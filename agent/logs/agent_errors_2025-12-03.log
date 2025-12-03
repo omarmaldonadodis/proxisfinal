@@ -1,0 +1,4 @@
+2025-12-03 12:31:57 | ERROR    | browser_controller:open_browser:85 - Failed to open browser for profile 1: AdsPower error: Profile does not exist
+2025-12-03 12:31:57 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=1, error=Failed to open browser for profile 1
+2025-12-03 12:38:24 | ERROR    | browser_controller:open_browser:85 - Failed to open browser for profile 1: AdsPower error: Profile does not exist
+2025-12-03 12:38:24 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=2, error=Failed to open browser for profile 1

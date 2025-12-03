@@ -1,314 +1,153 @@
-# app/api/v1/warming.py
-from fastapi import APIRouter, Depends, HTTPException, WebSocket, WebSocketDisconnect, Query
-from sqlalchemy.ext.asyncio import AsyncSession
-from typing import List, Optional
-from app.database import get_db
-from app.services.warming_script_service import WarmingScriptService
-from app.schemas.warming_script import (
-    WarmingScriptCreate,
-    WarmingScriptUpdate,
-    WarmingScriptResponse,
-    BatchWarmingRequest,
-    BatchWarmingResponse
-)
-from app.websocket.manager import connection_manager
+# agent/main.py
+import asyncio
+import sys
+import os
+import signal
 from loguru import logger
-import json
+from datetime import datetime
 
-router = APIRouter(prefix="/warming", tags=["Warming"])
+# Importar componentes del agente
+from config import AgentConfig
+from websocket_client import WebSocketClient
+from browser_controller import BrowserController
+from warming_executor import WarmingExecutor
 
-# =====================================================
-# SCRIPTS ENDPOINTS
-# =====================================================
-
-@router.post("/scripts/", response_model=WarmingScriptResponse, status_code=201)
-async def create_script(
-    script_in: WarmingScriptCreate,
-    db: AsyncSession = Depends(get_db)
-):
-    """Crea un nuevo script de warming"""
-    service = WarmingScriptService(db)
-    script = await service.create_script(script_in)
-    return script
-
-@router.get("/scripts/", response_model=dict)
-async def list_scripts(
-    skip: int = Query(0, ge=0),
-    limit: int = Query(100, ge=1, le=1000),
-    category: Optional[str] = None,
-    status: Optional[str] = None,
-    is_template: Optional[bool] = None,
-    db: AsyncSession = Depends(get_db)
-):
-    """Lista scripts de warming"""
-    service = WarmingScriptService(db)
-    scripts, total = await service.list_scripts(
-        skip=skip,
-        limit=limit,
-        category=category,
-        status=status,
-        is_template=is_template
-    )
-    return {"total": total, "items": scripts}
-
-@router.get("/scripts/templates/", response_model=List[WarmingScriptResponse])
-async def get_templates(db: AsyncSession = Depends(get_db)):
-    """Obtiene plantillas de scripts"""
-    service = WarmingScriptService(db)
-    templates = await service.get_script_templates()
-    return templates
-
-@router.get("/scripts/{script_id}", response_model=WarmingScriptResponse)
-async def get_script(
-    script_id: int,
-    db: AsyncSession = Depends(get_db)
-):
-    """Obtiene script por ID"""
-    service = WarmingScriptService(db)
-    script = await service.get_script(script_id)
-    if not script:
-        raise HTTPException(status_code=404, detail="Script not found")
-    return script
-
-@router.patch("/scripts/{script_id}", response_model=WarmingScriptResponse)
-async def update_script(
-    script_id: int,
-    script_in: WarmingScriptUpdate,
-    db: AsyncSession = Depends(get_db)
-):
-    """Actualiza script"""
-    service = WarmingScriptService(db)
-    try:
-        script = await service.update_script(script_id, script_in)
-        if not script:
-            raise HTTPException(status_code=404, detail="Script not found")
-        return script
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-@router.delete("/scripts/{script_id}", status_code=204)
-async def delete_script(
-    script_id: int,
-    db: AsyncSession = Depends(get_db)
-):
-    """Elimina script"""
-    service = WarmingScriptService(db)
-    success = await service.delete_script(script_id)
-    if not success:
-        raise HTTPException(status_code=404, detail="Script not found")
-
-# =====================================================
-# EXECUTION ENDPOINTS
-# =====================================================
-
-@router.post("/execute/batch", response_model=BatchWarmingResponse, status_code=202)
-async def execute_batch_warming(
-    request: BatchWarmingRequest,
-    db: AsyncSession = Depends(get_db)
-):
-    """Ejecuta warming en batch para múltiples profiles"""
+class AdsPowerAgent:
+    """Agente AdsPower para ejecución distribuida"""
     
-    service = WarmingScriptService(db)
-    
-    # Obtener script
-    script = await service.get_script(request.script_id)
-    if not script:
-        raise HTTPException(status_code=404, detail="Script not found")
-    
-    # Verificar profiles y crear ejecuciones
-    from app.services.profile_service import ProfileService
-    from app.services.computer_service import ComputerService
-    
-    profile_service = ProfileService(db)
-    computer_service = ComputerService(db)
-    
-    executions = []
-    
-    for profile_id in request.profile_ids:
-        # Obtener profile
-        profile = await profile_service.get_profile(profile_id)
-        if not profile:
-            logger.warning(f"Profile {profile_id} not found, skipping")
-            continue
+    def __init__(self):
+        # Cargar configuración
+        self.config = AgentConfig()
         
-        # Crear ejecución
-        execution = await service.create_execution(
-            script_id=request.script_id,
-            profile_id=profile_id,
-            computer_id=profile.computer_id
+        # Setup logging
+        self._setup_logging()
+        
+        # Inicializar componentes
+        self.browser_controller = BrowserController(self.config)
+        self.warming_executor = WarmingExecutor(
+            self.config,
+            self.browser_controller
+        )
+        self.websocket_client = WebSocketClient(
+            self.config,
+            self.warming_executor
         )
         
-        executions.append(execution.id)
+        # Estado
+        self.running = False
+        self.start_time = None
         
-        # Enviar comando al agente si está conectado
-        if connection_manager.is_connected(profile.computer_id):
-            await connection_manager.execute_warming(
-                computer_id=profile.computer_id,
-                execution_id=execution.id,
-                profile_id=profile_id,
-                script_actions=script.actions
-            )
-        else:
-            logger.warning(f"Computer {profile.computer_id} not connected")
-    
-    # Incrementar uso del script
-    await service.increment_script_usage(request.script_id)
-    
-    return BatchWarmingResponse(
-        task_id=f"batch_{request.script_id}_{len(executions)}",
-        total_profiles=len(request.profile_ids),
-        message=f"Warming started for {len(executions)} profiles",
-        executions=executions
-    )
-
-@router.get("/executions/{execution_id}")
-async def get_execution(
-    execution_id: int,
-    db: AsyncSession = Depends(get_db)
-):
-    """Obtiene estado de ejecución"""
-    service = WarmingScriptService(db)
-    execution = await service.get_execution(execution_id)
-    if not execution:
-        raise HTTPException(status_code=404, detail="Execution not found")
-    return execution
-
-@router.post("/executions/{execution_id}/stop", status_code=200)
-async def stop_execution(
-    execution_id: int,
-    db: AsyncSession = Depends(get_db)
-):
-    """Detiene ejecución de warming"""
-    service = WarmingScriptService(db)
-    execution = await service.get_execution(execution_id)
-    if not execution:
-        raise HTTPException(status_code=404, detail="Execution not found")
-    
-    # Enviar comando de stop al agente
-    if connection_manager.is_connected(execution.computer_id):
-        await connection_manager.stop_warming(
-            computer_id=execution.computer_id,
-            execution_id=execution_id
+    def _setup_logging(self):
+        """Configura logging"""
+        # Crear directorio de logs
+        os.makedirs(self.config.LOG_PATH, exist_ok=True)
+        
+        # Remover handlers por defecto
+        logger.remove()
+        
+        # Console handler
+        logger.add(
+            sys.stdout,
+            format="<green>{time:HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan> - <level>{message}</level>",
+            level=self.config.LOG_LEVEL,
+            colorize=True
+        )
+        
+        # File handler
+        logger.add(
+            os.path.join(self.config.LOG_PATH, "agent_{time:YYYY-MM-DD}.log"),
+            rotation="1 day",
+            retention="30 days",
+            level="DEBUG",
+            format="{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {name}:{function}:{line} - {message}"
+        )
+        
+        # Error file handler
+        logger.add(
+            os.path.join(self.config.LOG_PATH, "agent_errors_{time:YYYY-MM-DD}.log"),
+            rotation="1 day",
+            retention="90 days",
+            level="ERROR",
+            format="{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {name}:{function}:{line} - {message}"
         )
     
-    # Actualizar estado
-    await service.update_execution_status(
-        execution_id=execution_id,
-        status="cancelled"
-    )
+    async def start(self):
+        """Inicia el agente"""
+        self.running = True
+        self.start_time = datetime.utcnow()
+        
+        logger.info("=" * 60)
+        logger.info(f"🤖 AdsPower Agent Starting")
+        logger.info(f"Computer ID: {self.config.COMPUTER_ID}")
+        logger.info(f"Computer Name: {self.config.COMPUTER_NAME}")
+        logger.info(f"Orchestrator: {self.config.ORCHESTRATOR_URL}")
+        logger.info("=" * 60)
+        
+        try:
+            # Conectar al orquestrador
+            logger.info("Connecting to orchestrator...")
+            await self.websocket_client.connect()
+            
+            logger.info("✅ Agent started successfully!")
+            logger.info("Waiting for commands from orchestrator...")
+            
+            # Mantener agente corriendo
+            while self.running:
+                await asyncio.sleep(1)
+        
+        except KeyboardInterrupt:
+            logger.info("Received shutdown signal...")
+            await self.stop()
+        
+        except Exception as e:
+            logger.error(f"Agent error: {e}")
+            await self.stop()
     
-    return {"message": "Warming stopped"}
+    async def stop(self):
+        """Detiene el agente"""
+        if not self.running:
+            return
+        
+        logger.info("Stopping agent...")
+        self.running = False
+        
+        # Cerrar navegadores
+        await self.browser_controller.close_all_browsers()
+        
+        # Desconectar WebSocket
+        await self.websocket_client.disconnect()
+        
+        # Calcular uptime
+        if self.start_time:
+            uptime = datetime.utcnow() - self.start_time
+            logger.info(f"Agent uptime: {uptime}")
+        
+        logger.info("✅ Agent stopped")
+    
+    def handle_signal(self, signum, frame):
+        """Maneja señales del sistema"""
+        logger.info(f"Received signal {signum}")
+        asyncio.create_task(self.stop())
 
-# =====================================================
-# AGENTS STATUS
-# =====================================================
 
-@router.get("/agents/status")
-async def get_agents_status():
-    """Obtiene estado de todos los agentes conectados"""
-    connected = connection_manager.get_connected_agents()
+async def main():
+    """Función principal"""
+    agent = AdsPowerAgent()
     
-    agents_status = []
-    for computer_id in connected:
-        state = connection_manager.get_agent_state(computer_id)
-        agents_status.append({
-            "computer_id": computer_id,
-            "connected": True,
-            "state": state
-        })
+    # Registrar manejadores de señales
+    signal.signal(signal.SIGINT, agent.handle_signal)
+    signal.signal(signal.SIGTERM, agent.handle_signal)
     
-    return {
-        "total_connected": len(connected),
-        "agents": agents_status
-    }
+    # Iniciar agente
+    await agent.start()
 
-@router.post("/agents/{computer_id}/status")
-async def request_agent_status(computer_id: int):
-    """Solicita estado de un agente específico"""
-    if not connection_manager.is_connected(computer_id):
-        raise HTTPException(status_code=404, detail="Agent not connected")
-    
-    await connection_manager.request_status(computer_id)
-    return {"message": "Status request sent"}
 
-# =====================================================
-# WEBSOCKET ENDPOINT
-# =====================================================
-
-@router.websocket("/ws/{computer_id}")
-async def websocket_endpoint(
-    websocket: WebSocket,
-    computer_id: int,
-    db: AsyncSession = Depends(get_db)
-):
-    """WebSocket endpoint para agentes"""
-    
-    # Conectar agente
-    await connection_manager.connect(websocket, computer_id)
-    
+if __name__ == "__main__":
+    # Ejecutar agente
     try:
-        while True:
-            # Recibir mensaje del agente
-            data = await websocket.receive_text()
-            message = json.loads(data)
-            
-            message_type = message.get("type")
-            
-            # Procesar según tipo de mensaje
-            if message_type == "heartbeat":
-                # Actualizar heartbeat
-                connection_manager.last_activity[computer_id] = datetime.utcnow()
-                await websocket.send_json({"type": "heartbeat_ack"})
-            
-            elif message_type == "status_update":
-                # Actualizar estado del agente
-                connection_manager.update_agent_state(computer_id, message.get("state", {}))
-            
-            elif message_type == "execution_progress":
-                # Actualizar progreso de ejecución
-                execution_id = message.get("execution_id")
-                progress = message.get("progress")
-                log_entry = message.get("log_entry")
-                
-                service = WarmingScriptService(db)
-                await service.update_execution_status(
-                    execution_id=execution_id,
-                    status="running",
-                    progress=progress,
-                    log_entry=log_entry
-                )
-            
-            elif message_type == "execution_completed":
-                # Ejecución completada
-                execution_id = message.get("execution_id")
-                result = message.get("result", {})
-                
-                service = WarmingScriptService(db)
-                await service.update_execution_status(
-                    execution_id=execution_id,
-                    status="completed",
-                    progress=100,
-                    log_entry=result
-                )
-            
-            elif message_type == "execution_failed":
-                # Ejecución fallida
-                execution_id = message.get("execution_id")
-                error = message.get("error")
-                
-                service = WarmingScriptService(db)
-                await service.update_execution_status(
-                    execution_id=execution_id,
-                    status="failed",
-                    log_entry={"error": error}
-                )
-            
-            else:
-                logger.warning(f"Unknown message type from agent {computer_id}: {message_type}")
-    
-    except WebSocketDisconnect:
-        connection_manager.disconnect(computer_id)
-        logger.info(f"Agent disconnected: Computer {computer_id}")
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print("\nShutdown complete")
     except Exception as e:
-        logger.error(f"WebSocket error for computer {computer_id}: {e}")
-        connection_manager.disconnect(computer_id)
+        logger.error(f"Fatal error: {e}")
+        sys.exit(1)

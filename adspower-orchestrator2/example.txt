@@ -1,0 +1,55 @@
+Primer se crea una computadora
+
+curl -X POST "http://localhost:8000/api/v1/computers/" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Laptop-Omar-Loja",
+    "hostname": "omar-laptop",
+    "ip_address": "192.168.1.100",
+    "adspower_api_url": "http://host.docker.internal:50325",
+    "adspower_api_key": "0cbbd771ae5f6fad7ff4917bc66c95be",
+    "max_profiles": 50,
+    "cpu_cores": 8,
+    "ram_gb": 16,
+    "os_info": "Windows 11",
+    "tags": ["produccion", "loja"]
+}'
+
+
+El resultado se guarda el id 
+
+obtener el proxi
+
+bashcurl -X POST "http://localhost:8000/api/v1/proxies/" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "proxy_type": "mobile",
+    "host": "proxy.soax.com",
+    "port": 5000,
+    "country": "ec",
+    "city": "quito",
+    "session_lifetime": 3600,
+    "sticky_session": true,
+    "tags": ["ecuador", "quito", "mobile"]
+  }'
+
+  DEL RESULTADO SE GUARDA EL id
+
+Ahora para crear el perfil en adspower, será necesario incluirlos:
+curl -X POST "http://localhost:8000/api/v1/profiles/" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "computer_id": 1,
+    "proxy_id": 1,
+    "name": "OmarApi",
+    "age": 28,
+    "gender": "male",
+    "country": "ec",
+    "city": "Quito",
+    "timezone": "America/Guayaquil",
+    "language": "es-EC",
+    "device_type": "mobile",
+    "interests": ["technology", "business", "sports"],
+    "tags": ["api", "production", "quito"],
+    "notes": "Profile creado via API - Mobile Quito"
+}

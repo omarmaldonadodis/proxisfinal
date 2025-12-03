@@ -1,0 +1,91 @@
+2025-12-03 12:16:31 | INFO     | __main__:start:79 - ============================================================
+2025-12-03 12:16:31 | INFO     | __main__:start:80 - 🤖 AdsPower Agent Starting
+2025-12-03 12:16:31 | INFO     | __main__:start:81 - Computer ID: 1
+2025-12-03 12:16:31 | INFO     | __main__:start:82 - Computer Name: mac
+2025-12-03 12:16:31 | INFO     | __main__:start:83 - Orchestrator: http://192.168.1.10:8000
+2025-12-03 12:16:31 | INFO     | __main__:start:84 - ============================================================
+2025-12-03 12:16:31 | INFO     | __main__:start:88 - Connecting to orchestrator...
+2025-12-03 12:16:31 | INFO     | websocket_client:connect:26 - Connecting to: ws://192.168.1.10:8000/api/v1/warming/ws/1
+2025-12-03 12:16:31 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-03 12:16:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-03 12:16:31 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-03 12:17:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:17:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:18:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:18:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:19:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:19:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:20:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:20:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:21:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:21:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:22:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:22:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:23:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:23:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:24:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:24:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:25:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:25:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:26:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:26:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:27:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:27:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:28:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:28:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:29:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:29:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:30:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:30:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:31:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:31:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:31:56 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-03 12:31:56 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=1, profile_id=1
+2025-12-03 12:31:56 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=1, profile_id=1
+2025-12-03 12:31:56 | INFO     | browser_controller:open_browser:33 - Opening browser in AdsPower for profile 1
+2025-12-03 12:31:57 | ERROR    | browser_controller:open_browser:85 - Failed to open browser for profile 1: AdsPower error: Profile does not exist
+2025-12-03 12:31:57 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=1, error=Failed to open browser for profile 1
+2025-12-03 12:32:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:32:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:33:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:33:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:34:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:34:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:35:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:35:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:36:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:36:29 | INFO     | __main__:handle_signal:129 - Received signal 2
+2025-12-03 12:36:31 | INFO     | __main__:stop:111 - Stopping agent...
+2025-12-03 12:36:31 | INFO     | websocket_client:disconnect:211 - Disconnected from orchestrator
+2025-12-03 12:36:31 | INFO     | __main__:stop:123 - Agent uptime: 0:20:00.344335
+2025-12-03 12:36:31 | INFO     | __main__:stop:125 - ✅ Agent stopped
+2025-12-03 12:36:31 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-03 12:36:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-03 12:36:31 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-03 12:36:34 | INFO     | __main__:handle_signal:129 - Received signal 2
+2025-12-03 12:36:36 | INFO     | __main__:handle_signal:129 - Received signal 2
+2025-12-03 12:36:36 | INFO     | __main__:handle_signal:129 - Received signal 2
+2025-12-03 12:36:37 | INFO     | __main__:handle_signal:129 - Received signal 2
+2025-12-03 12:36:42 | INFO     | __main__:handle_signal:129 - Received signal 2
+2025-12-03 12:36:46 | INFO     | __main__:handle_signal:129 - Received signal 2
+2025-12-03 12:37:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:37:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:37:48 | INFO     | __main__:handle_signal:129 - Received signal 2
+2025-12-03 12:37:49 | INFO     | __main__:handle_signal:129 - Received signal 2
+2025-12-03 12:37:50 | INFO     | __main__:handle_signal:129 - Received signal 2
+2025-12-03 12:37:53 | INFO     | __main__:handle_signal:129 - Received signal 2
+2025-12-03 12:37:54 | INFO     | __main__:handle_signal:129 - Received signal 2
+2025-12-03 12:38:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:38:23 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-03 12:38:23 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=2, profile_id=1
+2025-12-03 12:38:23 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=2, profile_id=1
+2025-12-03 12:38:23 | INFO     | browser_controller:open_browser:33 - Opening browser in AdsPower for profile 1
+2025-12-03 12:38:24 | ERROR    | browser_controller:open_browser:85 - Failed to open browser for profile 1: AdsPower error: Profile does not exist
+2025-12-03 12:38:24 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=2, error=Failed to open browser for profile 1
+2025-12-03 12:38:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:39:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:39:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:40:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:40:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:41:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 12:41:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
