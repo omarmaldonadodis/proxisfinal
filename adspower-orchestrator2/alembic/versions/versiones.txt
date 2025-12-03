@@ -1,0 +1,32 @@
+```
+
+---
+
+## 2️⃣ Carpetas Vacías con .gitkeep
+
+### `logs/.gitkeep`
+```
+# logs/.gitkeep
+# Carpeta para logs de la aplicación
+```
+
+### `backups/.gitkeep`
+```
+# backups/.gitkeep
+# Carpeta para backups de base de datos
+```
+
+### `profiles/.gitkeep`
+```
+# profiles/.gitkeep
+# Carpeta para datos de perfiles (será creada por el código original)
+```
+
+### `profiles/profile_data/.gitkeep`
+```
+# profiles/profile_data/.gitkeep
+```
+
+### `profiles/warmup_reports/.gitkeep`
+```
+# profiles/warmup_reports/.gitkeep

@@ -1,0 +1,404 @@
+{
+  "warming_scripts_examples": [
+    {
+      "name": "Google Search Warm-up",
+      "description": "Script básico de búsqueda en Google",
+      "category": "search",
+      "duration_minutes": 10,
+      "actions": [
+        {
+          "type": "navigate",
+          "params": {
+            "url": "https://www.google.com"
+          },
+          "description": "Navegar a Google"
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 2
+          }
+        },
+        {
+          "type": "search_google",
+          "params": {
+            "query": "latest technology news"
+          },
+          "description": "Buscar noticias de tecnología"
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 3
+          }
+        },
+        {
+          "type": "scroll",
+          "params": {
+            "direction": "down",
+            "amount": 300,
+            "smooth": true
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 2
+          }
+        },
+        {
+          "type": "random_mouse",
+          "params": {
+            "movements": 3
+          }
+        }
+      ]
+    },
+    {
+      "name": "Social Media Warm-up",
+      "description": "Warming navegando redes sociales",
+      "category": "social_media",
+      "duration_minutes": 15,
+      "actions": [
+        {
+          "type": "navigate",
+          "params": {
+            "url": "https://www.facebook.com"
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 3
+          }
+        },
+        {
+          "type": "scroll",
+          "params": {
+            "direction": "down",
+            "amount": 400
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 5
+          }
+        },
+        {
+          "type": "navigate",
+          "params": {
+            "url": "https://www.instagram.com"
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 3
+          }
+        },
+        {
+          "type": "scroll",
+          "params": {
+            "direction": "down",
+            "amount": 500
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 4
+          }
+        },
+        {
+          "type": "navigate",
+          "params": {
+            "url": "https://www.twitter.com"
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 3
+          }
+        },
+        {
+          "type": "scroll",
+          "params": {
+            "direction": "down",
+            "amount": 300
+          }
+        }
+      ]
+    },
+    {
+      "name": "E-commerce Browsing",
+      "description": "Navegación en sitios de e-commerce",
+      "category": "ecommerce",
+      "duration_minutes": 20,
+      "actions": [
+        {
+          "type": "navigate",
+          "params": {
+            "url": "https://www.amazon.com"
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 2
+          }
+        },
+        {
+          "type": "human_typing",
+          "params": {
+            "selector": "input[name='field-keywords']",
+            "text": "wireless headphones",
+            "error_rate": 0.05
+          }
+        },
+        {
+          "type": "press_key",
+          "params": {
+            "key": "ENTER"
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 3
+          }
+        },
+        {
+          "type": "scroll",
+          "params": {
+            "direction": "down",
+            "amount": 500
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 4
+          }
+        },
+        {
+          "type": "random_mouse",
+          "params": {
+            "movements": 5
+          }
+        },
+        {
+          "type": "scroll",
+          "params": {
+            "direction": "down",
+            "amount": 400
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 3
+          }
+        }
+      ]
+    },
+    {
+      "name": "News Reading Warm-up",
+      "description": "Lectura de noticias en varios sitios",
+      "category": "news",
+      "duration_minutes": 15,
+      "actions": [
+        {
+          "type": "navigate",
+          "params": {
+            "url": "https://www.cnn.com"
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 3
+          }
+        },
+        {
+          "type": "scroll",
+          "params": {
+            "direction": "down",
+            "amount": 600,
+            "smooth": true
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 5
+          }
+        },
+        {
+          "type": "scroll",
+          "params": {
+            "direction": "down",
+            "amount": 400
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 3
+          }
+        },
+        {
+          "type": "navigate",
+          "params": {
+            "url": "https://www.bbc.com"
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 3
+          }
+        },
+        {
+          "type": "scroll",
+          "params": {
+            "direction": "down",
+            "amount": 500
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "Login Test - Facebook",
+      "description": "Test de login en Facebook",
+      "category": "authentication",
+      "duration_minutes": 5,
+      "actions": [
+        {
+          "type": "navigate",
+          "params": {
+            "url": "https://www.facebook.com"
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 2
+          }
+        },
+        {
+          "type": "login",
+          "params": {
+            "service": "generic",
+            "username": "your-email@example.com",
+            "password": "your-password",
+            "username_selector": "input[name='email']",
+            "password_selector": "input[name='pass']",
+            "submit_selector": "button[name='login']"
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 5
+          }
+        },
+        {
+          "type": "scroll",
+          "params": {
+            "direction": "down",
+            "amount": 300
+          }
+        }
+      ]
+    },
+    {
+      "name": "Complex Form Filling",
+      "description": "Llenado complejo de formulario",
+      "category": "forms",
+      "duration_minutes": 10,
+      "actions": [
+        {
+          "type": "navigate",
+          "params": {
+            "url": "https://example.com/contact"
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 2
+          }
+        },
+        {
+          "type": "human_typing",
+          "params": {
+            "selector": "input[name='name']",
+            "text": "John Doe",
+            "error_rate": 0.03
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 1
+          }
+        },
+        {
+          "type": "human_typing",
+          "params": {
+            "selector": "input[name='email']",
+            "text": "john.doe@example.com",
+            "error_rate": 0.02
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 1
+          }
+        },
+        {
+          "type": "select",
+          "params": {
+            "selector": "select[name='country']",
+            "value": "US"
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 1
+          }
+        },
+        {
+          "type": "human_typing",
+          "params": {
+            "selector": "textarea[name='message']",
+            "text": "This is a test message with some content.",
+            "error_rate": 0.05
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "duration": 2
+          }
+        },
+        {
+          "type": "random_mouse",
+          "params": {
+            "movements": 2
+          }
+        }
+      ]
+    }
+  ]
+}
