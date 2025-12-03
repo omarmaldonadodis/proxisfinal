@@ -222,7 +222,7 @@ async def execute_batch_warming(
             await connection_manager.execute_warming(
                 computer_id=profile.computer_id,
                 execution_id=execution.id,
-                profile_id=profile_id,
+                profile_id=profile.adspower_id,  # ✅ CORRECTO: Enviar adspower_id
                 script_actions=script.actions
             )
             logger.info(f"Warming command sent to agent: Computer {profile.computer_id}")

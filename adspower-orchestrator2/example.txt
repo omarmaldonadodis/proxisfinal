@@ -3,15 +3,15 @@ Primer se crea una computadora
 curl -X POST "http://localhost:8000/api/v1/computers/" \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Laptop-Omar-Loja",
+    "name": "Mac",
     "hostname": "omar-laptop",
-    "ip_address": "192.168.1.100",
-    "adspower_api_url": "http://host.docker.internal:50325",
+    "ip_address": "192.168.1.10",
+    "adspower_api_url": "http://192.168.1.10:50325",
     "adspower_api_key": "0cbbd771ae5f6fad7ff4917bc66c95be",
-    "max_profiles": 50,
+    "max_profiles": 20,
     "cpu_cores": 8,
     "ram_gb": 16,
-    "os_info": "Windows 11",
+    "os_info": "Mac",
     "tags": ["produccion", "loja"]
 }'
 
@@ -38,7 +38,7 @@ bashcurl -X POST "http://localhost:8000/api/v1/proxies/" \
 Ahora para crear el perfil en adspower, será necesario incluirlos:
 curl -X POST "http://localhost:8000/api/v1/profiles/" \
   -H "Content-Type: application/json" \
-  -d '{
+  -d '{{
     "computer_id": 1,
     "proxy_id": 1,
     "name": "OmarApi",
@@ -52,4 +52,22 @@ curl -X POST "http://localhost:8000/api/v1/profiles/" \
     "interests": ["technology", "business", "sports"],
     "tags": ["api", "production", "quito"],
     "notes": "Profile creado via API - Mobile Quito"
+
+}
+
+Warming script
+el del ejemplo
+
+y finalmente se agrega
+
+
+POST
+/api/v1/warming/execute/batch
+Execute Batch Warming
+
+
+{
+  "script_id": 1,
+  "profile_ids": [1],
+  "max_parallel": 5
 }

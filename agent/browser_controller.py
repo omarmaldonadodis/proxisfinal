@@ -1,35 +1,73 @@
-# agent/browser_controller.py
+# agent/browser_controller.py - Versión con ChromeDriver de AdsPower
 from typing import Dict, Optional
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 import requests
 from loguru import logger
 import asyncio
+import os
+import platform
 
 class BrowserController:
     """Controlador de navegadores AdsPower"""
     
     def __init__(self, config):
         self.config = config
-        self.active_browsers: Dict[int, webdriver.Chrome] = {}  # profile_id -> driver
-        self.browser_info: Dict[int, Dict] = {}  # profile_id -> info
+        self.active_browsers: Dict[int, webdriver.Chrome] = {}
+        self.browser_info: Dict[int, Dict] = {}
+        
+        # Detectar ruta de ChromeDriver de AdsPower
+        self.chromedriver_path = self._find_adspower_chromedriver()
+    
+    def _find_adspower_chromedriver(self) -> Optional[str]:
+        """Busca el ChromeDriver de AdsPower"""
+        
+        system = platform.system()
+        
+        # Rutas comunes de ChromeDriver de AdsPower
+        if system == "Windows":
+            paths = [
+                r"C:\Users\{}\AppData\Local\adspower_global\cwd\chrome_driver\chromedriver.exe",
+                r"C:\Program Files\AdsPower\chrome_driver\chromedriver.exe",
+            ]
+            username = os.getenv('USERNAME')
+            paths = [p.format(username) for p in paths]
+        
+        elif system == "Darwin":  # macOS
+            paths = [
+                "/Applications/AdsPower.app/Contents/Resources/chrome_driver/chromedriver",
+                os.path.expanduser("~/Library/Application Support/AdsPower/chrome_driver/chromedriver"),
+            ]
+        
+        else:  # Linux
+            paths = [
+                os.path.expanduser("~/.config/adspower/chrome_driver/chromedriver"),
+                "/opt/adspower/chrome_driver/chromedriver",
+            ]
+        
+        # Buscar ChromeDriver
+        for path in paths:
+            if os.path.exists(path):
+                logger.info(f"Found AdsPower ChromeDriver: {path}")
+                return path
+        
+        logger.warning("AdsPower ChromeDriver not found, will use system ChromeDriver")
+        return None
     
     async def open_browser(self, profile_id: int) -> Optional[webdriver.Chrome]:
         """Abre navegador de AdsPower para un profile"""
         
-        # Si ya está abierto, retornar
         if profile_id in self.active_browsers:
             logger.info(f"Browser already open for profile {profile_id}")
             return self.active_browsers[profile_id]
         
         try:
-            # Headers para API de AdsPower
             headers = {
                 'Content-Type': 'application/json',
                 'Authorization': f'Bearer {self.config.ADSPOWER_API_KEY}'
             }
             
-            # Abrir navegador en AdsPower
             logger.info(f"Opening browser in AdsPower for profile {profile_id}")
             
             response = requests.get(
@@ -55,7 +93,7 @@ class BrowserController:
             
             logger.info(f"Browser opened on port {debug_port}")
             
-            # Conectar Selenium al navegador
+            # Configurar opciones de Chrome
             chrome_options = Options()
             chrome_options.add_experimental_option(
                 "debuggerAddress", 
@@ -64,7 +102,31 @@ class BrowserController:
             chrome_options.add_argument('--log-level=3')
             chrome_options.add_argument('--disable-blink-features=AutomationControlled')
             
-            driver = webdriver.Chrome(options=chrome_options)
+            # Intentar usar ChromeDriver de AdsPower primero
+            driver = None
+            
+            if self.chromedriver_path and os.path.exists(self.chromedriver_path):
+                try:
+                    logger.info(f"Using AdsPower ChromeDriver: {self.chromedriver_path}")
+                    service = Service(executable_path=self.chromedriver_path)
+                    driver = webdriver.Chrome(service=service, options=chrome_options)
+                except Exception as e:
+                    logger.warning(f"Failed to use AdsPower ChromeDriver: {e}")
+            
+            # Fallback: usar webdriver-manager
+            if not driver:
+                try:
+                    logger.info("Using webdriver-manager to get ChromeDriver")
+                    from webdriver_manager.chrome import ChromeDriverManager
+                    service = Service(ChromeDriverManager().install())
+                    driver = webdriver.Chrome(service=service, options=chrome_options)
+                except Exception as e:
+                    logger.warning(f"webdriver-manager failed: {e}")
+            
+            # Último fallback: usar ChromeDriver del sistema
+            if not driver:
+                logger.info("Using system ChromeDriver")
+                driver = webdriver.Chrome(options=chrome_options)
             
             # Guardar driver
             self.active_browsers[profile_id] = driver
@@ -76,7 +138,7 @@ class BrowserController:
             
             logger.info(f"Selenium connected to browser for profile {profile_id}")
             
-            # Preparar navegador (cerrar tabs extras, navegar a página inicial)
+            # Preparar navegador
             await self._prepare_browser(driver, profile_id)
             
             return driver

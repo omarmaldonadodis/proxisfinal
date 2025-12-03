@@ -78,7 +78,7 @@ class ConnectionManager:
         self,
         computer_id: int,
         execution_id: int,
-        profile_id: int,
+        profile_id: str,  # ✅ CAMBIAR: Ahora es adspower_id (string)
         script_actions: List[Dict]
     ) -> bool:
         """Ejecuta warming en un agente"""
@@ -86,7 +86,7 @@ class ConnectionManager:
         command = {
             "type": "execute_warming",
             "execution_id": execution_id,
-            "profile_id": profile_id,
+            "profile_id": profile_id,  # ✅ Ahora envía adspower_id
             "actions": script_actions,
             "timestamp": datetime.utcnow().isoformat()
         }
