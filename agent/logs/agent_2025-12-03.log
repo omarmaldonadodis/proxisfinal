@@ -636,3 +636,724 @@ Stacktrace:
 2025-12-03 16:51:15 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
 2025-12-03 16:51:45 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
 2025-12-03 16:52:15 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 17:52:46 | WARNING  | browser_controller:_find_adspower_chromedriver:55 - AdsPower ChromeDriver not found, will use system ChromeDriver
+2025-12-03 17:52:46 | INFO     | __main__:start:79 - ============================================================
+2025-12-03 17:52:46 | INFO     | __main__:start:80 - 🤖 AdsPower Agent Starting
+2025-12-03 17:52:46 | INFO     | __main__:start:81 - Computer ID: 1
+2025-12-03 17:52:46 | INFO     | __main__:start:82 - Computer Name: mac
+2025-12-03 17:52:46 | INFO     | __main__:start:83 - Orchestrator: http://192.168.1.10:8000
+2025-12-03 17:52:46 | INFO     | __main__:start:84 - ============================================================
+2025-12-03 17:52:46 | INFO     | __main__:start:88 - Connecting to orchestrator...
+2025-12-03 17:52:46 | INFO     | websocket_client:connect:26 - Connecting to: ws://192.168.1.10:8000/api/v1/warming/ws/1
+2025-12-03 17:52:46 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-03 17:52:46 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-03 17:52:46 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-03 17:53:16 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 17:53:46 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 17:54:16 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 17:54:21 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-03 17:54:21 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=3, profile_id=k17l902d
+2025-12-03 17:54:21 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=3, profile_id=k17l902d
+2025-12-03 17:54:21 | INFO     | browser_controller:open_browser:71 - Opening browser in AdsPower for profile k17l902d
+2025-12-03 17:54:27 | INFO     | browser_controller:open_browser:94 - Browser opened on port 61092
+2025-12-03 17:54:27 | INFO     | browser_controller:open_browser:119 - Using webdriver-manager to get ChromeDriver
+2025-12-03 17:54:28 | WARNING  | browser_controller:open_browser:124 - webdriver-manager failed: [Errno 8] Exec format error: '/Users/omarmaldonado/.wdm/drivers/chromedriver/mac64/138.0.7204.183/chromedriver-mac-x64/THIRD_PARTY_NOTICES.chromedriver'
+2025-12-03 17:54:28 | INFO     | browser_controller:open_browser:128 - Using system ChromeDriver
+2025-12-03 17:55:00 | ERROR    | browser_controller:open_browser:147 - Failed to open browser for profile k17l902d: Message: session not created: cannot connect to chrome at 127.0.0.1:61092
+from session not created: This version of ChromeDriver only supports Chrome version 138
+Current browser version is 141.0.7390.55
+Stacktrace:
+0   chromedriver                        0x0000000107e3eb88 chromedriver + 5860232
+1   chromedriver                        0x0000000107e3612a chromedriver + 5824810
+2   chromedriver                        0x000000010790de20 chromedriver + 417312
+3   chromedriver                        0x000000010794f016 chromedriver + 684054
+4   chromedriver                        0x000000010794df84 chromedriver + 679812
+5   chromedriver                        0x0000000107943249 chromedriver + 635465
+6   chromedriver                        0x0000000107994137 chromedriver + 966967
+7   chromedriver                        0x00000001079937c6 chromedriver + 964550
+8   chromedriver                        0x0000000107985ac3 chromedriver + 907971
+9   chromedriver                        0x0000000107952107 chromedriver + 696583
+10  chromedriver                        0x0000000107952d71 chromedriver + 699761
+11  chromedriver                        0x0000000107dfcca0 chromedriver + 5590176
+12  chromedriver                        0x0000000107e00cf9 chromedriver + 5606649
+13  chromedriver                        0x0000000107dd80b6 chromedriver + 5439670
+14  chromedriver                        0x0000000107e0166f chromedriver + 5609071
+15  chromedriver                        0x0000000107dc6e64 chromedriver + 5369444
+16  chromedriver                        0x0000000107e23688 chromedriver + 5748360
+17  chromedriver                        0x0000000107e23850 chromedriver + 5748816
+18  chromedriver                        0x0000000107e35cc1 chromedriver + 5823681
+19  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+20  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-03 17:55:00 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=3, error=Failed to open browser for profile k17l902d
+2025-12-03 17:55:00 | WARNING  | websocket_client:_listen:64 - Connection lost
+2025-12-03 17:55:00 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-03 17:55:00 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-03 17:55:00 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-03 17:55:00 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-03 17:55:11 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-03 17:55:11 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=4, profile_id=k17l902d
+2025-12-03 17:55:11 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=4, profile_id=k17l902d
+2025-12-03 17:55:11 | INFO     | browser_controller:open_browser:71 - Opening browser in AdsPower for profile k17l902d
+2025-12-03 17:55:11 | INFO     | browser_controller:open_browser:94 - Browser opened on port 61092
+2025-12-03 17:55:11 | INFO     | browser_controller:open_browser:119 - Using webdriver-manager to get ChromeDriver
+2025-12-03 17:55:12 | WARNING  | browser_controller:open_browser:124 - webdriver-manager failed: [Errno 8] Exec format error: '/Users/omarmaldonado/.wdm/drivers/chromedriver/mac64/138.0.7204.183/chromedriver-mac-x64/THIRD_PARTY_NOTICES.chromedriver'
+2025-12-03 17:55:12 | INFO     | browser_controller:open_browser:128 - Using system ChromeDriver
+2025-12-03 17:55:18 | ERROR    | browser_controller:open_browser:147 - Failed to open browser for profile k17l902d: Message: session not created: cannot connect to chrome at 127.0.0.1:61092
+from session not created: This version of ChromeDriver only supports Chrome version 143
+Current browser version is 141.0.7390.55
+Stacktrace:
+0   chromedriver                        0x000000010fdb9568 chromedriver + 6595944
+1   chromedriver                        0x000000010fdb0c1a chromedriver + 6560794
+2   chromedriver                        0x000000010f7d9c3b chromedriver + 437307
+3   chromedriver                        0x000000010f81afa5 chromedriver + 704421
+4   chromedriver                        0x000000010f819e8e chromedriver + 700046
+5   chromedriver                        0x000000010f80f328 chromedriver + 656168
+6   chromedriver                        0x000000010f85fbdb chromedriver + 986075
+7   chromedriver                        0x000000010f85f2cc chromedriver + 983756
+8   chromedriver                        0x000000010f81dfc7 chromedriver + 716743
+9   chromedriver                        0x000000010f81ec91 chromedriver + 720017
+10  chromedriver                        0x000000010fd76691 chromedriver + 6321809
+11  chromedriver                        0x000000010fd7aaf0 chromedriver + 6339312
+12  chromedriver                        0x000000010fd51263 chromedriver + 6169187
+13  chromedriver                        0x000000010fd7b565 chromedriver + 6341989
+14  chromedriver                        0x000000010fd3fee1 chromedriver + 6098657
+15  chromedriver                        0x000000010fd9dab8 chromedriver + 6482616
+16  chromedriver                        0x000000010fd9dc73 chromedriver + 6483059
+17  chromedriver                        0x000000010fdb081c chromedriver + 6559772
+18  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+19  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-03 17:55:18 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=4, error=Failed to open browser for profile k17l902d
+2025-12-03 17:55:30 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 17:55:35 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-03 17:55:35 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=5, profile_id=k17l902d
+2025-12-03 17:55:35 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=5, profile_id=k17l902d
+2025-12-03 17:55:35 | INFO     | browser_controller:open_browser:71 - Opening browser in AdsPower for profile k17l902d
+2025-12-03 17:55:35 | INFO     | browser_controller:open_browser:94 - Browser opened on port 61092
+2025-12-03 17:55:35 | INFO     | browser_controller:open_browser:119 - Using webdriver-manager to get ChromeDriver
+2025-12-03 17:55:35 | WARNING  | browser_controller:open_browser:124 - webdriver-manager failed: [Errno 8] Exec format error: '/Users/omarmaldonado/.wdm/drivers/chromedriver/mac64/138.0.7204.183/chromedriver-mac-x64/THIRD_PARTY_NOTICES.chromedriver'
+2025-12-03 17:55:35 | INFO     | browser_controller:open_browser:128 - Using system ChromeDriver
+2025-12-03 17:55:36 | ERROR    | browser_controller:open_browser:147 - Failed to open browser for profile k17l902d: Message: session not created: cannot connect to chrome at 127.0.0.1:61092
+from session not created: This version of ChromeDriver only supports Chrome version 143
+Current browser version is 141.0.7390.55
+Stacktrace:
+0   chromedriver                        0x0000000101564568 chromedriver + 6595944
+1   chromedriver                        0x000000010155bc1a chromedriver + 6560794
+2   chromedriver                        0x0000000100f84c3b chromedriver + 437307
+3   chromedriver                        0x0000000100fc5fa5 chromedriver + 704421
+4   chromedriver                        0x0000000100fc4e8e chromedriver + 700046
+5   chromedriver                        0x0000000100fba328 chromedriver + 656168
+6   chromedriver                        0x000000010100abdb chromedriver + 986075
+7   chromedriver                        0x000000010100a2cc chromedriver + 983756
+8   chromedriver                        0x0000000100fc8fc7 chromedriver + 716743
+9   chromedriver                        0x0000000100fc9c91 chromedriver + 720017
+10  chromedriver                        0x0000000101521691 chromedriver + 6321809
+11  chromedriver                        0x0000000101525af0 chromedriver + 6339312
+12  chromedriver                        0x00000001014fc263 chromedriver + 6169187
+13  chromedriver                        0x0000000101526565 chromedriver + 6341989
+14  chromedriver                        0x00000001014eaee1 chromedriver + 6098657
+15  chromedriver                        0x0000000101548ab8 chromedriver + 6482616
+16  chromedriver                        0x0000000101548c73 chromedriver + 6483059
+17  chromedriver                        0x000000010155b81c chromedriver + 6559772
+18  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+19  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-03 17:55:36 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=5, error=Failed to open browser for profile k17l902d
+2025-12-03 17:56:00 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 17:56:30 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 17:57:00 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 17:57:30 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 17:58:00 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 17:58:30 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 17:59:00 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 17:59:30 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 17:59:39 | INFO     | __main__:handle_signal:129 - Received signal 2
+2025-12-03 17:59:40 | INFO     | __main__:stop:111 - Stopping agent...
+2025-12-03 17:59:40 | INFO     | websocket_client:disconnect:211 - Disconnected from orchestrator
+2025-12-03 17:59:40 | INFO     | __main__:stop:123 - Agent uptime: 0:06:54.129072
+2025-12-03 17:59:40 | INFO     | __main__:stop:125 - ✅ Agent stopped
+2025-12-03 17:59:40 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-03 17:59:40 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-03 17:59:40 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-03 17:59:40 | INFO     | __main__:handle_signal:129 - Received signal 2
+2025-12-03 18:00:16 | WARNING  | browser_controller:_find_adspower_chromedriver:55 - AdsPower ChromeDriver not found, will use system ChromeDriver
+2025-12-03 18:00:16 | INFO     | __main__:start:79 - ============================================================
+2025-12-03 18:00:16 | INFO     | __main__:start:80 - 🤖 AdsPower Agent Starting
+2025-12-03 18:00:16 | INFO     | __main__:start:81 - Computer ID: 1
+2025-12-03 18:00:16 | INFO     | __main__:start:82 - Computer Name: mac
+2025-12-03 18:00:16 | INFO     | __main__:start:83 - Orchestrator: http://192.168.1.10:8000
+2025-12-03 18:00:16 | INFO     | __main__:start:84 - ============================================================
+2025-12-03 18:00:16 | INFO     | __main__:start:88 - Connecting to orchestrator...
+2025-12-03 18:00:16 | INFO     | websocket_client:connect:26 - Connecting to: ws://192.168.1.10:8000/api/v1/warming/ws/1
+2025-12-03 18:00:17 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-03 18:00:17 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-03 18:00:17 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-03 18:00:47 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:00:47 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-03 18:00:47 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=6, profile_id=k17l902d
+2025-12-03 18:00:47 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=6, profile_id=k17l902d
+2025-12-03 18:00:47 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=6, error=name 'debug_port' is not defined
+2025-12-03 18:01:17 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:01:47 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:02:17 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:02:58 | INFO     | __main__:start:79 - ============================================================
+2025-12-03 18:02:58 | INFO     | __main__:start:80 - 🤖 AdsPower Agent Starting
+2025-12-03 18:02:58 | INFO     | __main__:start:81 - Computer ID: 1
+2025-12-03 18:02:58 | INFO     | __main__:start:82 - Computer Name: mac
+2025-12-03 18:02:58 | INFO     | __main__:start:83 - Orchestrator: http://192.168.1.10:8000
+2025-12-03 18:02:58 | INFO     | __main__:start:84 - ============================================================
+2025-12-03 18:02:58 | INFO     | __main__:start:88 - Connecting to orchestrator...
+2025-12-03 18:02:58 | INFO     | websocket_client:connect:26 - Connecting to: ws://192.168.1.10:8000/api/v1/warming/ws/1
+2025-12-03 18:02:58 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-03 18:02:58 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-03 18:02:58 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-03 18:03:06 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-03 18:03:06 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=7, profile_id=k17l902d
+2025-12-03 18:03:06 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=7, profile_id=k17l902d
+2025-12-03 18:03:06 | INFO     | browser_controller:open_browser:33 - Opening browser in AdsPower for profile k17l902d
+2025-12-03 18:03:07 | INFO     | browser_controller:open_browser:57 - Browser opened on port 61092
+2025-12-03 18:03:08 | ERROR    | browser_controller:open_browser:74 - Failed to attach to AdsPower browser: Message: session not created: cannot connect to chrome at 127.0.0.1:61092
+from session not created: This version of ChromeDriver only supports Chrome version 143
+Current browser version is 141.0.7390.55
+Stacktrace:
+0   chromedriver                        0x0000000102c35568 chromedriver + 6595944
+1   chromedriver                        0x0000000102c2cc1a chromedriver + 6560794
+2   chromedriver                        0x0000000102655c3b chromedriver + 437307
+3   chromedriver                        0x0000000102696fa5 chromedriver + 704421
+4   chromedriver                        0x0000000102695e8e chromedriver + 700046
+5   chromedriver                        0x000000010268b328 chromedriver + 656168
+6   chromedriver                        0x00000001026dbbdb chromedriver + 986075
+7   chromedriver                        0x00000001026db2cc chromedriver + 983756
+8   chromedriver                        0x0000000102699fc7 chromedriver + 716743
+9   chromedriver                        0x000000010269ac91 chromedriver + 720017
+10  chromedriver                        0x0000000102bf2691 chromedriver + 6321809
+11  chromedriver                        0x0000000102bf6af0 chromedriver + 6339312
+12  chromedriver                        0x0000000102bcd263 chromedriver + 6169187
+13  chromedriver                        0x0000000102bf7565 chromedriver + 6341989
+14  chromedriver                        0x0000000102bbbee1 chromedriver + 6098657
+15  chromedriver                        0x0000000102c19ab8 chromedriver + 6482616
+16  chromedriver                        0x0000000102c19c73 chromedriver + 6483059
+17  chromedriver                        0x0000000102c2c81c chromedriver + 6559772
+18  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+19  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-03 18:03:08 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=7, error=Failed to open browser for profile k17l902d
+2025-12-03 18:03:28 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:03:58 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:04:28 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:04:58 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:05:28 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:05:58 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:06:28 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:06:58 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:07:28 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:07:58 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:08:28 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:08:58 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:09:28 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:09:58 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:10:28 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:10:58 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:11:28 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:11:58 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:12:28 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:12:58 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:13:28 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:13:58 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:14:28 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:14:58 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:15:28 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:15:58 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:16:29 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:16:59 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:17:29 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:17:59 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:18:29 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:18:59 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:19:29 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:19:59 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:20:29 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:20:59 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:21:29 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:21:59 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:22:29 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:22:59 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:23:29 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:23:59 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:24:29 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:24:59 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:25:29 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:26:21 | INFO     | __main__:start:79 - ============================================================
+2025-12-03 18:26:21 | INFO     | __main__:start:80 - 🤖 AdsPower Agent Starting
+2025-12-03 18:26:21 | INFO     | __main__:start:81 - Computer ID: 1
+2025-12-03 18:26:21 | INFO     | __main__:start:82 - Computer Name: mac
+2025-12-03 18:26:21 | INFO     | __main__:start:83 - Orchestrator: http://192.168.1.10:8000
+2025-12-03 18:26:21 | INFO     | __main__:start:84 - ============================================================
+2025-12-03 18:26:21 | INFO     | __main__:start:88 - Connecting to orchestrator...
+2025-12-03 18:26:21 | INFO     | websocket_client:connect:26 - Connecting to: ws://192.168.1.10:8000/api/v1/warming/ws/1
+2025-12-03 18:26:21 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-03 18:26:21 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-03 18:26:21 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-03 18:26:36 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-03 18:26:36 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=8, profile_id=k17l902d
+2025-12-03 18:26:36 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=8, profile_id=k17l902d
+2025-12-03 18:26:36 | INFO     | browser_controller:open_browser:33 - Opening browser in AdsPower for profile k17l902d
+2025-12-03 18:26:43 | INFO     | browser_controller:open_browser:57 - Browser opened on port 50805
+2025-12-03 18:26:43 | ERROR    | browser_controller:open_browser:77 - Failed to attach to AdsPower browser: Message: Unable to locate or obtain driver for chrome; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors/driver_location
+
+2025-12-03 18:26:43 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=8, error=Failed to open browser for profile k17l902d
+2025-12-03 18:26:51 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:27:21 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:27:51 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:28:21 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:28:51 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:29:12 | INFO     | __main__:start:79 - ============================================================
+2025-12-03 18:29:12 | INFO     | __main__:start:80 - 🤖 AdsPower Agent Starting
+2025-12-03 18:29:12 | INFO     | __main__:start:81 - Computer ID: 1
+2025-12-03 18:29:12 | INFO     | __main__:start:82 - Computer Name: mac
+2025-12-03 18:29:12 | INFO     | __main__:start:83 - Orchestrator: http://192.168.1.10:8000
+2025-12-03 18:29:12 | INFO     | __main__:start:84 - ============================================================
+2025-12-03 18:29:12 | INFO     | __main__:start:88 - Connecting to orchestrator...
+2025-12-03 18:29:12 | INFO     | websocket_client:connect:26 - Connecting to: ws://192.168.1.10:8000/api/v1/warming/ws/1
+2025-12-03 18:29:12 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-03 18:29:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-03 18:29:12 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-03 18:29:25 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-03 18:29:25 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=9, profile_id=k17l902d
+2025-12-03 18:29:25 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=9, profile_id=k17l902d
+2025-12-03 18:29:25 | INFO     | browser_controller:open_browser:31 - Opening browser in AdsPower for profile k17l902d
+2025-12-03 18:29:30 | INFO     | browser_controller:open_browser:55 - Browser opened on port 51537
+2025-12-03 18:29:31 | ERROR    | browser_controller:open_browser:73 - Failed to attach to AdsPower browser: Message: session not created: cannot connect to chrome at 127.0.0.1:51537
+from session not created: This version of ChromeDriver only supports Chrome version 138
+Current browser version is 141.0.7390.55
+Stacktrace:
+0   chromedriver                        0x000000010d5e1b88 chromedriver + 5860232
+1   chromedriver                        0x000000010d5d912a chromedriver + 5824810
+2   chromedriver                        0x000000010d0b0e20 chromedriver + 417312
+3   chromedriver                        0x000000010d0f2016 chromedriver + 684054
+4   chromedriver                        0x000000010d0f0f84 chromedriver + 679812
+5   chromedriver                        0x000000010d0e6249 chromedriver + 635465
+6   chromedriver                        0x000000010d137137 chromedriver + 966967
+7   chromedriver                        0x000000010d1367c6 chromedriver + 964550
+8   chromedriver                        0x000000010d128ac3 chromedriver + 907971
+9   chromedriver                        0x000000010d0f5107 chromedriver + 696583
+10  chromedriver                        0x000000010d0f5d71 chromedriver + 699761
+11  chromedriver                        0x000000010d59fca0 chromedriver + 5590176
+12  chromedriver                        0x000000010d5a3cf9 chromedriver + 5606649
+13  chromedriver                        0x000000010d57b0b6 chromedriver + 5439670
+14  chromedriver                        0x000000010d5a466f chromedriver + 5609071
+15  chromedriver                        0x000000010d569e64 chromedriver + 5369444
+16  chromedriver                        0x000000010d5c6688 chromedriver + 5748360
+17  chromedriver                        0x000000010d5c6850 chromedriver + 5748816
+18  chromedriver                        0x000000010d5d8cc1 chromedriver + 5823681
+19  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+20  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-03 18:29:31 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=9, error=Failed to open browser for profile k17l902d
+2025-12-03 18:29:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:30:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:30:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:33:09 | INFO     | __main__:start:79 - ============================================================
+2025-12-03 18:33:09 | INFO     | __main__:start:80 - 🤖 AdsPower Agent Starting
+2025-12-03 18:33:09 | INFO     | __main__:start:81 - Computer ID: 1
+2025-12-03 18:33:09 | INFO     | __main__:start:82 - Computer Name: mac
+2025-12-03 18:33:09 | INFO     | __main__:start:83 - Orchestrator: http://192.168.1.10:8000
+2025-12-03 18:33:09 | INFO     | __main__:start:84 - ============================================================
+2025-12-03 18:33:09 | INFO     | __main__:start:88 - Connecting to orchestrator...
+2025-12-03 18:33:09 | INFO     | websocket_client:connect:26 - Connecting to: ws://192.168.1.10:8000/api/v1/warming/ws/1
+2025-12-03 18:33:09 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-03 18:33:09 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-03 18:33:09 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-03 18:33:18 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-03 18:33:18 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=10, profile_id=k17l902d
+2025-12-03 18:33:18 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=10, profile_id=k17l902d
+2025-12-03 18:33:18 | INFO     | browser_controller:open_browser:31 - Opening browser in AdsPower for profile k17l902d
+2025-12-03 18:33:19 | INFO     | browser_controller:open_browser:57 - Browser opened on port 51537
+2025-12-03 18:33:19 | ERROR    | browser_controller:open_browser:88 - Failed to open browser for profile k17l902d: __init__() got an unexpected keyword argument 'use_subprocess'
+2025-12-03 18:33:19 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=10, error=Failed to open browser for profile k17l902d
+2025-12-03 18:33:39 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:34:09 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:34:41 | INFO     | __main__:start:79 - ============================================================
+2025-12-03 18:34:41 | INFO     | __main__:start:80 - 🤖 AdsPower Agent Starting
+2025-12-03 18:34:41 | INFO     | __main__:start:81 - Computer ID: 1
+2025-12-03 18:34:41 | INFO     | __main__:start:82 - Computer Name: mac
+2025-12-03 18:34:41 | INFO     | __main__:start:83 - Orchestrator: http://192.168.1.10:8000
+2025-12-03 18:34:41 | INFO     | __main__:start:84 - ============================================================
+2025-12-03 18:34:41 | INFO     | __main__:start:88 - Connecting to orchestrator...
+2025-12-03 18:34:41 | INFO     | websocket_client:connect:26 - Connecting to: ws://192.168.1.10:8000/api/v1/warming/ws/1
+2025-12-03 18:34:41 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-03 18:34:41 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-03 18:34:41 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-03 18:34:50 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-03 18:34:50 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=11, profile_id=k17l902d
+2025-12-03 18:34:50 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=11, profile_id=k17l902d
+2025-12-03 18:34:50 | INFO     | browser_controller:open_browser:30 - Opening browser in AdsPower for profile k17l902d
+2025-12-03 18:34:50 | INFO     | browser_controller:open_browser:56 - Browser opened on port 51537
+2025-12-03 18:34:50 | ERROR    | browser_controller:open_browser:86 - Failed to open browser for profile k17l902d: Message: session not created: cannot connect to chrome at 127.0.0.1:51537
+from session not created: This version of ChromeDriver only supports Chrome version 138
+Current browser version is 141.0.7390.55
+Stacktrace:
+0   chromedriver                        0x000000010adf2b88 chromedriver + 5860232
+1   chromedriver                        0x000000010adea12a chromedriver + 5824810
+2   chromedriver                        0x000000010a8c1e20 chromedriver + 417312
+3   chromedriver                        0x000000010a903016 chromedriver + 684054
+4   chromedriver                        0x000000010a901f84 chromedriver + 679812
+5   chromedriver                        0x000000010a8f7249 chromedriver + 635465
+6   chromedriver                        0x000000010a948137 chromedriver + 966967
+7   chromedriver                        0x000000010a9477c6 chromedriver + 964550
+8   chromedriver                        0x000000010a939ac3 chromedriver + 907971
+9   chromedriver                        0x000000010a906107 chromedriver + 696583
+10  chromedriver                        0x000000010a906d71 chromedriver + 699761
+11  chromedriver                        0x000000010adb0ca0 chromedriver + 5590176
+12  chromedriver                        0x000000010adb4cf9 chromedriver + 5606649
+13  chromedriver                        0x000000010ad8c0b6 chromedriver + 5439670
+14  chromedriver                        0x000000010adb566f chromedriver + 5609071
+15  chromedriver                        0x000000010ad7ae64 chromedriver + 5369444
+16  chromedriver                        0x000000010add7688 chromedriver + 5748360
+17  chromedriver                        0x000000010add7850 chromedriver + 5748816
+18  chromedriver                        0x000000010ade9cc1 chromedriver + 5823681
+19  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+20  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-03 18:34:50 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=11, error=Failed to open browser for profile k17l902d
+2025-12-03 18:35:11 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:35:41 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:36:11 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:36:41 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:36:53 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-03 18:36:53 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=12, profile_id=k17l902d
+2025-12-03 18:36:53 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=12, profile_id=k17l902d
+2025-12-03 18:36:53 | INFO     | browser_controller:open_browser:30 - Opening browser in AdsPower for profile k17l902d
+2025-12-03 18:36:53 | INFO     | browser_controller:open_browser:56 - Browser opened on port 51537
+2025-12-03 18:36:54 | ERROR    | browser_controller:open_browser:86 - Failed to open browser for profile k17l902d: Message: session not created: cannot connect to chrome at 127.0.0.1:51537
+from session not created: This version of ChromeDriver only supports Chrome version 138
+Current browser version is 141.0.7390.55
+Stacktrace:
+0   chromedriver                        0x000000010283fb88 chromedriver + 5860232
+1   chromedriver                        0x000000010283712a chromedriver + 5824810
+2   chromedriver                        0x000000010230ee20 chromedriver + 417312
+3   chromedriver                        0x0000000102350016 chromedriver + 684054
+4   chromedriver                        0x000000010234ef84 chromedriver + 679812
+5   chromedriver                        0x0000000102344249 chromedriver + 635465
+6   chromedriver                        0x0000000102395137 chromedriver + 966967
+7   chromedriver                        0x00000001023947c6 chromedriver + 964550
+8   chromedriver                        0x0000000102386ac3 chromedriver + 907971
+9   chromedriver                        0x0000000102353107 chromedriver + 696583
+10  chromedriver                        0x0000000102353d71 chromedriver + 699761
+11  chromedriver                        0x00000001027fdca0 chromedriver + 5590176
+12  chromedriver                        0x0000000102801cf9 chromedriver + 5606649
+13  chromedriver                        0x00000001027d90b6 chromedriver + 5439670
+14  chromedriver                        0x000000010280266f chromedriver + 5609071
+15  chromedriver                        0x00000001027c7e64 chromedriver + 5369444
+16  chromedriver                        0x0000000102824688 chromedriver + 5748360
+17  chromedriver                        0x0000000102824850 chromedriver + 5748816
+18  chromedriver                        0x0000000102836cc1 chromedriver + 5823681
+19  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+20  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-03 18:36:54 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=12, error=Failed to open browser for profile k17l902d
+2025-12-03 18:37:16 | INFO     | __main__:start:79 - ============================================================
+2025-12-03 18:37:16 | INFO     | __main__:start:80 - 🤖 AdsPower Agent Starting
+2025-12-03 18:37:16 | INFO     | __main__:start:81 - Computer ID: 1
+2025-12-03 18:37:16 | INFO     | __main__:start:82 - Computer Name: mac
+2025-12-03 18:37:16 | INFO     | __main__:start:83 - Orchestrator: http://192.168.1.10:8000
+2025-12-03 18:37:16 | INFO     | __main__:start:84 - ============================================================
+2025-12-03 18:37:16 | INFO     | __main__:start:88 - Connecting to orchestrator...
+2025-12-03 18:37:16 | INFO     | websocket_client:connect:26 - Connecting to: ws://192.168.1.10:8000/api/v1/warming/ws/1
+2025-12-03 18:37:16 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-03 18:37:16 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-03 18:37:16 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-03 18:37:22 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-03 18:37:22 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=13, profile_id=k17l902d
+2025-12-03 18:37:22 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=13, profile_id=k17l902d
+2025-12-03 18:37:22 | INFO     | browser_controller:open_browser:30 - Opening browser in AdsPower for profile k17l902d
+2025-12-03 18:37:22 | INFO     | browser_controller:open_browser:56 - Browser opened on port 51537
+2025-12-03 18:37:23 | ERROR    | browser_controller:open_browser:86 - Failed to open browser for profile k17l902d: Message: session not created: cannot connect to chrome at 127.0.0.1:51537
+from session not created: This version of ChromeDriver only supports Chrome version 138
+Current browser version is 141.0.7390.55
+Stacktrace:
+0   chromedriver                        0x0000000100aebb88 chromedriver + 5860232
+1   chromedriver                        0x0000000100ae312a chromedriver + 5824810
+2   chromedriver                        0x00000001005bae20 chromedriver + 417312
+3   chromedriver                        0x00000001005fc016 chromedriver + 684054
+4   chromedriver                        0x00000001005faf84 chromedriver + 679812
+5   chromedriver                        0x00000001005f0249 chromedriver + 635465
+6   chromedriver                        0x0000000100641137 chromedriver + 966967
+7   chromedriver                        0x00000001006407c6 chromedriver + 964550
+8   chromedriver                        0x0000000100632ac3 chromedriver + 907971
+9   chromedriver                        0x00000001005ff107 chromedriver + 696583
+10  chromedriver                        0x00000001005ffd71 chromedriver + 699761
+11  chromedriver                        0x0000000100aa9ca0 chromedriver + 5590176
+12  chromedriver                        0x0000000100aadcf9 chromedriver + 5606649
+13  chromedriver                        0x0000000100a850b6 chromedriver + 5439670
+14  chromedriver                        0x0000000100aae66f chromedriver + 5609071
+15  chromedriver                        0x0000000100a73e64 chromedriver + 5369444
+16  chromedriver                        0x0000000100ad0688 chromedriver + 5748360
+17  chromedriver                        0x0000000100ad0850 chromedriver + 5748816
+18  chromedriver                        0x0000000100ae2cc1 chromedriver + 5823681
+19  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+20  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-03 18:37:23 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=13, error=Failed to open browser for profile k17l902d
+2025-12-03 18:37:46 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:38:16 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:38:17 | INFO     | __main__:handle_signal:129 - Received signal 2
+2025-12-03 18:42:39 | INFO     | browser_controller:__init__:27 - ChromeDriver detectado en: /Users/omarmaldonado/Desktop/proxys/proyectofinal/agent/chromedriver
+2025-12-03 18:42:39 | INFO     | __main__:start:79 - ============================================================
+2025-12-03 18:42:39 | INFO     | __main__:start:80 - 🤖 AdsPower Agent Starting
+2025-12-03 18:42:39 | INFO     | __main__:start:81 - Computer ID: 1
+2025-12-03 18:42:39 | INFO     | __main__:start:82 - Computer Name: mac
+2025-12-03 18:42:39 | INFO     | __main__:start:83 - Orchestrator: http://192.168.1.10:8000
+2025-12-03 18:42:39 | INFO     | __main__:start:84 - ============================================================
+2025-12-03 18:42:39 | INFO     | __main__:start:88 - Connecting to orchestrator...
+2025-12-03 18:42:39 | INFO     | websocket_client:connect:26 - Connecting to: ws://192.168.1.10:8000/api/v1/warming/ws/1
+2025-12-03 18:42:39 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-03 18:42:39 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-03 18:42:39 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-03 18:42:48 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-03 18:42:48 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=14, profile_id=k17l902d
+2025-12-03 18:42:48 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=14, profile_id=k17l902d
+2025-12-03 18:42:48 | INFO     | browser_controller:open_browser:42 - Opening browser in AdsPower for profile k17l902d
+2025-12-03 18:42:49 | INFO     | browser_controller:open_browser:65 - Browser opened on port 51537
+2025-12-03 18:42:49 | ERROR    | browser_controller:open_browser:97 - Failed to open browser for profile k17l902d: __init__() got an unexpected keyword argument 'executable_path'
+2025-12-03 18:42:49 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=14, error=Failed to open browser for profile k17l902d
+2025-12-03 18:43:09 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:43:39 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:44:08 | INFO     | browser_controller:__init__:26 - ChromeDriver detectado: /Users/omarmaldonado/Desktop/proxys/proyectofinal/agent/chromedriver
+2025-12-03 18:44:08 | INFO     | __main__:start:79 - ============================================================
+2025-12-03 18:44:08 | INFO     | __main__:start:80 - 🤖 AdsPower Agent Starting
+2025-12-03 18:44:08 | INFO     | __main__:start:81 - Computer ID: 1
+2025-12-03 18:44:08 | INFO     | __main__:start:82 - Computer Name: mac
+2025-12-03 18:44:08 | INFO     | __main__:start:83 - Orchestrator: http://192.168.1.10:8000
+2025-12-03 18:44:08 | INFO     | __main__:start:84 - ============================================================
+2025-12-03 18:44:08 | INFO     | __main__:start:88 - Connecting to orchestrator...
+2025-12-03 18:44:08 | INFO     | websocket_client:connect:26 - Connecting to: ws://192.168.1.10:8000/api/v1/warming/ws/1
+2025-12-03 18:44:08 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-03 18:44:08 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-03 18:44:08 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-03 18:44:16 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-03 18:44:16 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=15, profile_id=k17l902d
+2025-12-03 18:44:16 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=15, profile_id=k17l902d
+2025-12-03 18:44:16 | INFO     | browser_controller:open_browser:39 - Opening browser in AdsPower for profile k17l902d
+2025-12-03 18:44:16 | INFO     | browser_controller:open_browser:60 - Browser opened on port 51537
+2025-12-03 18:44:16 | INFO     | browser_controller:open_browser:82 - Selenium connected to browser for profile k17l902d
+2025-12-03 18:44:16 | INFO     | browser_controller:_prepare_browser:93 - Preparing browser for profile k17l902d
+2025-12-03 18:44:18 | ERROR    | browser_controller:_prepare_browser:121 - Error preparing browser for profile k17l902d: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x0000000109115518 chromedriver + 6378776
+1   chromedriver                        0x000000010910cc2a chromedriver + 6343722
+2   chromedriver                        0x0000000108b69086 chromedriver + 430214
+3   chromedriver                        0x0000000108b3da70 chromedriver + 252528
+4   chromedriver                        0x0000000108be9c88 chromedriver + 957576
+5   chromedriver                        0x0000000108c0896c chromedriver + 1083756
+6   chromedriver                        0x0000000108be17d3 chromedriver + 923603
+7   chromedriver                        0x0000000108bad185 chromedriver + 708997
+8   chromedriver                        0x0000000108bae5c1 chromedriver + 714177
+9   chromedriver                        0x00000001090d2da0 chromedriver + 6106528
+10  chromedriver                        0x00000001090d7005 chromedriver + 6123525
+11  chromedriver                        0x00000001090ae505 chromedriver + 5956869
+12  chromedriver                        0x00000001090d7a9f chromedriver + 6126239
+13  chromedriver                        0x000000010909d944 chromedriver + 5888324
+14  chromedriver                        0x00000001090f9b78 chromedriver + 6265720
+15  chromedriver                        0x00000001090f9d3d chromedriver + 6266173
+16  chromedriver                        0x000000010910c801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-03 18:44:18 | DEBUG    | action_executor:execute_action:55 - Executing action: navigate
+2025-12-03 18:44:18 | ERROR    | action_executor:execute_action:115 - Action failed (navigate): Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x0000000109115518 chromedriver + 6378776
+1   chromedriver                        0x000000010910cc2a chromedriver + 6343722
+2   chromedriver                        0x0000000108b69086 chromedriver + 430214
+3   chromedriver                        0x0000000108b3da70 chromedriver + 252528
+4   chromedriver                        0x0000000108be9c88 chromedriver + 957576
+5   chromedriver                        0x0000000108c0896c chromedriver + 1083756
+6   chromedriver                        0x0000000108be17d3 chromedriver + 923603
+7   chromedriver                        0x0000000108bad185 chromedriver + 708997
+8   chromedriver                        0x0000000108bae5c1 chromedriver + 714177
+9   chromedriver                        0x00000001090d2da0 chromedriver + 6106528
+10  chromedriver                        0x00000001090d7005 chromedriver + 6123525
+11  chromedriver                        0x00000001090ae505 chromedriver + 5956869
+12  chromedriver                        0x00000001090d7a9f chromedriver + 6126239
+13  chromedriver                        0x000000010909d944 chromedriver + 5888324
+14  chromedriver                        0x00000001090f9b78 chromedriver + 6265720
+15  chromedriver                        0x00000001090f9d3d chromedriver + 6266173
+16  chromedriver                        0x000000010910c801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-03 18:44:18 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/3 completed: navigate
+2025-12-03 18:44:18 | DEBUG    | action_executor:execute_action:55 - Executing action: wait
+2025-12-03 18:44:20 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/3 completed: wait
+2025-12-03 18:44:20 | DEBUG    | action_executor:execute_action:55 - Executing action: search_google
+2025-12-03 18:44:20 | ERROR    | action_executor:execute_action:115 - Action failed (search_google): Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x0000000109115518 chromedriver + 6378776
+1   chromedriver                        0x000000010910cc2a chromedriver + 6343722
+2   chromedriver                        0x0000000108b69086 chromedriver + 430214
+3   chromedriver                        0x0000000108b3da70 chromedriver + 252528
+4   chromedriver                        0x0000000108be9c88 chromedriver + 957576
+5   chromedriver                        0x0000000108c0896c chromedriver + 1083756
+6   chromedriver                        0x0000000108be17d3 chromedriver + 923603
+7   chromedriver                        0x0000000108bad185 chromedriver + 708997
+8   chromedriver                        0x0000000108bae5c1 chromedriver + 714177
+9   chromedriver                        0x00000001090d2da0 chromedriver + 6106528
+10  chromedriver                        0x00000001090d7005 chromedriver + 6123525
+11  chromedriver                        0x00000001090ae505 chromedriver + 5956869
+12  chromedriver                        0x00000001090d7a9f chromedriver + 6126239
+13  chromedriver                        0x000000010909d944 chromedriver + 5888324
+14  chromedriver                        0x00000001090f9b78 chromedriver + 6265720
+15  chromedriver                        0x00000001090f9d3d chromedriver + 6266173
+16  chromedriver                        0x000000010910c801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-03 18:44:20 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/3 completed: search_google
+2025-12-03 18:44:20 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=15, completed=1, failed=2
+2025-12-03 18:44:28 | INFO     | browser_controller:close_browser:150 - Browser closed for profile k17l902d
+2025-12-03 18:44:38 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:45:08 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:45:38 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:45:54 | ERROR    | __main__:<module>:152 - Fatal error: __init__() takes 1 positional argument but 2 were given
+2025-12-03 18:47:03 | INFO     | browser_controller:__init__:27 - ChromeDriver detectado en: /Users/omarmaldonado/Desktop/proxys/proyectofinal/agent/chromedriver
+2025-12-03 18:47:03 | INFO     | __main__:start:79 - ============================================================
+2025-12-03 18:47:03 | INFO     | __main__:start:80 - 🤖 AdsPower Agent Starting
+2025-12-03 18:47:03 | INFO     | __main__:start:81 - Computer ID: 1
+2025-12-03 18:47:03 | INFO     | __main__:start:82 - Computer Name: mac
+2025-12-03 18:47:03 | INFO     | __main__:start:83 - Orchestrator: http://192.168.1.10:8000
+2025-12-03 18:47:03 | INFO     | __main__:start:84 - ============================================================
+2025-12-03 18:47:03 | INFO     | __main__:start:88 - Connecting to orchestrator...
+2025-12-03 18:47:03 | INFO     | websocket_client:connect:26 - Connecting to: ws://192.168.1.10:8000/api/v1/warming/ws/1
+2025-12-03 18:47:03 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-03 18:47:03 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-03 18:47:03 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-03 18:47:09 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-03 18:47:09 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=16, profile_id=k17l902d
+2025-12-03 18:47:09 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=16, profile_id=k17l902d
+2025-12-03 18:47:09 | INFO     | browser_controller:open_browser:42 - Opening browser in AdsPower for profile k17l902d
+2025-12-03 18:47:15 | INFO     | browser_controller:open_browser:65 - Browser opened on port 55557
+2025-12-03 18:47:15 | ERROR    | browser_controller:open_browser:97 - Failed to open browser for profile k17l902d: __init__() got an unexpected keyword argument 'executable_path'
+2025-12-03 18:47:15 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=16, error=Failed to open browser for profile k17l902d
+2025-12-03 18:47:33 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:48:03 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:48:33 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:49:03 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:49:33 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:50:03 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:50:39 | INFO     | browser_controller:__init__:28 - ChromeDriver detectado en: /Users/omarmaldonado/Desktop/proxys/proyectofinal/agent/chromedriver
+2025-12-03 18:50:39 | INFO     | __main__:start:79 - ============================================================
+2025-12-03 18:50:39 | INFO     | __main__:start:80 - 🤖 AdsPower Agent Starting
+2025-12-03 18:50:39 | INFO     | __main__:start:81 - Computer ID: 1
+2025-12-03 18:50:39 | INFO     | __main__:start:82 - Computer Name: mac
+2025-12-03 18:50:39 | INFO     | __main__:start:83 - Orchestrator: http://192.168.1.10:8000
+2025-12-03 18:50:39 | INFO     | __main__:start:84 - ============================================================
+2025-12-03 18:50:39 | INFO     | __main__:start:88 - Connecting to orchestrator...
+2025-12-03 18:50:39 | INFO     | websocket_client:connect:26 - Connecting to: ws://192.168.1.10:8000/api/v1/warming/ws/1
+2025-12-03 18:50:39 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-03 18:50:39 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-03 18:50:39 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-03 18:50:48 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-03 18:50:48 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=17, profile_id=k17l902d
+2025-12-03 18:50:48 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=17, profile_id=k17l902d
+2025-12-03 18:50:48 | INFO     | browser_controller:open_browser:43 - Opening browser in AdsPower for profile k17l902d
+2025-12-03 18:50:49 | INFO     | browser_controller:open_browser:66 - Browser opened on port 55557
+2025-12-03 18:50:50 | INFO     | browser_controller:open_browser:91 - Selenium connected to browser for profile k17l902d
+2025-12-03 18:50:50 | INFO     | browser_controller:_prepare_browser:105 - Preparing browser for profile k17l902d
+2025-12-03 18:50:51 | ERROR    | browser_controller:_prepare_browser:149 - Error preparing browser for profile k17l902d: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x0000000102d80518 chromedriver + 6378776
+1   chromedriver                        0x0000000102d77c2a chromedriver + 6343722
+2   chromedriver                        0x00000001027d4086 chromedriver + 430214
+3   chromedriver                        0x00000001027a8a70 chromedriver + 252528
+4   chromedriver                        0x0000000102854c88 chromedriver + 957576
+5   chromedriver                        0x000000010287396c chromedriver + 1083756
+6   chromedriver                        0x000000010284c7d3 chromedriver + 923603
+7   chromedriver                        0x0000000102818185 chromedriver + 708997
+8   chromedriver                        0x00000001028195c1 chromedriver + 714177
+9   chromedriver                        0x0000000102d3dda0 chromedriver + 6106528
+10  chromedriver                        0x0000000102d42005 chromedriver + 6123525
+11  chromedriver                        0x0000000102d19505 chromedriver + 5956869
+12  chromedriver                        0x0000000102d42a9f chromedriver + 6126239
+13  chromedriver                        0x0000000102d08944 chromedriver + 5888324
+14  chromedriver                        0x0000000102d64b78 chromedriver + 6265720
+15  chromedriver                        0x0000000102d64d3d chromedriver + 6266173
+16  chromedriver                        0x0000000102d77801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-03 18:50:51 | DEBUG    | action_executor:execute_action:55 - Executing action: navigate
+2025-12-03 18:50:51 | ERROR    | action_executor:execute_action:115 - Action failed (navigate): Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x0000000102d80518 chromedriver + 6378776
+1   chromedriver                        0x0000000102d77c2a chromedriver + 6343722
+2   chromedriver                        0x00000001027d4086 chromedriver + 430214
+3   chromedriver                        0x00000001027a8a70 chromedriver + 252528
+4   chromedriver                        0x0000000102854c88 chromedriver + 957576
+5   chromedriver                        0x000000010287396c chromedriver + 1083756
+6   chromedriver                        0x000000010284c7d3 chromedriver + 923603
+7   chromedriver                        0x0000000102818185 chromedriver + 708997
+8   chromedriver                        0x00000001028195c1 chromedriver + 714177
+9   chromedriver                        0x0000000102d3dda0 chromedriver + 6106528
+10  chromedriver                        0x0000000102d42005 chromedriver + 6123525
+11  chromedriver                        0x0000000102d19505 chromedriver + 5956869
+12  chromedriver                        0x0000000102d42a9f chromedriver + 6126239
+13  chromedriver                        0x0000000102d08944 chromedriver + 5888324
+14  chromedriver                        0x0000000102d64b78 chromedriver + 6265720
+15  chromedriver                        0x0000000102d64d3d chromedriver + 6266173
+16  chromedriver                        0x0000000102d77801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-03 18:50:51 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/3 completed: navigate
+2025-12-03 18:50:51 | DEBUG    | action_executor:execute_action:55 - Executing action: wait
+2025-12-03 18:50:53 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/3 completed: wait
+2025-12-03 18:50:53 | DEBUG    | action_executor:execute_action:55 - Executing action: search_google
+2025-12-03 18:50:53 | ERROR    | action_executor:execute_action:115 - Action failed (search_google): Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x0000000102d80518 chromedriver + 6378776
+1   chromedriver                        0x0000000102d77c2a chromedriver + 6343722
+2   chromedriver                        0x00000001027d4086 chromedriver + 430214
+3   chromedriver                        0x00000001027a8a70 chromedriver + 252528
+4   chromedriver                        0x0000000102854c88 chromedriver + 957576
+5   chromedriver                        0x000000010287396c chromedriver + 1083756
+6   chromedriver                        0x000000010284c7d3 chromedriver + 923603
+7   chromedriver                        0x0000000102818185 chromedriver + 708997
+8   chromedriver                        0x00000001028195c1 chromedriver + 714177
+9   chromedriver                        0x0000000102d3dda0 chromedriver + 6106528
+10  chromedriver                        0x0000000102d42005 chromedriver + 6123525
+11  chromedriver                        0x0000000102d19505 chromedriver + 5956869
+12  chromedriver                        0x0000000102d42a9f chromedriver + 6126239
+13  chromedriver                        0x0000000102d08944 chromedriver + 5888324
+14  chromedriver                        0x0000000102d64b78 chromedriver + 6265720
+15  chromedriver                        0x0000000102d64d3d chromedriver + 6266173
+16  chromedriver                        0x0000000102d77801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-03 18:50:53 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/3 completed: search_google
+2025-12-03 18:50:53 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=17, completed=1, failed=2
+2025-12-03 18:51:01 | INFO     | browser_controller:close_browser:183 - Browser closed for profile k17l902d
+2025-12-03 18:51:09 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:51:39 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:52:09 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:52:39 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:53:09 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:53:39 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:54:09 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:54:39 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:55:09 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-03 18:55:39 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
