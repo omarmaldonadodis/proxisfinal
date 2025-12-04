@@ -1718,3 +1718,1313 @@ Stacktrace:
 2025-12-04 09:57:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
 2025-12-04 09:58:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
 2025-12-04 09:58:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:59:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:59:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:00:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:00:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:01:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:01:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:02:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:02:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:03:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:03:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:04:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:04:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:05:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:05:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:06:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:06:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:07:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:07:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:08:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:08:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:09:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:09:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:10:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:10:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:11:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:11:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:12:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:12:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:13:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:13:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:14:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:14:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:15:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:15:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:16:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:16:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:17:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:17:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:18:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:18:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:18:53 | INFO     | browser_controller:__init__:29 - ✓ ChromeDriver detectado: /Users/omarmaldonado/Desktop/proxys/proyectofinal/agent/chromedriver
+2025-12-04 10:18:53 | INFO     | __main__:start:79 - ============================================================
+2025-12-04 10:18:53 | INFO     | __main__:start:80 - 🤖 AdsPower Agent Starting
+2025-12-04 10:18:53 | INFO     | __main__:start:81 - Computer ID: 1
+2025-12-04 10:18:53 | INFO     | __main__:start:82 - Computer Name: mac
+2025-12-04 10:18:53 | INFO     | __main__:start:83 - Orchestrator: http://192.168.1.10:8000
+2025-12-04 10:18:53 | INFO     | __main__:start:84 - ============================================================
+2025-12-04 10:18:53 | INFO     | __main__:start:88 - Connecting to orchestrator...
+2025-12-04 10:18:53 | INFO     | websocket_client:connect:26 - Connecting to: ws://192.168.1.10:8000/api/v1/warming/ws/1
+2025-12-04 10:18:53 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 10:18:53 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 10:18:53 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 10:19:23 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:19:30 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 10:19:30 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=52, profile_id=k17l902d
+2025-12-04 10:19:30 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=52, profile_id=k17l902d
+2025-12-04 10:19:30 | INFO     | browser_controller:open_browser:47 - 🌐 Opening browser for profile k17l902d
+2025-12-04 10:19:37 | INFO     | browser_controller:open_browser:68 - ✓ Browser opened on port 59184
+2025-12-04 10:19:41 | DEBUG    | browser_controller:open_browser:82 - ✓ Port 59184 responding
+2025-12-04 10:19:41 | DEBUG    | browser_controller:open_browser:105 - Connecting Selenium (attempt 1)...
+2025-12-04 10:19:41 | INFO     | browser_controller:open_browser:110 - ✓ Selenium connected to port 59184
+2025-12-04 10:19:41 | DEBUG    | browser_controller:_prepare_browser_safe:164 - Preparing browser for profile k17l902d
+2025-12-04 10:19:42 | INFO     | browser_controller:_prepare_browser_safe:179 - ✓ Browser prepared for profile k17l902d
+2025-12-04 10:19:42 | INFO     | browser_controller:open_browser:132 - ✅ Browser ready for profile k17l902d
+2025-12-04 10:19:42 | DEBUG    | action_executor:execute_action:69 - Executing action: navigate
+2025-12-04 10:19:47 | INFO     | action_executor:_navigate:126 - ✓ Navigated to: https://www.google.com
+2025-12-04 10:19:47 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/8 completed: navigate
+2025-12-04 10:19:47 | DEBUG    | action_executor:execute_action:69 - Executing action: wait
+2025-12-04 10:19:50 | DEBUG    | action_executor:_wait:245 - ✓ Waited 3s
+2025-12-04 10:19:50 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/8 completed: wait
+2025-12-04 10:19:50 | DEBUG    | action_executor:execute_action:69 - Executing action: search_google
+2025-12-04 10:19:50 | INFO     | action_executor:_search_google:279 - Starting Google search: 'latest technology news'
+2025-12-04 10:19:50 | DEBUG    | action_executor:_search_google:303 - ✓ Found search box with: textarea[name='q']
+2025-12-04 10:21:48 | WARNING  | websocket_client:_listen:64 - Connection lost
+2025-12-04 10:21:48 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 10:21:48 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 10:21:48 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 10:21:48 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 10:21:48 | ERROR    | action_executor:_search_google:347 - ❌ Google search failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x0000000108109518 chromedriver + 6378776
+1   chromedriver                        0x0000000108100c2a chromedriver + 6343722
+2   chromedriver                        0x0000000107b5d086 chromedriver + 430214
+3   chromedriver                        0x0000000107b31a70 chromedriver + 252528
+4   chromedriver                        0x0000000107bddc88 chromedriver + 957576
+5   chromedriver                        0x0000000107bfc96c chromedriver + 1083756
+6   chromedriver                        0x0000000107bd57d3 chromedriver + 923603
+7   chromedriver                        0x0000000107ba1185 chromedriver + 708997
+8   chromedriver                        0x0000000107ba25c1 chromedriver + 714177
+9   chromedriver                        0x00000001080c6da0 chromedriver + 6106528
+10  chromedriver                        0x00000001080cb005 chromedriver + 6123525
+11  chromedriver                        0x00000001080a2505 chromedriver + 5956869
+12  chromedriver                        0x00000001080cba9f chromedriver + 6126239
+13  chromedriver                        0x0000000108091944 chromedriver + 5888324
+14  chromedriver                        0x00000001080edb78 chromedriver + 6265720
+15  chromedriver                        0x00000001080edd3d chromedriver + 6266173
+16  chromedriver                        0x0000000108100801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 10:21:48 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/8 completed: search_google
+2025-12-04 10:21:48 | DEBUG    | action_executor:execute_action:69 - Executing action: wait
+2025-12-04 10:21:48 | ERROR    | action_executor:execute_action:73 - Browser is closed, cannot execute action: wait
+2025-12-04 10:21:48 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/8 completed: wait
+2025-12-04 10:21:48 | DEBUG    | action_executor:execute_action:69 - Executing action: scroll
+2025-12-04 10:21:48 | ERROR    | action_executor:execute_action:73 - Browser is closed, cannot execute action: scroll
+2025-12-04 10:21:48 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/8 completed: scroll
+2025-12-04 10:21:48 | DEBUG    | action_executor:execute_action:69 - Executing action: wait
+2025-12-04 10:21:48 | ERROR    | action_executor:execute_action:73 - Browser is closed, cannot execute action: wait
+2025-12-04 10:21:48 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/8 completed: wait
+2025-12-04 10:21:48 | DEBUG    | action_executor:execute_action:69 - Executing action: scroll
+2025-12-04 10:21:48 | ERROR    | action_executor:execute_action:73 - Browser is closed, cannot execute action: scroll
+2025-12-04 10:21:48 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/8 completed: scroll
+2025-12-04 10:21:48 | DEBUG    | action_executor:execute_action:69 - Executing action: wait
+2025-12-04 10:21:48 | ERROR    | action_executor:execute_action:73 - Browser is closed, cannot execute action: wait
+2025-12-04 10:21:48 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/8 completed: wait
+2025-12-04 10:21:48 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=52, completed=2, failed=6
+2025-12-04 10:21:50 | INFO     | browser_controller:close_browser:228 - ✓ Browser closed for profile k17l902d
+2025-12-04 10:22:04 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 10:22:04 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=53, profile_id=k17l902d
+2025-12-04 10:22:04 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=53, profile_id=k17l902d
+2025-12-04 10:22:04 | INFO     | browser_controller:open_browser:47 - 🌐 Opening browser for profile k17l902d
+2025-12-04 10:22:10 | INFO     | browser_controller:open_browser:68 - ✓ Browser opened on port 59821
+2025-12-04 10:22:14 | DEBUG    | browser_controller:open_browser:82 - ✓ Port 59821 responding
+2025-12-04 10:22:14 | DEBUG    | browser_controller:open_browser:105 - Connecting Selenium (attempt 1)...
+2025-12-04 10:22:14 | INFO     | browser_controller:open_browser:110 - ✓ Selenium connected to port 59821
+2025-12-04 10:22:14 | DEBUG    | browser_controller:_prepare_browser_safe:164 - Preparing browser for profile k17l902d
+2025-12-04 10:22:15 | INFO     | browser_controller:_prepare_browser_safe:179 - ✓ Browser prepared for profile k17l902d
+2025-12-04 10:22:15 | INFO     | browser_controller:open_browser:132 - ✅ Browser ready for profile k17l902d
+2025-12-04 10:22:15 | DEBUG    | action_executor:execute_action:69 - Executing action: navigate
+2025-12-04 10:22:18 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 10:22:20 | INFO     | action_executor:_navigate:126 - ✓ Navigated to: https://www.google.com
+2025-12-04 10:22:20 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/8 completed: navigate
+2025-12-04 10:22:20 | DEBUG    | action_executor:execute_action:69 - Executing action: wait
+2025-12-04 10:22:23 | DEBUG    | action_executor:_wait:245 - ✓ Waited 3s
+2025-12-04 10:22:23 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/8 completed: wait
+2025-12-04 10:22:23 | DEBUG    | action_executor:execute_action:69 - Executing action: search_google
+2025-12-04 10:22:23 | INFO     | action_executor:_search_google:279 - Starting Google search: 'latest technology news'
+2025-12-04 10:22:23 | DEBUG    | action_executor:_search_google:303 - ✓ Found search box with: textarea[name='q']
+2025-12-04 10:47:26 | INFO     | browser_controller:__init__:29 - ✓ ChromeDriver detectado: /Users/omarmaldonado/Desktop/proxys/proyectofinal/agent/chromedriver
+2025-12-04 10:47:26 | INFO     | __main__:start:79 - ============================================================
+2025-12-04 10:47:26 | INFO     | __main__:start:80 - 🤖 AdsPower Agent Starting
+2025-12-04 10:47:26 | INFO     | __main__:start:81 - Computer ID: 1
+2025-12-04 10:47:26 | INFO     | __main__:start:82 - Computer Name: mac
+2025-12-04 10:47:26 | INFO     | __main__:start:83 - Orchestrator: http://192.168.1.10:8000
+2025-12-04 10:47:26 | INFO     | __main__:start:84 - ============================================================
+2025-12-04 10:47:26 | INFO     | __main__:start:88 - Connecting to orchestrator...
+2025-12-04 10:47:26 | INFO     | websocket_client:connect:26 - Connecting to: ws://192.168.1.10:8000/api/v1/warming/ws/1
+2025-12-04 10:47:26 | INFO     | websocket_client:connect:39 - ✅ Connected to orchestrator!
+2025-12-04 10:47:26 | DEBUG    | websocket_client:_handle_message:79 - Received message: connected
+2025-12-04 10:47:26 | INFO     | websocket_client:_handle_message:82 - Connected confirmation: Connected to orchestrator
+2025-12-04 10:47:36 | DEBUG    | websocket_client:_handle_message:79 - Received message: execute_warming
+2025-12-04 10:47:36 | INFO     | websocket_client:_execute_warming:110 - 🔥 Executing warming: execution_id=54, profile_id=k17l902d
+2025-12-04 10:47:36 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=54, profile_id=k17l902d
+2025-12-04 10:47:36 | INFO     | browser_controller:open_browser:47 - 🌐 Opening browser for profile k17l902d
+2025-12-04 10:47:37 | INFO     | browser_controller:open_browser:68 - ✓ Browser opened on port 59821
+2025-12-04 10:47:41 | DEBUG    | browser_controller:open_browser:82 - ✓ Port 59821 responding
+2025-12-04 10:47:41 | DEBUG    | browser_controller:open_browser:105 - Connecting Selenium (attempt 1)...
+2025-12-04 10:47:41 | INFO     | browser_controller:open_browser:110 - ✓ Selenium connected to port 59821
+2025-12-04 10:47:41 | DEBUG    | browser_controller:_prepare_browser_safe:164 - Preparing browser for profile k17l902d
+2025-12-04 10:47:42 | INFO     | browser_controller:_prepare_browser_safe:179 - ✓ Browser prepared for profile k17l902d
+2025-12-04 10:47:42 | INFO     | browser_controller:open_browser:132 - ✅ Browser ready for profile k17l902d
+2025-12-04 10:47:42 | DEBUG    | action_executor:execute_action:88 - Executing action: navigate
+2025-12-04 10:47:48 | INFO     | action_executor:_navigate:195 - ✓ Navigated to: https://www.google.com
+2025-12-04 10:47:48 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/8 completed: navigate
+2025-12-04 10:47:48 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 10:47:51 | DEBUG    | action_executor:_wait:470 - ✓ Waited 3s
+2025-12-04 10:47:51 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/8 completed: wait
+2025-12-04 10:47:51 | DEBUG    | action_executor:execute_action:88 - Executing action: search_google
+2025-12-04 10:47:51 | INFO     | action_executor:_search_google:209 - Starting Google search: 'latest technology news'
+2025-12-04 10:47:53 | DEBUG    | action_executor:_search_google:243 - ✓ Found search box with: textarea[name='q']
+2025-12-04 10:47:55 | DEBUG    | action_executor:_search_google:280 - ✓ Input focused and cleared
+2025-12-04 10:47:56 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:47:56 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:47:56 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:47:58 | DEBUG    | action_executor:_search_google:290 - ✓ Typed query: 'latest technology news'
+2025-12-04 10:48:00 | DEBUG    | action_executor:_search_google:304 - ✓ Submitted with ENTER key
+2025-12-04 10:48:06 | INFO     | action_executor:_search_google:343 - ✅ Google search completed successfully: 'latest technology news'
+2025-12-04 10:48:06 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/8 completed: search_google
+2025-12-04 10:48:06 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 10:48:10 | DEBUG    | action_executor:_wait:470 - ✓ Waited 4s
+2025-12-04 10:48:10 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/8 completed: wait
+2025-12-04 10:48:10 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 10:48:12 | DEBUG    | action_executor:_scroll:459 - ✓ Scrolled down 300px
+2025-12-04 10:48:12 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/8 completed: scroll
+2025-12-04 10:48:12 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 10:48:14 | DEBUG    | action_executor:_wait:470 - ✓ Waited 2s
+2025-12-04 10:48:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/8 completed: wait
+2025-12-04 10:48:14 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 10:48:15 | DEBUG    | action_executor:_scroll:459 - ✓ Scrolled down 300px
+2025-12-04 10:48:15 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/8 completed: scroll
+2025-12-04 10:48:15 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 10:48:17 | DEBUG    | action_executor:_wait:470 - ✓ Waited 2s
+2025-12-04 10:48:17 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/8 completed: wait
+2025-12-04 10:48:17 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=54, completed=8, failed=0
+2025-12-04 10:48:26 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:48:26 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:48:26 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:48:27 | INFO     | browser_controller:close_browser:228 - ✓ Browser closed for profile k17l902d
+2025-12-04 10:48:56 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:48:56 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:48:56 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:49:27 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:49:27 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:49:27 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:49:57 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:49:57 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:49:57 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:50:27 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:50:27 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:50:27 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:50:57 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:50:57 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:50:57 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:51:27 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:51:27 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:51:27 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:51:57 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:51:57 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:51:57 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:52:27 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:52:27 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:52:27 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:52:57 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:52:57 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:52:57 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:53:27 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:53:27 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:53:27 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:53:57 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:53:57 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:53:57 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:54:27 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:54:27 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:54:27 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:54:57 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:54:57 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:54:57 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:55:27 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:55:27 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:55:27 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:55:57 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:55:57 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:55:57 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:56:27 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:56:27 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:56:27 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:56:57 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:56:57 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:56:57 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:57:27 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:57:27 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:57:27 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:57:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: execute_warming
+2025-12-04 10:57:41 | INFO     | websocket_client:_execute_warming:110 - 🔥 Executing warming: execution_id=55, profile_id=k17l902d
+2025-12-04 10:57:41 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=55, profile_id=k17l902d
+2025-12-04 10:57:41 | INFO     | browser_controller:open_browser:47 - 🌐 Opening browser for profile k17l902d
+2025-12-04 10:57:46 | INFO     | browser_controller:open_browser:68 - ✓ Browser opened on port 50590
+2025-12-04 10:57:46 | DEBUG    | websocket_client:_handle_message:79 - Received message: execute_warming
+2025-12-04 10:57:46 | INFO     | websocket_client:_execute_warming:110 - 🔥 Executing warming: execution_id=56, profile_id=k17m5o28
+2025-12-04 10:57:46 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=56, profile_id=k17m5o28
+2025-12-04 10:57:46 | INFO     | browser_controller:open_browser:47 - 🌐 Opening browser for profile k17m5o28
+2025-12-04 10:57:51 | INFO     | browser_controller:open_browser:68 - ✓ Browser opened on port 50634
+2025-12-04 10:57:51 | DEBUG    | browser_controller:open_browser:82 - ✓ Port 50590 responding
+2025-12-04 10:57:51 | DEBUG    | browser_controller:open_browser:105 - Connecting Selenium (attempt 1)...
+2025-12-04 10:57:52 | INFO     | browser_controller:open_browser:110 - ✓ Selenium connected to port 50590
+2025-12-04 10:57:52 | DEBUG    | browser_controller:_prepare_browser_safe:164 - Preparing browser for profile k17l902d
+2025-12-04 10:57:53 | INFO     | browser_controller:_prepare_browser_safe:179 - ✓ Browser prepared for profile k17l902d
+2025-12-04 10:57:53 | INFO     | browser_controller:open_browser:132 - ✅ Browser ready for profile k17l902d
+2025-12-04 10:57:53 | DEBUG    | action_executor:execute_action:88 - Executing action: navigate
+2025-12-04 10:57:55 | DEBUG    | browser_controller:open_browser:82 - ✓ Port 50634 responding
+2025-12-04 10:57:55 | DEBUG    | browser_controller:open_browser:105 - Connecting Selenium (attempt 1)...
+2025-12-04 10:57:56 | INFO     | browser_controller:open_browser:110 - ✓ Selenium connected to port 50634
+2025-12-04 10:57:56 | DEBUG    | browser_controller:_prepare_browser_safe:164 - Preparing browser for profile k17m5o28
+2025-12-04 10:57:57 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:57:57 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:57:57 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:57:57 | INFO     | browser_controller:_prepare_browser_safe:179 - ✓ Browser prepared for profile k17m5o28
+2025-12-04 10:57:57 | INFO     | browser_controller:open_browser:132 - ✅ Browser ready for profile k17m5o28
+2025-12-04 10:57:57 | DEBUG    | action_executor:execute_action:88 - Executing action: navigate
+2025-12-04 10:58:01 | INFO     | action_executor:_navigate:195 - ✓ Navigated to: https://www.google.com
+2025-12-04 10:58:01 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/8 completed: navigate
+2025-12-04 10:58:01 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 10:58:04 | DEBUG    | action_executor:_wait:470 - ✓ Waited 3s
+2025-12-04 10:58:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/8 completed: wait
+2025-12-04 10:58:04 | DEBUG    | action_executor:execute_action:88 - Executing action: search_google
+2025-12-04 10:58:04 | INFO     | action_executor:_search_google:209 - Starting Google search: 'latest technology news'
+2025-12-04 10:58:05 | INFO     | action_executor:_navigate:195 - ✓ Navigated to: https://www.google.com
+2025-12-04 10:58:05 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/8 completed: navigate
+2025-12-04 10:58:05 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 10:58:06 | DEBUG    | action_executor:_search_google:243 - ✓ Found search box with: textarea[name='q']
+2025-12-04 10:58:07 | DEBUG    | action_executor:_search_google:280 - ✓ Input focused and cleared
+2025-12-04 10:58:08 | DEBUG    | action_executor:_wait:470 - ✓ Waited 3s
+2025-12-04 10:58:08 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/8 completed: wait
+2025-12-04 10:58:08 | DEBUG    | action_executor:execute_action:88 - Executing action: search_google
+2025-12-04 10:58:08 | INFO     | action_executor:_search_google:209 - Starting Google search: 'latest technology news'
+2025-12-04 10:58:10 | DEBUG    | action_executor:_search_google:243 - ✓ Found search box with: textarea[name='q']
+2025-12-04 10:58:11 | DEBUG    | action_executor:_search_google:290 - ✓ Typed query: 'latest technology news'
+2025-12-04 10:58:11 | DEBUG    | action_executor:_search_google:280 - ✓ Input focused and cleared
+2025-12-04 10:58:13 | DEBUG    | action_executor:_search_google:304 - ✓ Submitted with ENTER key
+2025-12-04 10:58:15 | DEBUG    | action_executor:_search_google:290 - ✓ Typed query: 'latest technology news'
+2025-12-04 10:58:17 | DEBUG    | action_executor:_search_google:304 - ✓ Submitted with ENTER key
+2025-12-04 10:58:18 | INFO     | action_executor:_search_google:343 - ✅ Google search completed successfully: 'latest technology news'
+2025-12-04 10:58:18 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/8 completed: search_google
+2025-12-04 10:58:18 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 10:58:21 | INFO     | action_executor:_search_google:343 - ✅ Google search completed successfully: 'latest technology news'
+2025-12-04 10:58:21 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/8 completed: search_google
+2025-12-04 10:58:21 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 10:58:22 | DEBUG    | action_executor:_wait:470 - ✓ Waited 4s
+2025-12-04 10:58:22 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/8 completed: wait
+2025-12-04 10:58:22 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 10:58:23 | DEBUG    | action_executor:_scroll:459 - ✓ Scrolled down 300px
+2025-12-04 10:58:23 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/8 completed: scroll
+2025-12-04 10:58:23 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 10:58:25 | DEBUG    | action_executor:_wait:470 - ✓ Waited 2s
+2025-12-04 10:58:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/8 completed: wait
+2025-12-04 10:58:25 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 10:58:25 | DEBUG    | action_executor:_wait:470 - ✓ Waited 4s
+2025-12-04 10:58:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/8 completed: wait
+2025-12-04 10:58:25 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 10:58:26 | DEBUG    | action_executor:_scroll:459 - ✓ Scrolled down 300px
+2025-12-04 10:58:26 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/8 completed: scroll
+2025-12-04 10:58:26 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 10:58:27 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:58:27 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:58:27 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:58:27 | DEBUG    | action_executor:_scroll:459 - ✓ Scrolled down 300px
+2025-12-04 10:58:27 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/8 completed: scroll
+2025-12-04 10:58:27 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 10:58:28 | DEBUG    | action_executor:_wait:470 - ✓ Waited 2s
+2025-12-04 10:58:28 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/8 completed: wait
+2025-12-04 10:58:28 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=55, completed=8, failed=0
+2025-12-04 10:58:29 | DEBUG    | action_executor:_wait:470 - ✓ Waited 2s
+2025-12-04 10:58:29 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/8 completed: wait
+2025-12-04 10:58:29 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 10:58:37 | DEBUG    | action_executor:_scroll:459 - ✓ Scrolled down 300px
+2025-12-04 10:58:37 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/8 completed: scroll
+2025-12-04 10:58:37 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 10:58:38 | INFO     | browser_controller:close_browser:228 - ✓ Browser closed for profile k17l902d
+2025-12-04 10:58:39 | DEBUG    | action_executor:_wait:470 - ✓ Waited 2s
+2025-12-04 10:58:39 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/8 completed: wait
+2025-12-04 10:58:39 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=56, completed=8, failed=0
+2025-12-04 10:58:49 | INFO     | browser_controller:close_browser:228 - ✓ Browser closed for profile k17m5o28
+2025-12-04 10:58:57 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:58:57 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:58:57 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:59:27 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:59:27 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:59:27 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 10:59:57 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 10:59:57 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 10:59:57 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:00:27 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:00:27 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:00:27 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:00:56 | DEBUG    | websocket_client:_handle_message:79 - Received message: execute_warming
+2025-12-04 11:00:56 | INFO     | websocket_client:_execute_warming:110 - 🔥 Executing warming: execution_id=57, profile_id=k17l902d
+2025-12-04 11:00:56 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=57, profile_id=k17l902d
+2025-12-04 11:00:56 | INFO     | browser_controller:open_browser:47 - 🌐 Opening browser for profile k17l902d
+2025-12-04 11:01:01 | INFO     | browser_controller:open_browser:68 - ✓ Browser opened on port 51739
+2025-12-04 11:01:01 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:01:01 | DEBUG    | websocket_client:_handle_message:79 - Received message: execute_warming
+2025-12-04 11:01:01 | INFO     | websocket_client:_execute_warming:110 - 🔥 Executing warming: execution_id=58, profile_id=k17m5o28
+2025-12-04 11:01:01 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=58, profile_id=k17m5o28
+2025-12-04 11:01:01 | INFO     | browser_controller:open_browser:47 - 🌐 Opening browser for profile k17m5o28
+2025-12-04 11:01:05 | INFO     | browser_controller:open_browser:68 - ✓ Browser opened on port 51794
+2025-12-04 11:01:05 | DEBUG    | browser_controller:open_browser:82 - ✓ Port 51739 responding
+2025-12-04 11:01:05 | DEBUG    | browser_controller:open_browser:105 - Connecting Selenium (attempt 1)...
+2025-12-04 11:01:06 | INFO     | browser_controller:open_browser:110 - ✓ Selenium connected to port 51739
+2025-12-04 11:01:06 | DEBUG    | browser_controller:_prepare_browser_safe:164 - Preparing browser for profile k17l902d
+2025-12-04 11:01:06 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:01:06 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:01:07 | INFO     | browser_controller:_prepare_browser_safe:179 - ✓ Browser prepared for profile k17l902d
+2025-12-04 11:01:07 | INFO     | browser_controller:open_browser:132 - ✅ Browser ready for profile k17l902d
+2025-12-04 11:01:07 | DEBUG    | action_executor:execute_action:88 - Executing action: navigate
+2025-12-04 11:01:09 | DEBUG    | browser_controller:open_browser:82 - ✓ Port 51794 responding
+2025-12-04 11:01:09 | DEBUG    | browser_controller:open_browser:105 - Connecting Selenium (attempt 1)...
+2025-12-04 11:01:10 | INFO     | browser_controller:open_browser:110 - ✓ Selenium connected to port 51794
+2025-12-04 11:01:10 | DEBUG    | browser_controller:_prepare_browser_safe:164 - Preparing browser for profile k17m5o28
+2025-12-04 11:01:11 | INFO     | browser_controller:_prepare_browser_safe:179 - ✓ Browser prepared for profile k17m5o28
+2025-12-04 11:01:11 | INFO     | browser_controller:open_browser:132 - ✅ Browser ready for profile k17m5o28
+2025-12-04 11:01:11 | DEBUG    | action_executor:execute_action:88 - Executing action: navigate
+2025-12-04 11:01:14 | INFO     | action_executor:_navigate:195 - ✓ Navigated to: https://www.google.com
+2025-12-04 11:01:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/8 completed: navigate
+2025-12-04 11:01:14 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:01:17 | DEBUG    | action_executor:_wait:470 - ✓ Waited 3s
+2025-12-04 11:01:17 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/8 completed: wait
+2025-12-04 11:01:17 | DEBUG    | action_executor:execute_action:88 - Executing action: search_google
+2025-12-04 11:01:17 | INFO     | action_executor:_search_google:209 - Starting Google search: 'latest technology news'
+2025-12-04 11:01:17 | INFO     | action_executor:_navigate:195 - ✓ Navigated to: https://www.google.com
+2025-12-04 11:01:17 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/8 completed: navigate
+2025-12-04 11:01:17 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:01:19 | DEBUG    | action_executor:_search_google:243 - ✓ Found search box with: textarea[name='q']
+2025-12-04 11:01:20 | DEBUG    | action_executor:_search_google:280 - ✓ Input focused and cleared
+2025-12-04 11:01:20 | DEBUG    | action_executor:_wait:470 - ✓ Waited 3s
+2025-12-04 11:01:20 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/8 completed: wait
+2025-12-04 11:01:20 | DEBUG    | action_executor:execute_action:88 - Executing action: search_google
+2025-12-04 11:01:20 | INFO     | action_executor:_search_google:209 - Starting Google search: 'latest technology news'
+2025-12-04 11:01:22 | DEBUG    | action_executor:_search_google:243 - ✓ Found search box with: textarea[name='q']
+2025-12-04 11:01:23 | DEBUG    | action_executor:_search_google:290 - ✓ Typed query: 'latest technology news'
+2025-12-04 11:01:24 | DEBUG    | action_executor:_search_google:280 - ✓ Input focused and cleared
+2025-12-04 11:01:26 | DEBUG    | action_executor:_search_google:304 - ✓ Submitted with ENTER key
+2025-12-04 11:01:28 | DEBUG    | action_executor:_search_google:290 - ✓ Typed query: 'latest technology news'
+2025-12-04 11:01:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:01:40 | INFO     | action_executor:_search_google:343 - ✅ Google search completed successfully: 'latest technology news'
+2025-12-04 11:01:40 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/8 completed: search_google
+2025-12-04 11:01:40 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:01:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:01:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:01:41 | DEBUG    | action_executor:_search_google:304 - ✓ Submitted with ENTER key
+2025-12-04 11:01:44 | DEBUG    | action_executor:_wait:470 - ✓ Waited 4s
+2025-12-04 11:01:44 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/8 completed: wait
+2025-12-04 11:01:44 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 11:01:46 | INFO     | action_executor:_search_google:343 - ✅ Google search completed successfully: 'latest technology news'
+2025-12-04 11:01:46 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/8 completed: search_google
+2025-12-04 11:01:46 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:01:46 | DEBUG    | action_executor:_scroll:459 - ✓ Scrolled down 300px
+2025-12-04 11:01:46 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/8 completed: scroll
+2025-12-04 11:01:46 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:01:48 | DEBUG    | action_executor:_wait:470 - ✓ Waited 2s
+2025-12-04 11:01:48 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/8 completed: wait
+2025-12-04 11:01:48 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 11:01:49 | DEBUG    | action_executor:_scroll:459 - ✓ Scrolled down 300px
+2025-12-04 11:01:49 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/8 completed: scroll
+2025-12-04 11:01:49 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:01:50 | DEBUG    | action_executor:_wait:470 - ✓ Waited 4s
+2025-12-04 11:01:50 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/8 completed: wait
+2025-12-04 11:01:50 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 11:01:51 | DEBUG    | action_executor:_wait:470 - ✓ Waited 2s
+2025-12-04 11:01:51 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/8 completed: wait
+2025-12-04 11:01:51 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=57, completed=8, failed=0
+2025-12-04 11:01:52 | DEBUG    | action_executor:_scroll:459 - ✓ Scrolled down 300px
+2025-12-04 11:01:52 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/8 completed: scroll
+2025-12-04 11:01:52 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:02:01 | DEBUG    | action_executor:_wait:470 - ✓ Waited 2s
+2025-12-04 11:02:01 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/8 completed: wait
+2025-12-04 11:02:01 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 11:02:02 | INFO     | browser_controller:close_browser:228 - ✓ Browser closed for profile k17l902d
+2025-12-04 11:02:02 | DEBUG    | action_executor:_scroll:459 - ✓ Scrolled down 300px
+2025-12-04 11:02:02 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/8 completed: scroll
+2025-12-04 11:02:02 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:02:04 | DEBUG    | action_executor:_wait:470 - ✓ Waited 2s
+2025-12-04 11:02:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/8 completed: wait
+2025-12-04 11:02:04 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=58, completed=8, failed=0
+2025-12-04 11:02:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:02:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:02:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:02:15 | INFO     | browser_controller:close_browser:228 - ✓ Browser closed for profile k17m5o28
+2025-12-04 11:02:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:02:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:02:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:03:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:03:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:03:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:03:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:03:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:03:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:04:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:04:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:04:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:04:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:04:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:04:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:05:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:05:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:05:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:05:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:05:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:05:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:06:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:06:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:06:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:06:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:06:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:06:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:07:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:07:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:07:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:07:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:07:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:07:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:08:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:08:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:08:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:08:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:08:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:08:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:09:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:09:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:09:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:09:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:09:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:09:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:10:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:10:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:10:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:10:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:10:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:10:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:11:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:11:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:11:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:11:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:11:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:11:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:12:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:12:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:12:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:12:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:12:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:12:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:13:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:13:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:13:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:13:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:13:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:13:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:14:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:14:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:14:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:14:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:14:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:14:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:15:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:15:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:15:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:15:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:15:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:15:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:16:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:16:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:16:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:16:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:16:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:16:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:17:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:17:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:17:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:17:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:17:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:17:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:18:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:18:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:18:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:18:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:18:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:18:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:19:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:19:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:19:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:19:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:19:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:19:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:20:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:20:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:20:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:20:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:20:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:20:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:21:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:21:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:21:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:21:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:21:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:21:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:22:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:22:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:22:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:22:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:22:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:22:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:23:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:23:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:23:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:23:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:23:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:23:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:24:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:24:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:24:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:24:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:24:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:24:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:25:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:25:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:25:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:25:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:25:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:25:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:26:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:26:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:26:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:26:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:26:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:26:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:27:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:27:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:27:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:27:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:27:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:27:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:28:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:28:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:28:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:28:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:28:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:28:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:29:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:29:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:29:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:29:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:29:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:29:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:30:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:30:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:30:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:30:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:30:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:30:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:31:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:31:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:31:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:31:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:31:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:31:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:32:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:32:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:32:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:32:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:32:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:32:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:33:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:33:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:33:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:33:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:33:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:33:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:34:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:34:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:34:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:34:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:34:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:34:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:35:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:35:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:35:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:35:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:35:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:35:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:36:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:36:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:36:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:36:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:36:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:36:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:37:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:37:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:37:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:37:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:37:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:37:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:38:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:38:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:38:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:38:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:38:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:38:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:39:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:39:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:39:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:39:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:39:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:39:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:40:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:40:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:40:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:40:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:40:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:40:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:41:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:41:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:41:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:41:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:41:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:41:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:42:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:42:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:42:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:42:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:42:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:42:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:43:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:43:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:43:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:43:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:43:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:43:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:44:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:44:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:44:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:44:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:44:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:44:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:45:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:45:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:45:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:45:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:45:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:45:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:46:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:46:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:46:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:46:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:46:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:46:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:47:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:47:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:47:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:47:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:47:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:47:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:48:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:48:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:48:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:48:35 | INFO     | browser_controller:__init__:29 - ✓ ChromeDriver detectado: /Users/omarmaldonado/Desktop/proxys/proyectofinal/agent/chromedriver
+2025-12-04 11:48:35 | INFO     | __main__:start:79 - ============================================================
+2025-12-04 11:48:35 | INFO     | __main__:start:80 - 🤖 AdsPower Agent Starting
+2025-12-04 11:48:35 | INFO     | __main__:start:81 - Computer ID: 1
+2025-12-04 11:48:35 | INFO     | __main__:start:82 - Computer Name: mac
+2025-12-04 11:48:35 | INFO     | __main__:start:83 - Orchestrator: http://192.168.1.10:8000
+2025-12-04 11:48:35 | INFO     | __main__:start:84 - ============================================================
+2025-12-04 11:48:35 | INFO     | __main__:start:88 - Connecting to orchestrator...
+2025-12-04 11:48:35 | INFO     | websocket_client:connect:26 - Connecting to: ws://192.168.1.10:8000/api/v1/warming/ws/1
+2025-12-04 11:48:35 | INFO     | websocket_client:connect:39 - ✅ Connected to orchestrator!
+2025-12-04 11:48:35 | DEBUG    | websocket_client:_handle_message:79 - Received message: connected
+2025-12-04 11:48:35 | INFO     | websocket_client:_handle_message:82 - Connected confirmation: Connected to orchestrator
+2025-12-04 11:49:05 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:49:05 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:49:05 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:49:20 | DEBUG    | websocket_client:_handle_message:79 - Received message: execute_warming
+2025-12-04 11:49:20 | INFO     | websocket_client:_execute_warming:110 - 🔥 Executing warming: execution_id=84, profile_id=k17l902d
+2025-12-04 11:49:20 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=84, profile_id=k17l902d
+2025-12-04 11:49:20 | INFO     | browser_controller:open_browser:47 - 🌐 Opening browser for profile k17l902d
+2025-12-04 11:49:27 | INFO     | browser_controller:open_browser:68 - ✓ Browser opened on port 54688
+2025-12-04 11:49:31 | DEBUG    | browser_controller:open_browser:82 - ✓ Port 54688 responding
+2025-12-04 11:49:31 | DEBUG    | browser_controller:open_browser:105 - Connecting Selenium (attempt 1)...
+2025-12-04 11:49:31 | INFO     | browser_controller:open_browser:110 - ✓ Selenium connected to port 54688
+2025-12-04 11:49:31 | DEBUG    | browser_controller:_prepare_browser_safe:164 - Preparing browser for profile k17l902d
+2025-12-04 11:49:33 | INFO     | browser_controller:_prepare_browser_safe:179 - ✓ Browser prepared for profile k17l902d
+2025-12-04 11:49:33 | INFO     | browser_controller:open_browser:132 - ✅ Browser ready for profile k17l902d
+2025-12-04 11:49:33 | DEBUG    | action_executor:execute_action:88 - Executing action: navigate
+2025-12-04 11:49:35 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:49:35 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:49:35 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:49:38 | INFO     | action_executor:_navigate:195 - ✓ Navigated to: https://www.google.com
+2025-12-04 11:49:38 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/8 completed: navigate
+2025-12-04 11:49:38 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:49:41 | DEBUG    | action_executor:_wait:470 - ✓ Waited 3s
+2025-12-04 11:49:41 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/8 completed: wait
+2025-12-04 11:49:41 | DEBUG    | action_executor:execute_action:88 - Executing action: search_google
+2025-12-04 11:49:41 | INFO     | action_executor:_search_google:209 - Starting Google search: 'latest technology news'
+2025-12-04 11:49:43 | DEBUG    | action_executor:_search_google:243 - ✓ Found search box with: textarea[name='q']
+2025-12-04 11:49:44 | DEBUG    | action_executor:_search_google:280 - ✓ Input focused and cleared
+2025-12-04 11:49:48 | DEBUG    | action_executor:_search_google:290 - ✓ Typed query: 'latest technology news'
+2025-12-04 11:49:50 | DEBUG    | action_executor:_search_google:304 - ✓ Submitted with ENTER key
+2025-12-04 11:49:55 | INFO     | action_executor:_search_google:343 - ✅ Google search completed successfully: 'latest technology news'
+2025-12-04 11:49:55 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/8 completed: search_google
+2025-12-04 11:49:55 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:49:59 | DEBUG    | action_executor:_wait:470 - ✓ Waited 4s
+2025-12-04 11:49:59 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/8 completed: wait
+2025-12-04 11:49:59 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 11:50:01 | DEBUG    | action_executor:_scroll:459 - ✓ Scrolled down 300px
+2025-12-04 11:50:01 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/8 completed: scroll
+2025-12-04 11:50:01 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:50:03 | DEBUG    | action_executor:_wait:470 - ✓ Waited 2s
+2025-12-04 11:50:03 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/8 completed: wait
+2025-12-04 11:50:03 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 11:50:05 | DEBUG    | action_executor:_scroll:459 - ✓ Scrolled down 300px
+2025-12-04 11:50:05 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/8 completed: scroll
+2025-12-04 11:50:05 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:50:05 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:50:05 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:50:05 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:50:05 | DEBUG    | websocket_client:_handle_message:79 - Received message: execute_warming
+2025-12-04 11:50:05 | INFO     | websocket_client:_execute_warming:110 - 🔥 Executing warming: execution_id=85, profile_id=k17l902d
+2025-12-04 11:50:05 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=85, profile_id=k17l902d
+2025-12-04 11:50:05 | INFO     | browser_controller:open_browser:35 - Browser already open for profile k17l902d
+2025-12-04 11:50:05 | DEBUG    | action_executor:execute_action:88 - Executing action: navigate
+2025-12-04 11:50:07 | DEBUG    | action_executor:_wait:470 - ✓ Waited 2s
+2025-12-04 11:50:07 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/8 completed: wait
+2025-12-04 11:50:07 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=84, completed=8, failed=0
+2025-12-04 11:50:16 | INFO     | action_executor:_navigate:195 - ✓ Navigated to: https://www.google.com
+2025-12-04 11:50:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/8 completed: navigate
+2025-12-04 11:50:16 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:50:16 | ERROR    | warming_executor:_execute_warming:107 - Action 2 failed: HTTPConnectionPool(host='localhost', port=54727): Max retries exceeded with url: /session/a9d1abd6c5f5cb426e66ef36e26bf94a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105c455e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 11:50:16 | DEBUG    | action_executor:execute_action:88 - Executing action: search_google
+2025-12-04 11:50:16 | ERROR    | warming_executor:_execute_warming:107 - Action 3 failed: HTTPConnectionPool(host='localhost', port=54727): Max retries exceeded with url: /session/a9d1abd6c5f5cb426e66ef36e26bf94a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105cc5220>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 11:50:16 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:50:16 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=54727): Max retries exceeded with url: /session/a9d1abd6c5f5cb426e66ef36e26bf94a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105cc5820>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 11:50:16 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 11:50:16 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=54727): Max retries exceeded with url: /session/a9d1abd6c5f5cb426e66ef36e26bf94a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105c45460>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 11:50:16 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:50:16 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=54727): Max retries exceeded with url: /session/a9d1abd6c5f5cb426e66ef36e26bf94a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105c457f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 11:50:16 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 11:50:16 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=54727): Max retries exceeded with url: /session/a9d1abd6c5f5cb426e66ef36e26bf94a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105cc5760>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 11:50:16 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:50:16 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=54727): Max retries exceeded with url: /session/a9d1abd6c5f5cb426e66ef36e26bf94a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105cc5e20>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 11:50:16 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=85, completed=1, failed=7
+2025-12-04 11:50:17 | INFO     | browser_controller:close_browser:228 - ✓ Browser closed for profile k17l902d
+2025-12-04 11:50:18 | ERROR    | browser_controller:close_browser:232 - Error closing browser: 'k17l902d'
+2025-12-04 11:50:35 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:50:35 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:50:35 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:50:43 | DEBUG    | websocket_client:_handle_message:79 - Received message: execute_warming
+2025-12-04 11:50:43 | INFO     | websocket_client:_execute_warming:110 - 🔥 Executing warming: execution_id=86, profile_id=k17l902d
+2025-12-04 11:50:43 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=86, profile_id=k17l902d
+2025-12-04 11:50:43 | INFO     | browser_controller:open_browser:47 - 🌐 Opening browser for profile k17l902d
+2025-12-04 11:50:48 | INFO     | browser_controller:open_browser:68 - ✓ Browser opened on port 55012
+2025-12-04 11:50:52 | DEBUG    | browser_controller:open_browser:82 - ✓ Port 55012 responding
+2025-12-04 11:50:52 | DEBUG    | browser_controller:open_browser:105 - Connecting Selenium (attempt 1)...
+2025-12-04 11:50:53 | INFO     | browser_controller:open_browser:110 - ✓ Selenium connected to port 55012
+2025-12-04 11:50:53 | DEBUG    | browser_controller:_prepare_browser_safe:164 - Preparing browser for profile k17l902d
+2025-12-04 11:50:54 | INFO     | browser_controller:_prepare_browser_safe:179 - ✓ Browser prepared for profile k17l902d
+2025-12-04 11:50:54 | INFO     | browser_controller:open_browser:132 - ✅ Browser ready for profile k17l902d
+2025-12-04 11:50:54 | DEBUG    | action_executor:execute_action:88 - Executing action: navigate
+2025-12-04 11:50:59 | INFO     | action_executor:_navigate:195 - ✓ Navigated to: https://www.google.com
+2025-12-04 11:50:59 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/8 completed: navigate
+2025-12-04 11:50:59 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:51:02 | DEBUG    | action_executor:_wait:470 - ✓ Waited 3s
+2025-12-04 11:51:02 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/8 completed: wait
+2025-12-04 11:51:02 | DEBUG    | action_executor:execute_action:88 - Executing action: search_google
+2025-12-04 11:51:02 | INFO     | action_executor:_search_google:209 - Starting Google search: 'latest technology news'
+2025-12-04 11:51:04 | DEBUG    | action_executor:_search_google:243 - ✓ Found search box with: textarea[name='q']
+2025-12-04 11:51:05 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:51:05 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:51:05 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:51:06 | DEBUG    | action_executor:_search_google:280 - ✓ Input focused and cleared
+2025-12-04 11:51:09 | DEBUG    | action_executor:_search_google:290 - ✓ Typed query: 'latest technology news'
+2025-12-04 11:51:11 | DEBUG    | action_executor:_search_google:304 - ✓ Submitted with ENTER key
+2025-12-04 11:51:15 | DEBUG    | websocket_client:_handle_message:79 - Received message: execute_warming
+2025-12-04 11:51:15 | INFO     | websocket_client:_execute_warming:110 - 🔥 Executing warming: execution_id=87, profile_id=k17m6178
+2025-12-04 11:51:15 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=87, profile_id=k17m6178
+2025-12-04 11:51:15 | INFO     | browser_controller:open_browser:47 - 🌐 Opening browser for profile k17m6178
+2025-12-04 11:51:20 | INFO     | browser_controller:open_browser:68 - ✓ Browser opened on port 55206
+2025-12-04 11:51:20 | INFO     | action_executor:_search_google:343 - ✅ Google search completed successfully: 'latest technology news'
+2025-12-04 11:51:20 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/8 completed: search_google
+2025-12-04 11:51:20 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:51:24 | DEBUG    | browser_controller:open_browser:82 - ✓ Port 55206 responding
+2025-12-04 11:51:24 | DEBUG    | browser_controller:open_browser:105 - Connecting Selenium (attempt 1)...
+2025-12-04 11:51:25 | INFO     | browser_controller:open_browser:110 - ✓ Selenium connected to port 55206
+2025-12-04 11:51:25 | DEBUG    | browser_controller:_prepare_browser_safe:164 - Preparing browser for profile k17m6178
+2025-12-04 11:51:25 | DEBUG    | action_executor:_wait:470 - ✓ Waited 4s
+2025-12-04 11:51:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/8 completed: wait
+2025-12-04 11:51:25 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 11:51:26 | INFO     | browser_controller:_prepare_browser_safe:179 - ✓ Browser prepared for profile k17m6178
+2025-12-04 11:51:26 | INFO     | browser_controller:open_browser:132 - ✅ Browser ready for profile k17m6178
+2025-12-04 11:51:26 | DEBUG    | action_executor:execute_action:88 - Executing action: navigate
+2025-12-04 11:51:39 | DEBUG    | action_executor:_scroll:459 - ✓ Scrolled down 300px
+2025-12-04 11:51:39 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:51:39 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/8 completed: scroll
+2025-12-04 11:51:39 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:51:39 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:51:39 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:51:41 | DEBUG    | action_executor:_wait:470 - ✓ Waited 2s
+2025-12-04 11:51:41 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/8 completed: wait
+2025-12-04 11:51:41 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 11:51:42 | DEBUG    | action_executor:_scroll:459 - ✓ Scrolled down 300px
+2025-12-04 11:51:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/8 completed: scroll
+2025-12-04 11:51:42 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:51:43 | INFO     | action_executor:_navigate:195 - ✓ Navigated to: https://www.google.com
+2025-12-04 11:51:43 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/8 completed: navigate
+2025-12-04 11:51:43 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:51:44 | DEBUG    | action_executor:_wait:470 - ✓ Waited 2s
+2025-12-04 11:51:44 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/8 completed: wait
+2025-12-04 11:51:44 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=86, completed=8, failed=0
+2025-12-04 11:51:53 | DEBUG    | action_executor:_wait:470 - ✓ Waited 3s
+2025-12-04 11:51:53 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/8 completed: wait
+2025-12-04 11:51:53 | DEBUG    | action_executor:execute_action:88 - Executing action: search_google
+2025-12-04 11:51:53 | INFO     | action_executor:_search_google:209 - Starting Google search: 'latest technology news'
+2025-12-04 11:51:54 | INFO     | browser_controller:close_browser:228 - ✓ Browser closed for profile k17l902d
+2025-12-04 11:51:55 | DEBUG    | action_executor:_search_google:243 - ✓ Found search box with: textarea[name='q']
+2025-12-04 11:51:56 | DEBUG    | action_executor:_search_google:280 - ✓ Input focused and cleared
+2025-12-04 11:52:00 | DEBUG    | action_executor:_search_google:290 - ✓ Typed query: 'latest technology news'
+2025-12-04 11:52:02 | DEBUG    | action_executor:_search_google:304 - ✓ Submitted with ENTER key
+2025-12-04 11:52:18 | INFO     | action_executor:_search_google:350 - ✓ Search completed (verification skipped)
+2025-12-04 11:52:18 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/8 completed: search_google
+2025-12-04 11:52:18 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:52:18 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 11:52:18 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/8 completed: wait
+2025-12-04 11:52:18 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 11:52:18 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 11:52:18 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/8 completed: scroll
+2025-12-04 11:52:18 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:52:18 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 11:52:18 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/8 completed: wait
+2025-12-04 11:52:18 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 11:52:18 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 11:52:18 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/8 completed: scroll
+2025-12-04 11:52:18 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:52:18 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 11:52:18 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/8 completed: wait
+2025-12-04 11:52:18 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=87, completed=3, failed=5
+2025-12-04 11:52:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:52:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:52:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:52:20 | INFO     | browser_controller:close_browser:228 - ✓ Browser closed for profile k17m6178
+2025-12-04 11:52:28 | DEBUG    | websocket_client:_handle_message:79 - Received message: execute_warming
+2025-12-04 11:52:28 | INFO     | websocket_client:_execute_warming:110 - 🔥 Executing warming: execution_id=88, profile_id=k17m6178
+2025-12-04 11:52:28 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=88, profile_id=k17m6178
+2025-12-04 11:52:28 | INFO     | browser_controller:open_browser:47 - 🌐 Opening browser for profile k17m6178
+2025-12-04 11:52:33 | INFO     | browser_controller:open_browser:68 - ✓ Browser opened on port 55656
+2025-12-04 11:52:37 | DEBUG    | browser_controller:open_browser:82 - ✓ Port 55656 responding
+2025-12-04 11:52:37 | DEBUG    | browser_controller:open_browser:105 - Connecting Selenium (attempt 1)...
+2025-12-04 11:52:38 | INFO     | browser_controller:open_browser:110 - ✓ Selenium connected to port 55656
+2025-12-04 11:52:38 | DEBUG    | browser_controller:_prepare_browser_safe:164 - Preparing browser for profile k17m6178
+2025-12-04 11:52:39 | INFO     | browser_controller:_prepare_browser_safe:179 - ✓ Browser prepared for profile k17m6178
+2025-12-04 11:52:39 | INFO     | browser_controller:open_browser:132 - ✅ Browser ready for profile k17m6178
+2025-12-04 11:52:39 | DEBUG    | action_executor:execute_action:88 - Executing action: navigate
+2025-12-04 11:52:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:52:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:52:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:52:51 | INFO     | action_executor:_navigate:195 - ✓ Navigated to: https://www.google.com
+2025-12-04 11:52:51 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/8 completed: navigate
+2025-12-04 11:52:51 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:52:54 | DEBUG    | action_executor:_wait:470 - ✓ Waited 3s
+2025-12-04 11:52:54 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/8 completed: wait
+2025-12-04 11:52:54 | DEBUG    | action_executor:execute_action:88 - Executing action: search_google
+2025-12-04 11:52:54 | INFO     | action_executor:_search_google:209 - Starting Google search: 'latest technology news'
+2025-12-04 11:52:57 | DEBUG    | action_executor:_search_google:243 - ✓ Found search box with: textarea[name='q']
+2025-12-04 11:52:58 | DEBUG    | action_executor:_search_google:280 - ✓ Input focused and cleared
+2025-12-04 11:53:01 | DEBUG    | action_executor:_search_google:290 - ✓ Typed query: 'latest technology news'
+2025-12-04 11:53:04 | DEBUG    | action_executor:_search_google:304 - ✓ Submitted with ENTER key
+2025-12-04 11:53:12 | INFO     | action_executor:_search_google:343 - ✅ Google search completed successfully: 'latest technology news'
+2025-12-04 11:53:12 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/8 completed: search_google
+2025-12-04 11:53:12 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:53:16 | DEBUG    | action_executor:_wait:470 - ✓ Waited 4s
+2025-12-04 11:53:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/8 completed: wait
+2025-12-04 11:53:16 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 11:53:18 | DEBUG    | action_executor:_scroll:459 - ✓ Scrolled down 300px
+2025-12-04 11:53:18 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/8 completed: scroll
+2025-12-04 11:53:18 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:53:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:53:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:53:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:53:20 | DEBUG    | action_executor:_wait:470 - ✓ Waited 2s
+2025-12-04 11:53:20 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/8 completed: wait
+2025-12-04 11:53:20 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 11:53:21 | DEBUG    | action_executor:_scroll:459 - ✓ Scrolled down 300px
+2025-12-04 11:53:21 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/8 completed: scroll
+2025-12-04 11:53:21 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 11:53:23 | DEBUG    | action_executor:_wait:470 - ✓ Waited 2s
+2025-12-04 11:53:23 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/8 completed: wait
+2025-12-04 11:53:23 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=88, completed=8, failed=0
+2025-12-04 11:53:33 | INFO     | browser_controller:close_browser:228 - ✓ Browser closed for profile k17m6178
+2025-12-04 11:53:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:53:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:53:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:54:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:54:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:54:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:54:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:54:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:54:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:55:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:55:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:55:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:55:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:55:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:55:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:56:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:56:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:56:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:56:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:56:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:56:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:57:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:57:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:57:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:57:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:57:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:57:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:58:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:58:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:58:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:58:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:58:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:58:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:59:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:59:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:59:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 11:59:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 11:59:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 11:59:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:00:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:00:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:00:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:00:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:00:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:00:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:01:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:01:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:01:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:01:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:01:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:01:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:02:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:02:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:02:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:02:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:02:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:02:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:03:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:03:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:03:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:03:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:03:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:03:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:04:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:04:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:04:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:04:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:04:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:04:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:05:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:05:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:05:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:05:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:05:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:05:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:06:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:06:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:06:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:06:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:06:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:06:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:07:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:07:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:07:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:07:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:07:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:07:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:08:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:08:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:08:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:08:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:08:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:08:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:09:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:09:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:09:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:09:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:09:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:09:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:10:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:10:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:10:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:10:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:10:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:10:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:11:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:11:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:11:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:11:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:11:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:11:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:12:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:12:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:12:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:12:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:12:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:12:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:13:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:13:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:13:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:13:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:13:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:13:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:14:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:14:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:14:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:14:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:14:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:14:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:15:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:15:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:15:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:15:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:15:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:15:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:16:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:16:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:16:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:16:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:16:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:16:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:17:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:17:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:17:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:17:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:17:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:17:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:18:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:18:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:18:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:18:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:18:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:18:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:19:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:19:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:19:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:19:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:19:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:19:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:20:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:20:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:20:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:20:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:20:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:20:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:21:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:21:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:21:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:21:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:21:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:21:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:22:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:22:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:22:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:22:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:22:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:22:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:23:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:23:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:23:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:23:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:23:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:23:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:24:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:24:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:24:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:24:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:24:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:24:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:25:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:25:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:25:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:25:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:25:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:25:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:26:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:26:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:26:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:26:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:26:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:26:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:27:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:27:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:27:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:27:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:27:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:27:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:28:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:28:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:28:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:28:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:28:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:28:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:29:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:29:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:29:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:29:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:29:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:29:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:30:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:30:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:30:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:30:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:30:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:30:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:31:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:31:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:31:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:31:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:31:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:31:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:32:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:32:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:32:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:32:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:32:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:32:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:33:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:33:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:33:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:33:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:33:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:33:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:34:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:34:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:34:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:34:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:34:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:34:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:35:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:35:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:35:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:35:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:35:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:35:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:36:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:36:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:36:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:36:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:36:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:36:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:37:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:37:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:37:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:37:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:37:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:37:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:38:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:38:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:38:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:38:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:38:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:38:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:39:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:39:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:39:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:39:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:39:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:39:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:40:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:40:18 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:40:18 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:40:48 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:40:48 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:40:48 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:41:17 | DEBUG    | websocket_client:_handle_message:79 - Received message: execute_warming
+2025-12-04 12:41:17 | INFO     | websocket_client:_execute_warming:110 - 🔥 Executing warming: execution_id=89, profile_id=k17m6178
+2025-12-04 12:41:17 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=89, profile_id=k17m6178
+2025-12-04 12:41:17 | INFO     | browser_controller:open_browser:47 - 🌐 Opening browser for profile k17m6178
+2025-12-04 12:41:23 | INFO     | browser_controller:open_browser:68 - ✓ Browser opened on port 56786
+2025-12-04 12:41:23 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:41:23 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:41:23 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:41:27 | DEBUG    | browser_controller:open_browser:82 - ✓ Port 56786 responding
+2025-12-04 12:41:27 | DEBUG    | browser_controller:open_browser:105 - Connecting Selenium (attempt 1)...
+2025-12-04 12:41:28 | INFO     | browser_controller:open_browser:110 - ✓ Selenium connected to port 56786
+2025-12-04 12:41:28 | DEBUG    | browser_controller:_prepare_browser_safe:164 - Preparing browser for profile k17m6178
+2025-12-04 12:41:29 | INFO     | browser_controller:_prepare_browser_safe:179 - ✓ Browser prepared for profile k17m6178
+2025-12-04 12:41:29 | INFO     | browser_controller:open_browser:132 - ✅ Browser ready for profile k17m6178
+2025-12-04 12:41:29 | DEBUG    | action_executor:execute_action:88 - Executing action: navigate
+2025-12-04 12:41:34 | INFO     | action_executor:_navigate:195 - ✓ Navigated to: https://www.google.com
+2025-12-04 12:41:34 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/8 completed: navigate
+2025-12-04 12:41:34 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 12:41:37 | DEBUG    | action_executor:_wait:470 - ✓ Waited 3s
+2025-12-04 12:41:37 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/8 completed: wait
+2025-12-04 12:41:37 | DEBUG    | action_executor:execute_action:88 - Executing action: search_google
+2025-12-04 12:41:37 | INFO     | action_executor:_search_google:209 - Starting Google search: 'latest technology news'
+2025-12-04 12:41:39 | DEBUG    | action_executor:_search_google:243 - ✓ Found search box with: textarea[name='q']
+2025-12-04 12:41:40 | DEBUG    | action_executor:_search_google:280 - ✓ Input focused and cleared
+2025-12-04 12:41:44 | DEBUG    | action_executor:_search_google:290 - ✓ Typed query: 'latest technology news'
+2025-12-04 12:41:46 | DEBUG    | action_executor:_search_google:304 - ✓ Submitted with ENTER key
+2025-12-04 12:41:51 | INFO     | action_executor:_search_google:343 - ✅ Google search completed successfully: 'latest technology news'
+2025-12-04 12:41:51 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/8 completed: search_google
+2025-12-04 12:41:51 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 12:41:53 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:41:53 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:41:53 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:41:55 | DEBUG    | action_executor:_wait:470 - ✓ Waited 4s
+2025-12-04 12:41:55 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/8 completed: wait
+2025-12-04 12:41:55 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 12:41:56 | DEBUG    | action_executor:_scroll:459 - ✓ Scrolled down 300px
+2025-12-04 12:41:56 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/8 completed: scroll
+2025-12-04 12:41:56 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 12:41:58 | DEBUG    | action_executor:_wait:470 - ✓ Waited 2s
+2025-12-04 12:41:58 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/8 completed: wait
+2025-12-04 12:41:58 | DEBUG    | action_executor:execute_action:88 - Executing action: scroll
+2025-12-04 12:42:00 | DEBUG    | action_executor:_scroll:459 - ✓ Scrolled down 300px
+2025-12-04 12:42:00 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/8 completed: scroll
+2025-12-04 12:42:00 | DEBUG    | action_executor:execute_action:88 - Executing action: wait
+2025-12-04 12:42:02 | DEBUG    | action_executor:_wait:470 - ✓ Waited 2s
+2025-12-04 12:42:02 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/8 completed: wait
+2025-12-04 12:42:02 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=89, completed=8, failed=0
+2025-12-04 12:42:12 | INFO     | browser_controller:close_browser:228 - ✓ Browser closed for profile k17m6178
+2025-12-04 12:42:23 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:42:23 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:42:23 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:42:53 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:42:53 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:42:53 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:43:23 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:43:23 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:43:23 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:43:53 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:43:53 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:43:53 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:44:23 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:44:23 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:44:23 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:44:53 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:44:53 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:44:53 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-04 12:45:23 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-04 12:45:23 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-04 12:45:23 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged

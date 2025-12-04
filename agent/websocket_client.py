@@ -1,4 +1,4 @@
-# agent/websocket_client.py
+# agent/websocket_client.py (FIXED VERSION)
 import asyncio
 import websockets
 import json
@@ -27,11 +27,12 @@ class WebSocketClient:
         
         while True:
             try:
-                # Conectar
+                # ✅ PING INTERVAL MÁS LARGO PARA EVITAR DESCONEXIONES
                 self.websocket = await websockets.connect(
                     ws_url,
-                    ping_interval=30,
-                    ping_timeout=10
+                    ping_interval=60,  # Cambiado de 30 a 60
+                    ping_timeout=30,   # Cambiado de 10 a 30
+                    close_timeout=10
                 )
                 
                 self.connected = True
@@ -58,7 +59,8 @@ class WebSocketClient:
         
         try:
             async for message in self.websocket:
-                await self._handle_message(message)
+                # ✅ NO BLOQUEAR EL LOOP - Procesar en background
+                asyncio.create_task(self._handle_message(message))
         
         except websockets.exceptions.ConnectionClosed:
             logger.warning("Connection lost")
@@ -80,20 +82,17 @@ class WebSocketClient:
                 logger.info(f"Connected confirmation: {data.get('message')}")
             
             elif message_type == "execute_warming":
-                # Ejecutar warming
-                await self._execute_warming(data)
+                # ✅ Ejecutar en background (NO BLOQUEANTE)
+                asyncio.create_task(self._execute_warming(data))
             
             elif message_type == "stop_warming":
-                # Detener warming
                 await self._stop_warming(data)
             
             elif message_type == "status_request":
-                # Enviar estado
                 await self._send_status()
             
             elif message_type == "heartbeat_ack":
-                # Heartbeat acknowledgement
-                pass
+                logger.debug("Heartbeat acknowledged")
             
             else:
                 logger.warning(f"Unknown message type: {message_type}")
@@ -102,23 +101,32 @@ class WebSocketClient:
             logger.error(f"Error handling message: {e}")
     
     async def _execute_warming(self, data: dict):
-        """Ejecuta warming"""
+        """Ejecuta warming (NON-BLOCKING)"""
         
         execution_id = data.get("execution_id")
         profile_id = data.get("profile_id")
         actions = data.get("actions", [])
         
-        logger.info(f"Executing warming: execution_id={execution_id}, profile_id={profile_id}")
+        logger.info(f"🔥 Executing warming: execution_id={execution_id}, profile_id={profile_id}")
         
-        # Ejecutar en background
-        asyncio.create_task(
-            self.warming_executor.execute(
+        # ✅ Ejecutar SIN AWAIT (para no bloquear websocket)
+        try:
+            await self.warming_executor.execute(
                 execution_id=execution_id,
                 profile_id=profile_id,
                 actions=actions,
                 progress_callback=self._send_progress
             )
-        )
+        except Exception as e:
+            logger.error(f"Warming execution error: {e}")
+            
+            # Enviar fallo al orquestador
+            await self.send({
+                "type": "execution_failed",
+                "execution_id": execution_id,
+                "error": str(e),
+                "timestamp": datetime.utcnow().isoformat()
+            })
     
     async def _stop_warming(self, data: dict):
         """Detiene warming"""
@@ -152,7 +160,7 @@ class WebSocketClient:
             "active_executions": len(self.warming_executor.active_executions),
             "cpu_usage": psutil.cpu_percent(interval=1),
             "memory_usage": psutil.virtual_memory().percent,
-            "uptime_seconds": 0  # Calcular si es necesario
+            "uptime_seconds": 0
         }
         
         message = {
@@ -164,17 +172,28 @@ class WebSocketClient:
         await self.send(message)
     
     async def _heartbeat_loop(self):
-        """Loop de heartbeat"""
+        """✅ Loop de heartbeat MEJORADO"""
+        
+        heartbeat_interval = 30  # Cada 30 segundos
         
         while self.connected:
             try:
-                await asyncio.sleep(30)
+                await asyncio.sleep(heartbeat_interval)
                 
-                if self.connected:
-                    await self.send({
-                        "type": "heartbeat",
-                        "timestamp": datetime.utcnow().isoformat()
-                    })
+                if self.connected and self.websocket:
+                    try:
+                        await self.send({
+                            "type": "heartbeat",
+                            "timestamp": datetime.utcnow().isoformat()
+                        })
+                        logger.debug("💓 Heartbeat sent")
+                    except Exception as e:
+                        logger.error(f"Heartbeat send failed: {e}")
+                        break
+            
+            except asyncio.CancelledError:
+                logger.debug("Heartbeat loop cancelled")
+                break
             
             except Exception as e:
                 logger.error(f"Heartbeat error: {e}")
@@ -203,9 +222,16 @@ class WebSocketClient:
         # Cancelar heartbeat
         if self.heartbeat_task:
             self.heartbeat_task.cancel()
+            try:
+                await self.heartbeat_task
+            except asyncio.CancelledError:
+                pass
         
         # Cerrar WebSocket
         if self.websocket:
-            await self.websocket.close()
+            try:
+                await self.websocket.close()
+            except:
+                pass
         
         logger.info("Disconnected from orchestrator")

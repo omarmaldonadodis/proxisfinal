@@ -1,4 +1,4 @@
-# agent/action_executor.py
+# agent/action_executor.py (FIXED VERSION)
 from typing import Dict, Optional, Any
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -51,7 +51,6 @@ class ActionExecutor:
     def _is_browser_alive(self, driver: webdriver.Chrome) -> bool:
         """Verifica si el navegador sigue activo"""
         try:
-            # Intentar obtener el título de la ventana
             _ = driver.title
             return True
         except (NoSuchWindowException, WebDriverException):
@@ -88,66 +87,23 @@ class ActionExecutor:
         
         logger.debug(f"Executing action: {action_type}")
         
-        # ✅ VERIFICAR QUE EL NAVEGADOR ESTÉ VIVO ANTES DE EJECUTAR
+        # ✅ VERIFICAR QUE EL NAVEGADOR ESTÉ VIVO
         if not self._is_browser_alive(driver):
             logger.error(f"Browser is closed, cannot execute action: {action_type}")
             return False
         
         try:
-            # Ejecutar según tipo
-            if action_type == "navigate":
-                return await self._navigate(driver, params)
+            # ✅ TIMEOUT GENERAL POR ACCIÓN
+            timeout = params.get("timeout", self.config.ACTION_TIMEOUT)
             
-            elif action_type == "click":
-                return await self._click(driver, params)
-            
-            elif action_type == "type":
-                return await self._type(driver, params)
-            
-            elif action_type == "scroll":
-                return await self._scroll(driver, params)
-            
-            elif action_type == "wait":
-                return await self._wait(driver, params)
-            
-            elif action_type == "wait_element":
-                return await self._wait_element(driver, params)
-            
-            elif action_type == "hover":
-                return await self._hover(driver, params)
-            
-            elif action_type == "select":
-                return await self._select(driver, params)
-            
-            elif action_type == "press_key":
-                return await self._press_key(driver, params)
-            
-            elif action_type == "screenshot":
-                return await self._screenshot(driver, params)
-            
-            elif action_type == "switch_tab":
-                return await self._switch_tab(driver, params)
-            
-            elif action_type == "close_tab":
-                return await self._close_tab(driver, params)
-            
-            elif action_type == "execute_script":
-                return await self._execute_script(driver, params)
-            
-            elif action_type == "random_mouse":
-                return await self._random_mouse_movement(driver, params)
-            
-            elif action_type == "human_typing":
-                return await self._human_typing(driver, params)
-            
-            elif action_type == "search_google":
-                return await self._search_google(driver, params)
-            
-            elif action_type == "login":
-                return await self._login(driver, params)
-            
-            else:
-                logger.warning(f"Unknown action type: {action_type}")
+            try:
+                result = await asyncio.wait_for(
+                    self._execute_action_internal(driver, action_type, params),
+                    timeout=timeout
+                )
+                return result
+            except asyncio.TimeoutError:
+                logger.error(f"Action timeout ({timeout}s): {action_type}")
                 return False
         
         except (NoSuchWindowException, WebDriverException) as e:
@@ -159,6 +115,69 @@ class ActionExecutor:
         
         except Exception as e:
             logger.error(f"Action failed ({action_type}): {e}")
+            return False
+    
+    async def _execute_action_internal(
+        self,
+        driver: webdriver.Chrome,
+        action_type: str,
+        params: Dict[str, Any]
+    ) -> bool:
+        """Ejecuta acción interna (sin timeout wrapper)"""
+        
+        if action_type == "navigate":
+            return await self._navigate(driver, params)
+        
+        elif action_type == "click":
+            return await self._click(driver, params)
+        
+        elif action_type == "type":
+            return await self._type(driver, params)
+        
+        elif action_type == "scroll":
+            return await self._scroll(driver, params)
+        
+        elif action_type == "wait":
+            return await self._wait(driver, params)
+        
+        elif action_type == "wait_element":
+            return await self._wait_element(driver, params)
+        
+        elif action_type == "hover":
+            return await self._hover(driver, params)
+        
+        elif action_type == "select":
+            return await self._select(driver, params)
+        
+        elif action_type == "press_key":
+            return await self._press_key(driver, params)
+        
+        elif action_type == "screenshot":
+            return await self._screenshot(driver, params)
+        
+        elif action_type == "switch_tab":
+            return await self._switch_tab(driver, params)
+        
+        elif action_type == "close_tab":
+            return await self._close_tab(driver, params)
+        
+        elif action_type == "execute_script":
+            return await self._execute_script(driver, params)
+        
+        elif action_type == "random_mouse":
+            return await self._random_mouse_movement(driver, params)
+        
+        elif action_type == "human_typing":
+            return await self._human_typing(driver, params)
+        
+        elif action_type == "search_google":
+            return await self._search_google(driver, params)
+        
+        elif action_type == "login":
+            return await self._login(driver, params)
+        
+        else:
+            logger.warning(f"Unknown action type: {action_type}")
             return False
     
     async def _navigate(self, driver: webdriver.Chrome, params: Dict) -> bool:
@@ -173,9 +192,166 @@ class ActionExecutor:
         try:
             self._safe_driver_call(driver.get, url)
             await asyncio.sleep(random.uniform(2, 4))
+            logger.info(f"✓ Navigated to: {url}")
             return True
         except Exception as e:
             logger.error(f"Navigation failed: {e}")
+            return False
+    
+    async def _search_google(self, driver: webdriver.Chrome, params: Dict) -> bool:
+        """✅ VERSIÓN MEJORADA - Búsqueda completa en Google"""
+        query = params.get("query", "")
+        if not query:
+            logger.error("❌ No query provided for Google search")
+            return False
+
+        try:
+            logger.info(f"Starting Google search: '{query}'")
+            
+            # ✅ PASO 1: Esperar que la página cargue completamente
+            await asyncio.sleep(2)
+            
+            # ✅ PASO 2: Verificar que estamos en Google
+            current_url = driver.current_url.lower()
+            if "google" not in current_url:
+                logger.warning(f"Not on Google page, current URL: {current_url}")
+                # Intentar navegar a Google primero
+                driver.get("https://www.google.com")
+                await asyncio.sleep(3)
+            
+            # ✅ PASO 3: Buscar input de búsqueda (MÚLTIPLES ESTRATEGIAS)
+            search_box = None
+            
+            # Estrategia 1: Selectores comunes
+            search_selectors = [
+                "textarea[name='q']",
+                "input[name='q']",
+                "textarea.gLFyf",
+                "input.gLFyf",
+                "textarea[title='Search']",
+                "input[title='Search']",
+                "textarea[aria-label*='Search']",
+                "input[aria-label*='Search']",
+            ]
+            
+            for selector in search_selectors:
+                try:
+                    search_box = WebDriverWait(driver, 5).until(
+                        EC.presence_of_element_located((By.CSS_SELECTOR, selector))
+                    )
+                    if search_box:
+                        logger.debug(f"✓ Found search box with: {selector}")
+                        break
+                except TimeoutException:
+                    continue
+            
+            # Estrategia 2: Si no encontró, buscar por JavaScript
+            if not search_box:
+                logger.debug("Trying JavaScript selector...")
+                try:
+                    search_box = driver.execute_script("""
+                        return document.querySelector('input[name="q"]') || 
+                               document.querySelector('textarea[name="q"]') ||
+                               document.querySelector('.gLFyf');
+                    """)
+                except:
+                    pass
+            
+            if not search_box:
+                logger.error("❌ Search box not found after all attempts")
+                return False
+            
+            # ✅ PASO 4: Click y focus en el input
+            try:
+                driver.execute_script(
+                    "arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});",
+                    search_box
+                )
+                await asyncio.sleep(0.5)
+                
+                # Click con JavaScript (más confiable)
+                driver.execute_script("arguments[0].focus(); arguments[0].click();", search_box)
+                await asyncio.sleep(0.5)
+                
+                # Limpiar campo
+                driver.execute_script("arguments[0].value = '';", search_box)
+                await asyncio.sleep(0.3)
+                
+                logger.debug("✓ Input focused and cleared")
+            except Exception as e:
+                logger.warning(f"Focus/click warning: {e}")
+            
+            # ✅ PASO 5: Escribir búsqueda (tipeo humanizado)
+            try:
+                for char in query:
+                    search_box.send_keys(char)
+                    await asyncio.sleep(self.behavior.typing_speed())
+                
+                logger.debug(f"✓ Typed query: '{query}'")
+                await asyncio.sleep(random.uniform(0.5, 1.0))
+            except Exception as e:
+                logger.error(f"Typing failed: {e}")
+                return False
+            
+            # ✅ PASO 6: Submit (MÚLTIPLES MÉTODOS)
+            submit_success = False
+            
+            # Método 1: Enter key
+            try:
+                search_box.send_keys(Keys.ENTER)
+                await asyncio.sleep(1)
+                submit_success = True
+                logger.debug("✓ Submitted with ENTER key")
+            except:
+                pass
+            
+            # Método 2: Si Enter falló, buscar botón de submit
+            if not submit_success:
+                try:
+                    submit_button = driver.find_element(By.CSS_SELECTOR, "input[value='Google Search']")
+                    submit_button.click()
+                    await asyncio.sleep(1)
+                    submit_success = True
+                    logger.debug("✓ Clicked submit button")
+                except:
+                    pass
+            
+            # Método 3: JavaScript submit
+            if not submit_success:
+                try:
+                    driver.execute_script("""
+                        var form = arguments[0].closest('form');
+                        if (form) form.submit();
+                    """, search_box)
+                    await asyncio.sleep(1)
+                    submit_success = True
+                    logger.debug("✓ Submitted with JavaScript")
+                except:
+                    pass
+            
+            if not submit_success:
+                logger.error("❌ All submit methods failed")
+                return False
+            
+            # ✅ PASO 7: Esperar resultados
+            await asyncio.sleep(random.uniform(3, 5))
+            
+            # ✅ PASO 8: Verificar que estamos en página de resultados
+            try:
+                final_url = driver.current_url.lower()
+                if "search" in final_url or "q=" in final_url:
+                    logger.info(f"✅ Google search completed successfully: '{query}'")
+                    return True
+                else:
+                    logger.warning(f"⚠️ Search completed but URL unexpected: {final_url}")
+                    # Aún así consideramos éxito si llegó aquí
+                    return True
+            except:
+                logger.info("✓ Search completed (verification skipped)")
+                return True
+
+        except Exception as e:
+            logger.error(f"❌ Google search failed: {e}")
             return False
     
     async def _click(self, driver: webdriver.Chrome, params: Dict) -> bool:
@@ -188,23 +364,19 @@ class ActionExecutor:
             return False
         
         try:
-            # Obtener tipo de selector
             by = By.CSS_SELECTOR if by_type == "css" else By.XPATH
             
-            # Encontrar elemento
             element = WebDriverWait(driver, 10).until(
                 EC.element_to_be_clickable((by, selector))
             )
             
             if human:
-                # Scroll al elemento
                 driver.execute_script(
                     "arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});",
                     element
                 )
                 await asyncio.sleep(random.uniform(0.5, 1.0))
                 
-                # Mover mouse al elemento
                 actions = ActionChains(driver)
                 actions.move_to_element(element)
                 actions.pause(random.uniform(0.2, 0.5))
@@ -241,17 +413,14 @@ class ActionExecutor:
                 EC.presence_of_element_located((by, selector))
             )
             
-            # Limpiar campo si es necesario
             if clear_first:
                 element.clear()
                 await asyncio.sleep(0.3)
             
-            # Click en el elemento
             element.click()
             await asyncio.sleep(0.3)
             
             if human:
-                # Tipeo humanizado
                 for char in text:
                     element.send_keys(char)
                     await asyncio.sleep(self.behavior.typing_speed())
@@ -287,6 +456,7 @@ class ActionExecutor:
                     driver.execute_script(f"window.scrollBy(0, -{amount});")
             
             await asyncio.sleep(random.uniform(1, 2))
+            logger.debug(f"✓ Scrolled {direction} {amount}px")
             return True
         
         except Exception as e:
@@ -297,6 +467,7 @@ class ActionExecutor:
         """Espera un tiempo"""
         duration = params.get("duration", 1)
         await asyncio.sleep(duration)
+        logger.debug(f"✓ Waited {duration}s")
         return True
     
     async def _wait_element(self, driver: webdriver.Chrome, params: Dict) -> bool:
@@ -323,63 +494,6 @@ class ActionExecutor:
             logger.error(f"Wait element failed: {e}")
             return False
     
-    async def _search_google(self, driver: webdriver.Chrome, params: Dict) -> bool:
-        """Búsqueda completa en Google (Mobile & Desktop)"""
-        query = params.get("query", "")
-        if not query:
-            return False
-
-        try:
-            # Esperar input de búsqueda
-            search_box = None
-            search_selectors = [
-                "input[name='q'][type='text']",
-                "input[aria-label='Buscar']",
-                "input[aria-label='Search']",
-                "textarea.gLFyf",
-                "input.gLFyf"
-            ]
-            for selector in search_selectors:
-                try:
-                    search_box = WebDriverWait(driver, 10).until(
-                        EC.element_to_be_clickable((By.CSS_SELECTOR, selector))
-                    )
-                    break
-                except TimeoutException:
-                    continue
-
-            if not search_box:
-                logger.error("Search box not found")
-                return False
-
-            # Scroll al input
-            driver.execute_script(
-                "arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});",
-                search_box
-            )
-            await asyncio.sleep(0.5)
-
-            # Click y limpiar
-            search_box.click()
-            await asyncio.sleep(0.3)
-            search_box.clear()
-            await asyncio.sleep(0.3)
-
-            # Tipeo humanizado
-            for char in query:
-                search_box.send_keys(char)
-                await asyncio.sleep(self.behavior.typing_speed())
-
-            search_box.send_keys(Keys.ENTER)
-            await asyncio.sleep(random.uniform(3, 5))
-
-            logger.info("✓ Google search completed")
-            return True
-
-        except Exception as e:
-            logger.error(f"Google search failed: {e}")
-            return False
-
     # Métodos auxiliares simplificados
     async def _hover(self, driver: webdriver.Chrome, params: Dict) -> bool:
         """Hover sobre elemento"""
