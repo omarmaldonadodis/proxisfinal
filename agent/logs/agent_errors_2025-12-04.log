@@ -551,3 +551,601 @@ Stacktrace:
 2025-12-04 11:52:18 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
 2025-12-04 11:52:18 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
 2025-12-04 11:52:18 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 13:12:25 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:12:30 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:12:35 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:12:40 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:15:54 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:15:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:16:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:16:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:16:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:16:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:16:24 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:16:29 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:16:34 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:16:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:16:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:16:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:16:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:16:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:17:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:17:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:17:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:17:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:17:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:17:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:17:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:17:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:17:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:17:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:17:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:17:59 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:18:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:18:09 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:18:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:18:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:18:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:18:29 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:18:34 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:18:39 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:18:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:18:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:18:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:18:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:19:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:19:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:19:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:19:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:19:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:19:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:19:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:19:39 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:19:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:19:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:19:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:19:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:20:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:20:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:20:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:20:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:20:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:20:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:20:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:20:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:20:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:20:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:20:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:20:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:21:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:21:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:21:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:21:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:21:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:21:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:21:34 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:21:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:21:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:21:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:21:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:21:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:22:04 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:22:09 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:22:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:22:19 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:22:24 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:22:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:22:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:22:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:22:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:22:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:22:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:22:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:23:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:23:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:23:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:23:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:23:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:23:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:23:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:23:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:23:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:23:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:23:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:23:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:24:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:24:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:24:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:24:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:24:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:24:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:24:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:24:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:24:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:24:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:24:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:24:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:25:04 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:25:09 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:25:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:25:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:25:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:25:29 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:25:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:25:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:25:44 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:25:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:25:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:25:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:26:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:26:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:26:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:26:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:26:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:26:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:26:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:26:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:26:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:26:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:26:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:26:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:27:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:27:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:27:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:27:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:27:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:27:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:27:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:27:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:27:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:27:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:27:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:27:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:28:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:28:09 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:28:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:28:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:28:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:28:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:28:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:28:39 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:28:44 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:28:49 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:28:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:29:06 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:29:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:29:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:29:21 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:29:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:29:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:29:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:29:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:29:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:29:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:29:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:30:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:30:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:30:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:30:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:30:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:30:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:30:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:30:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:30:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:30:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:30:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:30:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:31:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:31:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:31:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:31:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:31:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:31:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:31:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:31:36 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:31:41 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:31:46 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:31:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:32:03 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:32:08 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:32:13 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:32:18 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:32:23 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:32:28 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:32:33 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:32:38 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:32:43 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:32:48 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:32:53 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:32:58 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:33:03 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:33:08 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:33:13 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:33:18 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:33:23 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:33:28 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:33:33 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:33:38 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:33:43 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:33:48 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:33:53 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:33:58 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:34:03 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:34:08 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:34:13 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:34:18 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:34:24 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:34:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:34:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:34:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:34:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:34:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:34:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:34:59 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:35:04 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:35:09 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:35:14 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:35:19 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:35:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:35:29 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:35:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:35:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:35:44 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:35:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:35:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:35:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:36:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:36:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:36:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:36:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:36:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:36:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:36:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:36:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:36:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:36:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:36:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:36:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:37:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:37:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:37:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:37:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:37:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:37:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:37:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:37:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:37:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:37:49 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:37:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:37:59 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:38:04 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:38:09 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:38:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:38:19 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:38:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:38:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:38:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:38:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:38:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:38:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:38:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:38:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:39:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:39:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:39:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:39:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:39:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:39:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:39:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:39:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:39:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:39:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:39:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:39:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:40:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:40:09 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:41:16 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:41:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:41:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:41:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.10', 8000)
+2025-12-04 13:41:36 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 13:46:59 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 15:15:49 | ERROR    | warming_executor:_execute_warming:107 - Action 1 failed: HTTPConnectionPool(host='localhost', port=63281): Max retries exceeded with url: /session/2c02547b032a78d849cc23d851bdf0fc/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e2c910>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:15:49 | ERROR    | warming_executor:_execute_warming:107 - Action 2 failed: HTTPConnectionPool(host='localhost', port=63281): Max retries exceeded with url: /session/2c02547b032a78d849cc23d851bdf0fc/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105cc5ca0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:15:49 | ERROR    | warming_executor:_execute_warming:107 - Action 3 failed: HTTPConnectionPool(host='localhost', port=63281): Max retries exceeded with url: /session/2c02547b032a78d849cc23d851bdf0fc/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105cc5ee0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:15:49 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=63281): Max retries exceeded with url: /session/2c02547b032a78d849cc23d851bdf0fc/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e37400>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:15:49 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=63281): Max retries exceeded with url: /session/2c02547b032a78d849cc23d851bdf0fc/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105cc55e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:15:49 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=63281): Max retries exceeded with url: /session/2c02547b032a78d849cc23d851bdf0fc/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105c45550>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:15:49 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=63281): Max retries exceeded with url: /session/2c02547b032a78d849cc23d851bdf0fc/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e2c070>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:15:49 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=63281): Max retries exceeded with url: /session/2c02547b032a78d849cc23d851bdf0fc/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e37220>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:15:49 | ERROR    | warming_executor:_execute_warming:107 - Action 1 failed: HTTPConnectionPool(host='localhost', port=63296): Max retries exceeded with url: /session/9eebc5ef7f1e8f45d13697b1d56786a1/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e2cfd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:15:49 | ERROR    | warming_executor:_execute_warming:107 - Action 2 failed: HTTPConnectionPool(host='localhost', port=63296): Max retries exceeded with url: /session/9eebc5ef7f1e8f45d13697b1d56786a1/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e2cac0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:15:49 | ERROR    | warming_executor:_execute_warming:107 - Action 3 failed: HTTPConnectionPool(host='localhost', port=63296): Max retries exceeded with url: /session/9eebc5ef7f1e8f45d13697b1d56786a1/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e37af0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:15:49 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=63296): Max retries exceeded with url: /session/9eebc5ef7f1e8f45d13697b1d56786a1/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e37520>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:15:49 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=63296): Max retries exceeded with url: /session/9eebc5ef7f1e8f45d13697b1d56786a1/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105cc5b50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:15:49 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=63296): Max retries exceeded with url: /session/9eebc5ef7f1e8f45d13697b1d56786a1/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e549a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:15:49 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=63296): Max retries exceeded with url: /session/9eebc5ef7f1e8f45d13697b1d56786a1/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105cc52e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:15:49 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=63296): Max retries exceeded with url: /session/9eebc5ef7f1e8f45d13697b1d56786a1/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e37580>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:16:01 | ERROR    | warming_executor:_execute_warming:107 - Action 2 failed: HTTPConnectionPool(host='localhost', port=63394): Max retries exceeded with url: /session/c789f9250b6397ce9ab284ff57a2a8c9/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e2c8b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:16:01 | ERROR    | warming_executor:_execute_warming:107 - Action 3 failed: HTTPConnectionPool(host='localhost', port=63394): Max retries exceeded with url: /session/c789f9250b6397ce9ab284ff57a2a8c9/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e54df0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:16:01 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=63394): Max retries exceeded with url: /session/c789f9250b6397ce9ab284ff57a2a8c9/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e2c9d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:16:01 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=63394): Max retries exceeded with url: /session/c789f9250b6397ce9ab284ff57a2a8c9/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e2cf40>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:16:01 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=63394): Max retries exceeded with url: /session/c789f9250b6397ce9ab284ff57a2a8c9/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105cc54c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:16:01 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=63394): Max retries exceeded with url: /session/c789f9250b6397ce9ab284ff57a2a8c9/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e54c10>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:16:01 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=63394): Max retries exceeded with url: /session/c789f9250b6397ce9ab284ff57a2a8c9/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e54790>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:16:02 | ERROR    | browser_controller:close_browser:232 - Error closing browser: 'k17l902d'
+2025-12-04 15:16:02 | ERROR    | browser_controller:close_browser:232 - Error closing browser: 'k17m5o28'
+2025-12-04 15:16:11 | ERROR    | browser_controller:close_browser:232 - Error closing browser: 'k17m6178'
+2025-12-04 15:20:12 | ERROR    | action_executor:_search_google:293 - Typing failed: Message: stale element reference: stale element not found
+  (Session info: chrome=141.0.7390.55); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+0   chromedriver                        0x0000000110098518 chromedriver + 6378776
+1   chromedriver                        0x000000011008fc2a chromedriver + 6343722
+2   chromedriver                        0x000000010faec086 chromedriver + 430214
+3   chromedriver                        0x000000010faff90b chromedriver + 510219
+4   chromedriver                        0x000000010fafe6d2 chromedriver + 505554
+5   chromedriver                        0x000000010faf37dc chromedriver + 460764
+6   chromedriver                        0x000000010faf1968 chromedriver + 452968
+7   chromedriver                        0x000000010faf57f3 chromedriver + 468979
+8   chromedriver                        0x000000010faf58a3 chromedriver + 469155
+9   chromedriver                        0x000000010fb3f1c4 chromedriver + 770500
+10  chromedriver                        0x000000010fb3f248 chromedriver + 770632
+11  chromedriver                        0x000000010fb35cd1 chromedriver + 732369
+12  chromedriver                        0x000000010fb64a02 chromedriver + 924162
+13  chromedriver                        0x000000010fb320d8 chromedriver + 717016
+14  chromedriver                        0x000000010fb64bbe chromedriver + 924606
+15  chromedriver                        0x000000010fb8bf6e chromedriver + 1085294
+16  chromedriver                        0x000000010fb647d3 chromedriver + 923603
+17  chromedriver                        0x000000010fb30185 chromedriver + 708997
+18  chromedriver                        0x000000010fb315c1 chromedriver + 714177
+19  chromedriver                        0x0000000110055da0 chromedriver + 6106528
+20  chromedriver                        0x000000011005a005 chromedriver + 6123525
+21  chromedriver                        0x0000000110031505 chromedriver + 5956869
+22  chromedriver                        0x000000011005aa9f chromedriver + 6126239
+23  chromedriver                        0x0000000110020944 chromedriver + 5888324
+24  chromedriver                        0x000000011007cb78 chromedriver + 6265720
+25  chromedriver                        0x000000011007cd3d chromedriver + 6266173
+26  chromedriver                        0x000000011008f801 chromedriver + 6342657
+27  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+28  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 15:20:28 | ERROR    | action_executor:_search_google:293 - Typing failed: HTTPConnectionPool(host='localhost', port=49161): Max retries exceeded with url: /session/259f46f21a082c97a1b026faf95dad23/element/f.594A600A5024910898E3C3A06F6BBAAE.d.71EC39F94BEB292B49BF862273C41D93.e.1080/value (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e2c670>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:20:28 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=49161): Max retries exceeded with url: /session/259f46f21a082c97a1b026faf95dad23/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105c45550>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:20:28 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=49161): Max retries exceeded with url: /session/259f46f21a082c97a1b026faf95dad23/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105c45e50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:20:28 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=49161): Max retries exceeded with url: /session/259f46f21a082c97a1b026faf95dad23/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e2c700>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:20:28 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=49161): Max retries exceeded with url: /session/259f46f21a082c97a1b026faf95dad23/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e2c880>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:20:28 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=49161): Max retries exceeded with url: /session/259f46f21a082c97a1b026faf95dad23/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e54fa0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:20:37 | ERROR    | browser_controller:close_browser:232 - Error closing browser: 'k17m6178'
+2025-12-04 15:20:55 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=65474): Max retries exceeded with url: /session/53ecd4ce82b03efcc9f14358098354e2/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105cc5af0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:20:55 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=65474): Max retries exceeded with url: /session/53ecd4ce82b03efcc9f14358098354e2/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e2cb50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:20:55 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=65474): Max retries exceeded with url: /session/53ecd4ce82b03efcc9f14358098354e2/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e54460>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:20:55 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=65474): Max retries exceeded with url: /session/53ecd4ce82b03efcc9f14358098354e2/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e54190>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:20:55 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=65459): Max retries exceeded with url: /session/b03f529f61ec915a9bd5b908db006cb7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e54a30>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:20:55 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=65459): Max retries exceeded with url: /session/b03f529f61ec915a9bd5b908db006cb7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e54e20>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:20:56 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=65459): Max retries exceeded with url: /session/b03f529f61ec915a9bd5b908db006cb7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e2c640>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:20:56 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=65459): Max retries exceeded with url: /session/b03f529f61ec915a9bd5b908db006cb7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e2cc40>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:20:57 | ERROR    | browser_controller:close_browser:232 - Error closing browser: 'k17m5o28'
+2025-12-04 15:20:58 | ERROR    | browser_controller:close_browser:232 - Error closing browser: 'k17l902d'
+2025-12-04 15:24:50 | ERROR    | action_executor:_search_google:293 - Typing failed: Message: stale element reference: stale element not found
+  (Session info: chrome=141.0.7390.55); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+0   chromedriver                        0x0000000108cb0518 chromedriver + 6378776
+1   chromedriver                        0x0000000108ca7c2a chromedriver + 6343722
+2   chromedriver                        0x0000000108704086 chromedriver + 430214
+3   chromedriver                        0x000000010871790b chromedriver + 510219
+4   chromedriver                        0x00000001087166d2 chromedriver + 505554
+5   chromedriver                        0x000000010870b7dc chromedriver + 460764
+6   chromedriver                        0x0000000108709968 chromedriver + 452968
+7   chromedriver                        0x000000010870d7f3 chromedriver + 468979
+8   chromedriver                        0x000000010870d8a3 chromedriver + 469155
+9   chromedriver                        0x00000001087571c4 chromedriver + 770500
+10  chromedriver                        0x0000000108757248 chromedriver + 770632
+11  chromedriver                        0x000000010874dcd1 chromedriver + 732369
+12  chromedriver                        0x000000010877ca02 chromedriver + 924162
+13  chromedriver                        0x000000010874a0d8 chromedriver + 717016
+14  chromedriver                        0x000000010877cbbe chromedriver + 924606
+15  chromedriver                        0x00000001087a3f6e chromedriver + 1085294
+16  chromedriver                        0x000000010877c7d3 chromedriver + 923603
+17  chromedriver                        0x0000000108748185 chromedriver + 708997
+18  chromedriver                        0x00000001087495c1 chromedriver + 714177
+19  chromedriver                        0x0000000108c6dda0 chromedriver + 6106528
+20  chromedriver                        0x0000000108c72005 chromedriver + 6123525
+21  chromedriver                        0x0000000108c49505 chromedriver + 5956869
+22  chromedriver                        0x0000000108c72a9f chromedriver + 6126239
+23  chromedriver                        0x0000000108c38944 chromedriver + 5888324
+24  chromedriver                        0x0000000108c94b78 chromedriver + 6265720
+25  chromedriver                        0x0000000108c94d3d chromedriver + 6266173
+26  chromedriver                        0x0000000108ca7801 chromedriver + 6342657
+27  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+28  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 15:24:55 | ERROR    | action_executor:_search_google:293 - Typing failed: Message: stale element reference: stale element not found
+  (Session info: chrome=141.0.7390.55); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+0   chromedriver                        0x000000010d733518 chromedriver + 6378776
+1   chromedriver                        0x000000010d72ac2a chromedriver + 6343722
+2   chromedriver                        0x000000010d187086 chromedriver + 430214
+3   chromedriver                        0x000000010d19a90b chromedriver + 510219
+4   chromedriver                        0x000000010d1996d2 chromedriver + 505554
+5   chromedriver                        0x000000010d18e7dc chromedriver + 460764
+6   chromedriver                        0x000000010d18c968 chromedriver + 452968
+7   chromedriver                        0x000000010d1907f3 chromedriver + 468979
+8   chromedriver                        0x000000010d1908a3 chromedriver + 469155
+9   chromedriver                        0x000000010d1da1c4 chromedriver + 770500
+10  chromedriver                        0x000000010d1da248 chromedriver + 770632
+11  chromedriver                        0x000000010d1d0cd1 chromedriver + 732369
+12  chromedriver                        0x000000010d1ffa02 chromedriver + 924162
+13  chromedriver                        0x000000010d1cd0d8 chromedriver + 717016
+14  chromedriver                        0x000000010d1ffbbe chromedriver + 924606
+15  chromedriver                        0x000000010d226f6e chromedriver + 1085294
+16  chromedriver                        0x000000010d1ff7d3 chromedriver + 923603
+17  chromedriver                        0x000000010d1cb185 chromedriver + 708997
+18  chromedriver                        0x000000010d1cc5c1 chromedriver + 714177
+19  chromedriver                        0x000000010d6f0da0 chromedriver + 6106528
+20  chromedriver                        0x000000010d6f5005 chromedriver + 6123525
+21  chromedriver                        0x000000010d6cc505 chromedriver + 5956869
+22  chromedriver                        0x000000010d6f5a9f chromedriver + 6126239
+23  chromedriver                        0x000000010d6bb944 chromedriver + 5888324
+24  chromedriver                        0x000000010d717b78 chromedriver + 6265720
+25  chromedriver                        0x000000010d717d3d chromedriver + 6266173
+26  chromedriver                        0x000000010d72a801 chromedriver + 6342657
+27  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+28  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 15:25:15 | ERROR    | action_executor:_search_google:293 - Typing failed: Message: stale element reference: stale element not found
+  (Session info: chrome=141.0.7390.55); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+0   chromedriver                        0x000000010bcc6518 chromedriver + 6378776
+1   chromedriver                        0x000000010bcbdc2a chromedriver + 6343722
+2   chromedriver                        0x000000010b71a086 chromedriver + 430214
+3   chromedriver                        0x000000010b72d90b chromedriver + 510219
+4   chromedriver                        0x000000010b72c6d2 chromedriver + 505554
+5   chromedriver                        0x000000010b7217dc chromedriver + 460764
+6   chromedriver                        0x000000010b71f968 chromedriver + 452968
+7   chromedriver                        0x000000010b7237f3 chromedriver + 468979
+8   chromedriver                        0x000000010b7238a3 chromedriver + 469155
+9   chromedriver                        0x000000010b76d1c4 chromedriver + 770500
+10  chromedriver                        0x000000010b76d248 chromedriver + 770632
+11  chromedriver                        0x000000010b763cd1 chromedriver + 732369
+12  chromedriver                        0x000000010b792a02 chromedriver + 924162
+13  chromedriver                        0x000000010b7600d8 chromedriver + 717016
+14  chromedriver                        0x000000010b792bbe chromedriver + 924606
+15  chromedriver                        0x000000010b7b9f6e chromedriver + 1085294
+16  chromedriver                        0x000000010b7927d3 chromedriver + 923603
+17  chromedriver                        0x000000010b75e185 chromedriver + 708997
+18  chromedriver                        0x000000010b75f5c1 chromedriver + 714177
+19  chromedriver                        0x000000010bc83da0 chromedriver + 6106528
+20  chromedriver                        0x000000010bc88005 chromedriver + 6123525
+21  chromedriver                        0x000000010bc5f505 chromedriver + 5956869
+22  chromedriver                        0x000000010bc88a9f chromedriver + 6126239
+23  chromedriver                        0x000000010bc4e944 chromedriver + 5888324
+24  chromedriver                        0x000000010bcaab78 chromedriver + 6265720
+25  chromedriver                        0x000000010bcaad3d chromedriver + 6266173
+26  chromedriver                        0x000000010bcbd801 chromedriver + 6342657
+27  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+28  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 15:25:15 | ERROR    | action_executor:execute_action:106 - Action timeout (30s): search_google
+2025-12-04 15:25:31 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=50291): Max retries exceeded with url: /session/78c4b0bcbeaa7c1c91c8b43fee18c0a5/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105cc52b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:25:31 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=50291): Max retries exceeded with url: /session/78c4b0bcbeaa7c1c91c8b43fee18c0a5/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e545b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:25:31 | ERROR    | action_executor:_scroll:463 - Scroll failed: HTTPConnectionPool(host='localhost', port=50279): Max retries exceeded with url: /session/d88544c966baf0fe5694b200575e5a6e/execute/sync (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e545b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:25:31 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=50279): Max retries exceeded with url: /session/d88544c966baf0fe5694b200575e5a6e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105cc52b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:25:32 | ERROR    | warming_executor:_execute_warming:107 - Action 3 failed: HTTPConnectionPool(host='localhost', port=50279): Max retries exceeded with url: /session/d88544c966baf0fe5694b200575e5a6e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e33b20>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:25:32 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=50279): Max retries exceeded with url: /session/d88544c966baf0fe5694b200575e5a6e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e331f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:25:32 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=50279): Max retries exceeded with url: /session/d88544c966baf0fe5694b200575e5a6e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105cc5100>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:25:32 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=50279): Max retries exceeded with url: /session/d88544c966baf0fe5694b200575e5a6e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e54a60>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:25:32 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=50279): Max retries exceeded with url: /session/d88544c966baf0fe5694b200575e5a6e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e549d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:25:32 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=50279): Max retries exceeded with url: /session/d88544c966baf0fe5694b200575e5a6e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e333d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:25:48 | ERROR    | warming_executor:_execute_warming:107 - Action 3 failed: HTTPConnectionPool(host='localhost', port=50291): Max retries exceeded with url: /session/78c4b0bcbeaa7c1c91c8b43fee18c0a5/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e33310>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:25:48 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=50291): Max retries exceeded with url: /session/78c4b0bcbeaa7c1c91c8b43fee18c0a5/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e54a30>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:25:48 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=50291): Max retries exceeded with url: /session/78c4b0bcbeaa7c1c91c8b43fee18c0a5/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e2ceb0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:25:48 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=50291): Max retries exceeded with url: /session/78c4b0bcbeaa7c1c91c8b43fee18c0a5/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105cc5220>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:25:48 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=50291): Max retries exceeded with url: /session/78c4b0bcbeaa7c1c91c8b43fee18c0a5/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e5f190>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:25:48 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=50291): Max retries exceeded with url: /session/78c4b0bcbeaa7c1c91c8b43fee18c0a5/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105cc5100>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:25:49 | ERROR    | browser_controller:close_browser:232 - Error closing browser: 'k17m5o28'
+2025-12-04 15:25:49 | ERROR    | browser_controller:close_browser:232 - Error closing browser: 'k17l902d'
+2025-12-04 15:25:49 | ERROR    | browser_controller:close_browser:232 - Error closing browser: 'k17l902d'
+2025-12-04 15:25:50 | ERROR    | browser_controller:close_browser:232 - Error closing browser: 'k17m5o28'
+2025-12-04 15:25:51 | ERROR    | warming_executor:_execute_warming:107 - Action 3 failed: HTTPConnectionPool(host='localhost', port=50369): Max retries exceeded with url: /session/370cd45244790704bab77482ad2dcc08/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e54370>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:25:51 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=50369): Max retries exceeded with url: /session/370cd45244790704bab77482ad2dcc08/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e33a00>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:25:51 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=50369): Max retries exceeded with url: /session/370cd45244790704bab77482ad2dcc08/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e5f250>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:25:51 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=50369): Max retries exceeded with url: /session/370cd45244790704bab77482ad2dcc08/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105c296a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:25:51 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=50369): Max retries exceeded with url: /session/370cd45244790704bab77482ad2dcc08/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e54340>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:25:51 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=50369): Max retries exceeded with url: /session/370cd45244790704bab77482ad2dcc08/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e54910>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 15:26:00 | ERROR    | browser_controller:close_browser:232 - Error closing browser: 'k17m6178'
+2025-12-04 15:26:00 | ERROR    | browser_controller:close_browser:232 - Error closing browser: 'k17m6178'
+2025-12-04 16:30:16 | ERROR    | browser_controller:open_browser:136 - ❌ Failed to open browser for profile k17m6178: AdsPower error: Too many request per second, please check
+2025-12-04 16:30:16 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=145, error=Failed to open browser for profile k17m6178
+2025-12-04 16:30:48 | ERROR    | action_executor:_search_google:293 - Typing failed: Message: stale element reference: stale element not found
+  (Session info: chrome=141.0.7390.55); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+0   chromedriver                        0x000000010e851518 chromedriver + 6378776
+1   chromedriver                        0x000000010e848c2a chromedriver + 6343722
+2   chromedriver                        0x000000010e2a5086 chromedriver + 430214
+3   chromedriver                        0x000000010e2b890b chromedriver + 510219
+4   chromedriver                        0x000000010e2b76d2 chromedriver + 505554
+5   chromedriver                        0x000000010e2ac7dc chromedriver + 460764
+6   chromedriver                        0x000000010e2aa968 chromedriver + 452968
+7   chromedriver                        0x000000010e2ae7f3 chromedriver + 468979
+8   chromedriver                        0x000000010e2ae8a3 chromedriver + 469155
+9   chromedriver                        0x000000010e2f81c4 chromedriver + 770500
+10  chromedriver                        0x000000010e2f8248 chromedriver + 770632
+11  chromedriver                        0x000000010e2eecd1 chromedriver + 732369
+12  chromedriver                        0x000000010e31da02 chromedriver + 924162
+13  chromedriver                        0x000000010e2eb0d8 chromedriver + 717016
+14  chromedriver                        0x000000010e31dbbe chromedriver + 924606
+15  chromedriver                        0x000000010e344f6e chromedriver + 1085294
+16  chromedriver                        0x000000010e31d7d3 chromedriver + 923603
+17  chromedriver                        0x000000010e2e9185 chromedriver + 708997
+18  chromedriver                        0x000000010e2ea5c1 chromedriver + 714177
+19  chromedriver                        0x000000010e80eda0 chromedriver + 6106528
+20  chromedriver                        0x000000010e813005 chromedriver + 6123525
+21  chromedriver                        0x000000010e7ea505 chromedriver + 5956869
+22  chromedriver                        0x000000010e813a9f chromedriver + 6126239
+23  chromedriver                        0x000000010e7d9944 chromedriver + 5888324
+24  chromedriver                        0x000000010e835b78 chromedriver + 6265720
+25  chromedriver                        0x000000010e835d3d chromedriver + 6266173
+26  chromedriver                        0x000000010e848801 chromedriver + 6342657
+27  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+28  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 16:30:49 | ERROR    | action_executor:_search_google:333 - ❌ All submit methods failed
+2025-12-04 16:31:16 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 16:31:16 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 16:31:16 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 16:31:16 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 16:31:18 | ERROR    | browser_controller:close_browser:232 - Error closing browser: 'k17m5o28'
+2025-12-04 16:31:18 | ERROR    | browser_controller:close_browser:232 - Error closing browser: 'k17l902d'
+2025-12-04 16:34:11 | ERROR    | action_executor:_search_google:293 - Typing failed: Message: stale element reference: stale element not found
+  (Session info: chrome=141.0.7390.55); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+0   chromedriver                        0x0000000101915518 chromedriver + 6378776
+1   chromedriver                        0x000000010190cc2a chromedriver + 6343722
+2   chromedriver                        0x0000000101369086 chromedriver + 430214
+3   chromedriver                        0x000000010137c90b chromedriver + 510219
+4   chromedriver                        0x000000010137b6d2 chromedriver + 505554
+5   chromedriver                        0x00000001013707dc chromedriver + 460764
+6   chromedriver                        0x000000010136e968 chromedriver + 452968
+7   chromedriver                        0x00000001013727f3 chromedriver + 468979
+8   chromedriver                        0x00000001013728a3 chromedriver + 469155
+9   chromedriver                        0x00000001013bc1c4 chromedriver + 770500
+10  chromedriver                        0x00000001013bc248 chromedriver + 770632
+11  chromedriver                        0x00000001013b2cd1 chromedriver + 732369
+12  chromedriver                        0x00000001013e1a02 chromedriver + 924162
+13  chromedriver                        0x00000001013af0d8 chromedriver + 717016
+14  chromedriver                        0x00000001013e1bbe chromedriver + 924606
+15  chromedriver                        0x0000000101408f6e chromedriver + 1085294
+16  chromedriver                        0x00000001013e17d3 chromedriver + 923603
+17  chromedriver                        0x00000001013ad185 chromedriver + 708997
+18  chromedriver                        0x00000001013ae5c1 chromedriver + 714177
+19  chromedriver                        0x00000001018d2da0 chromedriver + 6106528
+20  chromedriver                        0x00000001018d7005 chromedriver + 6123525
+21  chromedriver                        0x00000001018ae505 chromedriver + 5956869
+22  chromedriver                        0x00000001018d7a9f chromedriver + 6126239
+23  chromedriver                        0x000000010189d944 chromedriver + 5888324
+24  chromedriver                        0x00000001018f9b78 chromedriver + 6265720
+25  chromedriver                        0x00000001018f9d3d chromedriver + 6266173
+26  chromedriver                        0x000000010190c801 chromedriver + 6342657
+27  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+28  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 16:34:24 | ERROR    | action_executor:_search_google:293 - Typing failed: HTTPConnectionPool(host='localhost', port=55923): Max retries exceeded with url: /session/cabc532455c3fb19ca0d8aed8e559cab/element/f.DE21368AF051E2CE5E2F7A8AC0A5E99E.d.325A32F3E89C6AC519E519FE4C7ABD4B.e.1546/value (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105cc53a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 16:34:24 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=55923): Max retries exceeded with url: /session/cabc532455c3fb19ca0d8aed8e559cab/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e5faf0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 16:34:24 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=55923): Max retries exceeded with url: /session/cabc532455c3fb19ca0d8aed8e559cab/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e5fe50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 16:34:24 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=55923): Max retries exceeded with url: /session/cabc532455c3fb19ca0d8aed8e559cab/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e5fa00>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 16:34:24 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=55923): Max retries exceeded with url: /session/cabc532455c3fb19ca0d8aed8e559cab/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e5f520>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 16:34:24 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=55923): Max retries exceeded with url: /session/cabc532455c3fb19ca0d8aed8e559cab/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e5fdc0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 16:34:41 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=55791): Max retries exceeded with url: /session/ea81fdbeb8ccc2d2efb426711c963abe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e33e50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 16:34:41 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=55791): Max retries exceeded with url: /session/ea81fdbeb8ccc2d2efb426711c963abe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e33a90>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 16:34:41 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=55791): Max retries exceeded with url: /session/ea81fdbeb8ccc2d2efb426711c963abe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105cc51f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 16:34:41 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=55791): Max retries exceeded with url: /session/ea81fdbeb8ccc2d2efb426711c963abe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e5fe20>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 16:34:41 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=55791): Max retries exceeded with url: /session/ea81fdbeb8ccc2d2efb426711c963abe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e5f190>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 16:34:42 | ERROR    | browser_controller:close_browser:232 - Error closing browser: 'k17m6178'
+2025-12-04 16:34:50 | ERROR    | action_executor:execute_action:106 - Action timeout (30s): search_google
+2025-12-04 16:34:50 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=55806): Max retries exceeded with url: /session/022a8bf18a34d6621750e4fc8433c2f5/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e33d00>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 16:34:50 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=55806): Max retries exceeded with url: /session/022a8bf18a34d6621750e4fc8433c2f5/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e54790>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 16:34:50 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=55806): Max retries exceeded with url: /session/022a8bf18a34d6621750e4fc8433c2f5/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e5fc70>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 16:34:50 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=55806): Max retries exceeded with url: /session/022a8bf18a34d6621750e4fc8433c2f5/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e5fdf0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 16:34:50 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=55806): Max retries exceeded with url: /session/022a8bf18a34d6621750e4fc8433c2f5/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105e5f880>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 16:34:51 | ERROR    | browser_controller:close_browser:232 - Error closing browser: 'k17l902d'
+2025-12-04 16:34:52 | ERROR    | browser_controller:close_browser:232 - Error closing browser: 'k17m5o28'

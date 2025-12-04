@@ -5,6 +5,7 @@ from app.services.profile_service import ProfileService
 from app.services.task_service import TaskService
 from app.services.health_service import HealthService
 from app.services.automation_service import AutomationService
+from app.services.warming_sync import warming_sync_manager
 
 __all__ = [
     "ComputerService",
@@ -13,4 +14,5 @@ __all__ = [
     "TaskService",
     "HealthService",
     "AutomationService",
+    "warming_sync_manager",
 ]
