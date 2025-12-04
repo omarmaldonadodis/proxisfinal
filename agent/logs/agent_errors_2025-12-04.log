@@ -1,0 +1,510 @@
+2025-12-04 08:39:33 | ERROR    | action_executor:_random_mouse_movement:507 - Random mouse failed: Message: move target out of bounds
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x00000001080d2518 chromedriver + 6378776
+1   chromedriver                        0x00000001080c9c2a chromedriver + 6343722
+2   chromedriver                        0x0000000107b25ebe chromedriver + 429758
+3   chromedriver                        0x0000000107bceaee chromedriver + 1121006
+4   chromedriver                        0x0000000107b9ea02 chromedriver + 924162
+5   chromedriver                        0x0000000107bc5f6e chromedriver + 1085294
+6   chromedriver                        0x0000000107b9e7d3 chromedriver + 923603
+7   chromedriver                        0x0000000107b6a185 chromedriver + 708997
+8   chromedriver                        0x0000000107b6b5c1 chromedriver + 714177
+9   chromedriver                        0x000000010808fda0 chromedriver + 6106528
+10  chromedriver                        0x0000000108094005 chromedriver + 6123525
+11  chromedriver                        0x000000010806b505 chromedriver + 5956869
+12  chromedriver                        0x0000000108094a9f chromedriver + 6126239
+13  chromedriver                        0x000000010805a944 chromedriver + 5888324
+14  chromedriver                        0x00000001080b6b78 chromedriver + 6265720
+15  chromedriver                        0x00000001080b6d3d chromedriver + 6266173
+16  chromedriver                        0x00000001080c9801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 08:42:12 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: press_key
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: click
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: switch_tab
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: click
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: close_tab
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: switch_tab
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: screenshot
+2025-12-04 08:43:28 | ERROR    | action_executor:_random_mouse_movement:507 - Random mouse failed: Message: move target out of bounds
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x0000000103701518 chromedriver + 6378776
+1   chromedriver                        0x00000001036f8c2a chromedriver + 6343722
+2   chromedriver                        0x0000000103154ebe chromedriver + 429758
+3   chromedriver                        0x00000001031fdaee chromedriver + 1121006
+4   chromedriver                        0x00000001031cda02 chromedriver + 924162
+5   chromedriver                        0x00000001031f4f6e chromedriver + 1085294
+6   chromedriver                        0x00000001031cd7d3 chromedriver + 923603
+7   chromedriver                        0x0000000103199185 chromedriver + 708997
+8   chromedriver                        0x000000010319a5c1 chromedriver + 714177
+9   chromedriver                        0x00000001036beda0 chromedriver + 6106528
+10  chromedriver                        0x00000001036c3005 chromedriver + 6123525
+11  chromedriver                        0x000000010369a505 chromedriver + 5956869
+12  chromedriver                        0x00000001036c3a9f chromedriver + 6126239
+13  chromedriver                        0x0000000103689944 chromedriver + 5888324
+14  chromedriver                        0x00000001036e5b78 chromedriver + 6265720
+15  chromedriver                        0x00000001036e5d3d chromedriver + 6266173
+16  chromedriver                        0x00000001036f8801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 08:44:35 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: press_key
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: click
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: switch_tab
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: click
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: close_tab
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: switch_tab
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: screenshot
+2025-12-04 08:45:44 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 08:52:43 | ERROR    | action_executor:_click:223 - Click failed: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x000000010435a518 chromedriver + 6378776
+1   chromedriver                        0x0000000104351c2a chromedriver + 6343722
+2   chromedriver                        0x0000000103dae086 chromedriver + 430214
+3   chromedriver                        0x0000000103d947ed chromedriver + 325613
+4   chromedriver                        0x0000000103dbce62 chromedriver + 491106
+5   chromedriver                        0x0000000103e2ee8f chromedriver + 958095
+6   chromedriver                        0x0000000103e4d96c chromedriver + 1083756
+7   chromedriver                        0x0000000103e267d3 chromedriver + 923603
+8   chromedriver                        0x0000000103df2185 chromedriver + 708997
+9   chromedriver                        0x0000000103df35c1 chromedriver + 714177
+10  chromedriver                        0x0000000104317da0 chromedriver + 6106528
+11  chromedriver                        0x000000010431c005 chromedriver + 6123525
+12  chromedriver                        0x00000001042f3505 chromedriver + 5956869
+13  chromedriver                        0x000000010431ca9f chromedriver + 6126239
+14  chromedriver                        0x00000001042e2944 chromedriver + 5888324
+15  chromedriver                        0x000000010433eb78 chromedriver + 6265720
+16  chromedriver                        0x000000010433ed3d chromedriver + 6266173
+17  chromedriver                        0x0000000104351801 chromedriver + 6342657
+18  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+19  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 08:52:43 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: human_typing
+2025-12-04 08:52:43 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: press_key
+2025-12-04 08:52:43 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:52:44 | ERROR    | warming_executor:_execute_warming:107 - Action 1 failed: HTTPConnectionPool(host='localhost', port=62819): Max retries exceeded with url: /session/056d627fd9f92abcb836195245900003/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107028f70>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 08:52:44 | ERROR    | warming_executor:_execute_warming:107 - Action 2 failed: HTTPConnectionPool(host='localhost', port=62819): Max retries exceeded with url: /session/056d627fd9f92abcb836195245900003/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106fa41c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 08:52:45 | ERROR    | warming_executor:_execute_warming:107 - Action 3 failed: HTTPConnectionPool(host='localhost', port=62819): Max retries exceeded with url: /session/056d627fd9f92abcb836195245900003/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107028700>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 08:52:45 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=62819): Max retries exceeded with url: /session/056d627fd9f92abcb836195245900003/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106fa4b20>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 08:52:45 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=62819): Max retries exceeded with url: /session/056d627fd9f92abcb836195245900003/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106fa4460>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 08:52:45 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=62819): Max retries exceeded with url: /session/056d627fd9f92abcb836195245900003/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107191430>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 08:52:45 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=62819): Max retries exceeded with url: /session/056d627fd9f92abcb836195245900003/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107191a30>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 08:52:47 | ERROR    | browser_controller:close_browser:236 - Error closing browser for profile k17l902d: 'k17l902d'
+2025-12-04 08:56:36 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 08:56:37 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: human_typing
+2025-12-04 08:56:37 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: press_key
+2025-12-04 08:56:37 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:59:53 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 08:59:54 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:59:54 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: human_typing
+2025-12-04 08:59:54 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: press_key
+2025-12-04 09:01:33 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:03:01 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:03:57 | ERROR    | action_executor:_random_mouse_movement:507 - Random mouse failed: Message: move target out of bounds
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x00000001007d3518 chromedriver + 6378776
+1   chromedriver                        0x00000001007cac2a chromedriver + 6343722
+2   chromedriver                        0x0000000100226ebe chromedriver + 429758
+3   chromedriver                        0x00000001002cfaee chromedriver + 1121006
+4   chromedriver                        0x000000010029fa02 chromedriver + 924162
+5   chromedriver                        0x00000001002c6f6e chromedriver + 1085294
+6   chromedriver                        0x000000010029f7d3 chromedriver + 923603
+7   chromedriver                        0x000000010026b185 chromedriver + 708997
+8   chromedriver                        0x000000010026c5c1 chromedriver + 714177
+9   chromedriver                        0x0000000100790da0 chromedriver + 6106528
+10  chromedriver                        0x0000000100795005 chromedriver + 6123525
+11  chromedriver                        0x000000010076c505 chromedriver + 5956869
+12  chromedriver                        0x0000000100795a9f chromedriver + 6126239
+13  chromedriver                        0x000000010075b944 chromedriver + 5888324
+14  chromedriver                        0x00000001007b7b78 chromedriver + 6265720
+15  chromedriver                        0x00000001007b7d3d chromedriver + 6266173
+16  chromedriver                        0x00000001007ca801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 09:05:05 | ERROR    | action_executor:_random_mouse_movement:507 - Random mouse failed: Message: move target out of bounds
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x0000000105aa2518 chromedriver + 6378776
+1   chromedriver                        0x0000000105a99c2a chromedriver + 6343722
+2   chromedriver                        0x00000001054f5ebe chromedriver + 429758
+3   chromedriver                        0x000000010559eaee chromedriver + 1121006
+4   chromedriver                        0x000000010556ea02 chromedriver + 924162
+5   chromedriver                        0x0000000105595f6e chromedriver + 1085294
+6   chromedriver                        0x000000010556e7d3 chromedriver + 923603
+7   chromedriver                        0x000000010553a185 chromedriver + 708997
+8   chromedriver                        0x000000010553b5c1 chromedriver + 714177
+9   chromedriver                        0x0000000105a5fda0 chromedriver + 6106528
+10  chromedriver                        0x0000000105a64005 chromedriver + 6123525
+11  chromedriver                        0x0000000105a3b505 chromedriver + 5956869
+12  chromedriver                        0x0000000105a64a9f chromedriver + 6126239
+13  chromedriver                        0x0000000105a2a944 chromedriver + 5888324
+14  chromedriver                        0x0000000105a86b78 chromedriver + 6265720
+15  chromedriver                        0x0000000105a86d3d chromedriver + 6266173
+16  chromedriver                        0x0000000105a99801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 09:06:20 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:06:20 | ERROR    | action_executor:_type:268 - Type failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x0000000105aa2518 chromedriver + 6378776
+1   chromedriver                        0x0000000105a99c2a chromedriver + 6343722
+2   chromedriver                        0x00000001054f6086 chromedriver + 430214
+3   chromedriver                        0x00000001054caa70 chromedriver + 252528
+4   chromedriver                        0x0000000105576c88 chromedriver + 957576
+5   chromedriver                        0x000000010559596c chromedriver + 1083756
+6   chromedriver                        0x000000010556e7d3 chromedriver + 923603
+7   chromedriver                        0x000000010553a185 chromedriver + 708997
+8   chromedriver                        0x000000010553b5c1 chromedriver + 714177
+9   chromedriver                        0x0000000105a5fda0 chromedriver + 6106528
+10  chromedriver                        0x0000000105a64005 chromedriver + 6123525
+11  chromedriver                        0x0000000105a3b505 chromedriver + 5956869
+12  chromedriver                        0x0000000105a64a9f chromedriver + 6126239
+13  chromedriver                        0x0000000105a2a944 chromedriver + 5888324
+14  chromedriver                        0x0000000105a86b78 chromedriver + 6265720
+15  chromedriver                        0x0000000105a86d3d chromedriver + 6266173
+16  chromedriver                        0x0000000105a99801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 09:06:20 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: press_key
+2025-12-04 09:06:20 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:06:20 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:29:14 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:29:14 | ERROR    | action_executor:_search_google:420 - Browser closed during typing
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:33:31 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:33:32 | ERROR    | action_executor:_search_google:420 - Browser closed during typing
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait_element
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait_element
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:34:32 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:43:04 | ERROR    | browser_controller:_prepare_browser:186 - Browser not ready: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x000000010b615518 chromedriver + 6378776
+1   chromedriver                        0x000000010b60cc2a chromedriver + 6343722
+2   chromedriver                        0x000000010b069086 chromedriver + 430214
+3   chromedriver                        0x000000010b04f7ed chromedriver + 325613
+4   chromedriver                        0x000000010b077e62 chromedriver + 491106
+5   chromedriver                        0x000000010b0e9e8f chromedriver + 958095
+6   chromedriver                        0x000000010b10896c chromedriver + 1083756
+7   chromedriver                        0x000000010b0e17d3 chromedriver + 923603
+8   chromedriver                        0x000000010b0ad185 chromedriver + 708997
+9   chromedriver                        0x000000010b0ae5c1 chromedriver + 714177
+10  chromedriver                        0x000000010b5d2da0 chromedriver + 6106528
+11  chromedriver                        0x000000010b5d7005 chromedriver + 6123525
+12  chromedriver                        0x000000010b5ae505 chromedriver + 5956869
+13  chromedriver                        0x000000010b5d7a9f chromedriver + 6126239
+14  chromedriver                        0x000000010b59d944 chromedriver + 5888324
+15  chromedriver                        0x000000010b5f9b78 chromedriver + 6265720
+16  chromedriver                        0x000000010b5f9d3d chromedriver + 6266173
+17  chromedriver                        0x000000010b60c801 chromedriver + 6342657
+18  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+19  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:05 | ERROR    | warming_executor:_execute_warming:107 - Action 1 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c91c190>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:05 | ERROR    | warming_executor:_execute_warming:107 - Action 2 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c4626a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:05 | ERROR    | warming_executor:_execute_warming:107 - Action 3 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97f640>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:05 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97fc40>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:05 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c91c100>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:05 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97fac0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:05 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97f4c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:05 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb02130>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 9 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb02730>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 10 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97f400>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 11 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97fa60>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 12 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c91c670>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 13 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb026d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 14 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb02160>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 15 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c91c340>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 16 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97fa90>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 17 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97f460>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 18 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97ffa0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 19 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb025b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 20 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb02ee0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 21 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb022e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 22 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97f520>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:08 | ERROR    | browser_controller:close_browser:236 - Error closing browser for profile k17l902d: 'k17l902d'
+2025-12-04 09:44:10 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:45:13 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:45:13 | ERROR    | action_executor:_search_google:380 - Google search failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x000000010c693518 chromedriver + 6378776
+1   chromedriver                        0x000000010c68ac2a chromedriver + 6343722
+2   chromedriver                        0x000000010c0e7086 chromedriver + 430214
+3   chromedriver                        0x000000010c0bba70 chromedriver + 252528
+4   chromedriver                        0x000000010c167c88 chromedriver + 957576
+5   chromedriver                        0x000000010c18696c chromedriver + 1083756
+6   chromedriver                        0x000000010c15f7d3 chromedriver + 923603
+7   chromedriver                        0x000000010c12b185 chromedriver + 708997
+8   chromedriver                        0x000000010c12c5c1 chromedriver + 714177
+9   chromedriver                        0x000000010c650da0 chromedriver + 6106528
+10  chromedriver                        0x000000010c655005 chromedriver + 6123525
+11  chromedriver                        0x000000010c62c505 chromedriver + 5956869
+12  chromedriver                        0x000000010c655a9f chromedriver + 6126239
+13  chromedriver                        0x000000010c61b944 chromedriver + 5888324
+14  chromedriver                        0x000000010c677b78 chromedriver + 6265720
+15  chromedriver                        0x000000010c677d3d chromedriver + 6266173
+16  chromedriver                        0x000000010c68a801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:45:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:45:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:45:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:46:17 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:50:25 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:50:25 | ERROR    | action_executor:_search_google:380 - Google search failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x000000010a621518 chromedriver + 6378776
+1   chromedriver                        0x000000010a618c2a chromedriver + 6343722
+2   chromedriver                        0x000000010a075086 chromedriver + 430214
+3   chromedriver                        0x000000010a049a70 chromedriver + 252528
+4   chromedriver                        0x000000010a0f5c88 chromedriver + 957576
+5   chromedriver                        0x000000010a11496c chromedriver + 1083756
+6   chromedriver                        0x000000010a0ed7d3 chromedriver + 923603
+7   chromedriver                        0x000000010a0b9185 chromedriver + 708997
+8   chromedriver                        0x000000010a0ba5c1 chromedriver + 714177
+9   chromedriver                        0x000000010a5deda0 chromedriver + 6106528
+10  chromedriver                        0x000000010a5e3005 chromedriver + 6123525
+11  chromedriver                        0x000000010a5ba505 chromedriver + 5956869
+12  chromedriver                        0x000000010a5e3a9f chromedriver + 6126239
+13  chromedriver                        0x000000010a5a9944 chromedriver + 5888324
+14  chromedriver                        0x000000010a605b78 chromedriver + 6265720
+15  chromedriver                        0x000000010a605d3d chromedriver + 6266173
+16  chromedriver                        0x000000010a618801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 1 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb16760>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 2 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97f4c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 3 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97fc10>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb02760>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97f5e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c8b72b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb16130>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb02130>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 9 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb22550>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 10 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb16730>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 11 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb16eb0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 12 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97fac0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 13 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97f4f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 14 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb22b50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 15 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97ffd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 16 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c8d4a30>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 17 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb16cd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 18 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb02130>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 19 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb34040>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 20 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb16250>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 21 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb16910>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 22 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97fc70>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:29 | ERROR    | browser_controller:close_browser:236 - Error closing browser for profile k17l902d: 'k17l902d'
+2025-12-04 09:51:29 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:52:16 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:52:16 | ERROR    | action_executor:_search_google:380 - Google search failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x000000010c1bd518 chromedriver + 6378776
+1   chromedriver                        0x000000010c1b4c2a chromedriver + 6343722
+2   chromedriver                        0x000000010bc11086 chromedriver + 430214
+3   chromedriver                        0x000000010bbe5a70 chromedriver + 252528
+4   chromedriver                        0x000000010bc91c88 chromedriver + 957576
+5   chromedriver                        0x000000010bcb096c chromedriver + 1083756
+6   chromedriver                        0x000000010bc897d3 chromedriver + 923603
+7   chromedriver                        0x000000010bc55185 chromedriver + 708997
+8   chromedriver                        0x000000010bc565c1 chromedriver + 714177
+9   chromedriver                        0x000000010c17ada0 chromedriver + 6106528
+10  chromedriver                        0x000000010c17f005 chromedriver + 6123525
+11  chromedriver                        0x000000010c156505 chromedriver + 5956869
+12  chromedriver                        0x000000010c17fa9f chromedriver + 6126239
+13  chromedriver                        0x000000010c145944 chromedriver + 5888324
+14  chromedriver                        0x000000010c1a1b78 chromedriver + 6265720
+15  chromedriver                        0x000000010c1a1d3d chromedriver + 6266173
+16  chromedriver                        0x000000010c1b4801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:54:42 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:54:42 | ERROR    | action_executor:_search_google:380 - Google search failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x000000010be00518 chromedriver + 6378776
+1   chromedriver                        0x000000010bdf7c2a chromedriver + 6343722
+2   chromedriver                        0x000000010b854086 chromedriver + 430214
+3   chromedriver                        0x000000010b828a70 chromedriver + 252528
+4   chromedriver                        0x000000010b8d4c88 chromedriver + 957576
+5   chromedriver                        0x000000010b8f396c chromedriver + 1083756
+6   chromedriver                        0x000000010b8cc7d3 chromedriver + 923603
+7   chromedriver                        0x000000010b898185 chromedriver + 708997
+8   chromedriver                        0x000000010b8995c1 chromedriver + 714177
+9   chromedriver                        0x000000010bdbdda0 chromedriver + 6106528
+10  chromedriver                        0x000000010bdc2005 chromedriver + 6123525
+11  chromedriver                        0x000000010bd99505 chromedriver + 5956869
+12  chromedriver                        0x000000010bdc2a9f chromedriver + 6126239
+13  chromedriver                        0x000000010bd88944 chromedriver + 5888324
+14  chromedriver                        0x000000010bde4b78 chromedriver + 6265720
+15  chromedriver                        0x000000010bde4d3d chromedriver + 6266173
+16  chromedriver                        0x000000010bdf7801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait

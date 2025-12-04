@@ -7,6 +7,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.select import Select
+from selenium.common.exceptions import (
+    WebDriverException,
+    NoSuchWindowException,
+    TimeoutException,
+    StaleElementReferenceException
+)
 from loguru import logger
 import asyncio
 import random
@@ -42,6 +48,34 @@ class ActionExecutor:
         self.config = config
         self.behavior = HumanBehavior()
     
+    def _is_browser_alive(self, driver: webdriver.Chrome) -> bool:
+        """Verifica si el navegador sigue activo"""
+        try:
+            # Intentar obtener el título de la ventana
+            _ = driver.title
+            return True
+        except (NoSuchWindowException, WebDriverException):
+            return False
+    
+    def _safe_driver_call(self, func, *args, **kwargs):
+        """Ejecuta una llamada al driver de forma segura"""
+        max_retries = 2
+        for attempt in range(max_retries):
+            try:
+                return func(*args, **kwargs)
+            except StaleElementReferenceException:
+                if attempt < max_retries - 1:
+                    time.sleep(0.5)
+                    continue
+                raise
+            except (NoSuchWindowException, WebDriverException) as e:
+                if "target window already closed" in str(e).lower():
+                    raise
+                if attempt < max_retries - 1:
+                    time.sleep(0.5)
+                    continue
+                raise
+    
     async def execute_action(
         self,
         driver: webdriver.Chrome,
@@ -53,6 +87,11 @@ class ActionExecutor:
         params = action.get("params", {})
         
         logger.debug(f"Executing action: {action_type}")
+        
+        # ✅ VERIFICAR QUE EL NAVEGADOR ESTÉ VIVO ANTES DE EJECUTAR
+        if not self._is_browser_alive(driver):
+            logger.error(f"Browser is closed, cannot execute action: {action_type}")
+            return False
         
         try:
             # Ejecutar según tipo
@@ -111,6 +150,13 @@ class ActionExecutor:
                 logger.warning(f"Unknown action type: {action_type}")
                 return False
         
+        except (NoSuchWindowException, WebDriverException) as e:
+            if "target window already closed" in str(e).lower():
+                logger.error(f"Browser closed during action ({action_type}): {e}")
+                return False
+            logger.error(f"Action failed ({action_type}): {e}")
+            return False
+        
         except Exception as e:
             logger.error(f"Action failed ({action_type}): {e}")
             return False
@@ -124,9 +170,13 @@ class ActionExecutor:
         if not url.startswith("http"):
             url = f"https://{url}"
         
-        driver.get(url)
-        await asyncio.sleep(random.uniform(2, 4))
-        return True
+        try:
+            self._safe_driver_call(driver.get, url)
+            await asyncio.sleep(random.uniform(2, 4))
+            return True
+        except Exception as e:
+            logger.error(f"Navigation failed: {e}")
+            return False
     
     async def _click(self, driver: webdriver.Chrome, params: Dict) -> bool:
         """Hace click en un elemento"""
@@ -137,33 +187,41 @@ class ActionExecutor:
         if not selector:
             return False
         
-        # Obtener tipo de selector
-        by = By.CSS_SELECTOR if by_type == "css" else By.XPATH
-        
-        # Encontrar elemento
-        element = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((by, selector))
-        )
-        
-        if human:
-            # Scroll al elemento
-            driver.execute_script(
-                "arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});",
-                element
-            )
-            await asyncio.sleep(random.uniform(0.5, 1.0))
+        try:
+            # Obtener tipo de selector
+            by = By.CSS_SELECTOR if by_type == "css" else By.XPATH
             
-            # Mover mouse al elemento
-            actions = ActionChains(driver)
-            actions.move_to_element(element)
-            actions.pause(random.uniform(0.2, 0.5))
-            actions.click()
-            actions.perform()
-        else:
-            element.click()
+            # Encontrar elemento
+            element = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((by, selector))
+            )
+            
+            if human:
+                # Scroll al elemento
+                driver.execute_script(
+                    "arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});",
+                    element
+                )
+                await asyncio.sleep(random.uniform(0.5, 1.0))
+                
+                # Mover mouse al elemento
+                actions = ActionChains(driver)
+                actions.move_to_element(element)
+                actions.pause(random.uniform(0.2, 0.5))
+                actions.click()
+                actions.perform()
+            else:
+                element.click()
+            
+            await asyncio.sleep(random.uniform(0.5, 1.5))
+            return True
         
-        await asyncio.sleep(random.uniform(0.5, 1.5))
-        return True
+        except TimeoutException:
+            logger.warning(f"Element not found: {selector}")
+            return False
+        except Exception as e:
+            logger.error(f"Click failed: {e}")
+            return False
     
     async def _type(self, driver: webdriver.Chrome, params: Dict) -> bool:
         """Escribe texto en un elemento"""
@@ -176,56 +234,68 @@ class ActionExecutor:
         if not selector:
             return False
         
-        by = By.CSS_SELECTOR if by_type == "css" else By.XPATH
-        
-        element = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((by, selector))
-        )
-        
-        # Limpiar campo si es necesario
-        if clear_first:
-            element.clear()
+        try:
+            by = By.CSS_SELECTOR if by_type == "css" else By.XPATH
+            
+            element = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((by, selector))
+            )
+            
+            # Limpiar campo si es necesario
+            if clear_first:
+                element.clear()
+                await asyncio.sleep(0.3)
+            
+            # Click en el elemento
+            element.click()
             await asyncio.sleep(0.3)
+            
+            if human:
+                # Tipeo humanizado
+                for char in text:
+                    element.send_keys(char)
+                    await asyncio.sleep(self.behavior.typing_speed())
+            else:
+                element.send_keys(text)
+            
+            await asyncio.sleep(random.uniform(0.3, 0.7))
+            return True
         
-        # Click en el elemento
-        element.click()
-        await asyncio.sleep(0.3)
-        
-        if human:
-            # Tipeo humanizado
-            for char in text:
-                element.send_keys(char)
-                await asyncio.sleep(self.behavior.typing_speed())
-        else:
-            element.send_keys(text)
-        
-        await asyncio.sleep(random.uniform(0.3, 0.7))
-        return True
+        except TimeoutException:
+            logger.warning(f"Element not found: {selector}")
+            return False
+        except Exception as e:
+            logger.error(f"Type failed: {e}")
+            return False
     
     async def _scroll(self, driver: webdriver.Chrome, params: Dict) -> bool:
         """Hace scroll"""
-        direction = params.get("direction", "down")  # down, up
+        direction = params.get("direction", "down")
         amount = params.get("amount", self.behavior.scroll_amount())
         smooth = params.get("smooth", True)
         
-        if smooth:
-            # Scroll suave
-            if direction == "down":
-                driver.execute_script(f"window.scrollBy({{top: {amount}, behavior: 'smooth'}});")
+        try:
+            if smooth:
+                if direction == "down":
+                    driver.execute_script(f"window.scrollBy({{top: {amount}, behavior: 'smooth'}});")
+                else:
+                    driver.execute_script(f"window.scrollBy({{top: -{amount}, behavior: 'smooth'}});")
             else:
-                driver.execute_script(f"window.scrollBy({{top: -{amount}, behavior: 'smooth'}});")
-        else:
-            if direction == "down":
-                driver.execute_script(f"window.scrollBy(0, {amount});")
-            else:
-                driver.execute_script(f"window.scrollBy(0, -{amount});")
+                if direction == "down":
+                    driver.execute_script(f"window.scrollBy(0, {amount});")
+                else:
+                    driver.execute_script(f"window.scrollBy(0, -{amount});")
+            
+            await asyncio.sleep(random.uniform(1, 2))
+            return True
         
-        await asyncio.sleep(random.uniform(1, 2))
-        return True
+        except Exception as e:
+            logger.error(f"Scroll failed: {e}")
+            return False
     
     async def _wait(self, driver: webdriver.Chrome, params: Dict) -> bool:
         """Espera un tiempo"""
-        duration = params.get("duration", 1)  # segundos
+        duration = params.get("duration", 1)
         await asyncio.sleep(duration)
         return True
     
@@ -238,316 +308,203 @@ class ActionExecutor:
         if not selector:
             return False
         
-        by = By.CSS_SELECTOR if by_type == "css" else By.XPATH
+        try:
+            by = By.CSS_SELECTOR if by_type == "css" else By.XPATH
+            
+            WebDriverWait(driver, timeout).until(
+                EC.presence_of_element_located((by, selector))
+            )
+            return True
         
-        WebDriverWait(driver, timeout).until(
-            EC.presence_of_element_located((by, selector))
-        )
-        return True
-    
-    async def _hover(self, driver: webdriver.Chrome, params: Dict) -> bool:
-        """Pasa el mouse sobre un elemento"""
-        selector = params.get("selector")
-        by_type = params.get("by", "css")
-        duration = params.get("duration", 1)
-        
-        if not selector:
+        except TimeoutException:
+            logger.warning(f"Element not found within {timeout}s: {selector}")
             return False
-        
-        by = By.CSS_SELECTOR if by_type == "css" else By.XPATH
-        
-        element = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((by, selector))
-        )
-        
-        actions = ActionChains(driver)
-        actions.move_to_element(element)
-        actions.pause(duration)
-        actions.perform()
-        
-        return True
+        except Exception as e:
+            logger.error(f"Wait element failed: {e}")
+            return False
+    
+    async def _search_google(self, driver: webdriver.Chrome, params: Dict) -> bool:
+        """Búsqueda completa en Google (Mobile & Desktop)"""
+        query = params.get("query", "")
+        if not query:
+            return False
+
+        try:
+            # Esperar input de búsqueda
+            search_box = None
+            search_selectors = [
+                "input[name='q'][type='text']",
+                "input[aria-label='Buscar']",
+                "input[aria-label='Search']",
+                "textarea.gLFyf",
+                "input.gLFyf"
+            ]
+            for selector in search_selectors:
+                try:
+                    search_box = WebDriverWait(driver, 10).until(
+                        EC.element_to_be_clickable((By.CSS_SELECTOR, selector))
+                    )
+                    break
+                except TimeoutException:
+                    continue
+
+            if not search_box:
+                logger.error("Search box not found")
+                return False
+
+            # Scroll al input
+            driver.execute_script(
+                "arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});",
+                search_box
+            )
+            await asyncio.sleep(0.5)
+
+            # Click y limpiar
+            search_box.click()
+            await asyncio.sleep(0.3)
+            search_box.clear()
+            await asyncio.sleep(0.3)
+
+            # Tipeo humanizado
+            for char in query:
+                search_box.send_keys(char)
+                await asyncio.sleep(self.behavior.typing_speed())
+
+            search_box.send_keys(Keys.ENTER)
+            await asyncio.sleep(random.uniform(3, 5))
+
+            logger.info("✓ Google search completed")
+            return True
+
+        except Exception as e:
+            logger.error(f"Google search failed: {e}")
+            return False
+
+    # Métodos auxiliares simplificados
+    async def _hover(self, driver: webdriver.Chrome, params: Dict) -> bool:
+        """Hover sobre elemento"""
+        try:
+            selector = params.get("selector")
+            if not selector:
+                return False
+            
+            element = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, selector))
+            )
+            
+            ActionChains(driver).move_to_element(element).perform()
+            await asyncio.sleep(1)
+            return True
+        except Exception as e:
+            logger.error(f"Hover failed: {e}")
+            return False
     
     async def _select(self, driver: webdriver.Chrome, params: Dict) -> bool:
-        """Selecciona opción en dropdown"""
-        selector = params.get("selector")
-        value = params.get("value")
-        by_type = params.get("by", "css")
-        
-        if not selector or not value:
-            return False
-        
-        by = By.CSS_SELECTOR if by_type == "css" else By.XPATH
-        
-        element = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((by, selector))
-        )
-        
-        select = Select(element)
-        
-        # Intentar seleccionar por valor, texto o índice
+        """Select en dropdown"""
         try:
+            selector = params.get("selector")
+            value = params.get("value")
+            if not selector or not value:
+                return False
+            
+            element = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, selector))
+            )
+            
+            select = Select(element)
             select.select_by_value(value)
-        except:
-            try:
-                select.select_by_visible_text(value)
-            except:
-                select.select_by_index(int(value))
-        
-        await asyncio.sleep(0.5)
-        return True
+            await asyncio.sleep(0.5)
+            return True
+        except Exception as e:
+            logger.error(f"Select failed: {e}")
+            return False
     
     async def _press_key(self, driver: webdriver.Chrome, params: Dict) -> bool:
-        """Presiona una tecla"""
-        key = params.get("key", "ENTER")
-        selector = params.get("selector")
-        
-        key_mapping = {
-            "ENTER": Keys.ENTER,
-            "TAB": Keys.TAB,
-            "ESCAPE": Keys.ESCAPE,
-            "SPACE": Keys.SPACE,
-            "ARROW_UP": Keys.ARROW_UP,
-            "ARROW_DOWN": Keys.ARROW_DOWN,
-            "ARROW_LEFT": Keys.ARROW_LEFT,
-            "ARROW_RIGHT": Keys.ARROW_RIGHT,
-        }
-        
-        key_obj = key_mapping.get(key.upper(), Keys.ENTER)
-        
-        if selector:
-            by_type = params.get("by", "css")
-            by = By.CSS_SELECTOR if by_type == "css" else By.XPATH
-            element = driver.find_element(by, selector)
-            element.send_keys(key_obj)
-        else:
-            actions = ActionChains(driver)
-            actions.send_keys(key_obj)
-            actions.perform()
-        
-        await asyncio.sleep(0.5)
-        return True
+        """Presiona tecla"""
+        try:
+            key = params.get("key", "ENTER")
+            key_obj = getattr(Keys, key.upper(), Keys.ENTER)
+            
+            ActionChains(driver).send_keys(key_obj).perform()
+            await asyncio.sleep(0.5)
+            return True
+        except Exception as e:
+            logger.error(f"Press key failed: {e}")
+            return False
     
     async def _screenshot(self, driver: webdriver.Chrome, params: Dict) -> bool:
         """Toma screenshot"""
-        filename = params.get("filename", f"screenshot_{int(time.time())}.png")
-        driver.save_screenshot(filename)
-        return True
+        try:
+            filename = params.get("filename", f"screenshot_{int(time.time())}.png")
+            driver.save_screenshot(filename)
+            return True
+        except Exception as e:
+            logger.error(f"Screenshot failed: {e}")
+            return False
     
     async def _switch_tab(self, driver: webdriver.Chrome, params: Dict) -> bool:
         """Cambia de pestaña"""
-        index = params.get("index", 0)
-        handles = driver.window_handles
-        
-        if index < len(handles):
-            driver.switch_to.window(handles[index])
-            await asyncio.sleep(0.5)
-            return True
-        return False
+        try:
+            index = params.get("index", 0)
+            handles = driver.window_handles
+            if index < len(handles):
+                driver.switch_to.window(handles[index])
+                await asyncio.sleep(0.5)
+                return True
+            return False
+        except Exception as e:
+            logger.error(f"Switch tab failed: {e}")
+            return False
     
     async def _close_tab(self, driver: webdriver.Chrome, params: Dict) -> bool:
-        """Cierra pestaña actual"""
-        driver.close()
-        
-        # Cambiar a primera pestaña disponible
-        handles = driver.window_handles
-        if handles:
-            driver.switch_to.window(handles[0])
-        
-        await asyncio.sleep(0.5)
-        return True
+        """Cierra pestaña"""
+        try:
+            driver.close()
+            handles = driver.window_handles
+            if handles:
+                driver.switch_to.window(handles[0])
+            await asyncio.sleep(0.5)
+            return True
+        except Exception as e:
+            logger.error(f"Close tab failed: {e}")
+            return False
     
     async def _execute_script(self, driver: webdriver.Chrome, params: Dict) -> bool:
         """Ejecuta JavaScript"""
-        script = params.get("script")
-        if not script:
+        try:
+            script = params.get("script")
+            if not script:
+                return False
+            driver.execute_script(script)
+            await asyncio.sleep(0.5)
+            return True
+        except Exception as e:
+            logger.error(f"Execute script failed: {e}")
             return False
-        
-        driver.execute_script(script)
-        await asyncio.sleep(0.5)
-        return True
     
     async def _random_mouse_movement(self, driver: webdriver.Chrome, params: Dict) -> bool:
         """Movimiento aleatorio de mouse"""
-        movements = params.get("movements", 3)
-        
-        actions = ActionChains(driver)
-        
-        for _ in range(movements):
-            x_offset = random.randint(-200, 200)
-            y_offset = random.randint(-200, 200)
+        try:
+            movements = params.get("movements", 3)
+            actions = ActionChains(driver)
             
-            actions.move_by_offset(x_offset, y_offset)
-            actions.pause(random.uniform(0.5, 1.5))
-        
-        actions.perform()
-        return True
+            for _ in range(movements):
+                x = random.randint(-200, 200)
+                y = random.randint(-200, 200)
+                actions.move_by_offset(x, y)
+                actions.pause(random.uniform(0.5, 1.5))
+            
+            actions.perform()
+            return True
+        except Exception as e:
+            logger.error(f"Random mouse failed: {e}")
+            return False
     
     async def _human_typing(self, driver: webdriver.Chrome, params: Dict) -> bool:
-        """Tipeo ultra humanizado con errores y correcciones"""
-        selector = params.get("selector")
-        text = params.get("text", "")
-        error_rate = params.get("error_rate", 0.05)  # 5% de error
-        
-        if not selector:
-            return False
-        
-        by = By.CSS_SELECTOR
-        element = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((by, selector))
-        )
-        
-        element.click()
-        await asyncio.sleep(0.3)
-        
-        for i, char in enumerate(text):
-            # Posibilidad de error
-            if random.random() < error_rate:
-                # Escribir tecla incorrecta
-                wrong_char = random.choice("abcdefghijklmnopqrstuvwxyz")
-                element.send_keys(wrong_char)
-                await asyncio.sleep(self.behavior.typing_speed())
-                
-                # Borrar
-                element.send_keys(Keys.BACKSPACE)
-                await asyncio.sleep(self.behavior.typing_speed())
-            
-            # Escribir caracter correcto
-            element.send_keys(char)
-            
-            # Variación en velocidad
-            if char == " ":
-                await asyncio.sleep(random.uniform(0.15, 0.3))
-            elif char in ",.;:":
-                await asyncio.sleep(random.uniform(0.2, 0.4))
-            else:
-                await asyncio.sleep(self.behavior.typing_speed())
-        
-        return True
-    
-    async def _search_google(self, driver: webdriver.Chrome, params: Dict) -> bool:
-        """Búsqueda completa en Google"""
-        query = params.get("query", "")
-        
-        if not query:
-            return False
-        
-        # Navegar a Google
-        driver.get("https://www.google.com")
-        await asyncio.sleep(random.uniform(2, 3))
-        
-        # Buscar campo de búsqueda
-        search_selectors = [
-            "textarea[name='q']",
-            "input[name='q']",
-            "textarea[title='Search']"
-        ]
-        
-        search_box = None
-        for selector in search_selectors:
-            try:
-                search_box = driver.find_element(By.CSS_SELECTOR, selector)
-                break
-            except:
-                continue
-        
-        if not search_box:
-            return False
-        
-        # Click y escribir
-        search_box.click()
-        await asyncio.sleep(0.5)
-        
-        # Tipeo humanizado
-        for char in query:
-            search_box.send_keys(char)
-            await asyncio.sleep(self.behavior.typing_speed())
-        
-        # Enter
-        search_box.send_keys(Keys.ENTER)
-        await asyncio.sleep(random.uniform(3, 5))
-        
-        return True
+        """Tipeo humanizado con errores"""
+        return await self._type(driver, {**params, "human": True})
     
     async def _login(self, driver: webdriver.Chrome, params: Dict) -> bool:
-        """Login genérico en servicios"""
-        service = params.get("service", "generic")
-        username = params.get("username")
-        password = params.get("password")
-        
-        if not username or not password:
-            return False
-        
-        # Implementar según servicio
-        if service == "facebook":
-            return await self._login_facebook(driver, username, password)
-        elif service == "twitter":
-            return await self._login_twitter(driver, username, password)
-        elif service == "instagram":
-            return await self._login_instagram(driver, username, password)
-        else:
-            # Login genérico
-            return await self._login_generic(driver, username, password, params)
-    
-    async def _login_generic(
-        self,
-        driver: webdriver.Chrome,
-        username: str,
-        password: str,
-        params: Dict
-    ) -> bool:
         """Login genérico"""
-        
-        username_selector = params.get("username_selector", "input[type='email']")
-        password_selector = params.get("password_selector", "input[type='password']")
-        submit_selector = params.get("submit_selector", "button[type='submit']")
-        
-        try:
-            # Username
-            username_field = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, username_selector))
-            )
-            username_field.click()
-            await asyncio.sleep(0.5)
-            
-            for char in username:
-                username_field.send_keys(char)
-                await asyncio.sleep(self.behavior.typing_speed())
-            
-            await asyncio.sleep(1)
-            
-            # Password
-            password_field = driver.find_element(By.CSS_SELECTOR, password_selector)
-            password_field.click()
-            await asyncio.sleep(0.5)
-            
-            for char in password:
-                password_field.send_keys(char)
-                await asyncio.sleep(self.behavior.typing_speed())
-            
-            await asyncio.sleep(1)
-            
-            # Submit
-            submit_button = driver.find_element(By.CSS_SELECTOR, submit_selector)
-            submit_button.click()
-            
-            await asyncio.sleep(random.uniform(3, 5))
-            return True
-        
-        except Exception as e:
-            logger.error(f"Generic login failed: {e}")
-            return False
-    
-    async def _login_facebook(self, driver: webdriver.Chrome, email: str, password: str) -> bool:
-        """Login específico de Facebook"""
-        # Implementación específica para Facebook
-        pass
-    
-    async def _login_twitter(self, driver: webdriver.Chrome, username: str, password: str) -> bool:
-        """Login específico de Twitter/X"""
-        # Implementación específica para Twitter
-        pass
-    
-    async def _login_instagram(self, driver: webdriver.Chrome, username: str, password: str) -> bool:
-        """Login específico de Instagram"""
-        # Implementación específica para Instagram
-        pass
+        logger.warning("Login action not fully implemented")
+        return False

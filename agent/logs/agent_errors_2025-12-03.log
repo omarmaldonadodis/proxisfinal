@@ -545,3 +545,95 @@ Stacktrace:
 17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
 18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
 
+2025-12-03 19:06:59 | ERROR    | action_executor:execute_action:115 - Action failed (navigate): Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x000000010abce518 chromedriver + 6378776
+1   chromedriver                        0x000000010abc5c2a chromedriver + 6343722
+2   chromedriver                        0x000000010a622086 chromedriver + 430214
+3   chromedriver                        0x000000010a5f6a70 chromedriver + 252528
+4   chromedriver                        0x000000010a6a2c88 chromedriver + 957576
+5   chromedriver                        0x000000010a6c196c chromedriver + 1083756
+6   chromedriver                        0x000000010a69a7d3 chromedriver + 923603
+7   chromedriver                        0x000000010a666185 chromedriver + 708997
+8   chromedriver                        0x000000010a6675c1 chromedriver + 714177
+9   chromedriver                        0x000000010ab8bda0 chromedriver + 6106528
+10  chromedriver                        0x000000010ab90005 chromedriver + 6123525
+11  chromedriver                        0x000000010ab67505 chromedriver + 5956869
+12  chromedriver                        0x000000010ab90a9f chromedriver + 6126239
+13  chromedriver                        0x000000010ab56944 chromedriver + 5888324
+14  chromedriver                        0x000000010abb2b78 chromedriver + 6265720
+15  chromedriver                        0x000000010abb2d3d chromedriver + 6266173
+16  chromedriver                        0x000000010abc5801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-03 19:07:01 | ERROR    | action_executor:execute_action:115 - Action failed (search_google): Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x000000010abce518 chromedriver + 6378776
+1   chromedriver                        0x000000010abc5c2a chromedriver + 6343722
+2   chromedriver                        0x000000010a622086 chromedriver + 430214
+3   chromedriver                        0x000000010a5f6a70 chromedriver + 252528
+4   chromedriver                        0x000000010a6a2c88 chromedriver + 957576
+5   chromedriver                        0x000000010a6c196c chromedriver + 1083756
+6   chromedriver                        0x000000010a69a7d3 chromedriver + 923603
+7   chromedriver                        0x000000010a666185 chromedriver + 708997
+8   chromedriver                        0x000000010a6675c1 chromedriver + 714177
+9   chromedriver                        0x000000010ab8bda0 chromedriver + 6106528
+10  chromedriver                        0x000000010ab90005 chromedriver + 6123525
+11  chromedriver                        0x000000010ab67505 chromedriver + 5956869
+12  chromedriver                        0x000000010ab90a9f chromedriver + 6126239
+13  chromedriver                        0x000000010ab56944 chromedriver + 5888324
+14  chromedriver                        0x000000010abb2b78 chromedriver + 6265720
+15  chromedriver                        0x000000010abb2d3d chromedriver + 6266173
+16  chromedriver                        0x000000010abc5801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-03 19:11:26 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-03 19:11:26 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-03 19:11:26 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-03 19:13:10 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-03 19:13:10 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-03 19:13:10 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-03 19:13:10 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-03 19:13:10 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-03 19:17:40 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-03 19:17:40 | ERROR    | action_executor:_search_google:373 - Browser closed during typing
+2025-12-03 19:28:51 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-03 19:28:52 | ERROR    | action_executor:_type:268 - Type failed: Message: stale element reference: stale element not found
+  (Session info: chrome=141.0.7390.55); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+0   chromedriver                        0x000000010467d518 chromedriver + 6378776
+1   chromedriver                        0x0000000104674c2a chromedriver + 6343722
+2   chromedriver                        0x00000001040d1086 chromedriver + 430214
+3   chromedriver                        0x00000001040e490b chromedriver + 510219
+4   chromedriver                        0x00000001040e36d2 chromedriver + 505554
+5   chromedriver                        0x00000001040d87dc chromedriver + 460764
+6   chromedriver                        0x00000001040d6968 chromedriver + 452968
+7   chromedriver                        0x00000001040da7f3 chromedriver + 468979
+8   chromedriver                        0x00000001040da8a3 chromedriver + 469155
+9   chromedriver                        0x00000001041241c4 chromedriver + 770500
+10  chromedriver                        0x0000000104124248 chromedriver + 770632
+11  chromedriver                        0x000000010411acd1 chromedriver + 732369
+12  chromedriver                        0x0000000104149a02 chromedriver + 924162
+13  chromedriver                        0x00000001041170d8 chromedriver + 717016
+14  chromedriver                        0x0000000104149bbe chromedriver + 924606
+15  chromedriver                        0x0000000104170f6e chromedriver + 1085294
+16  chromedriver                        0x00000001041497d3 chromedriver + 923603
+17  chromedriver                        0x0000000104115185 chromedriver + 708997
+18  chromedriver                        0x00000001041165c1 chromedriver + 714177
+19  chromedriver                        0x000000010463ada0 chromedriver + 6106528
+20  chromedriver                        0x000000010463f005 chromedriver + 6123525
+21  chromedriver                        0x0000000104616505 chromedriver + 5956869
+22  chromedriver                        0x000000010463fa9f chromedriver + 6126239
+23  chromedriver                        0x0000000104605944 chromedriver + 5888324
+24  chromedriver                        0x0000000104661b78 chromedriver + 6265720
+25  chromedriver                        0x0000000104661d3d chromedriver + 6266173
+26  chromedriver                        0x0000000104674801 chromedriver + 6342657
+27  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+28  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+

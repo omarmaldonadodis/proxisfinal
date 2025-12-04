@@ -1,0 +1,1720 @@
+2025-12-04 08:32:41 | INFO     | browser_controller:__init__:30 - ChromeDriver detectado en: /Users/omarmaldonado/Desktop/proxys/proyectofinal/agent/chromedriver
+2025-12-04 08:32:41 | INFO     | __main__:start:79 - ============================================================
+2025-12-04 08:32:41 | INFO     | __main__:start:80 - 🤖 AdsPower Agent Starting
+2025-12-04 08:32:41 | INFO     | __main__:start:81 - Computer ID: 1
+2025-12-04 08:32:41 | INFO     | __main__:start:82 - Computer Name: mac
+2025-12-04 08:32:41 | INFO     | __main__:start:83 - Orchestrator: http://192.168.1.10:8000
+2025-12-04 08:32:41 | INFO     | __main__:start:84 - ============================================================
+2025-12-04 08:32:41 | INFO     | __main__:start:88 - Connecting to orchestrator...
+2025-12-04 08:32:41 | INFO     | websocket_client:connect:26 - Connecting to: ws://192.168.1.10:8000/api/v1/warming/ws/1
+2025-12-04 08:32:41 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 08:32:41 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 08:32:41 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 08:33:11 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:33:41 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:34:11 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:34:41 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:35:11 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:35:41 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:36:11 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:36:41 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:37:11 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:37:41 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:38:11 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:38:29 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 08:38:29 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=24, profile_id=k17l902d
+2025-12-04 08:38:29 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=24, profile_id=k17l902d
+2025-12-04 08:38:29 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 08:38:36 | INFO     | browser_controller:open_browser:71 - Browser opened on port 59493
+2025-12-04 08:38:39 | INFO     | browser_controller:open_browser:85 - Browser port 59493 is responding
+2025-12-04 08:38:39 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 08:38:40 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 59493
+2025-12-04 08:38:40 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 08:38:41 | INFO     | browser_controller:_prepare_browser:183 - Browser ready for profile k17l902d
+2025-12-04 08:38:41 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 08:38:56 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:38:59 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/28 completed: navigate
+2025-12-04 08:38:59 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 08:39:09 | WARNING  | action_executor:_wait_element:320 - Element not found within 10s: input[name='q']
+2025-12-04 08:39:09 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/28 completed: wait_element
+2025-12-04 08:39:09 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 08:39:20 | WARNING  | action_executor:_click:220 - Element not found: input[name='q']
+2025-12-04 08:39:20 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/28 completed: click
+2025-12-04 08:39:20 | DEBUG    | action_executor:execute_action:89 - Executing action: human_typing
+2025-12-04 08:39:20 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/28 completed: human_typing
+2025-12-04 08:39:20 | DEBUG    | action_executor:execute_action:89 - Executing action: press_key
+2025-12-04 08:39:20 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/28 completed: press_key
+2025-12-04 08:39:20 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 08:39:31 | WARNING  | action_executor:_wait_element:320 - Element not found within 10s: div#search
+2025-12-04 08:39:31 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/28 completed: wait_element
+2025-12-04 08:39:31 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 08:39:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:39:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/28 completed: scroll
+2025-12-04 08:39:32 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:39:33 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/28 completed: wait
+2025-12-04 08:39:33 | DEBUG    | action_executor:execute_action:89 - Executing action: random_mouse
+2025-12-04 08:39:33 | ERROR    | action_executor:_random_mouse_movement:507 - Random mouse failed: Message: move target out of bounds
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x00000001080d2518 chromedriver + 6378776
+1   chromedriver                        0x00000001080c9c2a chromedriver + 6343722
+2   chromedriver                        0x0000000107b25ebe chromedriver + 429758
+3   chromedriver                        0x0000000107bceaee chromedriver + 1121006
+4   chromedriver                        0x0000000107b9ea02 chromedriver + 924162
+5   chromedriver                        0x0000000107bc5f6e chromedriver + 1085294
+6   chromedriver                        0x0000000107b9e7d3 chromedriver + 923603
+7   chromedriver                        0x0000000107b6a185 chromedriver + 708997
+8   chromedriver                        0x0000000107b6b5c1 chromedriver + 714177
+9   chromedriver                        0x000000010808fda0 chromedriver + 6106528
+10  chromedriver                        0x0000000108094005 chromedriver + 6123525
+11  chromedriver                        0x000000010806b505 chromedriver + 5956869
+12  chromedriver                        0x0000000108094a9f chromedriver + 6126239
+13  chromedriver                        0x000000010805a944 chromedriver + 5888324
+14  chromedriver                        0x00000001080b6b78 chromedriver + 6265720
+15  chromedriver                        0x00000001080b6d3d chromedriver + 6266173
+16  chromedriver                        0x00000001080c9801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 08:39:33 | DEBUG    | warming_executor:_execute_warming:104 - Action 9/28 completed: random_mouse
+2025-12-04 08:39:33 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 08:39:35 | DEBUG    | warming_executor:_execute_warming:104 - Action 10/28 completed: scroll
+2025-12-04 08:39:35 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:39:37 | DEBUG    | warming_executor:_execute_warming:104 - Action 11/28 completed: wait
+2025-12-04 08:39:37 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 08:39:47 | WARNING  | action_executor:_click:220 - Element not found: a h3
+2025-12-04 08:39:47 | DEBUG    | warming_executor:_execute_warming:104 - Action 12/28 completed: click
+2025-12-04 08:39:47 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:39:51 | DEBUG    | warming_executor:_execute_warming:104 - Action 13/28 completed: wait
+2025-12-04 08:39:51 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 08:39:53 | DEBUG    | warming_executor:_execute_warming:104 - Action 14/28 completed: scroll
+2025-12-04 08:39:53 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:39:54 | DEBUG    | warming_executor:_execute_warming:104 - Action 15/28 completed: wait
+2025-12-04 08:39:54 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 08:42:12 | WARNING  | websocket_client:_listen:64 - Connection lost
+2025-12-04 08:42:12 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 08:42:12 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 08:42:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 08:42:12 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 08:42:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 16/28 completed: click
+2025-12-04 08:42:13 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:42:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 17/28 completed: wait
+2025-12-04 08:42:13 | DEBUG    | action_executor:execute_action:89 - Executing action: press_key
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: press_key
+2025-12-04 08:42:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 18/28 completed: press_key
+2025-12-04 08:42:13 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:42:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 19/28 completed: wait
+2025-12-04 08:42:13 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: click
+2025-12-04 08:42:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 20/28 completed: click
+2025-12-04 08:42:13 | DEBUG    | action_executor:execute_action:89 - Executing action: switch_tab
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: switch_tab
+2025-12-04 08:42:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 21/28 completed: switch_tab
+2025-12-04 08:42:13 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 08:42:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 22/28 completed: scroll
+2025-12-04 08:42:13 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:42:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 23/28 completed: wait
+2025-12-04 08:42:13 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: click
+2025-12-04 08:42:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 24/28 completed: click
+2025-12-04 08:42:13 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:42:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 25/28 completed: wait
+2025-12-04 08:42:13 | DEBUG    | action_executor:execute_action:89 - Executing action: close_tab
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: close_tab
+2025-12-04 08:42:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 26/28 completed: close_tab
+2025-12-04 08:42:13 | DEBUG    | action_executor:execute_action:89 - Executing action: switch_tab
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: switch_tab
+2025-12-04 08:42:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 27/28 completed: switch_tab
+2025-12-04 08:42:13 | DEBUG    | action_executor:execute_action:89 - Executing action: screenshot
+2025-12-04 08:42:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: screenshot
+2025-12-04 08:42:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 28/28 completed: screenshot
+2025-12-04 08:42:13 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=24, completed=10, failed=18
+2025-12-04 08:42:15 | INFO     | browser_controller:close_browser:232 - Browser closed for profile k17l902d
+2025-12-04 08:42:35 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 08:42:35 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=25, profile_id=k17l902d
+2025-12-04 08:42:35 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=25, profile_id=k17l902d
+2025-12-04 08:42:35 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 08:42:41 | INFO     | browser_controller:open_browser:71 - Browser opened on port 60491
+2025-12-04 08:42:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:42:44 | INFO     | browser_controller:open_browser:85 - Browser port 60491 is responding
+2025-12-04 08:42:44 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 08:42:44 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 60491
+2025-12-04 08:42:44 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 08:42:45 | INFO     | browser_controller:_prepare_browser:183 - Browser ready for profile k17l902d
+2025-12-04 08:42:45 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 08:42:53 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/28 completed: navigate
+2025-12-04 08:42:53 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 08:43:04 | WARNING  | action_executor:_wait_element:320 - Element not found within 10s: input[name='q']
+2025-12-04 08:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/28 completed: wait_element
+2025-12-04 08:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 08:43:14 | WARNING  | action_executor:_click:220 - Element not found: input[name='q']
+2025-12-04 08:43:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/28 completed: click
+2025-12-04 08:43:14 | DEBUG    | action_executor:execute_action:89 - Executing action: human_typing
+2025-12-04 08:43:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/28 completed: human_typing
+2025-12-04 08:43:14 | DEBUG    | action_executor:execute_action:89 - Executing action: press_key
+2025-12-04 08:43:14 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:43:15 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/28 completed: press_key
+2025-12-04 08:43:15 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 08:43:25 | WARNING  | action_executor:_wait_element:320 - Element not found within 10s: div#search
+2025-12-04 08:43:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/28 completed: wait_element
+2025-12-04 08:43:25 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 08:43:27 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/28 completed: scroll
+2025-12-04 08:43:27 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:43:28 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/28 completed: wait
+2025-12-04 08:43:28 | DEBUG    | action_executor:execute_action:89 - Executing action: random_mouse
+2025-12-04 08:43:28 | ERROR    | action_executor:_random_mouse_movement:507 - Random mouse failed: Message: move target out of bounds
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x0000000103701518 chromedriver + 6378776
+1   chromedriver                        0x00000001036f8c2a chromedriver + 6343722
+2   chromedriver                        0x0000000103154ebe chromedriver + 429758
+3   chromedriver                        0x00000001031fdaee chromedriver + 1121006
+4   chromedriver                        0x00000001031cda02 chromedriver + 924162
+5   chromedriver                        0x00000001031f4f6e chromedriver + 1085294
+6   chromedriver                        0x00000001031cd7d3 chromedriver + 923603
+7   chromedriver                        0x0000000103199185 chromedriver + 708997
+8   chromedriver                        0x000000010319a5c1 chromedriver + 714177
+9   chromedriver                        0x00000001036beda0 chromedriver + 6106528
+10  chromedriver                        0x00000001036c3005 chromedriver + 6123525
+11  chromedriver                        0x000000010369a505 chromedriver + 5956869
+12  chromedriver                        0x00000001036c3a9f chromedriver + 6126239
+13  chromedriver                        0x0000000103689944 chromedriver + 5888324
+14  chromedriver                        0x00000001036e5b78 chromedriver + 6265720
+15  chromedriver                        0x00000001036e5d3d chromedriver + 6266173
+16  chromedriver                        0x00000001036f8801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 08:43:28 | DEBUG    | warming_executor:_execute_warming:104 - Action 9/28 completed: random_mouse
+2025-12-04 08:43:28 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 08:43:29 | DEBUG    | warming_executor:_execute_warming:104 - Action 10/28 completed: scroll
+2025-12-04 08:43:29 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:43:31 | DEBUG    | warming_executor:_execute_warming:104 - Action 11/28 completed: wait
+2025-12-04 08:43:31 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 08:43:41 | WARNING  | action_executor:_click:220 - Element not found: a h3
+2025-12-04 08:43:41 | DEBUG    | warming_executor:_execute_warming:104 - Action 12/28 completed: click
+2025-12-04 08:43:41 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:43:44 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:43:45 | DEBUG    | warming_executor:_execute_warming:104 - Action 13/28 completed: wait
+2025-12-04 08:43:45 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 08:43:46 | DEBUG    | warming_executor:_execute_warming:104 - Action 14/28 completed: scroll
+2025-12-04 08:43:46 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:43:48 | DEBUG    | warming_executor:_execute_warming:104 - Action 15/28 completed: wait
+2025-12-04 08:43:48 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 08:44:35 | WARNING  | websocket_client:_listen:64 - Connection lost
+2025-12-04 08:44:35 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 08:44:35 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 08:44:35 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 08:44:35 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 08:44:35 | DEBUG    | warming_executor:_execute_warming:104 - Action 16/28 completed: click
+2025-12-04 08:44:35 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:44:35 | DEBUG    | warming_executor:_execute_warming:104 - Action 17/28 completed: wait
+2025-12-04 08:44:35 | DEBUG    | action_executor:execute_action:89 - Executing action: press_key
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: press_key
+2025-12-04 08:44:35 | DEBUG    | warming_executor:_execute_warming:104 - Action 18/28 completed: press_key
+2025-12-04 08:44:35 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:44:35 | DEBUG    | warming_executor:_execute_warming:104 - Action 19/28 completed: wait
+2025-12-04 08:44:35 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: click
+2025-12-04 08:44:35 | DEBUG    | warming_executor:_execute_warming:104 - Action 20/28 completed: click
+2025-12-04 08:44:35 | DEBUG    | action_executor:execute_action:89 - Executing action: switch_tab
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: switch_tab
+2025-12-04 08:44:35 | DEBUG    | warming_executor:_execute_warming:104 - Action 21/28 completed: switch_tab
+2025-12-04 08:44:35 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 08:44:35 | DEBUG    | warming_executor:_execute_warming:104 - Action 22/28 completed: scroll
+2025-12-04 08:44:35 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:44:35 | DEBUG    | warming_executor:_execute_warming:104 - Action 23/28 completed: wait
+2025-12-04 08:44:35 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: click
+2025-12-04 08:44:35 | DEBUG    | warming_executor:_execute_warming:104 - Action 24/28 completed: click
+2025-12-04 08:44:35 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:44:35 | DEBUG    | warming_executor:_execute_warming:104 - Action 25/28 completed: wait
+2025-12-04 08:44:35 | DEBUG    | action_executor:execute_action:89 - Executing action: close_tab
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: close_tab
+2025-12-04 08:44:35 | DEBUG    | warming_executor:_execute_warming:104 - Action 26/28 completed: close_tab
+2025-12-04 08:44:35 | DEBUG    | action_executor:execute_action:89 - Executing action: switch_tab
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: switch_tab
+2025-12-04 08:44:35 | DEBUG    | warming_executor:_execute_warming:104 - Action 27/28 completed: switch_tab
+2025-12-04 08:44:35 | DEBUG    | action_executor:execute_action:89 - Executing action: screenshot
+2025-12-04 08:44:35 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: screenshot
+2025-12-04 08:44:35 | DEBUG    | warming_executor:_execute_warming:104 - Action 28/28 completed: screenshot
+2025-12-04 08:44:35 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=25, completed=10, failed=18
+2025-12-04 08:44:37 | INFO     | browser_controller:close_browser:232 - Browser closed for profile k17l902d
+2025-12-04 08:44:46 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 08:44:46 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=27, profile_id=k17l902d
+2025-12-04 08:44:46 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=27, profile_id=k17l902d
+2025-12-04 08:44:46 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 08:44:52 | INFO     | browser_controller:open_browser:71 - Browser opened on port 61046
+2025-12-04 08:44:55 | INFO     | browser_controller:open_browser:85 - Browser port 61046 is responding
+2025-12-04 08:44:55 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 08:44:56 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 61046
+2025-12-04 08:44:56 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 08:44:57 | INFO     | browser_controller:_prepare_browser:183 - Browser ready for profile k17l902d
+2025-12-04 08:44:57 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 08:45:03 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/6 completed: navigate
+2025-12-04 08:45:03 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 08:45:13 | WARNING  | action_executor:_wait_element:320 - Element not found within 10s: div[aria-label='Buscar']
+2025-12-04 08:45:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/6 completed: wait_element
+2025-12-04 08:45:13 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 08:45:23 | WARNING  | action_executor:_click:220 - Element not found: div[aria-label='Buscar']
+2025-12-04 08:45:23 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/6 completed: click
+2025-12-04 08:45:23 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 08:45:34 | WARNING  | action_executor:_wait_element:320 - Element not found within 10s: textarea[aria-label='Buscar'], input[aria-label='Buscar']
+2025-12-04 08:45:34 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/6 completed: wait_element
+2025-12-04 08:45:34 | DEBUG    | action_executor:execute_action:89 - Executing action: human_typing
+2025-12-04 08:45:44 | WARNING  | action_executor:_type:265 - Element not found: textarea[aria-label='Buscar'], input[aria-label='Buscar']
+2025-12-04 08:45:44 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/6 completed: human_typing
+2025-12-04 08:45:44 | DEBUG    | action_executor:execute_action:89 - Executing action: press_key
+2025-12-04 08:45:44 | WARNING  | websocket_client:_listen:64 - Connection lost
+2025-12-04 08:45:44 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 08:45:44 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 08:45:44 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 08:45:44 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 08:45:44 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/6 completed: press_key
+2025-12-04 08:45:44 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=27, completed=2, failed=4
+2025-12-04 08:45:55 | INFO     | browser_controller:close_browser:232 - Browser closed for profile k17l902d
+2025-12-04 08:46:14 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:46:44 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:46:55 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 08:46:55 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=28, profile_id=k17l902d
+2025-12-04 08:46:55 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=28, profile_id=k17l902d
+2025-12-04 08:46:55 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 08:47:00 | INFO     | browser_controller:open_browser:71 - Browser opened on port 61378
+2025-12-04 08:47:03 | INFO     | browser_controller:open_browser:85 - Browser port 61378 is responding
+2025-12-04 08:47:03 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 08:47:04 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 61378
+2025-12-04 08:47:04 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 08:47:05 | INFO     | browser_controller:_prepare_browser:183 - Browser ready for profile k17l902d
+2025-12-04 08:47:05 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 08:47:11 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/5 completed: navigate
+2025-12-04 08:47:11 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 08:47:22 | WARNING  | action_executor:_wait_element:320 - Element not found within 10s: input[role='combobox']
+2025-12-04 08:47:22 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/5 completed: wait_element
+2025-12-04 08:47:22 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 08:47:32 | WARNING  | action_executor:_click:220 - Element not found: input[role='combobox']
+2025-12-04 08:47:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/5 completed: click
+2025-12-04 08:47:32 | DEBUG    | action_executor:execute_action:89 - Executing action: human_typing
+2025-12-04 08:47:42 | WARNING  | action_executor:_type:265 - Element not found: input[role='combobox']
+2025-12-04 08:47:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/5 completed: human_typing
+2025-12-04 08:47:42 | DEBUG    | action_executor:execute_action:89 - Executing action: press_key
+2025-12-04 08:47:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:47:43 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/5 completed: press_key
+2025-12-04 08:47:43 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=28, completed=2, failed=3
+2025-12-04 08:47:53 | INFO     | browser_controller:close_browser:232 - Browser closed for profile k17l902d
+2025-12-04 08:48:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:48:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:49:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:49:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:50:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:50:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:51:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:51:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:52:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:52:29 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 08:52:29 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=29, profile_id=k17l902d
+2025-12-04 08:52:29 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=29, profile_id=k17l902d
+2025-12-04 08:52:29 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 08:52:29 | INFO     | browser_controller:open_browser:71 - Browser opened on port 61663
+2025-12-04 08:52:32 | INFO     | browser_controller:open_browser:85 - Browser port 61663 is responding
+2025-12-04 08:52:32 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 08:52:33 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 61663
+2025-12-04 08:52:33 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 08:52:34 | INFO     | browser_controller:_prepare_browser:183 - Browser ready for profile k17l902d
+2025-12-04 08:52:34 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 08:52:39 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/7 completed: navigate
+2025-12-04 08:52:39 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:52:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:52:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/7 completed: wait
+2025-12-04 08:52:42 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 08:52:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/7 completed: wait_element
+2025-12-04 08:52:42 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 08:52:43 | ERROR    | action_executor:_click:223 - Click failed: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x000000010435a518 chromedriver + 6378776
+1   chromedriver                        0x0000000104351c2a chromedriver + 6343722
+2   chromedriver                        0x0000000103dae086 chromedriver + 430214
+3   chromedriver                        0x0000000103d947ed chromedriver + 325613
+4   chromedriver                        0x0000000103dbce62 chromedriver + 491106
+5   chromedriver                        0x0000000103e2ee8f chromedriver + 958095
+6   chromedriver                        0x0000000103e4d96c chromedriver + 1083756
+7   chromedriver                        0x0000000103e267d3 chromedriver + 923603
+8   chromedriver                        0x0000000103df2185 chromedriver + 708997
+9   chromedriver                        0x0000000103df35c1 chromedriver + 714177
+10  chromedriver                        0x0000000104317da0 chromedriver + 6106528
+11  chromedriver                        0x000000010431c005 chromedriver + 6123525
+12  chromedriver                        0x00000001042f3505 chromedriver + 5956869
+13  chromedriver                        0x000000010431ca9f chromedriver + 6126239
+14  chromedriver                        0x00000001042e2944 chromedriver + 5888324
+15  chromedriver                        0x000000010433eb78 chromedriver + 6265720
+16  chromedriver                        0x000000010433ed3d chromedriver + 6266173
+17  chromedriver                        0x0000000104351801 chromedriver + 6342657
+18  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+19  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 08:52:43 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/7 completed: click
+2025-12-04 08:52:43 | DEBUG    | action_executor:execute_action:89 - Executing action: human_typing
+2025-12-04 08:52:43 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: human_typing
+2025-12-04 08:52:43 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/7 completed: human_typing
+2025-12-04 08:52:43 | DEBUG    | action_executor:execute_action:89 - Executing action: press_key
+2025-12-04 08:52:43 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: press_key
+2025-12-04 08:52:43 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/7 completed: press_key
+2025-12-04 08:52:43 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:52:43 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:52:43 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/7 completed: wait
+2025-12-04 08:52:43 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=29, completed=3, failed=4
+2025-12-04 08:52:44 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 08:52:44 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=30, profile_id=k17l902d
+2025-12-04 08:52:44 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=30, profile_id=k17l902d
+2025-12-04 08:52:44 | INFO     | browser_controller:open_browser:36 - Browser already open for profile k17l902d
+2025-12-04 08:52:44 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 08:52:44 | ERROR    | warming_executor:_execute_warming:107 - Action 1 failed: HTTPConnectionPool(host='localhost', port=62819): Max retries exceeded with url: /session/056d627fd9f92abcb836195245900003/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107028f70>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 08:52:44 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:52:44 | ERROR    | warming_executor:_execute_warming:107 - Action 2 failed: HTTPConnectionPool(host='localhost', port=62819): Max retries exceeded with url: /session/056d627fd9f92abcb836195245900003/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106fa41c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 08:52:44 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 08:52:45 | ERROR    | warming_executor:_execute_warming:107 - Action 3 failed: HTTPConnectionPool(host='localhost', port=62819): Max retries exceeded with url: /session/056d627fd9f92abcb836195245900003/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107028700>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 08:52:45 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 08:52:45 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=62819): Max retries exceeded with url: /session/056d627fd9f92abcb836195245900003/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106fa4b20>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 08:52:45 | DEBUG    | action_executor:execute_action:89 - Executing action: human_typing
+2025-12-04 08:52:45 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=62819): Max retries exceeded with url: /session/056d627fd9f92abcb836195245900003/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106fa4460>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 08:52:45 | DEBUG    | action_executor:execute_action:89 - Executing action: press_key
+2025-12-04 08:52:45 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=62819): Max retries exceeded with url: /session/056d627fd9f92abcb836195245900003/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107191430>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 08:52:45 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:52:45 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=62819): Max retries exceeded with url: /session/056d627fd9f92abcb836195245900003/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107191a30>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 08:52:45 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=30, completed=0, failed=7
+2025-12-04 08:52:45 | INFO     | browser_controller:close_browser:232 - Browser closed for profile k17l902d
+2025-12-04 08:52:47 | ERROR    | browser_controller:close_browser:236 - Error closing browser for profile k17l902d: 'k17l902d'
+2025-12-04 08:53:02 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 08:53:02 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=31, profile_id=k17l902d
+2025-12-04 08:53:02 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=31, profile_id=k17l902d
+2025-12-04 08:53:02 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 08:53:08 | INFO     | browser_controller:open_browser:71 - Browser opened on port 62974
+2025-12-04 08:53:11 | INFO     | browser_controller:open_browser:85 - Browser port 62974 is responding
+2025-12-04 08:53:11 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 08:53:11 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 62974
+2025-12-04 08:53:11 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 08:53:12 | INFO     | browser_controller:_prepare_browser:183 - Browser ready for profile k17l902d
+2025-12-04 08:53:12 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 08:53:14 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:53:17 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/7 completed: navigate
+2025-12-04 08:53:17 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:53:20 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/7 completed: wait
+2025-12-04 08:53:20 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 08:53:20 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/7 completed: wait_element
+2025-12-04 08:53:20 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 08:56:36 | WARNING  | websocket_client:_listen:64 - Connection lost
+2025-12-04 08:56:36 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 08:56:36 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 08:56:36 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 08:56:36 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 08:56:37 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/7 completed: click
+2025-12-04 08:56:37 | DEBUG    | action_executor:execute_action:89 - Executing action: human_typing
+2025-12-04 08:56:37 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: human_typing
+2025-12-04 08:56:37 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/7 completed: human_typing
+2025-12-04 08:56:37 | DEBUG    | action_executor:execute_action:89 - Executing action: press_key
+2025-12-04 08:56:37 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: press_key
+2025-12-04 08:56:37 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/7 completed: press_key
+2025-12-04 08:56:37 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:56:37 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:56:37 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/7 completed: wait
+2025-12-04 08:56:37 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=31, completed=4, failed=3
+2025-12-04 08:56:39 | INFO     | browser_controller:close_browser:232 - Browser closed for profile k17l902d
+2025-12-04 08:57:06 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 08:57:15 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 08:57:15 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=32, profile_id=k17l902d
+2025-12-04 08:57:15 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=32, profile_id=k17l902d
+2025-12-04 08:57:15 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 08:57:20 | INFO     | browser_controller:open_browser:71 - Browser opened on port 63940
+2025-12-04 08:57:23 | INFO     | browser_controller:open_browser:85 - Browser port 63940 is responding
+2025-12-04 08:57:23 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 08:57:24 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 63940
+2025-12-04 08:57:24 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 08:57:25 | INFO     | browser_controller:_prepare_browser:183 - Browser ready for profile k17l902d
+2025-12-04 08:57:25 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 08:57:30 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/7 completed: navigate
+2025-12-04 08:57:30 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:57:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/7 completed: wait
+2025-12-04 08:57:32 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 08:57:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/7 completed: wait_element
+2025-12-04 08:57:32 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 08:59:53 | WARNING  | websocket_client:_listen:64 - Connection lost
+2025-12-04 08:59:53 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 08:59:53 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 08:59:53 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 08:59:53 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 08:59:54 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/7 completed: click
+2025-12-04 08:59:54 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 08:59:54 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 08:59:54 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/7 completed: wait
+2025-12-04 08:59:54 | DEBUG    | action_executor:execute_action:89 - Executing action: human_typing
+2025-12-04 08:59:54 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: human_typing
+2025-12-04 08:59:54 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/7 completed: human_typing
+2025-12-04 08:59:54 | DEBUG    | action_executor:execute_action:89 - Executing action: press_key
+2025-12-04 08:59:54 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: press_key
+2025-12-04 08:59:54 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/7 completed: press_key
+2025-12-04 08:59:54 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=32, completed=4, failed=3
+2025-12-04 08:59:56 | INFO     | browser_controller:close_browser:232 - Browser closed for profile k17l902d
+2025-12-04 09:00:23 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:00:53 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:00:59 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 09:00:59 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=33, profile_id=k17l902d
+2025-12-04 09:00:59 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=33, profile_id=k17l902d
+2025-12-04 09:00:59 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 09:01:04 | INFO     | browser_controller:open_browser:71 - Browser opened on port 64706
+2025-12-04 09:01:07 | INFO     | browser_controller:open_browser:85 - Browser port 64706 is responding
+2025-12-04 09:01:07 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 09:01:07 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 64706
+2025-12-04 09:01:07 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 09:01:08 | INFO     | browser_controller:_prepare_browser:183 - Browser ready for profile k17l902d
+2025-12-04 09:01:08 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:01:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/11 completed: navigate
+2025-12-04 09:01:13 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 09:01:23 | WARNING  | action_executor:_wait_element:320 - Element not found within 10s: div[aria-label='Buscar']
+2025-12-04 09:01:23 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/11 completed: wait_element
+2025-12-04 09:01:23 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 09:01:33 | WARNING  | action_executor:_click:220 - Element not found: div[aria-label='Buscar']
+2025-12-04 09:01:33 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/11 completed: click
+2025-12-04 09:01:33 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:01:33 | WARNING  | websocket_client:_listen:64 - Connection lost
+2025-12-04 09:01:33 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:01:33 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 09:01:33 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 09:01:33 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 09:01:35 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/11 completed: wait
+2025-12-04 09:01:35 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 09:01:45 | WARNING  | action_executor:_wait_element:320 - Element not found within 10s: input[aria-label='Buscar'], textarea[aria-label='Buscar']
+2025-12-04 09:01:45 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/11 completed: wait_element
+2025-12-04 09:01:45 | DEBUG    | action_executor:execute_action:89 - Executing action: type
+2025-12-04 09:01:55 | WARNING  | action_executor:_type:265 - Element not found: input[aria-label='Buscar'], textarea[aria-label='Buscar']
+2025-12-04 09:01:55 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/11 completed: type
+2025-12-04 09:01:55 | DEBUG    | action_executor:execute_action:89 - Executing action: press_key
+2025-12-04 09:01:56 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/11 completed: press_key
+2025-12-04 09:01:56 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:01:59 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/11 completed: wait
+2025-12-04 09:01:59 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:02:01 | DEBUG    | warming_executor:_execute_warming:104 - Action 9/11 completed: scroll
+2025-12-04 09:02:01 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:02:03 | DEBUG    | warming_executor:_execute_warming:104 - Action 10/11 completed: wait
+2025-12-04 09:02:03 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 09:02:03 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:03:01 | WARNING  | websocket_client:_listen:64 - Connection lost
+2025-12-04 09:03:01 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:03:01 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 09:03:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 09:03:01 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 09:03:01 | DEBUG    | warming_executor:_execute_warming:104 - Action 11/11 completed: click
+2025-12-04 09:03:01 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=33, completed=7, failed=4
+2025-12-04 09:03:03 | INFO     | browser_controller:close_browser:232 - Browser closed for profile k17l902d
+2025-12-04 09:03:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:03:34 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 09:03:34 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=34, profile_id=k17l902d
+2025-12-04 09:03:34 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=34, profile_id=k17l902d
+2025-12-04 09:03:34 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 09:03:40 | INFO     | browser_controller:open_browser:71 - Browser opened on port 65277
+2025-12-04 09:03:43 | INFO     | browser_controller:open_browser:85 - Browser port 65277 is responding
+2025-12-04 09:03:43 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 09:03:43 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 65277
+2025-12-04 09:03:43 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 09:03:44 | INFO     | browser_controller:_prepare_browser:183 - Browser ready for profile k17l902d
+2025-12-04 09:03:44 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:03:55 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/9 completed: navigate
+2025-12-04 09:03:55 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:03:57 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/9 completed: wait
+2025-12-04 09:03:57 | DEBUG    | action_executor:execute_action:89 - Executing action: random_mouse
+2025-12-04 09:03:57 | ERROR    | action_executor:_random_mouse_movement:507 - Random mouse failed: Message: move target out of bounds
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x00000001007d3518 chromedriver + 6378776
+1   chromedriver                        0x00000001007cac2a chromedriver + 6343722
+2   chromedriver                        0x0000000100226ebe chromedriver + 429758
+3   chromedriver                        0x00000001002cfaee chromedriver + 1121006
+4   chromedriver                        0x000000010029fa02 chromedriver + 924162
+5   chromedriver                        0x00000001002c6f6e chromedriver + 1085294
+6   chromedriver                        0x000000010029f7d3 chromedriver + 923603
+7   chromedriver                        0x000000010026b185 chromedriver + 708997
+8   chromedriver                        0x000000010026c5c1 chromedriver + 714177
+9   chromedriver                        0x0000000100790da0 chromedriver + 6106528
+10  chromedriver                        0x0000000100795005 chromedriver + 6123525
+11  chromedriver                        0x000000010076c505 chromedriver + 5956869
+12  chromedriver                        0x0000000100795a9f chromedriver + 6126239
+13  chromedriver                        0x000000010075b944 chromedriver + 5888324
+14  chromedriver                        0x00000001007b7b78 chromedriver + 6265720
+15  chromedriver                        0x00000001007b7d3d chromedriver + 6266173
+16  chromedriver                        0x00000001007ca801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 09:03:57 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/9 completed: random_mouse
+2025-12-04 09:03:57 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 09:03:57 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/9 completed: click
+2025-12-04 09:03:57 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 09:04:08 | WARNING  | action_executor:_wait_element:320 - Element not found within 10s: textarea[name='q'], textarea[aria-label], input[name='q']
+2025-12-04 09:04:08 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/9 completed: wait_element
+2025-12-04 09:04:08 | DEBUG    | action_executor:execute_action:89 - Executing action: human_typing
+2025-12-04 09:04:18 | WARNING  | action_executor:_type:265 - Element not found: textarea[name='q'], textarea[aria-label], input[name='q']
+2025-12-04 09:04:18 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/9 completed: human_typing
+2025-12-04 09:04:18 | DEBUG    | action_executor:execute_action:89 - Executing action: press_key
+2025-12-04 09:04:18 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:04:18 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/9 completed: press_key
+2025-12-04 09:04:18 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:04:21 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/9 completed: wait
+2025-12-04 09:04:21 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:04:23 | DEBUG    | warming_executor:_execute_warming:104 - Action 9/9 completed: scroll
+2025-12-04 09:04:23 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=34, completed=5, failed=4
+2025-12-04 09:04:33 | INFO     | browser_controller:close_browser:232 - Browser closed for profile k17l902d
+2025-12-04 09:04:46 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 09:04:46 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=35, profile_id=k17l902d
+2025-12-04 09:04:46 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=35, profile_id=k17l902d
+2025-12-04 09:04:46 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 09:04:52 | INFO     | browser_controller:open_browser:71 - Browser opened on port 49157
+2025-12-04 09:04:52 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:04:55 | INFO     | browser_controller:open_browser:85 - Browser port 49157 is responding
+2025-12-04 09:04:55 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 09:04:55 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 49157
+2025-12-04 09:04:55 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 09:04:56 | INFO     | browser_controller:_prepare_browser:183 - Browser ready for profile k17l902d
+2025-12-04 09:04:56 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:05:02 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/9 completed: navigate
+2025-12-04 09:05:02 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:05:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/9 completed: wait
+2025-12-04 09:05:04 | DEBUG    | action_executor:execute_action:89 - Executing action: random_mouse
+2025-12-04 09:05:05 | ERROR    | action_executor:_random_mouse_movement:507 - Random mouse failed: Message: move target out of bounds
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x0000000105aa2518 chromedriver + 6378776
+1   chromedriver                        0x0000000105a99c2a chromedriver + 6343722
+2   chromedriver                        0x00000001054f5ebe chromedriver + 429758
+3   chromedriver                        0x000000010559eaee chromedriver + 1121006
+4   chromedriver                        0x000000010556ea02 chromedriver + 924162
+5   chromedriver                        0x0000000105595f6e chromedriver + 1085294
+6   chromedriver                        0x000000010556e7d3 chromedriver + 923603
+7   chromedriver                        0x000000010553a185 chromedriver + 708997
+8   chromedriver                        0x000000010553b5c1 chromedriver + 714177
+9   chromedriver                        0x0000000105a5fda0 chromedriver + 6106528
+10  chromedriver                        0x0000000105a64005 chromedriver + 6123525
+11  chromedriver                        0x0000000105a3b505 chromedriver + 5956869
+12  chromedriver                        0x0000000105a64a9f chromedriver + 6126239
+13  chromedriver                        0x0000000105a2a944 chromedriver + 5888324
+14  chromedriver                        0x0000000105a86b78 chromedriver + 6265720
+15  chromedriver                        0x0000000105a86d3d chromedriver + 6266173
+16  chromedriver                        0x0000000105a99801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 09:05:05 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/9 completed: random_mouse
+2025-12-04 09:05:05 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 09:05:05 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/9 completed: click
+2025-12-04 09:05:05 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 09:05:05 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/9 completed: wait_element
+2025-12-04 09:05:05 | DEBUG    | action_executor:execute_action:89 - Executing action: human_typing
+2025-12-04 09:06:20 | WARNING  | websocket_client:_listen:64 - Connection lost
+2025-12-04 09:06:20 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:06:20 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 09:06:20 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 09:06:20 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 09:06:20 | ERROR    | action_executor:_type:268 - Type failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x0000000105aa2518 chromedriver + 6378776
+1   chromedriver                        0x0000000105a99c2a chromedriver + 6343722
+2   chromedriver                        0x00000001054f6086 chromedriver + 430214
+3   chromedriver                        0x00000001054caa70 chromedriver + 252528
+4   chromedriver                        0x0000000105576c88 chromedriver + 957576
+5   chromedriver                        0x000000010559596c chromedriver + 1083756
+6   chromedriver                        0x000000010556e7d3 chromedriver + 923603
+7   chromedriver                        0x000000010553a185 chromedriver + 708997
+8   chromedriver                        0x000000010553b5c1 chromedriver + 714177
+9   chromedriver                        0x0000000105a5fda0 chromedriver + 6106528
+10  chromedriver                        0x0000000105a64005 chromedriver + 6123525
+11  chromedriver                        0x0000000105a3b505 chromedriver + 5956869
+12  chromedriver                        0x0000000105a64a9f chromedriver + 6126239
+13  chromedriver                        0x0000000105a2a944 chromedriver + 5888324
+14  chromedriver                        0x0000000105a86b78 chromedriver + 6265720
+15  chromedriver                        0x0000000105a86d3d chromedriver + 6266173
+16  chromedriver                        0x0000000105a99801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 09:06:20 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/9 completed: human_typing
+2025-12-04 09:06:20 | DEBUG    | action_executor:execute_action:89 - Executing action: press_key
+2025-12-04 09:06:20 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: press_key
+2025-12-04 09:06:20 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/9 completed: press_key
+2025-12-04 09:06:20 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:06:20 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:06:20 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/9 completed: wait
+2025-12-04 09:06:20 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:06:20 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:06:20 | DEBUG    | warming_executor:_execute_warming:104 - Action 9/9 completed: scroll
+2025-12-04 09:06:20 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=35, completed=3, failed=6
+2025-12-04 09:06:23 | INFO     | browser_controller:close_browser:232 - Browser closed for profile k17l902d
+2025-12-04 09:06:25 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 09:06:25 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=36, profile_id=k17l902d
+2025-12-04 09:06:25 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=36, profile_id=k17l902d
+2025-12-04 09:06:25 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 09:06:31 | INFO     | browser_controller:open_browser:71 - Browser opened on port 49614
+2025-12-04 09:06:34 | INFO     | browser_controller:open_browser:85 - Browser port 49614 is responding
+2025-12-04 09:06:34 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 09:06:34 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 49614
+2025-12-04 09:06:34 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 09:06:35 | INFO     | browser_controller:_prepare_browser:183 - Browser ready for profile k17l902d
+2025-12-04 09:06:35 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:06:40 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/9 completed: navigate
+2025-12-04 09:06:40 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:06:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/9 completed: wait
+2025-12-04 09:06:42 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 09:06:52 | WARNING  | action_executor:_wait_element:320 - Element not found within 10s: input[type='search'], textarea[type='search']
+2025-12-04 09:06:52 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/9 completed: wait_element
+2025-12-04 09:06:52 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 09:07:03 | WARNING  | action_executor:_click:220 - Element not found: input[type='search'], textarea[type='search']
+2025-12-04 09:07:03 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/9 completed: click
+2025-12-04 09:07:03 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:07:03 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:07:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/9 completed: wait
+2025-12-04 09:07:04 | DEBUG    | action_executor:execute_action:89 - Executing action: type
+2025-12-04 09:07:14 | WARNING  | action_executor:_type:265 - Element not found: input[type='search'], textarea[type='search']
+2025-12-04 09:07:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/9 completed: type
+2025-12-04 09:07:14 | DEBUG    | action_executor:execute_action:89 - Executing action: press_key
+2025-12-04 09:07:15 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/9 completed: press_key
+2025-12-04 09:07:15 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:07:18 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/9 completed: wait
+2025-12-04 09:07:18 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:07:19 | DEBUG    | warming_executor:_execute_warming:104 - Action 9/9 completed: scroll
+2025-12-04 09:07:19 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=36, completed=6, failed=3
+2025-12-04 09:07:29 | INFO     | browser_controller:close_browser:232 - Browser closed for profile k17l902d
+2025-12-04 09:07:33 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:08:03 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:08:30 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 09:08:30 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=37, profile_id=k17l902d
+2025-12-04 09:08:30 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=37, profile_id=k17l902d
+2025-12-04 09:08:30 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 09:08:35 | INFO     | browser_controller:open_browser:71 - Browser opened on port 49909
+2025-12-04 09:08:35 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:08:38 | INFO     | browser_controller:open_browser:85 - Browser port 49909 is responding
+2025-12-04 09:08:38 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 09:08:39 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 49909
+2025-12-04 09:08:39 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 09:08:40 | INFO     | browser_controller:_prepare_browser:183 - Browser ready for profile k17l902d
+2025-12-04 09:08:40 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:08:46 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/9 completed: navigate
+2025-12-04 09:08:46 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:08:48 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/9 completed: wait
+2025-12-04 09:08:48 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 09:08:58 | WARNING  | action_executor:_wait_element:320 - Element not found within 10s: input[name='q']
+2025-12-04 09:08:58 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/9 completed: wait_element
+2025-12-04 09:08:58 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 09:09:09 | WARNING  | action_executor:_click:220 - Element not found: input[name='q']
+2025-12-04 09:09:09 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/9 completed: click
+2025-12-04 09:09:09 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:09:09 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:09:10 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/9 completed: wait
+2025-12-04 09:09:10 | DEBUG    | action_executor:execute_action:89 - Executing action: type
+2025-12-04 09:09:20 | WARNING  | action_executor:_type:265 - Element not found: input[name='q']
+2025-12-04 09:09:20 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/9 completed: type
+2025-12-04 09:09:20 | DEBUG    | action_executor:execute_action:89 - Executing action: press_key
+2025-12-04 09:09:21 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/9 completed: press_key
+2025-12-04 09:09:21 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:09:24 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/9 completed: wait
+2025-12-04 09:09:24 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:09:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 9/9 completed: scroll
+2025-12-04 09:09:25 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=37, completed=6, failed=3
+2025-12-04 09:09:35 | INFO     | browser_controller:close_browser:232 - Browser closed for profile k17l902d
+2025-12-04 09:09:39 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:10:09 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:10:39 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:11:09 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:11:39 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:12:09 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:12:38 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 09:12:38 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=38, profile_id=k17l902d
+2025-12-04 09:12:38 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=38, profile_id=k17l902d
+2025-12-04 09:12:38 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 09:12:44 | INFO     | browser_controller:open_browser:71 - Browser opened on port 50235
+2025-12-04 09:12:44 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:12:47 | INFO     | browser_controller:open_browser:85 - Browser port 50235 is responding
+2025-12-04 09:12:47 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 09:12:48 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 50235
+2025-12-04 09:12:48 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 09:12:49 | INFO     | browser_controller:_prepare_browser:183 - Browser ready for profile k17l902d
+2025-12-04 09:12:49 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:12:54 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/9 completed: navigate
+2025-12-04 09:12:54 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:12:56 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/9 completed: wait
+2025-12-04 09:12:56 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 09:13:07 | WARNING  | action_executor:_wait_element:320 - Element not found within 10s: input[name='q']
+2025-12-04 09:13:07 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/9 completed: wait_element
+2025-12-04 09:13:07 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 09:13:17 | WARNING  | action_executor:_click:220 - Element not found: input[name='q']
+2025-12-04 09:13:17 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/9 completed: click
+2025-12-04 09:13:17 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:13:17 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:13:18 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/9 completed: wait
+2025-12-04 09:13:18 | DEBUG    | action_executor:execute_action:89 - Executing action: type
+2025-12-04 09:13:28 | WARNING  | action_executor:_type:265 - Element not found: input[name='q']
+2025-12-04 09:13:28 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/9 completed: type
+2025-12-04 09:13:28 | DEBUG    | action_executor:execute_action:89 - Executing action: press_key
+2025-12-04 09:13:29 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/9 completed: press_key
+2025-12-04 09:13:29 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:13:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/9 completed: wait
+2025-12-04 09:13:32 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:13:33 | DEBUG    | warming_executor:_execute_warming:104 - Action 9/9 completed: scroll
+2025-12-04 09:13:33 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=38, completed=6, failed=3
+2025-12-04 09:13:43 | INFO     | browser_controller:close_browser:232 - Browser closed for profile k17l902d
+2025-12-04 09:13:47 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:14:17 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:14:47 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:15:17 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:15:47 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:16:17 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:16:47 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:17:01 | INFO     | browser_controller:__init__:30 - ChromeDriver detectado en: /Users/omarmaldonado/Desktop/proxys/proyectofinal/agent/chromedriver
+2025-12-04 09:17:01 | INFO     | __main__:start:79 - ============================================================
+2025-12-04 09:17:01 | INFO     | __main__:start:80 - 🤖 AdsPower Agent Starting
+2025-12-04 09:17:01 | INFO     | __main__:start:81 - Computer ID: 1
+2025-12-04 09:17:01 | INFO     | __main__:start:82 - Computer Name: mac
+2025-12-04 09:17:01 | INFO     | __main__:start:83 - Orchestrator: http://192.168.1.10:8000
+2025-12-04 09:17:01 | INFO     | __main__:start:84 - ============================================================
+2025-12-04 09:17:01 | INFO     | __main__:start:88 - Connecting to orchestrator...
+2025-12-04 09:17:01 | INFO     | websocket_client:connect:26 - Connecting to: ws://192.168.1.10:8000/api/v1/warming/ws/1
+2025-12-04 09:17:01 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 09:17:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 09:17:01 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 09:17:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:17:54 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 09:17:54 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=39, profile_id=k17l902d
+2025-12-04 09:17:54 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=39, profile_id=k17l902d
+2025-12-04 09:17:54 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 09:18:00 | INFO     | browser_controller:open_browser:71 - Browser opened on port 50611
+2025-12-04 09:18:01 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:18:03 | INFO     | browser_controller:open_browser:85 - Browser port 50611 is responding
+2025-12-04 09:18:03 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 09:18:04 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 50611
+2025-12-04 09:18:04 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 09:18:05 | INFO     | browser_controller:_prepare_browser:183 - Browser ready for profile k17l902d
+2025-12-04 09:18:05 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:18:09 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/9 completed: navigate
+2025-12-04 09:18:09 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:18:11 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/9 completed: wait
+2025-12-04 09:18:11 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 09:18:22 | WARNING  | action_executor:_wait_element:320 - Element not found within 10s: input[name='q']
+2025-12-04 09:18:22 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/9 completed: wait_element
+2025-12-04 09:18:22 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 09:18:32 | WARNING  | action_executor:_click:220 - Element not found: input[name='q']
+2025-12-04 09:18:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/9 completed: click
+2025-12-04 09:18:32 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:18:32 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:18:33 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/9 completed: wait
+2025-12-04 09:18:33 | DEBUG    | action_executor:execute_action:89 - Executing action: type
+2025-12-04 09:18:44 | WARNING  | action_executor:_type:265 - Element not found: input[name='q']
+2025-12-04 09:18:44 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/9 completed: type
+2025-12-04 09:18:44 | DEBUG    | action_executor:execute_action:89 - Executing action: press_key
+2025-12-04 09:18:44 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/9 completed: press_key
+2025-12-04 09:18:44 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:18:47 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/9 completed: wait
+2025-12-04 09:18:47 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:18:49 | DEBUG    | warming_executor:_execute_warming:104 - Action 9/9 completed: scroll
+2025-12-04 09:18:49 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=39, completed=6, failed=3
+2025-12-04 09:18:59 | INFO     | browser_controller:close_browser:232 - Browser closed for profile k17l902d
+2025-12-04 09:19:02 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:19:32 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:20:02 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:20:32 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:21:02 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:21:32 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:22:02 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:22:32 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:23:02 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:23:32 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:24:02 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:24:32 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:25:02 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:25:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 09:25:31 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=40, profile_id=k17l902d
+2025-12-04 09:25:31 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=40, profile_id=k17l902d
+2025-12-04 09:25:31 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 09:25:38 | INFO     | browser_controller:open_browser:71 - Browser opened on port 50970
+2025-12-04 09:25:38 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:25:41 | INFO     | browser_controller:open_browser:85 - Browser port 50970 is responding
+2025-12-04 09:25:41 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 09:25:42 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 50970
+2025-12-04 09:25:42 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 09:25:43 | INFO     | browser_controller:_prepare_browser:183 - Browser ready for profile k17l902d
+2025-12-04 09:25:43 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:25:48 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/22 completed: navigate
+2025-12-04 09:25:48 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:25:51 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/22 completed: wait
+2025-12-04 09:25:51 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:25:51 | INFO     | action_executor:_search_google:335 - Navigating to Google...
+2025-12-04 09:25:59 | DEBUG    | action_executor:_search_google:374 - Selector not found: input[name='q'][type='text']
+2025-12-04 09:26:02 | DEBUG    | action_executor:_search_google:374 - Selector not found: input[aria-label='Buscar']
+2025-12-04 09:26:05 | DEBUG    | action_executor:_search_google:374 - Selector not found: input[aria-label='Search']
+2025-12-04 09:26:06 | INFO     | action_executor:_search_google:371 - ✓ Found search box: textarea.gLFyf
+2025-12-04 09:29:14 | WARNING  | websocket_client:_listen:64 - Connection lost
+2025-12-04 09:29:14 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:29:14 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 09:29:14 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 09:29:14 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 09:29:14 | ERROR    | action_executor:_search_google:420 - Browser closed during typing
+2025-12-04 09:29:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/22 completed: search_google
+2025-12-04 09:29:14 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:29:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/22 completed: wait
+2025-12-04 09:29:14 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:29:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/22 completed: scroll
+2025-12-04 09:29:14 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:29:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/22 completed: wait
+2025-12-04 09:29:14 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:29:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/22 completed: scroll
+2025-12-04 09:29:14 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:29:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/22 completed: wait
+2025-12-04 09:29:14 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:29:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 9/22 completed: navigate
+2025-12-04 09:29:14 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:29:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 10/22 completed: wait
+2025-12-04 09:29:14 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:29:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 11/22 completed: search_google
+2025-12-04 09:29:14 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:29:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 12/22 completed: wait
+2025-12-04 09:29:14 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:29:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 13/22 completed: scroll
+2025-12-04 09:29:14 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:29:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 14/22 completed: wait
+2025-12-04 09:29:14 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:29:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 15/22 completed: scroll
+2025-12-04 09:29:14 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:29:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 16/22 completed: wait
+2025-12-04 09:29:14 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:29:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 17/22 completed: navigate
+2025-12-04 09:29:14 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:29:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 18/22 completed: wait
+2025-12-04 09:29:14 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:29:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 19/22 completed: search_google
+2025-12-04 09:29:14 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:29:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 20/22 completed: wait
+2025-12-04 09:29:14 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:29:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 21/22 completed: scroll
+2025-12-04 09:29:14 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:29:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:29:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 22/22 completed: wait
+2025-12-04 09:29:14 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=40, completed=2, failed=20
+2025-12-04 09:29:16 | INFO     | browser_controller:close_browser:232 - Browser closed for profile k17l902d
+2025-12-04 09:29:21 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 09:29:21 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=41, profile_id=k17l902d
+2025-12-04 09:29:21 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=41, profile_id=k17l902d
+2025-12-04 09:29:21 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 09:29:26 | INFO     | browser_controller:open_browser:71 - Browser opened on port 51948
+2025-12-04 09:29:29 | INFO     | browser_controller:open_browser:85 - Browser port 51948 is responding
+2025-12-04 09:29:29 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 09:29:29 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 51948
+2025-12-04 09:29:29 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 09:29:30 | INFO     | browser_controller:_prepare_browser:183 - Browser ready for profile k17l902d
+2025-12-04 09:29:30 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:29:37 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/25 completed: navigate
+2025-12-04 09:29:37 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:29:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/25 completed: wait
+2025-12-04 09:29:42 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 09:30:02 | WARNING  | action_executor:_wait_element:320 - Element not found within 20s: input[type='text']
+2025-12-04 09:30:02 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/25 completed: wait_element
+2025-12-04 09:30:02 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:30:02 | INFO     | action_executor:_search_google:335 - Navigating to Google...
+2025-12-04 09:30:04 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:30:10 | DEBUG    | action_executor:_search_google:374 - Selector not found: input[name='q'][type='text']
+2025-12-04 09:30:13 | DEBUG    | action_executor:_search_google:374 - Selector not found: input[aria-label='Buscar']
+2025-12-04 09:30:16 | DEBUG    | action_executor:_search_google:374 - Selector not found: input[aria-label='Search']
+2025-12-04 09:30:16 | INFO     | action_executor:_search_google:371 - ✓ Found search box: textarea.gLFyf
+2025-12-04 09:33:31 | WARNING  | websocket_client:_listen:64 - Connection lost
+2025-12-04 09:33:31 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:33:31 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 09:33:31 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 09:33:31 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 09:33:32 | ERROR    | action_executor:_search_google:420 - Browser closed during typing
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/25 completed: search_google
+2025-12-04 09:33:32 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/25 completed: wait
+2025-12-04 09:33:32 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/25 completed: scroll
+2025-12-04 09:33:32 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/25 completed: wait
+2025-12-04 09:33:32 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/25 completed: scroll
+2025-12-04 09:33:32 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 9/25 completed: wait
+2025-12-04 09:33:32 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 10/25 completed: navigate
+2025-12-04 09:33:32 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 11/25 completed: wait
+2025-12-04 09:33:32 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait_element
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 12/25 completed: wait_element
+2025-12-04 09:33:32 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 13/25 completed: search_google
+2025-12-04 09:33:32 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 14/25 completed: wait
+2025-12-04 09:33:32 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 15/25 completed: scroll
+2025-12-04 09:33:32 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 16/25 completed: wait
+2025-12-04 09:33:32 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 17/25 completed: scroll
+2025-12-04 09:33:32 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 18/25 completed: wait
+2025-12-04 09:33:32 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 19/25 completed: navigate
+2025-12-04 09:33:32 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 20/25 completed: wait
+2025-12-04 09:33:32 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait_element
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 21/25 completed: wait_element
+2025-12-04 09:33:32 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 22/25 completed: search_google
+2025-12-04 09:33:32 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 23/25 completed: wait
+2025-12-04 09:33:32 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 24/25 completed: scroll
+2025-12-04 09:33:32 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:33:32 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:33:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 25/25 completed: wait
+2025-12-04 09:33:32 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=41, completed=2, failed=23
+2025-12-04 09:33:34 | INFO     | browser_controller:close_browser:232 - Browser closed for profile k17l902d
+2025-12-04 09:33:37 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 09:33:37 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=43, profile_id=k17l902d
+2025-12-04 09:33:37 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=43, profile_id=k17l902d
+2025-12-04 09:33:37 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 09:33:42 | INFO     | browser_controller:open_browser:71 - Browser opened on port 53108
+2025-12-04 09:33:45 | INFO     | browser_controller:open_browser:85 - Browser port 53108 is responding
+2025-12-04 09:33:45 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 09:33:45 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 53108
+2025-12-04 09:33:45 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 09:33:46 | INFO     | browser_controller:_prepare_browser:183 - Browser ready for profile k17l902d
+2025-12-04 09:33:46 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:33:51 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/31 completed: navigate
+2025-12-04 09:33:51 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:33:56 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/31 completed: wait
+2025-12-04 09:33:56 | DEBUG    | action_executor:execute_action:89 - Executing action: wait_element
+2025-12-04 09:34:21 | WARNING  | action_executor:_wait_element:320 - Element not found within 25s: input[type='text'], input[name='q'], input[title='Search']
+2025-12-04 09:34:21 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/31 completed: wait_element
+2025-12-04 09:34:21 | DEBUG    | action_executor:execute_action:89 - Executing action: click
+2025-12-04 09:34:32 | WARNING  | action_executor:_click:220 - Element not found: input[type='text'], input[name='q'], input[title='Search']
+2025-12-04 09:34:32 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/31 completed: click
+2025-12-04 09:34:32 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:34:32 | WARNING  | websocket_client:_listen:64 - Connection lost
+2025-12-04 09:34:32 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:34:32 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 09:34:32 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 09:34:32 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 09:34:33 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/31 completed: wait
+2025-12-04 09:34:33 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:34:33 | INFO     | action_executor:_search_google:335 - Navigating to Google...
+2025-12-04 09:34:41 | DEBUG    | action_executor:_search_google:374 - Selector not found: input[name='q'][type='text']
+2025-12-04 09:34:44 | DEBUG    | action_executor:_search_google:374 - Selector not found: input[aria-label='Buscar']
+2025-12-04 09:34:47 | DEBUG    | action_executor:_search_google:374 - Selector not found: input[aria-label='Search']
+2025-12-04 09:34:47 | INFO     | action_executor:_search_google:371 - ✓ Found search box: textarea.gLFyf
+2025-12-04 09:40:50 | INFO     | browser_controller:__init__:30 - ChromeDriver detectado en: /Users/omarmaldonado/Desktop/proxys/proyectofinal/agent/chromedriver
+2025-12-04 09:40:50 | INFO     | __main__:start:79 - ============================================================
+2025-12-04 09:40:50 | INFO     | __main__:start:80 - 🤖 AdsPower Agent Starting
+2025-12-04 09:40:50 | INFO     | __main__:start:81 - Computer ID: 1
+2025-12-04 09:40:50 | INFO     | __main__:start:82 - Computer Name: mac
+2025-12-04 09:40:50 | INFO     | __main__:start:83 - Orchestrator: http://192.168.1.10:8000
+2025-12-04 09:40:50 | INFO     | __main__:start:84 - ============================================================
+2025-12-04 09:40:50 | INFO     | __main__:start:88 - Connecting to orchestrator...
+2025-12-04 09:40:50 | INFO     | websocket_client:connect:26 - Connecting to: ws://192.168.1.10:8000/api/v1/warming/ws/1
+2025-12-04 09:40:50 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 09:40:50 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 09:40:50 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 09:41:20 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:41:50 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:42:20 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:42:50 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:42:59 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 09:42:59 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=44, profile_id=k17l902d
+2025-12-04 09:42:59 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=44, profile_id=k17l902d
+2025-12-04 09:42:59 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 09:43:00 | INFO     | browser_controller:open_browser:71 - Browser opened on port 53108
+2025-12-04 09:43:03 | INFO     | browser_controller:open_browser:85 - Browser port 53108 is responding
+2025-12-04 09:43:03 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 09:43:03 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 53108
+2025-12-04 09:43:03 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 09:43:04 | ERROR    | browser_controller:_prepare_browser:186 - Browser not ready: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x000000010b615518 chromedriver + 6378776
+1   chromedriver                        0x000000010b60cc2a chromedriver + 6343722
+2   chromedriver                        0x000000010b069086 chromedriver + 430214
+3   chromedriver                        0x000000010b04f7ed chromedriver + 325613
+4   chromedriver                        0x000000010b077e62 chromedriver + 491106
+5   chromedriver                        0x000000010b0e9e8f chromedriver + 958095
+6   chromedriver                        0x000000010b10896c chromedriver + 1083756
+7   chromedriver                        0x000000010b0e17d3 chromedriver + 923603
+8   chromedriver                        0x000000010b0ad185 chromedriver + 708997
+9   chromedriver                        0x000000010b0ae5c1 chromedriver + 714177
+10  chromedriver                        0x000000010b5d2da0 chromedriver + 6106528
+11  chromedriver                        0x000000010b5d7005 chromedriver + 6123525
+12  chromedriver                        0x000000010b5ae505 chromedriver + 5956869
+13  chromedriver                        0x000000010b5d7a9f chromedriver + 6126239
+14  chromedriver                        0x000000010b59d944 chromedriver + 5888324
+15  chromedriver                        0x000000010b5f9b78 chromedriver + 6265720
+16  chromedriver                        0x000000010b5f9d3d chromedriver + 6266173
+17  chromedriver                        0x000000010b60c801 chromedriver + 6342657
+18  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+19  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/22 completed: navigate
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/22 completed: wait
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/22 completed: search_google
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/22 completed: wait
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/22 completed: scroll
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/22 completed: wait
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/22 completed: scroll
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/22 completed: wait
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 9/22 completed: navigate
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 10/22 completed: wait
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 11/22 completed: search_google
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 12/22 completed: wait
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 13/22 completed: scroll
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 14/22 completed: wait
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 15/22 completed: scroll
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 16/22 completed: wait
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 17/22 completed: navigate
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 18/22 completed: wait
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 19/22 completed: search_google
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 20/22 completed: wait
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 21/22 completed: scroll
+2025-12-04 09:43:04 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:04 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:43:04 | DEBUG    | warming_executor:_execute_warming:104 - Action 22/22 completed: wait
+2025-12-04 09:43:04 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=44, completed=0, failed=22
+2025-12-04 09:43:05 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 09:43:05 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=45, profile_id=k17l902d
+2025-12-04 09:43:05 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=45, profile_id=k17l902d
+2025-12-04 09:43:05 | INFO     | browser_controller:open_browser:36 - Browser already open for profile k17l902d
+2025-12-04 09:43:05 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:43:05 | ERROR    | warming_executor:_execute_warming:107 - Action 1 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c91c190>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:05 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:05 | ERROR    | warming_executor:_execute_warming:107 - Action 2 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c4626a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:05 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:43:05 | ERROR    | warming_executor:_execute_warming:107 - Action 3 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97f640>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:05 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:05 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97fc40>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:05 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:43:05 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c91c100>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:05 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:05 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97fac0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:05 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:43:05 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97f4c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:05 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:05 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb02130>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:05 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 9 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb02730>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 10 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97f400>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 11 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97fa60>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 12 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c91c670>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 13 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb026d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 14 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb02160>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 15 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c91c340>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 16 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97fa90>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 17 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97f460>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 18 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97ffa0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 19 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb025b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 20 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb02ee0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 21 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb022e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:06 | ERROR    | warming_executor:_execute_warming:107 - Action 22 failed: HTTPConnectionPool(host='localhost', port=55553): Max retries exceeded with url: /session/ca825f0d74243a2f63840ba98ba23ca7/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97f520>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:43:06 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=45, completed=0, failed=22
+2025-12-04 09:43:06 | INFO     | browser_controller:close_browser:232 - Browser closed for profile k17l902d
+2025-12-04 09:43:08 | ERROR    | browser_controller:close_browser:236 - Error closing browser for profile k17l902d: 'k17l902d'
+2025-12-04 09:43:18 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 09:43:18 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=46, profile_id=k17l902d
+2025-12-04 09:43:18 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=46, profile_id=k17l902d
+2025-12-04 09:43:18 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 09:43:26 | INFO     | browser_controller:open_browser:71 - Browser opened on port 55780
+2025-12-04 09:43:26 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:43:29 | INFO     | browser_controller:open_browser:85 - Browser port 55780 is responding
+2025-12-04 09:43:29 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 09:43:29 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 55780
+2025-12-04 09:43:29 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 09:43:30 | INFO     | browser_controller:_prepare_browser:183 - Browser ready for profile k17l902d
+2025-12-04 09:43:30 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:43:36 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/22 completed: navigate
+2025-12-04 09:43:36 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:43:39 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/22 completed: wait
+2025-12-04 09:43:39 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:44:10 | WARNING  | websocket_client:_listen:64 - Connection lost
+2025-12-04 09:44:10 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:44:10 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 09:44:10 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 09:44:10 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 09:45:13 | WARNING  | websocket_client:_listen:64 - Connection lost
+2025-12-04 09:45:13 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:45:13 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 09:45:13 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 09:45:13 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 09:45:13 | ERROR    | action_executor:_search_google:380 - Google search failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x000000010c693518 chromedriver + 6378776
+1   chromedriver                        0x000000010c68ac2a chromedriver + 6343722
+2   chromedriver                        0x000000010c0e7086 chromedriver + 430214
+3   chromedriver                        0x000000010c0bba70 chromedriver + 252528
+4   chromedriver                        0x000000010c167c88 chromedriver + 957576
+5   chromedriver                        0x000000010c18696c chromedriver + 1083756
+6   chromedriver                        0x000000010c15f7d3 chromedriver + 923603
+7   chromedriver                        0x000000010c12b185 chromedriver + 708997
+8   chromedriver                        0x000000010c12c5c1 chromedriver + 714177
+9   chromedriver                        0x000000010c650da0 chromedriver + 6106528
+10  chromedriver                        0x000000010c655005 chromedriver + 6123525
+11  chromedriver                        0x000000010c62c505 chromedriver + 5956869
+12  chromedriver                        0x000000010c655a9f chromedriver + 6126239
+13  chromedriver                        0x000000010c61b944 chromedriver + 5888324
+14  chromedriver                        0x000000010c677b78 chromedriver + 6265720
+15  chromedriver                        0x000000010c677d3d chromedriver + 6266173
+16  chromedriver                        0x000000010c68a801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 09:45:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/22 completed: search_google
+2025-12-04 09:45:13 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:45:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/22 completed: wait
+2025-12-04 09:45:13 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:45:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/22 completed: scroll
+2025-12-04 09:45:13 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:45:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/22 completed: wait
+2025-12-04 09:45:13 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:45:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/22 completed: scroll
+2025-12-04 09:45:13 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:45:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/22 completed: wait
+2025-12-04 09:45:13 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:45:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 9/22 completed: navigate
+2025-12-04 09:45:13 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:45:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 10/22 completed: wait
+2025-12-04 09:45:13 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:45:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 11/22 completed: search_google
+2025-12-04 09:45:13 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:45:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 12/22 completed: wait
+2025-12-04 09:45:13 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:45:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 13/22 completed: scroll
+2025-12-04 09:45:13 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:45:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 14/22 completed: wait
+2025-12-04 09:45:13 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:45:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 15/22 completed: scroll
+2025-12-04 09:45:13 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:45:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 16/22 completed: wait
+2025-12-04 09:45:13 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:45:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 17/22 completed: navigate
+2025-12-04 09:45:13 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:45:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 18/22 completed: wait
+2025-12-04 09:45:13 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:45:13 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:45:13 | DEBUG    | warming_executor:_execute_warming:104 - Action 19/22 completed: search_google
+2025-12-04 09:45:13 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:45:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:45:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 20/22 completed: wait
+2025-12-04 09:45:14 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:45:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:45:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 21/22 completed: scroll
+2025-12-04 09:45:14 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:45:14 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:45:14 | DEBUG    | warming_executor:_execute_warming:104 - Action 22/22 completed: wait
+2025-12-04 09:45:14 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=46, completed=2, failed=20
+2025-12-04 09:45:16 | INFO     | browser_controller:close_browser:232 - Browser closed for profile k17l902d
+2025-12-04 09:45:27 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 09:45:27 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=47, profile_id=k17l902d
+2025-12-04 09:45:27 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=47, profile_id=k17l902d
+2025-12-04 09:45:27 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 09:45:33 | INFO     | browser_controller:open_browser:71 - Browser opened on port 56337
+2025-12-04 09:45:36 | INFO     | browser_controller:open_browser:85 - Browser port 56337 is responding
+2025-12-04 09:45:36 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 09:45:36 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 56337
+2025-12-04 09:45:36 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 09:45:37 | INFO     | browser_controller:_prepare_browser:183 - Browser ready for profile k17l902d
+2025-12-04 09:45:37 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:45:43 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:45:43 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/22 completed: navigate
+2025-12-04 09:45:43 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:45:46 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/22 completed: wait
+2025-12-04 09:45:46 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:46:17 | WARNING  | websocket_client:_listen:64 - Connection lost
+2025-12-04 09:46:17 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:46:17 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 09:46:17 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 09:46:17 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 09:50:25 | WARNING  | websocket_client:_listen:64 - Connection lost
+2025-12-04 09:50:25 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:50:25 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 09:50:25 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 09:50:25 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 09:50:25 | ERROR    | action_executor:_search_google:380 - Google search failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x000000010a621518 chromedriver + 6378776
+1   chromedriver                        0x000000010a618c2a chromedriver + 6343722
+2   chromedriver                        0x000000010a075086 chromedriver + 430214
+3   chromedriver                        0x000000010a049a70 chromedriver + 252528
+4   chromedriver                        0x000000010a0f5c88 chromedriver + 957576
+5   chromedriver                        0x000000010a11496c chromedriver + 1083756
+6   chromedriver                        0x000000010a0ed7d3 chromedriver + 923603
+7   chromedriver                        0x000000010a0b9185 chromedriver + 708997
+8   chromedriver                        0x000000010a0ba5c1 chromedriver + 714177
+9   chromedriver                        0x000000010a5deda0 chromedriver + 6106528
+10  chromedriver                        0x000000010a5e3005 chromedriver + 6123525
+11  chromedriver                        0x000000010a5ba505 chromedriver + 5956869
+12  chromedriver                        0x000000010a5e3a9f chromedriver + 6126239
+13  chromedriver                        0x000000010a5a9944 chromedriver + 5888324
+14  chromedriver                        0x000000010a605b78 chromedriver + 6265720
+15  chromedriver                        0x000000010a605d3d chromedriver + 6266173
+16  chromedriver                        0x000000010a618801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 09:50:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/22 completed: search_google
+2025-12-04 09:50:25 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:50:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/22 completed: wait
+2025-12-04 09:50:25 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:50:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/22 completed: scroll
+2025-12-04 09:50:25 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:50:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/22 completed: wait
+2025-12-04 09:50:25 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:50:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/22 completed: scroll
+2025-12-04 09:50:25 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:50:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/22 completed: wait
+2025-12-04 09:50:25 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:50:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 9/22 completed: navigate
+2025-12-04 09:50:25 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:50:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 10/22 completed: wait
+2025-12-04 09:50:25 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:50:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 11/22 completed: search_google
+2025-12-04 09:50:25 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:50:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 12/22 completed: wait
+2025-12-04 09:50:25 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:50:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 13/22 completed: scroll
+2025-12-04 09:50:25 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:50:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 14/22 completed: wait
+2025-12-04 09:50:25 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:50:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 15/22 completed: scroll
+2025-12-04 09:50:25 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:50:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 16/22 completed: wait
+2025-12-04 09:50:25 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:50:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 17/22 completed: navigate
+2025-12-04 09:50:25 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:50:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 18/22 completed: wait
+2025-12-04 09:50:25 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:50:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 19/22 completed: search_google
+2025-12-04 09:50:25 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:50:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 20/22 completed: wait
+2025-12-04 09:50:25 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:50:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 21/22 completed: scroll
+2025-12-04 09:50:25 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:25 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:50:25 | DEBUG    | warming_executor:_execute_warming:104 - Action 22/22 completed: wait
+2025-12-04 09:50:25 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=47, completed=2, failed=20
+2025-12-04 09:50:27 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 09:50:27 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=49, profile_id=k17l902d
+2025-12-04 09:50:27 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=49, profile_id=k17l902d
+2025-12-04 09:50:27 | INFO     | browser_controller:open_browser:36 - Browser already open for profile k17l902d
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 1 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb16760>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 2 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97f4c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 3 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97fc10>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb02760>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97f5e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c8b72b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb16130>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb02130>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 9 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb22550>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 10 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb16730>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 11 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb16eb0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 12 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97fac0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 13 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97f4f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 14 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb22b50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 15 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97ffd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 16 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c8d4a30>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 17 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb16cd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 18 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb02130>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 19 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb34040>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 20 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb16250>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 21 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10cb16910>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:27 | ERROR    | warming_executor:_execute_warming:107 - Action 22 failed: HTTPConnectionPool(host='localhost', port=56379): Max retries exceeded with url: /session/9bfcc3f5bd5bca848f1ca76c28dc9af3/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10c97fc70>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 09:50:27 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=49, completed=0, failed=22
+2025-12-04 09:50:28 | INFO     | browser_controller:close_browser:232 - Browser closed for profile k17l902d
+2025-12-04 09:50:29 | ERROR    | browser_controller:close_browser:236 - Error closing browser for profile k17l902d: 'k17l902d'
+2025-12-04 09:50:40 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 09:50:40 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=50, profile_id=k17l902d
+2025-12-04 09:50:40 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=50, profile_id=k17l902d
+2025-12-04 09:50:40 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 09:50:45 | INFO     | browser_controller:open_browser:71 - Browser opened on port 57848
+2025-12-04 09:50:48 | INFO     | browser_controller:open_browser:85 - Browser port 57848 is responding
+2025-12-04 09:50:48 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 09:50:48 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 57848
+2025-12-04 09:50:48 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 09:50:49 | INFO     | browser_controller:_prepare_browser:183 - Browser ready for profile k17l902d
+2025-12-04 09:50:49 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:50:55 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:50:55 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/22 completed: navigate
+2025-12-04 09:50:55 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:50:58 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/22 completed: wait
+2025-12-04 09:50:58 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:51:29 | WARNING  | websocket_client:_listen:64 - Connection lost
+2025-12-04 09:51:29 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:51:29 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 09:51:29 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 09:51:29 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 09:52:16 | WARNING  | websocket_client:_listen:64 - Connection lost
+2025-12-04 09:52:16 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:52:16 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 09:52:16 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 09:52:16 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 09:52:16 | ERROR    | action_executor:_search_google:380 - Google search failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x000000010c1bd518 chromedriver + 6378776
+1   chromedriver                        0x000000010c1b4c2a chromedriver + 6343722
+2   chromedriver                        0x000000010bc11086 chromedriver + 430214
+3   chromedriver                        0x000000010bbe5a70 chromedriver + 252528
+4   chromedriver                        0x000000010bc91c88 chromedriver + 957576
+5   chromedriver                        0x000000010bcb096c chromedriver + 1083756
+6   chromedriver                        0x000000010bc897d3 chromedriver + 923603
+7   chromedriver                        0x000000010bc55185 chromedriver + 708997
+8   chromedriver                        0x000000010bc565c1 chromedriver + 714177
+9   chromedriver                        0x000000010c17ada0 chromedriver + 6106528
+10  chromedriver                        0x000000010c17f005 chromedriver + 6123525
+11  chromedriver                        0x000000010c156505 chromedriver + 5956869
+12  chromedriver                        0x000000010c17fa9f chromedriver + 6126239
+13  chromedriver                        0x000000010c145944 chromedriver + 5888324
+14  chromedriver                        0x000000010c1a1b78 chromedriver + 6265720
+15  chromedriver                        0x000000010c1a1d3d chromedriver + 6266173
+16  chromedriver                        0x000000010c1b4801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 09:52:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/22 completed: search_google
+2025-12-04 09:52:16 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:52:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/22 completed: wait
+2025-12-04 09:52:16 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:52:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/22 completed: scroll
+2025-12-04 09:52:16 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:52:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/22 completed: wait
+2025-12-04 09:52:16 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:52:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/22 completed: scroll
+2025-12-04 09:52:16 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:52:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/22 completed: wait
+2025-12-04 09:52:16 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:52:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 9/22 completed: navigate
+2025-12-04 09:52:16 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:52:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 10/22 completed: wait
+2025-12-04 09:52:16 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:52:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 11/22 completed: search_google
+2025-12-04 09:52:16 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:52:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 12/22 completed: wait
+2025-12-04 09:52:16 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:52:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 13/22 completed: scroll
+2025-12-04 09:52:16 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:52:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 14/22 completed: wait
+2025-12-04 09:52:16 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:52:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 15/22 completed: scroll
+2025-12-04 09:52:16 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:52:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 16/22 completed: wait
+2025-12-04 09:52:16 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:52:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 17/22 completed: navigate
+2025-12-04 09:52:16 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:52:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 18/22 completed: wait
+2025-12-04 09:52:16 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:52:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 19/22 completed: search_google
+2025-12-04 09:52:16 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:52:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 20/22 completed: wait
+2025-12-04 09:52:16 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:52:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 21/22 completed: scroll
+2025-12-04 09:52:16 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:52:16 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:52:16 | DEBUG    | warming_executor:_execute_warming:104 - Action 22/22 completed: wait
+2025-12-04 09:52:16 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=50, completed=2, failed=20
+2025-12-04 09:52:18 | INFO     | browser_controller:close_browser:232 - Browser closed for profile k17l902d
+2025-12-04 09:52:46 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:53:05 | DEBUG    | websocket_client:_handle_message:77 - Received message: execute_warming
+2025-12-04 09:53:05 | INFO     | websocket_client:_execute_warming:111 - Executing warming: execution_id=51, profile_id=k17l902d
+2025-12-04 09:53:05 | INFO     | warming_executor:_execute_warming:65 - Starting warming: execution_id=51, profile_id=k17l902d
+2025-12-04 09:53:05 | INFO     | browser_controller:open_browser:48 - Opening browser in AdsPower for profile k17l902d
+2025-12-04 09:53:10 | INFO     | browser_controller:open_browser:71 - Browser opened on port 58322
+2025-12-04 09:53:13 | INFO     | browser_controller:open_browser:85 - Browser port 58322 is responding
+2025-12-04 09:53:13 | INFO     | browser_controller:open_browser:112 - Connecting Selenium (attempt 1/3)...
+2025-12-04 09:53:14 | INFO     | browser_controller:open_browser:117 - Selenium connected successfully to port 58322
+2025-12-04 09:53:14 | INFO     | browser_controller:_prepare_browser:175 - Preparing browser for profile k17l902d
+2025-12-04 09:53:15 | INFO     | browser_controller:_prepare_browser:183 - Browser ready for profile k17l902d
+2025-12-04 09:53:15 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:53:17 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:53:20 | DEBUG    | warming_executor:_execute_warming:104 - Action 1/22 completed: navigate
+2025-12-04 09:53:20 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:53:23 | DEBUG    | warming_executor:_execute_warming:104 - Action 2/22 completed: wait
+2025-12-04 09:53:23 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:53:54 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:54:42 | WARNING  | websocket_client:_listen:64 - Connection lost
+2025-12-04 09:54:42 | ERROR    | websocket_client:send:195 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 09:54:42 | INFO     | websocket_client:connect:38 - ✅ Connected to orchestrator!
+2025-12-04 09:54:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: connected
+2025-12-04 09:54:42 | INFO     | websocket_client:_handle_message:80 - Connected confirmation: Connected to orchestrator
+2025-12-04 09:54:42 | ERROR    | action_executor:_search_google:380 - Google search failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=141.0.7390.55)
+Stacktrace:
+0   chromedriver                        0x000000010be00518 chromedriver + 6378776
+1   chromedriver                        0x000000010bdf7c2a chromedriver + 6343722
+2   chromedriver                        0x000000010b854086 chromedriver + 430214
+3   chromedriver                        0x000000010b828a70 chromedriver + 252528
+4   chromedriver                        0x000000010b8d4c88 chromedriver + 957576
+5   chromedriver                        0x000000010b8f396c chromedriver + 1083756
+6   chromedriver                        0x000000010b8cc7d3 chromedriver + 923603
+7   chromedriver                        0x000000010b898185 chromedriver + 708997
+8   chromedriver                        0x000000010b8995c1 chromedriver + 714177
+9   chromedriver                        0x000000010bdbdda0 chromedriver + 6106528
+10  chromedriver                        0x000000010bdc2005 chromedriver + 6123525
+11  chromedriver                        0x000000010bd99505 chromedriver + 5956869
+12  chromedriver                        0x000000010bdc2a9f chromedriver + 6126239
+13  chromedriver                        0x000000010bd88944 chromedriver + 5888324
+14  chromedriver                        0x000000010bde4b78 chromedriver + 6265720
+15  chromedriver                        0x000000010bde4d3d chromedriver + 6266173
+16  chromedriver                        0x000000010bdf7801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 09:54:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 3/22 completed: search_google
+2025-12-04 09:54:42 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:54:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 4/22 completed: wait
+2025-12-04 09:54:42 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:54:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 5/22 completed: scroll
+2025-12-04 09:54:42 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:54:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 6/22 completed: wait
+2025-12-04 09:54:42 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:54:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 7/22 completed: scroll
+2025-12-04 09:54:42 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:54:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 8/22 completed: wait
+2025-12-04 09:54:42 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:54:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 9/22 completed: navigate
+2025-12-04 09:54:42 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:54:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 10/22 completed: wait
+2025-12-04 09:54:42 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:54:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 11/22 completed: search_google
+2025-12-04 09:54:42 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:54:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 12/22 completed: wait
+2025-12-04 09:54:42 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:54:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 13/22 completed: scroll
+2025-12-04 09:54:42 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:54:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 14/22 completed: wait
+2025-12-04 09:54:42 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:54:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 15/22 completed: scroll
+2025-12-04 09:54:42 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:54:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 16/22 completed: wait
+2025-12-04 09:54:42 | DEBUG    | action_executor:execute_action:89 - Executing action: navigate
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: navigate
+2025-12-04 09:54:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 17/22 completed: navigate
+2025-12-04 09:54:42 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:54:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 18/22 completed: wait
+2025-12-04 09:54:42 | DEBUG    | action_executor:execute_action:89 - Executing action: search_google
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: search_google
+2025-12-04 09:54:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 19/22 completed: search_google
+2025-12-04 09:54:42 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:54:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 20/22 completed: wait
+2025-12-04 09:54:42 | DEBUG    | action_executor:execute_action:89 - Executing action: scroll
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: scroll
+2025-12-04 09:54:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 21/22 completed: scroll
+2025-12-04 09:54:42 | DEBUG    | action_executor:execute_action:89 - Executing action: wait
+2025-12-04 09:54:42 | ERROR    | action_executor:execute_action:93 - Browser is closed, cannot execute action: wait
+2025-12-04 09:54:42 | DEBUG    | warming_executor:_execute_warming:104 - Action 22/22 completed: wait
+2025-12-04 09:54:42 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=51, completed=2, failed=20
+2025-12-04 09:54:44 | INFO     | browser_controller:close_browser:232 - Browser closed for profile k17l902d
+2025-12-04 09:55:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:55:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:56:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:56:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:57:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:57:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:58:12 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
+2025-12-04 09:58:42 | DEBUG    | websocket_client:_handle_message:77 - Received message: heartbeat_ack
