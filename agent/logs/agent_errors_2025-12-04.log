@@ -2030,3 +2030,994 @@ Stacktrace:
 20  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
 
 2025-12-04 21:50:54 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=204, error=Failed to open browser for profile k17m6178
+2025-12-04 22:28:34 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 22:28:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:28:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:28:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:30:21 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-04 22:30:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:30:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:30:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:30:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:30:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:30:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:30:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:31:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:31:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:31:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:31:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:31:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:31:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:31:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:31:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:31:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:31:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:31:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:31:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:32:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:32:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:32:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:32:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:32:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:32:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:32:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:32:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:32:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:32:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:32:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:32:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:33:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:33:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:33:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:33:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:33:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:33:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:33:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:33:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:33:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:33:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:33:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:33:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:34:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:34:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:34:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:34:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:34:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:34:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:34:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:34:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:34:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:34:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:34:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:34:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:35:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:35:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:35:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:35:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-04 22:50:36 | ERROR    | action_executor:_click:395 - Click failed: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2025-12-04 22:50:36 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39baf0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e19dd00>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e19d460>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | action_executor:_click:395 - Click failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/actions (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bd90>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bd60>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e19d4f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 9 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6430>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 10 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b4f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 11 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b8b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 12 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b580>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 13 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e2068e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 14 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6a30>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 15 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e206370>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 16 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bfa0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 17 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b2e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 18 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e19d670>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 19 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6ee0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 20 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b3d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 21 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39baf0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 22 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b580>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 23 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e2067f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 24 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc3d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 25 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b0a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 26 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39beb0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 27 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6e20>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 28 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6760>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 29 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e206280>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 30 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6250>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 31 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6a90>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 32 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bd60>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 33 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bcd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 34 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b520>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 35 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e2069a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 36 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b3a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 37 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b070>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 38 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6310>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 39 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a69a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 40 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e19d580>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 41 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a62e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 42 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6e50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 43 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b190>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 44 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39be80>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 45 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e206fd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 46 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e206f40>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 47 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bcd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 48 failed: HTTPConnectionPool(host='localhost', port=57528): Max retries exceeded with url: /session/88727dda0e44b301a193a9ab4dca3e27/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b190>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 3 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6ee0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e1fb8e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a62b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6340>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6c10>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b8b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 9 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b970>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 10 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc5e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 11 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bb50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 12 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6d00>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 13 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6cd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 14 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6640>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 15 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc7c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 16 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6550>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 17 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a64c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 18 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6b50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 19 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b370>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 20 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bd90>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 21 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bc40>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 22 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b8b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 23 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6460>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 24 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a69a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 25 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a66d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 26 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cce20>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 27 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6970>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 28 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6af0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 29 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b9d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 30 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bfd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 31 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e1310>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 32 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bcd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 33 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6b80>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 34 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a67f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 35 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6760>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 36 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e1910>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 37 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a66a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 38 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a64c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 39 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bd60>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 40 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b310>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 41 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e1f10>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 42 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6430>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 43 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6340>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 44 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e17f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 45 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e1370>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:37 | ERROR    | warming_executor:_execute_warming:107 - Action 46 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc640>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:37 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 47 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6f70>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 48 failed: HTTPConnectionPool(host='localhost', port=57634): Max retries exceeded with url: /session/7c67f578d75586aaf13dd7c4cd42c6fe/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6ac0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:38 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:38 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6cd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6520>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3ccd90>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc310>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b070>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 9 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc670>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 10 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6550>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 11 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6e20>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 12 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b340>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 13 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bdc0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 14 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6be0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 15 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a65b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 16 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3ccdc0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 17 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b340>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 18 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e1fb8e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 19 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3ccdc0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 20 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a62e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 21 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a66a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 22 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39ba60>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 23 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e159eb0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 24 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e1fbbe0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 25 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6af0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 26 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6b50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 27 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6790>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 28 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc040>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 29 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3ccc10>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 30 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e0e35e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 31 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a62b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 32 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a69d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 33 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e1fb850>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 34 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e19d400>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 35 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e116130>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 36 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6400>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 37 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a67c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 38 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3ccc70>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 39 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e206910>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 40 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc100>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 41 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6ac0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 42 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6760>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 43 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39baf0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 44 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e206b80>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 45 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e1fbbe0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 46 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6cd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 47 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6af0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:50:38 | ERROR    | warming_executor:_execute_warming:107 - Action 48 failed: HTTPConnectionPool(host='localhost', port=57510): Max retries exceeded with url: /session/b2d8f18b8bdd3c565f9f35791f7ed114/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e0e35e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 22:51:02 | ERROR    | websocket_client:connect:53 - Connection error: 
+2025-12-04 22:51:03 | ERROR    | browser_controller:close_browser:232 - Error closing browser: 'k17l902d'
+2025-12-04 22:51:04 | ERROR    | browser_controller:close_browser:232 - Error closing browser: 'k17m5o28'
+2025-12-04 23:11:46 | ERROR    | action_executor:_navigate:198 - Navigation failed: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2025-12-04 23:11:46 | ERROR    | warming_executor:_execute_warming:107 - Action 2 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f0760>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | warming_executor:_execute_warming:107 - Action 3 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f0e50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e1fb8e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | browser_controller:_prepare_browser_safe:187 - Error preparing browser: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b9d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | warming_executor:_execute_warming:107 - Action 1 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e19d4f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:46 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6b20>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:46 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b220>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:46 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b730>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:46 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3ccf40>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:46 | ERROR    | warming_executor:_execute_warming:107 - Action 9 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bfd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:46 | ERROR    | warming_executor:_execute_warming:107 - Action 10 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b4f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:46 | ERROR    | warming_executor:_execute_warming:107 - Action 11 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a65e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:46 | ERROR    | warming_executor:_execute_warming:107 - Action 12 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc100>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:46 | ERROR    | warming_executor:_execute_warming:107 - Action 13 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc8b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:46 | ERROR    | warming_executor:_execute_warming:107 - Action 14 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f0820>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:46 | ERROR    | warming_executor:_execute_warming:107 - Action 15 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6250>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:46 | ERROR    | warming_executor:_execute_warming:107 - Action 16 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cccd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:46 | ERROR    | warming_executor:_execute_warming:107 - Action 17 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b640>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:46 | ERROR    | warming_executor:_execute_warming:107 - Action 18 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bf40>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:46 | ERROR    | warming_executor:_execute_warming:107 - Action 19 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7430>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:46 | ERROR    | warming_executor:_execute_warming:107 - Action 20 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bbb0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:46 | ERROR    | warming_executor:_execute_warming:107 - Action 21 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3ccf70>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:46 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 22 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc3d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 23 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e1fb640>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 24 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e76d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 25 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6c10>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 26 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3ccca0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 27 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc0a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 28 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b910>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 29 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7790>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 30 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b730>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 31 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b850>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 32 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc8e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 33 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6670>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 34 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f0790>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 35 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7d30>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 36 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6ee0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 37 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3ccca0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 38 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc220>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 39 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bcd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 40 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7d30>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 41 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b580>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 42 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b220>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 43 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc310>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 44 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6790>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 45 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7d30>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 46 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f7220>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 47 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6b20>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 48 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cca30>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 49 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bb50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 50 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b190>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 51 failed: HTTPConnectionPool(host='localhost', port=52512): Max retries exceeded with url: /session/9a49b5439ca5df571add08af9b12b241/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f7550>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 2 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc7f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 3 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc4f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6c10>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f75b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f7af0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6c10>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc3a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 9 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc9a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 10 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b190>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 11 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f7ca0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 12 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a64c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 13 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b430>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 14 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bfa0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 15 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7700>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:47 | ERROR    | warming_executor:_execute_warming:107 - Action 16 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7b50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:47 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:48 | ERROR    | warming_executor:_execute_warming:107 - Action 17 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b9a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:48 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:48 | ERROR    | warming_executor:_execute_warming:107 - Action 18 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b400>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:48 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:48 | ERROR    | warming_executor:_execute_warming:107 - Action 19 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f0d30>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:48 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:48 | ERROR    | warming_executor:_execute_warming:107 - Action 20 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6ac0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:48 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:48 | ERROR    | warming_executor:_execute_warming:107 - Action 21 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7190>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:48 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:48 | ERROR    | warming_executor:_execute_warming:107 - Action 22 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7490>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:48 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:48 | ERROR    | warming_executor:_execute_warming:107 - Action 23 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7220>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:48 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:48 | ERROR    | warming_executor:_execute_warming:107 - Action 24 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e79a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:48 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:48 | ERROR    | warming_executor:_execute_warming:107 - Action 25 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6400>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:48 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:48 | ERROR    | warming_executor:_execute_warming:107 - Action 26 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bd60>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:48 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:48 | ERROR    | warming_executor:_execute_warming:107 - Action 27 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39be50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:48 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:48 | ERROR    | warming_executor:_execute_warming:107 - Action 28 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39be80>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:48 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:48 | ERROR    | warming_executor:_execute_warming:107 - Action 29 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bc70>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:48 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:48 | ERROR    | warming_executor:_execute_warming:107 - Action 30 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6d60>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:48 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:48 | ERROR    | warming_executor:_execute_warming:107 - Action 31 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7e80>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:48 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:48 | ERROR    | warming_executor:_execute_warming:107 - Action 32 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7430>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:48 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:48 | ERROR    | warming_executor:_execute_warming:107 - Action 33 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc490>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:48 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:49 | ERROR    | warming_executor:_execute_warming:107 - Action 34 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7190>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:49 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:49 | ERROR    | warming_executor:_execute_warming:107 - Action 35 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7a90>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:49 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:49 | ERROR    | warming_executor:_execute_warming:107 - Action 36 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a64c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:49 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:49 | ERROR    | warming_executor:_execute_warming:107 - Action 37 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b220>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:49 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:49 | ERROR    | warming_executor:_execute_warming:107 - Action 38 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b4f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:49 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:49 | ERROR    | warming_executor:_execute_warming:107 - Action 39 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b640>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:49 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:49 | ERROR    | warming_executor:_execute_warming:107 - Action 40 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bb50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:49 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:49 | ERROR    | warming_executor:_execute_warming:107 - Action 41 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6ee0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:49 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:49 | ERROR    | warming_executor:_execute_warming:107 - Action 42 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7b80>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:49 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:49 | ERROR    | warming_executor:_execute_warming:107 - Action 43 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7190>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:49 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:49 | ERROR    | warming_executor:_execute_warming:107 - Action 44 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3ccdf0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:49 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:49 | ERROR    | warming_executor:_execute_warming:107 - Action 45 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7190>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:49 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:49 | ERROR    | warming_executor:_execute_warming:107 - Action 46 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7d00>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:49 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:49 | ERROR    | warming_executor:_execute_warming:107 - Action 47 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a62b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:49 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:49 | ERROR    | warming_executor:_execute_warming:107 - Action 48 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc460>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:49 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:49 | ERROR    | warming_executor:_execute_warming:107 - Action 49 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bf70>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:49 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:49 | ERROR    | warming_executor:_execute_warming:107 - Action 50 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f0e50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:49 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:49 | ERROR    | warming_executor:_execute_warming:107 - Action 51 failed: HTTPConnectionPool(host='localhost', port=52534): Max retries exceeded with url: /session/d6b11f337010e5dc936ed1d38aac1447/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6520>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:49 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:49 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:49 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:11:58 | ERROR    | action_executor:_navigate:198 - Navigation failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f0670>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 2 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f0460>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 3 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bf70>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 4 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc640>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 5 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bdc0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 6 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7b20>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 7 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6370>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 8 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a62b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 9 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f02b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 10 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6850>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 11 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a63a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 12 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7fd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 13 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e74c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 14 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b310>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 15 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f05e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 16 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bdc0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 17 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e76d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 18 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f0ac0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 19 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a64f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 20 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a62b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 21 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6070>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 22 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6f10>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 23 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7670>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 24 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f0580>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 25 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b040>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 26 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3ccdf0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 27 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6d30>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 28 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6c10>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 29 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f0e80>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 30 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bcd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 31 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b130>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 32 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f0b50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 33 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f0c40>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:58 | ERROR    | warming_executor:_execute_warming:107 - Action 34 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6c10>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:59 | ERROR    | warming_executor:_execute_warming:107 - Action 35 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a68e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:59 | ERROR    | warming_executor:_execute_warming:107 - Action 36 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bc40>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:59 | ERROR    | warming_executor:_execute_warming:107 - Action 37 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7460>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:59 | ERROR    | warming_executor:_execute_warming:107 - Action 38 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a68e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:59 | ERROR    | warming_executor:_execute_warming:107 - Action 39 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a67c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:59 | ERROR    | warming_executor:_execute_warming:107 - Action 40 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f0c40>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:59 | ERROR    | warming_executor:_execute_warming:107 - Action 41 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bbb0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:59 | ERROR    | warming_executor:_execute_warming:107 - Action 42 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39ba30>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:59 | ERROR    | warming_executor:_execute_warming:107 - Action 43 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b4f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:59 | ERROR    | warming_executor:_execute_warming:107 - Action 44 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39b850>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:59 | ERROR    | warming_executor:_execute_warming:107 - Action 45 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f0580>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:59 | ERROR    | warming_executor:_execute_warming:107 - Action 46 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6c70>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:59 | ERROR    | warming_executor:_execute_warming:107 - Action 47 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a69a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:59 | ERROR    | warming_executor:_execute_warming:107 - Action 48 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7df0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:59 | ERROR    | warming_executor:_execute_warming:107 - Action 49 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6a30>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:59 | ERROR    | warming_executor:_execute_warming:107 - Action 50 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6400>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:11:59 | ERROR    | warming_executor:_execute_warming:107 - Action 51 failed: HTTPConnectionPool(host='localhost', port=54941): Max retries exceeded with url: /session/f4fa558b1ab625843b2b832f1af52b7f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f0ac0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:15:42 | ERROR    | action_executor:_navigate:198 - Navigation failed: Message: invalid session id
+Stacktrace:
+0   chromedriver                        0x000000010840c518 chromedriver + 6378776
+1   chromedriver                        0x0000000108403c2a chromedriver + 6343722
+2   chromedriver                        0x0000000107e5febe chromedriver + 429758
+3   chromedriver                        0x0000000107ea3ac9 chromedriver + 707273
+4   chromedriver                        0x0000000107ed8906 chromedriver + 923910
+5   chromedriver                        0x0000000107ed30e3 chromedriver + 901347
+6   chromedriver                        0x0000000107ed2267 chromedriver + 897639
+7   chromedriver                        0x0000000107e2814f chromedriver + 201039
+8   chromedriver                        0x00000001083c9da0 chromedriver + 6106528
+9   chromedriver                        0x00000001083ce005 chromedriver + 6123525
+10  chromedriver                        0x00000001083a5505 chromedriver + 5956869
+11  chromedriver                        0x00000001083cea9f chromedriver + 6126239
+12  chromedriver                        0x0000000108394944 chromedriver + 5888324
+13  chromedriver                        0x0000000107e262e1 chromedriver + 193249
+14  dyld                                0x00007ff8146b9530 start + 3056
+
+2025-12-04 23:15:42 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:42 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait_element
+2025-12-04 23:15:42 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: random_mouse
+2025-12-04 23:15:42 | ERROR    | browser_controller:_prepare_browser_safe:183 - Browser not ready: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x0000000103b06518 chromedriver + 6378776
+1   chromedriver                        0x0000000103afdc2a chromedriver + 6343722
+2   chromedriver                        0x000000010355a086 chromedriver + 430214
+3   chromedriver                        0x00000001035407ed chromedriver + 325613
+4   chromedriver                        0x0000000103568e62 chromedriver + 491106
+5   chromedriver                        0x00000001035dae8f chromedriver + 958095
+6   chromedriver                        0x00000001035f996c chromedriver + 1083756
+7   chromedriver                        0x00000001035d27d3 chromedriver + 923603
+8   chromedriver                        0x000000010359e185 chromedriver + 708997
+9   chromedriver                        0x000000010359f5c1 chromedriver + 714177
+10  chromedriver                        0x0000000103ac3da0 chromedriver + 6106528
+11  chromedriver                        0x0000000103ac8005 chromedriver + 6123525
+12  chromedriver                        0x0000000103a9f505 chromedriver + 5956869
+13  chromedriver                        0x0000000103ac8a9f chromedriver + 6126239
+14  chromedriver                        0x0000000103a8e944 chromedriver + 5888324
+15  chromedriver                        0x0000000103aeab78 chromedriver + 6265720
+16  chromedriver                        0x0000000103aead3d chromedriver + 6266173
+17  chromedriver                        0x0000000103afd801 chromedriver + 6342657
+18  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+19  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 23:15:42 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: navigate
+2025-12-04 23:15:42 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:42 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:42 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:42 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:42 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:42 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: hover
+2025-12-04 23:15:42 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:42 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:42 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:42 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: click
+2025-12-04 23:15:42 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:42 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:42 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:42 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:42 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:42 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: random_mouse
+2025-12-04 23:15:42 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:42 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: navigate
+2025-12-04 23:15:42 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:42 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:42 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait_element
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: click
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: hover
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: click
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: random_mouse
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: navigate
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait_element
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: click
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: random_mouse
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: hover
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: click
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: random_mouse
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: navigate
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait_element
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: click
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: hover
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: click
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: random_mouse
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait_element
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: random_mouse
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: hover
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: click
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: random_mouse
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: navigate
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait_element
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: click
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: hover
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: click
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: random_mouse
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: navigate
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait_element
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: click
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: random_mouse
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: hover
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: click
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: random_mouse
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: navigate
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait_element
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: click
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: hover
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: click
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: random_mouse
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:15:43 | ERROR    | browser_controller:_prepare_browser_safe:183 - Browser not ready: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x000000010971a518 chromedriver + 6378776
+1   chromedriver                        0x0000000109711c2a chromedriver + 6343722
+2   chromedriver                        0x000000010916e086 chromedriver + 430214
+3   chromedriver                        0x0000000109142a70 chromedriver + 252528
+4   chromedriver                        0x00000001091eec88 chromedriver + 957576
+5   chromedriver                        0x000000010920d96c chromedriver + 1083756
+6   chromedriver                        0x00000001091e67d3 chromedriver + 923603
+7   chromedriver                        0x00000001091b2185 chromedriver + 708997
+8   chromedriver                        0x00000001091b35c1 chromedriver + 714177
+9   chromedriver                        0x00000001096d7da0 chromedriver + 6106528
+10  chromedriver                        0x00000001096dc005 chromedriver + 6123525
+11  chromedriver                        0x00000001096b3505 chromedriver + 5956869
+12  chromedriver                        0x00000001096dca9f chromedriver + 6126239
+13  chromedriver                        0x00000001096a2944 chromedriver + 5888324
+14  chromedriver                        0x00000001096feb78 chromedriver + 6265720
+15  chromedriver                        0x00000001096fed3d chromedriver + 6266173
+16  chromedriver                        0x0000000109711801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: navigate
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:43 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait_element
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: random_mouse
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: hover
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: click
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: random_mouse
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: navigate
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait_element
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: click
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: hover
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: click
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: random_mouse
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: navigate
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait_element
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: click
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: random_mouse
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: hover
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: click
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: random_mouse
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: navigate
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait_element
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: click
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: hover
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: click
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: scroll
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: random_mouse
+2025-12-04 23:15:44 | ERROR    | action_executor:execute_action:92 - Browser is closed, cannot execute action: wait
+2025-12-04 23:16:58 | ERROR    | action_executor:execute_action:106 - Action timeout (30s): navigate
+2025-12-04 23:16:58 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 23:17:02 | ERROR    | action_executor:_random_mouse_movement:614 - Random mouse failed: Message: move target out of bounds
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x0000000108f97518 chromedriver + 6378776
+1   chromedriver                        0x0000000108f8ec2a chromedriver + 6343722
+2   chromedriver                        0x00000001089eaebe chromedriver + 429758
+3   chromedriver                        0x0000000108a93aee chromedriver + 1121006
+4   chromedriver                        0x0000000108a63a02 chromedriver + 924162
+5   chromedriver                        0x0000000108a8af6e chromedriver + 1085294
+6   chromedriver                        0x0000000108a637d3 chromedriver + 923603
+7   chromedriver                        0x0000000108a2f185 chromedriver + 708997
+8   chromedriver                        0x0000000108a305c1 chromedriver + 714177
+9   chromedriver                        0x0000000108f54da0 chromedriver + 6106528
+10  chromedriver                        0x0000000108f59005 chromedriver + 6123525
+11  chromedriver                        0x0000000108f30505 chromedriver + 5956869
+12  chromedriver                        0x0000000108f59a9f chromedriver + 6126239
+13  chromedriver                        0x0000000108f1f944 chromedriver + 5888324
+14  chromedriver                        0x0000000108f7bb78 chromedriver + 6265720
+15  chromedriver                        0x0000000108f7bd3d chromedriver + 6266173
+16  chromedriver                        0x0000000108f8e801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff814a5ee05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff814a5a857 thread_start + 15
+
+2025-12-04 23:24:20 | ERROR    | action_executor:_click:395 - Click failed: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 10 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6670>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 11 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc460>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 12 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a64f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 13 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6be0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 14 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f0a00>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 15 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc220>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 16 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7520>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 17 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc9a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 18 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e39bbb0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 19 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f0d90>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 20 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6730>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 21 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7af0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 22 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7970>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 23 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6c40>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 24 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f0070>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 25 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc730>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 26 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7850>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 27 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e2062e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 28 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc190>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 29 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f02b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 30 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6880>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 31 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6d60>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 32 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7580>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 33 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7280>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 34 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7910>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 35 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6880>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 36 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f02b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 37 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc8b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 38 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e206280>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 39 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3cc8b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 40 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f0970>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 41 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a6b50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 42 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e77c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 43 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e79a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 44 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a62e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 45 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3a64c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 46 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e206490>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 47 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e159eb0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 48 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f02b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 49 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3e7400>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 50 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e3f0610>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | warming_executor:_execute_warming:107 - Action 51 failed: HTTPConnectionPool(host='localhost', port=60631): Max retries exceeded with url: /session/26420b69e9d2c369f5f591fceece301e/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10e180070>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:24:20 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-04 23:26:25 | ERROR    | action_executor:execute_action:106 - Action timeout (30s): navigate
+2025-12-04 23:26:56 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 23:26:56 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-04 23:26:56 | ERROR    | websocket_client:connect:53 - Connection error: 
+2025-12-04 23:27:00 | ERROR    | action_executor:execute_action:106 - Action timeout (30s): navigate

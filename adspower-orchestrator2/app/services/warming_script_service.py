@@ -3,7 +3,12 @@ from typing import List, Optional, Dict
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, and_, func
 from app.models.warming_script import WarmingScript, WarmingExecution, ExecutionStatus
-from app.schemas.warming_script import WarmingScriptCreate, WarmingScriptUpdate
+from app.schemas.warming_script import (
+    WarmingScriptCreate, 
+    WarmingScriptUpdate,
+    WarmingScriptResponse,  # ✅ AÑADIDO
+    WarmingExecutionResponse  # ✅ AÑADIDO
+)
 from loguru import logger
 
 class WarmingScriptService:
@@ -12,7 +17,7 @@ class WarmingScriptService:
     def __init__(self, db: AsyncSession):
         self.db = db
     
-    async def create_script(self, script_in: WarmingScriptCreate) -> WarmingScript:
+    async def create_script(self, script_in: WarmingScriptCreate) -> WarmingScriptResponse:
         """Crea un nuevo script de warming"""
         
         # Convertir actions a dict
@@ -36,14 +41,22 @@ class WarmingScriptService:
         await self.db.refresh(script)
         
         logger.info(f"Warming script created: {script.name} (ID: {script.id})")
-        return script
+        
+        # ✅ Convertir a Pydantic schema
+        return WarmingScriptResponse.model_validate(script)
     
-    async def get_script(self, script_id: int) -> Optional[WarmingScript]:
+    async def get_script(self, script_id: int) -> Optional[WarmingScriptResponse]:
         """Obtiene script por ID"""
         result = await self.db.execute(
             select(WarmingScript).where(WarmingScript.id == script_id)
         )
-        return result.scalar_one_or_none()
+        script = result.scalar_one_or_none()
+        
+        if not script:
+            return None
+        
+        # ✅ Convertir a Pydantic schema
+        return WarmingScriptResponse.model_validate(script)
     
     async def list_scripts(
         self,
@@ -52,7 +65,7 @@ class WarmingScriptService:
         category: Optional[str] = None,
         status: Optional[str] = None,
         is_template: Optional[bool] = None
-    ) -> tuple[List[WarmingScript], int]:
+    ) -> tuple[List[WarmingScriptResponse], int]:  # ✅ CAMBIO: Retorna schemas
         """Lista scripts con filtros"""
         
         query = select(WarmingScript)
@@ -77,18 +90,28 @@ class WarmingScriptService:
         # Get items
         query = query.offset(skip).limit(limit).order_by(WarmingScript.created_at.desc())
         result = await self.db.execute(query)
-        items = list(result.scalars().all())
+        scripts = list(result.scalars().all())
         
-        return items, total
+        # ✅ Convertir todos a Pydantic schemas
+        script_responses = [
+            WarmingScriptResponse.model_validate(script) 
+            for script in scripts
+        ]
+        
+        return script_responses, total
     
     async def update_script(
         self,
         script_id: int,
         script_in: WarmingScriptUpdate
-    ) -> Optional[WarmingScript]:
+    ) -> Optional[WarmingScriptResponse]:
         """Actualiza script"""
         
-        script = await self.get_script(script_id)
+        result = await self.db.execute(
+            select(WarmingScript).where(WarmingScript.id == script_id)
+        )
+        script = result.scalar_one_or_none()
+        
         if not script:
             raise ValueError(f"Script {script_id} not found")
         
@@ -108,12 +131,18 @@ class WarmingScriptService:
         await self.db.refresh(script)
         
         logger.info(f"Warming script updated: {script.name}")
-        return script
+        
+        # ✅ Convertir a Pydantic schema
+        return WarmingScriptResponse.model_validate(script)
     
     async def delete_script(self, script_id: int) -> bool:
         """Elimina script"""
         
-        script = await self.get_script(script_id)
+        result = await self.db.execute(
+            select(WarmingScript).where(WarmingScript.id == script_id)
+        )
+        script = result.scalar_one_or_none()
+        
         if not script:
             return False
         
@@ -128,7 +157,7 @@ class WarmingScriptService:
         script_id: int,
         profile_id: int,
         computer_id: int
-    ) -> WarmingExecution:
+    ) -> WarmingExecutionResponse:  # ✅ CAMBIO
         """Crea una ejecución de warming"""
         
         execution = WarmingExecution(
@@ -143,14 +172,22 @@ class WarmingScriptService:
         await self.db.refresh(execution)
         
         logger.info(f"Warming execution created: Script {script_id}, Profile {profile_id}")
-        return execution
+        
+        # ✅ Convertir a Pydantic schema
+        return WarmingExecutionResponse.model_validate(execution)
     
-    async def get_execution(self, execution_id: int) -> Optional[WarmingExecution]:
+    async def get_execution(self, execution_id: int) -> Optional[WarmingExecutionResponse]:
         """Obtiene ejecución por ID"""
         result = await self.db.execute(
             select(WarmingExecution).where(WarmingExecution.id == execution_id)
         )
-        return result.scalar_one_or_none()
+        execution = result.scalar_one_or_none()
+        
+        if not execution:
+            return None
+        
+        # ✅ Convertir a Pydantic schema
+        return WarmingExecutionResponse.model_validate(execution)
     
     async def update_execution_status(
         self,
@@ -161,7 +198,11 @@ class WarmingScriptService:
     ) -> bool:
         """Actualiza estado de ejecución"""
         
-        execution = await self.get_execution(execution_id)
+        result = await self.db.execute(
+            select(WarmingExecution).where(WarmingExecution.id == execution_id)
+        )
+        execution = result.scalar_one_or_none()
+        
         if not execution:
             return False
         
@@ -178,7 +219,7 @@ class WarmingScriptService:
         await self.db.commit()
         return True
     
-    async def get_script_templates(self) -> List[WarmingScript]:
+    async def get_script_templates(self) -> List[WarmingScriptResponse]:
         """Obtiene plantillas de scripts"""
         result = await self.db.execute(
             select(WarmingScript).where(
@@ -186,11 +227,21 @@ class WarmingScriptService:
                 WarmingScript.status == "active"
             )
         )
-        return list(result.scalars().all())
+        scripts = list(result.scalars().all())
+        
+        # ✅ Convertir a Pydantic schemas
+        return [
+            WarmingScriptResponse.model_validate(script)
+            for script in scripts
+        ]
     
     async def increment_script_usage(self, script_id: int) -> bool:
         """Incrementa contador de uso del script"""
-        script = await self.get_script(script_id)
+        result = await self.db.execute(
+            select(WarmingScript).where(WarmingScript.id == script_id)
+        )
+        script = result.scalar_one_or_none()
+        
         if script:
             script.times_used += 1
             await self.db.commit()
