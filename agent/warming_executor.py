@@ -1,4 +1,4 @@
-# agent/warming_executor.py
+# agent/warming_executor.py (CON VARIABLES DE SESIÓN)
 import asyncio
 from typing import Dict, List, Callable, Optional
 from loguru import logger
@@ -13,10 +13,15 @@ class WarmingExecutor:
         self.browser_controller = browser_controller
         self.action_executor = ActionExecutor(config)
         
-        # Ejecuciones activas: execution_id -> task
+        # ✅ Establecer credenciales por defecto
+        # TODO: Estas deberían venir del profile o configuración
+        self.action_executor.set_session_var("USERNAME", "omaritouv0209@gmail.com")
+        self.action_executor.set_session_var("PASSWORD", "Eocm2003!")
+        
+        # Ejecuciones activas
         self.active_executions: Dict[int, asyncio.Task] = {}
         
-        # Semáforo para limitar ejecuciones concurrentes
+        # Semáforo para limitar concurrencia
         self.semaphore = asyncio.Semaphore(config.MAX_CONCURRENT_EXECUTIONS)
     
     async def execute(
@@ -28,7 +33,6 @@ class WarmingExecutor:
     ):
         """Ejecuta warming script"""
         
-        # Crear tarea
         task = asyncio.create_task(
             self._execute_warming(
                 execution_id,
@@ -40,7 +44,6 @@ class WarmingExecutor:
         
         self.active_executions[execution_id] = task
         
-        # Esperar a que termine
         try:
             await task
         finally:
@@ -60,7 +63,6 @@ class WarmingExecutor:
         start_time = datetime.utcnow()
         
         try:
-            # Adquirir semáforo
             async with self.semaphore:
                 logger.info(f"Starting warming: execution_id={execution_id}, profile_id={profile_id}")
                 
@@ -85,10 +87,9 @@ class WarmingExecutor:
                         else:
                             failed += 1
                         
-                        # Calcular progreso
+                        # Progreso
                         progress = int((i + 1) / total_actions * 100)
                         
-                        # Enviar progreso
                         if progress_callback:
                             await progress_callback(
                                 execution_id,
@@ -101,13 +102,12 @@ class WarmingExecutor:
                                 }
                             )
                         
-                        logger.debug(f"Action {i+1}/{total_actions} completed: {action.get('type')}")
+                        logger.debug(f"Action {i+1}/{total_actions}: {action.get('type')} - {'✓' if success else '✗'}")
                     
                     except Exception as e:
                         logger.error(f"Action {i+1} failed: {e}")
                         failed += 1
                         
-                        # Enviar error
                         if progress_callback:
                             await progress_callback(
                                 execution_id,
@@ -121,10 +121,10 @@ class WarmingExecutor:
                                 }
                             )
                 
-                # Calcular duración
+                # Duración
                 duration = (datetime.utcnow() - start_time).total_seconds()
                 
-                # Enviar completado
+                # Completado
                 if progress_callback:
                     await progress_callback(
                         execution_id,
@@ -144,7 +144,6 @@ class WarmingExecutor:
         except Exception as e:
             logger.error(f"Warming failed: execution_id={execution_id}, error={e}")
             
-            # Enviar error
             if progress_callback:
                 await progress_callback(
                     execution_id,
@@ -157,7 +156,6 @@ class WarmingExecutor:
                 )
         
         finally:
-            # Cerrar navegador
             if driver:
                 await self.browser_controller.close_browser(profile_id)
     

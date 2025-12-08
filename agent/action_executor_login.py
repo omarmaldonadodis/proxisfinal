@@ -1,11 +1,3 @@
-# agent/action_executor_login.py
-"""
-Enhanced Login Action Executor with:
-- Human-like behavior
-- reCAPTCHA detection
-- Authentication error detection
-- Multiple retry strategies
-"""
 from typing import Dict, Optional, Any, Tuple
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -188,4 +180,168 @@ class HumanizedLoginExecutor:
             
             # 7. Detectar reCAPTCHA después de llenar campos
             if self._detect_recaptcha(driver):
-                logger.warning("⚠
+                logger.warning("⚠️ reCAPTCHA detected after filling fields")
+                return LoginResult(
+                    success=False,
+                    message="reCAPTCHA detected after filling fields",
+                    error_type="recaptcha",
+                    needs_captcha=True
+                )
+            
+            # 8. Hacer click en submit
+            submit_clicked = await self._click_submit(
+                driver,
+                params.get("submit_selector", "button[type='submit']")
+            )
+            
+            if not submit_clicked:
+                return LoginResult(
+                    success=False,
+                    message="Could not click submit button",
+                    error_type="submit_button_not_found"
+                )
+            
+            # 9. Esperar resultado
+            wait_after = params.get("wait_after_submit", 5)
+            await asyncio.sleep(wait_after)
+            
+            # 10. Verificar login exitoso
+            success_url = params.get("success_url_contains")
+            success_element_selector = params.get("success_element")
+            
+            if success_url and success_url.lower() in driver.current_url.lower():
+                return LoginResult(success=True, message="Login successful")
+            
+            if success_element_selector:
+                try:
+                    WebDriverWait(driver, 5).until(
+                        EC.presence_of_element_located((By.CSS_SELECTOR, success_element_selector))
+                    )
+                    return LoginResult(success=True, message="Login successful")
+                except TimeoutException:
+                    pass
+            
+            # 11. Revisar errores de login
+            page_text = driver.page_source.lower()
+            if any(e in page_text for e in self.AUTH_ERROR_INDICATORS):
+                return LoginResult(
+                    success=False,
+                    message="Authentication failed",
+                    error_type="auth_error"
+                )
+            
+            if any(b in page_text for b in self.BLOCKED_INDICATORS):
+                return LoginResult(
+                    success=False,
+                    message="Account blocked",
+                    error_type="blocked",
+                    blocked=True
+                )
+            
+            if any(f in page_text for f in self.TWO_FA_INDICATORS):
+                return LoginResult(
+                    success=False,
+                    message="2FA required",
+                    error_type="2fa",
+                    needs_2fa=True
+                )
+            
+            # 12. Si nada funcionó
+            return LoginResult(
+                success=False,
+                message="Login failed for unknown reason",
+                error_type="unknown"
+            )
+        
+        except Exception as e:
+            logger.error(f"Login execution error: {e}")
+            return LoginResult(
+                success=False,
+                message=str(e),
+                error_type="exception"
+            )
+    
+    # -----------------------------
+    # Métodos internos auxiliares
+    # -----------------------------
+    
+    def _detect_recaptcha(self, driver: webdriver.Chrome) -> bool:
+        """Detecta si hay reCAPTCHA en la página"""
+        page_text = driver.page_source.lower()
+        for indicator in self.RECAPTCHA_INDICATORS:
+            if indicator in page_text:
+                return True
+        return False
+    
+    async def _wait_for_page_stability(self, driver: webdriver.Chrome, timeout: int = 3):
+        """Espera unos segundos para que la página termine de renderizar"""
+        await asyncio.sleep(random.uniform(timeout, timeout + 2))
+    
+    async def _fill_username(self, driver: webdriver.Chrome, username: str, selector: str) -> bool:
+        """Busca input de username y escribe humanizado"""
+        element = None
+        selectors = [s.strip() for s in selector.split(",")]
+        for sel in selectors:
+            try:
+                element = WebDriverWait(driver, 5).until(
+                    EC.presence_of_element_located((By.CSS_SELECTOR, sel))
+                )
+                if element.is_displayed():
+                    break
+            except TimeoutException:
+                continue
+        
+        if not element:
+            return False
+        
+        element.click()
+        await asyncio.sleep(random.uniform(0.2, 0.5))
+        for char in username:
+            element.send_keys(char)
+            await asyncio.sleep(random.uniform(0.05, 0.15))
+        return True
+    
+    async def _fill_password(self, driver: webdriver.Chrome, password: str, selector: str) -> bool:
+        """Busca input de password y escribe humanizado"""
+        element = None
+        selectors = [s.strip() for s in selector.split(",")]
+        for sel in selectors:
+            try:
+                element = WebDriverWait(driver, 5).until(
+                    EC.presence_of_element_located((By.CSS_SELECTOR, sel))
+                )
+                if element.is_displayed():
+                    break
+            except TimeoutException:
+                continue
+        
+        if not element:
+            return False
+        
+        element.click()
+        await asyncio.sleep(random.uniform(0.2, 0.5))
+        for char in password:
+            element.send_keys(char)
+            await asyncio.sleep(random.uniform(0.05, 0.15))
+        return True
+    
+    async def _click_submit(self, driver: webdriver.Chrome, selector: str) -> bool:
+        """Hace click en el botón submit"""
+        element = None
+        selectors = [s.strip() for s in selector.split(",")]
+        for sel in selectors:
+            try:
+                element = WebDriverWait(driver, 5).until(
+                    EC.element_to_be_clickable((By.CSS_SELECTOR, sel))
+                )
+                if element.is_displayed():
+                    break
+            except TimeoutException:
+                continue
+        
+        if not element:
+            return False
+        
+        element.click()
+        await asyncio.sleep(random.uniform(0.5, 1.0))
+        return True

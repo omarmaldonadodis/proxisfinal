@@ -139,3 +139,224 @@ Stacktrace:
 23  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
 
 2025-12-08 16:50:07 | ERROR    | action_executor:execute_action:110 - Action timeout (30s): advanced_login
+2025-12-08 17:12:22 | ERROR    | action_executor:execute_action:108 - Action timeout (30s): click
+2025-12-08 17:12:22 | ERROR    | action_executor:execute_action:91 - Browser is closed, cannot execute action: wait
+2025-12-08 17:12:22 | ERROR    | action_executor:execute_action:91 - Browser is closed, cannot execute action: scroll
+2025-12-08 17:20:45 | ERROR    | action_executor:execute_action:108 - Action timeout (30s): click
+2025-12-08 17:20:45 | ERROR    | action_executor:execute_action:91 - Browser is closed, cannot execute action: wait
+2025-12-08 17:20:45 | ERROR    | action_executor:execute_action:91 - Browser is closed, cannot execute action: scroll
+2025-12-08 17:20:45 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-08 17:23:07 | ERROR    | action_executor:_click:225 - Click failed: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalid-selector-exception
+Stacktrace:
+0   chromedriver                        0x0000000101b92518 chromedriver + 6378776
+1   chromedriver                        0x0000000101b89c2a chromedriver + 6343722
+2   chromedriver                        0x00000001015e6086 chromedriver + 430214
+3   chromedriver                        0x00000001015ecdcc chromedriver + 458188
+4   chromedriver                        0x00000001015ef7f3 chromedriver + 468979
+5   chromedriver                        0x00000001015ef8a3 chromedriver + 469155
+6   chromedriver                        0x0000000101637f63 chromedriver + 765795
+7   chromedriver                        0x0000000101638741 chromedriver + 767809
+8   chromedriver                        0x0000000101688c54 chromedriver + 1096788
+9   chromedriver                        0x000000010165ea2d chromedriver + 924205
+10  chromedriver                        0x0000000101685f6e chromedriver + 1085294
+11  chromedriver                        0x000000010165e7d3 chromedriver + 923603
+12  chromedriver                        0x000000010162a185 chromedriver + 708997
+13  chromedriver                        0x000000010162b5c1 chromedriver + 714177
+14  chromedriver                        0x0000000101b4fda0 chromedriver + 6106528
+15  chromedriver                        0x0000000101b54005 chromedriver + 6123525
+16  chromedriver                        0x0000000101b2b505 chromedriver + 5956869
+17  chromedriver                        0x0000000101b54a9f chromedriver + 6126239
+18  chromedriver                        0x0000000101b1a944 chromedriver + 5888324
+19  chromedriver                        0x0000000101b76b78 chromedriver + 6265720
+20  chromedriver                        0x0000000101b76d3d chromedriver + 6266173
+21  chromedriver                        0x0000000101b89801 chromedriver + 6342657
+22  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+23  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-08 17:42:23 | ERROR    | action_executor:_click:225 - Click failed: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2025-12-08 17:42:24 | ERROR    | warming_executor:_execute_warming:108 - Action 10 failed: HTTPConnectionPool(host='localhost', port=49261): Max retries exceeded with url: /session/b2be8f51345b273bb365182930a64d9d/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b79b670>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 17:42:24 | ERROR    | warming_executor:_execute_warming:108 - Action 11 failed: HTTPConnectionPool(host='localhost', port=49261): Max retries exceeded with url: /session/b2be8f51345b273bb365182930a64d9d/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b686c70>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 17:42:24 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-08 17:42:24 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-08 17:42:36 | ERROR    | warming_executor:_execute_warming:108 - Action 1 failed: HTTPConnectionPool(host='localhost', port=49261): Max retries exceeded with url: /session/b2be8f51345b273bb365182930a64d9d/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b8474c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 17:42:36 | ERROR    | warming_executor:_execute_warming:108 - Action 2 failed: HTTPConnectionPool(host='localhost', port=49261): Max retries exceeded with url: /session/b2be8f51345b273bb365182930a64d9d/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b202eb0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 17:42:36 | ERROR    | warming_executor:_execute_warming:108 - Action 3 failed: HTTPConnectionPool(host='localhost', port=49261): Max retries exceeded with url: /session/b2be8f51345b273bb365182930a64d9d/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b7c3490>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 17:42:36 | ERROR    | warming_executor:_execute_warming:108 - Action 4 failed: HTTPConnectionPool(host='localhost', port=49261): Max retries exceeded with url: /session/b2be8f51345b273bb365182930a64d9d/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b7c3760>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 17:42:36 | ERROR    | warming_executor:_execute_warming:108 - Action 5 failed: HTTPConnectionPool(host='localhost', port=49261): Max retries exceeded with url: /session/b2be8f51345b273bb365182930a64d9d/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b79bb50>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 17:42:36 | ERROR    | warming_executor:_execute_warming:108 - Action 6 failed: HTTPConnectionPool(host='localhost', port=49261): Max retries exceeded with url: /session/b2be8f51345b273bb365182930a64d9d/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b127b20>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 17:42:36 | ERROR    | warming_executor:_execute_warming:108 - Action 7 failed: HTTPConnectionPool(host='localhost', port=49261): Max retries exceeded with url: /session/b2be8f51345b273bb365182930a64d9d/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b77cac0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 17:42:36 | ERROR    | warming_executor:_execute_warming:108 - Action 8 failed: HTTPConnectionPool(host='localhost', port=49261): Max retries exceeded with url: /session/b2be8f51345b273bb365182930a64d9d/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b847880>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 17:42:36 | ERROR    | warming_executor:_execute_warming:108 - Action 9 failed: HTTPConnectionPool(host='localhost', port=49261): Max retries exceeded with url: /session/b2be8f51345b273bb365182930a64d9d/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b77cac0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 17:42:36 | ERROR    | warming_executor:_execute_warming:108 - Action 10 failed: HTTPConnectionPool(host='localhost', port=49261): Max retries exceeded with url: /session/b2be8f51345b273bb365182930a64d9d/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b5835e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 17:42:36 | ERROR    | warming_executor:_execute_warming:108 - Action 11 failed: HTTPConnectionPool(host='localhost', port=49261): Max retries exceeded with url: /session/b2be8f51345b273bb365182930a64d9d/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b79b4c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 17:42:36 | ERROR    | browser_controller:close_browser:241 - Error closing browser: 'k17m5o28'
+2025-12-08 17:42:38 | ERROR    | browser_controller:close_browser:241 - Error closing browser: 'k17m5o28'
+2025-12-08 17:43:52 | ERROR    | action_executor:_click:272 - Click failed: Message: element not interactable: [object HTMLButtonElement] has no size and location
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x000000010aa50518 chromedriver + 6378776
+1   chromedriver                        0x000000010aa47c2a chromedriver + 6343722
+2   chromedriver                        0x000000010a4a4086 chromedriver + 430214
+3   chromedriver                        0x000000010a4aadcc chromedriver + 458188
+4   chromedriver                        0x000000010a4ad7f3 chromedriver + 468979
+5   chromedriver                        0x000000010a4ad8a3 chromedriver + 469155
+6   chromedriver                        0x000000010a4fc923 chromedriver + 792867
+7   chromedriver                        0x000000010a4fbcd2 chromedriver + 789714
+8   chromedriver                        0x000000010a54c86c chromedriver + 1120364
+9   chromedriver                        0x000000010a51ca02 chromedriver + 924162
+10  chromedriver                        0x000000010a543f6e chromedriver + 1085294
+11  chromedriver                        0x000000010a51c7d3 chromedriver + 923603
+12  chromedriver                        0x000000010a4e8185 chromedriver + 708997
+13  chromedriver                        0x000000010a4e95c1 chromedriver + 714177
+14  chromedriver                        0x000000010aa0dda0 chromedriver + 6106528
+15  chromedriver                        0x000000010aa12005 chromedriver + 6123525
+16  chromedriver                        0x000000010a9e9505 chromedriver + 5956869
+17  chromedriver                        0x000000010aa12a9f chromedriver + 6126239
+18  chromedriver                        0x000000010a9d8944 chromedriver + 5888324
+19  chromedriver                        0x000000010aa34b78 chromedriver + 6265720
+20  chromedriver                        0x000000010aa34d3d chromedriver + 6266173
+21  chromedriver                        0x000000010aa47801 chromedriver + 6342657
+22  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+23  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-08 17:44:05 | ERROR    | action_executor:_type:337 - ❌ Element not found for type: input[type='email'], input[placeholder*='mail' i]
+2025-12-08 17:44:15 | ERROR    | action_executor:_type:337 - ❌ Element not found for type: input[type='password'], input[placeholder*='contrase' i]
+2025-12-08 17:44:38 | ERROR    | action_executor:_click:245 - ❌ Element not found for click: button[type='submit'], button:has-text('Entrar'), button:has-text('Iniciar')
+2025-12-08 17:48:53 | ERROR    | action_executor:_click:272 - Click failed: Message: element not interactable
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x00000001011b6518 chromedriver + 6378776
+1   chromedriver                        0x00000001011adc2a chromedriver + 6343722
+2   chromedriver                        0x0000000100c09ebe chromedriver + 429758
+3   chromedriver                        0x0000000100c5d66b chromedriver + 771691
+4   chromedriver                        0x0000000100c5075a chromedriver + 718682
+5   chromedriver                        0x0000000100c82a02 chromedriver + 924162
+6   chromedriver                        0x0000000100c500d8 chromedriver + 717016
+7   chromedriver                        0x0000000100c82bbe chromedriver + 924606
+8   chromedriver                        0x0000000100ca9f6e chromedriver + 1085294
+9   chromedriver                        0x0000000100c827d3 chromedriver + 923603
+10  chromedriver                        0x0000000100c4e185 chromedriver + 708997
+11  chromedriver                        0x0000000100c4f5c1 chromedriver + 714177
+12  chromedriver                        0x0000000101173da0 chromedriver + 6106528
+13  chromedriver                        0x0000000101178005 chromedriver + 6123525
+14  chromedriver                        0x000000010114f505 chromedriver + 5956869
+15  chromedriver                        0x0000000101178a9f chromedriver + 6126239
+16  chromedriver                        0x000000010113e944 chromedriver + 5888324
+17  chromedriver                        0x000000010119ab78 chromedriver + 6265720
+18  chromedriver                        0x000000010119ad3d chromedriver + 6266173
+19  chromedriver                        0x00000001011ad801 chromedriver + 6342657
+20  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+21  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-08 17:49:04 | ERROR    | action_executor:_type:368 - Type failed: Message: element not interactable
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x00000001011b6518 chromedriver + 6378776
+1   chromedriver                        0x00000001011adc2a chromedriver + 6343722
+2   chromedriver                        0x0000000100c09ebe chromedriver + 429758
+3   chromedriver                        0x0000000100c52a8e chromedriver + 727694
+4   chromedriver                        0x0000000100c82a02 chromedriver + 924162
+5   chromedriver                        0x0000000100c500d8 chromedriver + 717016
+6   chromedriver                        0x0000000100c82bbe chromedriver + 924606
+7   chromedriver                        0x0000000100ca9f6e chromedriver + 1085294
+8   chromedriver                        0x0000000100c827d3 chromedriver + 923603
+9   chromedriver                        0x0000000100c4e185 chromedriver + 708997
+10  chromedriver                        0x0000000100c4f5c1 chromedriver + 714177
+11  chromedriver                        0x0000000101173da0 chromedriver + 6106528
+12  chromedriver                        0x0000000101178005 chromedriver + 6123525
+13  chromedriver                        0x000000010114f505 chromedriver + 5956869
+14  chromedriver                        0x0000000101178a9f chromedriver + 6126239
+15  chromedriver                        0x000000010113e944 chromedriver + 5888324
+16  chromedriver                        0x000000010119ab78 chromedriver + 6265720
+17  chromedriver                        0x000000010119ad3d chromedriver + 6266173
+18  chromedriver                        0x00000001011ad801 chromedriver + 6342657
+19  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+20  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-08 17:49:21 | ERROR    | action_executor:_type:337 - ❌ Element not found for type: input[type='password']
+2025-12-08 17:49:27 | ERROR    | action_executor:_click:245 - ❌ Element not found for click: button[type='submit'], button:has-text('Ingresar'), button:has-text('Iniciar')
+2025-12-08 17:51:39 | ERROR    | action_executor:execute_action:154 - Action failed (click): Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalid-selector-exception
+Stacktrace:
+0   chromedriver                        0x0000000101247518 chromedriver + 6378776
+1   chromedriver                        0x000000010123ec2a chromedriver + 6343722
+2   chromedriver                        0x0000000100c9b086 chromedriver + 430214
+3   chromedriver                        0x0000000100ca1dcc chromedriver + 458188
+4   chromedriver                        0x0000000100ca47f3 chromedriver + 468979
+5   chromedriver                        0x0000000100ca48a3 chromedriver + 469155
+6   chromedriver                        0x0000000100cecf63 chromedriver + 765795
+7   chromedriver                        0x0000000100ced741 chromedriver + 767809
+8   chromedriver                        0x0000000100d3dc54 chromedriver + 1096788
+9   chromedriver                        0x0000000100d13a2d chromedriver + 924205
+10  chromedriver                        0x0000000100d3af6e chromedriver + 1085294
+11  chromedriver                        0x0000000100d137d3 chromedriver + 923603
+12  chromedriver                        0x0000000100cdf185 chromedriver + 708997
+13  chromedriver                        0x0000000100ce05c1 chromedriver + 714177
+14  chromedriver                        0x0000000101204da0 chromedriver + 6106528
+15  chromedriver                        0x0000000101209005 chromedriver + 6123525
+16  chromedriver                        0x00000001011e0505 chromedriver + 5956869
+17  chromedriver                        0x0000000101209a9f chromedriver + 6126239
+18  chromedriver                        0x00000001011cf944 chromedriver + 5888324
+19  chromedriver                        0x000000010122bb78 chromedriver + 6265720
+20  chromedriver                        0x000000010122bd3d chromedriver + 6266173
+21  chromedriver                        0x000000010123e801 chromedriver + 6342657
+22  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+23  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-08 17:51:51 | ERROR    | action_executor:_type:368 - Type failed: Message: element not interactable
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x0000000101247518 chromedriver + 6378776
+1   chromedriver                        0x000000010123ec2a chromedriver + 6343722
+2   chromedriver                        0x0000000100c9aebe chromedriver + 429758
+3   chromedriver                        0x0000000100ce3a8e chromedriver + 727694
+4   chromedriver                        0x0000000100d13a02 chromedriver + 924162
+5   chromedriver                        0x0000000100ce10d8 chromedriver + 717016
+6   chromedriver                        0x0000000100d13bbe chromedriver + 924606
+7   chromedriver                        0x0000000100d3af6e chromedriver + 1085294
+8   chromedriver                        0x0000000100d137d3 chromedriver + 923603
+9   chromedriver                        0x0000000100cdf185 chromedriver + 708997
+10  chromedriver                        0x0000000100ce05c1 chromedriver + 714177
+11  chromedriver                        0x0000000101204da0 chromedriver + 6106528
+12  chromedriver                        0x0000000101209005 chromedriver + 6123525
+13  chromedriver                        0x00000001011e0505 chromedriver + 5956869
+14  chromedriver                        0x0000000101209a9f chromedriver + 6126239
+15  chromedriver                        0x00000001011cf944 chromedriver + 5888324
+16  chromedriver                        0x000000010122bb78 chromedriver + 6265720
+17  chromedriver                        0x000000010122bd3d chromedriver + 6266173
+18  chromedriver                        0x000000010123e801 chromedriver + 6342657
+19  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+20  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-08 17:52:08 | ERROR    | action_executor:_type:337 - ❌ Element not found for type: input[type='password']
+2025-12-08 17:52:26 | ERROR    | action_executor:_click:245 - ❌ Element not found for click: button[type='submit']
+2025-12-08 17:55:45 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 51] Network is unreachable
+2025-12-08 18:15:03 | ERROR    | action_executor:_click:272 - Click failed: Message: element not interactable: [object HTMLButtonElement] has no size and location
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x00000001055b3518 chromedriver + 6378776
+1   chromedriver                        0x00000001055aac2a chromedriver + 6343722
+2   chromedriver                        0x0000000105007086 chromedriver + 430214
+3   chromedriver                        0x000000010500ddcc chromedriver + 458188
+4   chromedriver                        0x00000001050107f3 chromedriver + 468979
+5   chromedriver                        0x00000001050108a3 chromedriver + 469155
+6   chromedriver                        0x000000010505f923 chromedriver + 792867
+7   chromedriver                        0x000000010505ecd2 chromedriver + 789714
+8   chromedriver                        0x00000001050af86c chromedriver + 1120364
+9   chromedriver                        0x000000010507fa02 chromedriver + 924162
+10  chromedriver                        0x00000001050a6f6e chromedriver + 1085294
+11  chromedriver                        0x000000010507f7d3 chromedriver + 923603
+12  chromedriver                        0x000000010504b185 chromedriver + 708997
+13  chromedriver                        0x000000010504c5c1 chromedriver + 714177
+14  chromedriver                        0x0000000105570da0 chromedriver + 6106528
+15  chromedriver                        0x0000000105575005 chromedriver + 6123525
+16  chromedriver                        0x000000010554c505 chromedriver + 5956869
+17  chromedriver                        0x0000000105575a9f chromedriver + 6126239
+18  chromedriver                        0x000000010553b944 chromedriver + 5888324
+19  chromedriver                        0x0000000105597b78 chromedriver + 6265720
+20  chromedriver                        0x0000000105597d3d chromedriver + 6266173
+21  chromedriver                        0x00000001055aa801 chromedriver + 6342657
+22  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+23  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
