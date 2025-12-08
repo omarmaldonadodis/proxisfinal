@@ -14,3 +14,128 @@
 2025-12-08 11:15:47 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=234, error=Failed to open browser for profile k17l902d
 2025-12-08 11:25:54 | ERROR    | action_executor:_search_google:333 - ❌ All submit methods failed
 2025-12-08 11:25:54 | ERROR    | action_executor:execute_action:106 - Action timeout (30s): search_google
+2025-12-08 14:21:24 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-08 14:21:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-08 14:21:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-08 14:21:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-08 14:21:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-08 14:21:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-08 14:21:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-08 14:21:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-08 14:22:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-08 14:24:36 | ERROR    | browser_controller:open_browser:140 - ❌ Failed to open browser for profile k17l902d: AdsPower error: Profile does not exist
+2025-12-08 14:24:36 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=240, error=Failed to open browser for profile k17l902d
+2025-12-08 14:32:38 | ERROR    | action_executor:execute_action:110 - Action timeout (30s): advanced_login
+2025-12-08 14:36:34 | ERROR    | action_executor:_click:402 - Click failed: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalid-selector-exception
+Stacktrace:
+0   chromedriver                        0x00000001075d9518 chromedriver + 6378776
+1   chromedriver                        0x00000001075d0c2a chromedriver + 6343722
+2   chromedriver                        0x000000010702d086 chromedriver + 430214
+3   chromedriver                        0x0000000107033dcc chromedriver + 458188
+4   chromedriver                        0x00000001070367f3 chromedriver + 468979
+5   chromedriver                        0x00000001070368a3 chromedriver + 469155
+6   chromedriver                        0x000000010707ef63 chromedriver + 765795
+7   chromedriver                        0x000000010707f741 chromedriver + 767809
+8   chromedriver                        0x00000001070cfc54 chromedriver + 1096788
+9   chromedriver                        0x00000001070a5a2d chromedriver + 924205
+10  chromedriver                        0x00000001070ccf6e chromedriver + 1085294
+11  chromedriver                        0x00000001070a57d3 chromedriver + 923603
+12  chromedriver                        0x0000000107071185 chromedriver + 708997
+13  chromedriver                        0x00000001070725c1 chromedriver + 714177
+14  chromedriver                        0x0000000107596da0 chromedriver + 6106528
+15  chromedriver                        0x000000010759b005 chromedriver + 6123525
+16  chromedriver                        0x0000000107572505 chromedriver + 5956869
+17  chromedriver                        0x000000010759ba9f chromedriver + 6126239
+18  chromedriver                        0x0000000107561944 chromedriver + 5888324
+19  chromedriver                        0x00000001075bdb78 chromedriver + 6265720
+20  chromedriver                        0x00000001075bdd3d chromedriver + 6266173
+21  chromedriver                        0x00000001075d0801 chromedriver + 6342657
+22  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+23  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-08 14:36:37 | ERROR    | action_executor:_type:444 - Type failed: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalid-selector-exception
+Stacktrace:
+0   chromedriver                        0x00000001075d9518 chromedriver + 6378776
+1   chromedriver                        0x00000001075d0c2a chromedriver + 6343722
+2   chromedriver                        0x000000010702d086 chromedriver + 430214
+3   chromedriver                        0x0000000107033dcc chromedriver + 458188
+4   chromedriver                        0x00000001070367f3 chromedriver + 468979
+5   chromedriver                        0x00000001070368a3 chromedriver + 469155
+6   chromedriver                        0x000000010707ef63 chromedriver + 765795
+7   chromedriver                        0x000000010707f741 chromedriver + 767809
+8   chromedriver                        0x00000001070cfc54 chromedriver + 1096788
+9   chromedriver                        0x00000001070a5a2d chromedriver + 924205
+10  chromedriver                        0x00000001070ccf6e chromedriver + 1085294
+11  chromedriver                        0x00000001070a57d3 chromedriver + 923603
+12  chromedriver                        0x0000000107071185 chromedriver + 708997
+13  chromedriver                        0x00000001070725c1 chromedriver + 714177
+14  chromedriver                        0x0000000107596da0 chromedriver + 6106528
+15  chromedriver                        0x000000010759b005 chromedriver + 6123525
+16  chromedriver                        0x0000000107572505 chromedriver + 5956869
+17  chromedriver                        0x000000010759ba9f chromedriver + 6126239
+18  chromedriver                        0x0000000107561944 chromedriver + 5888324
+19  chromedriver                        0x00000001075bdb78 chromedriver + 6265720
+20  chromedriver                        0x00000001075bdd3d chromedriver + 6266173
+21  chromedriver                        0x00000001075d0801 chromedriver + 6342657
+22  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+23  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-08 14:36:38 | ERROR    | action_executor:_type:444 - Type failed: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalid-selector-exception
+Stacktrace:
+0   chromedriver                        0x00000001075d9518 chromedriver + 6378776
+1   chromedriver                        0x00000001075d0c2a chromedriver + 6343722
+2   chromedriver                        0x000000010702d086 chromedriver + 430214
+3   chromedriver                        0x0000000107033dcc chromedriver + 458188
+4   chromedriver                        0x00000001070367f3 chromedriver + 468979
+5   chromedriver                        0x00000001070368a3 chromedriver + 469155
+6   chromedriver                        0x000000010707ef63 chromedriver + 765795
+7   chromedriver                        0x000000010707f741 chromedriver + 767809
+8   chromedriver                        0x00000001070cfc54 chromedriver + 1096788
+9   chromedriver                        0x00000001070a5a2d chromedriver + 924205
+10  chromedriver                        0x00000001070ccf6e chromedriver + 1085294
+11  chromedriver                        0x00000001070a57d3 chromedriver + 923603
+12  chromedriver                        0x0000000107071185 chromedriver + 708997
+13  chromedriver                        0x00000001070725c1 chromedriver + 714177
+14  chromedriver                        0x0000000107596da0 chromedriver + 6106528
+15  chromedriver                        0x000000010759b005 chromedriver + 6123525
+16  chromedriver                        0x0000000107572505 chromedriver + 5956869
+17  chromedriver                        0x000000010759ba9f chromedriver + 6126239
+18  chromedriver                        0x0000000107561944 chromedriver + 5888324
+19  chromedriver                        0x00000001075bdb78 chromedriver + 6265720
+20  chromedriver                        0x00000001075bdd3d chromedriver + 6266173
+21  chromedriver                        0x00000001075d0801 chromedriver + 6342657
+22  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+23  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-08 14:36:39 | ERROR    | action_executor:_click:402 - Click failed: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalid-selector-exception
+Stacktrace:
+0   chromedriver                        0x00000001075d9518 chromedriver + 6378776
+1   chromedriver                        0x00000001075d0c2a chromedriver + 6343722
+2   chromedriver                        0x000000010702d086 chromedriver + 430214
+3   chromedriver                        0x0000000107033dcc chromedriver + 458188
+4   chromedriver                        0x00000001070367f3 chromedriver + 468979
+5   chromedriver                        0x00000001070368a3 chromedriver + 469155
+6   chromedriver                        0x000000010707ef63 chromedriver + 765795
+7   chromedriver                        0x000000010707f741 chromedriver + 767809
+8   chromedriver                        0x00000001070cfc54 chromedriver + 1096788
+9   chromedriver                        0x00000001070a5a2d chromedriver + 924205
+10  chromedriver                        0x00000001070ccf6e chromedriver + 1085294
+11  chromedriver                        0x00000001070a57d3 chromedriver + 923603
+12  chromedriver                        0x0000000107071185 chromedriver + 708997
+13  chromedriver                        0x00000001070725c1 chromedriver + 714177
+14  chromedriver                        0x0000000107596da0 chromedriver + 6106528
+15  chromedriver                        0x000000010759b005 chromedriver + 6123525
+16  chromedriver                        0x0000000107572505 chromedriver + 5956869
+17  chromedriver                        0x000000010759ba9f chromedriver + 6126239
+18  chromedriver                        0x0000000107561944 chromedriver + 5888324
+19  chromedriver                        0x00000001075bdb78 chromedriver + 6265720
+20  chromedriver                        0x00000001075bdd3d chromedriver + 6266173
+21  chromedriver                        0x00000001075d0801 chromedriver + 6342657
+22  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+23  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-08 16:50:07 | ERROR    | action_executor:execute_action:110 - Action timeout (30s): advanced_login

@@ -17,6 +17,8 @@ from loguru import logger
 import asyncio
 import random
 import time
+from login_action import LoginAction
+
 
 class HumanBehavior:
     """Comportamiento humano para acciones"""
@@ -47,6 +49,8 @@ class ActionExecutor:
     def __init__(self, config):
         self.config = config
         self.behavior = HumanBehavior()
+        self.login_action = LoginAction(config)  # ✅ NUEVO
+
     
     def _is_browser_alive(self, driver: webdriver.Chrome) -> bool:
         """Verifica si el navegador sigue activo"""
@@ -175,6 +179,9 @@ class ActionExecutor:
         
         elif action_type == "login":
             return await self._login(driver, params)
+        
+        elif action_type == "advanced_login":
+            return await self._advanced_login(driver, params)
         
         else:
             logger.warning(f"Unknown action type: {action_type}")
@@ -622,3 +629,24 @@ class ActionExecutor:
         """Login genérico"""
         logger.warning("Login action not fully implemented")
         return False
+    
+    async def _advanced_login(self, driver, params):
+        """Login avanzado con detección"""
+        try:
+            result = await self.login_action.execute_login(driver, params)
+            
+            if result["success"]:
+                logger.info(f"✅ Login successful on {params.get('site')}")
+                return True
+            else:
+                issue = result.get("issue_detected")
+                logger.error(f"❌ Login failed: {issue}")
+                
+                if issue == "recaptcha":
+                    logger.warning("⚠️ reCAPTCHA detected")
+                    await asyncio.sleep(30)
+                
+                return False
+        except Exception as e:
+            logger.error(f"Login error: {e}")
+            return False

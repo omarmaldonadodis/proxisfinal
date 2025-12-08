@@ -24,6 +24,7 @@ class ActionType(str, enum.Enum):
     HUMAN_TYPING = "human_typing"     # Tipeo humanizado
     SEARCH_GOOGLE = "search_google"   # Búsqueda en Google
     LOGIN = "login"                   # Login en servicio
+    ADVANCED_LOGIN = "advanced_login"
 
 class ScriptStatus(str, enum.Enum):
     DRAFT = "draft"

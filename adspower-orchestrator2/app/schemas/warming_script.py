@@ -22,6 +22,7 @@ class ActionType(str, Enum):
     HUMAN_TYPING = "human_typing"
     SEARCH_GOOGLE = "search_google"
     LOGIN = "login"
+    ADVANCED_LOGIN = "advanced_login"
 
 class ScriptAction(BaseModel):
     """Acción individual de un script"""
