@@ -58,6 +58,78 @@ curl -X POST "http://localhost:8000/api/v1/profiles/" \
 Warming script
 el del ejemplo
 
+
+{
+  "id": 1,
+  "name": "🔍 Google Search Test - Mobile",
+  "description": "Test simple de búsqueda en Google (mobile optimizado)",
+  "category": "search_test",
+  "actions": [
+    {
+      "type": "navigate",
+      "params": {
+        "url": "https://www.google.com"
+      }
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 3
+      }
+    },
+    {
+      "type": "search_google",
+      "params": {
+        "query": "latest technology news"
+      }
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 4
+      }
+    },
+    {
+      "type": "scroll",
+      "params": {
+        "direction": "down",
+        "amount": 300,
+        "smooth": true
+      }
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 2
+      }
+    },
+    {
+      "type": "scroll",
+      "params": {
+        "direction": "down",
+        "amount": 300,
+        "smooth": true
+      }
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 2
+      }
+    }
+  ],
+  "duration_minutes": 5,
+  "randomize_order": false,
+  "repeat_count": 1,
+  "status": "active",
+  "is_template": false,
+  "tags": [],
+  "success_rate": 0,
+  "times_used": 116,
+  "created_at": "2025-12-03T21:48:29.502519Z",
+  "updated_at": "2025-12-08T17:08:23.668018Z"
+}
+
 y finalmente se agrega
 
 

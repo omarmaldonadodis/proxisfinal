@@ -18,6 +18,11 @@ class BrowserController:
         self.active_browsers: Dict[int, webdriver.Chrome] = {}
         self.browser_info: Dict[int, Dict] = {}
 
+        # Generar instalador segun sistema operativo
+
+
+        # Selector segun sistema operativo
+
         # Ruta ABSOLUTA del ChromeDriver
         self.chromedriver_path = (
             "/Users/omarmaldonado/Desktop/proxys/proyectofinal/agent/chromedriver"
@@ -45,6 +50,10 @@ class BrowserController:
             }
 
             logger.info(f"🌐 Opening browser for profile {profile_id}")
+
+            logger.info(f"DEBUG ADS URL: {self.config.ADSPOWER_API_URL}")
+            logger.info(f"DEBUG CONFIG ID: {id(self.config)}")
+
 
             # 1. Abrir en AdsPower
             response = requests.get(

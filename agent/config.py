@@ -1,21 +1,20 @@
-# agent/config.py
 from pydantic_settings import BaseSettings
 from typing import Optional
 
 class AgentConfig(BaseSettings):
     """Configuración del agente"""
     
-    # Identificación
-    COMPUTER_ID: int
-    COMPUTER_NAME: str = "Agent Computer"
+    # ✅ Identificación (COMPUTER_ID ahora es opcional - se obtiene al registrar)
+    COMPUTER_ID: Optional[int] = None  # Se asigna después del registro
+    COMPUTER_NAME: str  # Único campo obligatorio para identificación
     
     # Orquestador
-    ORCHESTRATOR_URL: str = "http://localhost:8000"
-    ORCHESTRATOR_WS_URL: str = "ws://localhost:8000"
+    ORCHESTRATOR_URL: str
+    ORCHESTRATOR_WS_URL: Optional[str] = None  # Se genera automáticamente
     
     # AdsPower Local
-    ADSPOWER_API_URL: str = "http://local.adspower.net:50325"
-    ADSPOWER_API_KEY: str
+    ADSPOWER_API_URL: Optional[str] = None  # Se detecta automáticamente
+    ADSPOWER_API_KEY: str  # Obligatorio
     
     # Capacidad
     MAX_BROWSERS: int = 10
@@ -32,4 +31,14 @@ class AgentConfig(BaseSettings):
     class Config:
         env_file = ".env"
         case_sensitive = True
-
+    
+    def __init__(self, **data):
+        super().__init__(**data)
+        
+        # ✅ Auto-generar ORCHESTRATOR_WS_URL si no existe
+        if not self.ORCHESTRATOR_WS_URL:
+            self.ORCHESTRATOR_WS_URL = self.ORCHESTRATOR_URL.replace("http://", "ws://").replace("https://", "wss://")
+    
+    def set_computer_id(self, computer_id: int):
+        """Establece el COMPUTER_ID después del registro"""
+        self.COMPUTER_ID = computer_id

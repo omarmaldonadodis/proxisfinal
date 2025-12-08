@@ -4,6 +4,9 @@ from fastapi import APIRouter
 # Importar routers
 from app.api.v1 import computers, proxies, profiles, tasks, health, automation, warming
 
+from app.api.v1 import registration
+
+
 # Router principal v1
 router = APIRouter()
 
@@ -14,6 +17,8 @@ router.include_router(profiles.router)
 router.include_router(tasks.router)
 router.include_router(health.router)
 router.include_router(automation.router)
-router.include_router(warming.router)  # ✅ AÑADIDO
+router.include_router(warming.router) 
+router.include_router(registration.router)
+
 
 __all__ = ["router"]

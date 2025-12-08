@@ -16,8 +16,15 @@ class Computer(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(255), unique=True, nullable=False, index=True)
-    hostname = Column(String(255), nullable=False)
-    ip_address = Column(String(45), nullable=False)
+    hostname = Column(String(255), nullable=True)  
+    ip_address = Column(String(45), nullable=True)  
+
+    # Token relationship
+    token = relationship("ComputerToken", back_populates="computer", uselist=False, cascade="all, delete-orphan")
+
+    # Hardware info (detectado automáticamente)
+
+
     
     # AdsPower API info
     adspower_api_url = Column(String(512), nullable=False)

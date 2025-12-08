@@ -1,0 +1,16 @@
+2025-12-08 10:50:10 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-08 10:50:15 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-08 10:50:20 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-08 10:50:25 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-08 10:50:30 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-08 10:50:35 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-08 10:50:40 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.18.133', 8000)
+2025-12-08 10:50:45 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-08 10:57:45 | ERROR    | browser_controller:open_browser:136 - ❌ Failed to open browser for profile k17l902d: Invalid URL 'None/api/v1/browser/start': No scheme supplied. Perhaps you meant https://None/api/v1/browser/start?
+2025-12-08 10:57:45 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=232, error=Failed to open browser for profile k17l902d
+2025-12-08 10:58:01 | ERROR    | browser_controller:open_browser:136 - ❌ Failed to open browser for profile k17l902d: Invalid URL 'None/api/v1/browser/start': No scheme supplied. Perhaps you meant https://None/api/v1/browser/start?
+2025-12-08 10:58:01 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=233, error=Failed to open browser for profile k17l902d
+2025-12-08 11:15:47 | ERROR    | browser_controller:open_browser:140 - ❌ Failed to open browser for profile k17l902d: Invalid URL 'None/api/v1/browser/start': No scheme supplied. Perhaps you meant https://None/api/v1/browser/start?
+2025-12-08 11:15:47 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=234, error=Failed to open browser for profile k17l902d
+2025-12-08 11:25:54 | ERROR    | action_executor:_search_google:333 - ❌ All submit methods failed
+2025-12-08 11:25:54 | ERROR    | action_executor:execute_action:106 - Action timeout (30s): search_google

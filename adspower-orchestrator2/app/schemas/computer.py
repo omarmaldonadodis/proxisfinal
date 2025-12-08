@@ -17,6 +17,11 @@ class ComputerBase(BaseModel):
     tags: List[str] = Field(default_factory=list)
     meta_data: Dict[str, Any] = Field(default_factory=dict)
 
+    @validator("meta_data", pre=True, always=True)
+    def set_meta_data_default(cls, v):
+        return v or {}
+
+
 class ComputerCreate(ComputerBase):
     pass
 

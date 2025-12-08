@@ -11,6 +11,7 @@ from config import AgentConfig
 from websocket_client import WebSocketClient
 from browser_controller import BrowserController
 from warming_executor import WarmingExecutor
+from auto_config import AutoConfig
 
 class AdsPowerAgent:
     """Agente AdsPower para ejecución distribuida"""
@@ -18,6 +19,9 @@ class AdsPowerAgent:
     def __init__(self):
         # Cargar configuración
         self.config = AgentConfig()
+
+        hw = AutoConfig.get_hardware_info(self.config)
+        self.config.ADSPOWER_API_URL = hw["adspower_api_url"]
         
         # Setup logging
         self._setup_logging()
@@ -70,22 +74,55 @@ class AdsPowerAgent:
             level="ERROR",
             format="{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {name}:{function}:{line} - {message}"
         )
-    
+
     async def start(self):
-        """Inicia el agente"""
+        '''Inicia el agente'''
         self.running = True
         self.start_time = datetime.utcnow()
         
         logger.info("=" * 60)
         logger.info(f"🤖 AdsPower Agent Starting")
-        logger.info(f"Computer ID: {self.config.COMPUTER_ID}")
         logger.info(f"Computer Name: {self.config.COMPUTER_NAME}")
         logger.info(f"Orchestrator: {self.config.ORCHESTRATOR_URL}")
         logger.info("=" * 60)
         
         try:
-            # Conectar al orquestrador
-            logger.info("Connecting to orchestrator...")
+            # ✅ 1. REGISTRO AUTOMÁTICO
+            from registration_client import RegistrationClient
+            
+            registration_client = RegistrationClient(
+                self.config.ORCHESTRATOR_URL,
+                self.config
+            )
+            
+            # Intentar usar token guardado
+            saved_token = registration_client.load_token()
+            saved_registration = registration_client.load_registration()
+            
+            if saved_token and saved_registration:
+                logger.info("🔑 Found saved token, validating...")
+                validation = await registration_client.validate_token(saved_token)
+                
+                if validation.get("valid"):
+                    logger.info("✅ Token valid, using existing registration")
+                    self.config.set_computer_id(validation["computer_id"])
+                else:
+                    logger.warning("❌ Saved token invalid, re-registering...")
+                    saved_token = None
+            
+            if not saved_token:
+                logger.info("📝 Registering with orchestrator...")
+                result = await registration_client.register()
+                self.config.set_computer_id(result["computer_id"])
+            
+            # ✅ 2. VERIFICAR QUE TENEMOS COMPUTER_ID
+            if not self.config.COMPUTER_ID:
+                raise Exception("Failed to obtain Computer ID from orchestrator")
+            
+            logger.info(f"✅ Computer ID: {self.config.COMPUTER_ID}")
+            
+            # ✅ 3. CONECTAR AL WEBSOCKET
+            logger.info("Connecting to orchestrator via WebSocket...")
             await self.websocket_client.connect()
             
             logger.info("✅ Agent started successfully!")
@@ -101,7 +138,9 @@ class AdsPowerAgent:
         
         except Exception as e:
             logger.error(f"Agent error: {e}")
-            await self.stop()
+            import traceback
+            traceback.print_exc()
+            await self.stop() 
     
     async def stop(self):
         """Detiene el agente"""
