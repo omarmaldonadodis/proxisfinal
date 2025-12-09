@@ -11,6 +11,7 @@ from selenium.common.exceptions import (
     NoSuchWindowException,
     TimeoutException,
 )
+
 from loguru import logger
 import asyncio
 import random
@@ -176,6 +177,8 @@ class ActionExecutor:
             result = await login_executor.execute_login(driver, params)
             logger.info(f"Login result: success={result.success}, message={result.message}")
             return result.success
+        elif action_type == "wait_element":
+            return await self._wait_element(driver, params)
         else:
             logger.warning(f"Unknown action type: {action_type}")
             return False
@@ -309,318 +312,217 @@ class ActionExecutor:
         
     async def _click(self, driver: webdriver.Chrome, params: Dict) -> bool:
         """
-        ✅ CLICK OPTIMIZADO PARA MODO MOBILE
-        Evita ActionChains que fallan en mobile - usa solo JavaScript
+        ✅ CLICK seguro para Angular Material / CDK Overlay / Modales
+        Compatible con AdsPower
         """
         selector = params.get("selector")
         selector_type = params.get("selector_type", "css")
         text = params.get("text")
         human = params.get("human", True)
-        
-        if not selector:
-            logger.error("No selector provided for click")
+
+        if not selector and not text:
+            logger.error("❌ No selector or text provided")
             return False
-        
-        logger.info(f"🔍 Looking for: {selector_type}={selector}")
-        
-        # ============================================
-        # PASO 1: ENCONTRAR ELEMENTO (múltiples estrategias)
-        # ============================================
-        element = None
-        
-        # Estrategia A: Selector directo
+
+        logger.info(f"🔍 Looking for (modal-safe): {selector_type}={selector}")
+
+        overlays = []
+
+        # 1. Buscar overlays activos (Angular CDK)
         try:
-            if selector_type.lower() == "xpath":
-                element = WebDriverWait(driver, 10).until(
-                    EC.presence_of_element_located((By.XPATH, selector))
-                )
-            else:
-                element = WebDriverWait(driver, 10).until(
-                    EC.presence_of_element_located((By.CSS_SELECTOR, selector))
-                )
-            
-            if element:
-                logger.debug("✓ Element found with direct selector")
+            overlays = driver.find_elements(By.CSS_SELECTOR, ".cdk-overlay-pane")
         except:
-            logger.debug("Direct selector failed")
-        
-        # Estrategia B: Buscar por texto (si se proporcionó)
-        if not element and text:
+            overlays = []
+
+        search_contexts = overlays[::-1] if overlays else [driver]
+
+        element = None
+
+        # 2. Buscar dentro de overlays primero
+        for ctx in search_contexts:
             try:
-                logger.debug(f"Searching by text: '{text}'")
-                
-                # JavaScript para encontrar por texto
-                element = driver.execute_script(f"""
-                    function findByText(text) {{
-                        const buttons = Array.from(document.querySelectorAll('button, a'));
-                        return buttons.find(btn => 
-                            btn.textContent.trim().includes(text) && 
-                            btn.offsetParent !== null
+                if selector:
+                    if selector_type.lower() == "xpath":
+                        element = ctx.find_element(By.XPATH, selector)
+                    else:
+                        element = ctx.find_element(By.CSS_SELECTOR, selector)
+                elif text:
+                    element = driver.execute_script("""
+                        const root = arguments[0] === document ? document : arguments[0];
+                        const candidates = root.querySelectorAll('button, a, div, span');
+                        const txt = arguments[1];
+                        return [...candidates].find(el => 
+                            el.innerText && el.innerText.trim().includes(txt)
                         );
-                    }}
-                    return findByText('{text}');
-                """)
-                
+                    """, ctx if ctx != driver else driver.execute_script("return document"), text)
+
                 if element:
-                    logger.debug(f"✓ Found by text: '{text}'")
-            except Exception as e:
-                logger.debug(f"Text search failed: {e}")
-        
-        # Estrategia C: Clase específica de Sorti
-        if not element:
-            try:
-                logger.debug("Trying Sorti-specific class")
-                element = driver.execute_script("""
-                    return document.querySelector('button.zg-btn-primary');
-                """)
-                
-                if element:
-                    logger.debug("✓ Found Sorti button")
+                    logger.debug("✅ Element found inside overlay")
+                    break
             except:
-                pass
-        
-        # Estrategia D: Cualquier botón visible con "Ingresar"
-        if not element and text:
-            try:
-                logger.debug("Trying all visible buttons")
-                element = driver.execute_script(f"""
-                    const allButtons = Array.from(document.querySelectorAll('button'));
-                    for (let btn of allButtons) {{
-                        const rect = btn.getBoundingClientRect();
-                        const style = window.getComputedStyle(btn);
-                        const isVisible = (
-                            style.display !== 'none' &&
-                            style.visibility !== 'hidden' &&
-                            rect.width > 0 &&
-                            rect.height > 0
-                        );
-                        
-                        if (isVisible && btn.textContent.includes('{text}')) {{
-                            return btn;
-                        }}
-                    }}
-                    return null;
-                """)
-                
-                if element:
-                    logger.debug("✓ Found visible button")
-            except Exception as e:
-                logger.debug(f"Visible button search failed: {e}")
-        
+                continue
+
         if not element:
-            logger.error(f"❌ Element not found: {selector}")
+            logger.error(f"❌ Element not found in overlay: {selector or text}")
             self._take_debug_screenshot(driver, "element_not_found")
             return False
-        
-        # ============================================
-        # PASO 2: ASEGURAR QUE EL NAVEGADOR TIENE FOCO
-        # ============================================
+
+        # 3. Esperar a que sea realmente clickeable
         try:
-            logger.debug("Focusing browser window...")
-            
-            # Forzar foco en la ventana del navegador
-            driver.switch_to.window(driver.current_window_handle)
-            
-            # JavaScript para asegurar foco
+            WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable(element)
+            )
+        except:
+            pass
+
+        # 4. Scroll centrado
+        try:
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block: 'center'});",
+                element
+            )
+            await asyncio.sleep(0.3)
+        except:
+            pass
+
+        # 5. CLICK SEGURO (sin coordenadas reales)
+        try:
+            logger.debug("✅ Executing safe click (no coordinate math)...")
+
             driver.execute_script("""
-                window.focus();
-                document.body.focus();
-            """)
-            
-            await asyncio.sleep(0.5)
-        except Exception as e:
-            logger.warning(f"Window focus warning: {e}")
-        
-        # ============================================
-        # PASO 3: HACER ELEMENTO VISIBLE Y CLICKEABLE
-        # ============================================
-        try:
-            logger.debug("Preparing element for click...")
-            
-            # Forzar visibilidad y scroll
-            driver.execute_script("""
-                const elem = arguments[0];
-                
-                // Hacer visible
-                elem.style.display = 'block';
-                elem.style.visibility = 'visible';
-                elem.style.opacity = '1';
-                elem.style.pointerEvents = 'auto';
-                
-                // Scroll al centro
-                elem.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center',
-                    inline: 'center'
-                });
-                
-                // Remover cualquier overlay
-                const zIndex = window.getComputedStyle(elem).zIndex;
-                if (zIndex === 'auto' || parseInt(zIndex) < 1000) {
-                    elem.style.zIndex = '999999';
-                }
-            """, element)
-            
-            await asyncio.sleep(1.0)  # Esperar scroll
-            
-        except Exception as e:
-            logger.warning(f"Element preparation warning: {e}")
-        
-        # ============================================
-        # PASO 4: CLICK CON JAVASCRIPT (sin ActionChains)
-        # ============================================
-        try:
-            logger.debug("Performing click...")
-            
-            # Método 1: Click directo con JavaScript
-            success = driver.execute_script("""
-                const elem = arguments[0];
-                
-                try {
-                    // Focus en el elemento
-                    elem.focus();
-                    
-                    // Simular eventos de mouse completos
-                    const rect = elem.getBoundingClientRect();
-                    const x = rect.left + rect.width / 2;
-                    const y = rect.top + rect.height / 2;
-                    
-                    // MouseDown
-                    const mouseDown = new MouseEvent('mousedown', {
-                        view: window,
-                        bubbles: true,
-                        cancelable: true,
-                        clientX: x,
-                        clientY: y,
-                        button: 0
-                    });
-                    elem.dispatchEvent(mouseDown);
-                    
-                    // MouseUp
-                    const mouseUp = new MouseEvent('mouseup', {
-                        view: window,
-                        bubbles: true,
-                        cancelable: true,
-                        clientX: x,
-                        clientY: y,
-                        button: 0
-                    });
-                    elem.dispatchEvent(mouseUp);
-                    
-                    // Click
-                    const clickEvent = new MouseEvent('click', {
-                        view: window,
-                        bubbles: true,
-                        cancelable: true,
-                        clientX: x,
-                        clientY: y,
-                        button: 0
-                    });
-                    elem.dispatchEvent(clickEvent);
-                    
-                    // Click directo como backup
-                    elem.click();
-                    
-                    return true;
-                } catch(e) {
-                    console.error('Click error:', e);
-                    return false;
-                }
-            """, element)
-            
-            if success or success is None:  # None = no error
-                logger.info("✅ Click successful (JavaScript)")
-                await asyncio.sleep(random.uniform(0.8, 1.5) if human else 0.5)
-                self._take_debug_screenshot(driver, "after_click")
-                return True
-            
-        except Exception as e:
-            logger.error(f"JavaScript click failed: {e}")
-        
-        # ============================================
-        # MÉTODO FALLBACK: Click en coordenadas absolutas
-        # ============================================
-        try:
-            logger.debug("Trying coordinate click (fallback)...")
-            
-            driver.execute_script("""
-                const elem = arguments[0];
-                const rect = elem.getBoundingClientRect();
-                
-                const x = window.scrollX + rect.left + rect.width / 2;
-                const y = window.scrollY + rect.top + rect.height / 2;
-                
-                const clickAtCoords = new MouseEvent('click', {
-                    view: window,
+                const ev = new MouseEvent('click', {
                     bubbles: true,
                     cancelable: true,
-                    clientX: x,
-                    clientY: y
+                    view: window
                 });
-                
-                document.elementFromPoint(rect.left + rect.width/2, rect.top + rect.height/2)?.dispatchEvent(clickAtCoords);
-                elem.click();
+                arguments[0].dispatchEvent(ev);
             """, element)
-            
-            logger.info("✅ Click successful (coordinates)")
-            await asyncio.sleep(0.5)
+
+            logger.info("✅ Modal-safe click successful")
+
+            if human:
+                await asyncio.sleep(random.uniform(0.4, 1.0))
+            else:
+                await asyncio.sleep(0.2)
+
+            self._take_debug_screenshot(driver, "after_click")
             return True
-            
+
         except Exception as e:
-            logger.error(f"Coordinate click failed: {e}")
+            logger.error(f"❌ Modal-safe click failed: {e}")
             self._take_debug_screenshot(driver, "click_failed")
-            return False                 
+            return False
+
+    async def _wait_element(self, driver: webdriver.Chrome, params: Dict) -> bool:
+        selector = params.get("selector")
+        timeout = params.get("timeout", 20)
+
+        if not selector:
+            return False
+
+        logger.info(f"⏳ Waiting VISIBLE element: {selector}")
+
+        try:
+            end = time.time() + timeout
+
+            while time.time() < end:
+                elements = driver.find_elements(By.CSS_SELECTOR, selector)
+
+                for el in elements:
+                    try:
+                        is_displayed = el.is_displayed()
+                        rect = driver.execute_script("""
+                            const r = arguments[0].getBoundingClientRect();
+                            return {w: r.width, h: r.height};
+                        """, el)
+
+                        if is_displayed and rect["w"] > 5 and rect["h"] > 5:
+                            logger.info("✅ Real visible element found")
+                            return True
+                    except:
+                        continue
+
+                await asyncio.sleep(0.5)
+
+            raise Exception("Timeout waiting visible element")
+
+        except Exception as e:
+            logger.error(f"wait_element failed: {e}")
+            self._take_debug_screenshot(driver, "wait_element_failed")
+            return False
+
+                  
     async def _type(self, driver: webdriver.Chrome, params: Dict) -> bool:
         selector = params.get("selector")
         text = params.get("text", "")
-        selector_type = params.get("selector_type") or params.get("by", "css")
         human = params.get("human", True)
         clear_first = params.get("clear", True)
         
         if not selector:
             logger.error("No selector provided for type")
             return False
-        
+
         text = self._replace_variables(text)
-        
         self._take_debug_screenshot(driver, "before_type")
-        logger.info(f"🔍 Looking for type element: {selector_type} = {selector}")
-        
-        element = self._find_element_with_strategies(driver, selector, selector_type, timeout=15)
-        
+        logger.info(f"🔍 Looking for type element: css = {selector}")
+
+        try:
+            # Buscar input REAL dentro del overlay
+            element = driver.execute_script("""
+                const sel = arguments[0];
+                const overlays = document.querySelectorAll('.cdk-overlay-pane');
+                for (const overlay of overlays) {
+                    const el = overlay.querySelector(sel);
+                    if (el && el.offsetParent !== null) return el;
+                }
+                // fallback al body
+                const el = document.querySelector(sel);
+                return (el && el.offsetParent !== null) ? el : null;
+            """, selector)
+        except Exception as e:
+            logger.error(f"JS query failed: {e}")
+            return False
+
         if not element:
-            logger.error(f"❌ Element not found for type: {selector}")
+            logger.error("❌ No visible input found")
             self._take_debug_screenshot(driver, "type_not_found")
             return False
-        
+
         try:
-            driver.execute_script(
-                "arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});",
-                element
-            )
+            # Forzar foco real
+            driver.execute_script("""
+                arguments[0].scrollIntoView({behavior:'auto', block:'center'});
+                arguments[0].removeAttribute('disabled');
+                arguments[0].focus();
+            """, element)
             await asyncio.sleep(0.5)
-            
+
             if clear_first:
-                element.clear()
-                await asyncio.sleep(0.3)
-            
-            element.click()
-            await asyncio.sleep(0.3)
-            
+                try:
+                    element.clear()
+                    await asyncio.sleep(0.3)
+                except:
+                    # input oculto, usar JS
+                    driver.execute_script("arguments[0].value = '';", element)
+                    await asyncio.sleep(0.3)
+
+            # Enviar texto
             if human:
                 for char in text:
                     element.send_keys(char)
                     await asyncio.sleep(self.behavior.typing_speed())
             else:
                 element.send_keys(text)
-            
+
             await asyncio.sleep(random.uniform(0.3, 0.7))
-            logger.info(f"✓ Typed text")
+            logger.info("✓ Typed text successfully")
             return True
-        
+
         except Exception as e:
             logger.error(f"Type failed: {e}")
+            self._take_debug_screenshot(driver, "type_failed")
             return False
+
     
     async def _scroll(self, driver: webdriver.Chrome, params: Dict) -> bool:
         direction = params.get("direction", "down")
