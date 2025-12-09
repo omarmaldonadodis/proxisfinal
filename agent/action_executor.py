@@ -182,21 +182,38 @@ class ActionExecutor:
     
     async def _navigate(self, driver: webdriver.Chrome, params: Dict) -> bool:
         url = params.get("url")
+        timeout = params.get("timeout", 40)
+
         if not url:
+            logger.error("No URL provided")
             return False
-        
+
         if not url.startswith("http"):
             url = f"https://{url}"
-        
+
         try:
+            # Evitar que Selenium se quede esperando "carga completa"
+            driver.set_page_load_timeout(timeout)
+
+            # Cargar la página
             driver.get(url)
+
+            # Esperar solo a que el BODY esté presente (no toda la SPA)
+            WebDriverWait(driver, 15).until(
+                EC.presence_of_element_located((By.TAG_NAME, "body"))
+            )
+
+            # Espera humana aleatoria
             await asyncio.sleep(random.uniform(2, 4))
+
             self._log_page_info(driver)
             logger.info(f"✓ Navigated to: {url}")
             return True
+
         except Exception as e:
             logger.error(f"Navigation failed: {e}")
             return False
+
     
     async def _click(self, driver: webdriver.Chrome, params: Dict) -> bool:
         selector = params.get("selector")

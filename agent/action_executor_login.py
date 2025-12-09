@@ -115,14 +115,14 @@ class HumanizedLoginExecutor:
                     error_type="recaptcha",
                     needs_captcha=True
                 )
-            logger.info(f"Termiina paso 1")
+            logger.info(f"✓ Paso 1 completado")
 
             # 2. Esperar estabilidad de la página
             await self._wait_for_page_stability(driver)
-            logger.info(f"Termiina paso 2")
+            logger.info(f"✓ Paso 2 completado")
 
             
-            # 3. Esperar a que los campos del modal estén visibles
+            # 3. ✅ MEJORADO: Esperar a que los campos del modal estén visibles
             username_selector = params.get(
                 "username_selector",
                 "input[placeholder*='Correo'], input[type='text'], input[name='email']"
@@ -136,25 +136,33 @@ class HumanizedLoginExecutor:
                 "button:contains('Acceder'), button.btn-success, button[type='submit']"
             )
             
-            await self._wait_for_element(driver, username_selector)
-            logger.info(f"Termiina paso 3")
+            # ✅ MEJORADO: Usar método más robusto para esperar elemento
+            username_element = await self._wait_for_element_robust(driver, username_selector, timeout=15)
+            if not username_element:
+                return LoginResult(False, "Username field not found", "username_field_not_found")
+            
+            logger.info(f"✓ Paso 3 completado - Username field found")
 
             # 4. Llenar username
-            username_filled = await self._fill_username(driver, username, username_selector)
+            username_filled = await self._fill_field_robust(driver, username_element, username)
             if not username_filled:
-                return LoginResult(False, "Could not find username field", "username_field_not_found")
+                return LoginResult(False, "Could not fill username field", "username_fill_failed")
             
             await asyncio.sleep(random.uniform(0.8, 1.5))
             
-            logger.info(f"Termiina paso 4")
+            logger.info(f"✓ Paso 4 completado - Username filled")
 
             # 5. Llenar password
-            password_filled = await self._fill_password(driver, password, password_selector)
+            password_element = await self._wait_for_element_robust(driver, password_selector, timeout=10)
+            if not password_element:
+                return LoginResult(False, "Password field not found", "password_field_not_found")
+            
+            password_filled = await self._fill_field_robust(driver, password_element, password)
             if not password_filled:
-                return LoginResult(False, "Could not find password field", "password_field_not_found")
+                return LoginResult(False, "Could not fill password field", "password_fill_failed")
             
             await asyncio.sleep(random.uniform(1.0, 2.0))
-            logger.info(f"Termiina paso 5")
+            logger.info(f"✓ Paso 5 completado - Password filled")
 
             # 6. Detectar CAPTCHA visible después de llenar campos
             if not params.get("ignore_recaptcha", False) and self._detect_recaptcha(driver):
@@ -166,12 +174,14 @@ class HumanizedLoginExecutor:
                     needs_captcha=True
                 )
             
-            logger.info(f"Termiina paso 6")
+            logger.info(f"✓ Paso 6 completado - No CAPTCHA detected")
 
             # 7. Hacer click en submit
-            submit_clicked = await self._click_submit(driver, submit_selector)
+            submit_clicked = await self._click_submit_robust(driver, submit_selector)
             if not submit_clicked:
                 return LoginResult(False, "Could not click submit button", "submit_button_not_found")
+            
+            logger.info(f"✓ Paso 7 completado - Submit clicked")
             
             # 8. Esperar resultado
             wait_after = params.get("wait_after_submit", 5)
@@ -212,8 +222,151 @@ class HumanizedLoginExecutor:
             return LoginResult(False, str(e), "exception")
     
     # -----------------------------
-    # Métodos internos auxiliares
+    # ✅ MÉTODOS MEJORADOS
     # -----------------------------
+    
+    async def _wait_for_element_robust(
+        self,
+        driver: webdriver.Chrome,
+        selector: str,
+        timeout: int = 15
+    ):
+        """✅ MEJORADO: Espera elemento con múltiples estrategias"""
+        
+        selectors = [s.strip() for s in selector.split(",")]
+        
+        # Estrategia 1: CSS Selectors con espera explícita
+        for sel in selectors:
+            try:
+                logger.debug(f"Trying CSS selector: {sel}")
+                element = WebDriverWait(driver, timeout).until(
+                    EC.visibility_of_element_located((By.CSS_SELECTOR, sel))
+                )
+                if element and element.is_displayed():
+                    logger.debug(f"✓ Found with CSS: {sel}")
+                    return element
+            except TimeoutException:
+                logger.debug(f"✗ CSS selector failed: {sel}")
+                continue
+            except Exception as e:
+                logger.debug(f"✗ CSS selector error: {e}")
+                continue
+        
+        # Estrategia 2: JavaScript querySelector
+        for sel in selectors:
+            try:
+                logger.debug(f"Trying JavaScript querySelector: {sel}")
+                element = driver.execute_script(f"""
+                    return document.querySelector('{sel}');
+                """)
+                if element:
+                    # Verificar visibilidad
+                    is_visible = driver.execute_script("""
+                        var elem = arguments[0];
+                        var rect = elem.getBoundingClientRect();
+                        return rect.width > 0 && rect.height > 0;
+                    """, element)
+                    
+                    if is_visible:
+                        logger.debug(f"✓ Found with JS: {sel}")
+                        return element
+            except Exception as e:
+                logger.debug(f"✗ JavaScript selector error: {e}")
+                continue
+        
+        # Estrategia 3: Búsqueda por atributos comunes
+        common_attrs = [
+            ("id", "loginUsername"),
+            ("id", "username"),
+            ("id", "email"),
+            ("name", "email"),
+            ("name", "username"),
+            ("placeholder", "correo"),
+            ("placeholder", "email"),
+            ("type", "email"),
+        ]
+        
+        for attr, value in common_attrs:
+            try:
+                logger.debug(f"Trying attribute: {attr}='{value}'")
+                elements = driver.find_elements(By.CSS_SELECTOR, f"input[{attr}*='{value}' i]")
+                for elem in elements:
+                    if elem.is_displayed():
+                        logger.debug(f"✓ Found with attribute search: {attr}={value}")
+                        return elem
+            except Exception as e:
+                logger.debug(f"✗ Attribute search error: {e}")
+                continue
+        
+        logger.error(f"❌ Element not found after all strategies: {selector}")
+        return None
+    
+    async def _fill_field_robust(self, driver: webdriver.Chrome, element, text: str) -> bool:
+        """✅ MEJORADO: Llena campo con múltiples estrategias"""
+        
+        try:
+            # Estrategia 1: Scroll y focus
+            driver.execute_script(
+                "arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});",
+                element
+            )
+            await asyncio.sleep(0.5)
+            
+            # Estrategia 2: Click con JavaScript
+            driver.execute_script("arguments[0].focus(); arguments[0].click();", element)
+            await asyncio.sleep(0.3)
+            
+            # Estrategia 3: Limpiar campo (múltiples métodos)
+            try:
+                element.clear()
+            except:
+                driver.execute_script("arguments[0].value = '';", element)
+            
+            await asyncio.sleep(0.2)
+            
+            # Estrategia 4: Tipeo humanizado
+            for char in text:
+                element.send_keys(char)
+                await asyncio.sleep(random.uniform(0.05, 0.15))
+            
+            # Verificar que se escribió
+            current_value = driver.execute_script("return arguments[0].value;", element)
+            if current_value == text:
+                logger.debug(f"✓ Field filled successfully")
+                return True
+            else:
+                logger.warning(f"⚠️ Value mismatch: expected '{text}', got '{current_value}'")
+                return False
+        
+        except Exception as e:
+            logger.error(f"Fill field error: {e}")
+            return False
+    
+    async def _click_submit_robust(self, driver: webdriver.Chrome, selector: str) -> bool:
+        """✅ MEJORADO: Click en submit con múltiples estrategias"""
+        
+        element = await self._wait_for_element_robust(driver, selector, timeout=10)
+        if not element:
+            logger.error("Submit button not found")
+            return False
+        
+        try:
+            # Scroll hacia el botón
+            driver.execute_script(
+                "arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});",
+                element
+            )
+            await asyncio.sleep(0.5)
+            
+            # Click con JavaScript (más confiable)
+            driver.execute_script("arguments[0].click();", element)
+            logger.debug("✓ Submit button clicked")
+            await asyncio.sleep(random.uniform(0.5, 1.0))
+            return True
+        
+        except Exception as e:
+            logger.error(f"Submit click error: {e}")
+            return False
     
     def _detect_recaptcha(self, driver: webdriver.Chrome) -> bool:
         """Detecta si hay un reCAPTCHA visible en la página"""
@@ -234,76 +387,3 @@ class HumanizedLoginExecutor:
     
     async def _wait_for_page_stability(self, driver: webdriver.Chrome, timeout: int = 3):
         await asyncio.sleep(random.uniform(timeout, timeout + 2))
-    
-    async def _wait_for_element(self, driver: webdriver.Chrome, selector: str, timeout: int = 10):
-        """Espera hasta que un elemento sea visible"""
-        selectors = [s.strip() for s in selector.split(",")]
-        for sel in selectors:
-            try:
-                WebDriverWait(driver, timeout).until(
-                    EC.visibility_of_element_located((By.CSS_SELECTOR, sel))
-                )
-                return True
-            except TimeoutException:
-                continue
-        return False
-    
-    async def _fill_username(self, driver: webdriver.Chrome, username: str, selector: str) -> bool:
-        element = None
-        selectors = [s.strip() for s in selector.split(",")]
-        for sel in selectors:
-            try:
-                element = WebDriverWait(driver, 5).until(
-                    EC.visibility_of_element_located((By.CSS_SELECTOR, sel))
-                )
-                if element.is_displayed():
-                    break
-            except TimeoutException:
-                continue
-        if not element:
-            return False
-        element.click()
-        await asyncio.sleep(random.uniform(0.2, 0.5))
-        for char in username:
-            element.send_keys(char)
-            await asyncio.sleep(random.uniform(0.05, 0.15))
-        return True
-    
-    async def _fill_password(self, driver: webdriver.Chrome, password: str, selector: str) -> bool:
-        element = None
-        selectors = [s.strip() for s in selector.split(",")]
-        for sel in selectors:
-            try:
-                element = WebDriverWait(driver, 5).until(
-                    EC.visibility_of_element_located((By.CSS_SELECTOR, sel))
-                )
-                if element.is_displayed():
-                    break
-            except TimeoutException:
-                continue
-        if not element:
-            return False
-        element.click()
-        await asyncio.sleep(random.uniform(0.2, 0.5))
-        for char in password:
-            element.send_keys(char)
-            await asyncio.sleep(random.uniform(0.05, 0.15))
-        return True
-    
-    async def _click_submit(self, driver: webdriver.Chrome, selector: str) -> bool:
-        element = None
-        selectors = [s.strip() for s in selector.split(",")]
-        for sel in selectors:
-            try:
-                element = WebDriverWait(driver, 5).until(
-                    EC.element_to_be_clickable((By.CSS_SELECTOR, sel))
-                )
-                if element.is_displayed():
-                    break
-            except TimeoutException:
-                continue
-        if not element:
-            return False
-        element.click()
-        await asyncio.sleep(random.uniform(0.5, 1.0))
-        return True

@@ -420,3 +420,348 @@ Stacktrace:
 2025-12-08 19:04:41 | ERROR    | warming_executor:_execute_warming:108 - Action 9 failed: HTTPConnectionPool(host='localhost', port=59123): Max retries exceeded with url: /session/413f0a9d58a16279aa967a400dd64e89/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x104a29a60>: Failed to establish a new connection: [Errno 61] Connection refused'))
 2025-12-08 19:04:41 | ERROR    | warming_executor:_execute_warming:108 - Action 10 failed: HTTPConnectionPool(host='localhost', port=59123): Max retries exceeded with url: /session/413f0a9d58a16279aa967a400dd64e89/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x104a044f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
 2025-12-08 19:04:43 | ERROR    | browser_controller:close_browser:241 - Error closing browser: 'k17m5o28'
+2025-12-08 19:40:15 | ERROR    | action_executor:execute_action:143 - Action timeout (60s): advanced_login
+2025-12-08 19:40:15 | ERROR    | action_executor:_take_debug_screenshot:70 - Screenshot failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x00000001050b9518 chromedriver + 6378776
+1   chromedriver                        0x00000001050b0c2a chromedriver + 6343722
+2   chromedriver                        0x0000000104b0d086 chromedriver + 430214
+3   chromedriver                        0x0000000104ae1a70 chromedriver + 252528
+4   chromedriver                        0x0000000104b8dc88 chromedriver + 957576
+5   chromedriver                        0x0000000104bac96c chromedriver + 1083756
+6   chromedriver                        0x0000000104b857d3 chromedriver + 923603
+7   chromedriver                        0x0000000104b51185 chromedriver + 708997
+8   chromedriver                        0x0000000104b525c1 chromedriver + 714177
+9   chromedriver                        0x0000000105076da0 chromedriver + 6106528
+10  chromedriver                        0x000000010507b005 chromedriver + 6123525
+11  chromedriver                        0x0000000105052505 chromedriver + 5956869
+12  chromedriver                        0x000000010507ba9f chromedriver + 6126239
+13  chromedriver                        0x0000000105041944 chromedriver + 5888324
+14  chromedriver                        0x000000010509db78 chromedriver + 6265720
+15  chromedriver                        0x000000010509dd3d chromedriver + 6266173
+16  chromedriver                        0x00000001050b0801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-08 19:40:15 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 19:40:15 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 19:40:15 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 19:40:15 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 19:40:15 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-08 19:40:17 | ERROR    | warming_executor:_execute_warming:108 - Action 1 failed: HTTPConnectionPool(host='localhost', port=55874): Max retries exceeded with url: /session/312dfb45b27965392ac3550fdaebcaad/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x111edca90>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 19:40:17 | ERROR    | warming_executor:_execute_warming:108 - Action 2 failed: HTTPConnectionPool(host='localhost', port=55874): Max retries exceeded with url: /session/312dfb45b27965392ac3550fdaebcaad/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x111f05430>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 19:40:17 | ERROR    | warming_executor:_execute_warming:108 - Action 3 failed: HTTPConnectionPool(host='localhost', port=55874): Max retries exceeded with url: /session/312dfb45b27965392ac3550fdaebcaad/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x111edc370>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 19:40:17 | ERROR    | warming_executor:_execute_warming:108 - Action 4 failed: HTTPConnectionPool(host='localhost', port=55874): Max retries exceeded with url: /session/312dfb45b27965392ac3550fdaebcaad/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x111dbd8e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 19:40:17 | ERROR    | warming_executor:_execute_warming:108 - Action 5 failed: HTTPConnectionPool(host='localhost', port=55874): Max retries exceeded with url: /session/312dfb45b27965392ac3550fdaebcaad/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x111f05910>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 19:40:17 | ERROR    | warming_executor:_execute_warming:108 - Action 6 failed: HTTPConnectionPool(host='localhost', port=55874): Max retries exceeded with url: /session/312dfb45b27965392ac3550fdaebcaad/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x111f05e20>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 19:40:17 | ERROR    | warming_executor:_execute_warming:108 - Action 7 failed: HTTPConnectionPool(host='localhost', port=55874): Max retries exceeded with url: /session/312dfb45b27965392ac3550fdaebcaad/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x111cbe220>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 19:40:17 | ERROR    | warming_executor:_execute_warming:108 - Action 8 failed: HTTPConnectionPool(host='localhost', port=55874): Max retries exceeded with url: /session/312dfb45b27965392ac3550fdaebcaad/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x11193ba90>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 19:40:17 | ERROR    | warming_executor:_execute_warming:108 - Action 9 failed: HTTPConnectionPool(host='localhost', port=55874): Max retries exceeded with url: /session/312dfb45b27965392ac3550fdaebcaad/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x111f05a00>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 19:40:17 | ERROR    | warming_executor:_execute_warming:108 - Action 10 failed: HTTPConnectionPool(host='localhost', port=55874): Max retries exceeded with url: /session/312dfb45b27965392ac3550fdaebcaad/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x111edc310>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 19:40:19 | ERROR    | browser_controller:close_browser:241 - Error closing browser: 'k17m5o28'
+2025-12-08 19:45:38 | ERROR    | action_executor:execute_action:143 - Action timeout (60s): advanced_login
+2025-12-08 19:45:38 | ERROR    | action_executor:_take_debug_screenshot:70 - Screenshot failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x000000010aefe518 chromedriver + 6378776
+1   chromedriver                        0x000000010aef5c2a chromedriver + 6343722
+2   chromedriver                        0x000000010a952086 chromedriver + 430214
+3   chromedriver                        0x000000010a926a70 chromedriver + 252528
+4   chromedriver                        0x000000010a9d2c88 chromedriver + 957576
+5   chromedriver                        0x000000010a9f196c chromedriver + 1083756
+6   chromedriver                        0x000000010a9ca7d3 chromedriver + 923603
+7   chromedriver                        0x000000010a996185 chromedriver + 708997
+8   chromedriver                        0x000000010a9975c1 chromedriver + 714177
+9   chromedriver                        0x000000010aebbda0 chromedriver + 6106528
+10  chromedriver                        0x000000010aec0005 chromedriver + 6123525
+11  chromedriver                        0x000000010ae97505 chromedriver + 5956869
+12  chromedriver                        0x000000010aec0a9f chromedriver + 6126239
+13  chromedriver                        0x000000010ae86944 chromedriver + 5888324
+14  chromedriver                        0x000000010aee2b78 chromedriver + 6265720
+15  chromedriver                        0x000000010aee2d3d chromedriver + 6266173
+16  chromedriver                        0x000000010aef5801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-08 19:45:38 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 19:45:38 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 19:45:38 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 19:45:38 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 19:45:38 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-08 19:48:04 | ERROR    | action_executor_login:execute_login:211 - Login execution error: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2025-12-08 19:48:04 | ERROR    | warming_executor:_execute_warming:108 - Action 7 failed: HTTPConnectionPool(host='localhost', port=51184): Max retries exceeded with url: /session/228194651a5fa9cd865ab5e7e3f6646c/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x111f88100>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 19:48:04 | ERROR    | warming_executor:_execute_warming:108 - Action 8 failed: HTTPConnectionPool(host='localhost', port=51184): Max retries exceeded with url: /session/228194651a5fa9cd865ab5e7e3f6646c/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x111dbd640>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 19:48:04 | ERROR    | warming_executor:_execute_warming:108 - Action 9 failed: HTTPConnectionPool(host='localhost', port=51184): Max retries exceeded with url: /session/228194651a5fa9cd865ab5e7e3f6646c/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x111f056d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 19:48:04 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-08 19:48:04 | ERROR    | warming_executor:_execute_warming:108 - Action 10 failed: HTTPConnectionPool(host='localhost', port=51184): Max retries exceeded with url: /session/228194651a5fa9cd865ab5e7e3f6646c/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x11193ba00>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 19:48:04 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-08 19:48:04 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-08 19:48:04 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-08 20:10:16 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-08 20:10:19 | ERROR    | action_executor:execute_action:143 - Action timeout (30s): navigate
+2025-12-08 20:10:33 | ERROR    | action_executor:_click:258 - ❌ Element not found: #accion_iniciarsesion
+2025-12-08 20:11:28 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-08 20:11:58 | ERROR    | action_executor:execute_action:143 - Action timeout (60s): advanced_login
+2025-12-08 20:25:52 | ERROR    | browser_controller:open_browser:145 - ❌ Failed to open browser for profile k17m5o28: AdsPower error: Check Proxy Fail
+2025-12-08 20:25:52 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=276, error=Failed to open browser for profile k17m5o28
+2025-12-08 20:26:56 | ERROR    | action_executor:execute_action:143 - Action timeout (30s): navigate
+2025-12-08 20:31:46 | ERROR    | action_executor:execute_action:143 - Action timeout (30s): navigate
+2025-12-08 20:32:14 | ERROR    | action_executor:_click:315 - Click failed: HTTPConnectionPool(host='localhost', port=59974): Max retries exceeded with url: /session/71b0d5e5c9602d406944c74fef71597a/execute/sync (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1042f12e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:32:14 | ERROR    | action_executor:_take_debug_screenshot:70 - Screenshot failed: HTTPConnectionPool(host='localhost', port=59974): Max retries exceeded with url: /session/71b0d5e5c9602d406944c74fef71597a/screenshot (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10431e610>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:32:14 | ERROR    | warming_executor:_execute_warming:108 - Action 4 failed: HTTPConnectionPool(host='localhost', port=59974): Max retries exceeded with url: /session/71b0d5e5c9602d406944c74fef71597a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1042cdd00>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:32:14 | ERROR    | warming_executor:_execute_warming:108 - Action 5 failed: HTTPConnectionPool(host='localhost', port=59974): Max retries exceeded with url: /session/71b0d5e5c9602d406944c74fef71597a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10431e5b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:32:14 | ERROR    | warming_executor:_execute_warming:108 - Action 6 failed: HTTPConnectionPool(host='localhost', port=59974): Max retries exceeded with url: /session/71b0d5e5c9602d406944c74fef71597a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10431ebb0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:32:14 | ERROR    | warming_executor:_execute_warming:108 - Action 7 failed: HTTPConnectionPool(host='localhost', port=59974): Max retries exceeded with url: /session/71b0d5e5c9602d406944c74fef71597a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1042aca90>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:32:14 | ERROR    | warming_executor:_execute_warming:108 - Action 8 failed: HTTPConnectionPool(host='localhost', port=59974): Max retries exceeded with url: /session/71b0d5e5c9602d406944c74fef71597a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1042cd730>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:32:14 | ERROR    | warming_executor:_execute_warming:108 - Action 9 failed: HTTPConnectionPool(host='localhost', port=59974): Max retries exceeded with url: /session/71b0d5e5c9602d406944c74fef71597a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1042f1460>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:32:23 | ERROR    | warming_executor:_execute_warming:108 - Action 1 failed: HTTPConnectionPool(host='localhost', port=59974): Max retries exceeded with url: /session/71b0d5e5c9602d406944c74fef71597a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1042f18b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:32:23 | ERROR    | warming_executor:_execute_warming:108 - Action 2 failed: HTTPConnectionPool(host='localhost', port=59974): Max retries exceeded with url: /session/71b0d5e5c9602d406944c74fef71597a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10431ea60>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:32:23 | ERROR    | warming_executor:_execute_warming:108 - Action 3 failed: HTTPConnectionPool(host='localhost', port=59974): Max retries exceeded with url: /session/71b0d5e5c9602d406944c74fef71597a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10431e9d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:32:23 | ERROR    | warming_executor:_execute_warming:108 - Action 4 failed: HTTPConnectionPool(host='localhost', port=59974): Max retries exceeded with url: /session/71b0d5e5c9602d406944c74fef71597a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1040d42e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:32:23 | ERROR    | warming_executor:_execute_warming:108 - Action 5 failed: HTTPConnectionPool(host='localhost', port=59974): Max retries exceeded with url: /session/71b0d5e5c9602d406944c74fef71597a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1042f18b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:32:23 | ERROR    | warming_executor:_execute_warming:108 - Action 6 failed: HTTPConnectionPool(host='localhost', port=59974): Max retries exceeded with url: /session/71b0d5e5c9602d406944c74fef71597a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10431e550>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:32:23 | ERROR    | warming_executor:_execute_warming:108 - Action 7 failed: HTTPConnectionPool(host='localhost', port=59974): Max retries exceeded with url: /session/71b0d5e5c9602d406944c74fef71597a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10431eac0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:32:23 | ERROR    | warming_executor:_execute_warming:108 - Action 8 failed: HTTPConnectionPool(host='localhost', port=59974): Max retries exceeded with url: /session/71b0d5e5c9602d406944c74fef71597a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1043933a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:32:23 | ERROR    | warming_executor:_execute_warming:108 - Action 9 failed: HTTPConnectionPool(host='localhost', port=59974): Max retries exceeded with url: /session/71b0d5e5c9602d406944c74fef71597a/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10431e3a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:32:24 | ERROR    | browser_controller:close_browser:241 - Error closing browser: 'k17m5o28'
+2025-12-08 20:32:25 | ERROR    | browser_controller:close_browser:241 - Error closing browser: 'k17m5o28'
+2025-12-08 20:40:51 | ERROR    | action_executor:execute_action:143 - Action timeout (30s): click
+2025-12-08 20:40:51 | ERROR    | action_executor:_take_debug_screenshot:70 - Screenshot failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x00000001032b6518 chromedriver + 6378776
+1   chromedriver                        0x00000001032adc2a chromedriver + 6343722
+2   chromedriver                        0x0000000102d0a086 chromedriver + 430214
+3   chromedriver                        0x0000000102cdea70 chromedriver + 252528
+4   chromedriver                        0x0000000102d8ac88 chromedriver + 957576
+5   chromedriver                        0x0000000102da996c chromedriver + 1083756
+6   chromedriver                        0x0000000102d827d3 chromedriver + 923603
+7   chromedriver                        0x0000000102d4e185 chromedriver + 708997
+8   chromedriver                        0x0000000102d4f5c1 chromedriver + 714177
+9   chromedriver                        0x0000000103273da0 chromedriver + 6106528
+10  chromedriver                        0x0000000103278005 chromedriver + 6123525
+11  chromedriver                        0x000000010324f505 chromedriver + 5956869
+12  chromedriver                        0x0000000103278a9f chromedriver + 6126239
+13  chromedriver                        0x000000010323e944 chromedriver + 5888324
+14  chromedriver                        0x000000010329ab78 chromedriver + 6265720
+15  chromedriver                        0x000000010329ad3d chromedriver + 6266173
+16  chromedriver                        0x00000001032ad801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-08 20:40:51 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 20:40:51 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 20:40:51 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 20:40:51 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 20:40:51 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 20:40:51 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 20:40:51 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-08 20:40:51 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-08 20:44:39 | ERROR    | warming_executor:_execute_warming:108 - Action 1 failed: HTTPConnectionPool(host='localhost', port=50168): Max retries exceeded with url: /session/2ebe6bf33669ed751574206e053dd841/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x104393d90>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:44:39 | ERROR    | warming_executor:_execute_warming:108 - Action 2 failed: HTTPConnectionPool(host='localhost', port=50168): Max retries exceeded with url: /session/2ebe6bf33669ed751574206e053dd841/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10439f2b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:44:39 | ERROR    | warming_executor:_execute_warming:108 - Action 3 failed: HTTPConnectionPool(host='localhost', port=50168): Max retries exceeded with url: /session/2ebe6bf33669ed751574206e053dd841/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x104393940>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:44:39 | ERROR    | warming_executor:_execute_warming:108 - Action 4 failed: HTTPConnectionPool(host='localhost', port=50168): Max retries exceeded with url: /session/2ebe6bf33669ed751574206e053dd841/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1042cdd30>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:44:39 | ERROR    | warming_executor:_execute_warming:108 - Action 5 failed: HTTPConnectionPool(host='localhost', port=50168): Max retries exceeded with url: /session/2ebe6bf33669ed751574206e053dd841/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10431e880>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:44:39 | ERROR    | warming_executor:_execute_warming:108 - Action 6 failed: HTTPConnectionPool(host='localhost', port=50168): Max retries exceeded with url: /session/2ebe6bf33669ed751574206e053dd841/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10439f6d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:44:39 | ERROR    | warming_executor:_execute_warming:108 - Action 7 failed: HTTPConnectionPool(host='localhost', port=50168): Max retries exceeded with url: /session/2ebe6bf33669ed751574206e053dd841/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10431eb80>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:44:39 | ERROR    | warming_executor:_execute_warming:108 - Action 8 failed: HTTPConnectionPool(host='localhost', port=50168): Max retries exceeded with url: /session/2ebe6bf33669ed751574206e053dd841/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10431e520>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:44:39 | ERROR    | warming_executor:_execute_warming:108 - Action 9 failed: HTTPConnectionPool(host='localhost', port=50168): Max retries exceeded with url: /session/2ebe6bf33669ed751574206e053dd841/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1042f1d90>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:44:49 | ERROR    | browser_controller:close_browser:241 - Error closing browser: 'k17m5o28'
+2025-12-08 20:45:01 | ERROR    | browser_controller:open_browser:145 - ❌ Failed to open browser for profile k17m5o28: AdsPower error: Check Proxy Fail
+2025-12-08 20:45:01 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=283, error=Failed to open browser for profile k17m5o28
+2025-12-08 20:45:17 | ERROR    | browser_controller:open_browser:145 - ❌ Failed to open browser for profile k17m5o28: AdsPower error: Check Proxy Fail
+2025-12-08 20:45:17 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=284, error=Failed to open browser for profile k17m5o28
+2025-12-08 20:54:40 | ERROR    | action_executor:execute_action:143 - Action timeout (30s): click
+2025-12-08 20:54:40 | ERROR    | action_executor:_take_debug_screenshot:70 - Screenshot failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x0000000101eb2518 chromedriver + 6378776
+1   chromedriver                        0x0000000101ea9c2a chromedriver + 6343722
+2   chromedriver                        0x0000000101906086 chromedriver + 430214
+3   chromedriver                        0x00000001018daa70 chromedriver + 252528
+4   chromedriver                        0x0000000101986c88 chromedriver + 957576
+5   chromedriver                        0x00000001019a596c chromedriver + 1083756
+6   chromedriver                        0x000000010197e7d3 chromedriver + 923603
+7   chromedriver                        0x000000010194a185 chromedriver + 708997
+8   chromedriver                        0x000000010194b5c1 chromedriver + 714177
+9   chromedriver                        0x0000000101e6fda0 chromedriver + 6106528
+10  chromedriver                        0x0000000101e74005 chromedriver + 6123525
+11  chromedriver                        0x0000000101e4b505 chromedriver + 5956869
+12  chromedriver                        0x0000000101e74a9f chromedriver + 6126239
+13  chromedriver                        0x0000000101e3a944 chromedriver + 5888324
+14  chromedriver                        0x0000000101e96b78 chromedriver + 6265720
+15  chromedriver                        0x0000000101e96d3d chromedriver + 6266173
+16  chromedriver                        0x0000000101ea9801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-08 20:54:40 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 20:54:40 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 20:54:40 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 20:54:40 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 20:54:40 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 20:54:40 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 20:54:40 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-08 20:55:31 | ERROR    | action_executor:_click:315 - Click failed: HTTPConnectionPool(host='localhost', port=55911): Max retries exceeded with url: /session/6c4e3ef8388b50340dbb64e2c5ae2932/execute/sync (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10431ee80>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:55:31 | ERROR    | action_executor:_take_debug_screenshot:70 - Screenshot failed: HTTPConnectionPool(host='localhost', port=55911): Max retries exceeded with url: /session/6c4e3ef8388b50340dbb64e2c5ae2932/screenshot (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1043b4700>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:55:31 | ERROR    | warming_executor:_execute_warming:108 - Action 4 failed: HTTPConnectionPool(host='localhost', port=55911): Max retries exceeded with url: /session/6c4e3ef8388b50340dbb64e2c5ae2932/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1043b4430>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:55:31 | ERROR    | warming_executor:_execute_warming:108 - Action 5 failed: HTTPConnectionPool(host='localhost', port=55911): Max retries exceeded with url: /session/6c4e3ef8388b50340dbb64e2c5ae2932/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1043b4550>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:55:31 | ERROR    | warming_executor:_execute_warming:108 - Action 6 failed: HTTPConnectionPool(host='localhost', port=55911): Max retries exceeded with url: /session/6c4e3ef8388b50340dbb64e2c5ae2932/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10439f610>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:55:31 | ERROR    | warming_executor:_execute_warming:108 - Action 7 failed: HTTPConnectionPool(host='localhost', port=55911): Max retries exceeded with url: /session/6c4e3ef8388b50340dbb64e2c5ae2932/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10431ebe0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:55:31 | ERROR    | warming_executor:_execute_warming:108 - Action 8 failed: HTTPConnectionPool(host='localhost', port=55911): Max retries exceeded with url: /session/6c4e3ef8388b50340dbb64e2c5ae2932/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x104393eb0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 20:55:31 | ERROR    | warming_executor:_execute_warming:108 - Action 9 failed: HTTPConnectionPool(host='localhost', port=55911): Max retries exceeded with url: /session/6c4e3ef8388b50340dbb64e2c5ae2932/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1043b4880>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:15:51 | ERROR    | action_executor:_click:316 - Click failed: HTTPConnectionPool(host='localhost', port=60028): Max retries exceeded with url: /session/d6b3c07d6d4dbf6f2f6693e9a44cde48/execute/sync (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107169220>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:15:51 | ERROR    | action_executor:_take_debug_screenshot:70 - Screenshot failed: HTTPConnectionPool(host='localhost', port=60028): Max retries exceeded with url: /session/d6b3c07d6d4dbf6f2f6693e9a44cde48/screenshot (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107195670>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:15:51 | ERROR    | warming_executor:_execute_warming:108 - Action 4 failed: HTTPConnectionPool(host='localhost', port=60028): Max retries exceeded with url: /session/d6b3c07d6d4dbf6f2f6693e9a44cde48/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107143e20>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:15:51 | ERROR    | warming_executor:_execute_warming:108 - Action 5 failed: HTTPConnectionPool(host='localhost', port=60028): Max retries exceeded with url: /session/d6b3c07d6d4dbf6f2f6693e9a44cde48/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1071956d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:15:51 | ERROR    | warming_executor:_execute_warming:108 - Action 6 failed: HTTPConnectionPool(host='localhost', port=60028): Max retries exceeded with url: /session/d6b3c07d6d4dbf6f2f6693e9a44cde48/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107195c40>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:15:51 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-08 21:15:51 | ERROR    | warming_executor:_execute_warming:108 - Action 7 failed: HTTPConnectionPool(host='localhost', port=60028): Max retries exceeded with url: /session/d6b3c07d6d4dbf6f2f6693e9a44cde48/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107048640>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:15:51 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-08 21:15:51 | ERROR    | warming_executor:_execute_warming:108 - Action 8 failed: HTTPConnectionPool(host='localhost', port=60028): Max retries exceeded with url: /session/d6b3c07d6d4dbf6f2f6693e9a44cde48/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107169d00>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:15:51 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-08 21:15:51 | ERROR    | warming_executor:_execute_warming:108 - Action 9 failed: HTTPConnectionPool(host='localhost', port=60028): Max retries exceeded with url: /session/d6b3c07d6d4dbf6f2f6693e9a44cde48/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107195610>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:15:51 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-08 21:15:51 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-08 21:15:51 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-08 21:16:01 | ERROR    | warming_executor:_execute_warming:108 - Action 1 failed: HTTPConnectionPool(host='localhost', port=60028): Max retries exceeded with url: /session/d6b3c07d6d4dbf6f2f6693e9a44cde48/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107195190>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:16:01 | ERROR    | warming_executor:_execute_warming:108 - Action 2 failed: HTTPConnectionPool(host='localhost', port=60028): Max retries exceeded with url: /session/d6b3c07d6d4dbf6f2f6693e9a44cde48/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10720e5b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:16:01 | ERROR    | warming_executor:_execute_warming:108 - Action 3 failed: HTTPConnectionPool(host='localhost', port=60028): Max retries exceeded with url: /session/d6b3c07d6d4dbf6f2f6693e9a44cde48/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107195430>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:16:01 | ERROR    | warming_executor:_execute_warming:108 - Action 4 failed: HTTPConnectionPool(host='localhost', port=60028): Max retries exceeded with url: /session/d6b3c07d6d4dbf6f2f6693e9a44cde48/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107169be0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:16:01 | ERROR    | warming_executor:_execute_warming:108 - Action 5 failed: HTTPConnectionPool(host='localhost', port=60028): Max retries exceeded with url: /session/d6b3c07d6d4dbf6f2f6693e9a44cde48/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10720e5e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:16:01 | ERROR    | warming_executor:_execute_warming:108 - Action 6 failed: HTTPConnectionPool(host='localhost', port=60028): Max retries exceeded with url: /session/d6b3c07d6d4dbf6f2f6693e9a44cde48/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10720ebb0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:16:01 | ERROR    | warming_executor:_execute_warming:108 - Action 7 failed: HTTPConnectionPool(host='localhost', port=60028): Max retries exceeded with url: /session/d6b3c07d6d4dbf6f2f6693e9a44cde48/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10721e1f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:16:01 | ERROR    | warming_executor:_execute_warming:108 - Action 8 failed: HTTPConnectionPool(host='localhost', port=60028): Max retries exceeded with url: /session/d6b3c07d6d4dbf6f2f6693e9a44cde48/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10720e2e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:16:01 | ERROR    | warming_executor:_execute_warming:108 - Action 9 failed: HTTPConnectionPool(host='localhost', port=60028): Max retries exceeded with url: /session/d6b3c07d6d4dbf6f2f6693e9a44cde48/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10720e670>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:16:01 | ERROR    | warming_executor:_execute_warming:108 - Action 10 failed: HTTPConnectionPool(host='localhost', port=60028): Max retries exceeded with url: /session/d6b3c07d6d4dbf6f2f6693e9a44cde48/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x107169f10>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:16:02 | ERROR    | browser_controller:close_browser:241 - Error closing browser: 'k17m5o28'
+2025-12-08 21:16:03 | ERROR    | browser_controller:close_browser:241 - Error closing browser: 'k17m5o28'
+2025-12-08 21:16:50 | ERROR    | action_executor:_click:275 - ❌ Element not found: #accion_iniciarsesion
+2025-12-08 21:17:34 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-08 21:17:34 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-08 21:18:09 | ERROR    | action_executor:execute_action:148 - Action failed (navigate): 'ActionExecutor' object has no attribute '_navigate'
+2025-12-08 21:18:09 | ERROR    | action_executor:execute_action:148 - Action failed (wait): 'ActionExecutor' object has no attribute '_wait'
+2025-12-08 21:18:09 | ERROR    | action_executor:execute_action:148 - Action failed (click): 'ActionExecutor' object has no attribute '_click'
+2025-12-08 21:18:09 | ERROR    | action_executor:execute_action:148 - Action failed (wait): 'ActionExecutor' object has no attribute '_wait'
+2025-12-08 21:18:10 | ERROR    | action_executor:execute_action:148 - Action failed (screenshot): 'ActionExecutor' object has no attribute '_screenshot'
+2025-12-08 21:18:58 | ERROR    | action_executor_login:_wait_for_element_robust:301 - ❌ Element not found after all strategies: #loginUsername, input[name='email'], input[placeholder*='Correo electrónico']
+2025-12-08 21:18:58 | ERROR    | warming_executor:_execute_warming:108 - Action 7 failed: HTTPConnectionPool(host='localhost', port=51314): Max retries exceeded with url: /session/5f263cf0e03a56de813d2b7ad25d0a9d/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10729c730>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:18:58 | ERROR    | warming_executor:_execute_warming:108 - Action 8 failed: HTTPConnectionPool(host='localhost', port=51314): Max retries exceeded with url: /session/5f263cf0e03a56de813d2b7ad25d0a9d/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10704c1f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:18:58 | ERROR    | warming_executor:_execute_warming:108 - Action 9 failed: HTTPConnectionPool(host='localhost', port=51314): Max retries exceeded with url: /session/5f263cf0e03a56de813d2b7ad25d0a9d/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10726f6d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:18:58 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-08 21:18:58 | ERROR    | warming_executor:_execute_warming:108 - Action 10 failed: HTTPConnectionPool(host='localhost', port=51314): Max retries exceeded with url: /session/5f263cf0e03a56de813d2b7ad25d0a9d/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10726f1f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:18:58 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-08 21:18:58 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-08 21:18:58 | ERROR    | websocket_client:send:214 - Send error: no close frame received or sent
+2025-12-08 21:19:08 | ERROR    | browser_controller:close_browser:241 - Error closing browser: 'k17m5o28'
+2025-12-08 21:21:30 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-08 21:22:07 | ERROR    | action_executor:execute_action:143 - Action timeout (30s): click
+2025-12-08 21:22:07 | ERROR    | action_executor:_take_debug_screenshot:70 - Screenshot failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x000000010d77b518 chromedriver + 6378776
+1   chromedriver                        0x000000010d772c2a chromedriver + 6343722
+2   chromedriver                        0x000000010d1cf086 chromedriver + 430214
+3   chromedriver                        0x000000010d1a3a70 chromedriver + 252528
+4   chromedriver                        0x000000010d24fc88 chromedriver + 957576
+5   chromedriver                        0x000000010d26e96c chromedriver + 1083756
+6   chromedriver                        0x000000010d2477d3 chromedriver + 923603
+7   chromedriver                        0x000000010d213185 chromedriver + 708997
+8   chromedriver                        0x000000010d2145c1 chromedriver + 714177
+9   chromedriver                        0x000000010d738da0 chromedriver + 6106528
+10  chromedriver                        0x000000010d73d005 chromedriver + 6123525
+11  chromedriver                        0x000000010d714505 chromedriver + 5956869
+12  chromedriver                        0x000000010d73da9f chromedriver + 6126239
+13  chromedriver                        0x000000010d703944 chromedriver + 5888324
+14  chromedriver                        0x000000010d75fb78 chromedriver + 6265720
+15  chromedriver                        0x000000010d75fd3d chromedriver + 6266173
+16  chromedriver                        0x000000010d772801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-08 21:22:07 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 21:22:07 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 21:22:07 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 21:22:07 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 21:22:07 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 21:22:07 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 21:22:07 | ERROR    | warming_executor:_execute_warming:108 - Action 1 failed: HTTPConnectionPool(host='localhost', port=52833): Max retries exceeded with url: /session/df1707edf224f6beaaf99dcca3c4854f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b915430>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:22:07 | ERROR    | warming_executor:_execute_warming:108 - Action 2 failed: HTTPConnectionPool(host='localhost', port=52833): Max retries exceeded with url: /session/df1707edf224f6beaaf99dcca3c4854f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b9435b0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:22:07 | ERROR    | warming_executor:_execute_warming:108 - Action 3 failed: HTTPConnectionPool(host='localhost', port=52833): Max retries exceeded with url: /session/df1707edf224f6beaaf99dcca3c4854f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b915280>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:22:07 | ERROR    | warming_executor:_execute_warming:108 - Action 4 failed: HTTPConnectionPool(host='localhost', port=52833): Max retries exceeded with url: /session/df1707edf224f6beaaf99dcca3c4854f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b7f5640>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:22:07 | ERROR    | warming_executor:_execute_warming:108 - Action 5 failed: HTTPConnectionPool(host='localhost', port=52833): Max retries exceeded with url: /session/df1707edf224f6beaaf99dcca3c4854f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b9434c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:22:07 | ERROR    | warming_executor:_execute_warming:108 - Action 6 failed: HTTPConnectionPool(host='localhost', port=52833): Max retries exceeded with url: /session/df1707edf224f6beaaf99dcca3c4854f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b943eb0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:22:07 | ERROR    | warming_executor:_execute_warming:108 - Action 7 failed: HTTPConnectionPool(host='localhost', port=52833): Max retries exceeded with url: /session/df1707edf224f6beaaf99dcca3c4854f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b6f8220>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:22:07 | ERROR    | warming_executor:_execute_warming:108 - Action 8 failed: HTTPConnectionPool(host='localhost', port=52833): Max retries exceeded with url: /session/df1707edf224f6beaaf99dcca3c4854f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b375e20>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:22:07 | ERROR    | warming_executor:_execute_warming:108 - Action 9 failed: HTTPConnectionPool(host='localhost', port=52833): Max retries exceeded with url: /session/df1707edf224f6beaaf99dcca3c4854f/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10b943ac0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-08 21:22:09 | ERROR    | browser_controller:close_browser:241 - Error closing browser: 'k17m5o28'
+2025-12-08 21:22:46 | ERROR    | action_executor:_navigate:214 - Navigation failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x0000000107bb0518 chromedriver + 6378776
+1   chromedriver                        0x0000000107ba7c2a chromedriver + 6343722
+2   chromedriver                        0x0000000107604086 chromedriver + 430214
+3   chromedriver                        0x00000001075d8a70 chromedriver + 252528
+4   chromedriver                        0x0000000107684c88 chromedriver + 957576
+5   chromedriver                        0x00000001076a396c chromedriver + 1083756
+6   chromedriver                        0x000000010767c7d3 chromedriver + 923603
+7   chromedriver                        0x0000000107648185 chromedriver + 708997
+8   chromedriver                        0x00000001076495c1 chromedriver + 714177
+9   chromedriver                        0x0000000107b6dda0 chromedriver + 6106528
+10  chromedriver                        0x0000000107b72005 chromedriver + 6123525
+11  chromedriver                        0x0000000107b49505 chromedriver + 5956869
+12  chromedriver                        0x0000000107b72a9f chromedriver + 6126239
+13  chromedriver                        0x0000000107b38944 chromedriver + 5888324
+14  chromedriver                        0x0000000107b94b78 chromedriver + 6265720
+15  chromedriver                        0x0000000107b94d3d chromedriver + 6266173
+16  chromedriver                        0x0000000107ba7801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-08 21:22:46 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 21:22:46 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 21:22:46 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 21:22:46 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 21:22:46 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 21:22:46 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 21:22:46 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 21:22:46 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 21:23:49 | ERROR    | action_executor:execute_action:143 - Action timeout (30s): navigate
+2025-12-08 21:24:29 | ERROR    | action_executor:execute_action:143 - Action timeout (30s): click
+2025-12-08 21:24:29 | ERROR    | action_executor:_take_debug_screenshot:70 - Screenshot failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x000000010c49a518 chromedriver + 6378776
+1   chromedriver                        0x000000010c491c2a chromedriver + 6343722
+2   chromedriver                        0x000000010beee086 chromedriver + 430214
+3   chromedriver                        0x000000010bec2a70 chromedriver + 252528
+4   chromedriver                        0x000000010bf6ec88 chromedriver + 957576
+5   chromedriver                        0x000000010bf8d96c chromedriver + 1083756
+6   chromedriver                        0x000000010bf667d3 chromedriver + 923603
+7   chromedriver                        0x000000010bf32185 chromedriver + 708997
+8   chromedriver                        0x000000010bf335c1 chromedriver + 714177
+9   chromedriver                        0x000000010c457da0 chromedriver + 6106528
+10  chromedriver                        0x000000010c45c005 chromedriver + 6123525
+11  chromedriver                        0x000000010c433505 chromedriver + 5956869
+12  chromedriver                        0x000000010c45ca9f chromedriver + 6126239
+13  chromedriver                        0x000000010c422944 chromedriver + 5888324
+14  chromedriver                        0x000000010c47eb78 chromedriver + 6265720
+15  chromedriver                        0x000000010c47ed3d chromedriver + 6266173
+16  chromedriver                        0x000000010c491801 chromedriver + 6342657
+17  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+18  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-08 21:24:29 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 21:24:29 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 21:24:29 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 21:24:29 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 21:24:29 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 21:24:29 | ERROR    | action_executor:execute_action:130 - Browser is closed

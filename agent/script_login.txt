@@ -1,0 +1,84 @@
+Ecuabet numero 29 actualmente
+{
+  "name": "Login Ecuabet - Corregido",
+  "description": "Login con selectores correctos",
+  "category": "authentication",
+  "actions": [
+    {
+      "type": "navigate",
+      "params": {
+        "url": "https://ecuabet.com/"
+      }
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 3
+      }
+    },
+    {
+      "type": "click",
+      "params": {
+        "selector": "#accion_iniciarsesion",
+        "selector_type": "css",
+        "human": true
+      }
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 4
+      }
+    },
+    {
+      "type": "screenshot",
+      "params": {
+        "name": "modal_opened"
+      }
+    },
+    {
+      "type": "advanced_login",
+      "params": {
+        "service": "ecuabet",
+        "username": "omarrafmaljim@gmail.com",
+        "password": "contraseña",
+        "username_selector": "#loginUsername, input[name='email'], input[placeholder*='Correo electrónico']",
+        "password_selector": "#loginPassword, input[type='password']",
+        "submit_selector": "button[aria-label='Login'], button[type='submit']",
+        "wait_after_submit": 6,
+        "success_url_contains": "deportes",
+        "ignore_recaptcha": false
+      }
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 3
+      }
+    },
+    {
+      "type": "screenshot",
+      "params": {
+        "name": "after_login"
+      }
+    },
+    {
+      "type": "scroll",
+      "params": {
+        "direction": "down",
+        "amount": 500,
+        "smooth": true
+      }
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 5
+      }
+    }
+  ],
+  "duration_minutes": 5
+}
+
+SportI
+
