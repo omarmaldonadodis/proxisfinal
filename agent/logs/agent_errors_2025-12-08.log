@@ -765,3 +765,16 @@ Stacktrace:
 2025-12-08 21:24:29 | ERROR    | action_executor:execute_action:130 - Browser is closed
 2025-12-08 21:24:29 | ERROR    | action_executor:execute_action:130 - Browser is closed
 2025-12-08 21:24:29 | ERROR    | action_executor:execute_action:130 - Browser is closed
+2025-12-08 21:37:51 | ERROR    | action_executor:execute_action:143 - Action timeout (30s): navigate
+2025-12-08 21:45:40 | ERROR    | action_executor:execute_action:143 - Action timeout (60s): advanced_login
+2025-12-08 21:45:40 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-09 09:03:27 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 51] Network is unreachable
+2025-12-09 09:03:42 | ERROR    | websocket_client:connect:53 - Connection error: 
+2025-12-09 09:05:42 | ERROR    | websocket_client:connect:53 - Connection error: 
+2025-12-09 09:05:47 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 51] Network is unreachable
+2025-12-09 09:06:02 | ERROR    | websocket_client:connect:53 - Connection error: 
+2025-12-09 09:06:17 | ERROR    | websocket_client:connect:53 - Connection error: 
+2025-12-09 09:06:32 | ERROR    | websocket_client:connect:53 - Connection error: 
+2025-12-09 09:06:47 | ERROR    | websocket_client:connect:53 - Connection error: 
+2025-12-09 09:07:03 | ERROR    | websocket_client:connect:53 - Connection error: 
+2025-12-09 09:07:18 | ERROR    | websocket_client:connect:53 - Connection error: 

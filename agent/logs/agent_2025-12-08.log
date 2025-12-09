@@ -7964,3 +7964,598 @@ Stacktrace:
 2025-12-08 21:25:29 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
 2025-12-08 21:25:29 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
 2025-12-08 21:25:29 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:25:59 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:25:59 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:25:59 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:26:29 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:26:29 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:26:29 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:26:59 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:26:59 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:26:59 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:27:29 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:27:29 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:27:29 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:27:59 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:27:59 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:27:59 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:28:29 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:28:29 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:28:29 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:28:59 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:28:59 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:28:59 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:29:29 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:29:29 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:29:29 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:29:59 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:29:59 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:29:59 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:30:29 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:30:29 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:30:29 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:30:59 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:30:59 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:30:59 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:31:29 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:31:29 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:31:29 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:31:59 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:31:59 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:31:59 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:32:29 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:32:29 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:32:29 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:32:59 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:32:59 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:32:59 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:33:29 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:33:29 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:33:29 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:33:59 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:33:59 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:33:59 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:34:29 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:34:29 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:34:29 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:34:59 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:34:59 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:34:59 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:35:29 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:35:29 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:35:29 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:35:59 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:35:59 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:35:59 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:36:29 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:36:29 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:36:29 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:36:53 | INFO     | browser_controller:__init__:34 - ✓ ChromeDriver detectado: /Users/omarmaldonado/Desktop/proxys/proyectofinal/agent/chromedriver
+2025-12-08 21:36:53 | DEBUG    | action_executor:set_session_var:47 - Session var set: USERNAME
+2025-12-08 21:36:53 | DEBUG    | action_executor:set_session_var:47 - Session var set: PASSWORD
+2025-12-08 21:36:53 | INFO     | __main__:start:83 - ============================================================
+2025-12-08 21:36:53 | INFO     | __main__:start:84 - 🤖 AdsPower Agent Starting
+2025-12-08 21:36:53 | INFO     | __main__:start:85 - Computer Name: mac2
+2025-12-08 21:36:53 | INFO     | __main__:start:86 - Orchestrator: http://192.168.18.133:8000
+2025-12-08 21:36:53 | INFO     | __main__:start:87 - ============================================================
+2025-12-08 21:36:53 | INFO     | __main__:start:103 - 🔑 Found saved token, validating...
+2025-12-08 21:36:53 | INFO     | __main__:start:107 - ✅ Token valid, using existing registration
+2025-12-08 21:36:53 | INFO     | __main__:start:122 - ✅ Computer ID: 3
+2025-12-08 21:36:53 | INFO     | __main__:start:125 - Connecting to orchestrator via WebSocket...
+2025-12-08 21:36:53 | INFO     | websocket_client:connect:26 - Connecting to: ws://192.168.18.133:8000/api/v1/warming/ws/3
+2025-12-08 21:36:53 | INFO     | websocket_client:connect:39 - ✅ Connected to orchestrator!
+2025-12-08 21:36:53 | DEBUG    | websocket_client:_handle_message:79 - Received message: connected
+2025-12-08 21:36:53 | INFO     | websocket_client:_handle_message:82 - Connected confirmation: Connected to orchestrator
+2025-12-08 21:37:08 | DEBUG    | websocket_client:_handle_message:79 - Received message: execute_warming
+2025-12-08 21:37:08 | INFO     | websocket_client:_execute_warming:110 - 🔥 Executing warming: execution_id=297, profile_id=k17m5o28
+2025-12-08 21:37:08 | INFO     | warming_executor:_execute_warming:67 - Starting warming: execution_id=297, profile_id=k17m5o28
+2025-12-08 21:37:08 | INFO     | browser_controller:open_browser:52 - 🌐 Opening browser for profile k17m5o28
+2025-12-08 21:37:08 | INFO     | browser_controller:open_browser:54 - DEBUG ADS URL: http://192.168.18.133:50325
+2025-12-08 21:37:08 | INFO     | browser_controller:open_browser:55 - DEBUG CONFIG ID: 4503206544
+2025-12-08 21:37:15 | INFO     | browser_controller:open_browser:77 - ✓ Browser opened on port 57998
+2025-12-08 21:37:19 | DEBUG    | browser_controller:open_browser:91 - ✓ Port 57998 responding
+2025-12-08 21:37:19 | DEBUG    | browser_controller:open_browser:114 - Connecting Selenium (attempt 1)...
+2025-12-08 21:37:20 | INFO     | browser_controller:open_browser:119 - ✓ Selenium connected to port 57998
+2025-12-08 21:37:20 | DEBUG    | browser_controller:_prepare_browser_safe:173 - Preparing browser for profile k17m5o28
+2025-12-08 21:37:21 | INFO     | browser_controller:_prepare_browser_safe:188 - ✓ Browser prepared for profile k17m5o28
+2025-12-08 21:37:21 | INFO     | browser_controller:open_browser:141 - ✅ Browser ready for profile k17m5o28
+2025-12-08 21:37:21 | DEBUG    | action_executor:execute_action:127 - Executing action: navigate
+2025-12-08 21:37:51 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:37:51 | ERROR    | action_executor:execute_action:143 - Action timeout (30s): navigate
+2025-12-08 21:37:51 | INFO     | action_executor:_take_debug_screenshot:67 - 📸 Screenshot saved: screenshots/debug_timeout_navigate_1765247871.png
+2025-12-08 21:37:51 | DEBUG    | warming_executor:_execute_warming:105 - Action 1/11: navigate - ✗
+2025-12-08 21:37:51 | DEBUG    | action_executor:execute_action:127 - Executing action: wait
+2025-12-08 21:37:51 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:37:51 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:37:55 | DEBUG    | action_executor:_wait:594 - ✓ Waited 4s
+2025-12-08 21:37:55 | DEBUG    | warming_executor:_execute_warming:105 - Action 2/11: wait - ✓
+2025-12-08 21:37:55 | DEBUG    | action_executor:execute_action:127 - Executing action: screenshot
+2025-12-08 21:37:55 | INFO     | action_executor:_take_debug_screenshot:67 - 📸 Screenshot saved: screenshots/debug_sorti_home_1765247875.png
+2025-12-08 21:37:55 | DEBUG    | warming_executor:_execute_warming:105 - Action 3/11: screenshot - ✓
+2025-12-08 21:37:55 | DEBUG    | action_executor:execute_action:127 - Executing action: click
+2025-12-08 21:37:56 | INFO     | action_executor:_take_debug_screenshot:67 - 📸 Screenshot saved: screenshots/debug_before_click_1765247875.png
+2025-12-08 21:37:56 | DEBUG    | action_executor:_log_page_info:76 - Current URL: https://www.sorti.ec/home
+2025-12-08 21:37:56 | DEBUG    | action_executor:_log_page_info:77 - Page title: Pronósticos Deportivos | Sorti365
+2025-12-08 21:37:56 | INFO     | action_executor:_click:235 - 🔍 Looking for click element: css = button.zg-btn-primary
+2025-12-08 21:37:56 | DEBUG    | action_executor:_click:248 - Strategy 1: css selector = button.zg-btn-primary
+2025-12-08 21:37:56 | DEBUG    | action_executor:_click:254 - ✓ Found with strategy 1
+2025-12-08 21:37:56 | DEBUG    | action_executor:_click:447 - Click method 1: ActionChains
+2025-12-08 21:42:53 | INFO     | browser_controller:__init__:34 - ✓ ChromeDriver detectado: /Users/omarmaldonado/Desktop/proxys/proyectofinal/agent/chromedriver
+2025-12-08 21:42:53 | DEBUG    | action_executor:set_session_var:47 - Session var set: USERNAME
+2025-12-08 21:42:53 | DEBUG    | action_executor:set_session_var:47 - Session var set: PASSWORD
+2025-12-08 21:42:53 | INFO     | __main__:start:83 - ============================================================
+2025-12-08 21:42:53 | INFO     | __main__:start:84 - 🤖 AdsPower Agent Starting
+2025-12-08 21:42:53 | INFO     | __main__:start:85 - Computer Name: mac2
+2025-12-08 21:42:53 | INFO     | __main__:start:86 - Orchestrator: http://192.168.18.133:8000
+2025-12-08 21:42:53 | INFO     | __main__:start:87 - ============================================================
+2025-12-08 21:42:53 | INFO     | __main__:start:103 - 🔑 Found saved token, validating...
+2025-12-08 21:42:53 | INFO     | __main__:start:107 - ✅ Token valid, using existing registration
+2025-12-08 21:42:53 | INFO     | __main__:start:122 - ✅ Computer ID: 3
+2025-12-08 21:42:53 | INFO     | __main__:start:125 - Connecting to orchestrator via WebSocket...
+2025-12-08 21:42:53 | INFO     | websocket_client:connect:26 - Connecting to: ws://192.168.18.133:8000/api/v1/warming/ws/3
+2025-12-08 21:42:53 | INFO     | websocket_client:connect:39 - ✅ Connected to orchestrator!
+2025-12-08 21:42:53 | DEBUG    | websocket_client:_handle_message:79 - Received message: connected
+2025-12-08 21:42:53 | INFO     | websocket_client:_handle_message:82 - Connected confirmation: Connected to orchestrator
+2025-12-08 21:43:03 | DEBUG    | websocket_client:_handle_message:79 - Received message: execute_warming
+2025-12-08 21:43:03 | INFO     | websocket_client:_execute_warming:110 - 🔥 Executing warming: execution_id=298, profile_id=k17m5o28
+2025-12-08 21:43:03 | INFO     | warming_executor:_execute_warming:67 - Starting warming: execution_id=298, profile_id=k17m5o28
+2025-12-08 21:43:03 | INFO     | browser_controller:open_browser:52 - 🌐 Opening browser for profile k17m5o28
+2025-12-08 21:43:03 | INFO     | browser_controller:open_browser:54 - DEBUG ADS URL: http://192.168.18.133:50325
+2025-12-08 21:43:03 | INFO     | browser_controller:open_browser:55 - DEBUG CONFIG ID: 4352235056
+2025-12-08 21:43:10 | INFO     | browser_controller:open_browser:77 - ✓ Browser opened on port 60967
+2025-12-08 21:43:14 | DEBUG    | browser_controller:open_browser:91 - ✓ Port 60967 responding
+2025-12-08 21:43:14 | DEBUG    | browser_controller:open_browser:114 - Connecting Selenium (attempt 1)...
+2025-12-08 21:43:15 | INFO     | browser_controller:open_browser:119 - ✓ Selenium connected to port 60967
+2025-12-08 21:43:15 | DEBUG    | browser_controller:_prepare_browser_safe:173 - Preparing browser for profile k17m5o28
+2025-12-08 21:43:16 | INFO     | browser_controller:_prepare_browser_safe:188 - ✓ Browser prepared for profile k17m5o28
+2025-12-08 21:43:16 | INFO     | browser_controller:open_browser:141 - ✅ Browser ready for profile k17m5o28
+2025-12-08 21:43:16 | DEBUG    | action_executor:execute_action:127 - Executing action: navigate
+2025-12-08 21:43:16 | INFO     | action_executor:_navigate:198 - 🌐 Navigating to: https://www.sorti.ec/home
+2025-12-08 21:43:43 | DEBUG    | action_executor:_navigate:209 - Navigation completed (full load)
+2025-12-08 21:43:43 | DEBUG    | action_executor:_navigate:237 - ✓ Body element found
+2025-12-08 21:43:43 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:43:43 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:43:43 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:43:45 | DEBUG    | action_executor:_navigate:265 - Angular still loading, waiting...
+2025-12-08 21:43:48 | INFO     | action_executor:_navigate:278 - ✅ Navigation complete
+2025-12-08 21:43:48 | DEBUG    | action_executor:_navigate:279 -   Current URL: https://www.sorti.ec/home
+2025-12-08 21:43:48 | DEBUG    | action_executor:_navigate:280 -   Page title: Pronósticos Deportivos | Sorti365
+2025-12-08 21:43:50 | DEBUG    | warming_executor:_execute_warming:105 - Action 1/12: navigate - ✓
+2025-12-08 21:43:50 | DEBUG    | action_executor:execute_action:127 - Executing action: wait
+2025-12-08 21:43:55 | DEBUG    | action_executor:_wait:653 - ✓ Waited 5s
+2025-12-08 21:43:55 | DEBUG    | warming_executor:_execute_warming:105 - Action 2/12: wait - ✓
+2025-12-08 21:43:55 | DEBUG    | action_executor:execute_action:127 - Executing action: screenshot
+2025-12-08 21:43:55 | INFO     | action_executor:_take_debug_screenshot:67 - 📸 Screenshot saved: screenshots/debug_01_home_loaded_1765248235.png
+2025-12-08 21:43:55 | DEBUG    | warming_executor:_execute_warming:105 - Action 3/12: screenshot - ✓
+2025-12-08 21:43:55 | DEBUG    | action_executor:execute_action:127 - Executing action: execute_script
+2025-12-08 21:43:55 | WARNING  | action_executor:_execute_action_internal:180 - Unknown action type: execute_script
+2025-12-08 21:43:55 | DEBUG    | warming_executor:_execute_warming:105 - Action 4/12: execute_script - ✗
+2025-12-08 21:43:55 | DEBUG    | action_executor:execute_action:127 - Executing action: click
+2025-12-08 21:43:55 | INFO     | action_executor:_click:324 - 🔍 Looking for: css=button.zg-btn-primary
+2025-12-08 21:43:55 | DEBUG    | action_executor:_click:343 - ✓ Element found with direct selector
+2025-12-08 21:43:55 | DEBUG    | action_executor:_click:419 - Focusing browser window...
+2025-12-08 21:43:56 | DEBUG    | action_executor:_click:438 - Preparing element for click...
+2025-12-08 21:43:57 | DEBUG    | action_executor:_click:473 - Performing click...
+2025-12-08 21:43:57 | INFO     | action_executor:_click:532 - ✅ Click successful (JavaScript)
+2025-12-08 21:43:57 | INFO     | action_executor:_take_debug_screenshot:67 - 📸 Screenshot saved: screenshots/debug_after_click_1765248237.png
+2025-12-08 21:43:57 | DEBUG    | warming_executor:_execute_warming:105 - Action 5/12: click - ✓
+2025-12-08 21:43:57 | DEBUG    | action_executor:execute_action:127 - Executing action: wait
+2025-12-08 21:44:03 | DEBUG    | action_executor:_wait:653 - ✓ Waited 6s
+2025-12-08 21:44:03 | DEBUG    | warming_executor:_execute_warming:105 - Action 6/12: wait - ✓
+2025-12-08 21:44:03 | DEBUG    | action_executor:execute_action:127 - Executing action: screenshot
+2025-12-08 21:44:03 | INFO     | action_executor:_take_debug_screenshot:67 - 📸 Screenshot saved: screenshots/debug_02_modal_check_1765248243.png
+2025-12-08 21:44:03 | DEBUG    | warming_executor:_execute_warming:105 - Action 7/12: screenshot - ✓
+2025-12-08 21:44:03 | DEBUG    | action_executor:execute_action:127 - Executing action: advanced_login
+2025-12-08 21:44:03 | INFO     | action_executor_login:execute_login:106 - 🔐 Starting login for service: sorti
+2025-12-08 21:44:04 | INFO     | action_executor_login:execute_login:118 - ✓ Paso 1 completado
+2025-12-08 21:44:08 | INFO     | action_executor_login:execute_login:122 - ✓ Paso 2 completado
+2025-12-08 21:44:08 | DEBUG    | action_executor_login:_wait_for_element_robust:241 - Trying CSS selector: input[type='email']
+2025-12-08 21:44:24 | DEBUG    | action_executor_login:_wait_for_element_robust:249 - ✗ CSS selector failed: input[type='email']
+2025-12-08 21:44:24 | DEBUG    | action_executor_login:_wait_for_element_robust:241 - Trying CSS selector: input[name='email']
+2025-12-08 21:44:39 | DEBUG    | action_executor_login:_wait_for_element_robust:249 - ✗ CSS selector failed: input[name='email']
+2025-12-08 21:44:39 | DEBUG    | action_executor_login:_wait_for_element_robust:241 - Trying CSS selector: input[placeholder*='correo' i]
+2025-12-08 21:44:54 | DEBUG    | action_executor_login:_wait_for_element_robust:249 - ✗ CSS selector failed: input[placeholder*='correo' i]
+2025-12-08 21:44:54 | DEBUG    | action_executor_login:_wait_for_element_robust:241 - Trying CSS selector: input[placeholder*='email' i]
+2025-12-08 21:45:09 | DEBUG    | action_executor_login:_wait_for_element_robust:249 - ✗ CSS selector failed: input[placeholder*='email' i]
+2025-12-08 21:45:09 | DEBUG    | action_executor_login:_wait_for_element_robust:241 - Trying CSS selector: #email
+2025-12-08 21:45:24 | DEBUG    | action_executor_login:_wait_for_element_robust:249 - ✗ CSS selector failed: #email
+2025-12-08 21:45:24 | DEBUG    | action_executor_login:_wait_for_element_robust:241 - Trying CSS selector: #loginUsername
+2025-12-08 21:45:39 | DEBUG    | action_executor_login:_wait_for_element_robust:249 - ✗ CSS selector failed: #loginUsername
+2025-12-08 21:45:39 | DEBUG    | action_executor_login:_wait_for_element_robust:258 - Trying JavaScript querySelector: input[type='email']
+2025-12-08 21:45:40 | DEBUG    | action_executor_login:_wait_for_element_robust:274 - ✗ JavaScript selector error: Message: javascript error: missing ) after argument list
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x000000010f9fd518 chromedriver + 6378776
+1   chromedriver                        0x000000010f9f4c2a chromedriver + 6343722
+2   chromedriver                        0x000000010f451086 chromedriver + 430214
+3   chromedriver                        0x000000010f457dcc chromedriver + 458188
+4   chromedriver                        0x000000010f45aae0 chromedriver + 469728
+5   chromedriver                        0x000000010f4f20ea chromedriver + 1089770
+6   chromedriver                        0x000000010f4c9a02 chromedriver + 924162
+7   chromedriver                        0x000000010f4f0f6e chromedriver + 1085294
+8   chromedriver                        0x000000010f4c97d3 chromedriver + 923603
+9   chromedriver                        0x000000010f495185 chromedriver + 708997
+10  chromedriver                        0x000000010f4965c1 chromedriver + 714177
+11  chromedriver                        0x000000010f9bada0 chromedriver + 6106528
+12  chromedriver                        0x000000010f9bf005 chromedriver + 6123525
+13  chromedriver                        0x000000010f996505 chromedriver + 5956869
+14  chromedriver                        0x000000010f9bfa9f chromedriver + 6126239
+15  chromedriver                        0x000000010f985944 chromedriver + 5888324
+16  chromedriver                        0x000000010f9e1b78 chromedriver + 6265720
+17  chromedriver                        0x000000010f9e1d3d chromedriver + 6266173
+18  chromedriver                        0x000000010f9f4801 chromedriver + 6342657
+19  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+20  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-08 21:45:40 | DEBUG    | action_executor_login:_wait_for_element_robust:258 - Trying JavaScript querySelector: input[name='email']
+2025-12-08 21:45:40 | DEBUG    | action_executor_login:_wait_for_element_robust:274 - ✗ JavaScript selector error: Message: javascript error: missing ) after argument list
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x000000010f9fd518 chromedriver + 6378776
+1   chromedriver                        0x000000010f9f4c2a chromedriver + 6343722
+2   chromedriver                        0x000000010f451086 chromedriver + 430214
+3   chromedriver                        0x000000010f457dcc chromedriver + 458188
+4   chromedriver                        0x000000010f45aae0 chromedriver + 469728
+5   chromedriver                        0x000000010f4f20ea chromedriver + 1089770
+6   chromedriver                        0x000000010f4c9a02 chromedriver + 924162
+7   chromedriver                        0x000000010f4f0f6e chromedriver + 1085294
+8   chromedriver                        0x000000010f4c97d3 chromedriver + 923603
+9   chromedriver                        0x000000010f495185 chromedriver + 708997
+10  chromedriver                        0x000000010f4965c1 chromedriver + 714177
+11  chromedriver                        0x000000010f9bada0 chromedriver + 6106528
+12  chromedriver                        0x000000010f9bf005 chromedriver + 6123525
+13  chromedriver                        0x000000010f996505 chromedriver + 5956869
+14  chromedriver                        0x000000010f9bfa9f chromedriver + 6126239
+15  chromedriver                        0x000000010f985944 chromedriver + 5888324
+16  chromedriver                        0x000000010f9e1b78 chromedriver + 6265720
+17  chromedriver                        0x000000010f9e1d3d chromedriver + 6266173
+18  chromedriver                        0x000000010f9f4801 chromedriver + 6342657
+19  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+20  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-08 21:45:40 | DEBUG    | action_executor_login:_wait_for_element_robust:258 - Trying JavaScript querySelector: input[placeholder*='correo' i]
+2025-12-08 21:45:40 | DEBUG    | action_executor_login:_wait_for_element_robust:274 - ✗ JavaScript selector error: Message: javascript error: missing ) after argument list
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x000000010f9fd518 chromedriver + 6378776
+1   chromedriver                        0x000000010f9f4c2a chromedriver + 6343722
+2   chromedriver                        0x000000010f451086 chromedriver + 430214
+3   chromedriver                        0x000000010f457dcc chromedriver + 458188
+4   chromedriver                        0x000000010f45aae0 chromedriver + 469728
+5   chromedriver                        0x000000010f4f20ea chromedriver + 1089770
+6   chromedriver                        0x000000010f4c9a02 chromedriver + 924162
+7   chromedriver                        0x000000010f4f0f6e chromedriver + 1085294
+8   chromedriver                        0x000000010f4c97d3 chromedriver + 923603
+9   chromedriver                        0x000000010f495185 chromedriver + 708997
+10  chromedriver                        0x000000010f4965c1 chromedriver + 714177
+11  chromedriver                        0x000000010f9bada0 chromedriver + 6106528
+12  chromedriver                        0x000000010f9bf005 chromedriver + 6123525
+13  chromedriver                        0x000000010f996505 chromedriver + 5956869
+14  chromedriver                        0x000000010f9bfa9f chromedriver + 6126239
+15  chromedriver                        0x000000010f985944 chromedriver + 5888324
+16  chromedriver                        0x000000010f9e1b78 chromedriver + 6265720
+17  chromedriver                        0x000000010f9e1d3d chromedriver + 6266173
+18  chromedriver                        0x000000010f9f4801 chromedriver + 6342657
+19  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+20  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-08 21:45:40 | DEBUG    | action_executor_login:_wait_for_element_robust:258 - Trying JavaScript querySelector: input[placeholder*='email' i]
+2025-12-08 21:45:40 | DEBUG    | action_executor_login:_wait_for_element_robust:274 - ✗ JavaScript selector error: Message: javascript error: missing ) after argument list
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x000000010f9fd518 chromedriver + 6378776
+1   chromedriver                        0x000000010f9f4c2a chromedriver + 6343722
+2   chromedriver                        0x000000010f451086 chromedriver + 430214
+3   chromedriver                        0x000000010f457dcc chromedriver + 458188
+4   chromedriver                        0x000000010f45aae0 chromedriver + 469728
+5   chromedriver                        0x000000010f4f20ea chromedriver + 1089770
+6   chromedriver                        0x000000010f4c9a02 chromedriver + 924162
+7   chromedriver                        0x000000010f4f0f6e chromedriver + 1085294
+8   chromedriver                        0x000000010f4c97d3 chromedriver + 923603
+9   chromedriver                        0x000000010f495185 chromedriver + 708997
+10  chromedriver                        0x000000010f4965c1 chromedriver + 714177
+11  chromedriver                        0x000000010f9bada0 chromedriver + 6106528
+12  chromedriver                        0x000000010f9bf005 chromedriver + 6123525
+13  chromedriver                        0x000000010f996505 chromedriver + 5956869
+14  chromedriver                        0x000000010f9bfa9f chromedriver + 6126239
+15  chromedriver                        0x000000010f985944 chromedriver + 5888324
+16  chromedriver                        0x000000010f9e1b78 chromedriver + 6265720
+17  chromedriver                        0x000000010f9e1d3d chromedriver + 6266173
+18  chromedriver                        0x000000010f9f4801 chromedriver + 6342657
+19  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+20  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-08 21:45:40 | DEBUG    | action_executor_login:_wait_for_element_robust:258 - Trying JavaScript querySelector: #email
+2025-12-08 21:45:40 | DEBUG    | action_executor_login:_wait_for_element_robust:258 - Trying JavaScript querySelector: #loginUsername
+2025-12-08 21:45:40 | DEBUG    | action_executor_login:_wait_for_element_robust:291 - Trying attribute: id='loginUsername'
+2025-12-08 21:45:40 | DEBUG    | action_executor_login:_wait_for_element_robust:291 - Trying attribute: id='username'
+2025-12-08 21:45:40 | DEBUG    | action_executor_login:_wait_for_element_robust:295 - ✓ Found with attribute search: id=username
+2025-12-08 21:45:40 | INFO     | action_executor_login:execute_login:144 - ✓ Paso 3 completado - Username field found
+2025-12-08 21:45:40 | WARNING  | websocket_client:_listen:66 - Connection lost
+2025-12-08 21:45:40 | ERROR    | action_executor:execute_action:143 - Action timeout (60s): advanced_login
+2025-12-08 21:45:40 | INFO     | action_executor:_take_debug_screenshot:67 - 📸 Screenshot saved: screenshots/debug_timeout_advanced_login_1765248340.png
+2025-12-08 21:45:40 | WARNING  | websocket_client:send:206 - Cannot send message: not connected
+2025-12-08 21:45:40 | DEBUG    | warming_executor:_execute_warming:105 - Action 8/12: advanced_login - ✗
+2025-12-08 21:45:40 | DEBUG    | action_executor:execute_action:127 - Executing action: wait
+2025-12-08 21:45:40 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-08 21:45:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:45:40 | INFO     | websocket_client:connect:39 - ✅ Connected to orchestrator!
+2025-12-08 21:45:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: connected
+2025-12-08 21:45:40 | INFO     | websocket_client:_handle_message:82 - Connected confirmation: Connected to orchestrator
+2025-12-08 21:45:44 | DEBUG    | action_executor:_wait:653 - ✓ Waited 4s
+2025-12-08 21:45:44 | DEBUG    | warming_executor:_execute_warming:105 - Action 9/12: wait - ✓
+2025-12-08 21:45:44 | DEBUG    | action_executor:execute_action:127 - Executing action: screenshot
+2025-12-08 21:45:44 | INFO     | action_executor:_take_debug_screenshot:67 - 📸 Screenshot saved: screenshots/debug_03_login_result_1765248344.png
+2025-12-08 21:45:44 | DEBUG    | warming_executor:_execute_warming:105 - Action 10/12: screenshot - ✓
+2025-12-08 21:45:44 | DEBUG    | action_executor:execute_action:127 - Executing action: scroll
+2025-12-08 21:45:45 | DEBUG    | action_executor:_scroll:643 - ✓ Scrolled down 400px
+2025-12-08 21:45:45 | DEBUG    | warming_executor:_execute_warming:105 - Action 11/12: scroll - ✓
+2025-12-08 21:45:45 | DEBUG    | action_executor:execute_action:127 - Executing action: wait
+2025-12-08 21:45:50 | DEBUG    | action_executor:_wait:653 - ✓ Waited 5s
+2025-12-08 21:45:50 | DEBUG    | warming_executor:_execute_warming:105 - Action 12/12: wait - ✓
+2025-12-08 21:45:50 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=298, completed=10, failed=2
+2025-12-08 21:46:00 | INFO     | browser_controller:close_browser:237 - ✓ Browser closed for profile k17m5o28
+2025-12-08 21:46:09 | DEBUG    | websocket_client:_handle_message:79 - Received message: execute_warming
+2025-12-08 21:46:09 | INFO     | websocket_client:_execute_warming:110 - 🔥 Executing warming: execution_id=299, profile_id=k17m5o28
+2025-12-08 21:46:09 | INFO     | warming_executor:_execute_warming:67 - Starting warming: execution_id=299, profile_id=k17m5o28
+2025-12-08 21:46:09 | INFO     | browser_controller:open_browser:52 - 🌐 Opening browser for profile k17m5o28
+2025-12-08 21:46:09 | INFO     | browser_controller:open_browser:54 - DEBUG ADS URL: http://192.168.18.133:50325
+2025-12-08 21:46:09 | INFO     | browser_controller:open_browser:55 - DEBUG CONFIG ID: 4352235056
+2025-12-08 21:46:14 | INFO     | browser_controller:open_browser:77 - ✓ Browser opened on port 62497
+2025-12-08 21:46:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:46:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:46:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:46:18 | DEBUG    | browser_controller:open_browser:91 - ✓ Port 62497 responding
+2025-12-08 21:46:18 | DEBUG    | browser_controller:open_browser:114 - Connecting Selenium (attempt 1)...
+2025-12-08 21:46:19 | INFO     | browser_controller:open_browser:119 - ✓ Selenium connected to port 62497
+2025-12-08 21:46:19 | DEBUG    | browser_controller:_prepare_browser_safe:173 - Preparing browser for profile k17m5o28
+2025-12-08 21:46:20 | INFO     | browser_controller:_prepare_browser_safe:188 - ✓ Browser prepared for profile k17m5o28
+2025-12-08 21:46:20 | INFO     | browser_controller:open_browser:141 - ✅ Browser ready for profile k17m5o28
+2025-12-08 21:46:20 | DEBUG    | action_executor:execute_action:127 - Executing action: navigate
+2025-12-08 21:46:20 | INFO     | action_executor:_navigate:198 - 🌐 Navigating to: https://ecuabet.com/
+2025-12-08 21:46:23 | DEBUG    | action_executor:_navigate:209 - Navigation completed (full load)
+2025-12-08 21:46:23 | DEBUG    | action_executor:_navigate:237 - ✓ Body element found
+2025-12-08 21:46:25 | INFO     | action_executor:_navigate:278 - ✅ Navigation complete
+2025-12-08 21:46:25 | DEBUG    | action_executor:_navigate:279 -   Current URL: https://ecuabet.com/
+2025-12-08 21:46:25 | DEBUG    | action_executor:_navigate:280 -   Page title: Pronósticos deportivos | Juegos de casino Online | Ecuabet
+2025-12-08 21:46:28 | DEBUG    | warming_executor:_execute_warming:105 - Action 1/10: navigate - ✓
+2025-12-08 21:46:28 | DEBUG    | action_executor:execute_action:127 - Executing action: wait
+2025-12-08 21:46:31 | DEBUG    | action_executor:_wait:653 - ✓ Waited 3s
+2025-12-08 21:46:31 | DEBUG    | warming_executor:_execute_warming:105 - Action 2/10: wait - ✓
+2025-12-08 21:46:31 | DEBUG    | action_executor:execute_action:127 - Executing action: click
+2025-12-08 21:46:31 | INFO     | action_executor:_click:324 - 🔍 Looking for: css=#accion_iniciarsesion
+2025-12-08 21:46:31 | DEBUG    | action_executor:_click:343 - ✓ Element found with direct selector
+2025-12-08 21:46:31 | DEBUG    | action_executor:_click:419 - Focusing browser window...
+2025-12-08 21:46:31 | DEBUG    | action_executor:_click:438 - Preparing element for click...
+2025-12-08 21:46:32 | DEBUG    | action_executor:_click:473 - Performing click...
+2025-12-08 21:46:32 | INFO     | action_executor:_click:532 - ✅ Click successful (JavaScript)
+2025-12-08 21:46:33 | INFO     | action_executor:_take_debug_screenshot:67 - 📸 Screenshot saved: screenshots/debug_after_click_1765248393.png
+2025-12-08 21:46:33 | DEBUG    | warming_executor:_execute_warming:105 - Action 3/10: click - ✓
+2025-12-08 21:46:33 | DEBUG    | action_executor:execute_action:127 - Executing action: wait
+2025-12-08 21:46:37 | DEBUG    | action_executor:_wait:653 - ✓ Waited 4s
+2025-12-08 21:46:37 | DEBUG    | warming_executor:_execute_warming:105 - Action 4/10: wait - ✓
+2025-12-08 21:46:37 | DEBUG    | action_executor:execute_action:127 - Executing action: screenshot
+2025-12-08 21:46:38 | INFO     | action_executor:_take_debug_screenshot:67 - 📸 Screenshot saved: screenshots/debug_modal_opened_1765248397.png
+2025-12-08 21:46:38 | DEBUG    | warming_executor:_execute_warming:105 - Action 5/10: screenshot - ✓
+2025-12-08 21:46:38 | DEBUG    | action_executor:execute_action:127 - Executing action: advanced_login
+2025-12-08 21:46:38 | INFO     | action_executor_login:execute_login:106 - 🔐 Starting login for service: ecuabet
+2025-12-08 21:46:38 | INFO     | action_executor_login:execute_login:118 - ✓ Paso 1 completado
+2025-12-08 21:46:41 | INFO     | action_executor_login:execute_login:122 - ✓ Paso 2 completado
+2025-12-08 21:46:41 | DEBUG    | action_executor_login:_wait_for_element_robust:241 - Trying CSS selector: #loginUsername
+2025-12-08 21:46:41 | DEBUG    | action_executor_login:_wait_for_element_robust:246 - ✓ Found with CSS: #loginUsername
+2025-12-08 21:46:41 | INFO     | action_executor_login:execute_login:144 - ✓ Paso 3 completado - Username field found
+2025-12-08 21:46:44 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:46:44 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:46:44 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:46:46 | DEBUG    | action_executor_login:_fill_field_robust:335 - ✓ Field filled successfully
+2025-12-08 21:46:47 | INFO     | action_executor_login:execute_login:153 - ✓ Paso 4 completado - Username filled
+2025-12-08 21:46:47 | DEBUG    | action_executor_login:_wait_for_element_robust:241 - Trying CSS selector: #loginPassword
+2025-12-08 21:46:47 | DEBUG    | action_executor_login:_wait_for_element_robust:246 - ✓ Found with CSS: #loginPassword
+2025-12-08 21:46:50 | DEBUG    | action_executor_login:_fill_field_robust:335 - ✓ Field filled successfully
+2025-12-08 21:46:51 | INFO     | action_executor_login:execute_login:165 - ✓ Paso 5 completado - Password filled
+2025-12-08 21:46:51 | INFO     | action_executor_login:execute_login:177 - ✓ Paso 6 completado - No CAPTCHA detected
+2025-12-08 21:46:51 | DEBUG    | action_executor_login:_wait_for_element_robust:241 - Trying CSS selector: button[aria-label='Login']
+2025-12-08 21:46:51 | DEBUG    | action_executor_login:_wait_for_element_robust:246 - ✓ Found with CSS: button[aria-label='Login']
+2025-12-08 21:46:53 | DEBUG    | action_executor_login:_click_submit_robust:363 - ✓ Submit button clicked
+2025-12-08 21:46:54 | INFO     | action_executor_login:execute_login:184 - ✓ Paso 7 completado - Submit clicked
+2025-12-08 21:47:00 | INFO     | action_executor:_execute_action_internal:177 - Login result: success=False, message=Login failed for unknown reason
+2025-12-08 21:47:00 | DEBUG    | warming_executor:_execute_warming:105 - Action 6/10: advanced_login - ✗
+2025-12-08 21:47:00 | DEBUG    | action_executor:execute_action:127 - Executing action: wait
+2025-12-08 21:47:03 | DEBUG    | action_executor:_wait:653 - ✓ Waited 3s
+2025-12-08 21:47:03 | DEBUG    | warming_executor:_execute_warming:105 - Action 7/10: wait - ✓
+2025-12-08 21:47:03 | DEBUG    | action_executor:execute_action:127 - Executing action: screenshot
+2025-12-08 21:47:04 | INFO     | action_executor:_take_debug_screenshot:67 - 📸 Screenshot saved: screenshots/debug_after_login_1765248423.png
+2025-12-08 21:47:04 | DEBUG    | warming_executor:_execute_warming:105 - Action 8/10: screenshot - ✓
+2025-12-08 21:47:04 | DEBUG    | action_executor:execute_action:127 - Executing action: scroll
+2025-12-08 21:47:05 | DEBUG    | action_executor:_scroll:643 - ✓ Scrolled down 500px
+2025-12-08 21:47:05 | DEBUG    | warming_executor:_execute_warming:105 - Action 9/10: scroll - ✓
+2025-12-08 21:47:05 | DEBUG    | action_executor:execute_action:127 - Executing action: wait
+2025-12-08 21:47:10 | DEBUG    | action_executor:_wait:653 - ✓ Waited 5s
+2025-12-08 21:47:10 | DEBUG    | warming_executor:_execute_warming:105 - Action 10/10: wait - ✓
+2025-12-08 21:47:10 | INFO     | warming_executor:_execute_warming:142 - Warming completed: execution_id=299, completed=9, failed=1
+2025-12-08 21:47:19 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:47:19 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:47:19 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:47:20 | INFO     | browser_controller:close_browser:237 - ✓ Browser closed for profile k17m5o28
+2025-12-08 21:47:49 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:47:49 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:47:49 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:48:19 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:48:19 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:48:19 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:48:49 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:48:49 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:48:49 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:49:19 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:49:19 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:49:19 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:49:49 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:49:49 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:49:49 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:50:19 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:50:20 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:50:20 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:50:49 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:50:49 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:50:49 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:51:19 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:51:19 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:51:19 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:51:49 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:51:49 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:51:49 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:52:19 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:52:19 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:52:19 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:52:49 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:52:49 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:52:49 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:53:19 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:53:19 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:53:19 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:53:49 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:53:49 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:53:49 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:54:19 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:54:19 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:54:19 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:54:49 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:54:49 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:54:49 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:55:19 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:55:19 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:55:19 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:55:49 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:55:49 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:55:49 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:56:19 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:56:19 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:56:19 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:56:49 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:56:49 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:56:49 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:57:19 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:57:19 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:57:19 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:57:49 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:57:49 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:57:49 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:58:19 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:58:19 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:58:19 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:58:49 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:58:49 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:58:49 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:59:19 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:59:19 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:59:19 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 21:59:49 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 21:59:49 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 21:59:49 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 22:00:19 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 22:00:19 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 22:00:19 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 22:00:49 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 22:00:49 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 22:00:49 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 22:01:19 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 22:01:19 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 22:01:19 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 22:01:49 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 22:01:49 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 22:01:49 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 22:02:19 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 22:02:19 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 22:02:19 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 22:02:50 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 22:02:50 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 22:02:50 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 22:03:20 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 22:03:20 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 22:03:20 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 22:03:50 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 22:03:50 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 22:03:50 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 22:04:20 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 22:04:20 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 22:04:20 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 22:04:50 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 22:04:50 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 22:04:50 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 22:05:20 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 22:05:20 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 22:05:20 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 22:05:50 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 22:05:50 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 22:05:50 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 22:06:20 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 22:06:20 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 22:06:20 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 22:06:50 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 22:06:50 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 22:06:50 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 22:07:20 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 22:07:20 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 22:07:20 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 22:07:50 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 22:07:50 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 22:07:50 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 22:08:20 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 22:08:20 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 22:08:20 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-08 22:08:50 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-08 22:08:50 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-08 22:08:50 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-09 00:09:39 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-09 00:09:39 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-09 00:09:39 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-09 01:10:43 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-09 01:10:49 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-09 01:10:49 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-09 02:04:56 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-09 02:04:56 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-09 02:04:56 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-09 02:59:09 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-09 02:59:09 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-09 02:59:09 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-09 03:46:12 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-09 03:46:12 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-09 03:46:12 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-09 04:40:23 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-09 04:40:23 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-09 04:40:23 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-09 05:34:36 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-09 05:34:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-09 05:34:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-09 06:01:07 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-09 06:01:07 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-09 06:01:07 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-09 06:55:18 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-09 06:55:23 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-09 06:55:23 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-09 07:49:30 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-09 07:49:35 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-09 07:49:35 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-09 08:02:14 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-09 08:02:14 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-09 08:02:14 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-09 08:56:27 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-09 08:56:57 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-09 09:03:27 | WARNING  | websocket_client:_listen:66 - Connection lost
+2025-12-09 09:03:27 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 51] Network is unreachable
+2025-12-09 09:03:42 | ERROR    | websocket_client:connect:53 - Connection error: 
+2025-12-09 09:05:42 | ERROR    | websocket_client:connect:53 - Connection error: 
+2025-12-09 09:05:47 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 51] Network is unreachable
+2025-12-09 09:06:02 | ERROR    | websocket_client:connect:53 - Connection error: 
+2025-12-09 09:06:17 | ERROR    | websocket_client:connect:53 - Connection error: 
+2025-12-09 09:06:32 | ERROR    | websocket_client:connect:53 - Connection error: 
+2025-12-09 09:06:47 | ERROR    | websocket_client:connect:53 - Connection error: 
+2025-12-09 09:07:03 | ERROR    | websocket_client:connect:53 - Connection error: 
+2025-12-09 09:07:10 | INFO     | __main__:handle_signal:168 - Received signal 2
+2025-12-09 09:07:11 | INFO     | __main__:handle_signal:168 - Received signal 2
+2025-12-09 09:07:18 | INFO     | __main__:stop:150 - Stopping agent...
+2025-12-09 09:07:18 | INFO     | websocket_client:disconnect:237 - Disconnected from orchestrator
+2025-12-09 09:07:18 | INFO     | __main__:stop:162 - Agent uptime: 11:24:24.351019
+2025-12-09 09:07:18 | INFO     | __main__:stop:164 - ✅ Agent stopped
+2025-12-09 09:07:18 | ERROR    | websocket_client:connect:53 - Connection error: 
+2025-12-09 09:07:26 | INFO     | __main__:handle_signal:168 - Received signal 2

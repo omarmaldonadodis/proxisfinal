@@ -181,8 +181,11 @@ class ActionExecutor:
             return False
     
     async def _navigate(self, driver: webdriver.Chrome, params: Dict) -> bool:
+        """
+        ✅ NAVEGACIÓN MEJORADA - No se bloquea en SPAs
+        """
         url = params.get("url")
-        timeout = params.get("timeout", 40)
+        timeout = params.get("timeout", 45)  # ← Aumentado de 40 a 45
 
         if not url:
             logger.error("No URL provided")
@@ -192,130 +195,381 @@ class ActionExecutor:
             url = f"https://{url}"
 
         try:
-            # Evitar que Selenium se quede esperando "carga completa"
+            logger.info(f"🌐 Navigating to: {url}")
+            
+            # Configurar timeouts más largos
             driver.set_page_load_timeout(timeout)
+            driver.set_script_timeout(30)
+            
+            # ============================================
+            # MÉTODO 1: Navegación normal con timeout
+            # ============================================
+            try:
+                driver.get(url)
+                logger.debug("Navigation completed (full load)")
+            
+            except Exception as e:
+                # Si falla por timeout, intentar stop
+                error_msg = str(e).lower()
+                
+                if "timeout" in error_msg or "timed out" in error_msg:
+                    logger.warning("Page load timeout, trying to stop loading...")
+                    
+                    try:
+                        # Detener carga de página
+                        driver.execute_script("window.stop();")
+                        await asyncio.sleep(1)
+                        logger.debug("Page loading stopped")
+                    except:
+                        pass
+                else:
+                    # Si no es timeout, es un error real
+                    raise
 
-            # Cargar la página
-            driver.get(url)
+            # ============================================
+            # PASO 2: Esperar a que haya contenido básico
+            # ============================================
+            try:
+                # Esperar solo a que el BODY esté presente
+                WebDriverWait(driver, 15).until(
+                    EC.presence_of_element_located((By.TAG_NAME, "body"))
+                )
+                logger.debug("✓ Body element found")
+            except TimeoutException:
+                logger.warning("Body not found in 15s, continuing anyway...")
 
-            # Esperar solo a que el BODY esté presente (no toda la SPA)
-            WebDriverWait(driver, 15).until(
-                EC.presence_of_element_located((By.TAG_NAME, "body"))
-            )
+            # ============================================
+            # PASO 3: Esperar carga de JavaScript (para SPAs)
+            # ============================================
+            try:
+                # Esperar a que Angular/React termine de cargar
+                await asyncio.sleep(2)  # Espera base
+                
+                # Verificar si Angular está cargando
+                is_loading = driver.execute_script("""
+                    // Verificar Angular
+                    if (typeof window.getAllAngularTestabilities !== 'undefined') {
+                        const testabilities = window.getAllAngularTestabilities();
+                        return testabilities.some(t => t.isStable() === false);
+                    }
+                    
+                    // Verificar React
+                    if (typeof window.React !== 'undefined') {
+                        return false; // React no tiene API de "isLoading"
+                    }
+                    
+                    return false;
+                """)
+                
+                if is_loading:
+                    logger.debug("Angular still loading, waiting...")
+                    await asyncio.sleep(3)
+            
+            except Exception as e:
+                logger.debug(f"SPA check warning: {e}")
 
-            # Espera humana aleatoria
+            # ============================================
+            # PASO 4: Verificar que estamos en la página correcta
+            # ============================================
+            try:
+                current_url = driver.current_url
+                page_title = driver.title
+                
+                logger.info(f"✅ Navigation complete")
+                logger.debug(f"  Current URL: {current_url}")
+                logger.debug(f"  Page title: {page_title}")
+                
+                # Verificar que no estamos en about:blank
+                if current_url == "about:blank":
+                    logger.error("Navigation failed - still on about:blank")
+                    return False
+                
+                # Verificar que la URL contiene el dominio esperado
+                from urllib.parse import urlparse
+                expected_domain = urlparse(url).netloc
+                current_domain = urlparse(current_url).netloc
+                
+                if expected_domain not in current_domain:
+                    logger.warning(f"Domain mismatch: expected {expected_domain}, got {current_domain}")
+            
+            except Exception as e:
+                logger.warning(f"URL verification warning: {e}")
+
+            # ============================================
+            # PASO 5: Espera humanizada final
+            # ============================================
             await asyncio.sleep(random.uniform(2, 4))
-
-            self._log_page_info(driver)
-            logger.info(f"✓ Navigated to: {url}")
+            
             return True
 
         except Exception as e:
-            logger.error(f"Navigation failed: {e}")
+            logger.error(f"❌ Navigation failed: {e}")
+            self._take_debug_screenshot(driver, "navigate_error")
             return False
-
-    
+        
     async def _click(self, driver: webdriver.Chrome, params: Dict) -> bool:
+        """
+        ✅ CLICK OPTIMIZADO PARA MODO MOBILE
+        Evita ActionChains que fallan en mobile - usa solo JavaScript
+        """
         selector = params.get("selector")
-        selector_type = params.get("selector_type") or params.get("by", "css")
+        selector_type = params.get("selector_type", "css")
+        text = params.get("text")
         human = params.get("human", True)
-        fallback_text = params.get("text")
         
         if not selector:
             logger.error("No selector provided for click")
             return False
         
-        self._take_debug_screenshot(driver, "before_click")
-        self._log_page_info(driver)
+        logger.info(f"🔍 Looking for: {selector_type}={selector}")
         
-        logger.info(f"🔍 Looking for click element: {selector_type} = {selector}")
-        
-        # ✅ ESTRATEGIA MEJORADA: Buscar con JavaScript y verificar visibilidad
+        # ============================================
+        # PASO 1: ENCONTRAR ELEMENTO (múltiples estrategias)
+        # ============================================
         element = None
         
+        # Estrategia A: Selector directo
         try:
-            # Esperar a que el elemento exista
             if selector_type.lower() == "xpath":
-                by = By.XPATH
+                element = WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.XPATH, selector))
+                )
             else:
-                by = By.CSS_SELECTOR
+                element = WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.CSS_SELECTOR, selector))
+                )
             
-            element = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((by, selector))
-            )
-            
-            # ✅ VERIFICAR SI ES VISIBLE Y CLICKEABLE
-            is_visible = driver.execute_script("""
-                var elem = arguments[0];
-                var rect = elem.getBoundingClientRect();
-                var style = window.getComputedStyle(elem);
-                return (
-                    style.display !== 'none' &&
-                    style.visibility !== 'hidden' &&
-                    style.opacity !== '0' &&
-                    rect.width > 0 &&
-                    rect.height > 0
-                );
-            """, element)
-            
-            if not is_visible:
-                logger.warning(f"Element found but not visible, trying to make it visible...")
-                
-                # ✅ INTENTAR HACER VISIBLE EL ELEMENTO
-                driver.execute_script("""
-                    var elem = arguments[0];
-                    elem.style.display = 'block';
-                    elem.style.visibility = 'visible';
-                    elem.style.opacity = '1';
-                """, element)
-                
-                await asyncio.sleep(1)
+            if element:
+                logger.debug("✓ Element found with direct selector")
+        except:
+            logger.debug("Direct selector failed")
         
-        except TimeoutException:
-            logger.error(f"❌ Element not found: {selector}")
-            return False
+        # Estrategia B: Buscar por texto (si se proporcionó)
+        if not element and text:
+            try:
+                logger.debug(f"Searching by text: '{text}'")
+                
+                # JavaScript para encontrar por texto
+                element = driver.execute_script(f"""
+                    function findByText(text) {{
+                        const buttons = Array.from(document.querySelectorAll('button, a'));
+                        return buttons.find(btn => 
+                            btn.textContent.trim().includes(text) && 
+                            btn.offsetParent !== null
+                        );
+                    }}
+                    return findByText('{text}');
+                """)
+                
+                if element:
+                    logger.debug(f"✓ Found by text: '{text}'")
+            except Exception as e:
+                logger.debug(f"Text search failed: {e}")
+        
+        # Estrategia C: Clase específica de Sorti
+        if not element:
+            try:
+                logger.debug("Trying Sorti-specific class")
+                element = driver.execute_script("""
+                    return document.querySelector('button.zg-btn-primary');
+                """)
+                
+                if element:
+                    logger.debug("✓ Found Sorti button")
+            except:
+                pass
+        
+        # Estrategia D: Cualquier botón visible con "Ingresar"
+        if not element and text:
+            try:
+                logger.debug("Trying all visible buttons")
+                element = driver.execute_script(f"""
+                    const allButtons = Array.from(document.querySelectorAll('button'));
+                    for (let btn of allButtons) {{
+                        const rect = btn.getBoundingClientRect();
+                        const style = window.getComputedStyle(btn);
+                        const isVisible = (
+                            style.display !== 'none' &&
+                            style.visibility !== 'hidden' &&
+                            rect.width > 0 &&
+                            rect.height > 0
+                        );
+                        
+                        if (isVisible && btn.textContent.includes('{text}')) {{
+                            return btn;
+                        }}
+                    }}
+                    return null;
+                """)
+                
+                if element:
+                    logger.debug("✓ Found visible button")
+            except Exception as e:
+                logger.debug(f"Visible button search failed: {e}")
         
         if not element:
-            logger.error(f"❌ Element not found for click: {selector}")
-            self._take_debug_screenshot(driver, "click_not_found")
+            logger.error(f"❌ Element not found: {selector}")
+            self._take_debug_screenshot(driver, "element_not_found")
             return False
         
+        # ============================================
+        # PASO 2: ASEGURAR QUE EL NAVEGADOR TIENE FOCO
+        # ============================================
         try:
-            # ✅ MÉTODO 1: Scroll y click con ActionChains
-            if human:
-                try:
-                    driver.execute_script(
-                        "arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});",
-                        element
-                    )
-                    await asyncio.sleep(random.uniform(0.5, 1.0))
-                    
-                    actions = ActionChains(driver)
-                    actions.move_to_element(element)
-                    actions.pause(random.uniform(0.2, 0.5))
-                    actions.click()
-                    actions.perform()
-                    
-                    logger.info(f"✓ Clicked element (ActionChains)")
-                    await asyncio.sleep(random.uniform(0.5, 1.5))
-                    self._take_debug_screenshot(driver, "after_click")
-                    return True
-                
-                except Exception as e:
-                    logger.warning(f"ActionChains failed: {e}, trying JavaScript click...")
+            logger.debug("Focusing browser window...")
             
-            # ✅ MÉTODO 2: Click con JavaScript (FALLBACK)
-            driver.execute_script("arguments[0].click();", element)
-            logger.info(f"✓ Clicked element (JavaScript)")
-            await asyncio.sleep(random.uniform(0.5, 1.5))
-            self._take_debug_screenshot(driver, "after_click")
-            return True
-        
+            # Forzar foco en la ventana del navegador
+            driver.switch_to.window(driver.current_window_handle)
+            
+            # JavaScript para asegurar foco
+            driver.execute_script("""
+                window.focus();
+                document.body.focus();
+            """)
+            
+            await asyncio.sleep(0.5)
         except Exception as e:
-            logger.error(f"Click failed: {e}")
-            self._take_debug_screenshot(driver, "click_error")
-            return False
-    
+            logger.warning(f"Window focus warning: {e}")
+        
+        # ============================================
+        # PASO 3: HACER ELEMENTO VISIBLE Y CLICKEABLE
+        # ============================================
+        try:
+            logger.debug("Preparing element for click...")
+            
+            # Forzar visibilidad y scroll
+            driver.execute_script("""
+                const elem = arguments[0];
+                
+                // Hacer visible
+                elem.style.display = 'block';
+                elem.style.visibility = 'visible';
+                elem.style.opacity = '1';
+                elem.style.pointerEvents = 'auto';
+                
+                // Scroll al centro
+                elem.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center',
+                    inline: 'center'
+                });
+                
+                // Remover cualquier overlay
+                const zIndex = window.getComputedStyle(elem).zIndex;
+                if (zIndex === 'auto' || parseInt(zIndex) < 1000) {
+                    elem.style.zIndex = '999999';
+                }
+            """, element)
+            
+            await asyncio.sleep(1.0)  # Esperar scroll
+            
+        except Exception as e:
+            logger.warning(f"Element preparation warning: {e}")
+        
+        # ============================================
+        # PASO 4: CLICK CON JAVASCRIPT (sin ActionChains)
+        # ============================================
+        try:
+            logger.debug("Performing click...")
+            
+            # Método 1: Click directo con JavaScript
+            success = driver.execute_script("""
+                const elem = arguments[0];
+                
+                try {
+                    // Focus en el elemento
+                    elem.focus();
+                    
+                    // Simular eventos de mouse completos
+                    const rect = elem.getBoundingClientRect();
+                    const x = rect.left + rect.width / 2;
+                    const y = rect.top + rect.height / 2;
+                    
+                    // MouseDown
+                    const mouseDown = new MouseEvent('mousedown', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        clientX: x,
+                        clientY: y,
+                        button: 0
+                    });
+                    elem.dispatchEvent(mouseDown);
+                    
+                    // MouseUp
+                    const mouseUp = new MouseEvent('mouseup', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        clientX: x,
+                        clientY: y,
+                        button: 0
+                    });
+                    elem.dispatchEvent(mouseUp);
+                    
+                    // Click
+                    const clickEvent = new MouseEvent('click', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        clientX: x,
+                        clientY: y,
+                        button: 0
+                    });
+                    elem.dispatchEvent(clickEvent);
+                    
+                    // Click directo como backup
+                    elem.click();
+                    
+                    return true;
+                } catch(e) {
+                    console.error('Click error:', e);
+                    return false;
+                }
+            """, element)
+            
+            if success or success is None:  # None = no error
+                logger.info("✅ Click successful (JavaScript)")
+                await asyncio.sleep(random.uniform(0.8, 1.5) if human else 0.5)
+                self._take_debug_screenshot(driver, "after_click")
+                return True
+            
+        except Exception as e:
+            logger.error(f"JavaScript click failed: {e}")
+        
+        # ============================================
+        # MÉTODO FALLBACK: Click en coordenadas absolutas
+        # ============================================
+        try:
+            logger.debug("Trying coordinate click (fallback)...")
+            
+            driver.execute_script("""
+                const elem = arguments[0];
+                const rect = elem.getBoundingClientRect();
+                
+                const x = window.scrollX + rect.left + rect.width / 2;
+                const y = window.scrollY + rect.top + rect.height / 2;
+                
+                const clickAtCoords = new MouseEvent('click', {
+                    view: window,
+                    bubbles: true,
+                    cancelable: true,
+                    clientX: x,
+                    clientY: y
+                });
+                
+                document.elementFromPoint(rect.left + rect.width/2, rect.top + rect.height/2)?.dispatchEvent(clickAtCoords);
+                elem.click();
+            """, element)
+            
+            logger.info("✅ Click successful (coordinates)")
+            await asyncio.sleep(0.5)
+            return True
+            
+        except Exception as e:
+            logger.error(f"Coordinate click failed: {e}")
+            self._take_debug_screenshot(driver, "click_failed")
+            return False                 
     async def _type(self, driver: webdriver.Chrome, params: Dict) -> bool:
         selector = params.get("selector")
         text = params.get("text", "")
