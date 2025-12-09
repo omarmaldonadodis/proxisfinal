@@ -1,4 +1,4 @@
-# agent/action_executor.py (DEBUGGING VERSION)
+# agent/action_executor.py - FIXED VERSION
 from typing import Dict, Optional, Any, List
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -16,6 +16,10 @@ import asyncio
 import random
 import time
 import os
+
+# ✅ IMPORTAR LOGIN ACTION
+from action_executor_login import HumanizedLoginExecutor
+
 
 class HumanBehavior:
     @staticmethod
@@ -61,8 +65,10 @@ class ActionExecutor:
             filename = f"screenshots/debug_{name}_{timestamp}.png"
             driver.save_screenshot(filename)
             logger.info(f"📸 Screenshot saved: {filename}")
+            return filename
         except Exception as e:
             logger.error(f"Screenshot failed: {e}")
+            return None
     
     def _log_page_info(self, driver: webdriver.Chrome):
         """Log información de la página actual"""
@@ -107,18 +113,6 @@ class ActionExecutor:
                     return element
             except:
                 logger.debug(f"Strategy 2 failed")
-        
-        # Estrategia 3: Buscar todos los elementos y filtrar
-        if selector_type.lower() == "xpath":
-            try:
-                logger.debug(f"Strategy 3: Find all elements")
-                elements = driver.find_elements(By.XPATH, selector)
-                for elem in elements:
-                    if elem.is_displayed():
-                        logger.debug(f"✓ Found visible element with strategy 3")
-                        return elem
-            except:
-                logger.debug(f"Strategy 3 failed")
         
         return None
     
@@ -174,15 +168,14 @@ class ActionExecutor:
             return await self._wait(driver, params)
         elif action_type == "search_google":
             return await self._search_google(driver, params)
-        elif action_type == "debug_page":
-            return await self._debug_page(driver, params)
+        elif action_type == "screenshot":
+            return await self._screenshot(driver, params)
+        # ✅ AGREGAR ADVANCED_LOGIN
         elif action_type in ["advanced_login", "login"]:
-            # params debe incluir los campos para login
             login_executor = HumanizedLoginExecutor(self.config)
             result = await login_executor.execute_login(driver, params)
-            logger.info(f"Login result: {result.to_dict()}")
+            logger.info(f"Login result: success={result.success}, message={result.message}")
             return result.success
-
         else:
             logger.warning(f"Unknown action type: {action_type}")
             return False
@@ -209,69 +202,95 @@ class ActionExecutor:
         selector = params.get("selector")
         selector_type = params.get("selector_type") or params.get("by", "css")
         human = params.get("human", True)
-        fallback_text = params.get("text")  # ✅ Texto alternativo para buscar
+        fallback_text = params.get("text")
         
         if not selector:
             logger.error("No selector provided for click")
             return False
         
-        # 🔍 DEBUG
         self._take_debug_screenshot(driver, "before_click")
         self._log_page_info(driver)
         
         logger.info(f"🔍 Looking for click element: {selector_type} = {selector}")
         
-        # ✅ NUEVO: Si selector tiene múltiples opciones separadas por coma
-        if "," in selector and selector_type.lower() == "css":
-            # Probar cada selector individualmente
-            selectors = [s.strip() for s in selector.split(",")]
-            element = None
-            
-            for sel in selectors:
-                # Saltar selectores inválidos como :contains()
-                if ":contains(" in sel:
-                    continue
-                
-                try:
-                    logger.debug(f"Trying selector: {sel}")
-                    element = self._find_element_with_strategies(driver, sel, "css", timeout=3)
-                    if element:
-                        logger.debug(f"✓ Found with selector: {sel}")
-                        break
-                except:
-                    continue
-        else:
-            element = self._find_element_with_strategies(driver, selector, selector_type, timeout=15)
+        # ✅ ESTRATEGIA MEJORADA: Buscar con JavaScript y verificar visibilidad
+        element = None
         
-        # ✅ FALLBACK: Buscar por texto si selector falló
-        if not element and fallback_text:
-            logger.info(f"🔍 Fallback: searching by text '{fallback_text}'")
-            element = self._find_element_by_text(driver, fallback_text)
+        try:
+            # Esperar a que el elemento exista
+            if selector_type.lower() == "xpath":
+                by = By.XPATH
+            else:
+                by = By.CSS_SELECTOR
+            
+            element = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((by, selector))
+            )
+            
+            # ✅ VERIFICAR SI ES VISIBLE Y CLICKEABLE
+            is_visible = driver.execute_script("""
+                var elem = arguments[0];
+                var rect = elem.getBoundingClientRect();
+                var style = window.getComputedStyle(elem);
+                return (
+                    style.display !== 'none' &&
+                    style.visibility !== 'hidden' &&
+                    style.opacity !== '0' &&
+                    rect.width > 0 &&
+                    rect.height > 0
+                );
+            """, element)
+            
+            if not is_visible:
+                logger.warning(f"Element found but not visible, trying to make it visible...")
+                
+                # ✅ INTENTAR HACER VISIBLE EL ELEMENTO
+                driver.execute_script("""
+                    var elem = arguments[0];
+                    elem.style.display = 'block';
+                    elem.style.visibility = 'visible';
+                    elem.style.opacity = '1';
+                """, element)
+                
+                await asyncio.sleep(1)
+        
+        except TimeoutException:
+            logger.error(f"❌ Element not found: {selector}")
+            return False
         
         if not element:
             logger.error(f"❌ Element not found for click: {selector}")
-            await self._debug_find_similar_elements(driver, selector, selector_type)
             self._take_debug_screenshot(driver, "click_not_found")
             return False
         
         try:
+            # ✅ MÉTODO 1: Scroll y click con ActionChains
             if human:
-                driver.execute_script(
-                    "arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});",
-                    element
-                )
-                await asyncio.sleep(random.uniform(0.5, 1.0))
+                try:
+                    driver.execute_script(
+                        "arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});",
+                        element
+                    )
+                    await asyncio.sleep(random.uniform(0.5, 1.0))
+                    
+                    actions = ActionChains(driver)
+                    actions.move_to_element(element)
+                    actions.pause(random.uniform(0.2, 0.5))
+                    actions.click()
+                    actions.perform()
+                    
+                    logger.info(f"✓ Clicked element (ActionChains)")
+                    await asyncio.sleep(random.uniform(0.5, 1.5))
+                    self._take_debug_screenshot(driver, "after_click")
+                    return True
                 
-                actions = ActionChains(driver)
-                actions.move_to_element(element)
-                actions.pause(random.uniform(0.2, 0.5))
-                actions.click()
-                actions.perform()
-            else:
-                element.click()
+                except Exception as e:
+                    logger.warning(f"ActionChains failed: {e}, trying JavaScript click...")
             
+            # ✅ MÉTODO 2: Click con JavaScript (FALLBACK)
+            driver.execute_script("arguments[0].click();", element)
+            logger.info(f"✓ Clicked element (JavaScript)")
             await asyncio.sleep(random.uniform(0.5, 1.5))
-            logger.info(f"✓ Clicked element")
             self._take_debug_screenshot(driver, "after_click")
             return True
         
@@ -280,32 +299,12 @@ class ActionExecutor:
             self._take_debug_screenshot(driver, "click_error")
             return False
     
-    def _find_element_by_text(self, driver: webdriver.Chrome, text: str):
-        """Busca elemento por su texto visible"""
-        try:
-            # Buscar en todos los elementos clickeables
-            elements = driver.find_elements(By.TAG_NAME, "a") + \
-                      driver.find_elements(By.TAG_NAME, "button")
-            
-            for elem in elements:
-                try:
-                    if elem.is_displayed() and text.lower() in elem.text.lower():
-                        logger.debug(f"Found by text: '{elem.text}'")
-                        return elem
-                except:
-                    continue
-            
-            return None
-        except:
-            return None
-    
     async def _type(self, driver: webdriver.Chrome, params: Dict) -> bool:
         selector = params.get("selector")
         text = params.get("text", "")
         selector_type = params.get("selector_type") or params.get("by", "css")
         human = params.get("human", True)
         clear_first = params.get("clear", True)
-        placeholder = params.get("placeholder")  # ✅ Buscar por placeholder
         
         if not selector:
             logger.error("No selector provided for type")
@@ -313,36 +312,13 @@ class ActionExecutor:
         
         text = self._replace_variables(text)
         
-        # 🔍 DEBUG
         self._take_debug_screenshot(driver, "before_type")
         logger.info(f"🔍 Looking for type element: {selector_type} = {selector}")
         
-        # ✅ Probar múltiples selectores
-        element = None
-        
-        if "," in selector and selector_type.lower() == "css":
-            selectors = [s.strip() for s in selector.split(",")]
-            
-            for sel in selectors:
-                try:
-                    logger.debug(f"Trying selector: {sel}")
-                    element = self._find_element_with_strategies(driver, sel, "css", timeout=3)
-                    if element:
-                        logger.debug(f"✓ Found with selector: {sel}")
-                        break
-                except:
-                    continue
-        else:
-            element = self._find_element_with_strategies(driver, selector, selector_type, timeout=15)
-        
-        # ✅ FALLBACK: Buscar por placeholder
-        if not element and placeholder:
-            logger.info(f"🔍 Fallback: searching by placeholder '{placeholder}'")
-            element = self._find_input_by_placeholder(driver, placeholder)
+        element = self._find_element_with_strategies(driver, selector, selector_type, timeout=15)
         
         if not element:
             logger.error(f"❌ Element not found for type: {selector}")
-            await self._debug_find_similar_elements(driver, selector, selector_type)
             self._take_debug_screenshot(driver, "type_not_found")
             return False
         
@@ -374,25 +350,6 @@ class ActionExecutor:
         except Exception as e:
             logger.error(f"Type failed: {e}")
             return False
-    
-    def _find_input_by_placeholder(self, driver: webdriver.Chrome, placeholder: str):
-        """Busca input por su placeholder"""
-        try:
-            inputs = driver.find_elements(By.TAG_NAME, "input") + \
-                    driver.find_elements(By.TAG_NAME, "textarea")
-            
-            for inp in inputs:
-                try:
-                    ph = inp.get_attribute("placeholder")
-                    if ph and placeholder.lower() in ph.lower():
-                        logger.debug(f"Found by placeholder: '{ph}'")
-                        return inp
-                except:
-                    continue
-            
-            return None
-        except:
-            return None
     
     async def _scroll(self, driver: webdriver.Chrome, params: Dict) -> bool:
         direction = params.get("direction", "down")
@@ -478,76 +435,8 @@ class ActionExecutor:
             logger.error(f"Google search failed: {e}")
             return False
     
-    async def _debug_page(self, driver: webdriver.Chrome, params: Dict) -> bool:
-        """Acción de debugging para inspeccionar la página"""
-        
-        logger.info("🔍 DEBUG PAGE INFO:")
-        logger.info(f"URL: {driver.current_url}")
-        logger.info(f"Title: {driver.title}")
-        
-        # Tomar screenshot
-        self._take_debug_screenshot(driver, "debug_page")
-        
-        # Listar botones de login
-        try:
-            buttons = driver.find_elements(By.TAG_NAME, "button")
-            links = driver.find_elements(By.TAG_NAME, "a")
-            
-            logger.info(f"Found {len(buttons)} buttons")
-            logger.info(f"Found {len(links)} links")
-            
-            # Buscar elementos con texto "iniciar", "login", etc.
-            login_keywords = ["iniciar", "ingresar", "login", "acceder", "entrar"]
-            
-            for link in links[:20]:  # Primeros 20 links
-                try:
-                    text = link.text.lower()
-                    if any(keyword in text for keyword in login_keywords):
-                        logger.info(f"  Login link found: '{link.text}' - HTML: {link.get_attribute('outerHTML')[:100]}")
-                except:
-                    pass
-            
-            for button in buttons[:20]:
-                try:
-                    text = button.text.lower()
-                    if any(keyword in text for keyword in login_keywords):
-                        logger.info(f"  Login button found: '{button.text}' - HTML: {button.get_attribute('outerHTML')[:100]}")
-                except:
-                    pass
-        
-        except Exception as e:
-            logger.error(f"Debug failed: {e}")
-        
-        return True
-    
-    async def _debug_find_similar_elements(self, driver: webdriver.Chrome, selector: str, selector_type: str):
-        """Busca elementos similares para debugging"""
-        
-        logger.info("🔍 Looking for similar elements...")
-        
-        try:
-            if selector_type.lower() == "xpath":
-                # Si es XPath, intentar variaciones
-                if "text()" in selector:
-                    # Extraer texto buscado
-                    import re
-                    matches = re.findall(r"'([^']+)'", selector)
-                    if matches:
-                        search_text = matches[0]
-                        logger.info(f"Searching for elements with text containing: '{search_text}'")
-                        
-                        # Buscar en links
-                        links = driver.find_elements(By.TAG_NAME, "a")
-                        for link in links:
-                            try:
-                                if search_text.lower() in link.text.lower():
-                                    logger.info(f"  Found link: '{link.text}' - {link.get_attribute('outerHTML')[:150]}")
-                            except:
-                                pass
-            
-            else:
-                # Si es CSS, intentar encontrar el elemento
-                logger.info(f"Trying to find CSS element: {selector}")
-        
-        except Exception as e:
-            logger.error(f"Debug similar elements failed: {e}")
+    async def _screenshot(self, driver: webdriver.Chrome, params: Dict) -> bool:
+        """✅ ACCIÓN DE SCREENSHOT"""
+        name = params.get("name", "screenshot")
+        filename = self._take_debug_screenshot(driver, name)
+        return filename is not None

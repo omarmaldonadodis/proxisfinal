@@ -1,10 +1,10 @@
-from typing import Dict, Optional, Any, Tuple
+from typing import Dict, Optional, Any
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from selenium.common.exceptions import TimeoutException
 from loguru import logger
 import asyncio
 import random
@@ -44,18 +44,6 @@ class LoginResult:
 class HumanizedLoginExecutor:
     """Ejecutor de login humanizado con detección de problemas"""
     
-    # Detectores de reCAPTCHA
-    RECAPTCHA_INDICATORS = [
-        "recaptcha",
-        "g-recaptcha",
-        "captcha",
-        "robot",
-        "verify you're human",
-        "i'm not a robot",
-        "verificación",
-        "demostrar que no eres un robot"
-    ]
-    
     # Detectores de errores de autenticación
     AUTH_ERROR_INDICATORS = [
         "wrong password",
@@ -92,7 +80,7 @@ class HumanizedLoginExecutor:
         "6-digit code"
     ]
     
-    def __init__(self, config):
+    def __init__(self, config: Dict = {}):
         self.config = config
     
     async def execute_login(
@@ -102,19 +90,6 @@ class HumanizedLoginExecutor:
     ) -> LoginResult:
         """
         Ejecuta login humanizado con detección completa
-        
-        Params esperados:
-        {
-            "service": "ecuabet" | "betcris" | "generic",
-            "username": "user@email.com",
-            "password": "password123",
-            "username_selector": "input[name='username']",
-            "password_selector": "input[name='password']",
-            "submit_selector": "button[type='submit']",
-            "wait_after_submit": 5,
-            "success_url_contains": "dashboard",
-            "success_element": ".user-menu"
-        }
         """
         
         service = params.get("service", "generic")
@@ -131,8 +106,8 @@ class HumanizedLoginExecutor:
         logger.info(f"🔐 Starting login for service: {service}")
         
         try:
-            # 1. Detectar reCAPTCHA antes de empezar
-            if self._detect_recaptcha(driver):
+            # 1. Detectar reCAPTCHA visible antes de empezar
+            if not params.get("ignore_recaptcha", False) and self._detect_recaptcha(driver):
                 logger.warning("⚠️ reCAPTCHA detected before login")
                 return LoginResult(
                     success=False,
@@ -140,46 +115,49 @@ class HumanizedLoginExecutor:
                     error_type="recaptcha",
                     needs_captcha=True
                 )
-            
+            logger.info(f"Termiina paso 1")
+
             # 2. Esperar estabilidad de la página
             await self._wait_for_page_stability(driver)
+            logger.info(f"Termiina paso 2")
+
             
-            # 3. Buscar y llenar campo de usuario
-            username_filled = await self._fill_username(
-                driver,
-                username,
-                params.get("username_selector", "input[type='email'], input[name='username'], input[name='email']")
+            # 3. Esperar a que los campos del modal estén visibles
+            username_selector = params.get(
+                "username_selector",
+                "input[placeholder*='Correo'], input[type='text'], input[name='email']"
+            )
+            password_selector = params.get(
+                "password_selector",
+                "input[type='password'], input[placeholder*='Contrasena']"
+            )
+            submit_selector = params.get(
+                "submit_selector",
+                "button:contains('Acceder'), button.btn-success, button[type='submit']"
             )
             
+            await self._wait_for_element(driver, username_selector)
+            logger.info(f"Termiina paso 3")
+
+            # 4. Llenar username
+            username_filled = await self._fill_username(driver, username, username_selector)
             if not username_filled:
-                return LoginResult(
-                    success=False,
-                    message="Could not find username field",
-                    error_type="username_field_not_found"
-                )
+                return LoginResult(False, "Could not find username field", "username_field_not_found")
             
-            # 4. Pausa humanizada
             await asyncio.sleep(random.uniform(0.8, 1.5))
             
-            # 5. Buscar y llenar campo de contraseña
-            password_filled = await self._fill_password(
-                driver,
-                password,
-                params.get("password_selector", "input[type='password'], input[name='password']")
-            )
-            
+            logger.info(f"Termiina paso 4")
+
+            # 5. Llenar password
+            password_filled = await self._fill_password(driver, password, password_selector)
             if not password_filled:
-                return LoginResult(
-                    success=False,
-                    message="Could not find password field",
-                    error_type="password_field_not_found"
-                )
+                return LoginResult(False, "Could not find password field", "password_field_not_found")
             
-            # 6. Pausa antes de submit
             await asyncio.sleep(random.uniform(1.0, 2.0))
-            
-            # 7. Detectar reCAPTCHA después de llenar campos
-            if self._detect_recaptcha(driver):
+            logger.info(f"Termiina paso 5")
+
+            # 6. Detectar CAPTCHA visible después de llenar campos
+            if not params.get("ignore_recaptcha", False) and self._detect_recaptcha(driver):
                 logger.warning("⚠️ reCAPTCHA detected after filling fields")
                 return LoginResult(
                     success=False,
@@ -188,112 +166,102 @@ class HumanizedLoginExecutor:
                     needs_captcha=True
                 )
             
-            # 8. Hacer click en submit
-            submit_clicked = await self._click_submit(
-                driver,
-                params.get("submit_selector", "button[type='submit']")
-            )
-            
+            logger.info(f"Termiina paso 6")
+
+            # 7. Hacer click en submit
+            submit_clicked = await self._click_submit(driver, submit_selector)
             if not submit_clicked:
-                return LoginResult(
-                    success=False,
-                    message="Could not click submit button",
-                    error_type="submit_button_not_found"
-                )
+                return LoginResult(False, "Could not click submit button", "submit_button_not_found")
             
-            # 9. Esperar resultado
+            # 8. Esperar resultado
             wait_after = params.get("wait_after_submit", 5)
             await asyncio.sleep(wait_after)
             
-            # 10. Verificar login exitoso
+            # 9. Verificar login exitoso
             success_url = params.get("success_url_contains")
             success_element_selector = params.get("success_element")
             
             if success_url and success_url.lower() in driver.current_url.lower():
-                return LoginResult(success=True, message="Login successful")
+                return LoginResult(True, "Login successful")
             
             if success_element_selector:
                 try:
                     WebDriverWait(driver, 5).until(
                         EC.presence_of_element_located((By.CSS_SELECTOR, success_element_selector))
                     )
-                    return LoginResult(success=True, message="Login successful")
+                    return LoginResult(True, "Login successful")
                 except TimeoutException:
                     pass
             
-            # 11. Revisar errores de login
+            # 10. Revisar errores de login
             page_text = driver.page_source.lower()
             if any(e in page_text for e in self.AUTH_ERROR_INDICATORS):
-                return LoginResult(
-                    success=False,
-                    message="Authentication failed",
-                    error_type="auth_error"
-                )
+                return LoginResult(False, "Authentication failed", "auth_error")
             
             if any(b in page_text for b in self.BLOCKED_INDICATORS):
-                return LoginResult(
-                    success=False,
-                    message="Account blocked",
-                    error_type="blocked",
-                    blocked=True
-                )
+                return LoginResult(False, "Account blocked", "blocked", blocked=True)
             
             if any(f in page_text for f in self.TWO_FA_INDICATORS):
-                return LoginResult(
-                    success=False,
-                    message="2FA required",
-                    error_type="2fa",
-                    needs_2fa=True
-                )
+                return LoginResult(False, "2FA required", "2fa", needs_2fa=True)
             
-            # 12. Si nada funcionó
-            return LoginResult(
-                success=False,
-                message="Login failed for unknown reason",
-                error_type="unknown"
-            )
+            # 11. Si nada funcionó
+            return LoginResult(False, "Login failed for unknown reason", "unknown")
         
         except Exception as e:
             logger.error(f"Login execution error: {e}")
-            return LoginResult(
-                success=False,
-                message=str(e),
-                error_type="exception"
-            )
+            return LoginResult(False, str(e), "exception")
     
     # -----------------------------
     # Métodos internos auxiliares
     # -----------------------------
     
     def _detect_recaptcha(self, driver: webdriver.Chrome) -> bool:
-        """Detecta si hay reCAPTCHA en la página"""
-        page_text = driver.page_source.lower()
-        for indicator in self.RECAPTCHA_INDICATORS:
-            if indicator in page_text:
-                return True
-        return False
+        """Detecta si hay un reCAPTCHA visible en la página"""
+        try:
+            # Iframes de reCAPTCHA visibles
+            recaptcha_iframes = driver.find_elements(By.CSS_SELECTOR, "iframe[src*='recaptcha']")
+            for iframe in recaptcha_iframes:
+                if iframe.is_displayed():
+                    return True
+            # Checkbox visible
+            checkboxes = driver.find_elements(By.CSS_SELECTOR, ".g-recaptcha, .recaptcha-checkbox, .recaptcha")
+            for box in checkboxes:
+                if box.is_displayed():
+                    return True
+            return False
+        except Exception:
+            return False
     
     async def _wait_for_page_stability(self, driver: webdriver.Chrome, timeout: int = 3):
-        """Espera unos segundos para que la página termine de renderizar"""
         await asyncio.sleep(random.uniform(timeout, timeout + 2))
     
+    async def _wait_for_element(self, driver: webdriver.Chrome, selector: str, timeout: int = 10):
+        """Espera hasta que un elemento sea visible"""
+        selectors = [s.strip() for s in selector.split(",")]
+        for sel in selectors:
+            try:
+                WebDriverWait(driver, timeout).until(
+                    EC.visibility_of_element_located((By.CSS_SELECTOR, sel))
+                )
+                return True
+            except TimeoutException:
+                continue
+        return False
+    
     async def _fill_username(self, driver: webdriver.Chrome, username: str, selector: str) -> bool:
-        """Busca input de username y escribe humanizado"""
         element = None
         selectors = [s.strip() for s in selector.split(",")]
         for sel in selectors:
             try:
                 element = WebDriverWait(driver, 5).until(
-                    EC.presence_of_element_located((By.CSS_SELECTOR, sel))
+                    EC.visibility_of_element_located((By.CSS_SELECTOR, sel))
                 )
                 if element.is_displayed():
                     break
             except TimeoutException:
                 continue
-        
         if not element:
             return False
-        
         element.click()
         await asyncio.sleep(random.uniform(0.2, 0.5))
         for char in username:
@@ -302,22 +270,19 @@ class HumanizedLoginExecutor:
         return True
     
     async def _fill_password(self, driver: webdriver.Chrome, password: str, selector: str) -> bool:
-        """Busca input de password y escribe humanizado"""
         element = None
         selectors = [s.strip() for s in selector.split(",")]
         for sel in selectors:
             try:
                 element = WebDriverWait(driver, 5).until(
-                    EC.presence_of_element_located((By.CSS_SELECTOR, sel))
+                    EC.visibility_of_element_located((By.CSS_SELECTOR, sel))
                 )
                 if element.is_displayed():
                     break
             except TimeoutException:
                 continue
-        
         if not element:
             return False
-        
         element.click()
         await asyncio.sleep(random.uniform(0.2, 0.5))
         for char in password:
@@ -326,7 +291,6 @@ class HumanizedLoginExecutor:
         return True
     
     async def _click_submit(self, driver: webdriver.Chrome, selector: str) -> bool:
-        """Hace click en el botón submit"""
         element = None
         selectors = [s.strip() for s in selector.split(",")]
         for sel in selectors:
@@ -338,10 +302,8 @@ class HumanizedLoginExecutor:
                     break
             except TimeoutException:
                 continue
-        
         if not element:
             return False
-        
         element.click()
         await asyncio.sleep(random.uniform(0.5, 1.0))
         return True

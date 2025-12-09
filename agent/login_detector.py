@@ -1,4 +1,4 @@
-# agent/login_detector.py
+# agent/login_detector.py - VERSIÓN MEJORADA
 """
 Detector inteligente de problemas en procesos de login
 Identifica: reCAPTCHA, errores de credenciales, bloqueos, etc.
@@ -27,15 +27,18 @@ class LoginIssue:
 class LoginDetector:
     """Detector de problemas en login"""
     
-    # Patrones comunes de elementos de reCAPTCHA
-    RECAPTCHA_PATTERNS = [
+    # ✅ DETECCIÓN MÁS ESTRICTA DE reCAPTCHA
+    # Solo detecta si hay un iframe visible o checkbox de reCAPTCHA
+    RECAPTCHA_IFRAME_SELECTORS = [
         "iframe[src*='recaptcha']",
+        "iframe[src*='hcaptcha']",
         "iframe[title*='recaptcha']",
+        "iframe[title*='hcaptcha']"
+    ]
+    
+    RECAPTCHA_ELEMENTS = [
         ".g-recaptcha",
         "#g-recaptcha",
-        "div[class*='recaptcha']",
-        "[data-sitekey]",
-        "iframe[src*='hcaptcha']",
         ".h-captcha",
         "#h-captcha"
     ]
@@ -122,8 +125,8 @@ class LoginDetector:
         }
         
         try:
-            # 1. Verificar reCAPTCHA (PRIORIDAD ALTA)
-            recaptcha_detected = await self._detect_recaptcha(driver)
+            # 1. ✅ VERIFICAR reCAPTCHA DE FORMA ESTRICTA
+            recaptcha_detected = await self._detect_recaptcha_strict(driver)
             if recaptcha_detected:
                 result["issue_type"] = LoginIssue.RECAPTCHA
                 result["detected"] = True
@@ -190,39 +193,66 @@ class LoginDetector:
         
         return result
     
-    async def _detect_recaptcha(self, driver: webdriver.Chrome) -> Optional[Dict]:
-        """Detecta presencia de reCAPTCHA"""
+    async def _detect_recaptcha_strict(self, driver: webdriver.Chrome) -> Optional[Dict]:
+        """
+        ✅ DETECCIÓN ESTRICTA DE reCAPTCHA
+        Solo detecta si hay un elemento VISIBLE y ACTIVO
+        """
         
         try:
-            for selector in self.RECAPTCHA_PATTERNS:
+            # Buscar iframes de reCAPTCHA/hCaptcha VISIBLES
+            for selector in self.RECAPTCHA_IFRAME_SELECTORS:
                 try:
-                    elements = driver.find_elements(By.CSS_SELECTOR, selector)
-                    if elements:
-                        # Verificar que sea visible
-                        for elem in elements:
-                            if elem.is_displayed():
+                    iframes = driver.find_elements(By.CSS_SELECTOR, selector)
+                    
+                    for iframe in iframes:
+                        # ✅ VERIFICAR QUE SEA VISIBLE
+                        if iframe.is_displayed():
+                            # Verificar que tenga tamaño
+                            size = iframe.size
+                            if size['width'] > 0 and size['height'] > 0:
+                                logger.info(f"reCAPTCHA iframe found: {selector}")
                                 return {
                                     "captcha_type": "recaptcha" if "recaptcha" in selector else "hcaptcha",
                                     "selector": selector,
-                                    "visible": True
+                                    "visible": True,
+                                    "size": size
                                 }
                 except:
                     continue
             
-            # Buscar también por contenido de iframe
-            iframes = driver.find_elements(By.TAG_NAME, "iframe")
-            for iframe in iframes:
+            # Buscar elementos de reCAPTCHA VISIBLES
+            for selector in self.RECAPTCHA_ELEMENTS:
                 try:
-                    src = iframe.get_attribute("src") or ""
-                    if "recaptcha" in src.lower() or "hcaptcha" in src.lower():
-                        return {
-                            "captcha_type": "recaptcha" if "recaptcha" in src else "hcaptcha",
-                            "iframe_src": src,
-                            "visible": iframe.is_displayed()
-                        }
+                    elements = driver.find_elements(By.CSS_SELECTOR, selector)
+                    
+                    for elem in elements:
+                        if elem.is_displayed():
+                            size = elem.size
+                            if size['width'] > 0 and size['height'] > 0:
+                                logger.info(f"reCAPTCHA element found: {selector}")
+                                return {
+                                    "captcha_type": "recaptcha",
+                                    "selector": selector,
+                                    "visible": True,
+                                    "size": size
+                                }
                 except:
                     continue
             
+            # ✅ BUSCAR CHECKBOX "I'm not a robot"
+            try:
+                checkbox = driver.find_element(By.CSS_SELECTOR, ".recaptcha-checkbox")
+                if checkbox.is_displayed():
+                    logger.info("reCAPTCHA checkbox found")
+                    return {
+                        "captcha_type": "recaptcha_checkbox",
+                        "visible": True
+                    }
+            except:
+                pass
+            
+            # No se encontró reCAPTCHA visible
             return None
             
         except Exception as e:
