@@ -1,0 +1,49 @@
+59 actualmente
+{
+  "name": "Defensive Warmup - Stable Version",
+  "description": "Versión estable con bajo consumo",
+  "category": "qa-security",
+  "actions": [
+
+    { "type": "navigate", "params": { "url": "https://en.wikipedia.org/wiki/Sports_analytics", "timeout": 60 } },
+    { "type": "wait", "params": { "duration": 5 } },
+    { "type": "scroll", "params": { "direction": "down", "amount": 300 } },
+
+    { "type": "navigate", "params": { "url": "https://en.wikipedia.org/wiki/Sports_betting", "timeout": 60 } },
+    { "type": "wait", "params": { "duration": 5 } },
+
+    { "type": "navigate", "params": { "url": "https://www.livescore.com/en/", "timeout": 60 } },
+    { "type": "wait", "params": { "duration": 4 } },
+
+    { "type": "navigate", "params": { "url": "https://www.transfermarkt.com/", "timeout": 80 } },
+    { "type": "wait", "params": { "duration": 6 } },
+
+    { "type": "navigate", "params": { "url": "https://www.whoscored.com/", "timeout": 80 } },
+    { "type": "wait", "params": { "duration": 5 } },
+
+    { "type": "navigate", "params": { "url": "https://bet-core.com/", "timeout": 60 } },
+    { "type": "wait", "params": { "duration": 5 } },
+
+    { "type": "click", "params": { "selector": "a[href*='login']", "selector_type": "css" } },
+    { "type": "wait", "params": { "duration": 3 } },
+
+    {
+      "type": "advanced_login",
+      "params": {
+        "service": "bet-core",
+        "username": "SECURITY_TEST_USER",
+        "password": "SECURITY_TEST_PASS",
+        "username_selector": "form#login-form input[name='login']",
+        "password_selector": "form#login-form input[name='password']",
+        "submit_selector": "button#login-user",
+        "wait_after_submit": 10,
+        "success_url_contains": "/dashboard"
+      }
+    },
+
+    { "type": "screenshot", "params": { "name": "warmup_final" } }
+  ],
+  "duration_minutes": 15
+}
+
+id 60

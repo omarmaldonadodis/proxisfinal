@@ -80,5 +80,198 @@ Ecuabet numero 29 actualmente
   "duration_minutes": 5
 }
 
-SportI
+Sport
+{
+  name": "Login Sorti.ec",
+  "description": "Login con soporte Angular Material",
+  "category": "authentication",
+  "actions": [
+    {
+      "type": "navigate",
+      "params": {
+        "url": "https://www.sorti.ec/home",
+        "timeout": 50
+      },
+      "description": null
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 3
+      },
+      "description": null
+    },
+    {
+      "type": "click",
+      "params": {
+        "selector": "button.zg-btn-primary",
+        "text": null,
+        "human": true
+      },
+      "description": null
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 4
+      },
+      "description": null
+    },
+    {
+      "type": "screenshot",
+      "params": {
+        "name": "modal_opened"
+      },
+      "description": null
+    },
+    {
+      "type": "advanced_login",
+      "params": {
+        "service": "sorti",
+        "username": "TU_USUARIO_AQUI",
+        "password": "TU_PASSWORD_AQUI",
+        "username_selector": "input[formcontrolname='username'], input#usernameLogin",
+        "password_selector": "input[formcontrolname='password'], input#toggle-password-sign-in",
+        "submit_selector": "button.zg-action-btn",
+        "wait_after_submit": 6,
+        "success_url_contains": "home",
+        "ignore_recaptcha": false
+      },
+      "description": null
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 3
+      },
+      "description": null
+    },
+    {
+      "type": "screenshot",
+      "params": {
+        "name": "after_login"
+      },
+      "description": null
+    }
+  ],
+  "duration_minutes": 5,
+}
+
+Victory365
+{
+  "name": "Login Victory365",
+  "description": "Login",
+  "category": "authentication",
+  "actions": [
+    {
+      "type": "navigate",
+      "params": {
+        "url": "https://www.victory365.live/login",
+        "timeout": 50
+      }
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 3
+      }
+    },
+    {
+      "type": "advanced_login",
+      "params": {
+        "service": "victorory365",
+        "username": "TU_USUARIO_AQUI",
+        "password": "TU_PASSWORD_AQUI",
+        "username_selector": "input.usernameField[name='loginField']",
+    "password_selector": "input.passwordField[name='password']",
+    "submit_selector": "button.loginBtn[type='submit']",
+        
+        "wait_after_submit": 6,
+        "success_url_contains": "home",
+        "ignore_recaptcha": false
+      }
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 3
+      }
+    },
+    {
+      "type": "screenshot",
+      "params": {
+        "name": "after_login"
+      }
+    }
+  ],
+  "duration_minutes": 5
+}
+
+Betcore
+
+{
+  "name": "Login BetCore",
+  "description": "Login",
+  "category": "authentication",
+  "actions": [
+    {
+      "type": "navigate",
+      "params": {
+        "url": "https://bet-core.com/",
+        "timeout": 50
+      }
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 3
+      }
+    },
+{
+  "type": "click",
+  "params": {
+    "selector": "a.btn[href*='/login']",
+    "selector_type": "css"
+  }
+},
+
+    {
+      "type": "wait",
+      "params": {
+        "duration": 3
+      }
+    },
+{
+  "type": "advanced_login",
+  "params": {
+    "service": "bet-core",
+    "username": "TU_USUARIO",
+    "password": "TU_PASSWORD",
+
+    "username_selector": "form#login-form input[name='login']",
+    "password_selector": "form#login-form input[name='password']",
+
+    "submit_selector": "button#login-user",
+
+    "wait_after_submit": 6,
+    "success_url_contains": "/"
+  }
+},
+
+    {
+      "type": "wait",
+      "params": {
+        "duration": 3
+      }
+    },
+    {
+      "type": "screenshot",
+      "params": {
+        "name": "after_login"
+      }
+    }
+  ],
+  "duration_minutes": 5
+}
+
 

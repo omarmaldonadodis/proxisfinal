@@ -1,0 +1,357 @@
+2025-12-10 08:49:26 | ERROR    | registration_client:validate_token:122 - Token validation error: Cannot connect to host 192.168.1.6:8000 ssl:default [Host is down]
+2025-12-10 08:49:26 | ERROR    | registration_client:register:64 - Failed to connect to orchestrator: Cannot connect to host 192.168.1.6:8000 ssl:default [Host is down]
+2025-12-10 08:49:26 | ERROR    | __main__:start:140 - Agent error: Cannot connect to orchestrator at http://192.168.1.6:8000
+2025-12-10 08:49:54 | ERROR    | registration_client:validate_token:122 - Token validation error: 
+2025-12-10 08:49:54 | ERROR    | registration_client:register:64 - Failed to connect to orchestrator: Cannot connect to host 192.168.1.6:8000 ssl:default [Host is down]
+2025-12-10 08:49:54 | ERROR    | __main__:start:140 - Agent error: Cannot connect to orchestrator at http://192.168.1.6:8000
+2025-12-10 09:03:11 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-10 09:59:01 | ERROR    | browser_controller:open_browser:145 - ❌ Failed to open browser for profile k17m5o28: AdsPower error: Check Proxy Fail
+2025-12-10 09:59:01 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=366, error=Failed to open browser for profile k17m5o28
+2025-12-10 09:59:24 | ERROR    | browser_controller:open_browser:145 - ❌ Failed to open browser for profile k17m5o28: AdsPower error: Check Proxy Fail
+2025-12-10 09:59:24 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=367, error=Failed to open browser for profile k17m5o28
+2025-12-10 10:05:26 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-10 10:33:15 | ERROR    | action_executor:_click:366 - ❌ Element not found in overlay: button.headerLoginBtn
+2025-12-10 10:34:29 | ERROR    | action_executor:_click:366 - ❌ Element not found in overlay: button.headerLoginBtn
+2025-12-10 10:53:19 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-10 10:53:25 | ERROR    | action_executor:execute_action:144 - Action timeout (50s): navigate
+2025-12-10 11:12:33 | ERROR    | action_executor:_navigate:309 - ❌ Navigation failed: Message: unknown error: net::ERR_TUNNEL_CONNECTION_FAILED
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x0000000105edf518 chromedriver + 6378776
+1   chromedriver                        0x0000000105ed6c2a chromedriver + 6343722
+2   chromedriver                        0x0000000105933086 chromedriver + 430214
+3   chromedriver                        0x0000000105929cf6 chromedriver + 392438
+4   chromedriver                        0x000000010591b038 chromedriver + 331832
+5   chromedriver                        0x000000010591cdfb chromedriver + 339451
+6   chromedriver                        0x000000010591b59d chromedriver + 333213
+7   chromedriver                        0x000000010591adc9 chromedriver + 331209
+8   chromedriver                        0x000000010591aac9 chromedriver + 330441
+9   chromedriver                        0x000000010591893d chromedriver + 321853
+10  chromedriver                        0x00000001059190fa chromedriver + 323834
+11  chromedriver                        0x0000000105936619 chromedriver + 443929
+12  chromedriver                        0x00000001059d3bd5 chromedriver + 1088469
+13  chromedriver                        0x00000001059aba02 chromedriver + 924162
+14  chromedriver                        0x00000001059d2f6e chromedriver + 1085294
+15  chromedriver                        0x00000001059ab7d3 chromedriver + 923603
+16  chromedriver                        0x0000000105977185 chromedriver + 708997
+17  chromedriver                        0x00000001059785c1 chromedriver + 714177
+18  chromedriver                        0x0000000105e9cda0 chromedriver + 6106528
+19  chromedriver                        0x0000000105ea1005 chromedriver + 6123525
+20  chromedriver                        0x0000000105e78505 chromedriver + 5956869
+21  chromedriver                        0x0000000105ea1a9f chromedriver + 6126239
+22  chromedriver                        0x0000000105e67944 chromedriver + 5888324
+23  chromedriver                        0x0000000105ec3b78 chromedriver + 6265720
+24  chromedriver                        0x0000000105ec3d3d chromedriver + 6266173
+25  chromedriver                        0x0000000105ed6801 chromedriver + 6342657
+26  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+27  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-10 11:13:36 | ERROR    | action_executor:execute_action:144 - Action timeout (30s): navigate
+2025-12-10 11:15:13 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-10 11:15:17 | ERROR    | action_executor:execute_action:144 - Action timeout (30s): navigate
+2025-12-10 11:15:58 | ERROR    | action_executor:execute_action:144 - Action timeout (30s): navigate
+2025-12-10 11:15:58 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-10 11:26:20 | ERROR    | browser_controller:open_browser:145 - ❌ Failed to open browser for profile k17m5o28: AdsPower error: Check Proxy Fail
+2025-12-10 11:26:20 | ERROR    | warming_executor:_execute_warming:145 - Warming failed: execution_id=377, error=Failed to open browser for profile k17m5o28
+2025-12-10 11:29:19 | ERROR    | action_executor:_search_google:608 - Google search failed: Message: element not interactable
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x000000010c004518 chromedriver + 6378776
+1   chromedriver                        0x000000010bffbc2a chromedriver + 6343722
+2   chromedriver                        0x000000010ba57ebe chromedriver + 429758
+3   chromedriver                        0x000000010baa459b chromedriver + 742811
+4   chromedriver                        0x000000010baa2937 chromedriver + 735543
+5   chromedriver                        0x000000010bad0a02 chromedriver + 924162
+6   chromedriver                        0x000000010ba9e0d8 chromedriver + 717016
+7   chromedriver                        0x000000010bad0bbe chromedriver + 924606
+8   chromedriver                        0x000000010baf7f6e chromedriver + 1085294
+9   chromedriver                        0x000000010bad07d3 chromedriver + 923603
+10  chromedriver                        0x000000010ba9c185 chromedriver + 708997
+11  chromedriver                        0x000000010ba9d5c1 chromedriver + 714177
+12  chromedriver                        0x000000010bfc1da0 chromedriver + 6106528
+13  chromedriver                        0x000000010bfc6005 chromedriver + 6123525
+14  chromedriver                        0x000000010bf9d505 chromedriver + 5956869
+15  chromedriver                        0x000000010bfc6a9f chromedriver + 6126239
+16  chromedriver                        0x000000010bf8c944 chromedriver + 5888324
+17  chromedriver                        0x000000010bfe8b78 chromedriver + 6265720
+18  chromedriver                        0x000000010bfe8d3d chromedriver + 6266173
+19  chromedriver                        0x000000010bffb801 chromedriver + 6342657
+20  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+21  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-10 11:29:32 | ERROR    | action_executor:_search_google:608 - Google search failed: Message: element not interactable
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x000000010c004518 chromedriver + 6378776
+1   chromedriver                        0x000000010bffbc2a chromedriver + 6343722
+2   chromedriver                        0x000000010ba57ebe chromedriver + 429758
+3   chromedriver                        0x000000010baa459b chromedriver + 742811
+4   chromedriver                        0x000000010baa2937 chromedriver + 735543
+5   chromedriver                        0x000000010bad0a02 chromedriver + 924162
+6   chromedriver                        0x000000010ba9e0d8 chromedriver + 717016
+7   chromedriver                        0x000000010bad0bbe chromedriver + 924606
+8   chromedriver                        0x000000010baf7f6e chromedriver + 1085294
+9   chromedriver                        0x000000010bad07d3 chromedriver + 923603
+10  chromedriver                        0x000000010ba9c185 chromedriver + 708997
+11  chromedriver                        0x000000010ba9d5c1 chromedriver + 714177
+12  chromedriver                        0x000000010bfc1da0 chromedriver + 6106528
+13  chromedriver                        0x000000010bfc6005 chromedriver + 6123525
+14  chromedriver                        0x000000010bf9d505 chromedriver + 5956869
+15  chromedriver                        0x000000010bfc6a9f chromedriver + 6126239
+16  chromedriver                        0x000000010bf8c944 chromedriver + 5888324
+17  chromedriver                        0x000000010bfe8b78 chromedriver + 6265720
+18  chromedriver                        0x000000010bfe8d3d chromedriver + 6266173
+19  chromedriver                        0x000000010bffb801 chromedriver + 6342657
+20  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+21  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-10 11:29:44 | ERROR    | action_executor:_search_google:608 - Google search failed: Message: element not interactable
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x000000010c004518 chromedriver + 6378776
+1   chromedriver                        0x000000010bffbc2a chromedriver + 6343722
+2   chromedriver                        0x000000010ba57ebe chromedriver + 429758
+3   chromedriver                        0x000000010baa459b chromedriver + 742811
+4   chromedriver                        0x000000010baa2937 chromedriver + 735543
+5   chromedriver                        0x000000010bad0a02 chromedriver + 924162
+6   chromedriver                        0x000000010ba9e0d8 chromedriver + 717016
+7   chromedriver                        0x000000010bad0bbe chromedriver + 924606
+8   chromedriver                        0x000000010baf7f6e chromedriver + 1085294
+9   chromedriver                        0x000000010bad07d3 chromedriver + 923603
+10  chromedriver                        0x000000010ba9c185 chromedriver + 708997
+11  chromedriver                        0x000000010ba9d5c1 chromedriver + 714177
+12  chromedriver                        0x000000010bfc1da0 chromedriver + 6106528
+13  chromedriver                        0x000000010bfc6005 chromedriver + 6123525
+14  chromedriver                        0x000000010bf9d505 chromedriver + 5956869
+15  chromedriver                        0x000000010bfc6a9f chromedriver + 6126239
+16  chromedriver                        0x000000010bf8c944 chromedriver + 5888324
+17  chromedriver                        0x000000010bfe8b78 chromedriver + 6265720
+18  chromedriver                        0x000000010bfe8d3d chromedriver + 6266173
+19  chromedriver                        0x000000010bffb801 chromedriver + 6342657
+20  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+21  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-10 11:29:56 | ERROR    | action_executor:_search_google:608 - Google search failed: Message: element not interactable
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x000000010c004518 chromedriver + 6378776
+1   chromedriver                        0x000000010bffbc2a chromedriver + 6343722
+2   chromedriver                        0x000000010ba57ebe chromedriver + 429758
+3   chromedriver                        0x000000010baa459b chromedriver + 742811
+4   chromedriver                        0x000000010baa2937 chromedriver + 735543
+5   chromedriver                        0x000000010bad0a02 chromedriver + 924162
+6   chromedriver                        0x000000010ba9e0d8 chromedriver + 717016
+7   chromedriver                        0x000000010bad0bbe chromedriver + 924606
+8   chromedriver                        0x000000010baf7f6e chromedriver + 1085294
+9   chromedriver                        0x000000010bad07d3 chromedriver + 923603
+10  chromedriver                        0x000000010ba9c185 chromedriver + 708997
+11  chromedriver                        0x000000010ba9d5c1 chromedriver + 714177
+12  chromedriver                        0x000000010bfc1da0 chromedriver + 6106528
+13  chromedriver                        0x000000010bfc6005 chromedriver + 6123525
+14  chromedriver                        0x000000010bf9d505 chromedriver + 5956869
+15  chromedriver                        0x000000010bfc6a9f chromedriver + 6126239
+16  chromedriver                        0x000000010bf8c944 chromedriver + 5888324
+17  chromedriver                        0x000000010bfe8b78 chromedriver + 6265720
+18  chromedriver                        0x000000010bfe8d3d chromedriver + 6266173
+19  chromedriver                        0x000000010bffb801 chromedriver + 6342657
+20  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+21  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-10 11:30:19 | ERROR    | action_executor:execute_action:131 - Browser is closed
+2025-12-10 11:30:19 | ERROR    | action_executor:execute_action:131 - Browser is closed
+2025-12-10 11:30:19 | ERROR    | action_executor:execute_action:131 - Browser is closed
+2025-12-10 11:30:19 | ERROR    | action_executor:execute_action:131 - Browser is closed
+2025-12-10 11:30:19 | ERROR    | action_executor:execute_action:131 - Browser is closed
+2025-12-10 11:30:19 | ERROR    | action_executor:execute_action:131 - Browser is closed
+2025-12-10 11:30:19 | ERROR    | action_executor:execute_action:131 - Browser is closed
+2025-12-10 11:30:19 | ERROR    | action_executor:execute_action:131 - Browser is closed
+2025-12-10 11:30:19 | ERROR    | action_executor:execute_action:131 - Browser is closed
+2025-12-10 11:30:19 | ERROR    | action_executor:execute_action:131 - Browser is closed
+2025-12-10 11:30:19 | ERROR    | action_executor:execute_action:131 - Browser is closed
+2025-12-10 11:30:19 | ERROR    | action_executor:execute_action:131 - Browser is closed
+2025-12-10 11:30:19 | ERROR    | action_executor:execute_action:131 - Browser is closed
+2025-12-10 11:30:19 | ERROR    | action_executor:execute_action:131 - Browser is closed
+2025-12-10 11:30:19 | ERROR    | action_executor:execute_action:131 - Browser is closed
+2025-12-10 11:30:19 | ERROR    | action_executor:execute_action:131 - Browser is closed
+2025-12-10 11:33:23 | ERROR    | action_executor:execute_action:144 - Action timeout (30s): search_google
+2025-12-10 11:33:59 | ERROR    | action_executor:execute_action:144 - Action timeout (30s): search_google
+2025-12-10 11:34:33 | ERROR    | action_executor:execute_action:144 - Action timeout (30s): search_google
+2025-12-10 11:35:40 | ERROR    | action_executor:execute_action:144 - Action timeout (30s): search_google
+2025-12-10 11:37:11 | ERROR    | action_executor:execute_action:144 - Action timeout (30s): navigate
+2025-12-10 11:37:11 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-10 11:38:31 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-10 11:38:37 | ERROR    | action_executor:execute_action:144 - Action timeout (30s): navigate
+2025-12-10 12:12:52 | ERROR    | action_executor:execute_action:144 - Action timeout (30s): search_google
+2025-12-10 12:13:07 | ERROR    | action_executor:_search_google:608 - Google search failed: Message: element not interactable
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x000000011038c518 chromedriver + 6378776
+1   chromedriver                        0x0000000110383c2a chromedriver + 6343722
+2   chromedriver                        0x000000010fddfebe chromedriver + 429758
+3   chromedriver                        0x000000010fe2c59b chromedriver + 742811
+4   chromedriver                        0x000000010fe2a937 chromedriver + 735543
+5   chromedriver                        0x000000010fe58a02 chromedriver + 924162
+6   chromedriver                        0x000000010fe260d8 chromedriver + 717016
+7   chromedriver                        0x000000010fe58bbe chromedriver + 924606
+8   chromedriver                        0x000000010fe7ff6e chromedriver + 1085294
+9   chromedriver                        0x000000010fe587d3 chromedriver + 923603
+10  chromedriver                        0x000000010fe24185 chromedriver + 708997
+11  chromedriver                        0x000000010fe255c1 chromedriver + 714177
+12  chromedriver                        0x0000000110349da0 chromedriver + 6106528
+13  chromedriver                        0x000000011034e005 chromedriver + 6123525
+14  chromedriver                        0x0000000110325505 chromedriver + 5956869
+15  chromedriver                        0x000000011034ea9f chromedriver + 6126239
+16  chromedriver                        0x0000000110314944 chromedriver + 5888324
+17  chromedriver                        0x0000000110370b78 chromedriver + 6265720
+18  chromedriver                        0x0000000110370d3d chromedriver + 6266173
+19  chromedriver                        0x0000000110383801 chromedriver + 6342657
+20  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+21  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-10 12:13:20 | ERROR    | action_executor:_search_google:608 - Google search failed: Message: element not interactable
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x000000011038c518 chromedriver + 6378776
+1   chromedriver                        0x0000000110383c2a chromedriver + 6343722
+2   chromedriver                        0x000000010fddfebe chromedriver + 429758
+3   chromedriver                        0x000000010fe2c59b chromedriver + 742811
+4   chromedriver                        0x000000010fe2a937 chromedriver + 735543
+5   chromedriver                        0x000000010fe58a02 chromedriver + 924162
+6   chromedriver                        0x000000010fe260d8 chromedriver + 717016
+7   chromedriver                        0x000000010fe58bbe chromedriver + 924606
+8   chromedriver                        0x000000010fe7ff6e chromedriver + 1085294
+9   chromedriver                        0x000000010fe587d3 chromedriver + 923603
+10  chromedriver                        0x000000010fe24185 chromedriver + 708997
+11  chromedriver                        0x000000010fe255c1 chromedriver + 714177
+12  chromedriver                        0x0000000110349da0 chromedriver + 6106528
+13  chromedriver                        0x000000011034e005 chromedriver + 6123525
+14  chromedriver                        0x0000000110325505 chromedriver + 5956869
+15  chromedriver                        0x000000011034ea9f chromedriver + 6126239
+16  chromedriver                        0x0000000110314944 chromedriver + 5888324
+17  chromedriver                        0x0000000110370b78 chromedriver + 6265720
+18  chromedriver                        0x0000000110370d3d chromedriver + 6266173
+19  chromedriver                        0x0000000110383801 chromedriver + 6342657
+20  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+21  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-10 12:13:32 | ERROR    | action_executor:_search_google:608 - Google search failed: Message: element not interactable
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x000000011038c518 chromedriver + 6378776
+1   chromedriver                        0x0000000110383c2a chromedriver + 6343722
+2   chromedriver                        0x000000010fddfebe chromedriver + 429758
+3   chromedriver                        0x000000010fe2c59b chromedriver + 742811
+4   chromedriver                        0x000000010fe2a937 chromedriver + 735543
+5   chromedriver                        0x000000010fe58a02 chromedriver + 924162
+6   chromedriver                        0x000000010fe260d8 chromedriver + 717016
+7   chromedriver                        0x000000010fe58bbe chromedriver + 924606
+8   chromedriver                        0x000000010fe7ff6e chromedriver + 1085294
+9   chromedriver                        0x000000010fe587d3 chromedriver + 923603
+10  chromedriver                        0x000000010fe24185 chromedriver + 708997
+11  chromedriver                        0x000000010fe255c1 chromedriver + 714177
+12  chromedriver                        0x0000000110349da0 chromedriver + 6106528
+13  chromedriver                        0x000000011034e005 chromedriver + 6123525
+14  chromedriver                        0x0000000110325505 chromedriver + 5956869
+15  chromedriver                        0x000000011034ea9f chromedriver + 6126239
+16  chromedriver                        0x0000000110314944 chromedriver + 5888324
+17  chromedriver                        0x0000000110370b78 chromedriver + 6265720
+18  chromedriver                        0x0000000110370d3d chromedriver + 6266173
+19  chromedriver                        0x0000000110383801 chromedriver + 6342657
+20  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+21  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-10 12:13:44 | ERROR    | action_executor:_search_google:608 - Google search failed: Message: element not interactable
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x000000011038c518 chromedriver + 6378776
+1   chromedriver                        0x0000000110383c2a chromedriver + 6343722
+2   chromedriver                        0x000000010fddfebe chromedriver + 429758
+3   chromedriver                        0x000000010fe2c59b chromedriver + 742811
+4   chromedriver                        0x000000010fe2a937 chromedriver + 735543
+5   chromedriver                        0x000000010fe58a02 chromedriver + 924162
+6   chromedriver                        0x000000010fe260d8 chromedriver + 717016
+7   chromedriver                        0x000000010fe58bbe chromedriver + 924606
+8   chromedriver                        0x000000010fe7ff6e chromedriver + 1085294
+9   chromedriver                        0x000000010fe587d3 chromedriver + 923603
+10  chromedriver                        0x000000010fe24185 chromedriver + 708997
+11  chromedriver                        0x000000010fe255c1 chromedriver + 714177
+12  chromedriver                        0x0000000110349da0 chromedriver + 6106528
+13  chromedriver                        0x000000011034e005 chromedriver + 6123525
+14  chromedriver                        0x0000000110325505 chromedriver + 5956869
+15  chromedriver                        0x000000011034ea9f chromedriver + 6126239
+16  chromedriver                        0x0000000110314944 chromedriver + 5888324
+17  chromedriver                        0x0000000110370b78 chromedriver + 6265720
+18  chromedriver                        0x0000000110370d3d chromedriver + 6266173
+19  chromedriver                        0x0000000110383801 chromedriver + 6342657
+20  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+21  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-10 12:13:57 | ERROR    | action_executor:_search_google:608 - Google search failed: Message: element not interactable
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x000000011038c518 chromedriver + 6378776
+1   chromedriver                        0x0000000110383c2a chromedriver + 6343722
+2   chromedriver                        0x000000010fddfebe chromedriver + 429758
+3   chromedriver                        0x000000010fe2c59b chromedriver + 742811
+4   chromedriver                        0x000000010fe2a937 chromedriver + 735543
+5   chromedriver                        0x000000010fe58a02 chromedriver + 924162
+6   chromedriver                        0x000000010fe260d8 chromedriver + 717016
+7   chromedriver                        0x000000010fe58bbe chromedriver + 924606
+8   chromedriver                        0x000000010fe7ff6e chromedriver + 1085294
+9   chromedriver                        0x000000010fe587d3 chromedriver + 923603
+10  chromedriver                        0x000000010fe24185 chromedriver + 708997
+11  chromedriver                        0x000000010fe255c1 chromedriver + 714177
+12  chromedriver                        0x0000000110349da0 chromedriver + 6106528
+13  chromedriver                        0x000000011034e005 chromedriver + 6123525
+14  chromedriver                        0x0000000110325505 chromedriver + 5956869
+15  chromedriver                        0x000000011034ea9f chromedriver + 6126239
+16  chromedriver                        0x0000000110314944 chromedriver + 5888324
+17  chromedriver                        0x0000000110370b78 chromedriver + 6265720
+18  chromedriver                        0x0000000110370d3d chromedriver + 6266173
+19  chromedriver                        0x0000000110383801 chromedriver + 6342657
+20  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+21  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-10 12:15:09 | ERROR    | action_executor:execute_action:144 - Action timeout (30s): navigate
+2025-12-10 12:15:10 | ERROR    | websocket_client:send:214 - Send error: received 1011 (internal error) keepalive ping timeout; then sent 1011 (internal error) keepalive ping timeout
+2025-12-10 12:15:17 | ERROR    | action_executor:_navigate:309 - ❌ Navigation failed: Message: unknown error: net::ERR_CONNECTION_CLOSED
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x000000011038c518 chromedriver + 6378776
+1   chromedriver                        0x0000000110383c2a chromedriver + 6343722
+2   chromedriver                        0x000000010fde0086 chromedriver + 430214
+3   chromedriver                        0x000000010fdd6cf6 chromedriver + 392438
+4   chromedriver                        0x000000010fdc8038 chromedriver + 331832
+5   chromedriver                        0x000000010fdc9dfb chromedriver + 339451
+6   chromedriver                        0x000000010fdc859d chromedriver + 333213
+7   chromedriver                        0x000000010fdc7dc9 chromedriver + 331209
+8   chromedriver                        0x000000010fdc7ac9 chromedriver + 330441
+9   chromedriver                        0x000000010fdc593d chromedriver + 321853
+10  chromedriver                        0x000000010fdc60fa chromedriver + 323834
+11  chromedriver                        0x000000010fde3619 chromedriver + 443929
+12  chromedriver                        0x000000010fe80bd5 chromedriver + 1088469
+13  chromedriver                        0x000000010fe58a02 chromedriver + 924162
+14  chromedriver                        0x000000010fe7ff6e chromedriver + 1085294
+15  chromedriver                        0x000000010fe587d3 chromedriver + 923603
+16  chromedriver                        0x000000010fe24185 chromedriver + 708997
+17  chromedriver                        0x000000010fe255c1 chromedriver + 714177
+18  chromedriver                        0x0000000110349da0 chromedriver + 6106528
+19  chromedriver                        0x000000011034e005 chromedriver + 6123525
+20  chromedriver                        0x0000000110325505 chromedriver + 5956869
+21  chromedriver                        0x000000011034ea9f chromedriver + 6126239
+22  chromedriver                        0x0000000110314944 chromedriver + 5888324
+23  chromedriver                        0x0000000110370b78 chromedriver + 6265720
+24  chromedriver                        0x0000000110370d3d chromedriver + 6266173
+25  chromedriver                        0x0000000110383801 chromedriver + 6342657
+26  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+27  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-10 12:15:25 | ERROR    | action_executor:_navigate:309 - ❌ Navigation failed: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2025-12-10 12:15:25 | ERROR    | action_executor:_take_debug_screenshot:71 - Screenshot failed: HTTPConnectionPool(host='localhost', port=61795): Max retries exceeded with url: /session/1c8d86f9e2ea91a2abd0bdb2a546c62c/screenshot (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10a250070>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-10 12:15:25 | ERROR    | warming_executor:_execute_warming:108 - Action 23 failed: HTTPConnectionPool(host='localhost', port=61795): Max retries exceeded with url: /session/1c8d86f9e2ea91a2abd0bdb2a546c62c/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10a16f6a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-10 12:15:25 | ERROR    | warming_executor:_execute_warming:108 - Action 24 failed: HTTPConnectionPool(host='localhost', port=61795): Max retries exceeded with url: /session/1c8d86f9e2ea91a2abd0bdb2a546c62c/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10a201a00>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-10 12:15:25 | ERROR    | warming_executor:_execute_warming:108 - Action 25 failed: HTTPConnectionPool(host='localhost', port=61795): Max retries exceeded with url: /session/1c8d86f9e2ea91a2abd0bdb2a546c62c/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10a250970>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-10 12:15:25 | ERROR    | warming_executor:_execute_warming:108 - Action 26 failed: HTTPConnectionPool(host='localhost', port=61795): Max retries exceeded with url: /session/1c8d86f9e2ea91a2abd0bdb2a546c62c/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x109c85c10>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-10 12:15:25 | ERROR    | warming_executor:_execute_warming:108 - Action 27 failed: HTTPConnectionPool(host='localhost', port=61795): Max retries exceeded with url: /session/1c8d86f9e2ea91a2abd0bdb2a546c62c/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10a2018e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-10 12:15:25 | ERROR    | warming_executor:_execute_warming:108 - Action 28 failed: HTTPConnectionPool(host='localhost', port=61795): Max retries exceeded with url: /session/1c8d86f9e2ea91a2abd0bdb2a546c62c/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10a250970>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-12-10 12:15:25 | ERROR    | warming_executor:_execute_warming:108 - Action 29 failed: HTTPConnectionPool(host='localhost', port=61795): Max retries exceeded with url: /session/1c8d86f9e2ea91a2abd0bdb2a546c62c/title (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10a227220>: Failed to establish a new connection: [Errno 61] Connection refused'))

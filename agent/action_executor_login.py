@@ -141,6 +141,16 @@ class HumanizedLoginExecutor:
             # 9. Submit
             submit_selector = params.get("submit_selector")
             submit_clicked = await self._click_angular_submit(driver, submit_selector)
+            try:
+                pw_list = driver.find_elements(By.CSS_SELECTOR, params.get("password_selector"))
+                for pw in pw_list:
+                    if pw.is_displayed() and pw.is_enabled():
+                        pw.send_keys(Keys.ENTER)
+                        logger.info("✅ ENTER enviado al campo password (Angular fallback)")
+                        break
+            except Exception as e:
+                logger.warning(f"No se pudo enviar ENTER: {e}")
+
             
             if not submit_clicked:
                 return LoginResult(False, "Could not click submit", "submit_failed")
@@ -398,10 +408,29 @@ class HumanizedLoginExecutor:
             
             // Click directo como fallback
             button.click();
-            
-            console.log('Click executed on button');
-            
+
+            // ✅ Forzar submit real del formulario Angular
+            // 🔥 Buscar el form real en todo el modal
+            let form = null;
+            const modal = button.closest('div, section, app-root, body');
+
+            if (modal) {
+                form = modal.querySelector('form');
+            }
+
+            if (form) {
+                form.dispatchEvent(new Event('submit', { bubbles: true }));
+                form.submit();
+                console.log('✅ Form submit forzado desde modal');
+            } else {
+                console.log('⚠️ No se encontró <form>, fallback solo click');
+            }
+
+
+            console.log('Click + form submit forzado');
+
             return true;
+
             """
             
             success = driver.execute_script(script, selector)
