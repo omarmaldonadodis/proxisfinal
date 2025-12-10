@@ -1,10 +1,12 @@
-# app/api/v1/warming.py - VERSIÓN MEJORADA
-from fastapi import APIRouter, Depends, HTTPException, WebSocket, WebSocketDisconnect, Query
+# adspower-orchestrator2/app/api/v1/warming.py - VERSIÓN COMPLETA INTEGRADA
+from fastapi import APIRouter, Depends, HTTPException, WebSocket, WebSocketDisconnect, Query, Header
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List, Optional
 from datetime import datetime
+
 from app.database import get_db
 from app.services.warming_script_service import WarmingScriptService
+from app.services.scheduler_service import SchedulerService
 from app.schemas.warming_script import (
     WarmingScriptCreate,
     WarmingScriptUpdate,
@@ -12,14 +14,47 @@ from app.schemas.warming_script import (
     BatchWarmingRequest,
     BatchWarmingResponse
 )
+from app.schemas.scheduled_warming import (
+    ScheduledWarmingCreate,
+    ScheduledWarmingResponse
+)
 from app.websocket.manager import connection_manager
+from app.core.jwt_manager import JWTManager
 from loguru import logger
 import json
 
 router = APIRouter(prefix="/warming", tags=["🔥 Warming Scripts"])
 
 # =====================================================
-# SCRIPTS ENDPOINTS (sin cambios)
+# 🔐 JWT AUTHENTICATION HELPER
+# =====================================================
+
+async def verify_agent_token(authorization: Optional[str] = Header(None)) -> dict:
+    """Verifica JWT token de agente para WebSocket"""
+    if not authorization:
+        raise HTTPException(status_code=401, detail="Missing authorization header")
+    
+    try:
+        # Extraer token (formato: "Bearer <token>")
+        if not authorization.startswith("Bearer "):
+            raise HTTPException(status_code=401, detail="Invalid authorization format")
+        
+        token = authorization.replace("Bearer ", "")
+        
+        # Verificar token
+        payload = JWTManager.verify_agent_token(token)
+        
+        if not payload:
+            raise HTTPException(status_code=401, detail="Invalid or expired token")
+        
+        return payload
+    
+    except Exception as e:
+        logger.error(f"Token verification failed: {e}")
+        raise HTTPException(status_code=401, detail="Authentication failed")
+
+# =====================================================
+# SCRIPTS ENDPOINTS
 # =====================================================
 
 @router.post("/scripts/", response_model=WarmingScriptResponse, status_code=201)
@@ -99,7 +134,83 @@ async def delete_script(
         raise HTTPException(status_code=404, detail="Script not found")
 
 # =====================================================
-# ✅ EXECUTION ENDPOINT MEJORADO
+# ✅ SCHEDULED WARMING ENDPOINTS (NUEVO)
+# =====================================================
+
+@router.post("/schedule/", response_model=ScheduledWarmingResponse, status_code=201)
+async def schedule_warming(
+    schedule_in: ScheduledWarmingCreate,
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    📅 Programa ejecución de warming
+    
+    Permite programar warming scripts para ejecutarse:
+    - Una vez (frequency: once)
+    - Diariamente (frequency: daily)
+    - Semanalmente (frequency: weekly)
+    - Mensualmente (frequency: monthly)
+    - Cron personalizado (frequency: custom)
+    """
+    scheduler_service = SchedulerService(db)
+    
+    try:
+        scheduled = await scheduler_service.create_scheduled_warming(schedule_in)
+        return scheduled
+    except Exception as e:
+        logger.error(f"Error scheduling warming: {e}")
+        raise HTTPException(status_code=400, detail=str(e))
+
+@router.get("/schedule/", response_model=dict)
+async def list_scheduled_warmings(
+    skip: int = Query(0, ge=0),
+    limit: int = Query(100, ge=1, le=1000),
+    is_active: Optional[bool] = Query(None),
+    db: AsyncSession = Depends(get_db)
+):
+    """Lista warmings programados"""
+    from sqlalchemy import select, func
+    from app.models.scheduled_warming import ScheduledWarming
+    
+    query = select(ScheduledWarming)
+    count_query = select(func.count()).select_from(ScheduledWarming)
+    
+    if is_active is not None:
+        from sqlalchemy import and_
+        query = query.where(ScheduledWarming.is_active == is_active)
+        count_query = count_query.where(ScheduledWarming.is_active == is_active)
+    
+    total_result = await db.execute(count_query)
+    total = total_result.scalar()
+    
+    query = query.offset(skip).limit(limit).order_by(ScheduledWarming.next_execution_at)
+    result = await db.execute(query)
+    items = list(result.scalars().all())
+    
+    return {"total": total, "items": items}
+
+@router.delete("/schedule/{scheduled_id}", status_code=204)
+async def cancel_scheduled_warming(
+    scheduled_id: int,
+    db: AsyncSession = Depends(get_db)
+):
+    """Cancela warming programado"""
+    from sqlalchemy import select
+    from app.models.scheduled_warming import ScheduledWarming
+    
+    result = await db.execute(
+        select(ScheduledWarming).where(ScheduledWarming.id == scheduled_id)
+    )
+    scheduled = result.scalar_one_or_none()
+    
+    if not scheduled:
+        raise HTTPException(status_code=404, detail="Scheduled warming not found")
+    
+    scheduled.is_active = False
+    await db.commit()
+
+# =====================================================
+# EXECUTION ENDPOINT (con error recovery)
 # =====================================================
 
 @router.post("/execute/batch", response_model=BatchWarmingResponse, status_code=202)
@@ -108,17 +219,7 @@ async def execute_batch_warming(
     db: AsyncSession = Depends(get_db)
 ):
     """
-    ✅ VERSIÓN MEJORADA - Distribución inteligente entre computadoras
-    
-    ## Flujo:
-    
-    1. Obtiene script
-    2. Verifica profiles y sus computadoras asignadas
-    3. Agrupa profiles por computadora
-    4. Verifica qué computadoras están online (conectadas vía WebSocket)
-    5. Distribuye ejecuciones solo a computadoras online
-    6. Si una computadora no está online, muestra advertencia
-    7. Envía comandos simultáneos a todos los agentes
+    ✅ VERSIÓN MEJORADA - Distribución inteligente con error recovery
     """
     
     service = WarmingScriptService(db)
@@ -133,8 +234,8 @@ async def execute_batch_warming(
     
     profile_service = ProfileService(db)
     
-    profiles_by_computer = {}  # {computer_id: [profiles]}
-    profile_map = {}  # {profile_id: profile_obj}
+    profiles_by_computer = {}
+    profile_map = {}
     
     for profile_id in request.profile_ids:
         profile = await profile_service.get_profile(profile_id)
@@ -151,16 +252,10 @@ async def execute_batch_warming(
         profile_map[profile_id] = profile
     
     if not profiles_by_computer:
-        raise HTTPException(
-            status_code=400,
-            detail="No valid profiles found"
-        )
+        raise HTTPException(status_code=400, detail="No valid profiles found")
     
-    # 3. ✅ Verificar computadoras ONLINE
+    # 3. Verificar computadoras ONLINE
     connected_agents = connection_manager.get_connected_agents()
-    
-    logger.info(f"Connected agents: {connected_agents}")
-    logger.info(f"Profiles distribution: {[(cid, len(ps)) for cid, ps in profiles_by_computer.items()]}")
     
     # 4. Crear ejecuciones y distribuir
     executions = []
@@ -170,7 +265,6 @@ async def execute_batch_warming(
     
     for computer_id, profiles in profiles_by_computer.items():
         
-        # ✅ Verificar si la computadora está online
         if computer_id not in connected_agents:
             warning_msg = f"⚠️ Computer {computer_id} is OFFLINE - {len(profiles)} profiles skipped"
             warnings.append(warning_msg)
@@ -178,7 +272,6 @@ async def execute_batch_warming(
             profiles_skipped += len(profiles)
             continue
         
-        # ✅ Computadora ONLINE - Crear ejecuciones
         for profile in profiles:
             # Crear ejecución en DB
             execution = await service.create_execution(
@@ -190,11 +283,11 @@ async def execute_batch_warming(
             executions.append(execution.id)
             profiles_executed += 1
             
-            # ✅ Enviar comando al agente
+            # Enviar comando al agente
             success = await connection_manager.execute_warming(
                 computer_id=profile.computer_id,
                 execution_id=execution.id,
-                profile_id=profile.adspower_id,  # Usar adspower_id
+                profile_id=profile.adspower_id,
                 script_actions=script.actions
             )
             
@@ -206,7 +299,7 @@ async def execute_batch_warming(
     # 5. Incrementar uso del script
     await service.increment_script_usage(request.script_id)
     
-    # 6. ✅ Construir respuesta con información detallada
+    # 6. Construir respuesta
     message = f"Warming started for {profiles_executed}/{len(request.profile_ids)} profiles"
     
     if warnings:
@@ -218,6 +311,10 @@ async def execute_batch_warming(
         message=message,
         executions=executions
     )
+
+# =====================================================
+# EXECUTION STATUS
+# =====================================================
 
 @router.get("/executions/{execution_id}")
 async def get_execution(
@@ -256,21 +353,18 @@ async def stop_execution(
     return {"message": "Warming stopped"}
 
 # =====================================================
-# ✅ AGENTS STATUS - MEJORADO
+# AGENTS STATUS
 # =====================================================
 
 @router.get("/agents/status")
 async def get_agents_status():
-    """
-    ✅ Obtiene estado de TODOS los agentes (online y offline)
-    """
+    """Obtiene estado de TODOS los agentes"""
     from app.database import AsyncSessionLocal
     from app.services.computer_service import ComputerService
     
     async with AsyncSessionLocal() as db:
         computer_service = ComputerService(db)
         
-        # Obtener TODAS las computadoras
         computers, _ = await computer_service.list_computers(limit=1000)
         
         connected_agents = connection_manager.get_connected_agents()
@@ -312,7 +406,7 @@ async def request_agent_status(computer_id: int):
     return {"message": "Status request sent"}
 
 # =====================================================
-# WEBSOCKET ENDPOINT (sin cambios mayores)
+# 🔐 WEBSOCKET ENDPOINT (CON JWT AUTH)
 # =====================================================
 
 @router.websocket("/ws/{computer_id}")
@@ -320,8 +414,27 @@ async def websocket_endpoint(
     websocket: WebSocket,
     computer_id: int
 ):
-    """WebSocket endpoint para agentes."""
+    """
+    WebSocket endpoint para agentes (CON AUTENTICACIÓN JWT)
     
+    El agente debe enviar Authorization header con JWT token
+    """
+    
+    # ✅ VERIFICAR JWT EN QUERY PARAMS (WebSocket no soporta headers custom)
+    token = websocket.query_params.get("token")
+    
+    if not token:
+        await websocket.close(code=1008, reason="Missing authentication token")
+        return
+    
+    # Verificar token
+    payload = JWTManager.verify_agent_token(token)
+    
+    if not payload or payload.get("computer_id") != computer_id:
+        await websocket.close(code=1008, reason="Invalid authentication token")
+        return
+    
+    # Token válido - conectar
     await connection_manager.connect(websocket, computer_id)
     
     from app.database import AsyncSessionLocal
@@ -370,14 +483,33 @@ async def websocket_endpoint(
             elif message_type == "execution_failed":
                 execution_id = message.get("execution_id")
                 error = message.get("error")
+                error_type = message.get("error_type", "unknown")
+                
+                # ✅ ACTIVAR ERROR RECOVERY
+                from app.services.error_recovery_service import ErrorRecoveryService
                 
                 async with AsyncSessionLocal() as db:
-                    service = WarmingScriptService(db)
-                    await service.update_execution_status(
+                    recovery_service = ErrorRecoveryService(db)
+                    
+                    recovery_result = await recovery_service.handle_execution_error(
                         execution_id=execution_id,
-                        status="failed",
-                        log_entry={"error": error}
+                        error_type=error_type,
+                        error_details={
+                            "error": error,
+                            "retry_count": message.get("retry_count", 0)
+                        }
                     )
+                    
+                    logger.info(f"Error recovery: {recovery_result}")
+                    
+                    # Si no se recuperó, marcar como failed
+                    if not recovery_result.get("recovered"):
+                        service = WarmingScriptService(db)
+                        await service.update_execution_status(
+                            execution_id=execution_id,
+                            status="failed",
+                            log_entry={"error": error, "error_type": error_type}
+                        )
             
             else:
                 logger.warning(f"Unknown message type: {message_type}")

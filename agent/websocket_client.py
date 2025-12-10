@@ -18,41 +18,44 @@ class WebSocketClient:
         self.heartbeat_task = None
         
     async def connect(self):
-        """Conecta al orquestrador"""
+        """Conecta al orquestrador CON JWT"""
         
-        # URL del WebSocket
-        ws_url = f"{self.config.ORCHESTRATOR_WS_URL}/api/v1/warming/ws/{self.config.COMPUTER_ID}"
+        # ✅ 1. Cargar token JWT guardado
+        from registration_client import RegistrationClient
+        
+        registration_client = RegistrationClient(
+            self.config.ORCHESTRATOR_URL,
+            self.config
+        )
+        
+        token = registration_client.load_token()
+        
+        if not token:
+            logger.error("No JWT token found. Please register first.")
+            raise Exception("Missing authentication token")
+        
+        # ✅ 2. Conectar con token en query params
+        ws_url = f"{self.config.ORCHESTRATOR_WS_URL}/api/v1/warming/ws/{self.config.COMPUTER_ID}?token={token}"
         
         logger.info(f"Connecting to: {ws_url}")
         
         while True:
             try:
-                # ✅ PING INTERVAL MÁS LARGO PARA EVITAR DESCONEXIONES
                 self.websocket = await websockets.connect(
                     ws_url,
-                    ping_interval=60,  # Cambiado de 30 a 60
-                    ping_timeout=30,   # Cambiado de 10 a 30
+                    ping_interval=60,
+                    ping_timeout=30,
                     close_timeout=10
                 )
                 
                 self.connected = True
                 logger.info("✅ Connected to orchestrator!")
-                
-                # Iniciar heartbeat
-                self.heartbeat_task = asyncio.create_task(self._heartbeat_loop())
-                
-                # Iniciar escucha de mensajes
-                await self._listen()
-                
-            except websockets.exceptions.ConnectionClosed:
-                logger.warning("Connection closed, reconnecting...")
-                self.connected = False
-                await asyncio.sleep(self.reconnect_delay)
-                
-            except Exception as e:
-                logger.error(f"Connection error: {e}")
-                self.connected = False
-                await asyncio.sleep(self.reconnect_delay)
+                    
+                except websockets.exceptions.ConnectionClosed:
+                    logger.warning("Connection closed, reconnecting...")
+                    self.connected = False
+                    await asyncio.sleep(self.reconnect_delay)
+
     
     async def _listen(self):
         """Escucha mensajes del orquestador"""
@@ -137,15 +140,26 @@ class WebSocketClient:
         await self.warming_executor.stop(execution_id)
     
     async def _send_progress(self, execution_id: int, progress: int, log_entry: dict):
-        """Envía progreso al orquestrador"""
+        """Envía progreso al orquestrador (CON TIPO DE ERROR)"""
         
-        message = {
-            "type": "execution_progress",
-            "execution_id": execution_id,
-            "progress": progress,
-            "log_entry": log_entry,
-            "timestamp": datetime.utcnow().isoformat()
-        }
+        # ✅ Si hay error, cambiar tipo de mensaje
+        if not log_entry.get("completed", True) and log_entry.get("error"):
+            message = {
+                "type": "execution_failed",
+                "execution_id": execution_id,
+                "error": log_entry.get("error"),
+                "error_type": log_entry.get("error_type", "unknown"),
+                "retry_count": log_entry.get("retry_count", 0),
+                "timestamp": datetime.utcnow().isoformat()
+            }
+        else:
+            message = {
+                "type": "execution_progress",
+                "execution_id": execution_id,
+                "progress": progress,
+                "log_entry": log_entry,
+                "timestamp": datetime.utcnow().isoformat()
+            }
         
         await self.send(message)
     

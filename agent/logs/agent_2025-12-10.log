@@ -3505,3 +3505,1360 @@ Stacktrace:
 2025-12-10 12:55:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
 2025-12-10 12:55:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
 2025-12-10 12:55:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 12:56:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 12:56:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 12:56:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 12:56:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 12:56:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 12:56:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 12:57:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 12:57:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 12:57:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 12:57:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 12:57:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 12:57:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 12:58:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 12:58:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 12:58:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 12:58:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 12:58:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 12:58:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 12:59:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 12:59:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 12:59:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 12:59:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 12:59:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 12:59:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:00:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:00:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:00:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:00:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:00:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:00:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:01:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:01:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:01:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:01:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:01:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:01:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:02:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:02:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:02:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:02:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:02:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:02:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:03:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:03:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:03:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:03:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:03:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:03:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:04:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:04:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:04:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:04:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:04:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:04:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:05:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:05:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:05:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:05:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:05:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:05:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:06:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:06:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:06:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:06:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:06:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:06:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:07:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:07:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:07:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:07:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:07:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:07:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:08:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:08:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:08:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:08:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:08:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:08:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:09:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:09:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:09:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:09:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:09:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:09:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:10:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:10:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:10:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:10:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:10:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:10:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:11:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:11:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:11:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:11:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:11:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:11:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:12:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:12:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:12:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:12:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:12:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:12:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:13:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:13:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:13:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:13:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:13:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:13:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:14:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:14:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:14:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:14:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:14:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:14:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:15:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:15:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:15:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:15:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:15:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:15:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:16:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:16:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:16:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:16:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:16:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:16:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:17:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:17:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:17:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:17:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:17:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:17:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:18:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:18:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:18:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:18:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:18:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:18:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:19:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:19:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:19:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:19:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:19:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:19:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:20:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:20:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:20:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:20:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:20:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:20:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:21:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:21:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:21:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:21:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:21:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:21:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:22:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:22:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:22:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:22:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:22:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:22:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:23:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:23:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:23:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:23:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:23:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:23:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:24:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:24:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:24:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:24:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:24:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:24:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:25:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:25:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:25:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:25:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:25:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:25:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:26:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:26:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:26:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:26:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:26:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:26:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:27:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:27:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:27:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:27:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:27:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:27:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:28:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:28:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:28:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:28:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:28:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:28:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:29:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:29:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:29:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:29:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:29:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:29:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:30:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:30:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:30:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:30:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:30:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:30:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:31:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:31:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:31:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:31:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:31:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:31:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:32:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:32:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:32:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:32:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:32:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:32:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:33:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:33:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:33:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:33:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:33:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:33:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:34:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:34:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:34:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:34:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:34:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:34:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:35:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:35:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:35:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:35:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:35:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:35:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:36:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:36:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:36:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:36:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:36:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:36:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:37:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:37:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:37:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:37:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:37:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:37:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:38:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:38:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:38:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:38:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:38:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:38:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:39:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:39:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:39:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:39:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:39:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:39:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:40:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:40:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:40:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:40:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:40:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:40:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:41:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:41:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:41:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:41:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:41:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:41:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:42:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:42:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:42:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:42:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:42:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:42:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:43:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:43:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:43:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:43:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:43:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:43:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:44:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:44:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:44:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:44:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:44:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:44:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:45:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:45:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:45:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:45:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:45:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:45:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:46:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:46:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:46:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:46:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:46:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:46:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:47:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:47:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:47:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:47:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:47:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:47:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:48:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:48:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:48:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:48:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:48:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:48:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:49:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:49:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:49:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:49:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:49:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:49:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:50:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:50:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:50:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:50:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:50:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:50:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:51:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:51:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:51:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:51:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:51:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:51:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:52:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:52:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:52:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:52:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:52:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:52:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:53:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:53:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:53:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:53:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:53:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:53:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:54:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:54:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:54:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:54:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:54:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:54:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:55:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:55:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:55:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:55:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:55:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:55:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:56:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:56:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:56:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:56:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:56:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:56:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:57:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:57:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:57:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:57:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:57:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:57:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:58:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:58:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:58:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:58:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:58:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:58:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:59:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:59:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:59:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 13:59:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 13:59:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 13:59:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:00:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:00:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:00:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:00:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:00:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:00:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:01:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:01:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:01:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:01:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:01:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:01:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:02:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:02:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:02:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:02:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:02:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:02:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:03:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:03:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:03:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:03:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:03:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:03:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:04:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:04:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:04:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:04:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:04:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:04:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:05:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:05:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:05:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:05:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:05:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:05:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:06:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:06:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:06:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:06:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:06:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:06:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:07:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:07:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:07:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:07:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:07:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:07:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:08:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:08:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:08:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:08:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:08:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:08:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:09:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:09:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:09:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:09:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:09:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:09:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:10:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:10:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:10:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:10:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:10:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:10:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:11:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:11:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:11:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:11:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:11:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:11:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:12:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:12:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:12:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:12:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:12:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:12:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:13:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:13:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:13:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:13:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:13:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:13:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:14:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:14:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:14:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:14:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:14:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:14:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:15:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:15:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:15:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:15:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:15:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:15:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:16:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:16:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:16:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:16:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:16:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:16:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:17:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:17:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:17:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:17:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:17:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:17:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:18:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:18:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:18:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:18:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:18:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:18:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:19:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:19:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:19:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:19:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:19:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:19:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:20:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:20:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:20:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:20:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:20:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:20:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:21:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:21:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:21:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:21:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:21:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:21:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:22:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:22:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:22:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:22:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:22:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:22:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:23:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:23:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:23:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:23:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:23:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:23:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:24:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:24:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:24:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:24:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:24:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:24:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:25:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:25:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:25:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:25:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:25:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:25:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:26:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:26:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:26:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:26:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:26:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:26:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:27:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:27:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:27:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:27:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:27:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:27:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:28:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:28:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:28:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:28:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:28:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:28:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:29:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:29:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:29:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:29:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:29:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:29:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:30:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:30:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:30:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:30:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:30:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:30:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:31:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:31:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:31:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:31:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:31:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:31:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:32:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:32:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:32:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:32:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:32:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:32:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:33:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:33:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:33:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:33:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:33:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:33:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:34:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:34:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:34:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:34:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:34:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:34:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:35:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:35:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:35:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:35:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:35:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:35:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:36:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:36:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:36:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:36:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:36:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:36:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:37:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:37:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:37:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:37:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:37:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:37:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:38:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:38:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:38:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:38:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:38:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:38:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:39:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:39:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:39:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:39:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:39:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:39:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:40:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:40:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:40:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:40:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:40:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:40:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:41:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:41:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:41:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:41:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:41:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:41:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:42:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:42:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:42:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:42:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:42:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:42:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:43:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:43:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:43:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:43:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:43:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:43:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:44:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:44:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:44:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:44:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:44:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:44:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:45:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:45:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:45:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:45:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:45:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:45:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:46:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:46:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:46:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:46:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:46:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:46:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:47:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:47:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:47:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:47:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:47:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:47:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:48:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:48:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:48:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:48:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:48:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:48:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:49:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:49:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:49:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:49:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:49:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:49:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:50:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:50:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:50:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:50:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:50:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:50:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:51:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:51:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:51:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:51:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:51:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:51:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:52:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:52:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:52:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:52:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:52:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:52:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:53:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:53:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:53:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:53:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:53:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:53:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:54:10 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:54:10 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:54:10 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:54:40 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:54:40 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:54:40 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:55:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:55:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:55:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:55:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:55:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:55:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:56:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:56:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:56:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:56:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:56:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:56:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:57:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:57:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:57:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:57:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:57:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:57:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:58:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:58:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:58:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:58:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:58:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:58:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:59:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:59:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:59:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 14:59:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 14:59:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 14:59:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:00:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:00:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:00:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:00:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:00:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:00:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:01:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:01:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:01:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:01:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:01:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:01:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:02:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:02:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:02:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:02:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:02:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:02:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:03:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:03:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:03:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:03:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:03:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:03:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:04:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:04:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:04:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:04:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:04:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:04:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:05:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:05:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:05:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:05:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:05:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:05:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:06:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:06:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:06:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:06:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:06:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:06:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:07:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:07:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:07:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:07:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:07:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:07:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:08:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:08:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:08:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:08:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:08:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:08:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:09:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:09:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:09:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:09:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:09:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:09:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:10:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:10:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:10:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:10:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:10:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:10:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:11:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:11:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:11:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:11:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:11:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:11:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:12:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:12:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:12:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:12:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:12:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:12:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:13:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:13:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:13:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:13:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:13:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:13:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:14:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:14:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:14:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:14:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:14:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:14:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:15:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:15:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:15:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:15:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:15:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:15:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:16:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:16:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:16:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:16:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:16:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:16:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:17:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:17:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:17:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:17:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:17:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:17:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:18:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:18:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:18:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:18:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:18:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:18:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:19:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:19:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:19:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:19:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:19:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:19:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:20:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:20:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:20:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:20:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:20:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:20:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:21:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:21:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:21:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:21:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:21:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:21:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:22:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:22:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:22:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:22:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:22:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:22:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:23:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:23:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:23:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:23:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:23:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:23:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:24:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:24:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:24:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:24:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:24:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:24:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:25:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:25:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:25:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:25:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:25:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:25:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:26:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:26:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:26:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:26:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:26:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:26:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:27:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:27:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:27:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:27:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:27:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:27:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:28:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:28:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:28:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:28:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:28:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:28:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:29:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:29:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:29:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:29:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:29:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:29:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:30:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:30:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:30:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:30:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:30:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:30:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:31:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:31:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:31:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:31:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:31:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:31:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:32:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:32:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:32:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:32:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:32:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:32:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:33:11 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:33:11 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:33:11 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:33:41 | DEBUG    | websocket_client:_heartbeat_loop:189 - 💓 Heartbeat sent
+2025-12-10 15:33:41 | DEBUG    | websocket_client:_handle_message:79 - Received message: heartbeat_ack
+2025-12-10 15:33:41 | DEBUG    | websocket_client:_handle_message:95 - Heartbeat acknowledged
+2025-12-10 15:34:08 | WARNING  | websocket_client:_listen:66 - Connection lost
+2025-12-10 15:34:08 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:34:13 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:34:18 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:34:23 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:34:28 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:34:33 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:34:38 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:34:43 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:34:48 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:34:53 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:34:58 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:35:03 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:35:08 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:35:13 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:35:18 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:35:23 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:35:28 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:35:33 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:35:38 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:35:43 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:35:48 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:35:53 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:35:58 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:36:03 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:36:08 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:36:13 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:36:18 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:36:23 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:36:28 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:36:33 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:36:38 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:36:43 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:36:48 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:36:53 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:36:58 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:37:03 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:37:08 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:37:13 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:37:18 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:37:23 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:37:28 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:37:33 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:37:38 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:37:43 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:37:48 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:37:53 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:37:58 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:38:03 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:38:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:38:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:38:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:38:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:38:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:38:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:38:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:38:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:38:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:38:54 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:38:59 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:39:04 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:39:09 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:39:14 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:39:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:39:24 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:39:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:39:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:39:39 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:39:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:39:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:39:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:39:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:40:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:40:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:40:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:40:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:40:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:40:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:40:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:40:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:40:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:40:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:40:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:40:59 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:41:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:41:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:41:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:41:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:41:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:41:29 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:41:34 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:41:39 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:41:44 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:41:49 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:41:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:41:59 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:42:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:42:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:42:14 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:42:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:42:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:42:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:42:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:42:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:42:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:42:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:42:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:42:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:43:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:43:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:43:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:43:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:43:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:43:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:43:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:43:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:43:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:43:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:43:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:43:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:44:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:44:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:44:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:44:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:44:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:44:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:44:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:44:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:44:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:44:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:44:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:44:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:45:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:45:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:45:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:45:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:45:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:45:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:45:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:45:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:45:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:45:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:45:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:45:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:46:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:46:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:46:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:46:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:46:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:46:29 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:46:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:46:39 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:46:44 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:46:49 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:46:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:46:59 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:47:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:47:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:47:14 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:47:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:47:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:47:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:47:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:47:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:47:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:47:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:47:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:47:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:48:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:48:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:48:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:48:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:48:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:48:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:48:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:48:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:48:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:48:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:48:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:48:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:49:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:49:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:49:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:49:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:49:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:49:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:49:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:49:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:49:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:49:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:49:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:49:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:50:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:50:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:50:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:50:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:50:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:50:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:50:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:50:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:50:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:50:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:50:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:50:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:51:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:51:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:51:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:51:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:51:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:51:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:51:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:51:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:51:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:51:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:51:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:51:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:52:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:52:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:52:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:52:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:52:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:52:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:52:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:52:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:52:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:52:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:52:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:52:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:53:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:53:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:53:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:53:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:53:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:53:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:53:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:53:39 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:53:44 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:53:49 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:53:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:53:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:54:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:54:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:54:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:54:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:54:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:54:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:54:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:54:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:54:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:54:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:54:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:54:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:55:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:55:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:55:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:55:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:55:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:55:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:55:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:55:39 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:55:44 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:55:49 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:55:54 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:55:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:56:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:56:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:56:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:56:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:56:24 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:56:29 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:56:34 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:56:40 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:56:45 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:56:50 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:56:55 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:57:00 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:57:05 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:57:10 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:57:15 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:57:20 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:57:25 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:57:30 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:57:35 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:57:40 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:57:45 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:57:50 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:57:55 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:58:00 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:58:05 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:58:10 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:58:15 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:58:20 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:58:25 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:58:30 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:58:35 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:58:40 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:58:45 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:58:50 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:58:55 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 15:59:00 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:59:05 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:59:10 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:59:15 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:59:20 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:59:25 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:59:30 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:59:35 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:59:40 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:59:45 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:59:50 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 15:59:55 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:00:00 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:00:05 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:00:10 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:00:15 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:00:20 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:00:25 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:00:30 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:00:35 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:00:40 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:00:45 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:00:50 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:00:55 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:01:00 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:01:05 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:01:10 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:01:15 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:01:20 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:01:25 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:01:30 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:01:35 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:01:40 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:01:45 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:01:50 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:01:55 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:02:00 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:02:05 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:02:10 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:02:15 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:02:20 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:02:25 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:02:30 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:02:35 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:02:40 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:02:45 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:02:50 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:02:55 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:03:00 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:03:05 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:03:10 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:03:15 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:03:20 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:03:25 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:03:30 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:03:35 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:03:40 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:03:45 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:03:50 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:03:55 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:04:00 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:04:05 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:04:10 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:04:15 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:04:20 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:04:25 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:04:30 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:04:35 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:04:40 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:04:45 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:04:50 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:04:55 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:05:00 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:05:05 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:05:10 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:05:15 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:05:20 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:05:25 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:05:30 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:05:35 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:05:40 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:05:45 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:05:50 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:05:55 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:06:00 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:06:05 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:06:10 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:06:15 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:06:20 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:06:25 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:06:30 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:06:35 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:06:40 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:06:45 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:06:50 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:06:55 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:07:00 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:07:05 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:07:10 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:07:15 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:07:20 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:07:25 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:07:30 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:07:35 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:07:40 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:07:45 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:07:50 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:07:55 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:08:00 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:08:05 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
