@@ -1,14 +1,16 @@
+# app/services/registration_service.py - VERSIÓN CON JWT
 from typing import Dict, Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from app.models.computer import Computer, ComputerStatus
 from app.models.computer_token import ComputerToken
 from app.repositories.computer_repository import ComputerRepository
+from app.core.jwt_manager import JWTManager  # ✅ NUEVO
 from loguru import logger
 from datetime import datetime
 
 class RegistrationService:
-    """Servicio de registro automático de computadoras"""
+    """Servicio de registro automático con JWT"""
     
     def __init__(self, db: AsyncSession):
         self.db = db
@@ -19,24 +21,12 @@ class RegistrationService:
         hardware_info: Dict
     ) -> Dict[str, any]:
         """
-        Registra o actualiza computadora automáticamente
-        
-        Args:
-            hardware_info: {
-                "name": "Mac",
-                "hostname": "omar-laptop",
-                "ip_address": "192.168.1.10",
-                "adspower_api_url": "http://192.168.1.10:50325",
-                "adspower_api_key": "...",
-                "cpu_cores": 8,
-                "ram_gb": 16,
-                "os_info": "macOS 14.0"
-            }
+        Registra o actualiza computadora y genera JWT
         
         Returns:
             {
                 "computer_id": 1,
-                "token": "abc123...",
+                "token": "eyJ...",  # JWT token
                 "is_new": True/False,
                 "message": "..."
             }
@@ -68,10 +58,16 @@ class RegistrationService:
             computer = await self.computer_repo.create(computer_data)
             await self.db.flush()
             
-            # Crear token
+            # ✅ Crear JWT token (sin expiración)
+            jwt_token = JWTManager.create_agent_token(
+                computer_id=computer.id,
+                computer_name=computer.name
+            )
+            
+            # Guardar token en DB (para poder revocarlo)
             token_obj = ComputerToken(
                 computer_id=computer.id,
-                token=ComputerToken.generate_token(),
+                token=jwt_token,
                 is_active=True
             )
             
@@ -79,11 +75,11 @@ class RegistrationService:
             await self.db.commit()
             await self.db.refresh(computer)
             
-            logger.info(f"✅ New computer registered: {computer.name} (ID: {computer.id})")
+            logger.info(f"✅ New computer registered with JWT: {computer.name} (ID: {computer.id})")
             
             return {
                 "computer_id": computer.id,
-                "token": token_obj.token,
+                "token": jwt_token,
                 "is_new": True,
                 "message": f"Computer '{computer.name}' registered successfully"
             }
@@ -92,7 +88,7 @@ class RegistrationService:
             # Computadora EXISTENTE - ACTUALIZAR INFO
             update_data = {
                 "hostname": hardware_info["hostname"],
-                "ip_address": hardware_info["ip_address"],  # IP dinámica
+                "ip_address": hardware_info["ip_address"],
                 "adspower_api_url": hardware_info["adspower_api_url"],
                 "adspower_api_key": hardware_info.get("adspower_api_key", computer.adspower_api_key),
                 "cpu_cores": hardware_info.get("cpu_cores", computer.cpu_cores),
@@ -105,17 +101,25 @@ class RegistrationService:
             
             await self.computer_repo.update(computer.id, update_data)
             
-            # Obtener token existente
+            # ✅ Obtener JWT existente
             result = await self.db.execute(
-                select(ComputerToken).where(ComputerToken.computer_id == computer.id)
+                select(ComputerToken).where(
+                    ComputerToken.computer_id == computer.id,
+                    ComputerToken.is_active == True
+                )
             )
             token_obj = result.scalar_one_or_none()
             
             if not token_obj:
-                # Crear token si no existe (caso raro)
+                # ✅ Crear nuevo JWT si no existe
+                jwt_token = JWTManager.create_agent_token(
+                    computer_id=computer.id,
+                    computer_name=computer.name
+                )
+                
                 token_obj = ComputerToken(
                     computer_id=computer.id,
-                    token=ComputerToken.generate_token(),
+                    token=jwt_token,
                     is_active=True
                 )
                 self.db.add(token_obj)
@@ -125,7 +129,7 @@ class RegistrationService:
             
             await self.db.commit()
             
-            logger.info(f"✅ Computer updated: {computer.name} (IP: {hardware_info['ip_address']})")
+            logger.info(f"✅ Computer reconnected with JWT: {computer.name} (IP: {hardware_info['ip_address']})")
             
             return {
                 "computer_id": computer.id,
@@ -134,11 +138,31 @@ class RegistrationService:
                 "message": f"Computer '{computer.name}' reconnected"
             }
     
-    async def validate_token(self, token: str) -> Optional[Computer]:
-        """Valida token y retorna computadora"""
+    async def validate_token(self, token: str) -> Optional[Dict]:
+        """
+        Valida JWT token
         
+        Returns:
+            {
+                "valid": True,
+                "computer_id": 1,
+                "computer_name": "..."
+            }
+            None si inválido
+        """
+        
+        # ✅ Verificar JWT
+        payload = JWTManager.verify_agent_token(token)
+        
+        if not payload:
+            return None
+        
+        computer_id = payload.get("computer_id")
+        
+        # Verificar que el token sigue activo en DB
         result = await self.db.execute(
             select(ComputerToken).where(
+                ComputerToken.computer_id == computer_id,
                 ComputerToken.token == token,
                 ComputerToken.is_active == True
             )
@@ -152,14 +176,25 @@ class RegistrationService:
         token_obj.last_used_at = datetime.utcnow()
         await self.db.commit()
         
-        # Retornar computadora
+        # Retornar info de computadora
         result = await self.db.execute(
-            select(Computer).where(Computer.id == token_obj.computer_id)
+            select(Computer).where(Computer.id == computer_id)
         )
-        return result.scalar_one_or_none()
+        computer = result.scalar_one_or_none()
+        
+        if not computer:
+            return None
+        
+        return {
+            "valid": True,
+            "computer_id": computer.id,
+            "computer_name": computer.name
+        }
     
     async def revoke_token(self, computer_id: int) -> bool:
-        """Revoca token de una computadora"""
+        """
+        Revoca JWT token de una computadora
+        """
         
         result = await self.db.execute(
             select(ComputerToken).where(ComputerToken.computer_id == computer_id)
@@ -169,7 +204,7 @@ class RegistrationService:
         if token_obj:
             token_obj.is_active = False
             await self.db.commit()
-            logger.info(f"Token revoked for computer {computer_id}")
+            logger.info(f"JWT token revoked for computer {computer_id}")
             return True
         
         return False
