@@ -1,6 +1,6 @@
+# app/tasks/__init__.py
 from celery import Celery
 from app.config import settings
-from app.tasks.scheduled_warming_tasks import BEAT_SCHEDULE
 
 celery_app = Celery(
     'adspower_orchestrator',
@@ -26,5 +26,10 @@ celery_app.conf.update(
     task_soft_time_limit=3000,
     worker_prefetch_multiplier=1,
     worker_max_tasks_per_child=50,
-    beat_schedule=BEAT_SCHEDULE
 )
+
+@celery_app.on_after_configure.connect
+def setup_periodic_tasks(sender, **kwargs):
+    """Configurar tareas periódicas después de inicializar Celery"""
+    from app.tasks.scheduled_warming_tasks import BEAT_SCHEDULE
+    sender.conf.beat_schedule = BEAT_SCHEDULE

@@ -1,5 +1,5 @@
 # app/models/computer_token.py
-from sqlalchemy import Column, String, Integer, Boolean, DateTime, ForeignKey
+from sqlalchemy import Text, Column, String, Integer, Boolean, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from app.database import Base
@@ -11,7 +11,7 @@ class ComputerToken(Base):
     
     id = Column(Integer, primary_key=True)
     computer_id = Column(Integer, ForeignKey("computers.id"), unique=True, nullable=False)
-    token = Column(String(64), unique=True, nullable=False, index=True)
+    token = Column(Text, nullable=False, unique=True)
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     last_used_at = Column(DateTime(timezone=True))

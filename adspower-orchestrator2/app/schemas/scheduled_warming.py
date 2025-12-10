@@ -1,153 +1,101 @@
-# app/core/jwt_manager.py
+# adspower-orchestrator2/app/schemas/scheduled_warming.py
 """
-Sistema de gestión de JWT para autenticación de agentes
+Schemas para warming programado
 """
-from datetime import datetime, timedelta
-from typing import Optional, Dict
-from jose import JWTError, jwt
-from loguru import logger
-from app.config import settings
+from pydantic import BaseModel, Field
+from typing import List, Optional
+from datetime import datetime
 
-class JWTManager:
-    """Gestor de tokens JWT para agentes"""
+class ScheduledWarmingCreate(BaseModel):
+    """Schema para crear warming programado"""
     
-    # Tipo de tokens
-    TOKEN_TYPE_AGENT = "agent"
-    TOKEN_TYPE_API = "api"
+    script_id: int = Field(..., description="ID del script a ejecutar")
+    profile_ids: List[int] = Field(..., min_items=1, description="IDs de profiles")
     
-    @staticmethod
-    def create_agent_token(
-        computer_id: int,
-        computer_name: str,
-        expires_delta: Optional[timedelta] = None
-    ) -> str:
-        """
-        Crea token JWT para agente (sin expiración por defecto)
-        
-        Args:
-            computer_id: ID de la computadora
-            computer_name: Nombre de la computadora
-            expires_delta: Tiempo de expiración (None = sin expiración)
-        """
-        
-        to_encode = {
-            "sub": str(computer_id),
-            "type": JWTManager.TOKEN_TYPE_AGENT,
-            "computer_id": computer_id,
-            "computer_name": computer_name,
-            "iat": datetime.utcnow()
-        }
-        
-        # Si se especifica expiración
-        if expires_delta:
-            expire = datetime.utcnow() + expires_delta
-            to_encode["exp"] = expire
-        
-        encoded_jwt = jwt.encode(
-            to_encode, 
-            settings.SECRET_KEY, 
-            algorithm=settings.ALGORITHM
-        )
-        
-        logger.info(f"JWT created for agent: {computer_name} (ID: {computer_id})")
-        return encoded_jwt
+    # Frecuencia de ejecución
+    frequency: str = Field(
+        ...,
+        description="once | daily | weekly | monthly | custom",
+        pattern="^(once|daily|weekly|monthly|custom)$"
+    )
     
-    @staticmethod
-    def verify_agent_token(token: str) -> Optional[Dict]:
-        """
-        Verifica token de agente
-        
-        Returns:
-            {
-                "computer_id": 1,
-                "computer_name": "Mac",
-                "type": "agent"
-            }
-            None si token inválido
-        """
-        try:
-            payload = jwt.decode(
-                token, 
-                settings.SECRET_KEY, 
-                algorithms=[settings.ALGORITHM]
-            )
-            
-            # Verificar que sea token de agente
-            if payload.get("type") != JWTManager.TOKEN_TYPE_AGENT:
-                logger.warning("Invalid token type")
-                return None
-            
-            return {
-                "computer_id": payload.get("computer_id"),
-                "computer_name": payload.get("computer_name"),
-                "type": payload.get("type")
-            }
-        
-        except JWTError as e:
-            logger.warning(f"JWT verification failed: {e}")
-            return None
+    # Fecha/hora de primera ejecución (UTC)
+    scheduled_at: datetime = Field(..., description="Primera ejecución (UTC)")
     
-    @staticmethod
-    def create_api_token(
-        user_id: str,
-        permissions: list = None,
-        expires_delta: timedelta = None
-    ) -> str:
-        """
-        Crea token JWT para API (con expiración)
-        
-        Args:
-            user_id: ID del usuario
-            permissions: Lista de permisos
-            expires_delta: Tiempo de expiración
-        """
-        
-        if expires_delta is None:
-            expires_delta = timedelta(hours=24)
-        
-        expire = datetime.utcnow() + expires_delta
-        
-        to_encode = {
-            "sub": user_id,
-            "type": JWTManager.TOKEN_TYPE_API,
-            "permissions": permissions or [],
-            "iat": datetime.utcnow(),
-            "exp": expire
-        }
-        
-        encoded_jwt = jwt.encode(
-            to_encode, 
-            settings.SECRET_KEY, 
-            algorithm=settings.ALGORITHM
-        )
-        
-        return encoded_jwt
+    # Para frecuencia custom
+    cron_expression: Optional[str] = Field(None, description="Expresión cron (ej: '0 14 * * *')")
     
-    @staticmethod
-    def verify_api_token(token: str) -> Optional[Dict]:
-        """Verifica token de API"""
-        try:
-            payload = jwt.decode(
-                token, 
-                settings.SECRET_KEY, 
-                algorithms=[settings.ALGORITHM]
-            )
-            
-            if payload.get("type") != JWTManager.TOKEN_TYPE_API:
-                return None
-            
-            return payload
-        
-        except JWTError:
-            return None
+    # Timezone del usuario
+    timezone: str = Field(default="UTC", description="Timezone (ej: America/Guayaquil)")
     
-    @staticmethod
-    def revoke_token(token: str) -> bool:
-        """
-        Marca token como revocado (guardar en Redis/DB)
-        
-        TODO: Implementar blacklist en Redis
-        """
-        # Por ahora, retornar True
-        # En producción, guardar en Redis con TTL
-        return True
+    # Para frecuencia weekly
+    days_of_week: Optional[List[int]] = Field(
+        None,
+        description="Días de la semana [0=Lunes, 6=Domingo]"
+    )
+    
+    # Hora del día (para daily/weekly)
+    time_of_day: Optional[str] = Field(
+        None,
+        description="Hora del día (HH:MM, ej: '14:30')",
+        pattern="^([0-1][0-9]|2[0-3]):[0-5][0-9]$"
+    )
+    
+    # Límites
+    max_executions: Optional[int] = Field(
+        None,
+        description="Máximo de ejecuciones (None = infinito)"
+    )
+    expires_at: Optional[datetime] = Field(
+        None,
+        description="Fecha de expiración (UTC)"
+    )
+    
+    # Metadata
+    tags: List[str] = Field(default_factory=list)
+    notes: Optional[str] = Field(None, max_length=500)
+
+
+class ScheduledWarmingUpdate(BaseModel):
+    """Schema para actualizar warming programado"""
+    
+    is_active: Optional[bool] = None
+    max_executions: Optional[int] = None
+    expires_at: Optional[datetime] = None
+    notes: Optional[str] = None
+
+
+class ScheduledWarmingResponse(BaseModel):
+    """Schema de respuesta de warming programado"""
+    
+    id: int
+    script_id: int
+    profile_ids: List[int]
+    frequency: str
+    scheduled_at: datetime
+    next_execution_at: Optional[datetime]
+    last_execution_at: Optional[datetime]
+    
+    cron_expression: Optional[str]
+    timezone: str
+    days_of_week: Optional[List[int]]
+    time_of_day: Optional[str]
+    
+    status: str
+    is_active: bool
+    
+    execution_count: int
+    success_count: int
+    failure_count: int
+    
+    max_executions: Optional[int]
+    expires_at: Optional[datetime]
+    
+    tags: List[str]
+    notes: Optional[str]
+    
+    created_at: datetime
+    updated_at: Optional[datetime]
+    
+    class Config:
+        from_attributes = True

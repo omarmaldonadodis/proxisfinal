@@ -87,6 +87,7 @@ class WarmingExecution(Base):
     script_id = Column(Integer, ForeignKey("warming_scripts.id"), nullable=False)
     profile_id = Column(Integer, ForeignKey("profiles.id"), nullable=False)
     computer_id = Column(Integer, ForeignKey("computers.id"), nullable=False)
+    scheduled_warming_id = Column(Integer, ForeignKey("scheduled_warmings.id"), nullable=True)
     
     # Estado
     status = Column(SQLEnum(ExecutionStatus), default=ExecutionStatus.QUEUED, index=True)
@@ -112,6 +113,7 @@ class WarmingExecution(Base):
     script = relationship("WarmingScript", back_populates="executions")
     profile = relationship("Profile")
     computer = relationship("Computer")
+    scheduled_warming = relationship("ScheduledWarming", back_populates="executions", foreign_keys=[scheduled_warming_id])
 
 class AgentConnection(Base):
     """Estado de conexión de agentes (Computadoras B)"""
