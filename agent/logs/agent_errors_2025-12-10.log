@@ -763,3 +763,600 @@ Stacktrace:
 2025-12-10 16:07:55 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
 2025-12-10 16:08:00 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
 2025-12-10 16:08:05 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:08:10 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:08:15 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:08:20 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:08:25 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:08:30 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:08:35 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:08:40 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:08:45 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:08:50 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:08:55 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:09:00 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:09:05 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:09:10 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:09:15 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:09:20 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:09:25 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:09:30 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:09:35 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:09:40 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:09:45 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:09:50 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:09:55 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:10:00 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:10:05 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:10:10 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:10:15 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:10:20 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:10:25 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:10:30 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:10:35 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:10:40 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:10:45 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:10:50 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:10:55 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:11:00 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:11:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:11:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:11:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:11:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:11:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:11:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:11:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:11:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:11:46 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:11:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:11:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:12:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:12:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:12:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:12:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:12:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:12:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:12:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:12:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:12:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:12:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:12:51 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:12:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:13:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:13:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:13:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:13:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:13:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:13:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:13:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:13:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:13:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:13:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:13:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:13:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:14:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:14:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:14:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:14:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:14:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:14:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:14:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:14:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:14:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:14:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:14:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:14:56 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:15:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:15:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:15:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:15:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:15:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:15:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:15:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:15:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:15:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:15:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:15:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:15:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:16:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:16:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:16:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:16:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:16:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:16:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:16:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:16:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:16:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:16:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:16:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:16:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:17:01 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:17:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:17:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:17:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:17:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:17:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:17:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:17:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:17:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:17:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:17:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:17:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:18:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:18:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:18:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:18:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:18:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:18:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:18:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:18:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:18:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:18:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:18:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:18:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:19:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:19:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:19:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:19:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:19:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:19:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:19:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:19:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:19:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:19:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:19:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:19:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:20:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:20:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:20:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:20:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:20:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:20:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:20:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:20:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:20:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:20:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:20:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:20:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:21:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:21:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:21:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:21:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:21:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:21:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:21:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:21:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:21:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:21:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:21:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:21:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:22:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:22:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:22:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:22:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:22:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:22:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:22:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:22:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:22:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:22:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:22:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:22:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:23:01 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:23:06 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:23:11 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:23:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:23:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:23:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:23:31 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:23:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:23:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:23:46 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:23:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:23:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:24:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:24:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:24:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:24:16 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:24:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:24:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:24:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:24:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:24:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:24:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:24:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:24:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:25:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:25:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:25:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:25:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:25:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:25:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:25:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:25:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:25:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:25:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:25:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:25:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:26:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:26:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:26:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:26:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:26:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:26:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:26:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:26:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:26:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:26:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:26:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:26:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:27:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:27:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:27:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:27:16 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:27:21 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:27:26 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:27:31 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:27:36 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:27:41 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:27:46 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:27:51 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:27:56 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:28:01 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:28:06 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:28:11 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:28:17 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:28:22 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:28:27 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:28:32 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:28:37 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:28:42 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:28:47 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:28:52 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:28:57 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:29:02 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:29:07 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:29:12 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:29:18 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:29:23 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:29:28 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:29:33 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:29:38 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:29:43 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:29:48 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:29:53 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:29:58 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:30:03 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:30:08 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:30:13 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:30:18 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:30:23 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:30:28 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:30:33 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:30:38 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:30:43 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:30:48 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:30:53 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:30:58 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:31:03 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:31:08 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:31:13 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:31:18 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:31:23 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:31:28 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:31:33 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:31:38 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:31:43 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:31:48 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:31:53 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:31:58 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:32:03 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:32:08 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:32:13 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:32:18 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:32:23 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:32:28 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:32:33 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:32:38 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:32:43 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:32:48 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:32:53 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:32:58 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:33:03 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:33:08 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:33:13 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:33:18 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:33:23 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:33:28 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:33:33 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:33:38 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:33:43 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:33:48 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:33:53 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:33:58 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:34:03 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:34:08 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:34:13 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:34:18 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:34:23 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:34:28 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:34:33 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:34:38 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:34:43 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:34:48 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:34:53 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:34:58 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:35:03 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:35:08 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:35:13 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:35:18 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:35:23 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:35:28 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:35:33 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:35:38 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:35:43 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:35:48 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:35:53 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:35:58 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:36:03 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:36:08 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:36:13 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:36:18 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:36:23 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:36:28 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:36:33 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:36:38 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:36:43 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:36:48 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:36:53 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:36:58 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:37:03 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:37:08 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:37:13 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:37:18 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:37:23 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:37:28 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:37:33 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:37:38 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:37:43 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:37:48 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:37:53 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:37:58 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:38:03 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:38:08 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:38:13 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:38:18 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:38:23 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:38:28 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:38:33 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:38:38 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:38:43 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:38:48 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:38:53 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:38:58 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:39:03 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:39:08 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:39:13 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:39:18 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:39:23 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:39:28 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:39:33 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:39:38 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:39:43 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:39:48 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:39:53 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:39:58 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:40:03 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:40:08 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:40:13 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:40:18 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:40:23 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:40:28 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:40:33 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:40:38 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:40:43 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:40:48 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:40:53 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:40:58 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:41:03 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:41:08 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:41:13 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:41:18 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:41:23 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:41:28 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:41:33 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:41:38 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:41:43 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:41:48 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:41:53 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:41:58 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:42:03 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:42:08 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:42:13 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:42:18 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:42:23 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:42:28 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:42:33 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:42:38 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:42:43 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:42:48 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:42:53 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:42:58 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:43:03 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:43:08 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:43:13 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:43:18 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:43:23 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:43:28 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:43:33 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:43:38 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:43:44 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:43:49 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:43:54 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:43:59 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:44:04 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:44:09 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:44:14 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:44:19 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:44:24 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:44:29 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:44:34 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:44:39 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:44:44 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:44:49 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:44:54 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:44:59 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:45:04 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:45:09 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:45:14 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:45:19 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:45:24 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:45:29 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:45:34 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:45:39 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:45:44 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:45:49 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:45:54 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:45:59 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:46:04 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:46:09 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:46:14 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:46:19 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:46:24 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:46:29 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:46:34 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:46:39 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:46:44 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:46:49 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:46:54 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:46:59 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:47:04 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:47:09 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:47:14 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:47:19 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:47:24 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:47:29 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:47:34 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:47:39 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:47:44 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:47:49 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:47:54 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:47:59 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:48:04 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:48:09 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:48:14 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:48:19 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:48:24 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:48:29 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:48:34 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:48:39 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:48:44 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:48:49 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:48:54 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:48:59 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:49:04 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:49:09 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:49:14 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:49:19 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:49:24 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:49:29 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:49:34 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:49:39 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:49:44 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:49:49 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:49:54 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:49:59 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:50:04 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:50:09 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:50:14 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:50:19 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:50:24 | ERROR    | websocket_client:connect:53 - Connection error: did not receive a valid HTTP response
+2025-12-10 16:50:29 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:50:34 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:50:39 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:50:44 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:50:49 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:50:54 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:50:59 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:51:04 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:51:09 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:51:14 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:51:19 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:51:24 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:51:29 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:51:34 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:51:39 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:51:44 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:51:49 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:51:54 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:51:59 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:52:04 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:52:10 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:52:15 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:52:20 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:52:25 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:52:30 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:52:35 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:52:40 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:52:45 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:52:50 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:52:55 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:53:00 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:53:05 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:53:10 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:53:15 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:53:20 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:53:25 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:53:30 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:53:35 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:53:40 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:53:45 | ERROR    | websocket_client:connect:53 - Connection error: [Errno 61] Connect call failed ('192.168.1.5', 8000)
+2025-12-10 16:53:50 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:53:55 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:54:00 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:54:05 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:54:10 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:54:15 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:54:20 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:54:25 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:54:30 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:54:35 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:54:40 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:54:45 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:54:50 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:54:55 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:55:00 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:55:05 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:55:10 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:55:15 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:55:20 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:55:25 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:55:31 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:55:36 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:55:41 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:55:46 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:55:51 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:55:56 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:56:01 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:56:06 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:56:11 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:56:16 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:56:21 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:56:26 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:56:31 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:56:36 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:56:41 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:56:46 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:56:51 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:56:56 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:57:01 | ERROR    | websocket_client:connect:53 - Connection error: server rejected WebSocket connection: HTTP 403
+2025-12-10 16:58:30 | ERROR    | registration_client:register:67 - Registration error: Registration failed: 500 - {"detail":"Internal server error"}
+2025-12-10 16:58:30 | ERROR    | __main__:start:140 - Agent error: Registration failed: 500 - {"detail":"Internal server error"}
+2025-12-10 17:10:53 | ERROR    | registration_client:register:67 - Registration error: Registration failed: 500 - {"detail":"Internal server error"}
+2025-12-10 17:10:53 | ERROR    | __main__:start:140 - Agent error: Registration failed: 500 - {"detail":"Internal server error"}
+2025-12-10 17:15:54 | ERROR    | registration_client:register:67 - Registration error: Registration failed: 500 - {"detail":"Internal server error"}
+2025-12-10 17:15:54 | ERROR    | __main__:start:140 - Agent error: Registration failed: 500 - {"detail":"Internal server error"}
+2025-12-10 17:38:32 | ERROR    | registration_client:validate_token:122 - Token validation error: Cannot connect to host 192.168.1.5:8000 ssl:default [Connect call failed ('192.168.1.5', 8000)]
+2025-12-10 17:38:33 | ERROR    | registration_client:register:64 - Failed to connect to orchestrator: Cannot connect to host 192.168.1.5:8000 ssl:default [Connect call failed ('192.168.1.5', 8000)]
+2025-12-10 17:38:33 | ERROR    | __main__:start:140 - Agent error: Cannot connect to orchestrator at http://192.168.1.5:8000
+2025-12-10 17:39:13 | ERROR    | registration_client:register:67 - Registration error: Registration failed: 500 - {"detail":"Internal server error"}
+2025-12-10 17:39:13 | ERROR    | __main__:start:140 - Agent error: Registration failed: 500 - {"detail":"Internal server error"}

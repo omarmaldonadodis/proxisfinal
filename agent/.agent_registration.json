@@ -1,6 +1,6 @@
 {
-  "computer_id": 3,
-  "token": "XF0YPnFQpORxGsBR_t4HfqD2x2KRytHUNeGMwYgQ74L7pF4Exkv0DV_CUbo0hXrt",
-  "is_new": true,
-  "message": "Computer 'mac2' registered successfully"
+  "computer_id": 1,
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDA2NjU4fQ.ZvfvnIYXCP4UHJkolh0gEFQCK9s2807meFWhBSu38Bc",
+  "is_new": false,
+  "message": "Computer 'mac2' reconnected"
 }
