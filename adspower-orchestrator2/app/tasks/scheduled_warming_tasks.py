@@ -1,9 +1,8 @@
-# app/tasks/scheduled_warming_tasks.py
+# app/tasks/scheduled_warming_tasks.py - VERSIÓN CORREGIDA
 """
 Tareas Celery para ejecutar warmings programados automáticamente
 """
 from celery import Task
-import asyncio
 from app.database import AsyncSessionLocal
 from app.services.scheduler_service import SchedulerService
 from loguru import logger
@@ -21,6 +20,16 @@ def execute_scheduled_warmings_task(self: Task):
     """
     ⏰ Tarea que se ejecuta cada minuto para verificar warmings programados
     """
+    
+    # ✅ FIX: Usar import dentro de la función para evitar loop issues
+    import asyncio
+    
+    # ✅ FIX: Crear nuevo event loop si no existe
+    try:
+        loop = asyncio.get_event_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
     
     async def _execute():
         async with AsyncSessionLocal() as db:
@@ -68,7 +77,12 @@ def execute_scheduled_warmings_task(self: Task):
                 "total": len(pending)
             }
     
-    return asyncio.run(_execute())
+    # ✅ FIX: Usar loop.run_until_complete en lugar de asyncio.run
+    try:
+        return loop.run_until_complete(_execute())
+    finally:
+        # NO cerrar el loop aquí, Celery lo gestiona
+        pass
 
 
 @celery_app.task(name='tasks.cleanup_expired_scheduled_warmings')
@@ -76,6 +90,15 @@ def cleanup_expired_scheduled_warmings_task():
     """
     🧹 Limpia warmings programados expirados
     """
+    
+    import asyncio
+    
+    # ✅ FIX: Crear/obtener event loop correctamente
+    try:
+        loop = asyncio.get_event_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
     
     async def _cleanup():
         from sqlalchemy import select, and_, or_
@@ -119,7 +142,11 @@ def cleanup_expired_scheduled_warmings_task():
             
             return {"cleaned": len(expired)}
     
-    return asyncio.run(_cleanup())
+    # ✅ FIX: Usar loop.run_until_complete
+    try:
+        return loop.run_until_complete(_cleanup())
+    finally:
+        pass
 
 
 # ✅ SCHEDULE separado del import

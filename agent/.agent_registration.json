@@ -1,6 +1,6 @@
 {
   "computer_id": 1,
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDA2NjU4fQ.ZvfvnIYXCP4UHJkolh0gEFQCK9s2807meFWhBSu38Bc",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc",
   "is_new": false,
   "message": "Computer 'mac2' reconnected"
 }

@@ -275,3 +275,82 @@ Betcore
 }
 
 
+
+1xbet
+
+{
+  "name": "Login 1xBet",
+  "description": "Login automatizado 1xBet",
+  "category": "authentication",
+  "actions": [
+    {
+      "type": "navigate",
+      "params": {
+        "url": "https://1xbet.ec/es",
+        "timeout": 50
+      },
+      "description": null
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 5
+      },
+      "description": null
+    },
+    {
+      "type": "click",
+      "params": {
+        "selector": ".ui-caption--size-xs",
+        "selector_type": "css",
+        "human": true
+      },
+      "description": null
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 4
+      },
+      "description": null
+    },
+    {
+      "type": "screenshot",
+      "params": {
+        "name": "modal_opened"
+      },
+      "description": null
+    },
+    {
+      "type": "advanced_login",
+      "params": {
+        "service": "1xbet",
+        "username": "TU_USUARIO_AQUI",
+        "password": "TU_PASSWORD_AQUI",
+        "username_selector": "form.auth-form-by-password input[type='text'], form.auth-form-by-password input:not([type='password'])",
+        "password_selector": "form.auth-form-by-password input[type='password']",
+        "submit_selector": "form.auth-form-by-password button.auth-form-by-password__submit",
+        "wait_after_submit": 6,
+        "success_url_contains": "home",
+        "ignore_recaptcha": false
+      },
+      "description": null
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 3
+      },
+      "description": null
+    },
+    {
+      "type": "screenshot",
+      "params": {
+        "name": "after_login"
+      },
+      "description": null
+    }
+  ],
+  "duration_minutes": 5
+}
+
