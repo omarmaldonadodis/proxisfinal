@@ -7,8 +7,6 @@ celery_app = Celery(
     broker=settings.REDIS_URL,
     backend=settings.REDIS_URL,
     include=[
-        'app.tasks.profile_tasks',
-        'app.tasks.automation_tasks',
         'app.tasks.health_tasks',
         'app.tasks.backup_tasks',
         'app.tasks.scheduled_warming_tasks'
@@ -26,8 +24,11 @@ celery_app.conf.update(
     task_soft_time_limit=3000,
     worker_prefetch_multiplier=1,
     worker_max_tasks_per_child=50,
+    # ✅ NO IMPORTAR BEAT_SCHEDULE AQUÍ
+    # Se configurará directamente en celery beat
 )
 
+# ✅ Configurar beat_schedule DESPUÉS de que todos los módulos se carguen
 @celery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
     """Configurar tareas periódicas después de inicializar Celery"""

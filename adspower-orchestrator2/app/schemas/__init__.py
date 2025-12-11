@@ -19,18 +19,7 @@ from app.schemas.profile import (
     ProfileListResponse,
     ProfileBulkCreate
 )
-from app.schemas.task import (
-    TaskCreate,
-    TaskUpdate,
-    TaskResponse,
-    TaskListResponse
-)
-from app.schemas.automation import (
-    ParallelSearchRequest,
-    ParallelNavigationRequest,
-    AutomationResponse,
-    AutomationResult
-)
+
 from app.schemas.warming_script import (
     ActionType,
     ScriptAction,
@@ -58,10 +47,6 @@ __all__ = [
     "ProfileResponse",
     "ProfileListResponse",
     "ProfileBulkCreate",
-    "TaskCreate",
-    "TaskUpdate",
-    "TaskResponse",
-    "TaskListResponse",
     "ParallelSearchRequest",
     "ParallelNavigationRequest",
     "AutomationResponse",
