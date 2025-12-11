@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, HTMLResponse
 from contextlib import asynccontextmanager
 from loguru import logger
 import sys
@@ -9,6 +9,9 @@ import asyncio
 from app.config import settings
 from app.database import init_db
 from app.api.v1 import router as api_v1_router
+
+from fastapi.staticfiles import StaticFiles
+import os
 
 
 # Configurar logging
@@ -209,6 +212,20 @@ async def root():
             "health": "/api/v1/health/"
         }
     }
+
+templates_dir = os.path.join(os.path.dirname(__file__), "..", "templates")
+
+@app.get("/monitor", response_class=HTMLResponse, tags=["Dashboard"])
+async def event_monitor():
+    """Dashboard de monitoreo de eventos en tiempo real"""
+    
+    html_path = os.path.join(templates_dir, "event_monitor.html")
+    
+    if os.path.exists(html_path):
+        with open(html_path, 'r', encoding='utf-8') as f:
+            return f.read()
+    else:
+        return "<h1>Event Monitor not found</h1>"
 
 if __name__ == "__main__":
     import uvicorn

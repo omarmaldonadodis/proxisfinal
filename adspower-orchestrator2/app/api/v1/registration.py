@@ -46,7 +46,6 @@ async def validate_token(
     request: TokenValidationRequest,
     db: AsyncSession = Depends(get_db)
 ):
-    """🔍 Valida token de computadora"""
     service = RegistrationService(db)
     
     computer = await service.validate_token(request.token)
@@ -59,10 +58,11 @@ async def validate_token(
     
     return {
         "valid": True,
-        "computer_id": computer.id,
-        "computer_name": computer.name,
+        "computer_id": computer["computer_id"],
+        "computer_name": computer["computer_name"],
         "message": "Token valid"
     }
+
 
 @router.post("/revoke/{computer_id}")
 async def revoke_token(

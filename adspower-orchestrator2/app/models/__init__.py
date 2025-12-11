@@ -10,13 +10,18 @@ from app.models.warming_script import (
     AgentConnection,
     ActionType,
     ScriptStatus,
-    ExecutionStatus
+    ExecutionStatus,
 )
 from app.models.scheduled_warming import (
     ScheduledWarming,
     ScheduleFrequency,
     ScheduledWarmingStatus
 )
+
+from app.models.execution_event import (
+    EventSeverityDB,
+    ExecutionEventDB,
+ )
 
 __all__ = [
     "Computer",
@@ -38,4 +43,6 @@ __all__ = [
     "ScheduledWarming",
     "ScheduleFrequency",
     "ScheduledWarmingStatus",
+    "EventSeverityDB",
+    "ExecutionEventDB",
 ]

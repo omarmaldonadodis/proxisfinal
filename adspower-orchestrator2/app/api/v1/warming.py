@@ -510,7 +510,80 @@ async def websocket_endpoint(
                             status="failed",
                             log_entry={"error": error, "error_type": error_type}
                         )
-            
+
+                    # adspower-orchestrator2/app/api/v1/warming.py (MODIFICACIÓN en websocket_endpoint)
+
+            elif message_type == "event_detected":
+                # ✅ NUEVO: Guardar evento en DB
+                event_data = message.get("event", {})
+                
+                async with AsyncSessionLocal() as db:
+                    from app.models.execution_event import ExecutionEventDB
+                    
+                    event_record = ExecutionEventDB(
+                        event_id=event_data.get("event_id"),
+                        execution_id=event_data.get("execution_id"),
+                        computer_id=event_data.get("computer_id"),
+                        profile_id=event_data.get("profile_id"),
+                        event_type=event_data.get("event_type"),
+                        severity=event_data.get("severity"),
+                        message=event_data.get("message"),
+                        details=event_data.get("details", {}),
+                        current_url=event_data.get("current_url"),
+                        page_title=event_data.get("page_title"),
+                        screenshot_path=event_data.get("screenshot_path"),
+                        requires_manual_intervention=event_data.get("requires_manual_intervention", False),
+                        can_retry=event_data.get("can_retry", True),
+                        retry_count=event_data.get("retry_count", 0),
+                        suggested_action=event_data.get("suggested_action"),
+                        action_index=event_data.get("action_index"),
+                        action_type=event_data.get("action_type")
+                    )
+                    
+                    db.add(event_record)
+                    await db.commit()
+
+                    from app.api.v1.events import broadcast_event
+
+
+                    await broadcast_event({
+                        "event_id": event_data.get("event_id"),
+                        "execution_id": event_data.get("execution_id"),
+                        "computer_id": event_data.get("computer_id"),
+                        "profile_id": event_data.get("profile_id"),
+                        "event_type": event_data.get("event_type"),
+                        "severity": event_data.get("severity"),
+                        "message": event_data.get("message"),
+                        "requires_manual": event_data.get("requires_manual_intervention", False),
+                        "suggested_action": event_data.get("suggested_action"),
+                        "timestamp": event_data.get("timestamp")
+                    })
+                    
+                    # Log en servidor
+                    severity = event_data.get("severity", "info")
+                    event_type = event_data.get("event_type", "unknown")
+                    event_message = event_data.get("message", "")
+                    
+                    if severity == "critical":
+                        logger.error(f"🔴 CRITICAL EVENT from Computer {computer_id}: {event_type} - {event_message}")
+                    elif severity == "warning":
+                        logger.warning(f"🟡 WARNING EVENT from Computer {computer_id}: {event_type} - {event_message}")
+                    else:
+                        logger.info(f"🟢 EVENT from Computer {computer_id}: {event_type} - {event_message}")
+                    
+                    # ✅ ACTIVAR ERROR RECOVERY si es crítico
+                    if severity == "critical":
+                        from app.services.error_recovery_service import ErrorRecoveryService
+                        
+                        recovery_service = ErrorRecoveryService(db)
+                        
+                        recovery_result = await recovery_service.handle_execution_error(
+                            execution_id=event_data.get("execution_id"),
+                            error_type=event_type,
+                            error_details=event_data.get("details", {})
+                        )
+                        
+                        logger.info(f"Error recovery result: {recovery_result}")            
             else:
                 logger.warning(f"Unknown message type: {message_type}")
     

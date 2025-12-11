@@ -82,7 +82,6 @@ class Profile(Base):
     # Relationships
     computer = relationship("Computer", back_populates="profiles")
     proxy = relationship("Proxy", back_populates="profiles")
-    tasks = relationship("Task", back_populates="profile", cascade="all, delete-orphan")
     
     def __repr__(self):
         return f"<Profile(name={self.name}, adspower_id={self.adspower_id}, status={self.status})>"

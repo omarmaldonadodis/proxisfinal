@@ -1,0 +1,290 @@
+<!-- adspower-orchestrator2/templates/event_monitor.html (NUEVO) -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Monitor - Real Time</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .stat-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #888;
+        }
+        .stat-card .value {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        .stat-card.critical .value { color: #ff4444; }
+        .stat-card.warning .value { color: #ffaa00; }
+        .stat-card.info .value { color: #44ff44; }
+        .stat-card.total .value { color: #4488ff; }
+        
+        .events {
+            background: #2a2a2a;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .event {
+            background: #333;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #888;
+            position: relative;
+            animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .event.critical { border-left-color: #ff4444; background: #3a2222; }
+        .event.warning { border-left-color: #ffaa00; background: #3a3322; }
+        .event.info { border-left-color: #44ff44; background: #223a22; }
+        
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .event-type {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .event-time {
+            font-size: 12px;
+            color: #888;
+        }
+        .event-message {
+            margin-bottom: 10px;
+        }
+        .event-details {
+            font-size: 12px;
+            color: #aaa;
+        }
+        .event-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            margin-right: 5px;
+        }
+        .badge-manual {
+            background: #ff4444;
+            color: white;
+        }
+        .badge-retry {
+            background: #44ff44;
+            color: #1a1a1a;
+        }
+        .connection-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .connected {
+            background: #44ff44;
+            color: #1a1a1a;
+        }
+        .disconnected {
+            background: #ff4444;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="connection-status disconnected" id="status">● Disconnected</div>
+        
+        <h1>🔍 Event Monitor - Real Time</h1>
+        
+        <div class="stats">
+            <div class="stat-card critical">
+                <h3>CRITICAL</h3>
+                <div class="value" id="critical-count">0</div>
+            </div>
+            <div class="stat-card warning">
+                <h3>WARNING</h3>
+                <div class="value" id="warning-count">0</div>
+            </div>
+            <div class="stat-card info">
+                <h3>INFO</h3>
+                <div class="value" id="info-count">0</div>
+            </div>
+            <div class="stat-card total">
+                <h3>TOTAL</h3>
+                <div class="value" id="total-count">0</div>
+            </div>
+        </div>
+        
+        <div class="events" id="events-container">
+            <p style="text-align: center; color: #888;">Waiting for events...</p>
+        </div>
+    </div>
+
+    <script>
+        let ws;
+        let counts = { critical: 0, warning: 0, info: 0, total: 0 };
+        
+        function connect() {
+            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsUrl = `${protocol}//${window.location.host}/api/v1/events/ws/events`;
+            
+            ws = new WebSocket(wsUrl);
+            
+            ws.onopen = () => {
+                console.log('Connected to event stream');
+                document.getElementById('status').textContent = '● Connected';
+                document.getElementById('status').className = 'connection-status connected';
+                
+                // Ping cada 30s
+                setInterval(() => {
+                    if (ws.readyState === WebSocket.OPEN) {
+                        ws.send('ping');
+                    }
+                }, 30000);
+            };
+            
+            ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                
+                if (data.type === 'event') {
+                    addEvent(data.data);
+                }
+            };
+            
+            ws.onclose = () => {
+                console.log('Disconnected, reconnecting...');
+                document.getElementById('status').textContent = '● Disconnected';
+                document.getElementById('status').className = 'connection-status disconnected';
+                setTimeout(connect, 3000);
+            };
+            
+            ws.onerror = (error) => {
+                console.error('WebSocket error:', error);
+            };
+        }
+        
+        function addEvent(event) {
+            // Actualizar contadores
+            counts.total++;
+            if (event.severity === 'critical') counts.critical++;
+            else if (event.severity === 'warning') counts.warning++;
+            else counts.info++;
+            
+            document.getElementById('critical-count').textContent = counts.critical;
+            document.getElementById('warning-count').textContent = counts.warning;
+            document.getElementById('info-count').textContent = counts.info;
+            document.getElementById('total-count').textContent = counts.total;
+            
+            // Crear elemento de evento
+            const container = document.getElementById('events-container');
+            
+            // Remover mensaje de "waiting"
+            if (container.querySelector('p')) {
+                container.innerHTML = '';
+            }
+            
+            const eventEl = document.createElement('div');
+            eventEl.className = `event ${event.severity}`;
+            
+            const time = new Date(event.timestamp).toLocaleTimeString();
+            
+            const badges = [];
+            if (event.requires_manual) {
+                badges.push('<span class="event-badge badge-manual">MANUAL</span>');
+            }
+            if (event.suggested_action) {
+                badges.push('<span class="event-badge badge-retry">ACTION</span>');
+            }
+            
+            eventEl.innerHTML = `
+                <div class="event-header">
+                    <div class="event-type">
+                        ${badges.join('')}
+                        ${event.event_type}
+                    </div>
+                    <div class="event-time">${time}</div>
+                </div>
+                <div class="event-message">${event.message}</div>
+                <div class="event-details">
+                    Computer: ${event.computer_id} | 
+                    Profile: ${event.profile_id} | 
+                    Execution: ${event.execution_id}
+                    ${event.suggested_action ? `<br>💡 <strong>Suggested:</strong> ${event.suggested_action}` : ''}
+                </div>
+            `;
+            
+            // Insertar al principio
+            container.insertBefore(eventEl, container.firstChild);
+            
+            // Limitar a 50 eventos
+            while (container.children.length > 50) {
+                container.removeChild(container.lastChild);
+            }
+            
+            // Notificación sonora para críticos
+            if (event.severity === 'critical') {
+                playAlert();
+            }
+        }
+        
+        function playAlert() {
+            // Beep simple con Web Audio API
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+            
+            oscillator.start(audioCtx.currentTime);
+            oscillator.stop(audioCtx.currentTime + 0.5);
+        }
+        
+        // Conectar al iniciar
+        connect();
+    </script>
+</body>
+</html>
