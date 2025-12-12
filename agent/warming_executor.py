@@ -1,4 +1,4 @@
-# agent/warming_executor.py (CON VARIABLES DE SESIÓN)
+# agent/warming_executor.py - CON DEDUPLICACIÓN
 import asyncio
 from typing import Dict, List, Callable, Optional
 from loguru import logger
@@ -8,19 +8,19 @@ from action_executor import ActionExecutor
 from event_detector import UniversalEventDetector
 from event_model import ExecutionEvent
 from event_types import EventType, EventSeverity
+from event_deduplicator import EventDeduplicator, ExecutionEventCache  # ✅ NUEVO
 import uuid
 
 
 class WarmingExecutor:
-    """Ejecutor de warming scripts"""
+    """Ejecutor de warming scripts con deduplicación de eventos"""
     
     def __init__(self, config, browser_controller):
         self.config = config
         self.browser_controller = browser_controller
         self.action_executor = ActionExecutor(config)
         
-        # ✅ Establecer credenciales por defecto
-        # TODO: Estas deberían venir del profile o configuración
+        # Establecer credenciales por defecto
         self.action_executor.set_session_var("USERNAME", "omaritouv0209@gmail.com")
         self.action_executor.set_session_var("PASSWORD", "Eocm2003!")
         
@@ -30,8 +30,12 @@ class WarmingExecutor:
         # Semáforo para limitar concurrencia
         self.semaphore = asyncio.Semaphore(config.MAX_CONCURRENT_EXECUTIONS)
 
-        # ✅ NO pasar computer_id en __init__
+        # Detector de eventos
         self.event_detector = UniversalEventDetector()
+        
+        # ✅ SISTEMA DE DEDUPLICACIÓN
+        self.event_deduplicator = EventDeduplicator(dedup_window_seconds=30)
+        self.execution_cache = ExecutionEventCache()
 
     
     async def execute(
@@ -59,8 +63,12 @@ class WarmingExecutor:
         finally:
             if execution_id in self.active_executions:
                 del self.active_executions[execution_id]
-    
+            
+            # ✅ LIMPIAR CACHE AL FINALIZAR
+            self.event_deduplicator.mark_execution_completed(execution_id)
+            self.execution_cache.clear_execution(execution_id)
 
+    
     async def _execute_warming(
         self,
         execution_id: int,
@@ -68,7 +76,7 @@ class WarmingExecutor:
         actions: List[dict],
         progress_callback: Optional[Callable] = None
     ):
-        """Ejecuta warming CON detección de eventos en tiempo real"""
+        """Ejecuta warming CON detección de eventos deduplicados"""
         
         driver = None
         start_time = datetime.utcnow()
@@ -81,8 +89,7 @@ class WarmingExecutor:
                 driver = await self.browser_controller.open_browser(profile_id)
                 
                 if not driver:
-                    # ✅ EVENTO: Browser no abrió
-                    await self._send_event(
+                    await self._send_event_smart(
                         EventType.BROWSER_CRASH,
                         EventSeverity.CRITICAL,
                         execution_id,
@@ -95,8 +102,8 @@ class WarmingExecutor:
                     )
                     raise Exception(f"Failed to open browser for profile {profile_id}")
                 
-                # ✅ EVENTO: Ejecución iniciada
-                await self._send_event(
+                # Evento de inicio (siempre se reporta)
+                await self._send_event_smart(
                     EventType.EXECUTION_STARTED,
                     EventSeverity.INFO,
                     execution_id,
@@ -115,21 +122,21 @@ class WarmingExecutor:
                 
                 for i, action in enumerate(actions):
                     try:
-                        # ✅ DETECTAR EVENTOS ANTES de ejecutar acción
+                        # ✅ DETECTAR EVENTOS ANTES
                         events_before = await self.event_detector.detect_all_events(
                             driver,
                             execution_id,
                             profile_id,
-                            computer_id=self.config.COMPUTER_ID,  # ✅ NUEVO
+                            computer_id=self.config.COMPUTER_ID,
                             action_index=i,
                             action_type=action.get("type")
                         )
                         
-                        # Enviar eventos detectados
+                        # ✅ ENVIAR SOLO EVENTOS NO DUPLICADOS
                         for event in events_before:
-                            await self._send_detected_event(event, progress_callback)
+                            await self._send_detected_event_smart(event, progress_callback)
                             
-                            # Si es CRÍTICO y no se puede reintentar, abortar
+                            # Verificar si debe abortar
                             if event.severity == EventSeverity.CRITICAL and not event.can_retry:
                                 logger.error(f"Critical event, aborting: {event.message}")
                                 raise Exception(f"Critical event: {event.event_type}")
@@ -142,7 +149,7 @@ class WarmingExecutor:
                         else:
                             failed += 1
                         
-                        # ✅ DETECTAR EVENTOS DESPUÉS de ejecutar acción
+                        # ✅ DETECTAR EVENTOS DESPUÉS
                         events_after = await self.event_detector.detect_all_events(
                             driver,
                             execution_id,
@@ -153,16 +160,11 @@ class WarmingExecutor:
                         )
                         
                         for event in events_after:
-                            await self._send_detected_event(event, progress_callback)
+                            await self._send_detected_event_smart(event, progress_callback)
                             
-                            # Manejar eventos críticos
-                            if event.severity == EventSeverity.CRITICAL:
-                                if event.can_retry:
-                                    logger.warning(f"Critical event (retriable): {event.message}")
-                                    # El orquestador decidirá si reintentar
-                                else:
-                                    logger.error(f"Critical event (non-retriable): {event.message}")
-                                    raise Exception(f"Critical event: {event.event_type}")
+                            if event.severity == EventSeverity.CRITICAL and not event.can_retry:
+                                logger.error(f"Critical event: {event.message}")
+                                raise Exception(f"Critical event: {event.event_type}")
                         
                         # Progreso
                         progress = int((i + 1) / total_actions * 100)
@@ -175,7 +177,6 @@ class WarmingExecutor:
                                     "action_index": i,
                                     "action_type": action.get("type"),
                                     "success": success,
-                                    "events_detected": len(events_after),
                                     "timestamp": datetime.utcnow().isoformat()
                                 }
                             )
@@ -184,23 +185,23 @@ class WarmingExecutor:
                         logger.error(f"Action {i+1} failed: {e}")
                         failed += 1
                         
-                        # Detectar eventos de error
+                        # Detectar eventos de error (también deduplicados)
                         error_events = await self.event_detector.detect_all_events(
                             driver,
                             execution_id,
                             profile_id,
-                            computer_id=self.config.COMPUTER_ID, 
+                            computer_id=self.config.COMPUTER_ID,
                             action_index=i,
                             action_type=action.get("type")
                         )
                         
                         for event in error_events:
-                            await self._send_detected_event(event, progress_callback)
+                            await self._send_detected_event_smart(event, progress_callback)
                 
-                # ✅ EVENTO: Completado exitosamente
+                # Completado (siempre se reporta)
                 duration = (datetime.utcnow() - start_time).total_seconds()
                 
-                await self._send_event(
+                await self._send_event_smart(
                     EventType.EXECUTION_COMPLETED,
                     EventSeverity.INFO,
                     execution_id,
@@ -222,8 +223,8 @@ class WarmingExecutor:
         except Exception as e:
             logger.error(f"Warming failed: execution_id={execution_id}, error={e}")
             
-            # ✅ EVENTO: Fallo crítico
-            await self._send_event(
+            # Fallo crítico (siempre se reporta)
+            await self._send_event_smart(
                 EventType.EXECUTION_FAILED,
                 EventSeverity.CRITICAL,
                 execution_id,
@@ -239,7 +240,7 @@ class WarmingExecutor:
             if driver:
                 await self.browser_controller.close_browser(profile_id)
     
-    async def _send_event(
+    async def _send_event_smart(
         self,
         event_type: EventType,
         severity: EventSeverity,
@@ -251,8 +252,31 @@ class WarmingExecutor:
         can_retry: bool,
         progress_callback: Optional[Callable] = None
     ):
-        """Envía evento simple al orquestador"""
+        """✅ Envía evento CON DEDUPLICACIÓN"""
         
+        # Verificar deduplicación
+        should_report = self.event_deduplicator.should_report(
+            execution_id,
+            event_type,
+            current_url=details.get("current_url"),
+            severity=severity
+        )
+        
+        if not should_report:
+            logger.debug(f"Event deduplicated: {event_type}")
+            return
+        
+        # Verificar once-per-execution
+        should_report_once = self.execution_cache.should_report_once(
+            execution_id,
+            event_type
+        )
+        
+        if not should_report_once:
+            logger.debug(f"Event already reported once: {event_type}")
+            return
+        
+        # Crear y enviar evento
         event = ExecutionEvent(
             event_id=str(uuid.uuid4()),
             event_type=event_type,
@@ -269,80 +293,56 @@ class WarmingExecutor:
         
         await self._send_detected_event(event, progress_callback)
     
+    async def _send_detected_event_smart(
+        self,
+        event: ExecutionEvent,
+        progress_callback: Optional[Callable] = None
+    ):
+        """✅ Envía evento detectado CON DEDUPLICACIÓN"""
+        
+        # Verificar deduplicación
+        should_report = self.event_deduplicator.should_report(
+            event.execution_id,
+            event.event_type,
+            current_url=event.current_url,
+            severity=event.severity
+        )
+        
+        if not should_report:
+            logger.debug(f"Event deduplicated: {event.event_type}")
+            return
+        
+        # Verificar once-per-execution
+        should_report_once = self.execution_cache.should_report_once(
+            event.execution_id,
+            event.event_type
+        )
+        
+        if not should_report_once:
+            logger.debug(f"Event already reported once: {event.event_type}")
+            return
+        
+        # Enviar evento
+        await self._send_detected_event(event, progress_callback)
+    
     async def _send_detected_event(
         self,
         event: ExecutionEvent,
         progress_callback: Optional[Callable] = None
     ):
-        """Envía evento detectado al orquestador"""
+        """Envía evento al orquestador (sin verificación de duplicados)"""
         
         if progress_callback:
-            # ✅ Convertir Pydantic model a dict antes de enviar
-            event_dict = event.model_dump(mode='json')  # mode='json' aplica serializadores
+            event_dict = event.model_dump(mode='json')
             
             await progress_callback(
                 event.execution_id,
-                0,  # Progress no cambia por eventos
+                0,
                 {
-                    "event": event_dict,  # ✅ Ya es dict con datetime serializado
+                    "event": event_dict,
                     "is_event": True
                 }
             )
-
-
-    async def _detect_error_type(
-        self,
-        driver,
-        action: Optional[dict]
-    ) -> Optional[str]:
-        """
-        ✅ DETECTA TIPO DE ERROR
-        
-        Returns:
-            "recaptcha" | "ip_blocked" | "proxy_error" | 
-            "browser_crash" | "timeout" | "unknown"
-        """
-        
-        if not driver:
-            return "browser_crash"
-        
-        try:
-            # 1. Detectar reCAPTCHA
-            iframes = driver.find_elements(By.CSS_SELECTOR, "iframe[src*='recaptcha']")
-            for iframe in iframes:
-                if iframe.is_displayed() and iframe.size['width'] > 0:
-                    return "recaptcha"
-            
-            # 2. Detectar IP bloqueada
-            page_text = driver.find_element(By.TAG_NAME, "body").text.lower()
-            
-            blocked_indicators = [
-                "access denied",
-                "blocked",
-                "banned",
-                "ip address",
-                "too many requests",
-                "rate limit"
-            ]
-            
-            for indicator in blocked_indicators:
-                if indicator in page_text:
-                    return "ip_blocked"
-            
-            # 3. Detectar error de proxy
-            if action and action.get("type") == "navigate":
-                current_url = driver.current_url
-                if current_url == "about:blank" or "err_" in current_url.lower():
-                    return "proxy_error"
-            
-            # 4. Timeout
-            if action and action.get("params", {}).get("timeout"):
-                return "timeout"
-            
-            return "unknown"
-        
-        except:
-            return "browser_crash"
     
     async def stop(self, execution_id: int) -> bool:
         """Detiene una ejecución"""
@@ -353,6 +353,10 @@ class WarmingExecutor:
         
         task = self.active_executions[execution_id]
         task.cancel()
+        
+        # Limpiar cache
+        self.event_deduplicator.mark_execution_completed(execution_id)
+        self.execution_cache.clear_execution(execution_id)
         
         logger.info(f"Execution {execution_id} cancelled")
         return True
