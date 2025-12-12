@@ -189,6 +189,31 @@ class WebSocketClient:
     
     async def _send_progress(self, execution_id: int, progress: int, log_entry: dict):
         """Envía progreso al orquestrador"""
+
+        if log_entry.get("is_event"):
+            event_data = log_entry.get("event", {})
+            
+            message = {
+                "type": "event_detected",  # ✅ NUEVO TIPO
+                "execution_id": execution_id,
+                "event": event_data,
+                "timestamp": datetime.utcnow().isoformat()
+            }
+            
+            # Log local
+            severity = event_data.get("severity", "info")
+            event_type = event_data.get("event_type", "unknown")
+            event_message = event_data.get("message", "")
+            
+            if severity == "critical":
+                logger.error(f"🔴 CRITICAL EVENT: {event_type} - {event_message}")
+            elif severity == "warning":
+                logger.warning(f"🟡 WARNING EVENT: {event_type} - {event_message}")
+            else:
+                logger.info(f"🟢 EVENT: {event_type} - {event_message}")
+            
+            await self.send(message)
+            return
         
         if not log_entry.get("completed", True) and log_entry.get("error"):
             # Error

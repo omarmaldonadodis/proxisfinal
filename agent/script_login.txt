@@ -325,8 +325,8 @@ Betcore
       "type": "advanced_login",
       "params": {
         "service": "1xbet",
-        "username": "TU_USUARIO_AQUI",
-        "password": "TU_PASSWORD_AQUI",
+        "username": "omarmaldonado@gmail.com",
+        "password": "2123123",
         "username_selector": "form.auth-form-by-password input[type='text'], form.auth-form-by-password input:not([type='password'])",
         "password_selector": "form.auth-form-by-password input[type='password']",
         "submit_selector": "form.auth-form-by-password button.auth-form-by-password__submit",

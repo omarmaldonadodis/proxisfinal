@@ -5,6 +5,12 @@ from loguru import logger
 from datetime import datetime
 from action_executor import ActionExecutor
 
+from event_detector import UniversalEventDetector
+from event_model import ExecutionEvent
+from event_types import EventType, EventSeverity
+import uuid
+
+
 class WarmingExecutor:
     """Ejecutor de warming scripts"""
     
@@ -23,11 +29,14 @@ class WarmingExecutor:
         
         # Semáforo para limitar concurrencia
         self.semaphore = asyncio.Semaphore(config.MAX_CONCURRENT_EXECUTIONS)
+
+        self.event_detector = UniversalEventDetector(config.COMPUTER_ID)
+
     
     async def execute(
         self,
         execution_id: int,
-        profile_id: int,
+        profile_id: str,
         actions: List[dict],
         progress_callback: Optional[Callable] = None
     ):
@@ -50,20 +59,18 @@ class WarmingExecutor:
             if execution_id in self.active_executions:
                 del self.active_executions[execution_id]
     
-   # agent/warming_executor.py (AGREGAR DETECCIÓN DE ERRORES)
 
     async def _execute_warming(
         self,
         execution_id: int,
-        profile_id: int,
+        profile_id: str,
         actions: List[dict],
         progress_callback: Optional[Callable] = None
     ):
-        """Ejecuta warming con detección de errores"""
+        """Ejecuta warming CON detección de eventos en tiempo real"""
         
         driver = None
         start_time = datetime.utcnow()
-        retry_count = 0
         
         try:
             async with self.semaphore:
@@ -73,33 +80,86 @@ class WarmingExecutor:
                 driver = await self.browser_controller.open_browser(profile_id)
                 
                 if not driver:
+                    # ✅ EVENTO: Browser no abrió
+                    await self._send_event(
+                        EventType.BROWSER_CRASH,
+                        EventSeverity.CRITICAL,
+                        execution_id,
+                        profile_id,
+                        "Failed to open browser",
+                        {"reason": "Browser controller returned None"},
+                        requires_manual=True,
+                        can_retry=True,
+                        progress_callback=progress_callback
+                    )
                     raise Exception(f"Failed to open browser for profile {profile_id}")
+                
+                # ✅ EVENTO: Ejecución iniciada
+                await self._send_event(
+                    EventType.EXECUTION_STARTED,
+                    EventSeverity.INFO,
+                    execution_id,
+                    profile_id,
+                    "Warming execution started",
+                    {"total_actions": len(actions)},
+                    requires_manual=False,
+                    can_retry=False,
+                    progress_callback=progress_callback
+                )
                 
                 # Ejecutar acciones
                 total_actions = len(actions)
                 completed = 0
                 failed = 0
                 
-                # ✅ VARIABLES PARA ERROR DETECTION
-                detected_error_type = None
-                
                 for i, action in enumerate(actions):
                     try:
+                        # ✅ DETECTAR EVENTOS ANTES de ejecutar acción
+                        events_before = await self.event_detector.detect_all_events(
+                            driver,
+                            execution_id,
+                            profile_id,
+                            action_index=i,
+                            action_type=action.get("type")
+                        )
+                        
+                        # Enviar eventos detectados
+                        for event in events_before:
+                            await self._send_detected_event(event, progress_callback)
+                            
+                            # Si es CRÍTICO y no se puede reintentar, abortar
+                            if event.severity == EventSeverity.CRITICAL and not event.can_retry:
+                                logger.error(f"Critical event, aborting: {event.message}")
+                                raise Exception(f"Critical event: {event.event_type}")
+                        
+                        # Ejecutar acción
                         success = await self.action_executor.execute_action(driver, action)
                         
                         if success:
                             completed += 1
                         else:
                             failed += 1
+                        
+                        # ✅ DETECTAR EVENTOS DESPUÉS de ejecutar acción
+                        events_after = await self.event_detector.detect_all_events(
+                            driver,
+                            execution_id,
+                            profile_id,
+                            action_index=i,
+                            action_type=action.get("type")
+                        )
+                        
+                        for event in events_after:
+                            await self._send_detected_event(event, progress_callback)
                             
-                            # ✅ DETECTAR TIPO DE ERROR
-                            detected_error_type = await self._detect_error_type(
-                                driver,
-                                action
-                            )
-                            
-                            if detected_error_type:
-                                logger.warning(f"Error detected: {detected_error_type}")
+                            # Manejar eventos críticos
+                            if event.severity == EventSeverity.CRITICAL:
+                                if event.can_retry:
+                                    logger.warning(f"Critical event (retriable): {event.message}")
+                                    # El orquestador decidirá si reintentar
+                                else:
+                                    logger.error(f"Critical event (non-retriable): {event.message}")
+                                    raise Exception(f"Critical event: {event.event_type}")
                         
                         # Progreso
                         progress = int((i + 1) / total_actions * 100)
@@ -112,7 +172,7 @@ class WarmingExecutor:
                                     "action_index": i,
                                     "action_type": action.get("type"),
                                     "success": success,
-                                    "error_type": detected_error_type,
+                                    "events_detected": len(events_after),
                                     "timestamp": datetime.utcnow().isoformat()
                                 }
                             )
@@ -121,70 +181,106 @@ class WarmingExecutor:
                         logger.error(f"Action {i+1} failed: {e}")
                         failed += 1
                         
-                        # ✅ DETECTAR ERROR
-                        detected_error_type = await self._detect_error_type(
+                        # Detectar eventos de error
+                        error_events = await self.event_detector.detect_all_events(
                             driver,
-                            action
+                            execution_id,
+                            profile_id,
+                            action_index=i,
+                            action_type=action.get("type")
                         )
                         
-                        if progress_callback:
-                            await progress_callback(
-                                execution_id,
-                                int((i + 1) / total_actions * 100),
-                                {
-                                    "action_index": i,
-                                    "action_type": action.get("type"),
-                                    "success": False,
-                                    "error": str(e),
-                                    "error_type": detected_error_type,
-                                    "retry_count": retry_count,
-                                    "timestamp": datetime.utcnow().isoformat()
-                                }
-                            )
+                        for event in error_events:
+                            await self._send_detected_event(event, progress_callback)
                 
-                # Duración
+                # ✅ EVENTO: Completado exitosamente
                 duration = (datetime.utcnow() - start_time).total_seconds()
                 
-                # ✅ REPORTAR COMPLETADO (con o sin errores)
-                if progress_callback:
-                    await progress_callback(
-                        execution_id,
-                        100,
-                        {
-                            "completed": True,
-                            "total_actions": total_actions,
-                            "actions_completed": completed,
-                            "actions_failed": failed,
-                            "error_type": detected_error_type,
-                            "duration_seconds": duration,
-                            "timestamp": datetime.utcnow().isoformat()
-                        }
-                    )
+                await self._send_event(
+                    EventType.EXECUTION_COMPLETED,
+                    EventSeverity.INFO,
+                    execution_id,
+                    profile_id,
+                    f"Warming completed: {completed}/{total_actions} actions successful",
+                    {
+                        "total_actions": total_actions,
+                        "completed": completed,
+                        "failed": failed,
+                        "duration_seconds": duration
+                    },
+                    requires_manual=False,
+                    can_retry=False,
+                    progress_callback=progress_callback
+                )
                 
                 logger.info(f"Warming completed: execution_id={execution_id}")
         
         except Exception as e:
             logger.error(f"Warming failed: execution_id={execution_id}, error={e}")
             
-            # ✅ REPORTAR FALLO CON TIPO DE ERROR
-            if progress_callback:
-                error_type = await self._detect_error_type(driver, None) if driver else "unknown"
-                
-                await progress_callback(
-                    execution_id,
-                    0,
-                    {
-                        "completed": False,
-                        "error": str(e),
-                        "error_type": error_type,
-                        "retry_count": retry_count,
-                        "timestamp": datetime.utcnow().isoformat()
-                    }
-                )
+            # ✅ EVENTO: Fallo crítico
+            await self._send_event(
+                EventType.EXECUTION_FAILED,
+                EventSeverity.CRITICAL,
+                execution_id,
+                profile_id,
+                f"Warming failed: {str(e)}",
+                {"error": str(e), "error_type": type(e).__name__},
+                requires_manual=True,
+                can_retry=False,
+                progress_callback=progress_callback
+            )
         
         finally:
             if driver:
                 await self.browser_controller.close_browser(profile_id)
+    
+    async def _send_event(
+        self,
+        event_type: EventType,
+        severity: EventSeverity,
+        execution_id: int,
+        profile_id: str,
+        message: str,
+        details: Dict,
+        requires_manual: bool,
+        can_retry: bool,
+        progress_callback: Optional[Callable] = None
+    ):
+        """Envía evento simple al orquestador"""
+        
+        event = ExecutionEvent(
+            event_id=str(uuid.uuid4()),
+            event_type=event_type,
+            severity=severity,
+            execution_id=execution_id,
+            computer_id=self.config.COMPUTER_ID,
+            profile_id=profile_id,
+            message=message,
+            details=details,
+            timestamp=datetime.utcnow(),
+            requires_manual_intervention=requires_manual,
+            can_retry=can_retry
+        )
+        
+        await self._send_detected_event(event, progress_callback)
+    
+    async def _send_detected_event(
+        self,
+        event: ExecutionEvent,
+        progress_callback: Optional[Callable] = None
+    ):
+        """Envía evento detectado al orquestador"""
+        
+        if progress_callback:
+            await progress_callback(
+                event.execution_id,
+                0,  # Progress no cambia por eventos
+                {
+                    "event": event.model_dump(),
+                    "is_event": True  # Flag para identificar que es un evento
+                }
+            )
 
 
     async def _detect_error_type(
