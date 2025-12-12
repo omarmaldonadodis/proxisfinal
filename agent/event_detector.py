@@ -1,4 +1,4 @@
-# agent/event_detector.py
+# agent/event_detector.py (CORRECCIÓN COMPLETA)
 from typing import Optional, Dict, List
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -60,7 +60,7 @@ class UniversalEventDetector:
         "cuenta desactivada"
     ]
     
-    def __init__(self, computer_id: int = None):  # ✅ Hacer opcional
+    def __init__(self, computer_id: int = None):
         self.computer_id = computer_id
     
     async def detect_all_events(
@@ -68,7 +68,7 @@ class UniversalEventDetector:
         driver: webdriver.Chrome,
         execution_id: int,
         profile_id: int,
-        computer_id: Optional[int] = None,  # ✅ NUEVO parámetro
+        computer_id: Optional[int] = None,
         action_index: Optional[int] = None,
         action_type: Optional[str] = None
     ) -> List[ExecutionEvent]:
@@ -81,7 +81,7 @@ class UniversalEventDetector:
         if not driver:
             return events
         
-        # ✅ Usar computer_id del parámetro si se proporciona
+        # ✅ FIX: Determinar computer_id efectivo AL INICIO
         effective_computer_id = computer_id if computer_id is not None else self.computer_id
         
         if effective_computer_id is None:
@@ -100,7 +100,7 @@ class UniversalEventDetector:
                     event_type=EventType.RECAPTCHA_DETECTED,
                     severity=EventSeverity.CRITICAL,
                     execution_id=execution_id,
-                    computer_id=effective_computer_id,  # ✅ Usar valor efectivo
+                    computer_id=effective_computer_id,
                     profile_id=profile_id,
                     action_index=action_index,
                     action_type=action_type,
@@ -122,6 +122,7 @@ class UniversalEventDetector:
                     event_type=EventType.IP_BLOCKED,
                     severity=EventSeverity.CRITICAL,
                     execution_id=execution_id,
+                    computer_id=effective_computer_id,
                     profile_id=profile_id,
                     action_index=action_index,
                     action_type=action_type,
@@ -133,7 +134,7 @@ class UniversalEventDetector:
                     current_url=current_url,
                     page_title=page_title,
                     requires_manual=True,
-                    can_retry=True,  # Puede reintentar con otro proxy
+                    can_retry=True,
                     suggested_action="Change proxy and retry",
                     screenshot_name="ip_blocked"
                 ))
@@ -144,6 +145,7 @@ class UniversalEventDetector:
                     event_type=EventType.LOGIN_FAILED_CREDENTIALS,
                     severity=EventSeverity.WARNING,
                     execution_id=execution_id,
+                    computer_id=effective_computer_id,
                     profile_id=profile_id,
                     action_index=action_index,
                     action_type=action_type,
@@ -170,6 +172,7 @@ class UniversalEventDetector:
                     event_type=EventType.ALREADY_LOGGED_IN,
                     severity=EventSeverity.INFO,
                     execution_id=execution_id,
+                    computer_id=effective_computer_id,
                     profile_id=profile_id,
                     action_index=action_index,
                     action_type=action_type,
@@ -192,6 +195,7 @@ class UniversalEventDetector:
                     event_type=EventType.ACCOUNT_SUSPENDED,
                     severity=EventSeverity.CRITICAL,
                     execution_id=execution_id,
+                    computer_id=effective_computer_id,
                     profile_id=profile_id,
                     action_index=action_index,
                     action_type=action_type,
@@ -214,6 +218,7 @@ class UniversalEventDetector:
                     event_type=EventType.PAGE_NOT_LOADING,
                     severity=EventSeverity.WARNING,
                     execution_id=execution_id,
+                    computer_id=effective_computer_id,
                     profile_id=profile_id,
                     action_index=action_index,
                     action_type=action_type,
@@ -229,9 +234,6 @@ class UniversalEventDetector:
                     suggested_action="Retry navigation",
                     screenshot_name="page_load_failed"
                 ))
-            
-            # 7. 🔴 BROWSER CRASH (CRÍTICO)
-            # Este se detecta en warming_executor cuando el driver falla
             
         except Exception as e:
             logger.error(f"Error detecting events: {e}")
@@ -275,6 +277,7 @@ class UniversalEventDetector:
         event_type: EventType,
         severity: EventSeverity,
         execution_id: int,
+        computer_id: int,  # ✅ Ahora es parámetro directo
         profile_id: int,
         message: str,
         details: Dict,
@@ -292,7 +295,6 @@ class UniversalEventDetector:
         # Tomar screenshot si es necesario
         screenshot_path = None
         if screenshot_name:
-            # El screenshot se toma en action_executor
             screenshot_path = f"screenshots/{screenshot_name}_{int(datetime.utcnow().timestamp())}.png"
         
         return ExecutionEvent(
@@ -300,7 +302,7 @@ class UniversalEventDetector:
             event_type=event_type,
             severity=severity,
             execution_id=execution_id,
-            computer_id=effective_computer_id,
+            computer_id=computer_id,  # ✅ Usar parámetro directo
             profile_id=profile_id,
             action_index=action_index,
             action_type=action_type,

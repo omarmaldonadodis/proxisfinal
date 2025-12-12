@@ -1,4 +1,5 @@
-# adspower-orchestrator2/app/models/execution_event.py (NUEVO)
+# adspower-orchestrator2/app/models/execution_event.py (MODIFICACIÓN)
+
 from sqlalchemy import Column, String, Integer, Boolean, DateTime, JSON, Text, ForeignKey, Enum as SQLEnum
 from sqlalchemy.sql import func
 from app.database import Base
@@ -20,7 +21,7 @@ class ExecutionEventDB(Base):
     # Contexto
     execution_id = Column(Integer, ForeignKey("warming_executions.id"), nullable=False, index=True)
     computer_id = Column(Integer, ForeignKey("computers.id"), nullable=False, index=True)
-    profile_id = Column(Integer, ForeignKey("profiles.id"), nullable=False, index=True)
+    profile_id = Column(String(255), nullable=False, index=True)  # Cambió de Integer a String
     
     # Evento
     event_type = Column(String(100), nullable=False, index=True)
