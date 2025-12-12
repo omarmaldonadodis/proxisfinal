@@ -287,6 +287,8 @@ class WebSocketClient:
         except asyncio.CancelledError:
             logger.debug("Heartbeat stopped")
     
+    # agent/websocket_client.py (LÍNEA 210)
+
     async def send(self, message: dict):
         """Envía mensaje al orquestrador"""
         
@@ -295,7 +297,14 @@ class WebSocketClient:
             return False
         
         try:
-            await self.websocket.send(json.dumps(message))
+            # ✅ Serialización segura con manejo de datetime
+            def datetime_converter(obj):
+                if isinstance(obj, datetime):
+                    return obj.isoformat()
+                raise TypeError(f"Object of type {type(obj).__name__} is not JSON serializable")
+            
+            json_str = json.dumps(message, default=datetime_converter)
+            await self.websocket.send(json_str)
             return True
         
         except websockets.exceptions.ConnectionClosed:

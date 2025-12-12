@@ -244,3 +244,8 @@ computer_id
   Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]
     For further information visit https://errors.pydantic.dev/2.5/v/int_type
 2025-12-11 18:31:16 | ERROR    | websocket_client:send:307 - Send error: Object of type datetime is not JSON serializable
+2025-12-11 19:36:01 | ERROR    | event_detector:detect_all_events:237 - Error detecting events: name 'effective_computer_id' is not defined
+2025-12-11 19:36:01 | ERROR    | event_detector:detect_all_events:237 - Error detecting events: name 'effective_computer_id' is not defined
+2025-12-11 19:36:04 | ERROR    | event_detector:detect_all_events:237 - Error detecting events: name 'effective_computer_id' is not defined
+2025-12-11 19:36:04 | ERROR    | event_detector:detect_all_events:237 - Error detecting events: name 'effective_computer_id' is not defined
+2025-12-11 19:36:04 | ERROR    | event_detector:detect_all_events:237 - Error detecting events: name 'effective_computer_id' is not defined

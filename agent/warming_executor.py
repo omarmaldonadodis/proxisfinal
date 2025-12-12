@@ -30,7 +30,8 @@ class WarmingExecutor:
         # Semáforo para limitar concurrencia
         self.semaphore = asyncio.Semaphore(config.MAX_CONCURRENT_EXECUTIONS)
 
-        self.event_detector = UniversalEventDetector(config.COMPUTER_ID)
+        # ✅ NO pasar computer_id en __init__
+        self.event_detector = UniversalEventDetector()
 
     
     async def execute(
@@ -119,6 +120,7 @@ class WarmingExecutor:
                             driver,
                             execution_id,
                             profile_id,
+                            computer_id=self.config.COMPUTER_ID,  # ✅ NUEVO
                             action_index=i,
                             action_type=action.get("type")
                         )
@@ -145,6 +147,7 @@ class WarmingExecutor:
                             driver,
                             execution_id,
                             profile_id,
+                            computer_id=self.config.COMPUTER_ID,
                             action_index=i,
                             action_type=action.get("type")
                         )
@@ -186,6 +189,7 @@ class WarmingExecutor:
                             driver,
                             execution_id,
                             profile_id,
+                            computer_id=self.config.COMPUTER_ID, 
                             action_index=i,
                             action_type=action.get("type")
                         )
@@ -273,12 +277,15 @@ class WarmingExecutor:
         """Envía evento detectado al orquestador"""
         
         if progress_callback:
+            # ✅ Convertir Pydantic model a dict antes de enviar
+            event_dict = event.model_dump(mode='json')  # mode='json' aplica serializadores
+            
             await progress_callback(
                 event.execution_id,
                 0,  # Progress no cambia por eventos
                 {
-                    "event": event.model_dump(),
-                    "is_event": True  # Flag para identificar que es un evento
+                    "event": event_dict,  # ✅ Ya es dict con datetime serializado
+                    "is_event": True
                 }
             )
 

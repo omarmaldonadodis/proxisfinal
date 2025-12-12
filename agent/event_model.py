@@ -1,7 +1,8 @@
-# agent/event_model.py
+# agent/event_model.py (COMPLETO REEMPLAZAR)
+
 from typing import Optional, Dict, Any
 from datetime import datetime
-from pydantic import BaseModel
+from pydantic import BaseModel, field_serializer
 from event_types import EventType, EventSeverity
 
 
@@ -9,7 +10,7 @@ class ExecutionEvent(BaseModel):
     """Evento de ejecución estructurado"""
     
     # Identificación
-    event_id: str                       # UUID único
+    event_id: str
     event_type: EventType
     severity: EventSeverity
     
@@ -21,8 +22,8 @@ class ExecutionEvent(BaseModel):
     action_type: Optional[str] = None
     
     # Detalles del evento
-    message: str                        # Mensaje legible
-    details: Dict[str, Any]             # Datos técnicos
+    message: str
+    details: Dict[str, Any]
     
     # Estado actual
     current_url: Optional[str] = None
@@ -40,7 +41,14 @@ class ExecutionEvent(BaseModel):
     # Sugerencias de acción
     suggested_action: Optional[str] = None
     
+    # ✅ SERIALIZACIÓN CORRECTA DE DATETIME
+    @field_serializer('timestamp')
+    def serialize_timestamp(self, dt: datetime, _info) -> str:
+        """Convierte datetime a ISO string"""
+        return dt.isoformat()
+    
     class Config:
+        # ✅ Mantener esto por compatibilidad, pero field_serializer tiene prioridad
         json_encoders = {
             datetime: lambda v: v.isoformat()
         }

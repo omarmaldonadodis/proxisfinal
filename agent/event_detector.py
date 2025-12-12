@@ -60,7 +60,7 @@ class UniversalEventDetector:
         "cuenta desactivada"
     ]
     
-    def __init__(self, computer_id: int):
+    def __init__(self, computer_id: int = None):  # ✅ Hacer opcional
         self.computer_id = computer_id
     
     async def detect_all_events(
@@ -68,19 +68,24 @@ class UniversalEventDetector:
         driver: webdriver.Chrome,
         execution_id: int,
         profile_id: int,
+        computer_id: Optional[int] = None,  # ✅ NUEVO parámetro
         action_index: Optional[int] = None,
         action_type: Optional[str] = None
     ) -> List[ExecutionEvent]:
         """
         Detecta TODOS los eventos posibles en el estado actual
-        
-        Returns:
-            Lista de eventos detectados (puede estar vacía)
         """
         
         events = []
         
         if not driver:
+            return events
+        
+        # ✅ Usar computer_id del parámetro si se proporciona
+        effective_computer_id = computer_id if computer_id is not None else self.computer_id
+        
+        if effective_computer_id is None:
+            logger.error("❌ computer_id is None - cannot create events")
             return events
         
         try:
@@ -95,6 +100,7 @@ class UniversalEventDetector:
                     event_type=EventType.RECAPTCHA_DETECTED,
                     severity=EventSeverity.CRITICAL,
                     execution_id=execution_id,
+                    computer_id=effective_computer_id,  # ✅ Usar valor efectivo
                     profile_id=profile_id,
                     action_index=action_index,
                     action_type=action_type,
@@ -294,7 +300,7 @@ class UniversalEventDetector:
             event_type=event_type,
             severity=severity,
             execution_id=execution_id,
-            computer_id=self.computer_id,
+            computer_id=effective_computer_id,
             profile_id=profile_id,
             action_index=action_index,
             action_type=action_type,
