@@ -10,3 +10,70 @@
 2025-12-12 09:13:10 | ERROR    | websocket_client:_execute_warming:172 - ❌ Warming failed: _send_event() missing 7 required positional arguments: 'severity', 'execution_id', 'profile_id', 'message', 'details', 'requires_manual', and 'can_retry'
 2025-12-12 09:15:04 | ERROR    | warming_executor:_execute_warming:213 - Warming failed: execution_id=64, error=_send_event() missing 7 required positional arguments: 'severity', 'execution_id', 'profile_id', 'message', 'details', 'requires_manual', and 'can_retry'
 2025-12-12 09:15:14 | ERROR    | websocket_client:_execute_warming:172 - ❌ Warming failed: _send_event() missing 7 required positional arguments: 'severity', 'execution_id', 'profile_id', 'message', 'details', 'requires_manual', and 'can_retry'
+2025-12-12 16:16:11 | ERROR    | registration_client:validate_token:122 - Token validation error: [Errno 32] Broken pipe
+2025-12-12 16:16:11 | ERROR    | registration_client:register:64 - Failed to connect to orchestrator: [Errno 54] Connection reset by peer
+2025-12-12 16:16:11 | ERROR    | __main__:start:140 - Agent error: Cannot connect to orchestrator at http://192.168.1.4:8000
+2025-12-12 16:17:08 | ERROR    | action_executor:_navigate:309 - ❌ Navigation failed: Message: unknown error: net::ERR_TUNNEL_CONNECTION_FAILED
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x000000010635c518 chromedriver + 6378776
+1   chromedriver                        0x0000000106353c2a chromedriver + 6343722
+2   chromedriver                        0x0000000105db0086 chromedriver + 430214
+3   chromedriver                        0x0000000105da6cf6 chromedriver + 392438
+4   chromedriver                        0x0000000105d98038 chromedriver + 331832
+5   chromedriver                        0x0000000105d99dfb chromedriver + 339451
+6   chromedriver                        0x0000000105d9859d chromedriver + 333213
+7   chromedriver                        0x0000000105d97dc9 chromedriver + 331209
+8   chromedriver                        0x0000000105d97ac9 chromedriver + 330441
+9   chromedriver                        0x0000000105d9593d chromedriver + 321853
+10  chromedriver                        0x0000000105d960fa chromedriver + 323834
+11  chromedriver                        0x0000000105db3619 chromedriver + 443929
+12  chromedriver                        0x0000000105e50bd5 chromedriver + 1088469
+13  chromedriver                        0x0000000105e28a02 chromedriver + 924162
+14  chromedriver                        0x0000000105e4ff6e chromedriver + 1085294
+15  chromedriver                        0x0000000105e287d3 chromedriver + 923603
+16  chromedriver                        0x0000000105df4185 chromedriver + 708997
+17  chromedriver                        0x0000000105df55c1 chromedriver + 714177
+18  chromedriver                        0x0000000106319da0 chromedriver + 6106528
+19  chromedriver                        0x000000010631e005 chromedriver + 6123525
+20  chromedriver                        0x00000001062f5505 chromedriver + 5956869
+21  chromedriver                        0x000000010631ea9f chromedriver + 6126239
+22  chromedriver                        0x00000001062e4944 chromedriver + 5888324
+23  chromedriver                        0x0000000106340b78 chromedriver + 6265720
+24  chromedriver                        0x0000000106340d3d chromedriver + 6266173
+25  chromedriver                        0x0000000106353801 chromedriver + 6342657
+26  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+27  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+
+2025-12-12 16:29:13 | ERROR    | action_executor:_navigate:309 - ❌ Navigation failed: Message: unknown error: net::ERR_TUNNEL_CONNECTION_FAILED
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x0000000108a60518 chromedriver + 6378776
+1   chromedriver                        0x0000000108a57c2a chromedriver + 6343722
+2   chromedriver                        0x00000001084b4086 chromedriver + 430214
+3   chromedriver                        0x00000001084aacf6 chromedriver + 392438
+4   chromedriver                        0x000000010849c038 chromedriver + 331832
+5   chromedriver                        0x000000010849ddfb chromedriver + 339451
+6   chromedriver                        0x000000010849c59d chromedriver + 333213
+7   chromedriver                        0x000000010849bdc9 chromedriver + 331209
+8   chromedriver                        0x000000010849bac9 chromedriver + 330441
+9   chromedriver                        0x000000010849993d chromedriver + 321853
+10  chromedriver                        0x000000010849a0fa chromedriver + 323834
+11  chromedriver                        0x00000001084b7619 chromedriver + 443929
+12  chromedriver                        0x0000000108554bd5 chromedriver + 1088469
+13  chromedriver                        0x000000010852ca02 chromedriver + 924162
+14  chromedriver                        0x0000000108553f6e chromedriver + 1085294
+15  chromedriver                        0x000000010852c7d3 chromedriver + 923603
+16  chromedriver                        0x00000001084f8185 chromedriver + 708997
+17  chromedriver                        0x00000001084f95c1 chromedriver + 714177
+18  chromedriver                        0x0000000108a1dda0 chromedriver + 6106528
+19  chromedriver                        0x0000000108a22005 chromedriver + 6123525
+20  chromedriver                        0x00000001089f9505 chromedriver + 5956869
+21  chromedriver                        0x0000000108a22a9f chromedriver + 6126239
+22  chromedriver                        0x00000001089e8944 chromedriver + 5888324
+23  chromedriver                        0x0000000108a44b78 chromedriver + 6265720
+24  chromedriver                        0x0000000108a44d3d chromedriver + 6266173
+25  chromedriver                        0x0000000108a57801 chromedriver + 6342657
+26  libsystem_pthread.dylib             0x00007ff81c3aae05 _pthread_start + 115
+27  libsystem_pthread.dylib             0x00007ff81c3a6857 thread_start + 15
+

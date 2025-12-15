@@ -354,3 +354,31 @@ Betcore
   "duration_minutes": 5
 }
 
+
+
+sportbet.ec
+
+{
+  "name": "Login sportbet.ec",
+  "description": "Login automatizado sportbet.ec",
+  "category": "authentication",
+  "actions": [
+    {
+      "type": "navigate",
+      "params": {
+        "url": "https://https://sportbet.ec/es/sport/event-details/?sport=1&country=1230&champ=4261&event=32948201&live=0&supertip=0",
+        "timeout": 50
+      },
+      "description": null
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 5
+      },
+      "description": null
+    }
+  ],
+  "duration_minutes": 5
+}
+

@@ -29,6 +29,8 @@ requests==2.31.0
 # Celery y Redis (tareas asíncronas)
 celery==5.3.4
 redis==5.0.1
+redis[hiredis]==5.0.1
+
 
 # Selenium y automatización
 selenium==4.15.2

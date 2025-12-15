@@ -13,6 +13,9 @@ from app.api.v1 import router as api_v1_router
 from fastapi.staticfiles import StaticFiles
 import os
 
+from app.core.redis_messaging import redis_messaging
+from app.websocket.manager import connection_manager
+
 
 # Configurar logging
 logger.remove()
@@ -92,6 +95,8 @@ async def auto_health_check_loop():
             logger.error(f"Auto health check error: {e}")
             await asyncio.sleep(10)
 
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Lifecycle events"""
@@ -104,6 +109,99 @@ async def lifespan(app: FastAPI):
     await init_db()
     logger.info("✓ Database initialized")
     
+    # ✅ CONECTAR REDIS PUB/SUB
+    await redis_messaging.connect()
+    logger.info("✓ Redis Pub/Sub connected")
+    
+    # ✅ LISTENER DE COMANDOS DE WARMING
+    async def handle_warming_command(command: dict):
+        """
+        Procesa comandos de warming desde Redis y los envía via WebSocket
+        
+        Esta función corre en el proceso de FastAPI, donde sí existe
+        connection_manager con las conexiones activas
+        """
+        computer_id = command.get("computer_id")
+        execution_id = command.get("execution_id")
+        
+        logger.info(
+            f"📨 Processing warming command: "
+            f"Execution {execution_id}, Computer {computer_id}"
+        )
+        
+        # Verificar que el agente esté conectado
+        if not connection_manager.is_connected(computer_id):
+            logger.warning(
+                f"⚠️  Computer {computer_id} not connected, "
+                f"cannot execute warming {execution_id}"
+            )
+            
+            # Marcar ejecución como fallida
+            from app.database import AsyncSessionLocal
+            from app.services.warming_script_service import WarmingScriptService
+            
+            async with AsyncSessionLocal() as db:
+                warming_service = WarmingScriptService(db)
+                await warming_service.update_execution_status(
+                    execution_id=execution_id,
+                    status="failed",
+                    log_entry={
+                        "error": "Computer not connected",
+                        "timestamp": datetime.utcnow().isoformat()
+                    }
+                )
+            
+            return
+        
+        # Enviar comando via WebSocket
+        success = await connection_manager.send_message(computer_id, {
+            "type": "execute_warming",
+            "execution_id": execution_id,
+            "profile_id": command["profile_id"],
+            "actions": command["script_actions"],
+            "timestamp": datetime.utcnow().isoformat()
+        })
+        
+        if success:
+            logger.info(
+                f"✓ Warming command sent via WebSocket: "
+                f"Execution {execution_id}, Computer {computer_id}"
+            )
+            
+            # Publicar respuesta de éxito
+            await redis_messaging.publish_warming_response(
+                execution_id=execution_id,
+                status="sent",
+                result={"computer_id": computer_id}
+            )
+        else:
+            logger.error(
+                f"✗ Failed to send warming command: "
+                f"Execution {execution_id}, Computer {computer_id}"
+            )
+            
+            # Marcar como fallido
+            from app.database import AsyncSessionLocal
+            from app.services.warming_script_service import WarmingScriptService
+            
+            async with AsyncSessionLocal() as db:
+                warming_service = WarmingScriptService(db)
+                await warming_service.update_execution_status(
+                    execution_id=execution_id,
+                    status="failed",
+                    log_entry={
+                        "error": "Failed to send WebSocket message",
+                        "timestamp": datetime.utcnow().isoformat()
+                    }
+                )
+    
+    # Iniciar listener de Redis en background
+    redis_listener_task = asyncio.create_task(
+        redis_messaging.subscribe_warming_commands(handle_warming_command)
+    )
+    background_tasks.add(redis_listener_task)
+    logger.info("✓ Redis warming commands listener started")
+    
     # ✅ Iniciar warming sync manager
     from app.services.warming_sync import WarmingSyncManager
     warming_sync_manager = WarmingSyncManager()
@@ -111,7 +209,6 @@ async def lifespan(app: FastAPI):
     logger.info("✓ Warming sync manager started")
     
     # Iniciar heartbeat monitor para WebSocket
-    from app.websocket.manager import connection_manager
     heartbeat_task = asyncio.create_task(connection_manager.heartbeat_monitor())
     background_tasks.add(heartbeat_task)
     logger.info("✓ WebSocket heartbeat monitor started")
@@ -126,7 +223,10 @@ async def lifespan(app: FastAPI):
     # Shutdown
     logger.info("Shutting down AdsPower Orchestrator API...")
     
-    # ✅ Cancelar todas las tareas
+    # ✅ Detener Redis
+    await redis_messaging.stop()
+    
+    # Cancelar todas las tareas
     for task in background_tasks:
         task.cancel()
     

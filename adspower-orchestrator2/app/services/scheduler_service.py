@@ -16,6 +16,8 @@ from app.models.scheduled_warming import (
     ScheduledWarmingStatus
 )
 from app.schemas.scheduled_warming import ScheduledWarmingCreate
+from app.core.redis_messaging import redis_messaging
+
 
 class SchedulerService:
     """Servicio de programación de warming"""
@@ -108,18 +110,16 @@ class SchedulerService:
         
         return list(result.scalars().all())
     
+
     async def execute_scheduled_warming(
         self,
         scheduled_warming: ScheduledWarming
     ) -> Dict:
         """
-        Ejecuta warming programado
-        
-        Llama al servicio de warming normal
+        Ejecuta warming programado via Redis Pub/Sub
         """
         
         from app.services.warming_script_service import WarmingScriptService
-        from app.websocket.manager import connection_manager
         
         # Actualizar estado
         scheduled_warming.status = ScheduledWarmingStatus.RUNNING
@@ -128,42 +128,73 @@ class SchedulerService:
         await self.db.commit()
         
         try:
-            # Ejecutar warming en profiles
             warming_service = WarmingScriptService(self.db)
             
-            executions = []
-            for profile_id in scheduled_warming.profile_ids:
-                # Obtener computadora del profile
-                from app.services.profile_service import ProfileService
-                profile_service = ProfileService(self.db)
-                
-                profile = await profile_service.get_profile(profile_id)
-                if not profile:
-                    logger.warning(f"Profile {profile_id} not found")
-                    continue
-                
-                # Crear ejecución
-                execution = await warming_service.create_execution(
-                    script_id=scheduled_warming.script_id,
-                    profile_id=profile.id,
-                    computer_id=profile.computer_id
-                )
-                
-                executions.append(execution.id)
-                
-                # Enviar comando al agente
-                script = await warming_service.get_script(scheduled_warming.script_id)
-                
-                await connection_manager.execute_warming(
-                    computer_id=profile.computer_id,
-                    execution_id=execution.id,
-                    profile_id=profile.adspower_id,
-                    script_actions=script.actions
-                )
+            # Obtener script
+            script = await warming_service.get_script(scheduled_warming.script_id)
             
-            # Actualizar estado
-            scheduled_warming.success_count += 1
-            scheduled_warming.status = ScheduledWarmingStatus.COMPLETED
+            if not script:
+                raise Exception(f"Script {scheduled_warming.script_id} not found")
+            
+            executions = []
+            failed = 0
+            
+            for profile_id in scheduled_warming.profile_ids:
+                try:
+                    # Obtener profile
+                    from app.services.profile_service import ProfileService
+                    profile_service = ProfileService(self.db)
+                    
+                    profile = await profile_service.get_profile(profile_id)
+                    if not profile:
+                        logger.warning(f"Profile {profile_id} not found")
+                        failed += 1
+                        continue
+                    
+                    # Crear ejecución en DB
+                    execution = await warming_service.create_execution(
+                        script_id=scheduled_warming.script_id,
+                        profile_id=profile.id,
+                        computer_id=profile.computer_id
+                    )
+                    
+                    executions.append(execution.id)
+                    
+                    # ✅ PUBLICAR COMANDO VIA REDIS (en lugar de WebSocket directo)
+                    success = await redis_messaging.publish_warming_command(
+                        computer_id=profile.computer_id,
+                        execution_id=execution.id,
+                        profile_id=profile.adspower_id,
+                        script_actions=script.actions
+                    )
+                    
+                    if success:
+                        logger.info(
+                            f"✓ Command published: "
+                            f"Execution {execution.id}, Computer {profile.computer_id}"
+                        )
+                    else:
+                        logger.error(
+                            f"✗ Failed to publish command: "
+                            f"Execution {execution.id}"
+                        )
+                        failed += 1
+                
+                except Exception as e:
+                    logger.error(f"Error processing profile {profile_id}: {e}")
+                    failed += 1
+            
+            # Actualizar estado según resultados
+            if failed == 0 and len(executions) > 0:
+                scheduled_warming.success_count += 1
+                scheduled_warming.status = ScheduledWarmingStatus.COMPLETED
+            elif failed > 0 and len(executions) > 0:
+                # Parcialmente exitoso
+                scheduled_warming.status = ScheduledWarmingStatus.COMPLETED
+            else:
+                # Todos fallaron
+                scheduled_warming.failure_count += 1
+                scheduled_warming.status = ScheduledWarmingStatus.FAILED
             
             # Calcular próxima ejecución (si es recurrente)
             if scheduled_warming.frequency != ScheduleFrequency.ONCE:
@@ -193,6 +224,7 @@ class SchedulerService:
             return {
                 "success": True,
                 "executions": executions,
+                "failed": failed,
                 "next_execution": scheduled_warming.next_execution_at
             }
         
@@ -207,7 +239,7 @@ class SchedulerService:
                 "success": False,
                 "error": str(e)
             }
-    
+
     def _to_utc(self, dt: datetime, timezone_str: str) -> datetime:
         """Convierte datetime a UTC"""
         
