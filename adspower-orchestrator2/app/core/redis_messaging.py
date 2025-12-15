@@ -1,4 +1,4 @@
-# app/core/redis_messaging.py
+# app/core/redis_messaging.py - VERSIÓN MEJORADA
 """
 Sistema de mensajería distribuida via Redis Pub/Sub
 Permite comunicación entre procesos (Celery ↔ FastAPI)
@@ -6,7 +6,7 @@ Permite comunicación entre procesos (Celery ↔ FastAPI)
 import redis.asyncio as aioredis
 import json
 import asyncio
-from typing import Callable, Optional, Dict, Awaitable  # ✅ AGREGAR Awaitable
+from typing import Callable, Optional, Dict, Awaitable
 from loguru import logger
 from app.config import settings
 
@@ -28,9 +28,16 @@ class RedisMessaging:
         self.pubsub: Optional[aioredis.client.PubSub] = None
         self._listeners: Dict[str, asyncio.Task] = {}
         self._running = False
+        self._connected = False  # ✅ NUEVO: Flag de estado
     
     async def connect(self):
-        """Conecta a Redis"""
+        """Conecta a Redis (idempotente)"""
+        
+        # ✅ Si ya está conectado, no hacer nada
+        if self._connected and self.redis:
+            logger.debug("Redis already connected, skipping...")
+            return
+        
         try:
             self.redis = aioredis.from_url(
                 settings.REDIS_URL,
@@ -41,9 +48,11 @@ class RedisMessaging:
             # Test conexión
             await self.redis.ping()
             
+            self._connected = True
             logger.info("✓ Redis Pub/Sub connected")
             
         except Exception as e:
+            self._connected = False
             logger.error(f"Failed to connect to Redis: {e}")
             raise
     
@@ -67,9 +76,14 @@ class RedisMessaging:
             True si se publicó correctamente
         """
         
-        if not self.redis:
-            logger.error("Redis not connected")
-            return False
+        # ✅ Verificar conexión antes de publicar
+        if not self._connected or not self.redis:
+            logger.error("Redis not connected - attempting reconnect...")
+            try:
+                await self.connect()
+            except Exception as e:
+                logger.error(f"Failed to reconnect: {e}")
+                return False
         
         command = {
             "type": "execute_warming",
@@ -95,11 +109,12 @@ class RedisMessaging:
             
         except Exception as e:
             logger.error(f"Failed to publish warming command: {e}")
+            self._connected = False  # ✅ Marcar como desconectado
             return False
     
     async def subscribe_warming_commands(
         self,
-        callback: Callable[[dict], Awaitable[None]]  # ✅ FIX: Usar Awaitable
+        callback: Callable[[dict], Awaitable[None]]
     ):
         """
         Suscribe a comandos de warming (corre en FastAPI)
@@ -108,7 +123,7 @@ class RedisMessaging:
             callback: Función async que procesa comandos
         """
         
-        if not self.redis:
+        if not self._connected:
             await self.connect()
         
         self.pubsub = self.redis.pubsub()
@@ -158,7 +173,7 @@ class RedisMessaging:
             result: Datos del resultado
         """
         
-        if not self.redis:
+        if not self._connected or not self.redis:
             return
         
         response = {
@@ -182,6 +197,7 @@ class RedisMessaging:
     async def stop(self):
         """Detiene listeners y cierra conexiones"""
         self._running = False
+        self._connected = False
         
         if self.pubsub:
             await self.pubsub.close()
