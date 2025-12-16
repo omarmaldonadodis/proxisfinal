@@ -403,3 +403,184 @@ Stacktrace:
 2025-12-15 23:51:29 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
 2025-12-15 23:51:39 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
 2025-12-15 23:51:49 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-16 00:21:05 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-16 00:21:15 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-16 01:14:49 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-16 01:14:59 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-16 01:19:22 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-16 01:19:32 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-16 01:19:42 | ERROR    | websocket_client:connect:79 - WebSocket error: did not receive a valid HTTP response
+2025-12-16 01:39:44 | ERROR    | websocket_client:_send_progress:209 - 🔴 CRITICAL EVENT: ip_blocked - IP blocked or access denied
+2025-12-16 01:41:13 | ERROR    | event_detector:detect_all_events:239 - Error detecting events: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+0   chromedriver                        0x00000001032b7518 chromedriver + 6378776
+1   chromedriver                        0x00000001032aec2a chromedriver + 6343722
+2   chromedriver                        0x0000000102d0b086 chromedriver + 430214
+3   chromedriver                        0x0000000102cf17ed chromedriver + 325613
+4   chromedriver                        0x0000000102d19e62 chromedriver + 491106
+5   chromedriver                        0x0000000102d8be8f chromedriver + 958095
+6   chromedriver                        0x0000000102daa96c chromedriver + 1083756
+7   chromedriver                        0x0000000102d837d3 chromedriver + 923603
+8   chromedriver                        0x0000000102d4f185 chromedriver + 708997
+9   chromedriver                        0x0000000102d505c1 chromedriver + 714177
+10  chromedriver                        0x0000000103274da0 chromedriver + 6106528
+11  chromedriver                        0x0000000103279005 chromedriver + 6123525
+12  chromedriver                        0x0000000103250505 chromedriver + 5956869
+13  chromedriver                        0x0000000103279a9f chromedriver + 6126239
+14  chromedriver                        0x000000010323f944 chromedriver + 5888324
+15  chromedriver                        0x000000010329bb78 chromedriver + 6265720
+16  chromedriver                        0x000000010329bd3d chromedriver + 6266173
+17  chromedriver                        0x00000001032ae801 chromedriver + 6342657
+18  libsystem_pthread.dylib             0x00007ff8099b4e05 _pthread_start + 115
+19  libsystem_pthread.dylib             0x00007ff8099b0857 thread_start + 15
+
+2025-12-16 01:41:13 | ERROR    | event_detector:detect_all_events:239 - Error detecting events: Message: invalid session id
+Stacktrace:
+0   chromedriver                        0x00000001032b7518 chromedriver + 6378776
+1   chromedriver                        0x00000001032aec2a chromedriver + 6343722
+2   chromedriver                        0x0000000102d0aebe chromedriver + 429758
+3   chromedriver                        0x0000000102d4eac9 chromedriver + 707273
+4   chromedriver                        0x0000000102d83906 chromedriver + 923910
+5   chromedriver                        0x0000000102d7e0e3 chromedriver + 901347
+6   chromedriver                        0x0000000102d7d267 chromedriver + 897639
+7   chromedriver                        0x0000000102cd314f chromedriver + 201039
+8   chromedriver                        0x0000000103274da0 chromedriver + 6106528
+9   chromedriver                        0x0000000103279005 chromedriver + 6123525
+10  chromedriver                        0x0000000103250505 chromedriver + 5956869
+11  chromedriver                        0x0000000103279a9f chromedriver + 6126239
+12  chromedriver                        0x000000010323f944 chromedriver + 5888324
+13  chromedriver                        0x0000000102cd12e1 chromedriver + 193249
+14  dyld                                0x00007ff80960f530 start + 3056
+
+2025-12-16 01:41:13 | ERROR    | action_executor:execute_action:131 - Browser is closed
+2025-12-16 01:41:13 | ERROR    | event_detector:detect_all_events:239 - Error detecting events: Message: invalid session id
+Stacktrace:
+0   chromedriver                        0x00000001032b7518 chromedriver + 6378776
+1   chromedriver                        0x00000001032aec2a chromedriver + 6343722
+2   chromedriver                        0x0000000102d0aebe chromedriver + 429758
+3   chromedriver                        0x0000000102d4eac9 chromedriver + 707273
+4   chromedriver                        0x0000000102d83906 chromedriver + 923910
+5   chromedriver                        0x0000000102d7e0e3 chromedriver + 901347
+6   chromedriver                        0x0000000102d7d267 chromedriver + 897639
+7   chromedriver                        0x0000000102cd314f chromedriver + 201039
+8   chromedriver                        0x0000000103274da0 chromedriver + 6106528
+9   chromedriver                        0x0000000103279005 chromedriver + 6123525
+10  chromedriver                        0x0000000103250505 chromedriver + 5956869
+11  chromedriver                        0x0000000103279a9f chromedriver + 6126239
+12  chromedriver                        0x000000010323f944 chromedriver + 5888324
+13  chromedriver                        0x0000000102cd12e1 chromedriver + 193249
+14  dyld                                0x00007ff80960f530 start + 3056
+
+2025-12-16 01:41:13 | ERROR    | event_detector:detect_all_events:239 - Error detecting events: Message: invalid session id
+Stacktrace:
+0   chromedriver                        0x00000001032b7518 chromedriver + 6378776
+1   chromedriver                        0x00000001032aec2a chromedriver + 6343722
+2   chromedriver                        0x0000000102d0aebe chromedriver + 429758
+3   chromedriver                        0x0000000102d4eac9 chromedriver + 707273
+4   chromedriver                        0x0000000102d83906 chromedriver + 923910
+5   chromedriver                        0x0000000102d7e0e3 chromedriver + 901347
+6   chromedriver                        0x0000000102d7d267 chromedriver + 897639
+7   chromedriver                        0x0000000102cd314f chromedriver + 201039
+8   chromedriver                        0x0000000103274da0 chromedriver + 6106528
+9   chromedriver                        0x0000000103279005 chromedriver + 6123525
+10  chromedriver                        0x0000000103250505 chromedriver + 5956869
+11  chromedriver                        0x0000000103279a9f chromedriver + 6126239
+12  chromedriver                        0x000000010323f944 chromedriver + 5888324
+13  chromedriver                        0x0000000102cd12e1 chromedriver + 193249
+14  dyld                                0x00007ff80960f530 start + 3056
+
+2025-12-16 01:41:13 | ERROR    | action_executor:execute_action:131 - Browser is closed
+2025-12-16 01:41:13 | ERROR    | event_detector:detect_all_events:239 - Error detecting events: Message: invalid session id
+Stacktrace:
+0   chromedriver                        0x00000001032b7518 chromedriver + 6378776
+1   chromedriver                        0x00000001032aec2a chromedriver + 6343722
+2   chromedriver                        0x0000000102d0aebe chromedriver + 429758
+3   chromedriver                        0x0000000102d4eac9 chromedriver + 707273
+4   chromedriver                        0x0000000102d83906 chromedriver + 923910
+5   chromedriver                        0x0000000102d7e0e3 chromedriver + 901347
+6   chromedriver                        0x0000000102d7d267 chromedriver + 897639
+7   chromedriver                        0x0000000102cd314f chromedriver + 201039
+8   chromedriver                        0x0000000103274da0 chromedriver + 6106528
+9   chromedriver                        0x0000000103279005 chromedriver + 6123525
+10  chromedriver                        0x0000000103250505 chromedriver + 5956869
+11  chromedriver                        0x0000000103279a9f chromedriver + 6126239
+12  chromedriver                        0x000000010323f944 chromedriver + 5888324
+13  chromedriver                        0x0000000102cd12e1 chromedriver + 193249
+14  dyld                                0x00007ff80960f530 start + 3056
+
+2025-12-16 01:41:13 | ERROR    | event_detector:detect_all_events:239 - Error detecting events: Message: invalid session id
+Stacktrace:
+0   chromedriver                        0x00000001032b7518 chromedriver + 6378776
+1   chromedriver                        0x00000001032aec2a chromedriver + 6343722
+2   chromedriver                        0x0000000102d0aebe chromedriver + 429758
+3   chromedriver                        0x0000000102d4eac9 chromedriver + 707273
+4   chromedriver                        0x0000000102d83906 chromedriver + 923910
+5   chromedriver                        0x0000000102d7e0e3 chromedriver + 901347
+6   chromedriver                        0x0000000102d7d267 chromedriver + 897639
+7   chromedriver                        0x0000000102cd314f chromedriver + 201039
+8   chromedriver                        0x0000000103274da0 chromedriver + 6106528
+9   chromedriver                        0x0000000103279005 chromedriver + 6123525
+10  chromedriver                        0x0000000103250505 chromedriver + 5956869
+11  chromedriver                        0x0000000103279a9f chromedriver + 6126239
+12  chromedriver                        0x000000010323f944 chromedriver + 5888324
+13  chromedriver                        0x0000000102cd12e1 chromedriver + 193249
+14  dyld                                0x00007ff80960f530 start + 3056
+
+2025-12-16 01:41:13 | ERROR    | action_executor:execute_action:131 - Browser is closed
+2025-12-16 01:41:13 | ERROR    | event_detector:detect_all_events:239 - Error detecting events: Message: invalid session id
+Stacktrace:
+0   chromedriver                        0x00000001032b7518 chromedriver + 6378776
+1   chromedriver                        0x00000001032aec2a chromedriver + 6343722
+2   chromedriver                        0x0000000102d0aebe chromedriver + 429758
+3   chromedriver                        0x0000000102d4eac9 chromedriver + 707273
+4   chromedriver                        0x0000000102d83906 chromedriver + 923910
+5   chromedriver                        0x0000000102d7e0e3 chromedriver + 901347
+6   chromedriver                        0x0000000102d7d267 chromedriver + 897639
+7   chromedriver                        0x0000000102cd314f chromedriver + 201039
+8   chromedriver                        0x0000000103274da0 chromedriver + 6106528
+9   chromedriver                        0x0000000103279005 chromedriver + 6123525
+10  chromedriver                        0x0000000103250505 chromedriver + 5956869
+11  chromedriver                        0x0000000103279a9f chromedriver + 6126239
+12  chromedriver                        0x000000010323f944 chromedriver + 5888324
+13  chromedriver                        0x0000000102cd12e1 chromedriver + 193249
+14  dyld                                0x00007ff80960f530 start + 3056
+
+2025-12-16 01:41:13 | ERROR    | event_detector:detect_all_events:239 - Error detecting events: Message: invalid session id
+Stacktrace:
+0   chromedriver                        0x00000001032b7518 chromedriver + 6378776
+1   chromedriver                        0x00000001032aec2a chromedriver + 6343722
+2   chromedriver                        0x0000000102d0aebe chromedriver + 429758
+3   chromedriver                        0x0000000102d4eac9 chromedriver + 707273
+4   chromedriver                        0x0000000102d83906 chromedriver + 923910
+5   chromedriver                        0x0000000102d7e0e3 chromedriver + 901347
+6   chromedriver                        0x0000000102d7d267 chromedriver + 897639
+7   chromedriver                        0x0000000102cd314f chromedriver + 201039
+8   chromedriver                        0x0000000103274da0 chromedriver + 6106528
+9   chromedriver                        0x0000000103279005 chromedriver + 6123525
+10  chromedriver                        0x0000000103250505 chromedriver + 5956869
+11  chromedriver                        0x0000000103279a9f chromedriver + 6126239
+12  chromedriver                        0x000000010323f944 chromedriver + 5888324
+13  chromedriver                        0x0000000102cd12e1 chromedriver + 193249
+14  dyld                                0x00007ff80960f530 start + 3056
+
+2025-12-16 01:41:13 | ERROR    | action_executor:execute_action:131 - Browser is closed
+2025-12-16 01:41:13 | ERROR    | event_detector:detect_all_events:239 - Error detecting events: Message: invalid session id
+Stacktrace:
+0   chromedriver                        0x00000001032b7518 chromedriver + 6378776
+1   chromedriver                        0x00000001032aec2a chromedriver + 6343722
+2   chromedriver                        0x0000000102d0aebe chromedriver + 429758
+3   chromedriver                        0x0000000102d4eac9 chromedriver + 707273
+4   chromedriver                        0x0000000102d83906 chromedriver + 923910
+5   chromedriver                        0x0000000102d7e0e3 chromedriver + 901347
+6   chromedriver                        0x0000000102d7d267 chromedriver + 897639
+7   chromedriver                        0x0000000102cd314f chromedriver + 201039
+8   chromedriver                        0x0000000103274da0 chromedriver + 6106528
+9   chromedriver                        0x0000000103279005 chromedriver + 6123525
+10  chromedriver                        0x0000000103250505 chromedriver + 5956869
+11  chromedriver                        0x0000000103279a9f chromedriver + 6126239
+12  chromedriver                        0x000000010323f944 chromedriver + 5888324
+13  chromedriver                        0x0000000102cd12e1 chromedriver + 193249
+14  dyld                                0x00007ff80960f530 start + 3056
+

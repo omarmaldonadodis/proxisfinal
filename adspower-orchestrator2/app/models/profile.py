@@ -1,4 +1,4 @@
-# app/models/profile.py
+# app/models/profile.py - VERSIÓN CON TABLET
 from sqlalchemy import Column, String, Integer, Boolean, DateTime, JSON, ForeignKey, Enum as SQLEnum, Text
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
@@ -17,6 +17,7 @@ class ProfileStatus(str, enum.Enum):
 class DeviceType(str, enum.Enum):
     DESKTOP = "desktop"
     MOBILE = "mobile"
+    TABLET = "tablet"  # ✅ NUEVO
 
 class Profile(Base):
     __tablename__ = "profiles"
