@@ -84,10 +84,8 @@ class ProfileService:
         }
         
         if profile_in.tags and len(profile_in.tags) > 0:
-            adspower_data["remark"] = {
-                "tags": profile_in.tags  
-            }
-        
+            adspower_data["remark"] = ",".join(profile_in.tags)
+
         proxy_type_map = {
             "http": "http",
             "https": "https",
@@ -96,7 +94,7 @@ class ProfileService:
             "residential": "http",
             "datacenter": "http"
         }
-        
+
         adspower_data["user_proxy_config"] = {
             "proxy_soft": "other",
             "proxy_type": proxy_type_map.get(proxy.proxy_type, "http"),
@@ -105,7 +103,6 @@ class ProfileService:
             "proxy_user": proxy.username or "",
             "proxy_password": proxy.password or ""
         }
-        
         # Create in AdsPower
         adspower_response = await adspower_client.create_profile(adspower_data)
         
