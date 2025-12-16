@@ -374,3 +374,14 @@ Stacktrace:
 2025-12-15 20:19:16 | ERROR    | registration_client:validate_token:122 - Token validation error: Cannot connect to host 192.168.18.140:8000 ssl:default [Connect call failed ('192.168.18.140', 8000)]
 2025-12-15 20:19:16 | ERROR    | registration_client:register:64 - Failed to connect to orchestrator: Cannot connect to host 192.168.18.140:8000 ssl:default [Connect call failed ('192.168.18.140', 8000)]
 2025-12-15 20:19:16 | ERROR    | __main__:start:140 - Agent error: Cannot connect to orchestrator at http://192.168.18.140:8000
+2025-12-15 23:21:32 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 23:21:42 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 23:21:52 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 23:22:02 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 23:23:31 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 23:23:41 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 23:27:33 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 23:27:43 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 23:27:53 | ERROR    | websocket_client:connect:79 - WebSocket error: did not receive a valid HTTP response
+2025-12-15 23:28:48 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 23:28:58 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
