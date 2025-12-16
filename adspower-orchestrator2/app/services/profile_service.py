@@ -83,10 +83,8 @@ class ProfileService:
             "fingerprint_config": fingerprint_config
         }
         
-        # ✅ TAGS: AdsPower usa el campo "user_sort" para tags
         if profile_in.tags and len(profile_in.tags) > 0:
-            adspower_data["user_sort"] = profile_in.tags  # Array de strings
-            adspower_data["remark"] = ",".join(profile_in.tags)  # También en remark como backup
+            adspower_data["remark"] = ",".join(profile_in.tags)
 
         proxy_type_map = {
             "http": "http",
@@ -105,7 +103,6 @@ class ProfileService:
             "proxy_user": proxy.username or "",
             "proxy_password": proxy.password or ""
         }
-        
         # Create in AdsPower
         adspower_response = await adspower_client.create_profile(adspower_data)
         
@@ -235,7 +232,7 @@ class ProfileService:
                     api_url=computer.adspower_api_url,
                     api_key=computer.adspower_api_key
                 )
-                await adspower_client.delete_profile([profile.adspower_id])
+                await adspower_client.delete_profile([profile.adspower_id])  # ✅ FIX
             except Exception as e:
                 print(f"Failed to delete from AdsPower: {e}")
         
@@ -243,24 +240,3 @@ class ProfileService:
         await self.db.commit()
         
         return True
-
-    async def get_stats(self) -> Dict:
-        """Get profile statistics"""
-        from app.models.profile import ProfileStatus
-        
-        total_result = await self.db.execute(
-            select(func.count()).select_from(Profile)
-        )
-        total = total_result.scalar()
-        
-        ready_result = await self.db.execute(
-            select(func.count()).select_from(Profile).where(
-                Profile.status == ProfileStatus.READY
-            )
-        )
-        ready = ready_result.scalar()
-        
-        return {
-            "total": total,
-            "ready": ready
-        }
