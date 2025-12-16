@@ -79,11 +79,15 @@ class ProfileService:
         
         adspower_data = {
             "name": profile_in.name,
-            "group_id": "0",
+            "group_id": getattr(profile_in, 'group_id', "0"), 
             "fingerprint_config": fingerprint_config
         }
         
-        # Add proxy config
+        if profile_in.tags and len(profile_in.tags) > 0:
+            adspower_data["remark"] = {
+                "tags": profile_in.tags  
+            }
+        
         proxy_type_map = {
             "http": "http",
             "https": "https",
@@ -121,13 +125,13 @@ class ProfileService:
         if not data or "id" not in data:
             raise RuntimeError(f"Invalid AdsPower response: {adspower_response}")
         
-        adspower_id = data["id"]  # ✅ FIX: Usar variable correcta
+        adspower_id = data["id"]
         
         # Create in database
         db_profile = Profile(
             computer_id=profile_in.computer_id,
             proxy_id=profile_in.proxy_id,
-            adspower_id=adspower_id,  # ✅ FIX: Campo correcto
+            adspower_id=adspower_id,
             name=profile_in.name,
             age=profile_in.age,
             gender=profile_in.gender,
@@ -149,7 +153,7 @@ class ProfileService:
             tags=profile_in.tags,
             meta_data=profile_in.meta_data,
             notes=profile_in.notes,
-            status="ready",  # ✅ Cambiar a "ready" ya que se creó exitosamente
+            status="ready",
             is_warmed=False
         )
         

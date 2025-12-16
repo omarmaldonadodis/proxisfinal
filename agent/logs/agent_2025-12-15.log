@@ -1590,3 +1590,430 @@ Stacktrace:
 2025-12-15 18:41:24 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
 2025-12-15 18:41:24 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
 2025-12-15 18:41:24 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:41:54 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:41:54 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:41:54 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:42:24 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:42:24 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:42:24 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:42:54 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:42:54 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:42:54 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:43:24 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:43:24 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:43:24 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:43:54 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:43:54 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:43:54 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:44:24 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:44:24 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:44:24 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:44:54 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:44:54 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:44:54 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:45:24 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:45:24 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:45:24 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:45:54 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:45:54 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:45:54 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:46:24 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:46:24 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:46:24 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:46:54 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:46:54 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:46:54 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:47:24 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:47:24 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:47:24 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:47:54 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:47:54 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:47:54 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:48:24 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:48:24 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:48:24 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:48:54 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:48:54 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:48:54 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:49:24 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:49:24 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:49:24 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:49:54 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:49:54 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:49:54 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:50:24 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:50:24 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:50:24 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:50:54 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:50:54 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:50:54 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:51:24 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:51:24 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:51:24 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:51:54 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:51:54 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:51:54 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:52:24 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:52:24 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:52:24 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:52:54 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:52:54 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:52:54 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:53:24 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:53:24 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:53:24 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:53:54 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:53:54 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:53:54 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:54:24 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:54:24 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:54:24 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:54:54 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:54:54 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:54:54 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:55:24 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:55:24 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:55:24 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:55:54 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:55:54 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:55:54 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:56:24 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:56:24 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:56:24 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:56:54 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:56:54 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:56:54 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:57:24 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:57:24 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:57:24 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:57:54 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:57:54 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:57:54 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:58:24 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:58:24 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:58:24 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 18:58:38 | WARNING  | websocket_client:_listen:115 - Connection lost: received 1012 (service restart); then sent 1012 (service restart)
+2025-12-15 18:58:38 | WARNING  | websocket_client:connect:68 - Connection closed, will reconnect...
+2025-12-15 18:58:38 | DEBUG    | websocket_client:_heartbeat_loop:288 - Heartbeat stopped
+2025-12-15 18:58:38 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 18:58:43 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 18:58:43 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 18:58:48 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 18:58:53 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 18:58:53 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 18:58:58 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 18:59:03 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 18:59:03 | INFO     | websocket_client:connect:55 - ✅ Connected to orchestrator!
+2025-12-15 18:59:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: connected
+2025-12-15 18:59:03 | INFO     | websocket_client:_handle_message:132 - ✅ Connected to orchestrator
+2025-12-15 18:59:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 18:59:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 18:59:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:00:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:00:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:00:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:00:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:00:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:00:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:01:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:01:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:01:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:01:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:01:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:01:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:02:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:02:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:02:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:02:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:02:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:02:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:03:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:03:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:03:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:03:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:03:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:03:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:04:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:04:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:04:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:04:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:04:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:04:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:05:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:05:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:05:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:05:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:05:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:05:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:06:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:06:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:06:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:06:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:06:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:06:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:07:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:07:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:07:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:07:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:07:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:07:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:08:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:08:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:08:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:08:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:08:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:08:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:09:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:09:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:09:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:09:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:09:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:09:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:10:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:10:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:10:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:10:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:10:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:10:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:11:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:11:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:11:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:11:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:11:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:11:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:12:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:12:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:12:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:12:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:12:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:12:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:13:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:13:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:13:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:13:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:13:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:13:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:14:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:14:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:14:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:14:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:14:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:14:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:15:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:15:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:15:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:15:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:15:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:15:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:16:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:16:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:16:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:16:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:16:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:16:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:17:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:17:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:17:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:17:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:17:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:17:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:18:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:18:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:18:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:18:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:18:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:18:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:19:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:19:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:19:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:19:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:19:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:19:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:20:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:20:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:20:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:20:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:20:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:20:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:21:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:21:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:21:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:21:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:21:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:21:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:22:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:22:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:22:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:22:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:22:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:22:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:23:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:23:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:23:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:23:33 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:23:33 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:23:33 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:24:03 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:24:03 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:24:03 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:24:07 | WARNING  | websocket_client:_listen:115 - Connection lost: received 1012 (service restart); then sent 1012 (service restart)
+2025-12-15 19:24:07 | WARNING  | websocket_client:connect:68 - Connection closed, will reconnect...
+2025-12-15 19:24:07 | DEBUG    | websocket_client:_heartbeat_loop:288 - Heartbeat stopped
+2025-12-15 19:24:07 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:24:12 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:24:12 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:24:17 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:24:22 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:24:22 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:24:27 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:24:32 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:24:32 | ERROR    | websocket_client:connect:79 - WebSocket error: did not receive a valid HTTP response
+2025-12-15 19:24:37 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:24:42 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:24:42 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:24:47 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:24:52 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:24:52 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:24:57 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:25:02 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:25:02 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:25:07 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:25:12 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:25:12 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:25:17 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:25:22 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:25:22 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:25:27 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:25:32 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:25:32 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:25:37 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:25:42 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:25:42 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:25:47 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:25:52 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:25:52 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:25:57 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:26:02 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:26:02 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:26:07 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:26:12 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:26:12 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:26:17 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:26:22 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:26:22 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:26:27 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:26:32 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:26:32 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:26:37 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:26:42 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:26:42 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:26:47 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:26:52 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:26:52 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:26:57 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:27:02 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:27:02 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:27:07 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:27:12 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:27:12 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:27:17 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:27:22 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:27:22 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:27:27 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:27:32 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:27:32 | ERROR    | websocket_client:connect:79 - WebSocket error: did not receive a valid HTTP response
+2025-12-15 19:27:37 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:27:42 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:27:42 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:27:47 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:27:52 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:27:52 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:27:57 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:28:02 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:28:02 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:28:07 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:28:12 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:28:12 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:28:17 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:28:22 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:28:22 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:28:27 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:28:32 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:28:32 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:28:37 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:28:42 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:28:42 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:28:47 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:28:52 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:28:52 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:28:57 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:29:02 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:29:02 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 19:29:07 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:29:12 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:29:12 | ERROR    | websocket_client:connect:79 - WebSocket error: did not receive a valid HTTP response
+2025-12-15 19:29:17 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-15 19:29:22 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.18.140:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY1NDEwNTk0fQ.ENeJZ2MaT0uNtxY_zWWwgyvu-2tn0f9664-bbxpYyEc
+2025-12-15 19:29:22 | INFO     | websocket_client:connect:55 - ✅ Connected to orchestrator!
+2025-12-15 19:29:22 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: connected
+2025-12-15 19:29:22 | INFO     | websocket_client:_handle_message:132 - ✅ Connected to orchestrator
+2025-12-15 19:29:52 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:29:52 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:29:52 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:30:22 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:30:22 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:30:22 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:30:52 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:30:52 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:30:52 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:31:22 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:31:22 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:31:22 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:31:52 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:31:52 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:31:52 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:32:22 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:32:22 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:32:22 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:32:52 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:32:52 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:32:52 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:33:22 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:33:22 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:33:22 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:33:52 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:33:52 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:33:52 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:34:22 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:34:22 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:34:22 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:34:52 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:34:52 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:34:52 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:35:22 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:35:22 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:35:22 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:35:52 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:35:52 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:35:52 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:36:22 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:36:22 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:36:22 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:36:52 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:36:52 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:36:52 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:37:22 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:37:22 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:37:22 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:37:52 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:37:52 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:37:52 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:38:22 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:38:22 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:38:22 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:38:52 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:38:52 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:38:52 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-15 19:39:22 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-15 19:39:22 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-15 19:39:22 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK

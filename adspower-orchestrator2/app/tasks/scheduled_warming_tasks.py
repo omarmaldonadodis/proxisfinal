@@ -159,4 +159,23 @@ BEAT_SCHEDULE = {
         'task': 'tasks.cleanup_expired_scheduled_warmings',
         'schedule': 86400.0,  # Cada 24 horas
     },
+
+    # Monitoreo completo cada 15 minutos
+    'monitor-all-proxies': {
+        'task': 'tasks.monitor_all_proxies',
+        'schedule': 900.0,  # 15 minutos
+    },
+    
+    # Limpieza de blacklisted cada hora
+    'cleanup-blacklisted-proxies': {
+        'task': 'tasks.cleanup_blacklisted_proxies',
+        'schedule': 3600.0,  # 1 hora
+    },
+    
+    # Rotación de proxies lentos cada 30 minutos
+    'rotate-slow-proxies': {
+        'task': 'tasks.rotate_slow_proxies',
+        'schedule': 1800.0,  # 30 minutos
+    },
 }
+
