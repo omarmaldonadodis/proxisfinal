@@ -370,3 +370,7 @@ Stacktrace:
 2025-12-15 19:46:21 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
 2025-12-15 19:51:31 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
 2025-12-15 19:51:41 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 20:19:00 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.18.140', 8000)
+2025-12-15 20:19:16 | ERROR    | registration_client:validate_token:122 - Token validation error: Cannot connect to host 192.168.18.140:8000 ssl:default [Connect call failed ('192.168.18.140', 8000)]
+2025-12-15 20:19:16 | ERROR    | registration_client:register:64 - Failed to connect to orchestrator: Cannot connect to host 192.168.18.140:8000 ssl:default [Connect call failed ('192.168.18.140', 8000)]
+2025-12-15 20:19:16 | ERROR    | __main__:start:140 - Agent error: Cannot connect to orchestrator at http://192.168.18.140:8000
