@@ -1,17 +1,10 @@
-# alembic/versions/xxxx_add_tablet_device_type.py
-"""Add tablet device type
 
-Revision ID: add_tablet_type
-Revises: previous_revision
-Create Date: 2024-12-16
-
-"""
 from alembic import op
 import sqlalchemy as sa
 
 # revision identifiers
-revision = 'add_tablet_type'
-down_revision = 'previous_revision'  # ← Cambiar por última revisión
+revision = '006
+down_revision = '005'  # ← Cambiar por última revisión
 branch_labels = None
 depends_on = None
 
