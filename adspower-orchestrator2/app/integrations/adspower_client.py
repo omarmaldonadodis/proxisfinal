@@ -29,6 +29,21 @@ class AdsPowerClient:
         url = f"{self.api_url}{endpoint}"
         headers = self._get_headers()
         
+        # ✅ CRÍTICO: Si data contiene "cookie" como string, no hacer json.dumps doble
+        request_data = data
+        
+        if data and "cookie" in data:
+            # ✅ Verificar si cookie ya es string JSON
+            if isinstance(data["cookie"], str):
+                logger.debug("Cookie is JSON string, keeping as-is")
+            elif isinstance(data["cookie"], list):
+                # ✅ Convertir lista a JSON string
+                import json as json_lib
+                data_copy = data.copy()
+                data_copy["cookie"] = json_lib.dumps(data["cookie"])
+                request_data = data_copy
+                logger.debug(f"Converted cookie list to JSON: {data_copy['cookie'][:200]}")
+        
         try:
             async with httpx.AsyncClient(timeout=self.timeout) as client:
                 response = await client.request(
@@ -36,8 +51,13 @@ class AdsPowerClient:
                     url=url,
                     headers=headers,
                     params=params,
-                    json=data
+                    json=request_data  # ✅ httpx maneja la serialización JSON
                 )
+                
+                # ✅ Log response para debugging
+                logger.debug(f"Response status: {response.status_code}")
+                logger.debug(f"Response body (first 500): {response.text[:500]}")
+                
                 response.raise_for_status()
                 return response.json()
         except httpx.HTTPStatusError as e:
@@ -58,9 +78,8 @@ class AdsPowerClient:
     
     async def create_profile(self, profile_data: Dict) -> Dict:
         """Crea un nuevo perfil en AdsPower"""
-        # ✅ FIX: Retornar dict completo en lugar de solo el ID
         result = await self._make_request("POST", "/api/v1/user/create", data=profile_data)
-        return result  # Retorna todo el dict con code, msg, data
+        return result
     
     async def get_profile(self, profile_id: str) -> Dict:
         """Obtiene información de un perfil"""
@@ -93,11 +112,23 @@ class AdsPowerClient:
         return result["data"]
     
     async def update_profile(self, profile_id: str, profile_data: Dict) -> bool:
-        """Actualiza un perfil existente"""
+        """
+        ✅ SIMPLIFICADO: El manejo de cookies se hace en _make_request
+        """
         data = {"user_id": profile_id, **profile_data}
+        
+        logger.debug(f"Updating profile {profile_id} with keys: {list(profile_data.keys())}")
+        
         result = await self._make_request("POST", "/api/v1/user/update", data=data)
         
-        return result.get("code") == 0
+        if result.get("code") == 0:
+            logger.info(f"✓ Profile {profile_id} updated successfully")
+            return True
+        else:
+            logger.warning(
+                f"⚠️ Profile update failed - code: {result.get('code')}, msg: {result.get('msg')}"
+            )
+            return False
     
     async def delete_profile(self, profile_ids: List[str]) -> bool:
         """Elimina uno o más perfiles"""
@@ -148,3 +179,17 @@ class AdsPowerClient:
             return {"status": "inactive"}
         
         return result["data"]
+    
+    # ✅ NUEVO: Método específico para subir cookies
+    async def upload_cookies(self, profile_id: str, cookies: List[Dict]) -> bool:
+        """
+        Sube cookies a un perfil existente
+        
+        Args:
+            profile_id: ID del perfil en AdsPower
+            cookies: Lista de cookies en formato AdsPower
+        
+        Returns:
+            True si exitoso, False si falla
+        """
+        return await self.update_profile(profile_id, {"cookie": cookies})

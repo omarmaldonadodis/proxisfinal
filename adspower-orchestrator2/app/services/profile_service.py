@@ -1,15 +1,16 @@
-# app/services/profile_service.py - VERSIÓN ULTRA-REALISTA
+# app/services/profile_service.py - VERSIÓN CORREGIDA CON COOKIES
 from typing import List, Optional, Dict, Any, Tuple
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, and_, func
 from datetime import datetime
+import json
 
 from app.models.profile import Profile, DeviceType
 from app.models.computer import Computer
 from app.models.proxy import Proxy
 from app.schemas.profile import ProfileCreate, ProfileUpdate
 from app.integrations.adspower_client import AdsPowerClient
-from app.utils.profile_generator import ProfileGenerator  # ✅ NUEVO
+from app.utils.profile_generator import ProfileGenerator
 from loguru import logger
 
 
@@ -19,20 +20,13 @@ class ProfileService:
 
     async def create_profile(self, profile_in: ProfileCreate) -> Profile:
         """
-        Create profile with HYPER-REALISTIC fingerprinting
-        
-        Incluye:
-        - 50+ dispositivos (mobile, tablet, desktop)
-        - Cookies pre-cargadas
-        - LocalStorage/SessionStorage
-        - Remarks ultra-variados
+        Create profile with HYPER-REALISTIC fingerprinting + COOKIES
         """
         
         # ========================================
         # 1. VALIDACIONES INICIALES
         # ========================================
         
-        # Get computer
         result = await self.db.execute(
             select(Computer).where(Computer.id == profile_in.computer_id)
         )
@@ -40,9 +34,8 @@ class ProfileService:
         if not computer:
             raise ValueError(f"Computer {profile_in.computer_id} not found")
         
-        # Get proxy - ES OBLIGATORIO
         if not profile_in.proxy_id:
-            raise ValueError("proxy_id is required - AdsPower profiles need a proxy")
+            raise ValueError("proxy_id is required")
         
         result = await self.db.execute(
             select(Proxy).where(Proxy.id == profile_in.proxy_id)
@@ -61,9 +54,9 @@ class ProfileService:
             gender=profile_in.gender,
             country=profile_in.country or proxy.country or "EC",
             city=profile_in.city or proxy.city,
-            device_type=profile_in.device_type.value,  # mobile, tablet, desktop
-            include_cookies=True,  # ✅ INCLUIR COOKIES
-            include_localstorage=True  # ✅ INCLUIR LOCALSTORAGE
+            device_type=profile_in.device_type.value,
+            include_cookies=True,
+            include_localstorage=True
         )
         
         logger.info(
@@ -76,59 +69,29 @@ class ProfileService:
         # 3. CONFIGURAR FINGERPRINT PARA ADSPOWER
         # ========================================
         
-        # Convertir resolución al formato AdsPower (1920x1080 -> 1920_1080)
         screen_res = profile_config["screen_resolution"].replace("x", "_")
         
         fingerprint_config = {
-            # Timezone
-            "automatic_timezone": "0",  # Manual
+            "automatic_timezone": "0",
             "timezone": profile_config["timezone"],
-            
-            # WebRTC
-            "webrtc": "proxy",  # Usar IP del proxy
-            
-            # Geolocation
-            "location": "ask",  # Preguntar al usuario
-            
-            # Language
+            "webrtc": "proxy",
+            "location": "ask",
             "language": [profile_config["language"]],
             "page_language": [profile_config["language"]],
-            
-            # User Agent
             "ua": profile_config["user_agent"],
-            
-            # Screen
             "screen_resolution": screen_res,
-            
-            # Fonts
             "fonts": ["all"],
-            
-            # Canvas & WebGL (noise para anti-detección)
-            "canvas": "1",  # Noise mode
-            "webgl_image": "1",  # Noise mode
-            "webgl": "1",  # Noise mode
-            
-            # Audio
-            "audio": "1",  # Noise mode
-            
-            # Do Not Track
+            "canvas": "1",
+            "webgl_image": "1",
+            "webgl": "1",
+            "audio": "1",
             "do_not_track": "default",
-            
-            # Hardware
             "hardware_concurrency": str(profile_config["hardware_concurrency"]),
             "device_memory": str(profile_config["device_memory"]),
-            
-            # Flash (bloqueado por defecto)
             "flash": "block",
-            
-            # Media Devices
-            "media_devices": "1",  # Random
-            
-            # Client Rects
-            "client_rects": "1",  # Noise
-            
-            # Speech Voices
-            "speech_voices": "1",  # Noise
+            "media_devices": "1",
+            "client_rects": "1",
+            "speech_voices": "1",
         }
         
         # ========================================
@@ -139,23 +102,9 @@ class ProfileService:
             "name": profile_in.name,
             "group_id": getattr(profile_in, 'group_id', "0"),
             "fingerprint_config": fingerprint_config,
-            
-            # ✅ REMARK ULTRA-VARIADO
             "remark": profile_config["remark"],
-            
-            # ✅ COOKIES PRE-CARGADAS
-            "cookies": profile_config["cookies"],
-            
-            # ✅ LOCALSTORAGE PRE-CARGADO (si AdsPower lo soporta)
-            # Nota: AdsPower puede no soportar LocalStorage directo,
-            # pero podemos inyectarlo después con extensión/script
-            "user_data": {
-                "localstorage": profile_config["localstorage"],
-                "sessionstorage": profile_config["sessionstorage"]
-            }
         }
         
-        # Tags (usar intereses como tags)
         if profile_in.tags and len(profile_in.tags) > 0:
             adspower_data["remark"] += " | Tags: " + ", ".join(profile_in.tags)
         
@@ -182,7 +131,7 @@ class ProfileService:
         }
         
         # ========================================
-        # 6. CREAR PROFILE EN ADSPOWER
+        # 6. CREAR PROFILE EN ADSPOWER (SIN COOKIES)
         # ========================================
         
         adspower_client = AdsPowerClient(
@@ -193,9 +142,6 @@ class ProfileService:
         adspower_response = await adspower_client.create_profile(adspower_data)
         
         # Validar respuesta
-        if isinstance(adspower_response, str):
-            raise RuntimeError(f"AdsPower returned error: {adspower_response}")
-        
         if not isinstance(adspower_response, dict):
             raise RuntimeError(f"Unexpected AdsPower response type: {type(adspower_response)}")
         
@@ -203,29 +149,46 @@ class ProfileService:
             error_msg = adspower_response.get("msg", "Unknown error")
             raise RuntimeError(f"Failed to create profile in AdsPower: {error_msg}")
         
-        # Obtener AdsPower ID
         data = adspower_response.get("data")
         if not data or "id" not in data:
             raise RuntimeError(f"Invalid AdsPower response: {adspower_response}")
         
         adspower_id = data["id"]
         
-        logger.info(
-            f"✓ Profile created in AdsPower: {adspower_id}, "
-            f"Cookies: {len(profile_config['cookies'])}, "
-            f"Device: {profile_config['device_name']}"
-        )
+        logger.info(f"✓ Profile created in AdsPower: {adspower_id}")
         
         # ========================================
-        # 7. GUARDAR EN BASE DE DATOS
+        # 7. ✅ SUBIR COOKIES AL PROFILE (NUEVO)
+        # ========================================
+        
+        if profile_config["cookies"]:
+            try:
+                cookies_uploaded = await self._upload_cookies_to_profile(
+                    adspower_client=adspower_client,
+                    adspower_id=adspower_id,
+                    cookies=profile_config["cookies"]
+                )
+                
+                if cookies_uploaded:
+                    logger.info(
+                        f"✓ {len(profile_config['cookies'])} cookies uploaded to profile {adspower_id}"
+                    )
+                else:
+                    logger.warning(
+                        f"⚠️ Failed to upload cookies to profile {adspower_id}"
+                    )
+            except Exception as e:
+                logger.error(f"Error uploading cookies: {e}")
+                # No fallar la creación del perfil por error en cookies
+        
+        # ========================================
+        # 8. GUARDAR EN BASE DE DATOS
         # ========================================
         
         db_profile = Profile(
             computer_id=profile_in.computer_id,
             proxy_id=profile_in.proxy_id,
             adspower_id=adspower_id,
-            
-            # Datos básicos
             name=profile_in.name,
             age=profile_in.age,
             gender=profile_in.gender,
@@ -233,8 +196,6 @@ class ProfileService:
             city=profile_config["city"],
             timezone=profile_config["timezone"],
             language=profile_config["language"],
-            
-            # Device info
             device_type=profile_in.device_type,
             device_name=profile_config["device_name"],
             user_agent=profile_config["user_agent"],
@@ -244,12 +205,8 @@ class ProfileService:
             hardware_concurrency=profile_config["hardware_concurrency"],
             device_memory=profile_config["device_memory"],
             platform=profile_config["platform"],
-            
-            # Profile data
             interests=profile_config["interests"],
             browsing_history=profile_config["browsing_history"],
-            
-            # Metadata
             tags=profile_in.tags,
             meta_data={
                 "device_brand": profile_config["device_brand"],
@@ -261,8 +218,6 @@ class ProfileService:
                 "remark": profile_config["remark"]
             },
             notes=profile_in.notes,
-            
-            # Status
             status="ready",
             is_warmed=False
         )
@@ -278,6 +233,77 @@ class ProfileService:
         )
         
         return db_profile
+    
+    async def _upload_cookies_to_profile(
+        self,
+        adspower_client: AdsPowerClient,
+        adspower_id: str,
+        cookies: List[Dict]
+    ) -> bool:
+        """
+        ✅ CORREGIDO FINAL: Sube cookies como lista de objetos
+        
+        AdsPower maneja la conversión a JSON internamente.
+        Solo enviamos lista limpia de objetos.
+        """
+        
+        # ✅ Convertir cookies al formato correcto de AdsPower
+        formatted_cookies = []
+        
+        for cookie in cookies:
+            # ✅ Crear objeto con tipos correctos
+            formatted_cookie = {
+                "name": str(cookie["name"]),
+                "value": str(cookie["value"]),
+                "domain": str(cookie["domain"]),
+                "path": str(cookie.get("path", "/")),
+                "httpOnly": bool(cookie.get("httpOnly", False)),
+                "secure": bool(cookie.get("secure", True)),
+            }
+            
+            # ✅ Agregar expirationDate solo si existe (debe ser int/float)
+            if "expirationDate" in cookie and cookie["expirationDate"]:
+                try:
+                    formatted_cookie["expirationDate"] = int(cookie["expirationDate"])
+                except (ValueError, TypeError):
+                    logger.warning(f"Invalid expirationDate for cookie {cookie['name']}, skipping")
+            
+            # ✅ Agregar sameSite solo si existe
+            if "sameSite" in cookie and cookie["sameSite"]:
+                formatted_cookie["sameSite"] = str(cookie["sameSite"])
+            
+            formatted_cookies.append(formatted_cookie)
+        
+        logger.info(f"Uploading {len(formatted_cookies)} cookies to profile {adspower_id}")
+        
+        # ✅ Log primera cookie para debugging
+        if formatted_cookies:
+            logger.debug(f"Sample cookie: {formatted_cookies[0]}")
+        
+        try:
+            # ✅ Enviar como LISTA (no como string)
+            # El AdsPowerClient manejará la conversión a JSON
+            result = await adspower_client.update_profile(
+                profile_id=adspower_id,
+                profile_data={"cookie": formatted_cookies}
+            )
+            
+            if result:
+                logger.info(
+                    f"✓ {len(formatted_cookies)} cookies uploaded successfully to profile {adspower_id}"
+                )
+                return True
+            else:
+                logger.warning(
+                    f"⚠️ Cookie upload returned false for profile {adspower_id}"
+                )
+                return False
+        
+        except Exception as e:
+            logger.error(
+                f"✗ Error uploading cookies to profile {adspower_id}: {e}"
+            )
+            return False
 
     async def get_profile(self, profile_id: int) -> Optional[Profile]:
         result = await self.db.execute(
@@ -361,7 +387,6 @@ class ProfileService:
         return True
     
     async def get_stats(self) -> Dict:
-        """Obtiene estadísticas de profiles"""
         from app.models.profile import ProfileStatus
         
         result = await self.db.execute(

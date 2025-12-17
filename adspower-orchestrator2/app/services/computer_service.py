@@ -143,6 +143,7 @@ class ComputerService:
             'name': computer.name,
             'is_healthy': False,
             'adspower_connected': False,
+            'state': computer.status,
             'current_profiles': computer.current_profiles,
             'max_profiles': computer.max_profiles,
             'capacity_percentage': (computer.current_profiles / computer.max_profiles * 100) if computer.max_profiles > 0 else 0
