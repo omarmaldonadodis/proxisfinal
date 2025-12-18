@@ -85,18 +85,38 @@ class ProxyService:
         
         return proxies, total
     
-    async def update_proxy(self, proxy_id: int, proxy_in: ProxyUpdate) -> Optional[Proxy]:
-        """Actualiza proxy"""
-        proxy = await self.repo.get(proxy_id)
-        if not proxy:
-            raise ValueError(f"Proxy {proxy_id} not found")
+    async def _update_proxy_score(
+        self,
+        proxy_id: int,
+        overall_score: float,
+        details: Dict
+    ):
+        """Actualiza score del proxy"""
         
-        update_data = proxy_in.model_dump(exclude_unset=True)
-        proxy = await self.repo.update(proxy_id, update_data)
-        await self.db.commit()
+        # Buscar score existente
+        result = await self.db.execute(
+            select(ProxyScore).where(ProxyScore.proxy_id == proxy_id)
+        )
+        score_record = result.scalar_one_or_none()
         
-        logger.info(f"Proxy updated: {proxy_id}")
-        return proxy
+        if not score_record:
+            # Crear nuevo con valores iniciales
+            score_record = ProxyScore(
+                proxy_id=proxy_id,
+                total_checks=0,
+                successful_checks=0,
+                failed_checks=0,
+                timeout_checks=0,
+                geo_mismatch_count=0,
+                consecutive_failures=0
+            )
+            self.db.add(score_record)
+        
+        # Actualizar scores
+        score_record.overall_score = overall_score
+        
+        # Actualizar estadísticas (con valores por defecto si son None)
+        score_record.total_checks = (score_record.total_checks or 0) + 1
     
     async def delete_proxy(self, proxy_id: int) -> bool:
         """Elimina proxy"""

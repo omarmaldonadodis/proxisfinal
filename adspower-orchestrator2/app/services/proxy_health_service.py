@@ -459,73 +459,113 @@ class ProxyHealthService:
         overall_score: float,
         details: Dict
     ):
-        """Actualiza score del proxy"""
-        
+        """Actualiza o crea el score del proxy (100% safe)"""
+
         # Buscar score existente
         result = await self.db.execute(
             select(ProxyScore).where(ProxyScore.proxy_id == proxy_id)
         )
         score_record = result.scalar_one_or_none()
-        
+
+        # Crear score si no existe
         if not score_record:
-            # Crear nuevo
-            score_record = ProxyScore(proxy_id=proxy_id)
+            score_record = ProxyScore(
+                proxy_id=proxy_id,
+                overall_score=overall_score,
+                total_checks=0,
+                successful_checks=0,
+                failed_checks=0,
+                consecutive_failures=0,
+                geo_mismatch_count=0,
+                uptime_percentage=0.0,
+                avg_latency=None,
+                min_latency=None,
+                max_latency=None,
+                is_blacklisted=False
+            )
             self.db.add(score_record)
-        
-        # Actualizar scores
+            await self.db.flush()
+
+        # ------------------------------------------------------------------
+        # BLINDAJE: asegurar que nunca haya None en contadores
+        # ------------------------------------------------------------------
+        score_record.total_checks = score_record.total_checks or 0
+        score_record.successful_checks = score_record.successful_checks or 0
+        score_record.failed_checks = score_record.failed_checks or 0
+        score_record.consecutive_failures = score_record.consecutive_failures or 0
+        score_record.geo_mismatch_count = score_record.geo_mismatch_count or 0
+
+        # ------------------------------------------------------------------
+        # Actualizar score general
+        # ------------------------------------------------------------------
         score_record.overall_score = overall_score
-        
-        # Actualizar estadísticas
         score_record.total_checks += 1
-        
+
+        # ------------------------------------------------------------------
+        # Disponibilidad
+        # ------------------------------------------------------------------
         if details["availability"]["is_available"]:
             score_record.successful_checks += 1
+            score_record.consecutive_failures = 0
         else:
             score_record.failed_checks += 1
             score_record.consecutive_failures += 1
-        
-        # Actualizar latencia
+
+        # ------------------------------------------------------------------
+        # Latencia (media móvil + min/max)
+        # ------------------------------------------------------------------
         latency = details["speed"].get("latency_ms")
         if latency:
-            if not score_record.avg_latency:
+            if score_record.avg_latency is None:
                 score_record.avg_latency = latency
             else:
-                # Media móvil
                 score_record.avg_latency = (
                     score_record.avg_latency * 0.8 + latency * 0.2
                 )
-            
-            if not score_record.min_latency or latency < score_record.min_latency:
+
+            if score_record.min_latency is None or latency < score_record.min_latency:
                 score_record.min_latency = latency
-            
-            if not score_record.max_latency or latency > score_record.max_latency:
+
+            if score_record.max_latency is None or latency > score_record.max_latency:
                 score_record.max_latency = latency
-        
-        # Uptime percentage
+
+        # ------------------------------------------------------------------
+        # Uptime %
+        # ------------------------------------------------------------------
         if score_record.total_checks > 0:
-            score_record.uptime_percentage = (
-                score_record.successful_checks / score_record.total_checks * 100
+            score_record.uptime_percentage = round(
+                (score_record.successful_checks / score_record.total_checks) * 100,
+                2
             )
-        
+
+        # ------------------------------------------------------------------
         # Geo mismatch
-        if not details["geo"].get("geo_match"):
+        # ------------------------------------------------------------------
+        if not details["geo"].get("geo_match", True):
             score_record.geo_mismatch_count += 1
-        
+
+        # ------------------------------------------------------------------
         # Blacklist automático
+        # ------------------------------------------------------------------
         if score_record.consecutive_failures >= self.MAX_CONSECUTIVE_FAILURES:
             score_record.is_blacklisted = True
             score_record.blacklist_reason = (
                 f"{score_record.consecutive_failures} consecutive failures"
             )
             score_record.blacklisted_at = datetime.utcnow()
-            
-            logger.warning(f"Proxy {proxy_id} blacklisted: {score_record.blacklist_reason}")
-        
+
+            logger.warning(
+                f"Proxy {proxy_id} blacklisted: {score_record.blacklist_reason}"
+            )
+
+        # ------------------------------------------------------------------
+        # Timestamps
+        # ------------------------------------------------------------------
         score_record.last_check_at = datetime.utcnow()
         score_record.score_updated_at = datetime.utcnow()
-        
+
         await self.db.commit()
-    
+
     async def _attempt_auto_recovery(self, proxy: Proxy):
         """Intenta recuperar proxy automáticamente"""
         
