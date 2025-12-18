@@ -1,5 +1,3 @@
-<!-- templates/proxy_rotation_dashboard.html - VERSIÓN MEJORADA -->
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -27,9 +25,9 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            padding-bottom: 220px;
         }
 
-        /* Header */
         .header {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -39,17 +37,14 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
 
-        /* Controls */
         .controls {
             display: flex;
             justify-content: center;
             gap: 15px;
             flex-wrap: wrap;
+            margin-top: 20px;
         }
 
         .btn {
@@ -69,16 +64,21 @@
         .btn-secondary { background: linear-gradient(135deg, #f093fb, #f5576c); color: white; }
         .btn-success { background: linear-gradient(135deg, #4facfe, #00f2fe); color: white; }
         .btn-info { background: linear-gradient(135deg, #43e97b, #38f9d7); color: white; }
+        .btn-warning { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white; }
 
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
 
-        /* Stats Cards */
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
         .stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
         }
 
@@ -107,8 +107,8 @@
         .value.green { color: #4ade80; }
         .value.yellow { color: #fbbf24; }
         .value.red { color: #f87171; }
+        .value.gray { color: #94a3b8; }
 
-        /* Proxies Grid */
         .proxies-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -128,7 +128,8 @@
         .proxy-card.healthy { border-color: #4ade80; }
         .proxy-card.degraded { border-color: #fbbf24; }
         .proxy-card.unhealthy { border-color: #f87171; }
-        .proxy-card.no-score { border-color: #94a3b8; }
+        .proxy-card.no_score { border-color: #94a3b8; }
+        .proxy-card.offline { border-color: #ef4444; }
 
         .proxy-card:hover {
             transform: translateY(-5px);
@@ -158,8 +159,8 @@
             text-transform: uppercase;
         }
 
-        .badge.active { background: #fbbf24; color: #000; }
-        .badge.failed { background: #f87171; color: #fff; }
+        .badge.active { background: #4ade80; color: #000; }
+        .badge.failed { background: #ef4444; color: #fff; }
 
         .proxy-stats {
             display: grid;
@@ -185,7 +186,30 @@
             font-weight: 600;
         }
 
-        /* ✅ LOG CONSOLE (NUEVO) */
+        .proxy-actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .proxy-actions button {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .proxy-actions button:hover {
+            transform: scale(1.05);
+        }
+
+        .action-check { background: #4ade80; color: #000; }
+        .action-rotate { background: #fbbf24; color: #000; }
+
         .log-console {
             position: fixed;
             bottom: 0;
@@ -252,95 +276,85 @@
         .clear-log:hover {
             background: rgba(255, 255, 255, 0.2);
         }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <div class="header">
             <h1>🔄 Proxy Rotation Dashboard</h1>
-            <p>Monitoreo en tiempo real de rotación inteligente de proxies</p>
+            <p>Monitoreo en tiempo real - <span id="lastUpdate"></span></p>
             
-            <div class="controls" style="margin-top: 20px;">
+            <div class="controls">
                 <label style="display: flex; align-items: center; gap: 10px;">
-                    Auto-actualización:
-                    <input type="checkbox" id="autoRefresh" checked style="width: 50px; height: 25px;">
-                    <span id="refreshStatus">Activado (30s)</span>
+                    Auto-refresh:
+                    <input type="checkbox" id="autoRefresh" checked>
+                    <span id="refreshStatus">30s</span>
                 </label>
                 
                 <button class="btn btn-success" onclick="refreshData()">
-                    🔄 Actualizar Ahora
+                    🔄 Actualizar
                 </button>
-                <button class="btn btn-secondary" onclick="scanAllProxies()">
-                    🔍 Escanear Todos
+                <button class="btn btn-warning" onclick="healthCheckAll()">
+                    🏥 Health Check Todos
                 </button>
-                <button class="btn btn-info" onclick="showStats()">
-                    📊 Estadísticas
-                </button>
-                <button class="btn btn-primary" onclick="showLocations()">
-                    🗺️ Ubicaciones
+                <button class="btn btn-secondary" onclick="recoverFailed()">
+                    🔧 Recuperar Failed
                 </button>
             </div>
         </div>
 
-        <!-- Stats Cards -->
         <div class="stats">
             <div class="stat-card">
                 <h3>Total Proxies</h3>
-                <div class="value" id="totalProxies">10</div>
+                <div class="value" id="totalProxies">-</div>
             </div>
             <div class="stat-card">
-                <h3>Saludables</h3>
-                <div class="value green" id="healthyProxies">0</div>
+                <h3>✅ Saludables</h3>
+                <div class="value green" id="healthyProxies">-</div>
             </div>
             <div class="stat-card">
-                <h3>Degradados</h3>
-                <div class="value yellow" id="degradedProxies">0</div>
+                <h3>⚠️ Sin Score</h3>
+                <div class="value gray" id="noScoreProxies">-</div>
             </div>
             <div class="stat-card">
-                <h3>Offline</h3>
-                <div class="value red" id="offlineProxies">0</div>
+                <h3>🔴 Offline</h3>
+                <div class="value red" id="offlineProxies">-</div>
             </div>
         </div>
 
-        <!-- Proxies Grid -->
         <div class="proxies-grid" id="proxiesGrid">
-            <!-- Proxies se cargarán aquí -->
+            <div class="loading">Cargando proxies...</div>
         </div>
     </div>
 
-    <!-- ✅ LOG CONSOLE (NUEVO) -->
     <div class="log-console" id="logConsole">
         <div class="log-header" onclick="toggleLog()">
             <span>📋 Console Log</span>
             <button class="clear-log" onclick="clearLog(event)">Limpiar</button>
         </div>
-        <div class="log-body" id="logBody">
-            <!-- Logs se mostrarán aquí -->
-        </div>
+        <div class="log-body" id="logBody"></div>
     </div>
 
     <script>
         let autoRefreshInterval = null;
 
-        // ========================================
-        // ✅ SISTEMA DE LOGGING VISUAL (NUEVO)
-        // ========================================
         function log(message, type = 'info') {
             const logBody = document.getElementById('logBody');
             const timestamp = new Date().toLocaleTimeString();
             
             const entry = document.createElement('div');
             entry.className = `log-entry ${type}`;
-            entry.innerHTML = `
-                <span class="timestamp">[${timestamp}]</span>
-                <span>${message}</span>
-            `;
+            entry.innerHTML = `<span class="timestamp">[${timestamp}]</span><span>${message}</span>`;
             
             logBody.appendChild(entry);
             logBody.scrollTop = logBody.scrollHeight;
             
-            // Limitar a 100 entradas
             if (logBody.children.length > 100) {
                 logBody.removeChild(logBody.firstChild);
             }
@@ -356,9 +370,6 @@
             log('Log limpiado', 'info');
         }
 
-        // ========================================
-        // CARGAR DATOS
-        // ========================================
         async function refreshData() {
             log('🔄 Actualizando datos...', 'info');
             
@@ -366,25 +377,35 @@
                 const response = await fetch('/api/v1/proxy-rotation/rotation-stats');
                 const data = await response.json();
                 
-                // Actualizar contadores
-                document.getElementById('totalProxies').textContent = data.total_active;
-                document.getElementById('healthyProxies').textContent = data.health_distribution.healthy;
-                document.getElementById('degradedProxies').textContent = data.health_distribution.degraded;
-                document.getElementById('offlineProxies').textContent = data.total_failed;
+                // ✅ Actualizar contadores (estructura correcta)
+                document.getElementById('totalProxies').textContent = data.summary.total_proxies;
+                document.getElementById('healthyProxies').textContent = data.summary.health_distribution.healthy;
+                document.getElementById('noScoreProxies').textContent = data.summary.health_distribution.no_score;
+                document.getElementById('offlineProxies').textContent = data.summary.health_distribution.offline;
                 
-                // Actualizar grid
+                // Actualizar timestamp
+                document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+                
+                // ✅ Actualizar grid
                 const grid = document.getElementById('proxiesGrid');
                 grid.innerHTML = '';
                 
-                data.proxies_detail.forEach(proxy => {
-                    const card = createProxyCard(proxy);
-                    grid.appendChild(card);
-                });
-                
-                log(`✅ Datos actualizados: ${data.health_distribution.healthy} saludables, ${data.health_distribution.degraded} degradados`, 'success');
+                if (data.proxies_detail && data.proxies_detail.length > 0) {
+                    data.proxies_detail.forEach(proxy => {
+                        const card = createProxyCard(proxy);
+                        grid.appendChild(card);
+                    });
+                    
+                    log(`✅ ${data.proxies_detail.length} proxies cargados`, 'success');
+                } else {
+                    grid.innerHTML = '<div class="loading">No hay proxies disponibles</div>';
+                    log('⚠️ No hay proxies en el sistema', 'warning');
+                }
                 
             } catch (error) {
-                log(`❌ Error al actualizar: ${error.message}`, 'error');
+                log(`❌ Error: ${error.message}`, 'error');
+                document.getElementById('proxiesGrid').innerHTML = 
+                    `<div class="loading">Error al cargar datos: ${error.message}</div>`;
             }
         }
 
@@ -392,14 +413,23 @@
             const card = document.createElement('div');
             card.className = `proxy-card ${proxy.health_status}`;
             
-            const scoreDisplay = proxy.score !== null ? proxy.score.toFixed(1) : 'N/A';
+            const scoreDisplay = proxy.score !== null ? proxy.score.toFixed(1) : 'Sin datos';
             const latencyDisplay = proxy.latency_ms !== null ? `${Math.round(proxy.latency_ms)}ms` : 'N/A';
             const uptimeDisplay = proxy.uptime !== null ? `${proxy.uptime.toFixed(1)}%` : 'N/A';
+            
+            // ✅ Emoji según estado
+            const statusEmoji = {
+                'healthy': '✅',
+                'degraded': '⚠️',
+                'unhealthy': '🔴',
+                'no_score': '❓',
+                'offline': '💀'
+            };
             
             card.innerHTML = `
                 <div class="proxy-header">
                     <div class="proxy-location">
-                        📍 ${proxy.location}
+                        ${statusEmoji[proxy.health_status]} ${proxy.location}
                     </div>
                     <span class="badge ${proxy.status}">${proxy.status.toUpperCase()}</span>
                 </div>
@@ -422,27 +452,93 @@
                         <div class="stat-value">${uptimeDisplay}</div>
                     </div>
                 </div>
+                
+                <div class="proxy-actions">
+                    <button class="action-check" onclick="checkProxy(${proxy.id})">
+                        🔍 Check
+                    </button>
+                    ${proxy.status === 'failed' ? 
+                        `<button class="action-rotate" onclick="rotateProxy(${proxy.id})">🔄 Rotar</button>` 
+                        : ''}
+                </div>
             `;
             
             return card;
         }
 
-        async function scanAllProxies() {
-            log('🔍 Iniciando escaneo completo...', 'warning');
+        async function checkProxy(proxyId) {
+            log(`🔍 Verificando proxy ${proxyId}...`, 'info');
             
             try {
-                const response = await fetch('/api/v1/proxy-rotation/scan-all', {
+                const response = await fetch(`/api/v1/proxy-health/${proxyId}/check`, {
                     method: 'POST'
                 });
                 const data = await response.json();
                 
-                log(`✅ Escaneo completado: ${data.rotated} rotados, ${data.healthy} saludables`, 'success');
+                log(`✅ Proxy ${proxyId}: Score ${data.overall_score?.toFixed(1) || 'N/A'}`, 'success');
                 
-                // Refrescar datos
+                setTimeout(refreshData, 1000);
+                
+            } catch (error) {
+                log(`❌ Error verificando proxy ${proxyId}: ${error.message}`, 'error');
+            }
+        }
+
+        async function rotateProxy(proxyId) {
+            log(`🔄 Rotando proxy ${proxyId}...`, 'warning');
+            
+            try {
+                const response = await fetch(`/api/v1/proxy-rotation/${proxyId}/force-rotate`, {
+                    method: 'POST'
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    log(`✅ Rotación exitosa: ${data.old_location} → ${data.new_location}`, 'success');
+                } else {
+                    log(`⚠️ Rotación fallida: ${data.error || 'Sin ubicaciones disponibles'}`, 'warning');
+                }
+                
                 setTimeout(refreshData, 2000);
                 
             } catch (error) {
-                log(`❌ Error en escaneo: ${error.message}`, 'error');
+                log(`❌ Error rotando proxy ${proxyId}: ${error.message}`, 'error');
+            }
+        }
+
+        async function healthCheckAll() {
+            log('🏥 Iniciando health check masivo...', 'warning');
+            
+            try {
+                const response = await fetch('/api/v1/proxy-health/check-all', {
+                    method: 'POST'
+                });
+                const data = await response.json();
+                
+                log(`✅ Health check completado: ${data.healthy} healthy, ${data.unhealthy} unhealthy`, 'success');
+                
+                setTimeout(refreshData, 3000);
+                
+            } catch (error) {
+                log(`❌ Error en health check: ${error.message}`, 'error');
+            }
+        }
+
+        async function recoverFailed() {
+            log('🔧 Intentando recuperar proxies failed...', 'warning');
+            
+            try {
+                const response = await fetch('/api/v1/proxy-rotation/recover-failed-proxies', {
+                    method: 'POST'
+                });
+                const data = await response.json();
+                
+                log(`✅ Recuperación: ${data.recovered} exitosos, ${data.still_failed} fallidos`, 'success');
+                
+                setTimeout(refreshData, 2000);
+                
+            } catch (error) {
+                log(`❌ Error en recuperación: ${error.message}`, 'error');
             }
         }
 
@@ -450,19 +546,19 @@
         document.getElementById('autoRefresh').addEventListener('change', (e) => {
             if (e.target.checked) {
                 autoRefreshInterval = setInterval(refreshData, 30000);
-                document.getElementById('refreshStatus').textContent = 'Activado (30s)';
-                log('⏱️ Auto-actualización activada (30s)', 'info');
+                document.getElementById('refreshStatus').textContent = '30s';
+                log('⏱️ Auto-refresh activado', 'info');
             } else {
                 clearInterval(autoRefreshInterval);
-                document.getElementById('refreshStatus').textContent = 'Desactivado';
-                log('⏸️ Auto-actualización desactivada', 'warning');
+                document.getElementById('refreshStatus').textContent = 'OFF';
+                log('⏸️ Auto-refresh desactivado', 'warning');
             }
         });
 
-        // Cargar datos inicial
+        // Inicializar
         refreshData();
         autoRefreshInterval = setInterval(refreshData, 30000);
-        log('🚀 Dashboard iniciado', 'success');
+        log('🚀 Dashboard iniciado - 19 proxies detectados', 'success');
     </script>
 </body>
 </html>

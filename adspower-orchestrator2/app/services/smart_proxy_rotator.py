@@ -1,24 +1,25 @@
 # app/services/smart_proxy_rotator.py - VERSIÓN CORREGIDA FINAL
 """
 Sistema de Rotación Inteligente de Proxies
-- Detecta IPs bloqueadas/lentas
-- Rota automáticamente a ubicaciones alternativas
-- Actualiza DB + AdsPower
-- Monitoreo en tiempo real
+✅ FIXES:
+- Busca alternativas sin importar status actual
+- Crea ProxyScore automáticamente si no existe
+- Maneja correctamente proxies sin score
+- Algoritmo de selección más flexible
 """
-from typing import Optional, Dict, List, Tuple
+from typing import Optional, Dict, List
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, and_
-from datetime import datetime, timedelta
+from datetime import datetime
 from loguru import logger
 import asyncio
 import httpx
-import time  # ✅ AGREGADO
+import time
 
 from app.models.proxy import Proxy, ProxyStatus
 from app.models.profile import Profile
-from app.models.proxy_health import ProxyHealthCheck, ProxyScore
-from app.utils.geo_manager import GeoManager, GeoLocation, get_soax_username_with_geo
+from app.models.proxy_health import ProxyScore
+from app.utils.geo_manager import GeoManager, GeoLocation
 from app.integrations.adspower_client import AdsPowerClient
 from app.integrations.soax_client import SOAXClient
 from app.models.computer import Computer
@@ -38,7 +39,7 @@ class ProxyIssueType:
 
 
 class SmartProxyRotator:
-    """Rotador Inteligente con selección por LATENCIA"""
+    """Rotador Inteligente CORREGIDO"""
     
     MAX_LATENCY_MS = 3000
     TIMEOUT_THRESHOLD = 3
@@ -68,6 +69,9 @@ class SmartProxyRotator:
             return {"error": "Proxy not found"}
         
         logger.info(f"🔍 Checking proxy {proxy_id}: {proxy.country}/{proxy.city}")
+        
+        # ✅ Crear ProxyScore si no existe
+        await self._ensure_proxy_score(proxy_id)
         
         # 1. Detectar problemas
         issues = await self._detect_proxy_issues(proxy, test_urls)
@@ -114,31 +118,67 @@ class SmartProxyRotator:
             "message": f"Rotated to optimal location: {new_proxy.city}"
         }
     
+    async def _ensure_proxy_score(self, proxy_id: int):
+        """✅ Crea ProxyScore si no existe"""
+        
+        result = await self.db.execute(
+            select(ProxyScore).where(ProxyScore.proxy_id == proxy_id)
+        )
+        score = result.scalar_one_or_none()
+        
+        if not score:
+            logger.info(f"Creating ProxyScore for proxy {proxy_id}")
+            
+            score = ProxyScore(
+                proxy_id=proxy_id,
+                overall_score=100.0,
+                speed_score=100.0,
+                availability_score=100.0,
+                geo_accuracy_score=100.0,
+                stability_score=100.0,
+                total_checks=0,
+                successful_checks=0,
+                failed_checks=0,
+                uptime_percentage=100.0,
+                consecutive_failures=0
+            )
+            
+            self.db.add(score)
+            await self.db.commit()
+    
     async def _detect_proxy_issues(
         self,
         proxy: Proxy,
         test_urls: List[str] = None
     ) -> List[str]:
-        """Detecta problemas del proxy"""
+        """Detecta problemas del proxy (maneja score=None)"""
         
         issues = []
         
-        # Verificar score
+        # ✅ Manejar proxy sin score
         result = await self.db.execute(
             select(ProxyScore).where(ProxyScore.proxy_id == proxy.id)
         )
         score = result.scalar_one_or_none()
         
-        if score:
-            if score.is_blacklisted:
-                issues.append("unavailable")
-                return issues
-            
-            if score.avg_latency and score.avg_latency > self.MAX_LATENCY_MS:
-                issues.append("slow_loading")
-            
-            if score.uptime_percentage < 70:
-                issues.append("timeout")
+        if not score:
+            # Sin score = necesita health check
+            logger.warning(f"Proxy {proxy.id} has no score - needs health check")
+            issues.append("no_score")
+            return issues
+        
+        # Verificar blacklist
+        if score.is_blacklisted:
+            issues.append("unavailable")
+            return issues
+        
+        # Verificar latencia
+        if score.avg_latency and score.avg_latency > self.MAX_LATENCY_MS:
+            issues.append("slow_loading")
+        
+        # Verificar uptime
+        if score.uptime_percentage < 70:
+            issues.append("timeout")
         
         # Test funcionalidad si hay URLs
         if test_urls and not issues:
@@ -159,7 +199,7 @@ class SmartProxyRotator:
         
         for url in test_urls:
             try:
-                start = time.time()  # ✅ AHORA FUNCIONA
+                start = time.time()
                 
                 async with httpx.AsyncClient(
                     proxies={"http://": proxy_url, "https://": proxy_url},
@@ -198,25 +238,30 @@ class SmartProxyRotator:
         issues: List[str]
     ) -> Optional[Proxy]:
         """
-        🎯 Rota a ubicación ÓPTIMA (reutiliza proxy si existe)
+        🎯 Rota a ubicación ÓPTIMA (BUSCA SIN FILTROS)
+        
+        ✅ CAMBIOS:
+        - NO filtra por status ACTIVE
+        - Busca en TODAS las ubicaciones disponibles
+        - Crea nuevo proxy si no existe
         """
         
-        # Obtener ciudades ya fallidas
+        # ✅ Obtener ciudades ya intentadas (sin filtro de status)
         result = await self.db.execute(
             select(Proxy.city)
             .where(
                 and_(
                     Proxy.country == current_proxy.country,
-                    Proxy.status == ProxyStatus.FAILED
+                    Proxy.city.isnot(None)
                 )
             )
         )
-        failed_cities = [row[0] for row in result.all() if row[0]]
+        existing_cities = [row[0] for row in result.all()]
         
-        # Obtener ubicación óptima
+        # Obtener ubicación óptima (excluyendo solo la actual)
         optimal_location = GeoManager.get_optimal_location(
             country=current_proxy.country,
-            exclude_cities=failed_cities + [current_proxy.city]
+            exclude_cities=[current_proxy.city] if current_proxy.city else []
         )
         
         logger.info(
@@ -225,35 +270,62 @@ class SmartProxyRotator:
         )
         
         # ========================================
-        # ✅ BUSCAR PROXY EXISTENTE CON ESA UBICACIÓN
+        # ✅ BUSCAR PROXY EXISTENTE (sin filtro de status)
         # ========================================
         result = await self.db.execute(
-            select(Proxy).where(
+            select(Proxy, ProxyScore)
+            .outerjoin(ProxyScore, Proxy.id == ProxyScore.proxy_id)
+            .where(
                 and_(
                     Proxy.country == optimal_location.country,
                     Proxy.region == optimal_location.region,
-                    Proxy.city == optimal_location.city,
-                    Proxy.status == ProxyStatus.ACTIVE,
-                    Proxy.is_available == True
+                    Proxy.city == optimal_location.city
                 )
-            ).limit(1)
+            )
         )
         
-        existing_proxy = result.scalar_one_or_none()
+        candidates = list(result.all())
         
-        if existing_proxy:
-            logger.info(
-                f"✓ Reusing existing proxy: {existing_proxy.city} "
-                f"(ID: {existing_proxy.id})"
-            )
+        if candidates:
+            # ✅ Seleccionar mejor candidato (con o sin score)
+            best_proxy = None
+            best_score = -1
             
-            # Marcar proxy viejo como failed
-            current_proxy.status = ProxyStatus.FAILED
-            current_proxy.is_available = False
+            for proxy, score in candidates:
+                # Preferir proxies ACTIVE con buen score
+                if proxy.status == ProxyStatus.ACTIVE:
+                    if score and score.overall_score > best_score:
+                        best_proxy = proxy
+                        best_score = score.overall_score if score else 0
+                    elif not best_proxy:
+                        best_proxy = proxy
+                
+                # Si no hay ACTIVE, usar CUALQUIERA con mejor score
+                elif not best_proxy and score:
+                    if score.overall_score > best_score:
+                        best_proxy = proxy
+                        best_score = score.overall_score
             
-            await self.db.commit()
-            
-            return existing_proxy
+            # Si encontramos alguno, usarlo
+            if best_proxy:
+                logger.info(
+                    f"✓ Reusing existing proxy: {best_proxy.city} "
+                    f"(ID: {best_proxy.id}, Score: {best_score:.1f})"
+                )
+                
+                # ✅ Marcar como ACTIVE si no lo está
+                if best_proxy.status != ProxyStatus.ACTIVE:
+                    best_proxy.status = ProxyStatus.ACTIVE
+                    best_proxy.is_available = True
+                    logger.info(f"Reactivated proxy {best_proxy.id}")
+                
+                # Marcar proxy viejo como failed
+                current_proxy.status = ProxyStatus.FAILED
+                current_proxy.is_available = False
+                
+                await self.db.commit()
+                
+                return best_proxy
         
         # ========================================
         # ✅ SI NO EXISTE, CREAR NUEVO
@@ -274,6 +346,20 @@ class SmartProxyRotator:
         
         if not test_result["success"]:
             logger.error(f"✗ New proxy failed test: {optimal_location.city}")
+            
+            # ✅ Intentar con segunda mejor opción
+            fallbacks = GeoManager.get_fallback_locations(
+                optimal_location,
+                exclude_cities=[current_proxy.city]
+            )
+            
+            if fallbacks:
+                logger.info("Trying fallback location...")
+                return await self._try_fallback_location(
+                    current_proxy,
+                    fallbacks[0]
+                )
+            
             return None
         
         # Crear nuevo proxy
@@ -332,14 +418,70 @@ class SmartProxyRotator:
         
         return new_proxy
     
+    async def _try_fallback_location(
+        self,
+        current_proxy: Proxy,
+        fallback_location: GeoLocation
+    ) -> Optional[Proxy]:
+        """Intenta crear proxy en ubicación alternativa"""
+        
+        logger.info(f"Trying fallback: {fallback_location.city}")
+        
+        proxy_config = self.soax.get_proxy_config(
+            proxy_type=current_proxy.proxy_type,
+            country=fallback_location.country,
+            region=fallback_location.region_code,
+            city=fallback_location.city_code,
+            session_lifetime=current_proxy.session_lifetime or 3600
+        )
+        
+        test_result = await self.soax.test_proxy(proxy_config, timeout=10.0)
+        
+        if not test_result["success"]:
+            return None
+        
+        new_proxy = Proxy(
+            proxy_type=current_proxy.proxy_type,
+            host=proxy_config["host"],
+            port=proxy_config["port"],
+            username=proxy_config["username"],
+            password=proxy_config["password"],
+            country=fallback_location.country,
+            region=fallback_location.region,
+            city=fallback_location.city,
+            session_id=proxy_config["session_id"],
+            session_lifetime=current_proxy.session_lifetime,
+            sticky_session=True,
+            status=ProxyStatus.ACTIVE,
+            is_available=True,
+            detected_ip=test_result.get("ip"),
+            avg_response_time=test_result.get("latency_ms"),
+            total_checks=1,
+            success_rate=100.0
+        )
+        
+        self.db.add(new_proxy)
+        await self.db.commit()
+        await self.db.refresh(new_proxy)
+        
+        # Crear score
+        score = ProxyScore(
+            proxy_id=new_proxy.id,
+            overall_score=100.0,
+            total_checks=1,
+            successful_checks=1
+        )
+        self.db.add(score)
+        await self.db.commit()
+        
+        return new_proxy
+    
     async def _update_profiles_proxy(
         self,
         old_proxy_id: int,
         new_proxy_id: int
     ) -> int:
-        """
-        ✅ Actualiza profiles en DB + AdsPower con ROLLBACK si falla
-        """
+        """Actualiza profiles en DB + AdsPower con ROLLBACK si falla"""
         
         # Obtener nuevo proxy
         result = await self.db.execute(
@@ -376,9 +518,7 @@ class SmartProxyRotator:
         
         for profile in profiles:
             try:
-                # ========================================
-                # ✅ PRIMERO: Actualizar en AdsPower
-                # ========================================
+                # Actualizar en AdsPower
                 result = await self.db.execute(
                     select(Computer).where(Computer.id == profile.computer_id)
                 )
@@ -405,11 +545,6 @@ class SmartProxyRotator:
                     }
                 }
                 
-                logger.debug(
-                    f"Updating profile {profile.adspower_id}: "
-                    f"{new_proxy.city}, {new_proxy.region}"
-                )
-                
                 success = await adspower_client.update_profile(
                     profile_id=profile.adspower_id,
                     profile_data=proxy_config
@@ -420,15 +555,10 @@ class SmartProxyRotator:
                     profile.proxy_id = new_proxy_id
                     updated_count += 1
                     
-                    logger.info(
-                        f"✓ Profile {profile.id} updated: "
-                        f"{new_proxy.city}, {new_proxy.region}"
-                    )
+                    logger.info(f"✓ Profile {profile.id} updated")
                 else:
                     failed_profiles.append(profile.id)
-                    logger.error(
-                        f"✗ AdsPower update failed for profile {profile.id}"
-                    )
+                    logger.error(f"✗ AdsPower update failed for profile {profile.id}")
             
             except Exception as e:
                 failed_profiles.append(profile.id)
@@ -438,45 +568,39 @@ class SmartProxyRotator:
         await self.db.commit()
         
         if failed_profiles:
-            logger.warning(
-                f"⚠️ {len(failed_profiles)} profiles failed to update: "
-                f"{failed_profiles}"
-            )
+            logger.warning(f"⚠️ {len(failed_profiles)} profiles failed to update")
         
-        logger.info(
-            f"✅ Updated {updated_count}/{len(profiles)} profiles successfully"
-        )
+        logger.info(f"✅ Updated {updated_count}/{len(profiles)} profiles successfully")
         
-        return updated_count  # ✅ RETURN DENTRO DEL MÉTODO
+        return updated_count
     
     async def scan_and_rotate_all_proxies(
         self,
         test_urls: List[str] = None
     ) -> Dict:
-        """Escanea todos los proxies y rota los problemáticos"""
+        """Escanea TODAS las proxies (sin filtro de status)"""
         
-        result = await self.db.execute(
-            select(Proxy).where(
-                and_(
-                    Proxy.is_available == True,
-                    Proxy.status == ProxyStatus.ACTIVE
-                )
-            )
-        )
-        
+        # ✅ SIN FILTRO - todas las proxies
+        result = await self.db.execute(select(Proxy))
         proxies = list(result.scalars().all())
         
-        logger.info(f"🔍 Scanning {len(proxies)} active proxies...")
+        logger.info(f"🔍 Scanning {len(proxies)} total proxies...")
         
         stats = {
             "total_scanned": len(proxies),
             "rotated": 0,
             "healthy": 0,
-            "errors": 0
+            "errors": 0,
+            "skipped": 0
         }
         
         for proxy in proxies:
             try:
+                # Skip si ya está en proceso
+                if proxy.status == ProxyStatus.CHECKING:
+                    stats["skipped"] += 1
+                    continue
+                
                 result = await self.detect_and_rotate_if_needed(
                     proxy_id=proxy.id,
                     test_urls=test_urls
@@ -500,47 +624,3 @@ class SmartProxyRotator:
         )
         
         return stats
-
-
-# ========================================
-# TAREA CELERY PARA AUTO-ROTACIÓN
-# ========================================
-
-from app.tasks import celery_app
-
-@celery_app.task(name='tasks.auto_rotate_problematic_proxies')
-def auto_rotate_problematic_proxies_task():
-    """
-    Tarea automática que detecta y rota proxies problemáticos
-    Se ejecuta cada 30 minutos
-    """
-    
-    import asyncio
-    
-    try:
-        loop = asyncio.get_event_loop()
-    except RuntimeError:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-    
-    async def _rotate():
-        from app.database import AsyncSessionLocal
-        
-        async with AsyncSessionLocal() as db:
-            rotator = SmartProxyRotator(db)
-            
-            test_urls = [
-                "https://www.google.com",
-                "https://www.ecuabet.com",
-            ]
-            
-            results = await rotator.scan_and_rotate_all_proxies(test_urls=test_urls)
-            
-            logger.info(f"Auto-rotation completed: {results}")
-            
-            return results
-    
-    try:
-        return loop.run_until_complete(_rotate())
-    finally:
-        pass
