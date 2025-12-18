@@ -336,3 +336,14 @@ if __name__ == "__main__":
         port=settings.API_PORT,
         reload=settings.API_RELOAD
     )
+@app.get("/proxy-dashboard", response_class=HTMLResponse, tags=["Dashboard"])
+async def proxy_rotation_dashboard():
+    """Dashboard de rotación de proxies en tiempo real"""
+    
+    html_path = os.path.join(templates_dir, "proxy_rotation_dashboard.html")
+    
+    if os.path.exists(html_path):
+        with open(html_path, 'r', encoding='utf-8') as f:
+            return f.read()
+    else:
+        return "<h1>Proxy Rotation Dashboard not found</h1>"

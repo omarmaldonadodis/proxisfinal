@@ -1,30 +1,24 @@
-# app/tasks/scheduled_warming_tasks.py - VERSIÓN CORREGIDA
+# app/tasks/scheduled_warming_tasks.py - VERSIÓN ACTUALIZADA CON PROXY ROTATION
 """
-Tareas Celery para ejecutar warmings programados automáticamente
+Tareas Celery programadas (Beat Schedule)
+Incluye: warming automático + rotación de proxies + health checks
 """
 from celery import Task
 from app.database import AsyncSessionLocal
 from app.services.scheduler_service import SchedulerService
 from loguru import logger
+import asyncio
 
-# ✅ Importar celery_app DESPUÉS para evitar circular import
 def get_celery_app():
     from app.tasks import celery_app
     return celery_app
 
 celery_app = get_celery_app()
 
-
 @celery_app.task(name='tasks.execute_scheduled_warmings', bind=True)
 def execute_scheduled_warmings_task(self: Task):
-    """
-    ⏰ Tarea que se ejecuta cada minuto para verificar warmings programados
-    """
+    """⏰ Ejecuta warmings programados cada minuto"""
     
-    # ✅ FIX: Usar import dentro de la función para evitar loop issues
-    import asyncio
-    
-    # ✅ FIX: Crear nuevo event loop si no existe
     try:
         loop = asyncio.get_event_loop()
     except RuntimeError:
@@ -56,16 +50,8 @@ def execute_scheduled_warmings_task(self: Task):
                     
                     if result.get("success"):
                         executed_count += 1
-                        logger.info(
-                            f"✓ Scheduled warming {scheduled_warming.id} executed. "
-                            f"Next execution: {scheduled_warming.next_execution_at}"
-                        )
                     else:
                         failed_count += 1
-                        logger.error(
-                            f"✗ Scheduled warming {scheduled_warming.id} failed: "
-                            f"{result.get('error')}"
-                        )
                 
                 except Exception as e:
                     logger.error(f"Error executing scheduled warming {scheduled_warming.id}: {e}")
@@ -77,23 +63,16 @@ def execute_scheduled_warmings_task(self: Task):
                 "total": len(pending)
             }
     
-    # ✅ FIX: Usar loop.run_until_complete en lugar de asyncio.run
     try:
         return loop.run_until_complete(_execute())
     finally:
-        # NO cerrar el loop aquí, Celery lo gestiona
         pass
 
 
 @celery_app.task(name='tasks.cleanup_expired_scheduled_warmings')
 def cleanup_expired_scheduled_warmings_task():
-    """
-    🧹 Limpia warmings programados expirados
-    """
+    """🧹 Limpia warmings programados expirados"""
     
-    import asyncio
-    
-    # ✅ FIX: Crear/obtener event loop correctamente
     try:
         loop = asyncio.get_event_loop()
     except RuntimeError:
@@ -136,21 +115,25 @@ def cleanup_expired_scheduled_warmings_task():
             
             for scheduled in expired:
                 scheduled.is_active = False
-                logger.info(f"Deactivated expired warming {scheduled.id}")
             
             await db.commit()
             
             return {"cleaned": len(expired)}
     
-    # ✅ FIX: Usar loop.run_until_complete
     try:
         return loop.run_until_complete(_cleanup())
     finally:
         pass
 
 
+# ========================================
+# ✅ BEAT SCHEDULE COMPLETO
+# ========================================
+
 BEAT_SCHEDULE = {
-    # Warming programado
+    # ========================================
+    # WARMING AUTOMÁTICO
+    # ========================================
     'execute-scheduled-warmings': {
         'task': 'tasks.execute_scheduled_warmings',
         'schedule': 60.0,  # Cada 60 segundos
@@ -160,7 +143,17 @@ BEAT_SCHEDULE = {
         'schedule': 86400.0,  # Cada 24 horas
     },
     
-    # Proxy health monitoring
+    # ========================================
+    # ✅ ROTACIÓN AUTOMÁTICA DE PROXIES (NUEVO)
+    # ========================================
+    'auto-rotate-proxies': {
+        'task': 'tasks.auto_rotate_problematic_proxies',
+        'schedule': 1800.0,  # Cada 30 minutos
+    },
+    
+    # ========================================
+    # PROXY HEALTH MONITORING
+    # ========================================
     'monitor-all-proxies': {
         'task': 'tasks.monitor_all_proxies',
         'schedule': 900.0,  # 15 minutos
@@ -174,10 +167,11 @@ BEAT_SCHEDULE = {
         'schedule': 1800.0,  # 30 minutos
     },
     
+    # ========================================
+    # BACKUPS
+    # ========================================
     'backup-database-daily': {
         'task': 'tasks.backup_database',
-        'schedule': 86400.0,  # Cada 24 horas (ajustable)
-        # Ejecuta a las 2:00 AM (si usas crontab)
-        # 'schedule': crontab(hour=2, minute=0),
+        'schedule': 86400.0,  # Cada 24 horas
     },
 }
