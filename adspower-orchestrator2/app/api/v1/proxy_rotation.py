@@ -160,23 +160,109 @@ async def get_fallback_locations(
     }
 
 
+
 @router.get("/rotation-stats")
 async def get_rotation_stats(
     db: AsyncSession = Depends(get_db)
 ):
     """
-    📊 Estadísticas de rotación
+    📊 Estadísticas de rotación MEJORADAS
     
-    Muestra:
-    - Proxies activos por ciudad
-    - Proxies fallidos
-    - Rotaciones recientes
+    Incluye:
+    - Distribución por estado (healthy, degraded, unhealthy, offline)
+    - Contadores correctos según scores
     """
     
-    from sqlalchemy import select, func
+    from sqlalchemy import select, func, and_, case
     from app.models.proxy import Proxy, ProxyStatus
+    from app.models.proxy_health import ProxyScore
     
-    # Proxies activos por ciudad
+    # ========================================
+    # 1. TOTAL DE PROXIES ACTIVOS
+    # ========================================
+    result = await db.execute(
+        select(func.count(Proxy.id))
+        .where(Proxy.status == ProxyStatus.ACTIVE)
+    )
+    active_count = result.scalar()
+    
+    # ========================================
+    # 2. PROXIES FAILED
+    # ========================================
+    result = await db.execute(
+        select(func.count(Proxy.id))
+        .where(Proxy.status == ProxyStatus.FAILED)
+    )
+    failed_count = result.scalar()
+    
+    # ========================================
+    # 3. DISTRIBUCIÓN POR SCORE (con LEFT JOIN)
+    # ========================================
+    result = await db.execute(
+        select(
+            Proxy.id,
+            Proxy.city,
+            Proxy.region,
+            Proxy.status,
+            ProxyScore.overall_score,
+            ProxyScore.avg_latency,
+            ProxyScore.uptime_percentage
+        )
+        .outerjoin(ProxyScore, Proxy.id == ProxyScore.proxy_id)
+        .where(Proxy.status == ProxyStatus.ACTIVE)
+    )
+    
+    proxies_data = result.all()
+    
+    # Clasificar proxies
+    healthy = 0
+    degraded = 0
+    unhealthy = 0
+    no_score = 0
+    
+    distribution = []
+    
+    for proxy_id, city, region, status, score, latency, uptime in proxies_data:
+        proxy_info = {
+            "id": proxy_id,
+            "location": f"{city}, {region}",
+            "status": status.value,
+            "score": score,
+            "latency_ms": latency,
+            "uptime": uptime
+        }
+        
+        if score is None:
+            # ✅ Sin score - necesita health check
+            no_score += 1
+            proxy_info["health_status"] = "no_score"
+        elif score >= 80:
+            healthy += 1
+            proxy_info["health_status"] = "healthy"
+        elif score >= 60:
+            degraded += 1
+            proxy_info["health_status"] = "degraded"
+        else:
+            unhealthy += 1
+            proxy_info["health_status"] = "unhealthy"
+        
+        distribution.append(proxy_info)
+    
+    # ========================================
+    # 4. PROMEDIOS (solo de proxies con score)
+    # ========================================
+    result = await db.execute(
+        select(
+            func.avg(ProxyScore.overall_score),
+            func.avg(ProxyScore.avg_latency),
+            func.avg(ProxyScore.uptime_percentage)
+        )
+    )
+    averages = result.one()
+    
+    # ========================================
+    # 5. DISTRIBUCIÓN POR CIUDAD
+    # ========================================
     result = await db.execute(
         select(
             Proxy.city,
@@ -197,27 +283,23 @@ async def get_rotation_stats(
         for row in result.all()
     ]
     
-    # Proxies fallidos
-    result = await db.execute(
-        select(func.count(Proxy.id))
-        .where(Proxy.status == ProxyStatus.FAILED)
-    )
-    failed_count = result.scalar()
-    
-    # Total activos
-    result = await db.execute(
-        select(func.count(Proxy.id))
-        .where(Proxy.status == ProxyStatus.ACTIVE)
-    )
-    active_count = result.scalar()
-    
     return {
-        "active_proxies": active_count,
-        "failed_proxies": failed_count,
+        "total_active": active_count,
+        "total_failed": failed_count,
+        "health_distribution": {
+            "healthy": healthy,        # Score >= 80
+            "degraded": degraded,      # Score 60-79
+            "unhealthy": unhealthy,    # Score < 60
+            "no_score": no_score       # Sin health check
+        },
+        "averages": {
+            "overall_score": round(averages[0] or 0, 2),
+            "avg_latency_ms": round(averages[1] or 0, 2),
+            "uptime_percentage": round(averages[2] or 0, 2)
+        },
         "distribution_by_city": active_by_city,
-        "total_cities": len(active_by_city)
+        "proxies_detail": distribution
     }
-
 
 @router.post("/{proxy_id}/force-rotate")
 async def force_rotate_proxy(
@@ -346,4 +428,73 @@ async def get_health_monitor_data(
         "timestamp": datetime.utcnow().isoformat(),
         "total_proxies": len(proxies_data),
         "proxies": proxies_data
+    }
+
+# app/api/v1/proxy_rotation.py - AÑADIR ENDPOINT
+
+@router.get("/rotation-details/{proxy_id}")
+async def get_rotation_details(
+    proxy_id: int,
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    📊 Detalles completos de rotación de un proxy
+    
+    Muestra:
+    - Profiles asignados
+    - Ubicación actual
+    - Score del proxy
+    - Historial de rotaciones
+    """
+    
+    from sqlalchemy import select
+    from app.models.proxy import Proxy
+    from app.models.proxy_health import ProxyScore
+    from app.models.profile import Profile
+    
+    # Obtener proxy
+    result = await db.execute(
+        select(Proxy).where(Proxy.id == proxy_id)
+    )
+    proxy = result.scalar_one_or_none()
+    
+    if not proxy:
+        return {"error": "Proxy not found"}
+    
+    # Obtener score
+    result = await db.execute(
+        select(ProxyScore).where(ProxyScore.proxy_id == proxy_id)
+    )
+    score = result.scalar_one_or_none()
+    
+    # Obtener profiles asignados
+    result = await db.execute(
+        select(Profile).where(Profile.proxy_id == proxy_id)
+    )
+    profiles = list(result.scalars().all())
+    
+    return {
+        "proxy": {
+            "id": proxy.id,
+            "location": f"{proxy.city}, {proxy.region}",
+            "status": proxy.status.value,
+            "is_available": proxy.is_available,
+            "session_id": proxy.session_id
+        },
+        "score": {
+            "overall": score.overall_score if score else None,
+            "latency_ms": score.avg_latency if score else None,
+            "uptime": score.uptime_percentage if score else None,
+            "is_blacklisted": score.is_blacklisted if score else False
+        } if score else None,
+        "profiles": [
+            {
+                "id": p.id,
+                "name": p.name,
+                "adspower_id": p.adspower_id,
+                "computer_id": p.computer_id
+            }
+            for p in profiles
+        ],
+        "profiles_count": len(profiles)
     }
