@@ -129,7 +129,6 @@ def cleanup_expired_scheduled_warmings_task():
 # ========================================
 # ✅ BEAT SCHEDULE COMPLETO
 # ========================================
-
 BEAT_SCHEDULE = {
     # ========================================
     # WARMING AUTOMÁTICO
@@ -142,56 +141,48 @@ BEAT_SCHEDULE = {
         'task': 'tasks.cleanup_expired_scheduled_warmings',
         'schedule': 86400.0,  # Cada 24 horas
     },
-    
+
     # ========================================
-    # ✅ ROTACIÓN AUTOMÁTICA DE PROXIES (NUEVO)
+    # ROTACIÓN AUTOMÁTICA DE PROXIES
     # ========================================
-    'auto-rotate-proxies': {
-        'task': 'tasks.auto_rotate_problematic_proxies',
+    'rotate-slow-proxies': {
+        'task': 'tasks.rotate_slow_proxies',
         'schedule': 1800.0,  # Cada 30 minutos
     },
-    
-    # ========================================
-    # PROXY HEALTH MONITORING
-    # ========================================
     'monitor-all-proxies': {
         'task': 'tasks.monitor_all_proxies',
-        'schedule': 900.0,  # 15 minutos
+        'schedule': 900.0,  # Cada 15 minutos
     },
     'cleanup-blacklisted-proxies': {
         'task': 'tasks.cleanup_blacklisted_proxies',
-        'schedule': 3600.0,  # 1 hora
+        'schedule': 3600.0,  # Cada 1 hora
     },
-    'rotate-slow-proxies': {
-        'task': 'tasks.rotate_slow_proxies',
-        'schedule': 1800.0,  # 30 minutos
+    'auto-recover-and-verify': {
+        'task': 'tasks.auto_recover_and_verify',
+        'schedule': 900.0,  # Cada 15 minutos
     },
-    
+    'auto-fix-proxies': {
+        'task': 'tasks.auto_fix_all_proxies',
+        'schedule': 900.0,  # Cada 15 minutos
+    },
+    'recover-blacklisted': {
+        'task': 'tasks.recover_blacklisted_v2',
+        'schedule': 3600.0,  # Cada 1 hora
+    },
+
+    # ========================================
+    # PROXY DETECCIÓN PROACTIVA
+    # ========================================
+    'proactive-slow-detection': {
+        'task': 'tasks.proactive_slow_detection',
+        'schedule': 600.0,  # Cada 10 minutos
+    },
+
     # ========================================
     # BACKUPS
     # ========================================
     'backup-database-daily': {
         'task': 'tasks.backup_database',
         'schedule': 86400.0,  # Cada 24 horas
-    },
-
-    # ========================================
-    # ✅ AUTO-RECOVERY PERIÓDICO (NUEVO)
-    # ========================================
-    'auto-recover-and-verify': {
-        'task': 'tasks.auto_recover_and_verify',
-        'schedule': 900.0,  # Cada 15 minutos
-    },
-
-        # ✅ NUEVO: Auto-fix inteligente cada 15 minutos
-    'auto-fix-proxies': {
-        'task': 'tasks.auto_fix_all_proxies',
-        'schedule': 900.0,  # 15 minutos
-    },
-    
-    # ✅ NUEVO: Recuperar blacklisted cada hora
-    'fix-blacklisted': {
-        'task': 'tasks.fix_blacklisted_proxies',
-        'schedule': 3600.0,  # 1 hora
     },
 }

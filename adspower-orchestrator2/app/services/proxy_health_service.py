@@ -199,6 +199,7 @@ class ProxyHealthService:
         """✅ Availability test MEJORADO"""
         
         proxy_url = self._build_proxy_url(proxy)
+        logger.info(f"🔹 Proxy URL construido: {proxy_url}")
         
         results = {
             "is_available": False,

@@ -10,9 +10,11 @@ celery_app = Celery(
     broker=settings.REDIS_URL,
     backend=settings.REDIS_URL,
     include=[
-        'app.tasks.health_tasks',
         'app.tasks.backup_tasks',
-        'app.tasks.scheduled_warming_tasks'
+        'app.tasks.health_tasks',
+        'app.tasks.scheduled_warming_tasks',
+        'app.tasks.proxy_rotation_tasks',
+        'app.tasks.proxy_health_tasks',  # ✅ Se agregó este módulo faltante
     ]
 )
 
@@ -29,39 +31,25 @@ celery_app.conf.update(
     worker_max_tasks_per_child=50,
 )
 
-# ✅ NUEVO: Inicializar Redis Pub/Sub en workers
+# ========================================
+# Inicialización Redis Pub/Sub
+# ========================================
 @worker_process_init.connect
 def init_worker(**kwargs):
-    """
-    Se ejecuta cuando cada worker process inicia
-    Conecta Redis Pub/Sub para publicar comandos
-    """
     logger.info("🚀 Celery worker process initializing...")
-    
-    # Importar aquí para evitar circular imports
     from app.core.redis_messaging import redis_messaging
-    
-    # Crear event loop si no existe
     try:
         loop = asyncio.get_event_loop()
     except RuntimeError:
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-    
-    # Conectar Redis
     loop.run_until_complete(redis_messaging.connect())
     logger.info("✓ Redis Pub/Sub connected in Celery worker")
 
 @worker_process_shutdown.connect
 def shutdown_worker(**kwargs):
-    """
-    Se ejecuta cuando worker process termina
-    Desconecta Redis Pub/Sub
-    """
     logger.info("🛑 Celery worker process shutting down...")
-    
     from app.core.redis_messaging import redis_messaging
-    
     try:
         loop = asyncio.get_event_loop()
         loop.run_until_complete(redis_messaging.stop())
@@ -69,10 +57,11 @@ def shutdown_worker(**kwargs):
     except Exception as e:
         logger.error(f"Error disconnecting Redis: {e}")
 
-# ✅ Configurar beat_schedule DESPUÉS de que todos los módulos se carguen
+# ========================================
+# Configurar Beat Schedule después de cargar módulos
+# ========================================
 @celery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
-    """Configurar tareas periódicas después de inicializar Celery"""
     from app.tasks.scheduled_warming_tasks import BEAT_SCHEDULE
     sender.conf.beat_schedule = BEAT_SCHEDULE
     logger.info("✓ Celery Beat schedule configured")
