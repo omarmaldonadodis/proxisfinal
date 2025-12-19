@@ -9,6 +9,7 @@ from sqlalchemy.sql import func
 from app.database import Base
 import enum
 
+
 class HealthCheckStatus(str, enum.Enum):
     """Estados de verificación"""
     SUCCESS = "success"
@@ -17,30 +18,34 @@ class HealthCheckStatus(str, enum.Enum):
     BLOCKED = "blocked"
     SLOW = "slow"
 
+# adspower-orchestrator2/app/models/proxy_health.py
+
+
 class ProxyHealthCheck(Base):
     """Historial de verificaciones de proxy"""
     __tablename__ = "proxy_health_checks"
     
-    id = Column(Integer, primary_key=True, index=True)
+    # ✅ CRÍTICO: ID auto-generado (no manual)
+    id = Column(Integer, primary_key=True, autoincrement=True, index=True)
     
     # Relación con proxy
     proxy_id = Column(Integer, ForeignKey("proxies.id"), nullable=False, index=True)
     
     # Resultado de verificación
     status = Column(String(20), nullable=False, index=True)
-    check_type = Column(String(50), nullable=False)  # speed, geo, availability
+    check_type = Column(String(50), nullable=False)
     
     # Métricas de velocidad
-    latency_ms = Column(Float)  # Tiempo de respuesta
-    download_speed_mbps = Column(Float)  # Velocidad de descarga
-    upload_speed_mbps = Column(Float)  # Velocidad de subida
+    latency_ms = Column(Float)
+    download_speed_mbps = Column(Float)
+    upload_speed_mbps = Column(Float)
     
     # Verificación geográfica
     detected_ip = Column(String(45))
     detected_country = Column(String(2))
     detected_city = Column(String(255))
     detected_isp = Column(String(255))
-    geo_match = Column(Boolean)  # ¿Coincide con país esperado?
+    geo_match = Column(Boolean)
     
     # Información de disponibilidad
     is_available = Column(Boolean)
@@ -49,11 +54,11 @@ class ProxyHealthCheck(Base):
     
     # Sesión utilizada
     session_id = Column(String(255))
-    session_test_result = Column(JSON)  # Resultados con diferentes sesiones
+    session_test_result = Column(JSON)
     
     # Metadata
-    test_urls = Column(JSON)  # URLs usadas para test
-    raw_response = Column(JSON)  # Respuesta completa del test
+    test_urls = Column(JSON)
+    raw_response = Column(JSON)
     
     # Timestamp
     checked_at = Column(DateTime(timezone=True), server_default=func.now(), index=True)
@@ -61,8 +66,8 @@ class ProxyHealthCheck(Base):
     # Relationships
     proxy = relationship("Proxy", back_populates="health_checks")
     
-    def __repr__(self):
-        return f"<ProxyHealthCheck(proxy_id={self.proxy_id}, status={self.status}, latency={self.latency_ms}ms)>"
+   #  def __repr__(self):
+   #      return f"<ProxyHealthCheck(proxy_id={self.proxy_id}, status={self.status}, latency={self.latency_ms}ms)>"
 
 
 class ProxyScore(Base):

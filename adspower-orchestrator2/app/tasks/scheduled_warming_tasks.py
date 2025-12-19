@@ -174,4 +174,12 @@ BEAT_SCHEDULE = {
         'task': 'tasks.backup_database',
         'schedule': 86400.0,  # Cada 24 horas
     },
+
+    # ========================================
+    # ✅ AUTO-RECOVERY PERIÓDICO (NUEVO)
+    # ========================================
+    'auto-recover-and-verify': {
+        'task': 'tasks.auto_recover_and_verify',
+        'schedule': 900.0,  # Cada 15 minutos
+    },
 }

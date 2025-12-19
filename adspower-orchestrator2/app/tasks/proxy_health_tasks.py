@@ -272,6 +272,101 @@ def rotate_slow_proxies_task(self: Task):
     finally:
         pass
 
+# adspower-orchestrator2/app/tasks/proxy_health_tasks.py
+
+@celery_app.task(name='tasks.auto_recover_and_verify')
+def auto_recover_and_verify_task():
+    """
+    🔄 Tarea automática que:
+    1. Verifica salud de todos los proxies
+    2. Recupera los que fallan
+    3. Actualiza AdsPower
+    
+    Se ejecuta cada 15 minutos
+    """
+    
+    try:
+        loop = asyncio.get_event_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+    
+    async def _recover():
+        from sqlalchemy import select
+        from app.models.proxy import Proxy, ProxyStatus
+        from app.services.proxy_health_service import ProxyHealthService
+        from app.services.smart_proxy_rotator import SmartProxyRotator
+        
+        async with AsyncSessionLocal() as db:
+            # ========================================
+            # 1. HEALTH CHECK TODOS LOS PROXIES
+            # ========================================
+            health_service = ProxyHealthService(db)
+            
+            results = await health_service.health_check_all_proxies(
+                only_active=False,  # ✅ Verificar TODOS
+                max_concurrent=5
+            )
+            
+            logger.info(
+                f"Health check: {results['healthy']} healthy, "
+                f"{results['offline']} offline"
+            )
+            
+            # ========================================
+            # 2. RECUPERAR PROXIES FAILED
+            # ========================================
+            result = await db.execute(
+                select(Proxy).where(Proxy.status == ProxyStatus.FAILED)
+            )
+            failed_proxies = list(result.scalars().all())
+            
+            if not failed_proxies:
+                logger.info("No failed proxies to recover")
+                return {"recovered": 0, "failed": 0}
+            
+            logger.info(f"Found {len(failed_proxies)} failed proxies")
+            
+            rotator = SmartProxyRotator(db)
+            recovered = 0
+            still_failed = 0
+            
+            for proxy in failed_proxies:
+                try:
+                    # Intentar recuperar (reutilizando proxies existentes)
+                    result = await rotator.detect_and_rotate_if_needed(
+                        proxy_id=proxy.id,
+                        test_urls=["https://www.google.com"]
+                    )
+                    
+                    if result.get("rotated"):
+                        # ✅ Actualizar profiles en AdsPower
+                        if result.get("new_proxy_id"):
+                            await rotator._update_profiles_proxy(
+                                old_proxy_id=proxy.id,
+                                new_proxy_id=result["new_proxy_id"]
+                            )
+                        
+                        recovered += 1
+                        logger.info(f"✓ Recovered proxy {proxy.id}")
+                    else:
+                        still_failed += 1
+                
+                except Exception as e:
+                    logger.error(f"Error recovering proxy {proxy.id}: {e}")
+                    still_failed += 1
+            
+            return {
+                "total_checked": results['total'],
+                "healthy": results['healthy'],
+                "recovered": recovered,
+                "still_failed": still_failed
+            }
+    
+    try:
+        return loop.run_until_complete(_recover())
+    finally:
+        pass
 
 
 # NOTA: Agregar PROXY_HEALTH_SCHEDULE al BEAT_SCHEDULE existente

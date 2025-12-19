@@ -232,33 +232,22 @@ class SmartProxyRotator:
         
         return True
     
+
     async def _rotate_to_optimal_location(
         self,
         current_proxy: Proxy,
         issues: List[str]
     ) -> Optional[Proxy]:
         """
-        🎯 Rota a ubicación ÓPTIMA (BUSCA SIN FILTROS)
+        🎯 Rota a ubicación ÓPTIMA sin crear duplicados
         
-        ✅ CAMBIOS:
-        - NO filtra por status ACTIVE
-        - Busca en TODAS las ubicaciones disponibles
-        - Crea nuevo proxy si no existe
+        Estrategia:
+        1. Buscar proxies EXISTENTES (status ACTIVE o INACTIVE)
+        2. Si existe, reactivar y actualizar
+        3. Solo crear nuevo si NO existe ninguno en esa ubicación
         """
         
-        # ✅ Obtener ciudades ya intentadas (sin filtro de status)
-        result = await self.db.execute(
-            select(Proxy.city)
-            .where(
-                and_(
-                    Proxy.country == current_proxy.country,
-                    Proxy.city.isnot(None)
-                )
-            )
-        )
-        existing_cities = [row[0] for row in result.all()]
-        
-        # Obtener ubicación óptima (excluyendo solo la actual)
+        # Obtener ubicación óptima
         optimal_location = GeoManager.get_optimal_location(
             country=current_proxy.country,
             exclude_cities=[current_proxy.city] if current_proxy.city else []
@@ -270,7 +259,7 @@ class SmartProxyRotator:
         )
         
         # ========================================
-        # ✅ BUSCAR PROXY EXISTENTE (sin filtro de status)
+        # 1. BUSCAR PROXY EXISTENTE (sin filtro de status)
         # ========================================
         result = await self.db.execute(
             select(Proxy, ProxyScore)
@@ -279,7 +268,8 @@ class SmartProxyRotator:
                 and_(
                     Proxy.country == optimal_location.country,
                     Proxy.region == optimal_location.region,
-                    Proxy.city == optimal_location.city
+                    Proxy.city == optimal_location.city,
+                    Proxy.proxy_type == current_proxy.proxy_type  # ✅ Mismo tipo
                 )
             )
         )
@@ -287,12 +277,14 @@ class SmartProxyRotator:
         candidates = list(result.all())
         
         if candidates:
-            # ✅ Seleccionar mejor candidato (con o sin score)
+            # ========================================
+            # 2. SELECCIONAR MEJOR CANDIDATO
+            # ========================================
             best_proxy = None
             best_score = -1
             
             for proxy, score in candidates:
-                # Preferir proxies ACTIVE con buen score
+                # Preferir ACTIVE con buen score
                 if proxy.status == ProxyStatus.ACTIVE:
                     if score and score.overall_score > best_score:
                         best_proxy = proxy
@@ -306,18 +298,21 @@ class SmartProxyRotator:
                         best_proxy = proxy
                         best_score = score.overall_score
             
-            # Si encontramos alguno, usarlo
+            # Si encontramos alguno, REUTILIZARLO
             if best_proxy:
                 logger.info(
                     f"✓ Reusing existing proxy: {best_proxy.city} "
                     f"(ID: {best_proxy.id}, Score: {best_score:.1f})"
                 )
                 
-                # ✅ Marcar como ACTIVE si no lo está
+                # ✅ ACTUALIZAR (NO CREAR)
                 if best_proxy.status != ProxyStatus.ACTIVE:
                     best_proxy.status = ProxyStatus.ACTIVE
                     best_proxy.is_available = True
                     logger.info(f"Reactivated proxy {best_proxy.id}")
+                
+                # ✅ Rotar sesión (nueva IP sin cambiar proxy)
+                await self._rotate_session(best_proxy)
                 
                 # Marcar proxy viejo como failed
                 current_proxy.status = ProxyStatus.FAILED
@@ -328,9 +323,9 @@ class SmartProxyRotator:
                 return best_proxy
         
         # ========================================
-        # ✅ SI NO EXISTE, CREAR NUEVO
+        # 3. SI NO EXISTE, CREAR NUEVO (último recurso)
         # ========================================
-        logger.info(f"Creating new proxy for {optimal_location.city}")
+        logger.info(f"No existing proxy found, creating new for {optimal_location.city}")
         
         # Generar configuración SOAX
         proxy_config = self.soax.get_proxy_config(
@@ -346,20 +341,6 @@ class SmartProxyRotator:
         
         if not test_result["success"]:
             logger.error(f"✗ New proxy failed test: {optimal_location.city}")
-            
-            # ✅ Intentar con segunda mejor opción
-            fallbacks = GeoManager.get_fallback_locations(
-                optimal_location,
-                exclude_cities=[current_proxy.city]
-            )
-            
-            if fallbacks:
-                logger.info("Trying fallback location...")
-                return await self._try_fallback_location(
-                    current_proxy,
-                    fallbacks[0]
-                )
-            
             return None
         
         # Crear nuevo proxy
@@ -378,8 +359,6 @@ class SmartProxyRotator:
             status=ProxyStatus.ACTIVE,
             is_available=True,
             detected_ip=test_result.get("ip"),
-            detected_country=test_result.get("country"),
-            detected_city=test_result.get("city"),
             avg_response_time=test_result.get("latency_ms"),
             total_checks=1,
             success_rate=100.0
@@ -394,87 +373,105 @@ class SmartProxyRotator:
         await self.db.commit()
         await self.db.refresh(new_proxy)
         
-        # ✅ CREAR ProxyScore para el nuevo proxy
+        # Crear ProxyScore
         score = ProxyScore(
             proxy_id=new_proxy.id,
             overall_score=100.0,
-            speed_score=100.0,
-            availability_score=100.0,
-            geo_accuracy_score=100.0,
-            stability_score=100.0,
             total_checks=1,
             successful_checks=1,
-            failed_checks=0,
-            avg_latency=test_result.get("latency_ms"),
-            min_latency=test_result.get("latency_ms"),
-            max_latency=test_result.get("latency_ms"),
             uptime_percentage=100.0
         )
-        
         self.db.add(score)
         await self.db.commit()
         
         logger.info(f"✓ New proxy created: {new_proxy.city} (ID: {new_proxy.id})")
         
         return new_proxy
-    
-    async def _try_fallback_location(
-        self,
-        current_proxy: Proxy,
-        fallback_location: GeoLocation
-    ) -> Optional[Proxy]:
-        """Intenta crear proxy en ubicación alternativa"""
+
+
+    async def _rotate_session(self, proxy: Proxy):
+        """
+        🔄 Rota sesión del proxy (nueva IP) sin crear proxy nuevo
+        """
+        from app.integrations.soax_client import SOAXClient
         
-        logger.info(f"Trying fallback: {fallback_location.city}")
-        
-        proxy_config = self.soax.get_proxy_config(
-            proxy_type=current_proxy.proxy_type,
-            country=fallback_location.country,
-            region=fallback_location.region_code,
-            city=fallback_location.city_code,
-            session_lifetime=current_proxy.session_lifetime or 3600
+        soax = SOAXClient(
+            username=proxy.username.split('-')[0] if proxy.username else "",
+            password=proxy.password or ""
         )
         
-        test_result = await self.soax.test_proxy(proxy_config, timeout=10.0)
-        
-        if not test_result["success"]:
-            return None
-        
-        new_proxy = Proxy(
-            proxy_type=current_proxy.proxy_type,
-            host=proxy_config["host"],
-            port=proxy_config["port"],
-            username=proxy_config["username"],
-            password=proxy_config["password"],
-            country=fallback_location.country,
-            region=fallback_location.region,
-            city=fallback_location.city,
-            session_id=proxy_config["session_id"],
-            session_lifetime=current_proxy.session_lifetime,
-            sticky_session=True,
-            status=ProxyStatus.ACTIVE,
-            is_available=True,
-            detected_ip=test_result.get("ip"),
-            avg_response_time=test_result.get("latency_ms"),
-            total_checks=1,
-            success_rate=100.0
+        # Generar nueva configuración con nueva sesión
+        new_config = soax.get_proxy_config(
+            proxy_type=proxy.proxy_type,
+            country=proxy.country,
+            region=proxy.region,
+            city=proxy.city,
+            session_lifetime=proxy.session_lifetime or 3600
         )
         
-        self.db.add(new_proxy)
-        await self.db.commit()
-        await self.db.refresh(new_proxy)
+        # Actualizar proxy con nueva sesión
+        proxy.session_id = new_config["session_id"]
+        proxy.username = new_config["username"]
         
-        # Crear score
-        score = ProxyScore(
-            proxy_id=new_proxy.id,
-            overall_score=100.0,
-            total_checks=1,
-            successful_checks=1
-        )
-        self.db.add(score)
-        await self.db.commit()
+        logger.info(f"Session rotated for proxy {proxy.id}: New IP incoming")
         
-        return new_proxy
+        async def _try_fallback_location(
+            self,
+            current_proxy: Proxy,
+            fallback_location: GeoLocation
+        ) -> Optional[Proxy]:
+            """Intenta crear proxy en ubicación alternativa"""
+            
+            logger.info(f"Trying fallback: {fallback_location.city}")
+            
+            proxy_config = self.soax.get_proxy_config(
+                proxy_type=current_proxy.proxy_type,
+                country=fallback_location.country,
+                region=fallback_location.region_code,
+                city=fallback_location.city_code,
+                session_lifetime=current_proxy.session_lifetime or 3600
+            )
+            
+            test_result = await self.soax.test_proxy(proxy_config, timeout=10.0)
+            
+            if not test_result["success"]:
+                return None
+            
+            new_proxy = Proxy(
+                proxy_type=current_proxy.proxy_type,
+                host=proxy_config["host"],
+                port=proxy_config["port"],
+                username=proxy_config["username"],
+                password=proxy_config["password"],
+                country=fallback_location.country,
+                region=fallback_location.region,
+                city=fallback_location.city,
+                session_id=proxy_config["session_id"],
+                session_lifetime=current_proxy.session_lifetime,
+                sticky_session=True,
+                status=ProxyStatus.ACTIVE,
+                is_available=True,
+                detected_ip=test_result.get("ip"),
+                avg_response_time=test_result.get("latency_ms"),
+                total_checks=1,
+                success_rate=100.0
+            )
+            
+            self.db.add(new_proxy)
+            await self.db.commit()
+            await self.db.refresh(new_proxy)
+            
+            # Crear score
+            score = ProxyScore(
+                proxy_id=new_proxy.id,
+                overall_score=100.0,
+                total_checks=1,
+                successful_checks=1
+            )
+            self.db.add(score)
+            await self.db.commit()
+            
+            return new_proxy
     
     async def _update_profiles_proxy(
         self,
@@ -529,9 +526,9 @@ class SmartProxyRotator:
                     failed_profiles.append(profile.id)
                     continue
                 
-                adspower_client = AdsPowerClient(
-                    api_url=computer.adspower_api_url,
-                    api_key=computer.adspower_api_key
+                adspower_client = AdsPowerClient(                    
+                    api_url=settings.ADSPOWER_DEFAULT_API_URL or computer.adspower_api_url,
+                    api_key=settings.ADSPOWER_DEFAULT_API_KEY or computer.adspower_api_key
                 )
                 
                 proxy_config = {
