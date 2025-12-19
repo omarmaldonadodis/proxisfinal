@@ -128,16 +128,16 @@ async def recover_blacklisted_proxies(
     """
     🚑 RECOVER: Intenta recuperar proxies blacklisted
     
-    ✅ Proceso:
-    1. Encuentra proxies blacklisted
-    2. Para cada una: rotar a ubicación óptima
-    3. Si exitoso, quitar blacklist
+    ✅ CORREGIDO: Evita acceso a atributos después de commit
     """
     
     from sqlalchemy import select, and_
     from app.models.proxy import Proxy
     from app.models.proxy_health import ProxyScore
     
+    # ========================================
+    # 1. OBTENER PROXIES BLACKLISTED
+    # ========================================
     result = await db.execute(
         select(Proxy, ProxyScore)
         .join(ProxyScore)
@@ -154,52 +154,85 @@ async def recover_blacklisted_proxies(
     
     logger.info(f"🚑 Attempting to recover {len(blacklisted)} blacklisted proxies")
     
+    # ========================================
+    # 2. EXTRAER IDs ANTES DE CUALQUIER OPERACIÓN
+    # ========================================
+    proxy_ids_to_recover = [
+        {
+            "proxy_id": proxy.id,
+            "location": f"{proxy.city or 'N/A'}, {proxy.region or 'N/A'}",
+            "score_id": score.id
+        }
+        for proxy, score in blacklisted
+    ]
+    
+    # ========================================
+    # 3. PROCESAR CADA PROXY
+    # ========================================
     rotator = SmartProxyRotator(db)
     
     stats = {
-        "total": len(blacklisted),
+        "total": len(proxy_ids_to_recover),
         "recovered": 0,
         "still_failed": 0,
         "details": []
     }
     
-    for proxy, score in blacklisted:
+    for proxy_info in proxy_ids_to_recover:
+        proxy_id = proxy_info["proxy_id"]
+        score_id = proxy_info["score_id"]
+        
         try:
-            # Intentar rotación
+            # ========================================
+            # A. INTENTAR ROTACIÓN
+            # ========================================
             result = await rotator.detect_and_rotate_if_needed(
-                proxy_id=proxy.id
+                proxy_id=proxy_id
             )
             
+            # ========================================
+            # B. SI EXITOSO, QUITAR BLACKLIST
+            # ========================================
             if result.get("rotated") and result.get("new_latency_ms"):
-                # Exitoso - quitar blacklist
-                score.is_blacklisted = False
-                score.blacklist_reason = None
-                score.blacklisted_at = None
-                score.consecutive_failures = 0
-                
-                stats["recovered"] += 1
-                
-                logger.info(
-                    f"✅ Recovered proxy {proxy.id}: "
-                    f"{result['new_location']} ({result['new_latency_ms']}ms)"
+                # Obtener score de nuevo (ANTES de modificar)
+                score_result = await db.execute(
+                    select(ProxyScore).where(ProxyScore.id == score_id)
                 )
+                score = score_result.scalar_one_or_none()
+                
+                if score:
+                    # Modificar
+                    score.is_blacklisted = False
+                    score.blacklist_reason = None
+                    score.blacklisted_at = None
+                    score.consecutive_failures = 0
+                    
+                    # Commit AHORA
+                    await db.commit()
+                    
+                    stats["recovered"] += 1
+                    
+                    logger.info(
+                        f"✅ Recovered proxy {proxy_id}: "
+                        f"{result['new_location']} ({result['new_latency_ms']}ms)"
+                    )
+                else:
+                    logger.warning(f"Score {score_id} not found after rotation")
+                    stats["still_failed"] += 1
             else:
                 stats["still_failed"] += 1
             
+            # Agregar detalle
             stats["details"].append({
-                "proxy_id": proxy.id,
-                "old_location": f"{proxy.city}, {proxy.region}",
+                "proxy_id": proxy_id,
+                "old_location": proxy_info["location"],
                 "result": result
             })
         
         except Exception as e:
-            logger.error(f"Recovery failed for proxy {proxy.id}: {e}")
+            logger.error(f"Recovery failed for proxy {proxy_id}: {e}")
             stats["still_failed"] += 1
     
-    await db.commit()
-    
-    return stats
-
 
 @router.get("/health-report")
 async def get_health_report(
@@ -280,35 +313,46 @@ async def batch_optimize_all_proxies(
     """
     🚀 BATCH OPTIMIZE: Optimiza TODAS las proxies en background
     
-    ✅ Proceso:
-    1. Ping todas
-    2. Rotar las lentas/offline
-    3. Se ejecuta en background
+    ✅ CORREGIDO: Evita acceso a atributos en contexto incorrecto
     """
     
     async def _optimize():
         from sqlalchemy import select
         from app.models.proxy import Proxy
         
+        # ========================================
+        # 1. CREAR NUEVA SESIÓN PARA BACKGROUND
+        # ========================================
         async with AsyncSessionLocal() as bg_db:
+            # ========================================
+            # 2. OBTENER TODAS LAS PROXIES
+            # ========================================
             result = await bg_db.execute(select(Proxy))
             proxies = list(result.scalars().all())
             
+            # ========================================
+            # 3. EXTRAER IDs ANTES DE OPERACIONES
+            # ========================================
+            proxy_ids = [proxy.id for proxy in proxies]
+            
+            logger.info(f"🚀 Starting batch optimization for {len(proxy_ids)} proxies")
+            
             rotator = SmartProxyRotator(bg_db)
             
-            logger.info(f"🚀 Starting batch optimization for {len(proxies)} proxies")
-            
             stats = {
-                "total": len(proxies),
+                "total": len(proxy_ids),
                 "rotated": 0,
                 "optimal": 0,
                 "failed": 0
             }
             
-            for proxy in proxies:
+            # ========================================
+            # 4. PROCESAR CADA PROXY
+            # ========================================
+            for proxy_id in proxy_ids:
                 try:
                     result = await rotator.detect_and_rotate_if_needed(
-                        proxy_id=proxy.id
+                        proxy_id=proxy_id
                     )
                     
                     if result.get("rotated"):
@@ -317,7 +361,7 @@ async def batch_optimize_all_proxies(
                         stats["optimal"] += 1
                 
                 except Exception as e:
-                    logger.error(f"Failed to optimize proxy {proxy.id}: {e}")
+                    logger.error(f"Failed to optimize proxy {proxy_id}: {e}")
                     stats["failed"] += 1
                 
                 # Rate limiting
@@ -339,7 +383,6 @@ async def batch_optimize_all_proxies(
         "message": "Batch optimization started in background",
         "note": "Check logs for progress"
     }
-
 
 # ========================================
 # TASK CELERY ACTUALIZADO

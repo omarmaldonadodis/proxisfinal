@@ -407,6 +407,9 @@ class SmartProxyRotator:
                 city=location.city_code,
                 session_lifetime=3600
             )
+
+            logger.warning(f"SOAX USERNAME TESTED: {test_config['username']}")
+
             
             # Crear proxy temporal para ping
             test_proxy = Proxy(
@@ -479,6 +482,7 @@ class SmartProxyRotator:
         proxy.status = ProxyStatus.ACTIVE
         proxy.is_available = True
         proxy.updated_at = datetime.utcnow()
+        
         
         logger.info(
             f"✓ Proxy {proxy.id} session updated: "

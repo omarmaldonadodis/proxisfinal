@@ -9,6 +9,7 @@ from loguru import logger
 
 class SOAXClient:
     """Cliente para configurar proxies SOAX con jerarquía completa"""
+
     
     def __init__(
         self,
@@ -72,7 +73,7 @@ class SOAXClient:
         proxy_username = "-".join(username_parts)
         
         logger.debug(
-            f"SOAX username: {proxy_username} "
+            f"c: {proxy_username} "
             f"(country={country}, region={region}, city={city})"
         )
         
