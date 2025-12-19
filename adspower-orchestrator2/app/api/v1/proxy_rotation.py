@@ -1,18 +1,15 @@
-# app/api/v1/proxy_rotation.py - VERSIÓN CORREGIDA COMPLETA
+# app/api/v1/proxy_rotation.py - INTEGRACIÓN CON NUEVO SISTEMA
 """
-API endpoints para rotación inteligente de proxies
-✅ FIXES:
-- Muestra TODAS las proxies (ACTIVE, FAILED, INACTIVE)
-- Conteos correctos con manejo de NULL scores
-- Busca alternativas eficientes sin importar status actual
-- Recuperación automática de proxies FAILED
+API endpoints actualizados para usar SmartProxyRotator BLINDADO
 """
-from fastapi import APIRouter, Depends, Query, BackgroundTasks
+from fastapi import APIRouter, Depends, Query, BackgroundTasks, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List, Optional
 from app.database import get_db
 from app.services.smart_proxy_rotator import SmartProxyRotator
-from app.utils.geo_manager import GeoManager
+from loguru import logger
+from datetime import datetime
+
 
 router = APIRouter(prefix="/proxy-rotation", tags=["🔄 Proxy Rotation"])
 
@@ -20,53 +17,21 @@ router = APIRouter(prefix="/proxy-rotation", tags=["🔄 Proxy Rotation"])
 @router.post("/{proxy_id}/check-and-rotate")
 async def check_and_rotate_proxy(
     proxy_id: int,
-    test_urls: Optional[List[str]] = Query(None, description="URLs to test functionality"),
-    db: AsyncSession = Depends(get_db)
-):
-    """
-    🔍 Verifica proxy y rota si hay problemas
-    
-    Detecta:
-    - Timeouts
-    - Carga lenta
-    - Bloqueos
-    - Detección de bots
-    
-    Si detecta problemas, rota automáticamente a ubicación alternativa
-    """
-    
-    rotator = SmartProxyRotator(db)
-    
-    result = await rotator.detect_and_rotate_if_needed(
-        proxy_id=proxy_id,
-        test_urls=test_urls
-    )
-    
-    return result
-
-
-@router.post("/scan-all")
-async def scan_all_proxies(
     test_urls: Optional[List[str]] = Query(
-        None,
+        None, 
         description="URLs to test (default: Google + Ecuabet)"
     ),
-    background_tasks: BackgroundTasks = None,
     db: AsyncSession = Depends(get_db)
 ):
     """
-    🔍 Escanea TODOS los proxies activos y rota los problemáticos
+    🎯 Verifica proxy y rota INTELIGENTEMENTE si hay problemas
     
-    Proceso:
-    1. Verifica cada proxy activo
-    2. Detecta problemas
-    3. Rota automáticamente si es necesario
-    4. Actualiza DB + AdsPower
-    
-    Ejecuta en background (puede tomar varios minutos)
+    ✅ NUEVO SISTEMA:
+    - Ping real antes de decidir
+    - Jerarquía geográfica correcta
+    - NO crea duplicados
+    - Rollback si falla
     """
-    
-    rotator = SmartProxyRotator(db)
     
     if not test_urls:
         test_urls = [
@@ -74,125 +39,344 @@ async def scan_all_proxies(
             "https://www.ecuabet.com"
         ]
     
-    # Ejecutar en background
-    async def _scan():
-        await rotator.scan_and_rotate_all_proxies(test_urls=test_urls)
+    rotator = SmartProxyRotator(db)
     
-    background_tasks.add_task(_scan)
+    try:
+        result = await rotator.detect_and_rotate_if_needed(
+            proxy_id=proxy_id,
+            test_urls=test_urls
+        )
+        
+        return result
     
-    return {
-        "message": "Proxy scan started in background",
-        "test_urls": test_urls
-    }
+    except Exception as e:
+        logger.error(f"Rotation failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/available-locations")
-async def get_available_locations(
-    country: str = Query("ec", description="Country code")
-):
-    """
-    🗺️ Lista de TODAS las ubicaciones disponibles
-    
-    Útil para:
-    - Ver qué ciudades/regiones están configuradas
-    - Planning de distribución geográfica
-    """
-    
-    locations = GeoManager.get_all_locations(country=country)
-    
-    return {
-        "total": len(locations),
-        "country": country,
-        "locations": [
-            {
-                "region": loc.region,
-                "city": loc.city,
-                "soax_string": loc.to_soax_string(),
-                "priority": loc.priority
-            }
-            for loc in locations
-        ]
-    }
-
-
-@router.get("/fallback-locations/{proxy_id}")
-async def get_fallback_locations(
-    proxy_id: int,
+@router.post("/auto-fix-slow-proxies")
+async def auto_fix_slow_proxies(
+    max_latency_ms: int = Query(2000, description="Max latency threshold"),
     db: AsyncSession = Depends(get_db)
 ):
     """
-    🔄 Ubicaciones alternativas para un proxy
+    🔧 AUTO-FIX: Rota TODAS las proxies lentas
     
-    Muestra qué ciudades se usarían si el proxy actual falla
+    ✅ Proceso:
+    1. Busca proxies con latencia > threshold
+    2. Para cada una: ping + rotar si es necesario
+    3. Retorna estadísticas
     """
     
     from sqlalchemy import select
     from app.models.proxy import Proxy
+    from app.models.proxy_health import ProxyScore
     
+    # Obtener proxies lentas
     result = await db.execute(
-        select(Proxy).where(Proxy.id == proxy_id)
-    )
-    proxy = result.scalar_one_or_none()
-    
-    if not proxy:
-        return {"error": "Proxy not found"}
-    
-    current_location = GeoManager.create_location(
-        country=proxy.country,
-        region=proxy.region,
-        city=proxy.city
+        select(Proxy, ProxyScore)
+        .outerjoin(ProxyScore, Proxy.id == ProxyScore.proxy_id)
+        .where(
+            (ProxyScore.avg_latency > max_latency_ms) |
+            (ProxyScore.avg_latency == None)
+        )
     )
     
-    fallbacks = GeoManager.get_fallback_locations(current_location)
+    candidates = list(result.all())
     
-    return {
-        "current_location": {
-            "city": current_location.city,
-            "region": current_location.region,
-            "soax_string": current_location.to_soax_string()
-        },
-        "fallback_count": len(fallbacks),
-        "fallbacks": [
-            {
-                "priority": i + 1,
-                "region": loc.region,
-                "city": loc.city,
-                "soax_string": loc.to_soax_string(),
-                "proximity": "same_region" if loc.region == current_location.region else "nearby_region"
-            }
-            for i, loc in enumerate(fallbacks[:10])  # Top 10
-        ]
+    logger.info(f"🔧 Found {len(candidates)} slow/unscored proxies")
+    
+    rotator = SmartProxyRotator(db)
+    
+    stats = {
+        "total_checked": len(candidates),
+        "rotated": 0,
+        "already_optimal": 0,
+        "failed": 0,
+        "details": []
     }
+    
+    for proxy, score in candidates:
+        try:
+            result = await rotator.detect_and_rotate_if_needed(
+                proxy_id=proxy.id,
+                test_urls=["https://www.google.com"]
+            )
+            
+            if result.get("rotated"):
+                stats["rotated"] += 1
+            else:
+                stats["already_optimal"] += 1
+            
+            stats["details"].append({
+                "proxy_id": proxy.id,
+                "location": f"{proxy.city}, {proxy.region}",
+                "result": result
+            })
+        
+        except Exception as e:
+            logger.error(f"Failed to fix proxy {proxy.id}: {e}")
+            stats["failed"] += 1
+    
+    return stats
 
 
-@router.get("/rotation-stats")
-async def get_rotation_stats(
+@router.post("/recover-blacklisted")
+async def recover_blacklisted_proxies(
     db: AsyncSession = Depends(get_db)
 ):
     """
-    📊 Estadísticas de rotación CORREGIDAS
+    🚑 RECOVER: Intenta recuperar proxies blacklisted
     
-    ✅ FIXES:
-    - Muestra TODAS las proxies (no solo ACTIVE)
-    - Maneja correctamente proxies sin ProxyScore
-    - Conteos precisos por estado
+    ✅ Proceso:
+    1. Encuentra proxies blacklisted
+    2. Para cada una: rotar a ubicación óptima
+    3. Si exitoso, quitar blacklist
     """
     
-    from sqlalchemy import select, func, case
+    from sqlalchemy import select, and_
+    from app.models.proxy import Proxy
+    from app.models.proxy_health import ProxyScore
+    
+    result = await db.execute(
+        select(Proxy, ProxyScore)
+        .join(ProxyScore)
+        .where(ProxyScore.is_blacklisted == True)
+    )
+    
+    blacklisted = list(result.all())
+    
+    if not blacklisted:
+        return {
+            "message": "No blacklisted proxies found",
+            "recovered": 0
+        }
+    
+    logger.info(f"🚑 Attempting to recover {len(blacklisted)} blacklisted proxies")
+    
+    rotator = SmartProxyRotator(db)
+    
+    stats = {
+        "total": len(blacklisted),
+        "recovered": 0,
+        "still_failed": 0,
+        "details": []
+    }
+    
+    for proxy, score in blacklisted:
+        try:
+            # Intentar rotación
+            result = await rotator.detect_and_rotate_if_needed(
+                proxy_id=proxy.id
+            )
+            
+            if result.get("rotated") and result.get("new_latency_ms"):
+                # Exitoso - quitar blacklist
+                score.is_blacklisted = False
+                score.blacklist_reason = None
+                score.blacklisted_at = None
+                score.consecutive_failures = 0
+                
+                stats["recovered"] += 1
+                
+                logger.info(
+                    f"✅ Recovered proxy {proxy.id}: "
+                    f"{result['new_location']} ({result['new_latency_ms']}ms)"
+                )
+            else:
+                stats["still_failed"] += 1
+            
+            stats["details"].append({
+                "proxy_id": proxy.id,
+                "old_location": f"{proxy.city}, {proxy.region}",
+                "result": result
+            })
+        
+        except Exception as e:
+            logger.error(f"Recovery failed for proxy {proxy.id}: {e}")
+            stats["still_failed"] += 1
+    
+    await db.commit()
+    
+    return stats
+
+
+@router.get("/health-report")
+async def get_health_report(
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    📊 REPORT: Estado detallado de TODAS las proxies
+    
+    ✅ Incluye:
+    - Ping real de cada proxy
+    - Latencia actual
+    - Sugerencias de rotación
+    """
+    
+    from sqlalchemy import select
+    from app.models.proxy import Proxy
+    from app.models.proxy_health import ProxyScore
+    
+    result = await db.execute(
+        select(Proxy, ProxyScore)
+        .outerjoin(ProxyScore, Proxy.id == ProxyScore.proxy_id)
+    )
+    
+    proxies_data = list(result.all())
+    
+    rotator = SmartProxyRotator(db)
+    
+    report = {
+        "timestamp": datetime.utcnow().isoformat(),
+        "total_proxies": len(proxies_data),
+        "optimal": 0,
+        "needs_rotation": 0,
+        "offline": 0,
+        "proxies": []
+    }
+    
+    for proxy, score in proxies_data:
+        # Ping real
+        ping_result = await rotator._ping_proxy(proxy)
+        
+        status = "offline"
+        recommendation = "rotate"
+        
+        if ping_result["success"]:
+            latency = ping_result["latency_ms"]
+            
+            if latency < rotator.OPTIMAL_LATENCY_MS:
+                status = "optimal"
+                recommendation = "keep"
+                report["optimal"] += 1
+            else:
+                status = "slow"
+                recommendation = "rotate"
+                report["needs_rotation"] += 1
+        else:
+            report["offline"] += 1
+        
+        report["proxies"].append({
+            "id": proxy.id,
+            "location": f"{proxy.city}, {proxy.region}",
+            "status": status,
+            "current_latency_ms": ping_result.get("latency_ms"),
+            "stored_avg_latency_ms": score.avg_latency if score else None,
+            "uptime": score.uptime_percentage if score else None,
+            "is_blacklisted": score.is_blacklisted if score else False,
+            "recommendation": recommendation,
+            "error": ping_result.get("error")
+        })
+    
+    return report
+
+
+@router.post("/batch-optimize")
+async def batch_optimize_all_proxies(
+    background_tasks: BackgroundTasks,
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    🚀 BATCH OPTIMIZE: Optimiza TODAS las proxies en background
+    
+    ✅ Proceso:
+    1. Ping todas
+    2. Rotar las lentas/offline
+    3. Se ejecuta en background
+    """
+    
+    async def _optimize():
+        from sqlalchemy import select
+        from app.models.proxy import Proxy
+        
+        async with AsyncSessionLocal() as bg_db:
+            result = await bg_db.execute(select(Proxy))
+            proxies = list(result.scalars().all())
+            
+            rotator = SmartProxyRotator(bg_db)
+            
+            logger.info(f"🚀 Starting batch optimization for {len(proxies)} proxies")
+            
+            stats = {
+                "total": len(proxies),
+                "rotated": 0,
+                "optimal": 0,
+                "failed": 0
+            }
+            
+            for proxy in proxies:
+                try:
+                    result = await rotator.detect_and_rotate_if_needed(
+                        proxy_id=proxy.id
+                    )
+                    
+                    if result.get("rotated"):
+                        stats["rotated"] += 1
+                    else:
+                        stats["optimal"] += 1
+                
+                except Exception as e:
+                    logger.error(f"Failed to optimize proxy {proxy.id}: {e}")
+                    stats["failed"] += 1
+                
+                # Rate limiting
+                await asyncio.sleep(2)
+            
+            logger.info(
+                f"✅ Batch optimization complete: "
+                f"{stats['rotated']} rotated, "
+                f"{stats['optimal']} optimal, "
+                f"{stats['failed']} failed"
+            )
+    
+    from app.database import AsyncSessionLocal
+    import asyncio
+    
+    background_tasks.add_task(_optimize)
+    
+    return {
+        "message": "Batch optimization started in background",
+        "note": "Check logs for progress"
+    }
+
+
+# ========================================
+# TASK CELERY ACTUALIZADO
+# ========================================
+
+@router.get("/trigger-auto-fix")
+async def trigger_auto_fix_task():
+    """🔧 Trigger tarea Celery para auto-fix periódico"""
+    
+    from app.tasks.proxy_rotation_tasks import auto_fix_all_proxies_task
+    
+    task = auto_fix_all_proxies_task.delay()
+    
+    return {
+        "message": "Auto-fix task triggered",
+        "task_id": task.id
+    }
+
+
+# ========================================
+# ESTADÍSTICAS (mantener compatibilidad)
+# ========================================
+
+@router.get("/rotation-stats")
+async def get_rotation_stats(db: AsyncSession = Depends(get_db)):
+    """
+    📊 Estadísticas de rotación (COMPATIBILIDAD)
+    """
+    from sqlalchemy import select, func
     from app.models.proxy import Proxy, ProxyStatus
     from app.models.proxy_health import ProxyScore
     
-    # ========================================
-    # 1. TODAS LAS PROXIES (sin filtro de status)
-    # ========================================
-    result = await db.execute(
-        select(func.count(Proxy.id))
-    )
+    # Total proxies
+    result = await db.execute(select(func.count(Proxy.id)))
     total_proxies = result.scalar()
     
-    # ========================================
-    # 2. CONTEO POR STATUS
-    # ========================================
+    # Conteo por status
     result = await db.execute(
         select(
             Proxy.status,
@@ -203,9 +387,7 @@ async def get_rotation_stats(
     
     status_distribution = {row.status.value: row.count for row in result.all()}
     
-    # ========================================
-    # 3. PROXIES CON SCORE (LEFT JOIN CORRECTO)
-    # ========================================
+    # Health distribution
     result = await db.execute(
         select(
             Proxy.id,
@@ -215,14 +397,15 @@ async def get_rotation_stats(
             Proxy.is_available,
             ProxyScore.overall_score,
             ProxyScore.avg_latency,
-            ProxyScore.uptime_percentage
+            ProxyScore.uptime_percentage,
+            ProxyScore.is_blacklisted
         )
         .outerjoin(ProxyScore, Proxy.id == ProxyScore.proxy_id)
     )
     
     proxies_data = result.all()
     
-    # Clasificar por health status
+    # Clasificar
     healthy = 0
     degraded = 0
     unhealthy = 0
@@ -231,28 +414,29 @@ async def get_rotation_stats(
     
     distribution = []
     
-    for proxy_id, city, region, status, is_available, score, latency, uptime in proxies_data:
+    for row in proxies_data:
         proxy_info = {
-            "id": proxy_id,
-            "location": f"{city or 'N/A'}, {region or 'N/A'}",
-            "status": status.value,
-            "is_available": is_available,
-            "score": score,
-            "latency_ms": latency,
-            "uptime": uptime
+            "id": row.id,
+            "location": f"{row.city or 'N/A'}, {row.region or 'N/A'}",
+            "status": row.status.value,
+            "is_available": row.is_available,
+            "score": row.overall_score,
+            "latency_ms": row.avg_latency,
+            "uptime": row.uptime_percentage,
+            "is_blacklisted": row.is_blacklisted
         }
         
-        # ✅ Clasificación correcta
-        if status == ProxyStatus.FAILED:
+        # Clasificación
+        if row.status == ProxyStatus.FAILED or row.is_blacklisted:
             offline += 1
             proxy_info["health_status"] = "offline"
-        elif score is None:
+        elif row.overall_score is None:
             no_score += 1
             proxy_info["health_status"] = "no_score"
-        elif score >= 80:
+        elif row.overall_score >= 80:
             healthy += 1
             proxy_info["health_status"] = "healthy"
-        elif score >= 60:
+        elif row.overall_score >= 60:
             degraded += 1
             proxy_info["health_status"] = "degraded"
         else:
@@ -261,9 +445,7 @@ async def get_rotation_stats(
         
         distribution.append(proxy_info)
     
-    # ========================================
-    # 4. PROMEDIOS (solo proxies con score válido)
-    # ========================================
+    # Promedios
     result = await db.execute(
         select(
             func.avg(ProxyScore.overall_score),
@@ -273,46 +455,16 @@ async def get_rotation_stats(
     )
     averages = result.one()
     
-    # ========================================
-    # 5. DISTRIBUCIÓN POR CIUDAD (TODAS las proxies)
-    # ========================================
-    result = await db.execute(
-        select(
-            Proxy.city,
-            Proxy.region,
-            Proxy.status,
-            func.count(Proxy.id).label('count')
-        )
-        .group_by(Proxy.city, Proxy.region, Proxy.status)
-        .order_by(func.count(Proxy.id).desc())
-    )
-    
-    city_distribution = {}
-    for row in result.all():
-        key = f"{row.city}, {row.region}"
-        if key not in city_distribution:
-            city_distribution[key] = {
-                "city": row.city,
-                "region": row.region,
-                "active": 0,
-                "failed": 0,
-                "inactive": 0,
-                "total": 0
-            }
-        
-        city_distribution[key][row.status.value] = row.count
-        city_distribution[key]["total"] += row.count
-    
     return {
         "summary": {
             "total_proxies": total_proxies,
             "by_status": status_distribution,
             "health_distribution": {
-                "healthy": healthy,        # Score >= 80
-                "degraded": degraded,      # Score 60-79
-                "unhealthy": unhealthy,    # Score < 60
-                "no_score": no_score,      # Sin health check
-                "offline": offline         # Status FAILED
+                "healthy": healthy,
+                "degraded": degraded,
+                "unhealthy": unhealthy,
+                "no_score": no_score,
+                "offline": offline
             }
         },
         "averages": {
@@ -320,81 +472,9 @@ async def get_rotation_stats(
             "avg_latency_ms": round(averages[1] or 0, 2),
             "uptime_percentage": round(averages[2] or 0, 2)
         },
-        "distribution_by_city": list(city_distribution.values()),
         "proxies_detail": distribution
     }
 
-
-@router.post("/{proxy_id}/force-rotate")
-async def force_rotate_proxy(
-    proxy_id: int,
-    target_city: Optional[str] = Query(None, description="Specific city to rotate to"),
-    target_region: Optional[str] = Query(None, description="Specific region"),
-    db: AsyncSession = Depends(get_db)
-):
-    """
-    🔄 Forzar rotación manual a ubicación específica
-    
-    Útil para:
-    - Testing
-    - Redistribución geográfica manual
-    - Cambio de estrategia de localización
-    """
-    
-    from sqlalchemy import select
-    from app.models.proxy import Proxy
-    
-    result = await db.execute(
-        select(Proxy).where(Proxy.id == proxy_id)
-    )
-    proxy = result.scalar_one_or_none()
-    
-    if not proxy:
-        return {"error": "Proxy not found"}
-    
-    rotator = SmartProxyRotator(db)
-    
-    # Si se especifica ciudad/región, validar
-    if target_city or target_region:
-        target_location = GeoManager.create_location(
-            country=proxy.country,
-            region=target_region,
-            city=target_city
-        )
-        
-        # Marcar proxy actual como failed para forzar rotación
-        proxy.status = "failed"
-        await db.commit()
-        
-        # Rotar (usará target_location como hint)
-        new_proxy = await rotator._rotate_to_optimal_location(
-            current_proxy=proxy,
-            issues=["manual_rotation"]
-        )
-        
-        if not new_proxy:
-            return {"error": "Target location not available"}
-        
-        await rotator._update_profiles_proxy(
-            old_proxy_id=proxy.id,
-            new_proxy_id=new_proxy.id
-        )
-        
-        return {
-            "success": True,
-            "old_location": f"{proxy.city}, {proxy.region}",
-            "new_location": f"{new_proxy.city}, {new_proxy.region}",
-            "new_proxy_id": new_proxy.id
-        }
-    
-    else:
-        # Rotación automática (sin target específico)
-        result = await rotator.detect_and_rotate_if_needed(
-            proxy_id=proxy_id,
-            test_urls=["https://www.google.com"]
-        )
-        
-        return result
 
 
 @router.get("/health-monitor")

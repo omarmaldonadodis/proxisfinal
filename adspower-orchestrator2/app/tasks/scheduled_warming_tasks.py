@@ -182,4 +182,16 @@ BEAT_SCHEDULE = {
         'task': 'tasks.auto_recover_and_verify',
         'schedule': 900.0,  # Cada 15 minutos
     },
+
+        # ✅ NUEVO: Auto-fix inteligente cada 15 minutos
+    'auto-fix-proxies': {
+        'task': 'tasks.auto_fix_all_proxies',
+        'schedule': 900.0,  # 15 minutos
+    },
+    
+    # ✅ NUEVO: Recuperar blacklisted cada hora
+    'fix-blacklisted': {
+        'task': 'tasks.fix_blacklisted_proxies',
+        'schedule': 3600.0,  # 1 hora
+    },
 }
