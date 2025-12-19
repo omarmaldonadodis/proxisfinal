@@ -18,6 +18,7 @@ import time
 from app.models.proxy import Proxy, ProxyStatus
 from app.models.proxy_health import ProxyHealthCheck, ProxyScore
 from app.integrations.soax_client import SOAXClient
+from app.config import settings
 
 
 class ProxyHealthService:
@@ -35,7 +36,7 @@ class ProxyHealthService:
     
     # ✅ Thresholds más realistas
     MAX_LATENCY_MS = 2500      # 2.5s (antes 3s)
-    OPTIMAL_LATENCY_MS = 1000  # 1s
+    OPTIMAL_LATENCY_MS = 1500  # 1s
     MAX_CONSECUTIVE_FAILURES = 5  # Más tolerante
     
     def __init__(self, db: AsyncSession):
@@ -461,51 +462,103 @@ class ProxyHealthService:
             await self.db.rollback()
             logger.error(f"Error updating score: {e}")
     
+    # app/services/proxy_health_service.py - LÍNEA ~440
+
     async def _attempt_auto_recovery_smart(self, proxy: Proxy):
-        """✅ Auto-recovery INTELIGENTE"""
+        """✅ Auto-recovery con validación de username"""
         
         logger.info(f"🔄 Smart auto-recovery: Proxy {proxy.id}")
         
         try:
-            # ========================================
-            # ESTRATEGIA: Rotar sesión (nueva IP)
-            # ========================================
-            from app.integrations.soax_client import SOAXClient
+            # ✅ VALIDAR que proxy.username tenga formato correcto
+            current_username = proxy.username or ""
             
-            soax = SOAXClient(
-                username=proxy.username.split('-')[0] if proxy.username else "",
-                password=proxy.password or ""
+            if not current_username.startswith("package-"):
+                logger.error(
+                    f"❌ Proxy {proxy.id} tiene username inválido: '{current_username}'\n"
+                    f"   Formato esperado: 'package-XXXXXX-country-...'\n"
+                    f"   Esto causará error 500 en SOAX"
+                )
+                # Usar username de settings como fallback
+                base_username = settings.SOAX_USERNAME
+            else:
+                # Extraer "package-325401" del username actual
+                parts = current_username.split('-')
+                
+                if len(parts) >= 2:
+                    base_username = f"{parts[0]}-{parts[1]}"  # "package-325401"
+                else:
+                    logger.warning(
+                        f"⚠️ No se pudo parsear username '{current_username}', "
+                        f"usando settings.SOAX_USERNAME"
+                    )
+                    base_username = settings.SOAX_USERNAME
+            
+            logger.info(
+                f"🔍 Recovery info:\n"
+                f"   Proxy ID: {proxy.id}\n"
+                f"   Old username: {current_username}\n"
+                f"   Base username: {base_username}\n"
+                f"   Settings username: {settings.SOAX_USERNAME}"
             )
+            
+            # ✅ Verificar que base_username sea válido
+            if not base_username.startswith("package-"):
+                logger.error(
+                    f"❌ CRÍTICO: base_username inválido: '{base_username}'\n"
+                    f"   Verifica SOAX_USERNAME en .env\n"
+                    f"   Debe ser: SOAX_USERNAME=package-325401"
+                )
+                return
             
             # Generar nueva sesión
-            new_config = soax.get_proxy_config(
-                proxy_type=proxy.proxy_type,
-                country=proxy.country,
+            from app.utils.soax_cities_manager import get_soax_username_with_dynamic_city
+            
+            result = await get_soax_username_with_dynamic_city(
+                base_username=base_username,
+                country=proxy.country or "ec",
                 region=proxy.region,
-                city=proxy.city
+                preferred_city=proxy.city,
+                session_lifetime=proxy.session_lifetime or 3600
             )
             
-            # Actualizar
-            proxy.session_id = new_config["session_id"]
-            proxy.username = new_config["username"]
-            proxy.status = ProxyStatus.ACTIVE  # ✅ Reactivar
+            new_username = result["username"]
+            
+            # ✅ VALIDAR username generado
+            if not new_username.startswith("package-"):
+                logger.error(
+                    f"❌ Username generado es inválido: '{new_username}'\n"
+                    f"   Esto causará error 500 en SOAX"
+                )
+                return
+            
+            # Actualizar proxy
+            proxy.username = new_username
+            proxy.session_id = new_username.split("sessionid-")[1].split("-")[0]
+            proxy.status = ProxyStatus.ACTIVE
             
             await self.db.commit()
             
-            logger.info(f"✅ Auto-recovery: New session for proxy {proxy.id}")
+            logger.info(
+                f"✅ Auto-recovery completado:\n"
+                f"   Proxy {proxy.id}\n"
+                f"   New username: {new_username[:60]}..."
+            )
             
-            # ✅ Re-test después de 10s
+            # Re-test
             await asyncio.sleep(10)
             
-            result = await self.comprehensive_health_check(
+            check_result = await self.comprehensive_health_check(
                 proxy_id=proxy.id,
                 test_multiple_sessions=False
             )
             
-            if result["overall_status"] == "healthy":
+            if check_result["overall_status"] == "healthy":
                 logger.info(f"🎉 Recovery successful: Proxy {proxy.id}")
                 
                 # Reset blacklist
+                from app.models.proxy_health import ProxyScore
+                
                 score_result = await self.db.execute(
                     select(ProxyScore).where(ProxyScore.proxy_id == proxy.id)
                 )
@@ -522,7 +575,9 @@ class ProxyHealthService:
         
         except Exception as e:
             logger.error(f"Error in auto-recovery: {e}")
-    
+            import traceback
+            logger.error(traceback.format_exc())
+
     def _build_proxy_url(self, proxy: Proxy) -> str:
         """Construye URL del proxy"""
         return (
@@ -539,9 +594,16 @@ class ProxyHealthService:
         only_active: bool = False,
         max_concurrent: int = 5
     ) -> Dict:
-        """Health check de todos los proxies (MEJORADO)"""
+        """
+        ✅ Health check de todos los proxies CORREGIDO
         
-        query = select(Proxy)
+        Crea sesión independiente por cada proxy para evitar race conditions
+        """
+        
+        # ========================================
+        # 1. OBTENER IDs DE PROXIES (solo IDs, no objetos)
+        # ========================================
+        query = select(Proxy.id)  # ✅ Solo ID
         
         if only_active:
             query = query.where(
@@ -552,12 +614,12 @@ class ProxyHealthService:
             )
         
         result = await self.db.execute(query)
-        proxies = list(result.scalars().all())
+        proxy_ids = [row[0] for row in result.all()]  # ✅ Lista de IDs
         
-        logger.info(f"🏥 Starting batch health check: {len(proxies)} proxies")
+        logger.info(f"🏥 Starting batch health check: {len(proxy_ids)} proxies")
         
         results = {
-            "total": len(proxies),
+            "total": len(proxy_ids),
             "healthy": 0,
             "degraded": 0,
             "unhealthy": 0,
@@ -565,28 +627,58 @@ class ProxyHealthService:
             "details": []
         }
         
+        # ========================================
+        # 2. CREAR FUNCIÓN CON SESIÓN INDEPENDIENTE
+        # ========================================
         semaphore = asyncio.Semaphore(max_concurrent)
         
-        async def check_with_semaphore(proxy):
+        async def check_with_independent_session(proxy_id: int):
+            """✅ Crea su propia sesión DB - sin race conditions"""
+            from app.database import AsyncSessionLocal
+            
             async with semaphore:
-                try:
-                    return await self.comprehensive_health_check(
-                        proxy.id,
-                        test_multiple_sessions=False
-                    )
-                except Exception as e:
-                    logger.error(f"Health check failed for proxy {proxy.id}: {e}")
-                    return {
-                        "proxy_id": proxy.id,
-                        "overall_status": "error",
-                        "error": str(e)
-                    }
+                # ✅ NUEVA SESIÓN para esta tarea
+                async with AsyncSessionLocal() as independent_db:
+                    try:
+                        # Crear servicio con sesión independiente
+                        independent_service = ProxyHealthService(independent_db)
+                        
+                        # Ejecutar health check
+                        return await independent_service.comprehensive_health_check(
+                            proxy_id=proxy_id,
+                            test_multiple_sessions=False
+                        )
+                    
+                    except Exception as e:
+                        logger.error(
+                            f"Health check failed for proxy {proxy_id}: {e}"
+                        )
+                        return {
+                            "proxy_id": proxy_id,
+                            "overall_status": "error",
+                            "error": str(e)
+                        }
         
-        tasks = [check_with_semaphore(proxy) for proxy in proxies]
-        check_results = await asyncio.gather(*tasks)
+        # ========================================
+        # 3. EJECUTAR EN PARALELO (SAFE)
+        # ========================================
+        tasks = [
+            check_with_independent_session(proxy_id) 
+            for proxy_id in proxy_ids
+        ]
+        check_results = await asyncio.gather(*tasks, return_exceptions=True)
         
+        # ========================================
+        # 4. PROCESAR RESULTADOS
+        # ========================================
         for check_result in check_results:
-            status = check_result["overall_status"]
+            # Manejar excepciones
+            if isinstance(check_result, Exception):
+                logger.error(f"Task failed with exception: {check_result}")
+                results["offline"] += 1
+                continue
+            
+            status = check_result.get("overall_status", "error")
             
             if status == "healthy":
                 results["healthy"] += 1
