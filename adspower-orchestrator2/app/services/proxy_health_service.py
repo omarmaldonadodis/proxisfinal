@@ -111,18 +111,21 @@ class ProxyHealthService:
         # 7. AUTO-RECOVERY SI ES NECESARIO
         # ========================================
         if overall_status in ["unhealthy", "offline"]:
-            logger.warning(f"⚠️ Proxy {proxy_id} unhealthy, triggering auto-recovery")
-            await self._attempt_auto_recovery_smart(proxy)
-        
-        return {
-            "proxy_id": proxy_id,
-            "overall_status": overall_status,
-            "overall_score": overall_score,
-            "speed_test": speed_result,
-            "geo_verification": geo_result,
-            "availability": availability_result,
-            "timestamp": datetime.utcnow().isoformat()
-        }
+            # ✅ VERIFICAR consecutive_failures ANTES de intentar recovery
+            result = await self.db.execute(
+                select(ProxyScore).where(ProxyScore.proxy_id == proxy_id)
+            )
+            score = result.scalar_one_or_none()
+            
+            if score and score.consecutive_failures >= 10:
+                logger.error(
+                    f"🛑 CIRCUIT BREAKER ACTIVADO: Proxy {proxy_id} tiene "
+                    f"{score.consecutive_failures} fallos consecutivos. "
+                    f"Auto-recovery DESHABILITADO."
+                )
+            else:
+                logger.warning(f"⚠️ Proxy {proxy_id} unhealthy, triggering auto-recovery")
+                await self._attempt_auto_recovery_smart(proxy)
     
     async def _test_speed_robust(self, proxy: Proxy) -> Dict:
         """✅ Speed test MÁS ROBUSTO (sin 500 errors)"""
@@ -450,8 +453,26 @@ class ProxyHealthService:
                     
                     logger.warning(
                         f"🚫 Proxy {proxy_id} blacklisted: "
-                        f"{score_record.consecutive_failures} failures"
+                        f"{score_record.consecutive_failures} failures (threshold: {self.MAX_CONSECUTIVE_FAILURES})"
                     )
+            
+            # ✅ CIRCUIT BREAKER: Marcar como unavailable después de 10 fallos
+            if score_record.consecutive_failures >= 10:
+                logger.error(
+                    f"🛑 CIRCUIT BREAKER: Proxy {proxy_id} alcanzó 10 fallos consecutivos. "
+                    f"Marcando como UNAVAILABLE."
+                )
+                
+                # Actualizar el proxy también
+                from app.models.proxy import Proxy
+                proxy_result = await self.db.execute(
+                    select(Proxy).where(Proxy.id == proxy_id)
+                )
+                proxy = proxy_result.scalar_one_or_none()
+                
+                if proxy:
+                    proxy.is_available = False
+                    proxy.status = ProxyStatus.FAILED
             
             score_record.last_check_at = datetime.utcnow()
             score_record.score_updated_at = datetime.utcnow()
@@ -463,56 +484,56 @@ class ProxyHealthService:
             logger.error(f"Error updating score: {e}")
     
     # app/services/proxy_health_service.py - LÍNEA ~440
-
     async def _attempt_auto_recovery_smart(self, proxy: Proxy):
-        """✅ Auto-recovery con validación de username"""
+        """✅ Auto-recovery con circuit breaker y validación"""
         
-        logger.info(f"🔄 Smart auto-recovery: Proxy {proxy.id}")
+        # ========================================
+        # 🛑 CIRCUIT BREAKER: Detener si ya intentó muchas veces
+        # ========================================
+        result = await self.db.execute(
+            select(ProxyScore).where(ProxyScore.proxy_id == proxy.id)
+        )
+        score = result.scalar_one_or_none()
+        
+        if score and score.consecutive_failures >= 10:
+            logger.error(
+                f"🛑 CIRCUIT BREAKER: Proxy {proxy.id} tiene {score.consecutive_failures} fallos consecutivos. "
+                f"Auto-recovery deshabilitado. Requiere intervención manual."
+            )
+            return
+        
+        logger.info(f"🔄 Smart auto-recovery: Proxy {proxy.id} (attempt #{score.consecutive_failures if score else 0})")
         
         try:
-            # ✅ VALIDAR que proxy.username tenga formato correcto
+            # ✅ EXTRAER BASE USERNAME CORRECTO
             current_username = proxy.username or ""
             
-            if not current_username.startswith("package-"):
-                logger.error(
-                    f"❌ Proxy {proxy.id} tiene username inválido: '{current_username}'\n"
-                    f"   Formato esperado: 'package-XXXXXX-country-...'\n"
-                    f"   Esto causará error 500 en SOAX"
-                )
-                # Usar username de settings como fallback
+            # El base_username debe ser el package-XXXXXX del PROXY, no de settings
+            # Ejemplo: "package-325101-country-ec-city-manta-..." → "package-325101"
+            if current_username.startswith("package-") and "-country-" in current_username:
+                # Extraer solo "package-325101" (antes de "-country-")
+                base_username = current_username.split("-country-")[0]
+                logger.info(f"✓ Base username extraído: {base_username}")
+            elif settings.SOAX_USERNAME.startswith("package-"):
+                # Fallback: usar settings si el proxy no tiene username válido
                 base_username = settings.SOAX_USERNAME
+                logger.warning(f"⚠️ Usando SOAX_USERNAME como fallback: {base_username}")
             else:
-                # Extraer "package-325401" del username actual
-                parts = current_username.split('-')
-                
-                if len(parts) >= 2:
-                    base_username = f"{parts[0]}-{parts[1]}"  # "package-325401"
-                else:
-                    logger.warning(
-                        f"⚠️ No se pudo parsear username '{current_username}', "
-                        f"usando settings.SOAX_USERNAME"
-                    )
-                    base_username = settings.SOAX_USERNAME
-            
-            logger.info(
-                f"🔍 Recovery info:\n"
-                f"   Proxy ID: {proxy.id}\n"
-                f"   Old username: {current_username}\n"
-                f"   Base username: {base_username}\n"
-                f"   Settings username: {settings.SOAX_USERNAME}"
-            )
-            
-            # ✅ Verificar que base_username sea válido
-            if not base_username.startswith("package-"):
                 logger.error(
-                    f"❌ CRÍTICO: base_username inválido: '{base_username}'\n"
-                    f"   Verifica SOAX_USERNAME en .env\n"
-                    f"   Debe ser: SOAX_USERNAME=package-325401"
+                    f"❌ No se pudo extraer base username. "
+                    f"Current: '{current_username}', Settings: '{settings.SOAX_USERNAME}'"
                 )
                 return
             
-            # Generar nueva sesión
+            # ========================================
+            # GENERAR NUEVA SESIÓN (MISMA CIUDAD PRIMERO)
+            # ========================================
             from app.utils.soax_cities_manager import get_soax_username_with_dynamic_city
+            
+            logger.info(
+                f"🔍 Intentando recuperar en misma ciudad: {proxy.city or 'N/A'}, "
+                f"región: {proxy.region or 'N/A'}"
+            )
             
             result = await get_soax_username_with_dynamic_city(
                 base_username=base_username,
@@ -523,29 +544,38 @@ class ProxyHealthService:
             )
             
             new_username = result["username"]
+            selected_city = result.get("selected_city")
             
             # ✅ VALIDAR username generado
             if not new_username.startswith("package-"):
-                logger.error(
-                    f"❌ Username generado es inválido: '{new_username}'\n"
-                    f"   Esto causará error 500 en SOAX"
-                )
+                logger.error(f"❌ Username generado inválido: '{new_username}'")
                 return
             
-            # Actualizar proxy
+            # ========================================
+            # ACTUALIZAR PROXY
+            # ========================================
             proxy.username = new_username
             proxy.session_id = new_username.split("sessionid-")[1].split("-")[0]
             proxy.status = ProxyStatus.ACTIVE
+            
+            # ✅ Actualizar ciudad solo si cambió
+            if selected_city and selected_city != proxy.city:
+                proxy.city = selected_city
+                logger.info(f"📍 Ciudad actualizada: {proxy.city} → {selected_city}")
             
             await self.db.commit()
             
             logger.info(
                 f"✅ Auto-recovery completado:\n"
                 f"   Proxy {proxy.id}\n"
-                f"   New username: {new_username[:60]}..."
+                f"   Ciudad: {selected_city or proxy.city or 'N/A'}\n"
+                f"   Username: {new_username[:70]}..."
             )
             
-            # Re-test
+            # ========================================
+            # RE-VERIFICAR (CON RATE LIMITING)
+            # ========================================
+            logger.info(f"⏳ Esperando 10s antes de re-verificar...")
             await asyncio.sleep(10)
             
             check_result = await self.comprehensive_health_check(
@@ -553,10 +583,13 @@ class ProxyHealthService:
                 test_multiple_sessions=False
             )
             
+            # ========================================
+            # RESULTADO
+            # ========================================
             if check_result["overall_status"] == "healthy":
                 logger.info(f"🎉 Recovery successful: Proxy {proxy.id}")
                 
-                # Reset blacklist
+                # Reset blacklist y contadores
                 from app.models.proxy_health import ProxyScore
                 
                 score_result = await self.db.execute(
@@ -564,19 +597,36 @@ class ProxyHealthService:
                 )
                 score = score_result.scalar_one_or_none()
                 
-                if score and score.is_blacklisted:
+                if score:
                     score.is_blacklisted = False
                     score.blacklist_reason = None
                     score.blacklisted_at = None
-                    score.consecutive_failures = 0
+                    score.consecutive_failures = 0  # ✅ RESET CONTADOR
                     await self.db.commit()
+                    logger.info(f"✓ Contadores reseteados para proxy {proxy.id}")
             else:
-                logger.warning(f"⚠️ Recovery failed: Proxy {proxy.id}")
+                logger.warning(
+                    f"⚠️ Recovery falló para proxy {proxy.id}. "
+                    f"Status: {check_result['overall_status']}"
+                )
+                
+                # ✅ INCREMENTAR contador de fallos (para circuit breaker)
+                from app.models.proxy_health import ProxyScore
+                
+                score_result = await self.db.execute(
+                    select(ProxyScore).where(ProxyScore.proxy_id == proxy.id)
+                )
+                score = score_result.scalar_one_or_none()
+                
+                if score:
+                    score.consecutive_failures = (score.consecutive_failures or 0) + 1
+                    await self.db.commit()
         
         except Exception as e:
             logger.error(f"Error in auto-recovery: {e}")
             import traceback
             logger.error(traceback.format_exc())
+
 
     def _build_proxy_url(self, proxy: Proxy) -> str:
         """Construye URL del proxy"""
@@ -677,9 +727,20 @@ class ProxyHealthService:
                 logger.error(f"Task failed with exception: {check_result}")
                 results["offline"] += 1
                 continue
-            
+
+            # ✅ Manejar None
+            if check_result is None:
+                logger.warning("Health check returned None, marcando como offline")
+                results["offline"] += 1
+                results["details"].append({
+                    "proxy_id": None,
+                    "overall_status": "error",
+                    "error": "None returned"
+                })
+                continue
+
             status = check_result.get("overall_status", "error")
-            
+
             if status == "healthy":
                 results["healthy"] += 1
             elif status == "degraded":
@@ -688,8 +749,9 @@ class ProxyHealthService:
                 results["unhealthy"] += 1
             else:
                 results["offline"] += 1
-            
+
             results["details"].append(check_result)
+
         
         logger.info(
             f"✅ Batch health check complete: "
