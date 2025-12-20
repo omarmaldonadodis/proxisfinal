@@ -14,7 +14,6 @@ from app.utils.mobile_devices import (
     get_mobile_device
 )
 from app.utils.cookie_generator import CookieGenerator, LocalStorageGenerator
-from app.utils.geo_manager import GeoManager, GeoLocation, get_soax_username_with_geo
 from app.utils.soax_cities_manager import SOAXCitiesManager
 __all__ = [
     # Profile Generator
@@ -37,11 +36,6 @@ __all__ = [
     # Cookie & Storage
     "CookieGenerator",
     "LocalStorageGenerator",
-
-    # Geo Manager
-    "GeoManager",
-    "GeoLocation",
-    "get_soax_username_with_geo"
 
     # SOAX Cities Manager
     "SOAXCitiesManager"

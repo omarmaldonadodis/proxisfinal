@@ -1,4 +1,4 @@
-# app/tasks/__init__.py - VERSIÓN CORREGIDA CON REDIS PUB/SUB
+# app/tasks/__init__.py
 from celery import Celery
 from celery.signals import worker_process_init, worker_process_shutdown
 from app.config import settings
@@ -13,8 +13,7 @@ celery_app = Celery(
         'app.tasks.backup_tasks',
         'app.tasks.health_tasks',
         'app.tasks.scheduled_warming_tasks',
-        'app.tasks.proxy_rotation_tasks',
-        'app.tasks.proxy_health_tasks',  # ✅ Se agregó este módulo faltante
+        'app.tasks.proxy_rotation_tasks',  
     ]
 )
 

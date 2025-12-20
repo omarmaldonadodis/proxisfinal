@@ -23,8 +23,6 @@ from app.models.execution_event import (
     ExecutionEventDB,
 )
 
-from app.models.proxy_health import ProxyHealthCheck, ProxyScore
-
 __all__ = [
     "Computer",
     "ComputerStatus",
@@ -47,6 +45,5 @@ __all__ = [
     "ScheduledWarmingStatus",
     "EventSeverityDB",
     "ExecutionEventDB",
-    "ProxyHealthCheck",
-    "ProxyScore",
+
 ]

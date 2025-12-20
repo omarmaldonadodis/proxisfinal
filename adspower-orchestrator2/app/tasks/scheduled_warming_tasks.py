@@ -130,59 +130,27 @@ def cleanup_expired_scheduled_warmings_task():
 # ✅ BEAT SCHEDULE COMPLETO
 # ========================================
 BEAT_SCHEDULE = {
-    # ========================================
-    # WARMING AUTOMÁTICO
-    # ========================================
+    # WARMING AUTOMÁTICO (mantener)
     'execute-scheduled-warmings': {
         'task': 'tasks.execute_scheduled_warmings',
-        'schedule': 60.0,  # Cada 60 segundos
+        'schedule': 60.0,
     },
     'cleanup-expired-warmings': {
         'task': 'tasks.cleanup_expired_scheduled_warmings',
-        'schedule': 86400.0,  # Cada 24 horas
+        'schedule': 86400.0,
     },
 
     # ========================================
-    # ROTACIÓN AUTOMÁTICA DE PROXIES
+    # ✅ ROTACIÓN AUTOMÁTICA (SIMPLIFICADA)
     # ========================================
-    'rotate-slow-proxies': {
-        'task': 'tasks.rotate_slow_proxies',
-        'schedule': 1800.0,  # Cada 30 minutos
-    },
-    'monitor-all-proxies': {
-        'task': 'tasks.monitor_all_proxies',
+    'auto-rotate-slow-proxies': {
+        'task': 'tasks.auto_rotate_slow_proxies',
         'schedule': 900.0,  # Cada 15 minutos
-    },
-    'cleanup-blacklisted-proxies': {
-        'task': 'tasks.cleanup_blacklisted_proxies',
-        'schedule': 3600.0,  # Cada 1 hora
-    },
-    'auto-recover-and-verify': {
-        'task': 'tasks.auto_recover_and_verify',
-        'schedule': 900.0,  # Cada 15 minutos
-    },
-    'auto-fix-proxies': {
-        'task': 'tasks.auto_fix_all_proxies',
-        'schedule': 900.0,  # Cada 15 minutos
-    },
-    'recover-blacklisted': {
-        'task': 'tasks.recover_blacklisted_v2',
-        'schedule': 3600.0,  # Cada 1 hora
     },
 
-    # ========================================
-    # PROXY DETECCIÓN PROACTIVA
-    # ========================================
-    'proactive-slow-detection': {
-        'task': 'tasks.proactive_slow_detection',
-        'schedule': 600.0,  # Cada 10 minutos
-    },
-
-    # ========================================
-    # BACKUPS
-    # ========================================
+    # BACKUPS (mantener)
     'backup-database-daily': {
         'task': 'tasks.backup_database',
-        'schedule': 86400.0,  # Cada 24 horas
+        'schedule': 86400.0,
     },
 }

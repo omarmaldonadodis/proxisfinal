@@ -71,11 +71,6 @@ class Proxy(Base):
     # Relationships
     profiles = relationship("Profile", back_populates="proxy")
 
-    health_checks = relationship(
-        "ProxyHealthCheck", 
-        back_populates="proxy", 
-        cascade="all, delete-orphan"
-    )
     score = relationship(
         "ProxyScore", 
         back_populates="proxy", 
