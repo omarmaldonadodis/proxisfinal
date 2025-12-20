@@ -71,12 +71,6 @@ class Proxy(Base):
     # Relationships
     profiles = relationship("Profile", back_populates="proxy")
 
-    score = relationship(
-        "ProxyScore", 
-        back_populates="proxy", 
-        uselist=False, 
-        cascade="all, delete-orphan"
-    )
-   
+
     def __repr__(self):
         return f"<Proxy(type={self.proxy_type}, country={self.country}, status={self.status})>"

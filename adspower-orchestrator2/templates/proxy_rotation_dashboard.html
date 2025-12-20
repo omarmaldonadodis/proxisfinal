@@ -122,11 +122,9 @@
             transition: all 0.3s;
         }
 
-        .proxy-card.healthy { border-color: #4ade80; }
-        .proxy-card.degraded { border-color: #fbbf24; }
-        .proxy-card.unhealthy { border-color: #f87171; }
-        .proxy-card.no_score { border-color: #94a3b8; }
-        .proxy-card.offline { border-color: #ef4444; }
+        .proxy-card.active { border-color: #4ade80; }
+        .proxy-card.failed { border-color: #f87171; }
+        .proxy-card.inactive { border-color: #94a3b8; }
 
         .proxy-card:hover {
             transform: translateY(-5px);
@@ -158,6 +156,7 @@
 
         .badge.active { background: #4ade80; color: #000; }
         .badge.failed { background: #ef4444; color: #fff; }
+        .badge.inactive { background: #94a3b8; color: #000; }
 
         .proxy-stats {
             display: grid;
@@ -205,7 +204,6 @@
         }
 
         .action-check { background: #4ade80; color: #000; }
-        .action-rotate { background: #fbbf24; color: #000; }
 
         .log-console {
             position: fixed;
@@ -285,7 +283,7 @@
     <div class="container">
         <div class="header">
             <h1>🔄 Proxy Rotation Dashboard</h1>
-            <p>Monitoreo en tiempo real - <span id="lastUpdate"></span></p>
+            <p>Monitoreo Simplificado - <span id="lastUpdate"></span></p>
             
             <div class="controls">
                 <label style="display: flex; align-items: center; gap: 10px;">
@@ -313,12 +311,12 @@
                 <div class="value green" id="activeProxies">-</div>
             </div>
             <div class="stat-card">
-                <h3>⚠️ Sin Score</h3>
-                <div class="value gray" id="noScoreProxies">-</div>
-            </div>
-            <div class="stat-card">
                 <h3>🔴 Failed</h3>
                 <div class="value red" id="failedProxies">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>⚡ Latencia Prom.</h3>
+                <div class="value" id="avgLatency">-</div>
             </div>
         </div>
 
@@ -368,34 +366,29 @@
             log('🔄 Actualizando datos...', 'info');
             
             try {
-                // ✅ ENDPOINT CORRECTO
-                const response = await fetch('/api/v1/proxy-rotation/rotation-stats');
+                // ✅ ENDPOINT SIMPLIFICADO
+                const response = await fetch('/api/v1/proxy-rotation/stats');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
                 const data = await response.json();
                 
                 // Actualizar contadores
-                document.getElementById('totalProxies').textContent = data.summary.total_proxies;
-                document.getElementById('activeProxies').textContent = data.summary.by_status.active;
-                document.getElementById('noScoreProxies').textContent = data.summary.health_distribution.no_score;
-                document.getElementById('failedProxies').textContent = data.summary.by_status.failed;
+                document.getElementById('totalProxies').textContent = data.total || 0;
+                document.getElementById('activeProxies').textContent = data.active || 0;
+                document.getElementById('failedProxies').textContent = data.failed || 0;
+                document.getElementById('avgLatency').textContent = 
+                    data.avg_latency_ms ? `${data.avg_latency_ms}ms` : 'N/A';
                 
                 // Actualizar timestamp
                 document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
                 
-                // Actualizar grid
-                const grid = document.getElementById('proxiesGrid');
-                grid.innerHTML = '';
+                // Cargar lista de proxies
+                await loadProxiesList();
                 
-                if (data.proxies_detail && data.proxies_detail.length > 0) {
-                    data.proxies_detail.forEach(proxy => {
-                        const card = createProxyCard(proxy);
-                        grid.appendChild(card);
-                    });
-                    
-                    log(`✅ ${data.proxies_detail.length} proxies cargados`, 'success');
-                } else {
-                    grid.innerHTML = '<div class="loading">No hay proxies disponibles</div>';
-                    log('⚠️ No hay proxies en el sistema', 'warning');
-                }
+                log(`✅ Stats actualizadas`, 'success');
                 
             } catch (error) {
                 log(`❌ Error: ${error.message}`, 'error');
@@ -404,24 +397,58 @@
             }
         }
 
+        async function loadProxiesList() {
+            try {
+                // Listar todos los proxies
+                const response = await fetch('/api/v1/proxies/?limit=100');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                const grid = document.getElementById('proxiesGrid');
+                grid.innerHTML = '';
+                
+                if (data.items && data.items.length > 0) {
+                    data.items.forEach(proxy => {
+                        const card = createProxyCard(proxy);
+                        grid.appendChild(card);
+                    });
+                    
+                    log(`✅ ${data.items.length} proxies cargados`, 'success');
+                } else {
+                    grid.innerHTML = '<div class="loading">No hay proxies disponibles</div>';
+                    log('⚠️ No hay proxies en el sistema', 'warning');
+                }
+                
+            } catch (error) {
+                log(`❌ Error cargando lista: ${error.message}`, 'error');
+            }
+        }
+
         function createProxyCard(proxy) {
             const card = document.createElement('div');
-            card.className = `proxy-card ${proxy.health_status}`;
+            card.className = `proxy-card ${proxy.status}`;
             
-            const latencyDisplay = proxy.latency_ms !== null ? `${Math.round(proxy.latency_ms)}ms` : 'N/A';
+            const latencyDisplay = proxy.avg_response_time 
+                ? `${Math.round(proxy.avg_response_time)}ms` 
+                : 'N/A';
+            
+            const location = `${proxy.city || proxy.region || 'Unknown'}, ${proxy.country || 'EC'}`;
             
             const statusEmoji = {
-                'healthy': '✅',
-                'degraded': '⚠️',
-                'unhealthy': '🔴',
-                'no_score': '❓',
-                'offline': '💀'
+                'active': '✅',
+                'failed': '🔴',
+                'inactive': '⚠️',
+                'checking': '🔄'
             };
             
             card.innerHTML = `
                 <div class="proxy-header">
                     <div class="proxy-location">
-                        ${statusEmoji[proxy.health_status]} ${proxy.location}
+                        ${statusEmoji[proxy.status] || '❓'} ${location}
                     </div>
                     <span class="badge ${proxy.status}">${proxy.status.toUpperCase()}</span>
                 </div>
@@ -435,11 +462,19 @@
                         <div class="stat-label">Latencia</div>
                         <div class="stat-value">${latencyDisplay}</div>
                     </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Tipo</div>
+                        <div class="stat-value">${proxy.proxy_type}</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Success Rate</div>
+                        <div class="stat-value">${Math.round(proxy.success_rate || 0)}%</div>
+                    </div>
                 </div>
                 
                 <div class="proxy-actions">
                     <button class="action-check" onclick="checkProxy(${proxy.id})">
-                        🔍 Verificar
+                        🔍 Verificar y Rotar
                     </button>
                 </div>
             `;
@@ -451,10 +486,13 @@
             log(`🔍 Verificando proxy ${proxyId}...`, 'info');
             
             try {
-                // ✅ ENDPOINT CORRECTO
                 const response = await fetch(`/api/v1/proxy-rotation/${proxyId}/check-and-rotate`, {
                     method: 'POST'
                 });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
                 
                 const data = await response.json();
                 
@@ -484,10 +522,14 @@
             log('🔧 Verificando todos los proxies...', 'warning');
             
             try {
-                // ✅ ENDPOINT CORRECTO
                 const response = await fetch('/api/v1/proxy-rotation/check-and-rotate-all', {
                     method: 'POST'
                 });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
                 const data = await response.json();
                 
                 log(`✅ ${data.message}`, 'success');
