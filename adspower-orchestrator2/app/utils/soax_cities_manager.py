@@ -14,10 +14,6 @@ from app.config import settings
 class SOAXCitiesManager:
     """
     Gestor dinámico de ciudades disponibles en SOAX
-    
-    - Consulta API de SOAX en tiempo real
-    - Cache con TTL de 5 minutos
-    - Fallback inteligente: Ciudad → Región → País
     """
     
     # Cache de ciudades disponibles
@@ -25,20 +21,24 @@ class SOAXCitiesManager:
     _cache_timestamp: Dict[str, datetime] = {}
     _cache_ttl_minutes = 5
     
-    # API Key de SOAX (nueva variable)
-    SOAX_API_KEY = None  # Se inicializa desde settings
+    # ✅ SOLUCIÓN: Inicializar directamente desde settings
+    @classmethod
+    def get_api_key(cls) -> Optional[str]:
+        """Obtiene API key desde settings"""
+        return getattr(settings, 'SOAX_API_KEY', None)
     
     @classmethod
     async def initialize(cls):
-        """Inicializa el manager (llamar al inicio)"""
-        # Obtener API key desde settings o variable de entorno
-        cls.SOAX_API_KEY = getattr(settings, 'SOAX_API_KEY', None)
+        """Inicializa el manager (opcional ahora)"""
+        api_key = cls.get_api_key()
         
-        if not cls.SOAX_API_KEY:
+        if not api_key:
             logger.warning(
                 "⚠️ SOAX_API_KEY no configurado. "
                 "Sistema de rotación usará ciudades estáticas."
             )
+        else:
+            logger.info(f"✅ SOAX_API_KEY configurado: {api_key[:8]}...")
     
     @classmethod
     async def get_available_cities(
@@ -47,19 +47,11 @@ class SOAXCitiesManager:
         conn_type: str = "mobile",
         force_refresh: bool = False
     ) -> List[str]:
-        """
-        Obtiene ciudades disponibles desde API de SOAX
-        
-        Returns:
-            Lista de ciudades disponibles (lowercase, con guiones)
-            Ej: ["quito", "guayaquil", "santo-domingo-de-los-colorados"]
-        """
+        """Obtiene ciudades disponibles desde API de SOAX"""
         
         cache_key = f"{country}_{conn_type}"
         
-        # ========================================
         # 1. VERIFICAR CACHE
-        # ========================================
         if not force_refresh and cache_key in cls._cache:
             cache_age = datetime.utcnow() - cls._cache_timestamp[cache_key]
             
@@ -70,10 +62,10 @@ class SOAXCitiesManager:
                 )
                 return cls._cache[cache_key]
         
-        # ========================================
-        # 2. CONSULTAR API DE SOAX
-        # ========================================
-        if not cls.SOAX_API_KEY:
+        # 2. OBTENER API KEY
+        api_key = cls.get_api_key()  # ✅ Obtener dinámicamente
+        
+        if not api_key:
             logger.warning("SOAX_API_KEY no disponible, usando fallback")
             return cls._get_fallback_cities()
         
@@ -81,8 +73,8 @@ class SOAXCitiesManager:
             url = "https://api.soax.com/api/get-country-cities"
             
             params = {
-                "api_key": cls.SOAX_API_KEY,
-                "package_key": settings.SOAX_PASSWORD,  # ✅ Mantiene SOAX_PASSWORD
+                "api_key": api_key,  # ✅ Usar el valor obtenido
+                "package_key": settings.SOAX_PASSWORD,
                 "country_iso": country.lower(),
                 "conn_type": conn_type
             }
@@ -99,17 +91,13 @@ class SOAXCitiesManager:
                     return cls._get_fallback_cities()
                 
                 data = response.json()
-                
-                # Parsear respuesta
                 cities = cls._parse_soax_response(data)
                 
                 if not cities:
                     logger.warning("⚠️ SOAX retornó 0 ciudades, usando fallback")
                     return cls._get_fallback_cities()
                 
-                # ========================================
                 # 3. GUARDAR EN CACHE
-                # ========================================
                 cls._cache[cache_key] = cities
                 cls._cache_timestamp[cache_key] = datetime.utcnow()
                 

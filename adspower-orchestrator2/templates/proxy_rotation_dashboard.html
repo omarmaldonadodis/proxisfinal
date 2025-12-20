@@ -466,23 +466,42 @@
             return card;
         }
 
-        async function checkProxy(proxyId) {
-            log(`🔍 Verificando proxy ${proxyId}...`, 'info');
+    async function checkProxy(proxyId) {
+        log(`🔍 Verificando proxy ${proxyId}...`, 'info');
+        
+        try {
+            const response = await fetch(`/api/v1/proxy-health/${proxyId}/check`, {
+                method: 'POST'
+            });
             
-            try {
-                const response = await fetch(`/api/v1/proxy-health/${proxyId}/check`, {
-                    method: 'POST'
-                });
-                const data = await response.json();
-                
-                log(`✅ Proxy ${proxyId}: Score ${data.overall_score?.toFixed(1) || 'N/A'}`, 'success');
-                
-                setTimeout(refreshData, 1000);
-                
-            } catch (error) {
-                log(`❌ Error verificando proxy ${proxyId}: ${error.message}`, 'error');
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
             }
+            
+            const data = await response.json();
+            
+            // ✅ Verificar si hay error
+            if (data.error) {
+                log(`⚠️ Proxy ${proxyId}: ${data.error}`, 'warning');
+                return;
+            }
+            
+            // ✅ Verificar si overall_score existe y es un número
+            let score = 'N/A';
+            if (data.overall_score !== null && data.overall_score !== undefined) {
+                score = data.overall_score.toFixed(1);
+            }
+            
+            const status = data.overall_status || 'unknown';
+            
+            log(`✅ Proxy ${proxyId}: Status=${status}, Score=${score}`, 'success');
+            
+            setTimeout(refreshData, 1000);
+            
+        } catch (error) {
+            log(`❌ Error verificando proxy ${proxyId}: ${error.message}`, 'error');
         }
+    }
 
         async function rotateProxy(proxyId) {
             log(`🔄 Rotando proxy ${proxyId}...`, 'warning');

@@ -1,10 +1,12 @@
-# app/services/proxy_health_service.py - VERSIÓN CORREGIDA
+# app/services/proxy_health_service.py - SECCIÓN DE IMPORTS (AL INICIO DEL ARCHIVO)
+
 """
 Servicio CORREGIDO con:
 - Speed test más robusto (sin 500 errors)
 - Auto-recovery mejorado
 - Detección de proxies lentas
 - Rotación automática
+✅ FIX: Importaciones correctas para ProxyScore
 """
 from typing import Dict, List, Optional
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -16,7 +18,7 @@ import asyncio
 import time
 
 from app.models.proxy import Proxy, ProxyStatus
-from app.models.proxy_health import ProxyHealthCheck, ProxyScore
+from app.models.proxy_health import ProxyHealthCheck, ProxyScore  # ✅ IMPORTAR AQUÍ
 from app.integrations.soax_client import SOAXClient
 from app.config import settings
 
@@ -26,9 +28,9 @@ class ProxyHealthService:
     
     # ✅ URLs más confiables (sin 500 errors)
     TEST_URLS = [
-        "https://httpbin.org/ip",           # Muy confiable
-        "https://ifconfig.me/ip",           # Simple y rápido
-        "https://api.ipify.org?format=json" # Backup
+        "https://httpbin.org/ip",
+        "https://ifconfig.me/ip",
+        "https://api.ipify.org?format=json"
     ]
     
     # ✅ Speed test más ligero (evita timeouts)
@@ -47,86 +49,144 @@ class ProxyHealthService:
         proxy_id: int,
         test_multiple_sessions: bool = False
     ) -> Dict:
-        """✅ Health check CORREGIDO"""
+        """✅ Health check ULTRA-SEGURO - NUNCA retorna None"""
         
-        result = await self.db.execute(
-            select(Proxy).where(Proxy.id == proxy_id)
-        )
-        proxy = result.scalar_one_or_none()
-        
-        if not proxy:
-            raise ValueError(f"Proxy {proxy_id} not found")
-        
-        logger.info(f"🔍 Health check: Proxy {proxy_id} ({proxy.city}, {proxy.region})")
-        
-        # ========================================
-        # 1. SPEED TEST (MÁS ROBUSTO)
-        # ========================================
-        speed_result = await self._test_speed_robust(proxy)
-        
-        # ========================================
-        # 2. AVAILABILITY
-        # ========================================
-        availability_result = await self._test_availability_robust(proxy)
-        
-        # ========================================
-        # 3. GEO VERIFICATION (OPCIONAL SI FALLÓ SPEED)
-        # ========================================
-        geo_result = {"geo_match": True, "status": "skipped"}
-        
-        if speed_result["status"] == "success":
-            geo_result = await self._verify_geo_location(proxy)
-        
-        # ========================================
-        # 4. CALCULAR SCORE
-        # ========================================
-        overall_score = self._calculate_score_safe(
-            speed_result,
-            availability_result,
-            geo_result
-        )
-        
-        overall_status = self._determine_status(overall_score, availability_result)
-        
-        # ========================================
-        # 5. GUARDAR EN DB (SAFE)
-        # ========================================
-        await self._save_health_check_safe(
-            proxy_id=proxy_id,
-            speed=speed_result,
-            availability=availability_result,
-            geo=geo_result
-        )
-        
-        # ========================================
-        # 6. ACTUALIZAR SCORE
-        # ========================================
-        await self._update_proxy_score_safe(proxy_id, overall_score, {
-            "speed": speed_result,
-            "availability": availability_result,
-            "geo": geo_result
-        })
-        
-        # ========================================
-        # 7. AUTO-RECOVERY SI ES NECESARIO
-        # ========================================
-        if overall_status in ["unhealthy", "offline"]:
-            # ✅ VERIFICAR consecutive_failures ANTES de intentar recovery
+        try:
             result = await self.db.execute(
-                select(ProxyScore).where(ProxyScore.proxy_id == proxy_id)
+                select(Proxy).where(Proxy.id == proxy_id)
             )
-            score = result.scalar_one_or_none()
+            proxy = result.scalar_one_or_none()
             
-            if score and score.consecutive_failures >= 10:
-                logger.error(
-                    f"🛑 CIRCUIT BREAKER ACTIVADO: Proxy {proxy_id} tiene "
-                    f"{score.consecutive_failures} fallos consecutivos. "
-                    f"Auto-recovery DESHABILITADO."
+            if not proxy:
+                logger.error(f"❌ Proxy {proxy_id} not found in database")
+                return {
+                    "proxy_id": proxy_id,
+                    "overall_status": "error",
+                    "overall_score": 0,
+                    "error": "Proxy not found",
+                    "speed_test": {"status": "failed"},
+                    "availability": {"is_available": False}
+                }
+            
+            logger.info(f"🔍 Health check: Proxy {proxy_id} ({proxy.city}, {proxy.region})")
+            
+            # ========================================
+            # 1. SPEED TEST (MÁS ROBUSTO)
+            # ========================================
+            try:
+                speed_result = await self._test_speed_robust(proxy)
+            except Exception as e:
+                logger.error(f"Speed test exception for proxy {proxy_id}: {e}")
+                speed_result = {"status": "failed", "latency_ms": None}
+            
+            # ========================================
+            # 2. AVAILABILITY
+            # ========================================
+            try:
+                availability_result = await self._test_availability_robust(proxy)
+            except Exception as e:
+                logger.error(f"Availability test exception for proxy {proxy_id}: {e}")
+                availability_result = {"status": "failed", "is_available": False}
+            
+            # ========================================
+            # 3. GEO VERIFICATION (OPCIONAL)
+            # ========================================
+            geo_result = {"geo_match": True, "status": "skipped"}
+            
+            if speed_result.get("status") == "success":
+                try:
+                    geo_result = await self._verify_geo_location(proxy)
+                except Exception as e:
+                    logger.error(f"Geo verification exception for proxy {proxy_id}: {e}")
+                    geo_result = {"status": "failed", "geo_match": False}
+            
+            # ========================================
+            # 4. CALCULAR SCORE (SIEMPRE RETORNA VALOR)
+            # ========================================
+            try:
+                overall_score = self._calculate_score_safe(
+                    speed_result,
+                    availability_result,
+                    geo_result
                 )
-            else:
-                logger.warning(f"⚠️ Proxy {proxy_id} unhealthy, triggering auto-recovery")
-                await self._attempt_auto_recovery_smart(proxy)
-    
+            except Exception as e:
+                logger.error(f"Score calculation exception for proxy {proxy_id}: {e}")
+                overall_score = 0.0
+            
+            overall_status = self._determine_status(overall_score, availability_result)
+            
+            # ========================================
+            # 5. GUARDAR EN DB (NO BLOQUEAR SI FALLA)
+            # ========================================
+            try:
+                await self._save_health_check_safe(
+                    proxy_id=proxy_id,
+                    speed=speed_result,
+                    availability=availability_result,
+                    geo=geo_result
+                )
+            except Exception as e:
+                logger.error(f"Failed to save health check for proxy {proxy_id}: {e}")
+            
+            # ========================================
+            # 6. ACTUALIZAR SCORE (NO BLOQUEAR SI FALLA)
+            # ========================================
+            try:
+                await self._update_proxy_score_safe(proxy_id, overall_score, {
+                    "speed": speed_result,
+                    "availability": availability_result,
+                    "geo": geo_result
+                })
+            except Exception as e:
+                logger.error(f"Failed to update score for proxy {proxy_id}: {e}")
+            
+            # ========================================
+            # 7. AUTO-RECOVERY SI ES NECESARIO (NO BLOQUEAR)
+            # ========================================
+            if overall_status in ["unhealthy", "offline"]:
+                try:
+                    result = await self.db.execute(
+                        select(ProxyScore).where(ProxyScore.proxy_id == proxy_id)
+                    )
+                    score = result.scalar_one_or_none()
+                    
+                    if score and score.consecutive_failures >= 10:
+                        logger.error(
+                            f"🛑 CIRCUIT BREAKER: Proxy {proxy_id} tiene "
+                            f"{score.consecutive_failures} fallos consecutivos"
+                        )
+                    else:
+                        logger.warning(f"⚠️ Proxy {proxy_id} unhealthy, triggering auto-recovery")
+                        await self._attempt_auto_recovery_smart(proxy)
+                except Exception as e:
+                    logger.error(f"Auto-recovery failed for proxy {proxy_id}: {e}")
+            
+            # ========================================
+            # 8. ✅ RETORNAR RESULTADO COMPLETO (NUNCA None)
+            # ========================================
+            return {
+                "proxy_id": proxy_id,
+                "overall_status": overall_status,
+                "overall_score": overall_score,
+                "speed_test": speed_result,
+                "availability": availability_result,
+                "geo_verification": geo_result,
+                "timestamp": datetime.utcnow().isoformat()
+            }
+        
+        except Exception as e:
+            # ✅ ÚLTIMO RECURSO: Si todo falla, retornar estructura básica
+            logger.error(f"❌ CRITICAL: Comprehensive health check failed for proxy {proxy_id}: {e}")
+            return {
+                "proxy_id": proxy_id,
+                "overall_status": "error",
+                "overall_score": 0,
+                "error": str(e),
+                "speed_test": {"status": "failed"},
+                "availability": {"is_available": False},
+                "timestamp": datetime.utcnow().isoformat()
+            }
+ 
     async def _test_speed_robust(self, proxy: Proxy) -> Dict:
         """✅ Speed test MÁS ROBUSTO (sin 500 errors)"""
         
@@ -485,7 +545,12 @@ class ProxyHealthService:
     
     # app/services/proxy_health_service.py - LÍNEA ~440
     async def _attempt_auto_recovery_smart(self, proxy: Proxy):
-        """✅ Auto-recovery con circuit breaker y validación"""
+        """✅ Auto-recovery con circuit breaker y validación - CORREGIDO"""
+        
+        # ========================================
+        # ✅ IMPORTAR ProxyScore AL INICIO
+        # ========================================
+        from app.models.proxy_health import ProxyScore
         
         # ========================================
         # 🛑 CIRCUIT BREAKER: Detener si ya intentó muchas veces
@@ -509,13 +574,10 @@ class ProxyHealthService:
             current_username = proxy.username or ""
             
             # El base_username debe ser el package-XXXXXX del PROXY, no de settings
-            # Ejemplo: "package-325101-country-ec-city-manta-..." → "package-325101"
             if current_username.startswith("package-") and "-country-" in current_username:
-                # Extraer solo "package-325101" (antes de "-country-")
                 base_username = current_username.split("-country-")[0]
                 logger.info(f"✓ Base username extraído: {base_username}")
             elif settings.SOAX_USERNAME.startswith("package-"):
-                # Fallback: usar settings si el proxy no tiene username válido
                 base_username = settings.SOAX_USERNAME
                 logger.warning(f"⚠️ Usando SOAX_USERNAME como fallback: {base_username}")
             else:
@@ -590,8 +652,6 @@ class ProxyHealthService:
                 logger.info(f"🎉 Recovery successful: Proxy {proxy.id}")
                 
                 # Reset blacklist y contadores
-                from app.models.proxy_health import ProxyScore
-                
                 score_result = await self.db.execute(
                     select(ProxyScore).where(ProxyScore.proxy_id == proxy.id)
                 )
@@ -611,8 +671,6 @@ class ProxyHealthService:
                 )
                 
                 # ✅ INCREMENTAR contador de fallos (para circuit breaker)
-                from app.models.proxy_health import ProxyScore
-                
                 score_result = await self.db.execute(
                     select(ProxyScore).where(ProxyScore.proxy_id == proxy.id)
                 )
@@ -626,7 +684,6 @@ class ProxyHealthService:
             logger.error(f"Error in auto-recovery: {e}")
             import traceback
             logger.error(traceback.format_exc())
-
 
     def _build_proxy_url(self, proxy: Proxy) -> str:
         """Construye URL del proxy"""
@@ -644,16 +701,12 @@ class ProxyHealthService:
         only_active: bool = False,
         max_concurrent: int = 5
     ) -> Dict:
-        """
-        ✅ Health check de todos los proxies CORREGIDO
-        
-        Crea sesión independiente por cada proxy para evitar race conditions
-        """
+        """✅ Health check MASIVO - NUNCA retorna None"""
         
         # ========================================
-        # 1. OBTENER IDs DE PROXIES (solo IDs, no objetos)
+        # 1. OBTENER IDs DE PROXIES
         # ========================================
-        query = select(Proxy.id)  # ✅ Solo ID
+        query = select(Proxy.id)
         
         if only_active:
             query = query.where(
@@ -663,8 +716,20 @@ class ProxyHealthService:
                 )
             )
         
-        result = await self.db.execute(query)
-        proxy_ids = [row[0] for row in result.all()]  # ✅ Lista de IDs
+        try:
+            result = await self.db.execute(query)
+            proxy_ids = [row[0] for row in result.all()]
+        except Exception as e:
+            logger.error(f"Failed to fetch proxy IDs: {e}")
+            return {
+                "total": 0,
+                "healthy": 0,
+                "degraded": 0,
+                "unhealthy": 0,
+                "offline": 0,
+                "details": [],
+                "error": str(e)
+            }
         
         logger.info(f"🏥 Starting batch health check: {len(proxy_ids)} proxies")
         
@@ -677,46 +742,65 @@ class ProxyHealthService:
             "details": []
         }
         
+        if not proxy_ids:
+            logger.warning("No proxies to check")
+            return results
+        
         # ========================================
-        # 2. CREAR FUNCIÓN CON SESIÓN INDEPENDIENTE
+        # 2. FUNCIÓN CON SESIÓN INDEPENDIENTE
         # ========================================
         semaphore = asyncio.Semaphore(max_concurrent)
         
         async def check_with_independent_session(proxy_id: int):
-            """✅ Crea su propia sesión DB - sin race conditions"""
+            """✅ NUNCA retorna None - siempre retorna Dict"""
             from app.database import AsyncSessionLocal
             
             async with semaphore:
-                # ✅ NUEVA SESIÓN para esta tarea
-                async with AsyncSessionLocal() as independent_db:
-                    try:
-                        # Crear servicio con sesión independiente
+                try:
+                    async with AsyncSessionLocal() as independent_db:
                         independent_service = ProxyHealthService(independent_db)
                         
-                        # Ejecutar health check
-                        return await independent_service.comprehensive_health_check(
+                        result = await independent_service.comprehensive_health_check(
                             proxy_id=proxy_id,
                             test_multiple_sessions=False
                         )
-                    
-                    except Exception as e:
-                        logger.error(
-                            f"Health check failed for proxy {proxy_id}: {e}"
-                        )
-                        return {
-                            "proxy_id": proxy_id,
-                            "overall_status": "error",
-                            "error": str(e)
-                        }
+                        
+                        # ✅ VALIDACIÓN: Si result es None, crear estructura básica
+                        if result is None:
+                            logger.error(f"Health check returned None for proxy {proxy_id}")
+                            return {
+                                "proxy_id": proxy_id,
+                                "overall_status": "error",
+                                "overall_score": 0,
+                                "error": "Health check returned None"
+                            }
+                        
+                        return result
+                
+                except Exception as e:
+                    logger.error(f"Exception in check_with_independent_session for proxy {proxy_id}: {e}")
+                    return {
+                        "proxy_id": proxy_id,
+                        "overall_status": "error",
+                        "overall_score": 0,
+                        "error": str(e)
+                    }
         
         # ========================================
-        # 3. EJECUTAR EN PARALELO (SAFE)
+        # 3. EJECUTAR EN PARALELO
         # ========================================
-        tasks = [
-            check_with_independent_session(proxy_id) 
-            for proxy_id in proxy_ids
-        ]
-        check_results = await asyncio.gather(*tasks, return_exceptions=True)
+        try:
+            tasks = [
+                check_with_independent_session(proxy_id) 
+                for proxy_id in proxy_ids
+            ]
+            check_results = await asyncio.gather(*tasks, return_exceptions=True)
+        except Exception as e:
+            logger.error(f"Failed to gather health check tasks: {e}")
+            return {
+                **results,
+                "error": f"Failed to execute batch: {str(e)}"
+            }
         
         # ========================================
         # 4. PROCESAR RESULTADOS
@@ -727,10 +811,10 @@ class ProxyHealthService:
                 logger.error(f"Task failed with exception: {check_result}")
                 results["offline"] += 1
                 continue
-
-            # ✅ Manejar None
+            
+            # ✅ VALIDACIÓN: Si es None, marcarlo como error
             if check_result is None:
-                logger.warning("Health check returned None, marcando como offline")
+                logger.error("Health check returned None, marcando como offline")
                 results["offline"] += 1
                 results["details"].append({
                     "proxy_id": None,
@@ -738,9 +822,15 @@ class ProxyHealthService:
                     "error": "None returned"
                 })
                 continue
-
+            
+            # ✅ Validar que sea un dict
+            if not isinstance(check_result, dict):
+                logger.error(f"Invalid result type: {type(check_result)}")
+                results["offline"] += 1
+                continue
+            
             status = check_result.get("overall_status", "error")
-
+            
             if status == "healthy":
                 results["healthy"] += 1
             elif status == "degraded":
@@ -749,9 +839,8 @@ class ProxyHealthService:
                 results["unhealthy"] += 1
             else:
                 results["offline"] += 1
-
+            
             results["details"].append(check_result)
-
         
         logger.info(
             f"✅ Batch health check complete: "

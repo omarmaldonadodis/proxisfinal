@@ -109,6 +109,9 @@ async def lifespan(app: FastAPI):
     
     await init_db()
     logger.info("✓ Database initialized")
+
+    from app.utils.soax_cities_manager import SOAXCitiesManager
+    await SOAXCitiesManager.initialize()
     
     # ✅ CONECTAR REDIS PUB/SUB
     await redis_messaging.connect()
