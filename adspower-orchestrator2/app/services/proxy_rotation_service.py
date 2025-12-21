@@ -1,10 +1,11 @@
-# app/services/proxy_rotation_service.py - ✅ VERSIÓN CORREGIDA CON FORMATO CORRECTO
+# app/services/proxy_rotation_service.py - ✅ VERSIÓN CORREGIDA COMPLETA
 
 """
-CAMBIO CRÍTICO:
-- Usar EXACTAMENTE el mismo formato que profile_service.py usa al crear perfiles
-- El campo se llama "user_proxy_config", no "proxy_config"
-- Debe incluir "proxy_soft": "other"
+Sistema de Rotación de Proxies con:
+1. Validación de conectividad AdsPower
+2. Formato correcto API v2
+3. Manejo robusto de errores
+4. Retry con backoff exponencial
 """
 
 from typing import Dict, Optional, List
@@ -186,16 +187,47 @@ class ProxyRotationService:
     async def _update_adspower_profiles_with_retry(
         self, 
         proxy: Proxy,
-        max_retries: int = 2
+        max_retries: int = 3
     ) -> bool:
-        """Actualiza profiles con retry automático"""
+        """
+        ✅ CRÍTICO: Actualiza profiles con retry automático
         
-        for attempt in range(max_retries + 1):
+        Cambios:
+        1. Verifica conectividad ANTES de cada intento
+        2. Backoff exponencial entre reintentos
+        3. Timeout reducido a 30s por intento
+        """
+        
+        for attempt in range(max_retries):
             if attempt > 0:
-                logger.info(f"🔄 Reintento {attempt}/{max_retries}...")
-                await asyncio.sleep(2)
+                wait_time = min(2 ** attempt, 10)  # Exponential backoff (max 10s)
+                logger.info(f"🔄 Reintento {attempt}/{max_retries} en {wait_time}s...")
+                await asyncio.sleep(wait_time)
             
-            success = await self._update_adspower_profiles_sync(proxy)
+            # ✅ VERIFICAR CONECTIVIDAD ANTES DE INTENTAR
+            result = await self.db.execute(
+                select(Profile).where(Profile.proxy_id == proxy.id).limit(1)
+            )
+            sample_profile = result.scalar_one_or_none()
+            
+            if sample_profile:
+                result = await self.db.execute(
+                    select(Computer).where(Computer.id == sample_profile.computer_id)
+                )
+                computer = result.scalar_one_or_none()
+                
+                if computer:
+                    is_reachable = await self._check_adspower_connectivity(computer)
+                    
+                    if not is_reachable:
+                        logger.error(
+                            f"❌ AdsPower en {computer.ip_address}:{computer.adspower_api_url} "
+                            f"NO RESPONDE - Saltando intento {attempt + 1}"
+                        )
+                        continue  # Pasar al siguiente intento
+            
+            # Ejecutar actualización
+            success = await self._update_adspower_profiles_sync(proxy, timeout=30.0)
             
             if success:
                 return True
@@ -204,24 +236,66 @@ class ProxyRotationService:
         
         return False
     
-    async def _update_adspower_profiles_sync(self, proxy: Proxy) -> bool:
+    async def _check_adspower_connectivity(self, computer: Computer) -> bool:
         """
-        ✅ CORRECCIÓN CRÍTICA: Usar el MISMO formato que profile_service.py
+        ✅ NUEVO: Verifica que AdsPower responda ANTES de intentar actualizar
         
-        ANTES (incorrecto):
-        proxy_config = {
+        Returns:
+            True si AdsPower responde, False si no
+        """
+        try:
+            client = AdsPowerClient(
+                api_url=computer.adspower_api_url,
+                api_key=computer.adspower_api_key
+            )
+            
+            # Test simple: listar 1 profile
+            async with httpx.AsyncClient(timeout=5.0) as http_client:
+                response = await http_client.get(
+                    f"{computer.adspower_api_url}/api/v1/user/list",
+                    params={"page": 1, "page_size": 1},
+                    headers={"Authorization": f"Bearer {computer.adspower_api_key}"}
+                )
+                
+                if response.status_code == 200:
+                    logger.debug(f"✅ AdsPower respondió: {computer.ip_address}")
+                    return True
+                else:
+                    logger.warning(
+                        f"⚠️ AdsPower retornó {response.status_code}: {computer.ip_address}"
+                    )
+                    return False
+        
+        except httpx.TimeoutException:
+            logger.error(f"⏱️ Timeout verificando AdsPower: {computer.ip_address}")
+            return False
+        
+        except Exception as e:
+            logger.error(f"❌ Error verificando AdsPower: {e}")
+            return False
+    
+    async def _update_adspower_profiles_sync(
+        self, 
+        proxy: Proxy,
+        timeout: float = 30.0
+    ) -> bool:
+        """
+        ✅ FORMATO CORRECTO según documentación AdsPower
+        
+        Documentación: https://localapi-doc-en.adspower.com/docs/Update-Profile-Info-V2
+        
+        CRÍTICO: AdsPower espera el formato EXACTO del ejemplo de creación:
+        {
+            "user_id": "k182wa7h",
             "user_proxy_config": {
                 "proxy_soft": "other",
                 "proxy_type": "http",
-                "proxy_host": proxy.host,
-                "proxy_port": str(proxy.port),
-                "proxy_user": proxy.username,
-                "proxy_password": proxy.password
+                "proxy_host": "proxy.soax.com",
+                "proxy_port": "5000",  # ⚠️ STRING en docs oficiales
+                "proxy_user": "user",
+                "proxy_password": "pass"
             }
         }
-        
-        AHORA (correcto, igual que en creación):
-        Copiar EXACTAMENTE el formato de profile_service.py líneas 100-108
         """
         
         result = await self.db.execute(
@@ -235,30 +309,20 @@ class ProxyRotationService:
         
         logger.info(f"🔄 Actualizando {len(profiles)} profiles en AdsPower...")
         
-        # ✅ MAPEO DE TIPOS DE PROXY (igual que en profile_service.py)
-        proxy_type_map = {
-            "http": "http",
-            "https": "https",
-            "socks5": "socks5",
-            "mobile": "http",      # ✅ SOAX mobile usa http
-            "residential": "http",  # ✅ SOAX residential usa http
-            "datacenter": "http"
-        }
-        
-        # ✅ FORMATO EXACTO usado en profile_service.py (línea 100-108)
+        # ✅ FORMATO EXACTO según documentación
         proxy_config = {
             "user_proxy_config": {
                 "proxy_soft": "other",
-                "proxy_type": proxy_type_map.get(proxy.proxy_type, "http"),
+                "proxy_type": "http",  # SOAX siempre usa http
                 "proxy_host": proxy.host,
-                "proxy_port": proxy.port,  # ✅ INT, no string
+                "proxy_port": str(proxy.port),  # ⚠️ STRING según docs
                 "proxy_user": proxy.username or "",
                 "proxy_password": proxy.password or ""
             }
         }
         
-        # ✅ DEBUG: Imprimir EXACTAMENTE lo que se envía
-        logger.info(f"📤 Datos que se enviarán a AdsPower:")
+        # ✅ LOG DETALLADO
+        logger.info(f"📤 Datos para AdsPower API v2:")
         logger.info(f"   proxy_soft: {proxy_config['user_proxy_config']['proxy_soft']}")
         logger.info(f"   proxy_type: {proxy_config['user_proxy_config']['proxy_type']}")
         logger.info(f"   proxy_host: {proxy_config['user_proxy_config']['proxy_host']}")
@@ -287,35 +351,58 @@ class ProxyRotationService:
                     failed_count += len(computer_profiles)
                     continue
                 
-                # ✅ CREAR CLIENT con los MISMOS parámetros que profile_service.py
-                client = AdsPowerClient(
-                    api_url=computer.adspower_api_url,
-                    api_key=computer.adspower_api_key
-                )
-                
-                # Actualizar profiles de este computer
-                for profile in computer_profiles:
-                    try:
-                        # ✅ USAR EL MISMO MÉTODO que profile_service.py
-                        logger.info(f"📤 Actualizando profile {profile.adspower_id} en AdsPower...")
-                        logger.info(f"   URL: {computer.adspower_api_url}/api/v1/user/update")
-                        logger.info(f"   Profile ID: {profile.adspower_id}")
-                        
-                        success = await client.update_profile(
-                            profile_id=profile.adspower_id,
-                            profile_data=proxy_config
-                        )
-                        
-                        if success:
-                            logger.info(f"✅ Profile {profile.id} actualizado")
-                            success_count += 1
-                        else:
-                            logger.error(f"❌ Profile {profile.id} falló (returned False)")
-                            failed_count += 1
+                # ✅ USAR HTTPX DIRECTAMENTE (más control)
+                async with httpx.AsyncClient(timeout=timeout) as http_client:
                     
-                    except Exception as e:
-                        logger.error(f"❌ Exception actualizando profile {profile.id}: {e}")
-                        failed_count += 1
+                    for profile in computer_profiles:
+                        try:
+                            url = f"{computer.adspower_api_url}/api/v1/user/update"
+                            
+                            # ✅ PAYLOAD COMPLETO
+                            payload = {
+                                "user_id": profile.adspower_id,
+                                **proxy_config
+                            }
+                            
+                            logger.info(f"📤 POST {url}")
+                            logger.info(f"   Profile: {profile.adspower_id}")
+                            
+                            response = await http_client.post(
+                                url,
+                                json=payload,
+                                headers={
+                                    "Authorization": f"Bearer {computer.adspower_api_key}",
+                                    "Content-Type": "application/json"
+                                }
+                            )
+                            
+                            logger.info(f"📥 Response: {response.status_code}")
+                            
+                            if response.status_code == 200:
+                                data = response.json()
+                                
+                                if data.get("code") == 0:
+                                    logger.info(f"✅ Profile {profile.id} actualizado")
+                                    success_count += 1
+                                else:
+                                    logger.error(
+                                        f"❌ AdsPower error code {data.get('code')}: "
+                                        f"{data.get('msg')}"
+                                    )
+                                    failed_count += 1
+                            else:
+                                logger.error(
+                                    f"❌ HTTP {response.status_code}: {response.text[:200]}"
+                                )
+                                failed_count += 1
+                        
+                        except httpx.TimeoutException:
+                            logger.error(f"⏱️ Timeout actualizando profile {profile.id}")
+                            failed_count += 1
+                        
+                        except Exception as e:
+                            logger.error(f"❌ Error profile {profile.id}: {e}")
+                            failed_count += 1
             
             except Exception as e:
                 logger.error(f"❌ Error con computer {computer_id}: {e}")

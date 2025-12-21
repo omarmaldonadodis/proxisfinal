@@ -1,0 +1,234 @@
+2025-12-21 09:39:40 | INFO     | browser_controller:__init__:34 - ✓ ChromeDriver detectado: /Users/omarmaldonado/Desktop/proxys/proyectofinal/agent/chromedriver
+2025-12-21 09:39:40 | DEBUG    | action_executor:set_session_var:48 - Session var set: USERNAME
+2025-12-21 09:39:40 | DEBUG    | action_executor:set_session_var:48 - Session var set: PASSWORD
+2025-12-21 09:39:40 | INFO     | __main__:start:83 - ============================================================
+2025-12-21 09:39:40 | INFO     | __main__:start:84 - 🤖 AdsPower Agent Starting
+2025-12-21 09:39:40 | INFO     | __main__:start:85 - Computer Name: mac2
+2025-12-21 09:39:40 | INFO     | __main__:start:86 - Orchestrator: http://192.168.1.8:8000
+2025-12-21 09:39:40 | INFO     | __main__:start:87 - ============================================================
+2025-12-21 09:39:40 | INFO     | __main__:start:103 - 🔑 Found saved token, validating...
+2025-12-21 09:39:40 | INFO     | __main__:start:107 - ✅ Token valid, using existing registration
+2025-12-21 09:39:40 | INFO     | __main__:start:122 - ✅ Computer ID: 1
+2025-12-21 09:39:40 | INFO     | __main__:start:125 - Connecting to orchestrator via WebSocket...
+2025-12-21 09:39:40 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.1.8:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY2MDkzNzM0fQ.27cdASvmva_gqhEdnyiexSvqWwIMUZWcA7ky9jQePp4
+2025-12-21 09:39:40 | INFO     | websocket_client:connect:55 - ✅ Connected to orchestrator!
+2025-12-21 09:39:40 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: connected
+2025-12-21 09:39:40 | INFO     | websocket_client:_handle_message:132 - ✅ Connected to orchestrator
+2025-12-21 09:40:04 | WARNING  | websocket_client:_listen:115 - Connection lost: received 1012 (service restart); then sent 1012 (service restart)
+2025-12-21 09:40:04 | WARNING  | websocket_client:connect:68 - Connection closed, will reconnect...
+2025-12-21 09:40:04 | DEBUG    | websocket_client:_heartbeat_loop:288 - Heartbeat stopped
+2025-12-21 09:40:04 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-21 09:40:09 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.1.8:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY2MDkzNzM0fQ.27cdASvmva_gqhEdnyiexSvqWwIMUZWcA7ky9jQePp4
+2025-12-21 09:40:09 | ERROR    | websocket_client:connect:79 - WebSocket error: did not receive a valid HTTP response
+2025-12-21 09:40:14 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-21 09:40:19 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.1.8:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY2MDkzNzM0fQ.27cdASvmva_gqhEdnyiexSvqWwIMUZWcA7ky9jQePp4
+2025-12-21 09:40:19 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.1.8', 8000)
+2025-12-21 09:40:24 | INFO     | websocket_client:connect:103 - Reconnecting in 5 seconds...
+2025-12-21 09:40:29 | INFO     | websocket_client:connect:44 - Connecting to: ws://192.168.1.8:8000/api/v1/warming/ws/1?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFnZW50IiwiY29tcHV0ZXJfaWQiOjEsImNvbXB1dGVyX25hbWUiOiJtYWMyIiwiaWF0IjoxNzY2MDkzNzM0fQ.27cdASvmva_gqhEdnyiexSvqWwIMUZWcA7ky9jQePp4
+2025-12-21 09:40:29 | INFO     | websocket_client:connect:55 - ✅ Connected to orchestrator!
+2025-12-21 09:40:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: connected
+2025-12-21 09:40:29 | INFO     | websocket_client:_handle_message:132 - ✅ Connected to orchestrator
+2025-12-21 09:40:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:40:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:40:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:41:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:41:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:41:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:41:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:41:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:41:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:42:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:42:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:42:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:42:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:42:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:42:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:43:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:43:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:43:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:43:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:43:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:43:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:44:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:44:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:44:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:44:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:44:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:44:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:45:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:45:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:45:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:45:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:45:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:45:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:46:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:46:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:46:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:46:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:46:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:46:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:47:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:47:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:47:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:47:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:47:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:47:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:48:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:48:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:48:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:48:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:48:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:48:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:49:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:49:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:49:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:49:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:49:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:49:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:50:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:50:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:50:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:50:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:50:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:50:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:51:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:51:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:51:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:51:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:51:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:51:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:52:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:52:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:52:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:52:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:52:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:52:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:53:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:53:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:53:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:53:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:53:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:53:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:54:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:54:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:54:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:54:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:54:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:54:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:55:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:55:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:55:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:55:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:55:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:55:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:56:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:56:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:56:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:56:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:56:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:56:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:57:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:57:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:57:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:57:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:57:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:57:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:58:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:58:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:58:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:58:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:58:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:58:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:59:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:59:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:59:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 09:59:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 09:59:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 09:59:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:00:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:00:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:00:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:00:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:00:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:00:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:01:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:01:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:01:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:01:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:01:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:01:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:02:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:02:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:02:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:02:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:02:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:02:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:03:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:03:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:03:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:03:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:03:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:03:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:04:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:04:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:04:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:04:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:04:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:04:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:05:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:05:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:05:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:05:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:05:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:05:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:06:29 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:06:29 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:06:29 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:06:59 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:06:59 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:06:59 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:22:31 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:22:31 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:22:31 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:38:02 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:38:02 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:38:02 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:47:32 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:47:32 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:47:32 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:48:02 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:48:02 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:48:02 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:48:32 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:48:32 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:48:32 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:49:02 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:49:02 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:49:02 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:49:32 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:49:32 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:49:32 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:50:02 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:50:02 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:50:02 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:50:32 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:50:32 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:50:32 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:51:02 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:51:02 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:51:02 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:51:32 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:51:32 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:51:32 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:52:02 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:52:02 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:52:02 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:52:32 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:52:32 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:52:32 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:53:02 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:53:02 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:53:02 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
+2025-12-21 10:53:32 | DEBUG    | websocket_client:_heartbeat_loop:282 - 💓 Heartbeat
+2025-12-21 10:53:32 | DEBUG    | websocket_client:_handle_message:129 - 📨 Received: heartbeat_ack
+2025-12-21 10:53:32 | DEBUG    | websocket_client:_handle_message:144 - 💓 Heartbeat OK
