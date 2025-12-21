@@ -1,5 +1,5 @@
 # app/schemas/proxy.py
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 from typing import Optional, List, Dict, Any
 from datetime import datetime
 from app.models.proxy import ProxyType, ProxyStatus
@@ -17,6 +17,11 @@ class ProxyBase(BaseModel):
     sticky_session: bool = True
     tags: List[str] = Field(default_factory=list)
     meta_data: Dict[str, Any] = Field(default_factory=dict)
+    
+    @validator("meta_data", pre=True, always=True)
+    def ensure_meta_data(cls, v):
+        """Convierte None a {} automáticamente"""
+        return v if v is not None else {}
 
 class ProxyCreate(ProxyBase):
     pass

@@ -1,3 +1,4 @@
+# app/integrations/adspower_client.py - ✅ VERSIÓN CORREGIDA
 from typing import Dict, List, Optional
 import httpx
 from loguru import logger
@@ -9,7 +10,7 @@ class AdsPowerClient:
     def __init__(self, api_url: str, api_key: str):
         self.api_url = api_url.rstrip('/')
         self.api_key = api_key
-        self.timeout = 30.0
+        self.timeout = 60.0  # ✅ Aumentado a 60s (AdsPower puede ser lento)
     
     def _get_headers(self) -> Dict[str, str]:
         """Genera headers con Bearer token"""
@@ -45,13 +46,21 @@ class AdsPowerClient:
                 logger.debug(f"Converted cookie list to JSON: {data_copy['cookie'][:200]}")
         
         try:
+            # ✅ LOGGING DETALLADO
+            logger.debug(f"Making {method} request to: {url}")
+            logger.debug(f"Headers: {headers}")
+            if params:
+                logger.debug(f"Params: {params}")
+            if request_data:
+                logger.debug(f"Data keys: {list(request_data.keys())}")
+            
             async with httpx.AsyncClient(timeout=self.timeout) as client:
                 response = await client.request(
                     method=method,
                     url=url,
                     headers=headers,
                     params=params,
-                    json=request_data  # ✅ httpx maneja la serialización JSON
+                    json=request_data
                 )
                 
                 # ✅ Log response para debugging
@@ -60,20 +69,65 @@ class AdsPowerClient:
                 
                 response.raise_for_status()
                 return response.json()
+        
+        except httpx.ConnectError as e:
+            logger.error(f"❌ AdsPower connection error: Cannot connect to {url}")
+            logger.error(f"   Error: {str(e)}")
+            logger.error(f"   ¿Está AdsPower corriendo en este computer?")
+            raise Exception(f"Cannot connect to AdsPower at {url}. Is AdsPower running?")
+        
+        except httpx.TimeoutException as e:
+            logger.error(f"❌ AdsPower timeout: {url}")
+            logger.error(f"   Error: {str(e)}")
+            raise Exception(f"AdsPower API timeout after {self.timeout}s")
+        
         except httpx.HTTPStatusError as e:
-            logger.error(f"AdsPower API error: {e.response.status_code} - {e.response.text}")
-            raise Exception(f"AdsPower API error: {e.response.status_code}")
+            logger.error(f"❌ AdsPower API error: {e.response.status_code}")
+            logger.error(f"   URL: {url}")
+            logger.error(f"   Response: {e.response.text}")
+            raise Exception(f"AdsPower API error: {e.response.status_code} - {e.response.text[:200]}")
+        
         except Exception as e:
-            logger.error(f"AdsPower connection error: {str(e)}")
-            raise Exception(f"AdsPower connection error: {str(e)}")
+            logger.error(f"❌ Unexpected AdsPower error: {type(e).__name__}")
+            logger.error(f"   Error: {str(e)}")
+            raise Exception(f"AdsPower error: {str(e)}")
     
     async def test_connection(self) -> bool:
         """Prueba la conexión con AdsPower"""
         try:
-            result = await self._make_request("GET", "/api/v1/user/list", params={"page": 1, "page_size": 1})
+            result = await self._make_request(
+                "GET", 
+                "/api/v1/user/list", 
+                params={"page": 1, "page_size": 1}
+            )
             return result.get("code") == 0
         except Exception as e:
             logger.error(f"AdsPower connection test failed: {str(e)}")
+            return False
+    
+    async def update_profile(self, profile_id: str, profile_data: Dict) -> bool:
+        """
+        ✅ ACTUALIZADO: Retorna True/False explícitamente
+        """
+        data = {"user_id": profile_id, **profile_data}
+        
+        logger.debug(f"Updating profile {profile_id} with keys: {list(profile_data.keys())}")
+        
+        try:
+            result = await self._make_request("POST", "/api/v1/user/update", data=data)
+            
+            if result.get("code") == 0:
+                logger.info(f"✅ Profile {profile_id} updated successfully")
+                return True
+            else:
+                logger.warning(
+                    f"⚠️ Profile update failed - code: {result.get('code')}, "
+                    f"msg: {result.get('msg')}"
+                )
+                return False
+        
+        except Exception as e:
+            logger.error(f"❌ Exception updating profile {profile_id}: {str(e)}")
             return False
     
     async def create_profile(self, profile_data: Dict) -> Dict:
@@ -110,25 +164,6 @@ class AdsPowerClient:
             raise Exception(f"Failed to list profiles: {result.get('msg')}")
         
         return result["data"]
-    
-    async def update_profile(self, profile_id: str, profile_data: Dict) -> bool:
-        """
-        ✅ SIMPLIFICADO: El manejo de cookies se hace en _make_request
-        """
-        data = {"user_id": profile_id, **profile_data}
-        
-        logger.debug(f"Updating profile {profile_id} with keys: {list(profile_data.keys())}")
-        
-        result = await self._make_request("POST", "/api/v1/user/update", data=data)
-        
-        if result.get("code") == 0:
-            logger.info(f"✓ Profile {profile_id} updated successfully")
-            return True
-        else:
-            logger.warning(
-                f"⚠️ Profile update failed - code: {result.get('code')}, msg: {result.get('msg')}"
-            )
-            return False
     
     async def delete_profile(self, profile_ids: List[str]) -> bool:
         """Elimina uno o más perfiles"""
@@ -180,16 +215,8 @@ class AdsPowerClient:
         
         return result["data"]
     
-    # ✅ NUEVO: Método específico para subir cookies
     async def upload_cookies(self, profile_id: str, cookies: List[Dict]) -> bool:
         """
         Sube cookies a un perfil existente
-        
-        Args:
-            profile_id: ID del perfil en AdsPower
-            cookies: Lista de cookies en formato AdsPower
-        
-        Returns:
-            True si exitoso, False si falla
         """
         return await self.update_profile(profile_id, {"cookie": cookies})

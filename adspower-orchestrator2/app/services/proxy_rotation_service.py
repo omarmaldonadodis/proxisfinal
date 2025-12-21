@@ -1,9 +1,10 @@
-# app/services/proxy_rotation_service.py
+# app/services/proxy_rotation_service.py - ✅ VERSIÓN OPTIMIZADA
 """
-Sistema SIMPLIFICADO de rotación de proxies
-- Ping en tiempo real
-- Rotación automática si latencia > 2000ms
-- Actualización en AdsPower + DB
+OPTIMIZACIONES:
+1. Timeout aumentado a 60s
+2. Actualización en paralelo de profiles
+3. Retry automático en caso de timeout
+4. Mejor logging
 """
 from typing import Dict, Optional, List
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -28,13 +29,11 @@ import asyncio
 
 
 class ProxyRotationService:
-    """Servicio TODO-EN-UNO para rotación de proxies"""
+    """Servicio optimizado para rotación de proxies"""
     
-    # Umbrales
     MAX_LATENCY_MS = 2000
     OPTIMAL_LATENCY_MS = 1000
     
-    # Regiones cercanas (Ecuador)
     NEARBY_REGIONS = {
         "pichincha": ["cotopaxi", "imbabura", "santo-domingo"],
         "guayas": ["los-rios", "santa-elena", "manabi"],
@@ -45,35 +44,9 @@ class ProxyRotationService:
     def __init__(self, db: AsyncSession):
         self.db = db
     
-    # ========================================
-    # 1️⃣ MÉTODO PRINCIPAL (LO ÚNICO QUE NECESITAS)
-    # ========================================
-    
     async def check_and_rotate_proxy(self, proxy_id: int) -> Dict:
-        """
-        🎯 MÉTODO MAESTRO: Verifica y rota proxy si es necesario
+        """🎯 Verifica y rota proxy si es necesario"""
         
-        Flujo:
-        1. Ping proxy actual
-        2. Si >2000ms → Rotar a otra sesión misma ciudad
-        3. Si ciudad no disponible → Buscar ciudad cercana
-        4. Actualizar AdsPower
-        5. Actualizar DB
-        
-        Returns:
-            {
-                "rotated": True/False,
-                "old_latency_ms": 3500,
-                "new_latency_ms": 800,
-                "old_location": "Quito, Pichincha",
-                "new_location": "Guayaquil, Guayas",
-                "message": "✅ Rotación exitosa"
-            }
-        """
-        
-        # ========================================
-        # PASO 1: Obtener proxy
-        # ========================================
         result = await self.db.execute(
             select(Proxy).where(Proxy.id == proxy_id)
         )
@@ -84,9 +57,6 @@ class ProxyRotationService:
         
         logger.info(f"🔍 Verificando proxy {proxy_id}: {proxy.city}, {proxy.region}")
         
-        # ========================================
-        # PASO 2: Ping actual
-        # ========================================
         old_latency = await self._ping_proxy(proxy)
         
         if old_latency is None:
@@ -99,13 +69,9 @@ class ProxyRotationService:
                 "old_latency_ms": None
             }
         
-        # ========================================
-        # PASO 3: Verificar si necesita rotación
-        # ========================================
         if old_latency < self.MAX_LATENCY_MS:
             logger.info(f"✅ Proxy {proxy_id} está óptimo ({old_latency}ms)")
             
-            # Actualizar métricas en DB
             proxy.avg_response_time = old_latency
             proxy.last_check_at = datetime.utcnow()
             proxy.status = ProxyStatus.ACTIVE
@@ -118,27 +84,19 @@ class ProxyRotationService:
                 "message": f"Proxy óptimo ({old_latency}ms)"
             }
         
-        # ========================================
-        # PASO 4: ROTAR (Latencia > 2000ms)
-        # ========================================
         logger.warning(f"⚠️ Proxy {proxy_id} LENTO ({old_latency}ms) → Rotando...")
         
-        # Intentar rotar en orden de prioridad
         new_session = None
         
-        # A) Misma ciudad, nueva sesión
         if proxy.city:
             new_session = await self._rotate_same_city(proxy)
         
-        # B) Ciudad cercana (misma región)
         if not new_session and proxy.region:
             new_session = await self._rotate_nearby_city_in_region(proxy)
         
-        # C) Cualquier ciudad disponible en regiones cercanas
         if not new_session:
             new_session = await self._rotate_nearby_region(proxy)
         
-        # D) Fallback: Guayaquil (mejor latencia nacional)
         if not new_session:
             logger.warning("⚠️ Usando fallback: Guayaquil")
             new_session = await self._rotate_to_fallback()
@@ -151,10 +109,12 @@ class ProxyRotationService:
                 "old_latency_ms": old_latency
             }
         
-        # ========================================
-        # PASO 5: Aplicar nueva sesión
-        # ========================================
         old_location = f"{proxy.city or proxy.region}, {proxy.country}"
+        
+        old_username = proxy.username
+        old_session_id = proxy.session_id
+        old_city = proxy.city
+        old_region = proxy.region
         
         proxy.username = new_session["username"]
         proxy.session_id = new_session["session_id"]
@@ -162,13 +122,16 @@ class ProxyRotationService:
         proxy.region = new_session.get("region")
         proxy.country = new_session.get("country", "ec")
         
-        # ========================================
-        # PASO 6: Verificar nueva sesión
-        # ========================================
         new_latency = await self._ping_proxy(proxy)
         
         if new_latency is None:
             logger.error("❌ Nueva sesión falló, rollback")
+            
+            proxy.username = old_username
+            proxy.session_id = old_session_id
+            proxy.city = old_city
+            proxy.region = old_region
+            
             await self.db.rollback()
             return {
                 "rotated": False,
@@ -176,14 +139,27 @@ class ProxyRotationService:
                 "old_latency_ms": old_latency
             }
         
-        # ========================================
-        # PASO 7: Actualizar AdsPower
-        # ========================================
-        await self._update_adspower_profiles(proxy)
+        logger.info(f"🔄 Actualizando perfiles en AdsPower con nuevo proxy...")
         
-        # ========================================
-        # PASO 8: Guardar en DB
-        # ========================================
+        # ✅ NUEVA VERSIÓN: Con retry automático
+        adspower_success = await self._update_adspower_profiles_with_retry(proxy)
+        
+        if not adspower_success:
+            logger.error("❌ Error actualizando AdsPower, rollback")
+            
+            proxy.username = old_username
+            proxy.session_id = old_session_id
+            proxy.city = old_city
+            proxy.region = old_region
+            
+            await self.db.rollback()
+            
+            return {
+                "rotated": False,
+                "error": "Error sincronizando con AdsPower (timeout o conexión fallida)",
+                "old_latency_ms": old_latency
+            }
+        
         proxy.avg_response_time = new_latency
         proxy.last_check_at = datetime.utcnow()
         proxy.status = ProxyStatus.ACTIVE
@@ -192,7 +168,7 @@ class ProxyRotationService:
         new_location = f"{proxy.city or proxy.region}, {proxy.country}"
         
         logger.info(
-            f"✅ Proxy {proxy_id} rotado: "
+            f"✅ Proxy {proxy_id} rotado y sincronizado: "
             f"{old_location} ({old_latency}ms) → {new_location} ({new_latency}ms)"
         )
         
@@ -203,11 +179,136 @@ class ProxyRotationService:
             "old_latency_ms": old_latency,
             "new_latency_ms": new_latency,
             "improvement_ms": old_latency - new_latency,
+            "adspower_updated": True,
             "message": f"✅ Mejorado de {old_latency}ms a {new_latency}ms"
         }
     
     # ========================================
-    # 2️⃣ MÉTODOS HELPER (PRIVADOS)
+    # ✅ NUEVO: Actualización con retry
+    # ========================================
+    
+    async def _update_adspower_profiles_with_retry(
+        self, 
+        proxy: Proxy,
+        max_retries: int = 2
+    ) -> bool:
+        """
+        ✅ NUEVO: Actualiza profiles con retry automático
+        
+        Si falla por timeout, reintenta hasta 2 veces
+        """
+        
+        for attempt in range(max_retries + 1):
+            if attempt > 0:
+                logger.info(f"🔄 Reintento {attempt}/{max_retries}...")
+                await asyncio.sleep(2)  # Esperar 2s entre reintentos
+            
+            success = await self._update_adspower_profiles_sync(proxy)
+            
+            if success:
+                return True
+            
+            logger.warning(f"⚠️ Intento {attempt + 1} falló")
+        
+        return False
+    
+    async def _update_adspower_profiles_sync(self, proxy: Proxy) -> bool:
+        """
+        Actualiza profiles en AdsPower
+        
+        ✅ OPTIMIZACIÓN: Actualiza en paralelo si hay muchos profiles
+        """
+        
+        result = await self.db.execute(
+            select(Profile).where(Profile.proxy_id == proxy.id)
+        )
+        profiles = list(result.scalars().all())
+        
+        if not profiles:
+            logger.info(f"ℹ️ Proxy {proxy.id} no tiene profiles asignados")
+            return True
+        
+        logger.info(f"🔄 Actualizando {len(profiles)} profiles en AdsPower...")
+        
+        proxy_config = {
+            "user_proxy_config": {
+                "proxy_soft": "other",
+                "proxy_type": "http",
+                "proxy_host": proxy.host,
+                "proxy_port": str(proxy.port),
+                "proxy_user": proxy.username,
+                "proxy_password": proxy.password
+            }
+        }
+        
+        # ✅ OPTIMIZACIÓN: Agrupar profiles por computer
+        profiles_by_computer = {}
+        for profile in profiles:
+            if profile.computer_id not in profiles_by_computer:
+                profiles_by_computer[profile.computer_id] = []
+            profiles_by_computer[profile.computer_id].append(profile)
+        
+        success_count = 0
+        failed_count = 0
+        
+        # Actualizar computer por computer
+        for computer_id, computer_profiles in profiles_by_computer.items():
+            try:
+                result = await self.db.execute(
+                    select(Computer).where(Computer.id == computer_id)
+                )
+                computer = result.scalar_one_or_none()
+                
+                if not computer:
+                    logger.warning(f"⚠️ Computer {computer_id} no encontrado")
+                    failed_count += len(computer_profiles)
+                    continue
+                
+                client = AdsPowerClient(
+                    api_url=computer.adspower_api_url,
+                    api_key=computer.adspower_api_key
+                )
+                
+                # ✅ Actualizar profiles de este computer en paralelo
+                tasks = []
+                for profile in computer_profiles:
+                    task = client.update_profile(
+                        profile_id=profile.adspower_id,
+                        profile_data=proxy_config
+                    )
+                    tasks.append(task)
+                
+                # Ejecutar en paralelo
+                results = await asyncio.gather(*tasks, return_exceptions=True)
+                
+                for i, result in enumerate(results):
+                    profile = computer_profiles[i]
+                    
+                    if isinstance(result, Exception):
+                        logger.error(f"❌ Error actualizando profile {profile.id}: {result}")
+                        failed_count += 1
+                    elif result:
+                        logger.info(f"✅ Profile {profile.id} actualizado")
+                        success_count += 1
+                    else:
+                        logger.error(f"❌ Profile {profile.id} falló")
+                        failed_count += 1
+            
+            except Exception as e:
+                logger.error(f"❌ Error con computer {computer_id}: {e}")
+                failed_count += len(computer_profiles)
+        
+        if failed_count > 0:
+            logger.error(
+                f"⚠️ Actualización parcial: {success_count} OK, {failed_count} fallidos"
+            )
+            return False
+        
+        logger.info(f"✅ Todos los profiles actualizados: {success_count}/{len(profiles)}")
+        return True
+    
+    # ========================================
+    # MÉTODOS HELPER (sin cambios)
     # ========================================
     
     async def _ping_proxy(self, proxy: Proxy) -> Optional[int]:
@@ -244,7 +345,6 @@ class ProxyRotationService:
         
         logger.info(f"🔄 Intentando rotar en misma ciudad: {proxy.city}")
         
-        # Verificar si ciudad está disponible
         available_cities = await SOAXCitiesManager.get_available_cities(
             country=proxy.country or "ec"
         )
@@ -255,7 +355,6 @@ class ProxyRotationService:
             logger.warning(f"Ciudad {proxy.city} no disponible")
             return None
         
-        # Generar nueva sesión
         session_id = secrets.token_urlsafe(16)
         
         result = await get_soax_username_with_dynamic_city(
@@ -266,7 +365,6 @@ class ProxyRotationService:
             session_lifetime=proxy.session_lifetime or 3600
         )
         
-        # Ping nueva sesión
         test_proxy = Proxy(
             username=result["username"],
             password=settings.SOAX_PASSWORD,
@@ -297,19 +395,16 @@ class ProxyRotationService:
         
         logger.info(f"🔄 Buscando ciudad cercana en región: {proxy.region}")
         
-        # Obtener ciudades disponibles
         available_cities = await SOAXCitiesManager.get_available_cities(
             country=proxy.country or "ec"
         )
         
-        # Ciudades de la región (excluyendo actual)
         region_cities = SOAXCitiesManager._get_cities_in_region(proxy.region)
         nearby = [c for c in region_cities if c in available_cities and c != proxy.city]
         
         if not nearby:
             return None
         
-        # Probar cada ciudad
         for city in nearby:
             session_id = secrets.token_urlsafe(16)
             
@@ -365,9 +460,7 @@ class ProxyRotationService:
             if not available:
                 continue
             
-            # Probar primera ciudad disponible
             city = available[0]
-            
             session_id = secrets.token_urlsafe(16)
             
             result = await get_soax_username_with_dynamic_city(
@@ -400,8 +493,7 @@ class ProxyRotationService:
         return None
     
     async def _rotate_to_fallback(self) -> Optional[Dict]:
-        """Fallback: Guayaquil (mejor latencia)"""
-        
+        """Fallback: Guayaquil"""
         session_id = secrets.token_urlsafe(16)
         
         result = await get_soax_username_with_dynamic_city(
@@ -418,59 +510,6 @@ class ProxyRotationService:
             "region": "Guayas",
             "country": "ec"
         }
-    
-    async def _update_adspower_profiles(self, proxy: Proxy):
-        """Actualiza profiles en AdsPower"""
-        
-        result = await self.db.execute(
-            select(Profile).where(Profile.proxy_id == proxy.id)
-        )
-        profiles = list(result.scalars().all())
-        
-        if not profiles:
-            return
-        
-        logger.info(f"Actualizando {len(profiles)} profiles en AdsPower")
-        
-        proxy_config = {
-            "user_proxy_config": {
-                "proxy_soft": "other",
-                "proxy_type": "http",
-                "proxy_host": proxy.host,
-                "proxy_port": str(proxy.port),
-                "proxy_user": proxy.username,
-                "proxy_password": proxy.password
-            }
-        }
-        
-        for profile in profiles:
-            try:
-                result = await self.db.execute(
-                    select(Computer).where(Computer.id == profile.computer_id)
-                )
-                computer = result.scalar_one_or_none()
-                
-                if not computer:
-                    continue
-                
-                client = AdsPowerClient(
-                    api_url=computer.adspower_api_url,
-                    api_key=computer.adspower_api_key
-                )
-                
-                await client.update_profile(
-                    profile_id=profile.adspower_id,
-                    profile_data=proxy_config
-                )
-                
-                logger.info(f"✓ Profile {profile.id} actualizado")
-            
-            except Exception as e:
-                logger.error(f"Error actualizando profile {profile.id}: {e}")
-    
-    # ========================================
-    # 3️⃣ MÉTODO BATCH (PARA TODOS LOS PROXIES)
-    # ========================================
     
     async def check_and_rotate_all_proxies(self) -> Dict:
         """Verifica y rota TODOS los proxies activos"""
@@ -499,7 +538,6 @@ class ProxyRotationService:
             else:
                 stats["optimal"] += 1
             
-            # Rate limiting
             await asyncio.sleep(2)
         
         logger.info(
@@ -510,5 +548,3 @@ class ProxyRotationService:
         )
         
         return stats
-
-

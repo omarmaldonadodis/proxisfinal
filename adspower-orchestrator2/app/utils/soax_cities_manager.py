@@ -91,7 +91,12 @@ class SOAXCitiesManager:
                     return cls._get_fallback_cities()
                 
                 data = response.json()
-                cities = cls._parse_soax_response(data)
+
+                if isinstance(data, list):
+                    cities = [c.lower().strip() for c in data if c]
+                else:
+                    logger.error(f"Formato inesperado de respuesta SOAX: {data}")
+                    return cls._get_fallback_cities()
                 
                 if not cities:
                     logger.warning("⚠️ SOAX retornó 0 ciudades, usando fallback")
