@@ -1,11 +1,12 @@
-# app/services/proxy_rotation_service.py - ✅ VERSIÓN OPTIMIZADA
+# app/services/proxy_rotation_service.py - ✅ VERSIÓN CORREGIDA CON FORMATO CORRECTO
+
 """
-OPTIMIZACIONES:
-1. Timeout aumentado a 60s
-2. Actualización en paralelo de profiles
-3. Retry automático en caso de timeout
-4. Mejor logging
+CAMBIO CRÍTICO:
+- Usar EXACTAMENTE el mismo formato que profile_service.py usa al crear perfiles
+- El campo se llama "user_proxy_config", no "proxy_config"
+- Debe incluir "proxy_soft": "other"
 """
+
 from typing import Dict, Optional, List
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
@@ -141,7 +142,6 @@ class ProxyRotationService:
         
         logger.info(f"🔄 Actualizando perfiles en AdsPower con nuevo proxy...")
         
-        # ✅ NUEVA VERSIÓN: Con retry automático
         adspower_success = await self._update_adspower_profiles_with_retry(proxy)
         
         if not adspower_success:
@@ -183,25 +183,17 @@ class ProxyRotationService:
             "message": f"✅ Mejorado de {old_latency}ms a {new_latency}ms"
         }
     
-    # ========================================
-    # ✅ NUEVO: Actualización con retry
-    # ========================================
-    
     async def _update_adspower_profiles_with_retry(
         self, 
         proxy: Proxy,
         max_retries: int = 2
     ) -> bool:
-        """
-        ✅ NUEVO: Actualiza profiles con retry automático
-        
-        Si falla por timeout, reintenta hasta 2 veces
-        """
+        """Actualiza profiles con retry automático"""
         
         for attempt in range(max_retries + 1):
             if attempt > 0:
                 logger.info(f"🔄 Reintento {attempt}/{max_retries}...")
-                await asyncio.sleep(2)  # Esperar 2s entre reintentos
+                await asyncio.sleep(2)
             
             success = await self._update_adspower_profiles_sync(proxy)
             
@@ -214,9 +206,22 @@ class ProxyRotationService:
     
     async def _update_adspower_profiles_sync(self, proxy: Proxy) -> bool:
         """
-        Actualiza profiles en AdsPower
+        ✅ CORRECCIÓN CRÍTICA: Usar el MISMO formato que profile_service.py
         
-        ✅ OPTIMIZACIÓN: Actualiza en paralelo si hay muchos profiles
+        ANTES (incorrecto):
+        proxy_config = {
+            "user_proxy_config": {
+                "proxy_soft": "other",
+                "proxy_type": "http",
+                "proxy_host": proxy.host,
+                "proxy_port": str(proxy.port),
+                "proxy_user": proxy.username,
+                "proxy_password": proxy.password
+            }
+        }
+        
+        AHORA (correcto, igual que en creación):
+        Copiar EXACTAMENTE el formato de profile_service.py líneas 100-108
         """
         
         result = await self.db.execute(
@@ -230,18 +235,37 @@ class ProxyRotationService:
         
         logger.info(f"🔄 Actualizando {len(profiles)} profiles en AdsPower...")
         
+        # ✅ MAPEO DE TIPOS DE PROXY (igual que en profile_service.py)
+        proxy_type_map = {
+            "http": "http",
+            "https": "https",
+            "socks5": "socks5",
+            "mobile": "http",      # ✅ SOAX mobile usa http
+            "residential": "http",  # ✅ SOAX residential usa http
+            "datacenter": "http"
+        }
+        
+        # ✅ FORMATO EXACTO usado en profile_service.py (línea 100-108)
         proxy_config = {
             "user_proxy_config": {
                 "proxy_soft": "other",
-                "proxy_type": "http",
+                "proxy_type": proxy_type_map.get(proxy.proxy_type, "http"),
                 "proxy_host": proxy.host,
-                "proxy_port": str(proxy.port),
-                "proxy_user": proxy.username,
-                "proxy_password": proxy.password
+                "proxy_port": proxy.port,  # ✅ INT, no string
+                "proxy_user": proxy.username or "",
+                "proxy_password": proxy.password or ""
             }
         }
         
-        # ✅ OPTIMIZACIÓN: Agrupar profiles por computer
+        # ✅ DEBUG: Imprimir EXACTAMENTE lo que se envía
+        logger.info(f"📤 Datos que se enviarán a AdsPower:")
+        logger.info(f"   proxy_soft: {proxy_config['user_proxy_config']['proxy_soft']}")
+        logger.info(f"   proxy_type: {proxy_config['user_proxy_config']['proxy_type']}")
+        logger.info(f"   proxy_host: {proxy_config['user_proxy_config']['proxy_host']}")
+        logger.info(f"   proxy_port: {proxy_config['user_proxy_config']['proxy_port']} (type: {type(proxy_config['user_proxy_config']['proxy_port']).__name__})")
+        logger.info(f"   proxy_user length: {len(proxy_config['user_proxy_config']['proxy_user'])}")
+        
+        # Agrupar profiles por computer
         profiles_by_computer = {}
         for profile in profiles:
             if profile.computer_id not in profiles_by_computer:
@@ -251,7 +275,6 @@ class ProxyRotationService:
         success_count = 0
         failed_count = 0
         
-        # Actualizar computer por computer
         for computer_id, computer_profiles in profiles_by_computer.items():
             try:
                 result = await self.db.execute(
@@ -264,34 +287,34 @@ class ProxyRotationService:
                     failed_count += len(computer_profiles)
                     continue
                 
+                # ✅ CREAR CLIENT con los MISMOS parámetros que profile_service.py
                 client = AdsPowerClient(
                     api_url=computer.adspower_api_url,
                     api_key=computer.adspower_api_key
                 )
                 
-                # ✅ Actualizar profiles de este computer en paralelo
-                tasks = []
+                # Actualizar profiles de este computer
                 for profile in computer_profiles:
-                    task = client.update_profile(
-                        profile_id=profile.adspower_id,
-                        profile_data=proxy_config
-                    )
-                    tasks.append(task)
-                
-                # Ejecutar en paralelo
-                results = await asyncio.gather(*tasks, return_exceptions=True)
-                
-                for i, result in enumerate(results):
-                    profile = computer_profiles[i]
+                    try:
+                        # ✅ USAR EL MISMO MÉTODO que profile_service.py
+                        logger.info(f"📤 Actualizando profile {profile.adspower_id} en AdsPower...")
+                        logger.info(f"   URL: {computer.adspower_api_url}/api/v1/user/update")
+                        logger.info(f"   Profile ID: {profile.adspower_id}")
+                        
+                        success = await client.update_profile(
+                            profile_id=profile.adspower_id,
+                            profile_data=proxy_config
+                        )
+                        
+                        if success:
+                            logger.info(f"✅ Profile {profile.id} actualizado")
+                            success_count += 1
+                        else:
+                            logger.error(f"❌ Profile {profile.id} falló (returned False)")
+                            failed_count += 1
                     
-                    if isinstance(result, Exception):
-                        logger.error(f"❌ Error actualizando profile {profile.id}: {result}")
-                        failed_count += 1
-                    elif result:
-                        logger.info(f"✅ Profile {profile.id} actualizado")
-                        success_count += 1
-                    else:
-                        logger.error(f"❌ Profile {profile.id} falló")
+                    except Exception as e:
+                        logger.error(f"❌ Exception actualizando profile {profile.id}: {e}")
                         failed_count += 1
             
             except Exception as e:

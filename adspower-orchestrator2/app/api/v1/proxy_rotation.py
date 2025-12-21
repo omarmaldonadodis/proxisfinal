@@ -1,10 +1,11 @@
-# app/api/v1/proxy_rotation.py - ✅ VERSIÓN CORREGIDA
+# app/api/v1/proxy_rotation.py - ✅ VERSIÓN COMPLETA CON ROUTER
 from fastapi import APIRouter, Depends, BackgroundTasks, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db
 from app.services.proxy_rotation_service import ProxyRotationService
 from loguru import logger
 from sqlalchemy import select
+import asyncio
 
 
 router = APIRouter(prefix="/proxy-rotation", tags=["🔄 Proxy Rotation"])
