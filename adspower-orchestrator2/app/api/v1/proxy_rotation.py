@@ -1,6 +1,6 @@
-# app/api/v1/proxy_rotation.py - ✅ VERSIÓN CORREGIDA
+# app/api/v1/proxy_rotation.py - ✅ VERSIÓN CORREGIDA SIN BACKGROUNDTASKS
 
-from fastapi import APIRouter, Depends, BackgroundTasks, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db
 from app.services.proxy_rotation_service import ProxyRotationService
@@ -9,7 +9,7 @@ from sqlalchemy import select
 import asyncio
 
 
-router = APIRouter(prefix="/proxy-rotation", tags=["🔄 Proxy Rotation"])
+router = APIRouter(prefix="/proxy-rotation", tags=["Proxy Rotation"])
 
 
 @router.post("/{proxy_id}/check-and-rotate")
@@ -18,7 +18,7 @@ async def check_and_rotate_proxy(
     db: AsyncSession = Depends(get_db)
 ):
     """
-    🎯 Verifica y rota proxy si es necesario
+    Verifica y rota proxy si es necesario
     """
     
     try:
@@ -50,40 +50,45 @@ async def check_and_rotate_proxy(
 
 
 @router.post("/check-and-rotate-all")
-async def check_and_rotate_all(
-    background_tasks: BackgroundTasks
-):
+async def check_and_rotate_all():
     """
     🔄 Verifica y rota TODOS los proxies
+    
     """
     
-    async def _task():
-        from app.database import AsyncSessionLocal
-        
-        try:
-            async with AsyncSessionLocal() as bg_db:
-                service = ProxyRotationService(bg_db)
-                stats = await service.check_and_rotate_all_proxies()
-                
-                logger.info(
-                    f"✅ Rotación completa: "
-                    f"{stats['rotated']} rotados, "
-                    f"{stats['optimal']} óptimos, "
-                    f"{stats['failed']} fallidos"
-                )
-                
-                return stats
-        
-        except Exception as e:
-            logger.error(f"Error en tarea de rotación: {e}")
-            raise
-    
-    background_tasks.add_task(_task)
+    # ✅ Crear tarea en background usando asyncio
+    asyncio.create_task(_background_check_all())
     
     return {
         "message": "Verificación iniciada en background",
         "status": "processing"
     }
+
+
+async def _background_check_all():
+    """
+    ✅ Tarea en background que se ejecuta con su propia sesión de DB
+    """
+    from app.database import AsyncSessionLocal
+    
+    try:
+        async with AsyncSessionLocal() as db:
+            service = ProxyRotationService(db)
+            stats = await service.check_and_rotate_all_proxies()
+            
+            logger.info(
+                f"✅ Rotación completa: "
+                f"{stats['rotated']} rotados, "
+                f"{stats['recovered']} recuperados, "
+                f"{stats['optimal']} óptimos, "
+                f"{stats['failed']} fallidos"
+            )
+            
+            return stats
+    
+    except Exception as e:
+        logger.error(f"Error en tarea de rotación: {e}")
+        raise
 
 
 @router.get("/stats")
@@ -117,57 +122,60 @@ async def get_stats(db: AsyncSession = Depends(get_db)):
 
 
 @router.post("/sync-all")
-async def sync_all_to_adspower(background_tasks: BackgroundTasks):
+async def sync_all_to_adspower():
     """
-    🔄 FORZAR sincronización de TODOS los proxies a AdsPower
+    🔄 FORZAR sincronización de TODOS los proxies a AdsPower, sirve para pasar de la BD al adspower 
     
-    ✅ CORREGIDO: Usa el método correcto del servicio
     """
     
-    async def _sync_task():
-        from app.database import AsyncSessionLocal
-        from app.models.proxy import Proxy, ProxyStatus
-        
-        async with AsyncSessionLocal() as bg_db:
-            result = await bg_db.execute(
-                select(Proxy).where(Proxy.status == ProxyStatus.ACTIVE)
-            )
-            proxies = list(result.scalars().all())
-            
-            logger.info(f"🔄 Sincronizando {len(proxies)} proxies a AdsPower...")
-            
-            service = ProxyRotationService(bg_db)
-            
-            synced = 0
-            failed = 0
-            
-            for proxy in proxies:
-                try:
-                    # ✅ USAR EL MÉTODO CORRECTO
-                    success = await service._update_adspower_profiles_centralized(proxy)
-                    
-                    if success:
-                        synced += 1
-                        logger.info(f"✅ Proxy {proxy.id} sincronizado")
-                    else:
-                        failed += 1
-                        logger.error(f"❌ Proxy {proxy.id} falló")
-                
-                except Exception as e:
-                    logger.error(f"❌ Error sincronizando proxy {proxy.id}: {e}")
-                    failed += 1
-                
-                await asyncio.sleep(1)
-            
-            logger.info(
-                f"✅ Sincronización completa: {synced} OK, {failed} fallidos"
-            )
-            
-            return {"synced": synced, "failed": failed}
-    
-    background_tasks.add_task(_sync_task)
+    # ✅ Crear tarea en background
+    asyncio.create_task(_background_sync_all())
     
     return {
         "message": "Sincronización iniciada en background",
         "status": "processing"
     }
+
+
+async def _background_sync_all():
+    """
+    ✅ Sincroniza todos los proxies con AdsPower en background
+    """
+    from app.database import AsyncSessionLocal
+    from app.models.proxy import Proxy, ProxyStatus
+    
+    async with AsyncSessionLocal() as db:
+        result = await db.execute(
+            select(Proxy).where(Proxy.status == ProxyStatus.ACTIVE)
+        )
+        proxies = list(result.scalars().all())
+        
+        logger.info(f"🔄 Sincronizando {len(proxies)} proxies a AdsPower...")
+        
+        service = ProxyRotationService(db)
+        
+        synced = 0
+        failed = 0
+        
+        for proxy in proxies:
+            try:
+                success = await service._update_adspower_profiles_centralized(proxy)
+                
+                if success:
+                    synced += 1
+                    logger.info(f"✅ Proxy {proxy.id} sincronizado")
+                else:
+                    failed += 1
+                    logger.error(f"❌ Proxy {proxy.id} falló")
+            
+            except Exception as e:
+                logger.error(f"❌ Error sincronizando proxy {proxy.id}: {e}")
+                failed += 1
+            
+            await asyncio.sleep(1)
+        
+        logger.info(
+            f"✅ Sincronización completa: {synced} OK, {failed} fallidos"
+        )
+        
+        return {"synced": synced, "failed": failed}

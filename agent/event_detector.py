@@ -155,7 +155,9 @@ class UniversalEventDetector:
                         "possible_reasons": [
                             "Wrong username/password",
                             "Account locked",
-                            "Credentials expired"
+                            "Credentials expired",
+                            "Error",
+                            "Usuario (Login) no existe"
                         ]
                     },
                     current_url=current_url,

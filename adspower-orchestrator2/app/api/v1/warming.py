@@ -23,7 +23,16 @@ from app.core.jwt_manager import JWTManager
 from loguru import logger
 import json
 
-router = APIRouter(prefix="/warming", tags=["🔥 Warming Scripts"])
+from pydantic import BaseModel, ConfigDict
+from app.schemas.scheduled_warming import ScheduledWarmingResponse
+
+class ScheduledWarmingListResponse(BaseModel):
+    total: int
+    items: List[ScheduledWarmingResponse]
+
+    model_config = ConfigDict(from_attributes=True)
+
+router = APIRouter(prefix="/warming", tags=["Warming Scripts"])
 
 # =====================================================
 # 🔐 JWT AUTHENTICATION HELPER
@@ -87,12 +96,6 @@ async def list_scripts(
     )
     return {"total": total, "items": scripts}
 
-@router.get("/scripts/templates/", response_model=List[WarmingScriptResponse])
-async def get_templates(db: AsyncSession = Depends(get_db)):
-    """Obtiene plantillas de scripts."""
-    service = WarmingScriptService(db)
-    templates = await service.get_script_templates()
-    return templates
 
 @router.get("/scripts/{script_id}", response_model=WarmingScriptResponse)
 async def get_script(
@@ -161,7 +164,7 @@ async def schedule_warming(
         logger.error(f"Error scheduling warming: {e}")
         raise HTTPException(status_code=400, detail=str(e))
 
-@router.get("/schedule/", response_model=dict)
+@router.get("/schedule/", response_model=ScheduledWarmingListResponse)
 async def list_scheduled_warmings(
     skip: int = Query(0, ge=0),
     limit: int = Query(100, ge=1, le=1000),
@@ -219,7 +222,7 @@ async def execute_batch_warming(
     db: AsyncSession = Depends(get_db)
 ):
     """
-    ✅ VERSIÓN MEJORADA - Distribución inteligente con error recovery
+    Distribución inteligente con error recovery
     """
     
     service = WarmingScriptService(db)

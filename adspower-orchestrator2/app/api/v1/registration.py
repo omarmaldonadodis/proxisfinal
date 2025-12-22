@@ -6,7 +6,7 @@ from app.services.registration_service import RegistrationService
 from pydantic import BaseModel
 from typing import Optional
 
-router = APIRouter(prefix="/registration", tags=["🔐 Registration"])
+router = APIRouter(prefix="/registration", tags=["Registration"])
 
 class ComputerRegistrationRequest(BaseModel):
     """Datos de registro de computadora"""
@@ -69,7 +69,7 @@ async def revoke_token(
     computer_id: int,
     db: AsyncSession = Depends(get_db)
 ):
-    """🚫 Revoca token de computadora"""
+    """Revoca token de computadora"""
     service = RegistrationService(db)
     
     success = await service.revoke_token(computer_id)

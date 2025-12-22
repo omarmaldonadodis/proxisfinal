@@ -1,15 +1,15 @@
-# app/services/proxy_rotation_service.py - ✅ VERSIÓN CORREGIDA CON HOST DINÁMICO
+# app/services/proxy_rotation_service.py - ✅ VERSIÓN CORREGIDA CON RECUPERACIÓN
 
 """
 CORRECCIONES:
-1. Usar ADSPOWER_API_URL de settings en lugar de computer.ip_address
-2. Success rate actualizado dinámicamente
-3. Recuperación automática mejorada
+1. check_and_rotate_all_proxies() ahora incluye proxies FAILED
+2. Nuevo método _attempt_recovery() para recuperar proxies FAILED
+3. Nuevo método _apply_new_session() para aplicar y verificar nuevas sesiones
 """
 
 from typing import Dict, Optional, List
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
+from sqlalchemy import select, or_
 from loguru import logger
 import httpx
 import time
@@ -45,7 +45,7 @@ class ProxyRotationService:
         self.db = db
     
     async def check_and_rotate_proxy(self, proxy_id: int) -> Dict:
-        """🎯 Verifica y rota proxy si es necesario"""
+        """Verifica y rota proxy si es necesario"""
         
         result = await self.db.execute(
             select(Proxy).where(Proxy.id == proxy_id)
@@ -59,20 +59,32 @@ class ProxyRotationService:
         
         old_latency = await self._ping_proxy(proxy)
         
+        # ✅ SI ESTÁ OFFLINE → INTENTAR RECUPERAR
         if old_latency is None:
-            logger.error(f"❌ Proxy {proxy_id} está OFFLINE")
+            logger.warning(f"⚠️ Proxy {proxy_id} está OFFLINE → Intentando recuperar...")
             
-            # ✅ Actualizar success rate dinámicamente
             await self._update_success_rate(proxy, success=False)
             
-            proxy.status = ProxyStatus.FAILED
-            await self.db.commit()
+            # ✅ INTENTAR RECUPERACIÓN AUTOMÁTICA
+            recovery_result = await self._attempt_recovery(proxy)
             
-            return {
-                "rotated": False,
-                "error": "Proxy offline",
-                "old_latency_ms": None
-            }
+            if recovery_result["recovered"]:
+                logger.info(
+                    f"✅ Proxy {proxy_id} recuperado: "
+                    f"{recovery_result['new_location']} ({recovery_result['new_latency_ms']}ms)"
+                )
+                return recovery_result
+            else:
+                # Si no se pudo recuperar, marcar como FAILED
+                proxy.status = ProxyStatus.FAILED
+                await self.db.commit()
+                
+                return {
+                    "rotated": False,
+                    "recovered": False,
+                    "error": "Proxy offline y no se pudo recuperar",
+                    "old_latency_ms": None
+                }
         
         # ✅ Actualizar success rate dinámicamente
         await self._update_success_rate(proxy, success=True)
@@ -94,6 +106,114 @@ class ProxyRotationService:
         
         logger.warning(f"⚠️ Proxy {proxy_id} LENTO ({old_latency}ms) → Rotando...")
         
+        # Intentar rotación
+        return await self._rotate_proxy(proxy, old_latency)
+    
+    async def _attempt_recovery(self, proxy: Proxy) -> Dict:
+        """
+        ✅ NUEVO: Intenta recuperar un proxy FAILED
+        
+        Estrategia:
+        1. Generar nueva sesión en misma ciudad
+        2. Si falla, probar ciudad cercana
+        3. Si falla, probar región cercana
+        4. Si falla, usar Guayaquil (fallback)
+        """
+        logger.info(f"🔄 Intentando recuperar proxy {proxy.id}...")
+        
+        # Intentar nueva sesión en misma ciudad
+        if proxy.city:
+            new_session = await self._rotate_same_city(proxy)
+            if new_session:
+                return await self._apply_new_session(proxy, new_session, "recovery_same_city")
+        
+        # Intentar ciudad cercana en misma región
+        if proxy.region:
+            new_session = await self._rotate_nearby_city_in_region(proxy)
+            if new_session:
+                return await self._apply_new_session(proxy, new_session, "recovery_nearby_city")
+        
+        # Intentar región cercana
+        new_session = await self._rotate_nearby_region(proxy)
+        if new_session:
+            return await self._apply_new_session(proxy, new_session, "recovery_nearby_region")
+        
+        # Fallback: Guayaquil
+        new_session = await self._rotate_to_fallback()
+        if new_session:
+            return await self._apply_new_session(proxy, new_session, "recovery_fallback")
+        
+        return {"recovered": False, "error": "No se pudo encontrar sesión viable"}
+    
+    async def _apply_new_session(self, proxy: Proxy, new_session: Dict, recovery_type: str) -> Dict:
+        """Aplica nueva sesión al proxy y verifica"""
+        
+        old_location = f"{proxy.city or proxy.region}, {proxy.country}"
+        old_username = proxy.username
+        old_session_id = proxy.session_id
+        old_city = proxy.city
+        old_region = proxy.region
+        
+        # Aplicar cambios
+        proxy.username = new_session["username"]
+        proxy.session_id = new_session["session_id"]
+        proxy.city = new_session.get("city")
+        proxy.region = new_session.get("region")
+        proxy.country = new_session.get("country", "ec")
+        
+        # Verificar nueva sesión
+        new_latency = await self._ping_proxy(proxy)
+        
+        if new_latency is None:
+            logger.error(f"❌ Nueva sesión falló en {recovery_type}")
+            # Rollback
+            proxy.username = old_username
+            proxy.session_id = old_session_id
+            proxy.city = old_city
+            proxy.region = old_region
+            await self.db.rollback()
+            return {"recovered": False, "error": f"Nueva sesión falló ({recovery_type})"}
+        
+        # Actualizar AdsPower
+        success = await self._update_adspower_profiles_centralized(proxy)
+        
+        if not success:
+            logger.error(f"❌ Error sincronizando con AdsPower en {recovery_type}")
+            # Rollback
+            proxy.username = old_username
+            proxy.session_id = old_session_id
+            proxy.city = old_city
+            proxy.region = old_region
+            await self.db.rollback()
+            return {"recovered": False, "error": "Error sincronizando AdsPower"}
+        
+        # ✅ ÉXITO: Actualizar estado
+        proxy.avg_response_time = new_latency
+        proxy.last_check_at = datetime.utcnow()
+        proxy.status = ProxyStatus.ACTIVE
+        proxy.failed_checks = 0  # Reset contador de fallos
+        await self.db.commit()
+        
+        new_location = f"{proxy.city or proxy.region}, {proxy.country}"
+        
+        logger.info(
+            f"✅ Proxy {proxy.id} recuperado ({recovery_type}): "
+            f"{old_location} → {new_location} ({new_latency}ms)"
+        )
+        
+        return {
+            "recovered": True,
+            "rotated": True,
+            "recovery_type": recovery_type,
+            "old_location": old_location,
+            "new_location": new_location,
+            "new_latency_ms": new_latency,
+            "message": f"Proxy recuperado ({recovery_type})"
+        }
+    
+    async def _rotate_proxy(self, proxy: Proxy, old_latency: int) -> Dict:
+        """Rota proxy lento"""
+        
         new_session = None
         
         if proxy.city:
@@ -110,96 +230,75 @@ class ProxyRotationService:
             new_session = await self._rotate_to_fallback()
         
         if not new_session:
-            logger.error(f"❌ No se pudo rotar proxy {proxy_id}")
+            logger.error(f"❌ No se pudo rotar proxy {proxy.id}")
             return {
                 "rotated": False,
                 "error": "No hay ubicaciones disponibles",
                 "old_latency_ms": old_latency
             }
         
-        old_location = f"{proxy.city or proxy.region}, {proxy.country}"
+        return await self._apply_new_session(proxy, new_session, "rotation")
+    
+    async def check_and_rotate_all_proxies(self) -> Dict:
+        """
+        ✅ CORREGIDO: Verifica y rota TODOS los proxies (ACTIVE + FAILED)
+        """
         
-        old_username = proxy.username
-        old_session_id = proxy.session_id
-        old_city = proxy.city
-        old_region = proxy.region
-        
-        proxy.username = new_session["username"]
-        proxy.session_id = new_session["session_id"]
-        proxy.city = new_session.get("city")
-        proxy.region = new_session.get("region")
-        proxy.country = new_session.get("country", "ec")
-        
-        new_latency = await self._ping_proxy(proxy)
-        
-        if new_latency is None:
-            logger.error("❌ Nueva sesión falló, rollback")
-            
-            proxy.username = old_username
-            proxy.session_id = old_session_id
-            proxy.city = old_city
-            proxy.region = old_region
-            
-            await self.db.rollback()
-            return {
-                "rotated": False,
-                "error": "Nueva sesión falló",
-                "old_latency_ms": old_latency
-            }
-        
-        logger.info(f"🔄 Actualizando perfiles en AdsPower con nuevo proxy...")
-        
-        # ✅ CORRECCIÓN: Usar AdsPower centralizado
-        adspower_success = await self._update_adspower_profiles_centralized(proxy)
-        
-        if not adspower_success:
-            logger.error("❌ Error actualizando AdsPower, rollback")
-            
-            proxy.username = old_username
-            proxy.session_id = old_session_id
-            proxy.city = old_city
-            proxy.region = old_region
-            
-            await self.db.rollback()
-            
-            return {
-                "rotated": False,
-                "error": "Error sincronizando con AdsPower",
-                "old_latency_ms": old_latency
-            }
-        
-        proxy.avg_response_time = new_latency
-        proxy.last_check_at = datetime.utcnow()
-        proxy.status = ProxyStatus.ACTIVE
-        await self.db.commit()
-        
-        new_location = f"{proxy.city or proxy.region}, {proxy.country}"
+        # ✅ INCLUIR PROXIES FAILED
+        result = await self.db.execute(
+            select(Proxy).where(
+                or_(
+                    Proxy.status == ProxyStatus.ACTIVE,
+                    Proxy.status == ProxyStatus.FAILED
+                )
+            )
+        )
+        proxies = list(result.scalars().all())
         
         logger.info(
-            f"✅ Proxy {proxy_id} rotado y sincronizado: "
-            f"{old_location} ({old_latency}ms) → {new_location} ({new_latency}ms)"
+            f"🔄 Verificando {len(proxies)} proxies "
+            f"(ACTIVE + FAILED para recuperación)..."
         )
         
-        return {
-            "rotated": True,
-            "old_location": old_location,
-            "new_location": new_location,
-            "old_latency_ms": old_latency,
-            "new_latency_ms": new_latency,
-            "improvement_ms": old_latency - new_latency,
-            "adspower_updated": True,
-            "message": f"✅ Mejorado de {old_latency}ms a {new_latency}ms"
+        stats = {
+            "total": len(proxies),
+            "optimal": 0,
+            "rotated": 0,
+            "recovered": 0,
+            "failed": 0
         }
+        
+        for proxy in proxies:
+            result = await self.check_and_rotate_proxy(proxy.id)
+            
+            if result.get("recovered"):
+                stats["recovered"] += 1
+            elif result.get("rotated"):
+                stats["rotated"] += 1
+            elif result.get("error"):
+                stats["failed"] += 1
+            else:
+                stats["optimal"] += 1
+            
+            await asyncio.sleep(2)
+        
+        logger.info(
+            f"✅ Verificación completa: "
+            f"{stats['optimal']} óptimos, "
+            f"{stats['rotated']} rotados, "
+            f"{stats['recovered']} recuperados, "
+            f"{stats['failed']} fallidos"
+        )
+        
+        return stats
+    
+    # ========================================
+    # MÉTODOS HELPER (mantienen la misma lógica)
+    # ========================================
     
     async def _update_adspower_profiles_centralized(self, proxy: Proxy) -> bool:
-        """
-        ✅ CORRECCIÓN CRÍTICA: Usar AdsPower centralizado
+        """Actualiza profiles en AdsPower centralizado"""
         
-        En lugar de buscar por computer.ip_address, usar configuración
-        centralizada desde settings
-        """
-        
-        # Obtener profiles asociados a este proxy
         result = await self.db.execute(
             select(Profile).where(Profile.proxy_id == proxy.id)
         )
@@ -211,7 +310,6 @@ class ProxyRotationService:
         
         logger.info(f"🔄 Updating {len(profiles)} profiles in centralized AdsPower...")
         
-        # ✅ USAR CONFIGURACIÓN CENTRALIZADA DESDE SETTINGS
         adspower_url = settings.ADSPOWER_DEFAULT_API_URL
         adspower_key = settings.ADSPOWER_DEFAULT_API_KEY
         
@@ -219,7 +317,6 @@ class ProxyRotationService:
             logger.error("❌ AdsPower credentials not configured in settings")
             return False
         
-        # Formato según documentación AdsPower
         proxy_config = {
             "user_proxy_config": {
                 "proxy_soft": "other",
@@ -231,7 +328,6 @@ class ProxyRotationService:
             }
         }
         
-        # Verificar conectividad PRIMERO
         is_reachable = await self._check_adspower_reachable_centralized(
             adspower_url, 
             adspower_key
@@ -255,8 +351,6 @@ class ProxyRotationService:
                             **proxy_config
                         }
                         
-                        logger.info(f"📤 Updating profile {profile.adspower_id}")
-                        
                         response = await client.post(
                             url,
                             json=payload,
@@ -270,21 +364,15 @@ class ProxyRotationService:
                             data = response.json()
                             
                             if data.get("code") == 0:
-                                logger.info(f"✅ Profile {profile.id} updated")
                                 success_count += 1
                             else:
                                 logger.error(f"❌ AdsPower error: {data.get('msg')}")
                                 failed_count += 1
                         else:
-                            logger.error(f"❌ HTTP {response.status_code}")
                             failed_count += 1
                     
-                    except httpx.TimeoutException:
-                        logger.error(f"⏱️ Timeout updating profile {profile.id}")
-                        failed_count += 1
-                    
                     except Exception as e:
-                        logger.error(f"❌ Error: {e}")
+                        logger.error(f"❌ Error updating profile {profile.id}: {e}")
                         failed_count += 1
         
         except Exception as e:
@@ -314,41 +402,21 @@ class ProxyRotationService:
                     }
                 )
                 
-                if response.status_code == 200:
-                    logger.debug(f"✅ AdsPower reachable: {adspower_url}")
-                    return True
-                else:
-                    logger.warning(f"⚠️ AdsPower returned {response.status_code}")
-                    return False
+                return response.status_code == 200
         
-        except httpx.TimeoutException:
-            logger.error(f"⏱️ Timeout checking AdsPower: {adspower_url}")
-            return False
-        
-        except Exception as e:
-            logger.error(f"❌ Error checking AdsPower: {e}")
+        except Exception:
             return False
     
     async def _update_success_rate(self, proxy: Proxy, success: bool):
-        """
-        ✅ Actualiza success rate dinámicamente
-        
-        Incrementa total_checks y calcula nuevo success_rate
-        """
+        """Actualiza success rate dinámicamente"""
         proxy.total_checks = (proxy.total_checks or 0) + 1
         
         if not success:
             proxy.failed_checks = (proxy.failed_checks or 0) + 1
         
-        # Calcular success rate
         if proxy.total_checks > 0:
             successful_checks = proxy.total_checks - (proxy.failed_checks or 0)
             proxy.success_rate = (successful_checks / proxy.total_checks) * 100
-        
-        logger.debug(
-            f"Proxy {proxy.id} success rate: {proxy.success_rate:.1f}% "
-            f"({proxy.total_checks - (proxy.failed_checks or 0)}/{proxy.total_checks})"
-        )
     
     async def _ping_proxy(self, proxy: Proxy) -> Optional[int]:
         """Ping simple y rápido"""
@@ -372,13 +440,8 @@ class ProxyRotationService:
             
             return None
         
-        except Exception as e:
-            logger.debug(f"Ping failed: {e}")
+        except Exception:
             return None
-    
-    # ========================================
-    # MÉTODOS HELPER (sin cambios)
-    # ========================================
     
     async def _rotate_same_city(self, proxy: Proxy) -> Optional[Dict]:
         """Rota a nueva sesión en MISMA ciudad"""
@@ -553,41 +616,3 @@ class ProxyRotationService:
             "region": "Guayas",
             "country": "ec"
         }
-    
-    async def check_and_rotate_all_proxies(self) -> Dict:
-        """Verifica y rota TODOS los proxies activos"""
-        
-        result = await self.db.execute(
-            select(Proxy).where(Proxy.status == ProxyStatus.ACTIVE)
-        )
-        proxies = list(result.scalars().all())
-        
-        logger.info(f"🔄 Verificando {len(proxies)} proxies activos...")
-        
-        stats = {
-            "total": len(proxies),
-            "optimal": 0,
-            "rotated": 0,
-            "failed": 0
-        }
-        
-        for proxy in proxies:
-            result = await self.check_and_rotate_proxy(proxy.id)
-            
-            if result.get("rotated"):
-                stats["rotated"] += 1
-            elif result.get("error"):
-                stats["failed"] += 1
-            else:
-                stats["optimal"] += 1
-            
-            await asyncio.sleep(2)
-        
-        logger.info(
-            f"✅ Verificación completa: "
-            f"{stats['optimal']} óptimos, "
-            f"{stats['rotated']} rotados, "
-            f"{stats['failed']} fallidos"
-        )
-        
-        return stats

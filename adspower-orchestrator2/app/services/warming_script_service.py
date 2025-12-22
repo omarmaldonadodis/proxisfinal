@@ -219,21 +219,6 @@ class WarmingScriptService:
         await self.db.commit()
         return True
     
-    async def get_script_templates(self) -> List[WarmingScriptResponse]:
-        """Obtiene plantillas de scripts"""
-        result = await self.db.execute(
-            select(WarmingScript).where(
-                WarmingScript.is_template == True,
-                WarmingScript.status == "active"
-            )
-        )
-        scripts = list(result.scalars().all())
-        
-        # ✅ Convertir a Pydantic schemas
-        return [
-            WarmingScriptResponse.model_validate(script)
-            for script in scripts
-        ]
     
     async def increment_script_usage(self, script_id: int) -> bool:
         """Incrementa contador de uso del script"""

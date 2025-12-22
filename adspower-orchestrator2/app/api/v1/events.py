@@ -10,7 +10,7 @@ from loguru import logger
 
 import asyncio
 
-router = APIRouter(prefix="/events", tags=["📊 Execution Events"])
+router = APIRouter(prefix="/events", tags=["Execution Events"])
 
 @router.get("/")
 async def list_events(
