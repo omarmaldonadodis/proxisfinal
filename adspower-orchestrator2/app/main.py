@@ -207,8 +207,8 @@ async def lifespan(app: FastAPI):
     logger.info("✓ Redis warming commands listener started")
     
     # ✅ Iniciar warming sync manager
-    from app.services.warming_sync import WarmingSyncManager
-    warming_sync_manager = WarmingSyncManager()
+    from app.services.warming_sync_service import WarmingSyncService
+    warming_sync_manager = WarmingSyncService()
     await warming_sync_manager.start()
     logger.info("✓ Warming sync manager started")
     

@@ -1,4 +1,3 @@
-# app/schemas/__init__.py
 from app.schemas.computer import (
     ComputerCreate,
     ComputerUpdate,
@@ -22,12 +21,11 @@ from app.schemas.profile import (
 
 from app.schemas.warming_script import (
     ActionType,
-    ScriptAction,
+    WarmingAction, 
     WarmingScriptCreate,
     WarmingScriptUpdate,
     WarmingScriptResponse,
-    WarmingExecutionCreate,
-    WarmingExecutionResponse,
+    WarmingExecutionResponse,  
     BatchWarmingRequest,
     BatchWarmingResponse
 )
@@ -47,17 +45,12 @@ __all__ = [
     "ProfileResponse",
     "ProfileListResponse",
     "ProfileBulkCreate",
-    "ParallelSearchRequest",
-    "ParallelNavigationRequest",
-    "AutomationResponse",
-    "AutomationResult",
     "ActionType",
-    "ScriptAction",
+    "WarmingAction",  
     "WarmingScriptCreate",
     "WarmingScriptUpdate",
     "WarmingScriptResponse",
-    "WarmingExecutionCreate",
-    "WarmingExecutionResponse",
+    "WarmingExecutionResponse", 
     "BatchWarmingRequest",
     "BatchWarmingResponse",
 ]
