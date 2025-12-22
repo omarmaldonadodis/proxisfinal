@@ -1,3 +1,5 @@
+
+# agent/action_executor_login.py - DETECCIÓN MEJORADA
 from typing import Dict, Optional, Any
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -42,12 +44,14 @@ class LoginResult:
 
 
 class HumanizedLoginExecutor:
-    """Ejecutor de login humanizado con soporte especial para Angular"""
+    """Ejecutor de login con detección ESTRICTA"""
     
     AUTH_ERROR_INDICATORS = [
         "wrong password", "incorrect password", "invalid credentials",
         "contraseña incorrecta", "credenciales inválidas", 
-        "usuario o contraseña incorrectos"
+        "usuario o contraseña incorrectos", "invalid login",
+        "authentication failed", "login failed",
+        "usuario (login) no existe" 
     ]
     
     BLOCKED_INDICATORS = [
@@ -60,6 +64,12 @@ class HumanizedLoginExecutor:
         "código de verificación"
     ]
     
+    # ✅ NUEVO: Indicadores de éxito más estrictos
+    SUCCESS_INDICATORS = [
+        "dashboard", "bienvenido", "welcome", "logout", "cerrar sesión",
+        "mi cuenta", "my account", "perfil", "profile"
+    ]
+    
     def __init__(self, config: Dict = {}):
         self.config = config
     
@@ -68,7 +78,7 @@ class HumanizedLoginExecutor:
         driver: webdriver.Chrome,
         params: Dict[str, Any]
     ) -> LoginResult:
-        """Ejecuta login con soporte especial para Angular"""
+        """Ejecuta login con validación ESTRICTA"""
         
         service = params.get("service", "generic")
         username = params.get("username")
@@ -87,21 +97,19 @@ class HumanizedLoginExecutor:
             # 1. Verificar reCAPTCHA
             if not params.get("ignore_recaptcha", False) and self._detect_recaptcha(driver):
                 return LoginResult(False, "reCAPTCHA detected", "recaptcha", needs_captcha=True)
-            logger.info(f"✓ Paso 1 completado")
-
+            
             # 2. Esperar estabilidad
             await self._wait_for_page_stability(driver)
-            logger.info(f"✓ Paso 2 completado")
-
-            # 3. Detectar si es modal Angular
+            
+            # 3. Detectar tipo de formulario
             is_angular = await self._detect_angular_modal(driver)
-            logger.info(f"✓ Modal Angular cargado" if is_angular else "✓ Formulario HTML estándar")
+            logger.info(f"✓ Form type: {'Angular modal' if is_angular else 'Standard HTML'}")
             
             # 4. Obtener selectores
             username_selector = params.get("username_selector", "input[type='text'], input[type='email']")
             password_selector = params.get("password_selector", "input[type='password']")
             
-            # 5. Llenar campos con método Angular
+            # 5. Llenar username
             if is_angular:
                 username_filled = await self._fill_angular_field(driver, username_selector, username)
             else:
@@ -111,9 +119,8 @@ class HumanizedLoginExecutor:
             if not username_filled:
                 return LoginResult(False, "Could not fill username", "username_fill_failed")
             
-            logger.info(f"✓ Paso 3 completado - Username field found")
+            logger.info(f"✓ Username filled")
             await asyncio.sleep(random.uniform(0.8, 1.5))
-            logger.info(f"✓ Paso 4 completado - Username filled")
             
             # 6. Llenar password
             if is_angular:
@@ -125,65 +132,183 @@ class HumanizedLoginExecutor:
             if not password_filled:
                 return LoginResult(False, "Could not fill password", "password_fill_failed")
             
-            logger.info(f"✓ Paso 5 completado - Password filled")
+            logger.info(f"✓ Password filled")
             await asyncio.sleep(random.uniform(1.0, 2.0))
             
-            # 7. Verificar Angular form validity
+            # 7. Validar formulario Angular
             if is_angular:
                 await self._trigger_angular_validation(driver)
-                logger.info(f"✓ Formulario validado por Angular")
             
             # 8. Verificar CAPTCHA después de llenar
             if not params.get("ignore_recaptcha", False) and self._detect_recaptcha(driver):
                 return LoginResult(False, "reCAPTCHA after fill", "recaptcha", needs_captcha=True)
-            logger.info(f"✓ Paso 6 completado - No CAPTCHA detected")
             
             # 9. Submit
             submit_selector = params.get("submit_selector")
             submit_clicked = await self._click_angular_submit(driver, submit_selector)
-            try:
-                pw_list = driver.find_elements(By.CSS_SELECTOR, params.get("password_selector"))
-                for pw in pw_list:
-                    if pw.is_displayed() and pw.is_enabled():
-                        pw.send_keys(Keys.ENTER)
-                        logger.info("✅ ENTER enviado al campo password (Angular fallback)")
-                        break
-            except Exception as e:
-                logger.warning(f"No se pudo enviar ENTER: {e}")
-
+            
+            # ✅ Fallback: ENTER en password
+            if not submit_clicked:
+                try:
+                    pw_list = driver.find_elements(By.CSS_SELECTOR, password_selector)
+                    for pw in pw_list:
+                        if pw.is_displayed() and pw.is_enabled():
+                            pw.send_keys(Keys.ENTER)
+                            logger.info("✓ ENTER sent to password field")
+                            submit_clicked = True
+                            break
+                except Exception as e:
+                    logger.warning(f"Could not send ENTER: {e}")
             
             if not submit_clicked:
                 return LoginResult(False, "Could not click submit", "submit_failed")
             
-            logger.info(f"✓ Paso 7 completado - Submit clicked")
+            logger.info(f"✓ Submit clicked")
             
-            # 10. Esperar resultado
-            await asyncio.sleep(params.get("wait_after_submit", 5))
+            # 10. ✅ ESPERA CRÍTICA: dar tiempo al servidor
+            wait_time = params.get("wait_after_submit", 10)
+            logger.info(f"⏳ Waiting {wait_time}s for server response...")
+            await asyncio.sleep(wait_time)
             
-            # 11. Verificar éxito
-            success_url = params.get("success_url_contains")
-            if success_url and success_url.lower() in driver.current_url.lower():
-                return LoginResult(True, "Login successful")
-            
-            # 12. Verificar errores
-            page_text = driver.page_source.lower()
-            if any(e in page_text for e in self.AUTH_ERROR_INDICATORS):
-                return LoginResult(False, "Wrong credentials", "auth_error")
-            
-            if any(b in page_text for b in self.BLOCKED_INDICATORS):
-                return LoginResult(False, "Account blocked", "blocked", blocked=True)
-            
-            # Si llegamos aquí, asumimos éxito (no hubo errores)
-            return LoginResult(True, "Login completed (no errors detected)")
+            # 11. ✅ VALIDACIÓN ESTRICTA
+            return await self._validate_login_result(
+                driver,
+                params.get("success_url_contains")
+            )
         
         except Exception as e:
             logger.error(f"Login execution error: {e}")
             return LoginResult(False, str(e), "exception")
     
+    async def _validate_login_result(
+        self,
+        driver: webdriver.Chrome,
+        expected_url: Optional[str]
+    ) -> LoginResult:
+        """
+        ✅ VALIDACIÓN ESTRICTA DE RESULTADO DE LOGIN
+        
+        Orden de verificación:
+        1. Errores de credenciales → FAIL
+        2. Cuenta bloqueada → FAIL
+        3. Modal sigue abierto → FAIL
+        4. URL cambió al dashboard → SUCCESS
+        5. Elementos de sesión presentes → SUCCESS
+        6. Si nada indica éxito → FAIL (por defecto)
+        """
+        
+        try:
+            current_url = driver.current_url
+            page_text = driver.page_source.lower()
+            
+            logger.info(f"🔍 Validating login result...")
+            logger.debug(f"  Current URL: {current_url}")
+            
+            # ✅ 1. VERIFICAR ERRORES DE CREDENCIALES (prioridad máxima)
+            for error_pattern in self.AUTH_ERROR_INDICATORS:
+                if error_pattern in page_text:
+                    logger.error(f"❌ Auth error detected: '{error_pattern}'")
+                    return LoginResult(
+                        False,
+                        f"Wrong credentials: '{error_pattern}' found",
+                        "auth_error"
+                    )
+            
+            # ✅ 2. VERIFICAR CUENTA BLOQUEADA
+            for block_pattern in self.BLOCKED_INDICATORS:
+                if block_pattern in page_text:
+                    logger.error(f"❌ Account blocked: '{block_pattern}'")
+                    return LoginResult(
+                        False,
+                        "Account blocked",
+                        "blocked",
+                        blocked=True
+                    )
+            
+            # ✅ 3. VERIFICAR SI MODAL SIGUE ABIERTO (indica fallo)
+            modal_still_open = driver.execute_script("""
+                const modal = document.querySelector('.modal.show, [role="dialog"]');
+                return modal !== null && window.getComputedStyle(modal).display !== 'none';
+            """)
+            
+            if modal_still_open:
+                logger.warning("⚠️ Login modal still open - likely failed")
+                # Buscar mensaje de error dentro del modal
+                try:
+                    modal_text = driver.execute_script("""
+                        const modal = document.querySelector('.modal.show, [role="dialog"]');
+                        return modal ? modal.textContent.toLowerCase() : '';
+                    """)
+                    
+                    for error_pattern in self.AUTH_ERROR_INDICATORS:
+                        if error_pattern in modal_text:
+                            logger.error(f"❌ Error in modal: '{error_pattern}'")
+                            return LoginResult(
+                                False,
+                                f"Login failed: '{error_pattern}' in modal",
+                                "auth_error"
+                            )
+                except:
+                    pass
+                
+                # Si el modal está abierto pero no vemos error específico
+                logger.error("❌ Modal still open without clear error - assuming failure")
+                return LoginResult(
+                    False,
+                    "Login modal still open - no redirect occurred",
+                    "no_redirect"
+                )
+            
+            # ✅ 4. VERIFICAR CAMBIO DE URL (indica éxito)
+            if expected_url and expected_url.lower() in current_url:
+                logger.info(f"✅ Login success: URL matches '{expected_url}'")
+                return LoginResult(True, "Login successful (URL redirect)")
+            
+            # ✅ 5. VERIFICAR ELEMENTOS DE SESIÓN ACTIVA
+            success_detected = False
+            
+            for success_pattern in self.SUCCESS_INDICATORS:
+                if success_pattern in page_text:
+                    logger.info(f"✅ Login success: '{success_pattern}' found in page")
+                    success_detected = True
+                    break
+            
+            if success_detected:
+                return LoginResult(True, "Login successful (session indicators)")
+            
+            # ✅ 6. VERIFICAR COOKIES DE SESIÓN
+            cookies = driver.get_cookies()
+            session_cookies = [
+                c for c in cookies
+                if any(keyword in c["name"].lower() for keyword in ["session", "token", "auth", "user"])
+            ]
+            
+            if session_cookies and len(session_cookies) > 0:
+                logger.info(f"✅ Login success: {len(session_cookies)} session cookies found")
+                return LoginResult(True, f"Login successful ({len(session_cookies)} session cookies)")
+            
+            # ✅ 7. SI NO DETECTAMOS NADA → ASUMIR FALLO
+            logger.error(
+                "❌ Login validation inconclusive - no clear success indicators\n"
+                f"  URL: {current_url}\n"
+                f"  Expected: {expected_url}\n"
+                f"  Modal open: {modal_still_open}\n"
+                f"  Session cookies: {len(session_cookies)}"
+            )
+            
+            return LoginResult(
+                False,
+                "Login validation failed - no success indicators detected",
+                "validation_failed"
+            )
+        
+        except Exception as e:
+            logger.error(f"Validation error: {e}")
+            return LoginResult(False, f"Validation error: {str(e)}", "validation_error")
+    
     async def _detect_angular_modal(self, driver: webdriver.Chrome) -> bool:
         """Detecta si hay un modal Angular activo"""
         try:
-            # Buscar atributos Angular comunes
             angular_indicators = driver.execute_script("""
                 return document.querySelector('[ng-version]') !== null ||
                        document.querySelector('[_nghost]') !== null ||
@@ -195,23 +320,16 @@ class HumanizedLoginExecutor:
             return False
     
     async def _fill_angular_field(self, driver: webdriver.Chrome, selector: str, value: str) -> bool:
-        """Llena campo Angular disparando eventos correctos - SOLO MODAL VISIBLE"""
+        """Llena campo Angular disparando eventos correctos"""
         try:
-            logger.debug(f"Filling Angular field: {selector}")
-            
-            # Script que busca el campo VISIBLE y lo llena
             script = """
             const selector = arguments[0];
             const value = arguments[1];
             
-            // Función para verificar si un elemento es REALMENTE visible
             function isReallyVisible(elem) {
                 if (!elem) return false;
-                
                 const style = window.getComputedStyle(elem);
                 const rect = elem.getBoundingClientRect();
-                
-                // Verificar que esté visible
                 return (
                     style.display !== 'none' &&
                     style.visibility !== 'hidden' &&
@@ -222,76 +340,45 @@ class HumanizedLoginExecutor:
                 );
             }
             
-            // Buscar TODOS los campos que coincidan
             const allFields = document.querySelectorAll(selector);
-            console.log('Found ' + allFields.length + ' fields matching selector');
-            
-            // Filtrar solo los VISIBLES
             let field = null;
+            
             for (let f of allFields) {
                 if (isReallyVisible(f)) {
                     field = f;
-                    console.log('Found VISIBLE field:', f);
                     break;
                 }
             }
             
-            if (!field) {
-                console.error('No VISIBLE field found for:', selector);
-                return false;
-            }
+            if (!field) return false;
             
-            // Verificar que el modal padre esté visible
-            const modal = field.closest('.modal, [role="dialog"], .zg-modal');
-            if (modal && !isReallyVisible(modal)) {
-                console.error('Field found but modal is not visible');
-                return false;
-            }
-            
-            // Scroll al campo
             field.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            
-            // Focus
             field.focus();
-            
-            // Limpiar
             field.value = '';
             
-            // Disparar eventos Angular
             field.dispatchEvent(new Event('focus', { bubbles: true }));
             field.dispatchEvent(new Event('click', { bubbles: true }));
             
-            // Establecer valor carácter por carácter (simular tipeo)
             for (let i = 0; i < value.length; i++) {
                 field.value = value.substring(0, i + 1);
-                
-                // Disparar eventos de input
                 field.dispatchEvent(new Event('input', { bubbles: true }));
                 field.dispatchEvent(new Event('keydown', { bubbles: true }));
                 field.dispatchEvent(new Event('keyup', { bubbles: true }));
                 field.dispatchEvent(new Event('change', { bubbles: true }));
             }
             
-            // Disparar blur para validación Angular
             field.dispatchEvent(new Event('blur', { bubbles: true }));
-            
-            // Verificar que el valor se estableció
-            console.log('Field value after fill:', field.value);
-            console.log('Field is visible:', isReallyVisible(field));
             
             return field.value === value;
             """
             
-            # Ejecutar script
             success = driver.execute_script(script, selector, value)
             
             if success:
-                logger.info(f"✅ Field filled successfully: '{value}'")
                 await asyncio.sleep(random.uniform(0.3, 0.7))
                 return True
-            else:
-                logger.error(f"❌ Failed to fill field: {selector}")
-                return False
+            
+            return False
         
         except Exception as e:
             logger.error(f"Angular field fill error: {e}")
@@ -301,14 +388,12 @@ class HumanizedLoginExecutor:
         """Dispara validación de formulario Angular"""
         try:
             driver.execute_script("""
-                // Disparar validación en todos los campos del formulario
                 const inputs = document.querySelectorAll('input');
                 inputs.forEach(input => {
                     input.dispatchEvent(new Event('blur', { bubbles: true }));
                     input.dispatchEvent(new Event('change', { bubbles: true }));
                 });
                 
-                // Forzar detección de cambios Angular
                 if (typeof window.ng !== 'undefined') {
                     const components = window.ng.probe(document.body);
                     if (components && components.injector) {
@@ -322,15 +407,11 @@ class HumanizedLoginExecutor:
             logger.warning(f"Angular validation trigger error: {e}")
     
     async def _click_angular_submit(self, driver: webdriver.Chrome, selector: str) -> bool:
-        """Click en botón submit Angular - SOLO BOTÓN VISIBLE"""
+        """Click en botón submit Angular"""
         try:
-            logger.debug(f"Looking for submit button: {selector}")
-            
-            # Script mejorado que busca el botón VISIBLE
             script = """
             const selector = arguments[0];
             
-            // Función para verificar visibilidad real
             function isReallyVisible(elem) {
                 if (!elem) return false;
                 const style = window.getComputedStyle(elem);
@@ -345,22 +426,12 @@ class HumanizedLoginExecutor:
                 );
             }
             
-            // Buscar todos los botones que coincidan
-            let allButtons = [];
+            let allButtons = selector ? 
+                Array.from(document.querySelectorAll(selector)) : 
+                Array.from(document.querySelectorAll('button'));
             
-            if (selector) {
-                allButtons = Array.from(document.querySelectorAll(selector));
-            }
-            
-            // Si no se encontró, buscar por texto
-            if (allButtons.length === 0) {
-                allButtons = Array.from(document.querySelectorAll('button'));
-            }
-            
-            console.log('Total buttons found:', allButtons.length);
-            
-            // Filtrar solo los VISIBLES
             let button = null;
+            
             for (let btn of allButtons) {
                 if (isReallyVisible(btn)) {
                     const text = btn.textContent.toLowerCase();
@@ -369,103 +440,56 @@ class HumanizedLoginExecutor:
                         text.includes('acceder') ||
                         btn.type === 'submit') {
                         button = btn;
-                        console.log('Found VISIBLE submit button:', btn);
                         break;
                     }
                 }
             }
             
-            if (!button) {
-                console.error('No VISIBLE submit button found');
-                return false;
-            }
+            if (!button) return false;
             
-            // Verificar estado
-            const isDisabled = button.disabled || 
-                              button.getAttribute('disabled') !== null ||
-                              button.classList.contains('disabled');
-            
-            console.log('Button enabled:', !isDisabled);
-            console.log('Button classes:', button.className);
-            
-            // Scroll al botón
             button.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            
-            // Remover disabled FORZOSAMENTE
             button.disabled = false;
             button.removeAttribute('disabled');
             button.classList.remove('disabled');
-            
-            // Hacer clickeable
             button.style.pointerEvents = 'auto';
             button.style.cursor = 'pointer';
             
-            // Disparar eventos completos
             button.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
             button.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
             button.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
             button.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-            
-            // Click directo como fallback
             button.click();
-
-            // ✅ Forzar submit real del formulario Angular
-            // 🔥 Buscar el form real en todo el modal
+            
             let form = null;
             const modal = button.closest('div, section, app-root, body');
-
+            
             if (modal) {
                 form = modal.querySelector('form');
             }
-
+            
             if (form) {
                 form.dispatchEvent(new Event('submit', { bubbles: true }));
                 form.submit();
-                console.log('✅ Form submit forzado desde modal');
-            } else {
-                console.log('⚠️ No se encontró <form>, fallback solo click');
             }
-
-
-            console.log('Click + form submit forzado');
-
+            
             return true;
-
             """
             
             success = driver.execute_script(script, selector)
             
             if success:
-                logger.info("✓ Submit button clicked (JavaScript)")
+                logger.info("✓ Submit button clicked")
                 await asyncio.sleep(1.0)
-                
-                # Verificar cambio en página
-                await asyncio.sleep(2)
-                current_url = driver.current_url
-                logger.debug(f"URL after submit: {current_url}")
-                
-                # Verificar si el modal sigue abierto (indicaría error)
-                modal_still_open = driver.execute_script("""
-                    const modal = document.querySelector('.modal.show, [role="dialog"][style*="display: block"]');
-                    return modal !== null;
-                """)
-                
-                if modal_still_open:
-                    logger.warning("⚠️ Submit may not have worked - modal still open")
-                else:
-                    logger.info("✓ Modal closed after submit")
-                
                 return True
-            else:
-                logger.error("❌ Submit button not found or not clickable")
-                return False
+            
+            return False
         
         except Exception as e:
             logger.error(f"Submit click error: {e}")
             return False
     
     async def _wait_for_element_robust(self, driver: webdriver.Chrome, selector: str, timeout: int = 15):
-        """Espera elemento con múltiples estrategias"""
+        """Espera elemento con múltiples selectores"""
         selectors = [s.strip() for s in selector.split(",")]
         
         for sel in selectors:
@@ -481,7 +505,7 @@ class HumanizedLoginExecutor:
         return None
     
     async def _fill_field_robust(self, driver: webdriver.Chrome, element, text: str) -> bool:
-        """Llena campo estándar (no Angular)"""
+        """Llena campo estándar"""
         try:
             driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
             await asyncio.sleep(0.3)

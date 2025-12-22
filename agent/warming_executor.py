@@ -1,8 +1,4 @@
-# agent/warming_executor.py (ACTUALIZACIÓN COMPLETA)
-"""
-Ejecutor de warming con soporte para sincronización paralela
-Permite ejecución simultánea sin bloqueos
-"""
+# agent/warming_executor.py - VERSIÓN SIN BLOQUEOS
 import asyncio
 from typing import Dict, List, Callable, Optional
 from loguru import logger
@@ -17,23 +13,22 @@ import uuid
 
 
 class WarmingExecutor:
-    """Ejecutor de warming con deduplicación y sincronización"""
+    """Ejecutor de warming optimizado sin bloqueos"""
     
     def __init__(self, config, browser_controller):
         self.config = config
         self.browser_controller = browser_controller
         self.action_executor = ActionExecutor(config)
         
-        # Establecer credenciales por defecto
+        # Credenciales
         self.action_executor.set_session_var("USERNAME", "omaritouv0209@gmail.com")
         self.action_executor.set_session_var("PASSWORD", "Eocm2003!")
         
-        # ✅ CAMBIO: Ejecuciones activas SIN LÍMITE de concurrencia
-        # Cada ejecución corre independientemente
+        # Ejecuciones activas (sin límite de concurrencia)
         self.active_executions: Dict[int, asyncio.Task] = {}
         
         # Detector de eventos
-        self.event_detector = UniversalEventDetector()
+        self.event_detector = UniversalEventDetector(computer_id=config.COMPUTER_ID)
         
         # Sistema de deduplicación
         self.event_deduplicator = EventDeduplicator(dedup_window_seconds=30)
@@ -44,16 +39,12 @@ class WarmingExecutor:
         execution_id: int,
         profile_id: str,
         actions: List[dict],
-        batch_id: Optional[str] = None,  # ✅ NUEVO
+        batch_id: Optional[str] = None,
         progress_callback: Optional[Callable] = None
     ):
-        """
-        Ejecuta warming script
+        """Ejecuta warming SIN BLOQUEAR"""
         
-        ✅ NUEVO: batch_id permite sincronización paralela
-        """
-        
-        # ✅ Crear tarea SIN esperar
+        # ✅ Crear tarea en background
         task = asyncio.create_task(
             self._execute_warming(
                 execution_id,
@@ -66,11 +57,12 @@ class WarmingExecutor:
         
         self.active_executions[execution_id] = task
         
-        # ✅ NO BLOQUEAMOS: La tarea corre en background
         logger.info(
-            f"Warming execution started in background: "
+            f"✅ Warming started (non-blocking): "
             f"execution_id={execution_id}, batch_id={batch_id}"
         )
+        
+        # ✅ NO ESPERAMOS - retorna inmediatamente
     
     async def _execute_warming(
         self,
@@ -80,115 +72,84 @@ class WarmingExecutor:
         batch_id: Optional[str],
         progress_callback: Optional[Callable] = None
     ):
-        """Ejecuta warming CON sincronización si es batch"""
+        """Ejecuta warming (corre en background)"""
         
         driver = None
         start_time = datetime.utcnow()
         
         try:
-            logger.info(
-                f"Starting warming: execution_id={execution_id}, "
-                f"batch_id={batch_id or 'none'}"
+            logger.info(f"🔥 Starting warming: execution={execution_id}")
+            
+            # ✅ 1. ABRIR NAVEGADOR (sin retry excesivo)
+            driver = await asyncio.wait_for(
+                self.browser_controller.open_browser(profile_id),
+                timeout=45  # Timeout de 45s
             )
             
-            # Abrir navegador
-            driver = await self.browser_controller.open_browser(profile_id)
-            
             if not driver:
-                await self._send_event_smart(
-                    EventType.BROWSER_CRASH,
-                    EventSeverity.CRITICAL,
-                    execution_id,
-                    profile_id,
-                    "Failed to open browser",
-                    {"reason": "Browser controller returned None"},
-                    requires_manual=True,
-                    can_retry=True,
-                    progress_callback=progress_callback
-                )
                 raise Exception(f"Failed to open browser for profile {profile_id}")
             
-            # Evento de inicio
-            await self._send_event_smart(
+            # ✅ 2. ENVIAR EVENTO DE INICIO (sin esperar)
+            asyncio.create_task(self._send_event_smart(
                 EventType.EXECUTION_STARTED,
                 EventSeverity.INFO,
                 execution_id,
                 profile_id,
-                "Warming execution started",
+                "Warming started",
                 {"total_actions": len(actions), "batch_id": batch_id},
                 requires_manual=False,
                 can_retry=False,
                 progress_callback=progress_callback
-            )
+            ))
             
-            # Ejecutar acciones
+            # ✅ 3. EJECUTAR ACCIONES (con detección ligera de eventos)
             total_actions = len(actions)
             completed = 0
             failed = 0
             
             for i, action in enumerate(actions):
                 try:
-                    # ✅ SINCRONIZACIÓN: Si es batch, esperar en barrera
+                    # ✅ SINCRONIZACIÓN (si es batch)
                     if batch_id:
-                        sync_success = await self._sync_wait_at_barrier(
-                            batch_id=batch_id,
-                            action_index=i,
-                            execution_id=execution_id
+                        # No bloqueamos más de 90s
+                        try:
+                            await asyncio.wait_for(
+                                self._sync_wait_at_barrier(batch_id, i, execution_id),
+                                timeout=90
+                            )
+                        except asyncio.TimeoutError:
+                            logger.warning(f"⏱️ Sync timeout action {i}, continuing...")
+                    
+                    # ✅ EJECUTAR ACCIÓN (timeout por acción)
+                    action_timeout = action.get("params", {}).get("timeout", 60)
+                    
+                    try:
+                        success = await asyncio.wait_for(
+                            self.action_executor.execute_action(driver, action),
+                            timeout=action_timeout + 10  # +10s de margen
                         )
                         
-                        if not sync_success:
-                            logger.warning(
-                                f"Sync barrier timeout for action {i}, "
-                                "continuing anyway..."
+                        if success:
+                            completed += 1
+                        else:
+                            failed += 1
+                            
+                            # ✅ DETECTAR EVENTOS SOLO SI FALLA
+                            asyncio.create_task(
+                                self._detect_and_report_events(
+                                    driver, execution_id, profile_id, i, action, progress_callback
+                                )
                             )
                     
-                    # Detectar eventos ANTES
-                    events_before = await self.event_detector.detect_all_events(
-                        driver,
-                        execution_id,
-                        profile_id,
-                        computer_id=self.config.COMPUTER_ID,
-                        action_index=i,
-                        action_type=action.get("type")
-                    )
-                    
-                    for event in events_before:
-                        await self._send_detected_event_smart(event, progress_callback)
-                        
-                        if event.severity == EventSeverity.CRITICAL and not event.can_retry:
-                            logger.error(f"Critical event, aborting: {event.message}")
-                            raise Exception(f"Critical event: {event.event_type}")
-                    
-                    # Ejecutar acción
-                    success = await self.action_executor.execute_action(driver, action)
-                    
-                    if success:
-                        completed += 1
-                    else:
+                    except asyncio.TimeoutError:
+                        logger.error(f"⏱️ Action {i} timeout ({action_timeout}s)")
                         failed += 1
                     
-                    # Detectar eventos DESPUÉS
-                    events_after = await self.event_detector.detect_all_events(
-                        driver,
-                        execution_id,
-                        profile_id,
-                        computer_id=self.config.COMPUTER_ID,
-                        action_index=i,
-                        action_type=action.get("type")
-                    )
-                    
-                    for event in events_after:
-                        await self._send_detected_event_smart(event, progress_callback)
-                        
-                        if event.severity == EventSeverity.CRITICAL and not event.can_retry:
-                            logger.error(f"Critical event: {event.message}")
-                            raise Exception(f"Critical event: {event.event_type}")
-                    
-                    # Progreso
+                    # ✅ PROGRESO (sin esperar)
                     progress = int((i + 1) / total_actions * 100)
                     
                     if progress_callback:
-                        await progress_callback(
+                        asyncio.create_task(progress_callback(
                             execution_id,
                             progress,
                             {
@@ -197,28 +158,16 @@ class WarmingExecutor:
                                 "success": success,
                                 "timestamp": datetime.utcnow().isoformat()
                             }
-                        )
+                        ))
                 
                 except Exception as e:
-                    logger.error(f"Action {i+1} failed: {e}")
+                    logger.error(f"❌ Action {i+1} failed: {e}")
                     failed += 1
-                    
-                    error_events = await self.event_detector.detect_all_events(
-                        driver,
-                        execution_id,
-                        profile_id,
-                        computer_id=self.config.COMPUTER_ID,
-                        action_index=i,
-                        action_type=action.get("type")
-                    )
-                    
-                    for event in error_events:
-                        await self._send_detected_event_smart(event, progress_callback)
             
-            # Completado
+            # ✅ 4. COMPLETADO
             duration = (datetime.utcnow() - start_time).total_seconds()
             
-            await self._send_event_smart(
+            asyncio.create_task(self._send_event_smart(
                 EventType.EXECUTION_COMPLETED,
                 EventSeverity.INFO,
                 execution_id,
@@ -234,14 +183,17 @@ class WarmingExecutor:
                 requires_manual=False,
                 can_retry=False,
                 progress_callback=progress_callback
-            )
+            ))
             
-            logger.info(f"Warming completed: execution_id={execution_id}")
+            logger.info(
+                f"✅ Warming completed: execution={execution_id}, "
+                f"success={completed}/{total_actions}, duration={duration:.1f}s"
+            )
         
         except Exception as e:
-            logger.error(f"Warming failed: execution_id={execution_id}, error={e}")
+            logger.error(f"❌ Warming failed: execution={execution_id}, error={e}")
             
-            await self._send_event_smart(
+            asyncio.create_task(self._send_event_smart(
                 EventType.EXECUTION_FAILED,
                 EventSeverity.CRITICAL,
                 execution_id,
@@ -251,11 +203,18 @@ class WarmingExecutor:
                 requires_manual=True,
                 can_retry=False,
                 progress_callback=progress_callback
-            )
+            ))
         
         finally:
+            # ✅ CERRAR NAVEGADOR (sin esperar demasiado)
             if driver:
-                await self.browser_controller.close_browser(profile_id)
+                try:
+                    await asyncio.wait_for(
+                        self.browser_controller.close_browser(profile_id),
+                        timeout=10
+                    )
+                except asyncio.TimeoutError:
+                    logger.warning(f"⏱️ Browser close timeout for profile {profile_id}")
             
             # Limpiar
             if execution_id in self.active_executions:
@@ -264,30 +223,47 @@ class WarmingExecutor:
             self.event_deduplicator.mark_execution_completed(execution_id)
             self.execution_cache.clear_execution(execution_id)
     
+    async def _detect_and_report_events(
+        self,
+        driver,
+        execution_id: int,
+        profile_id: str,
+        action_index: int,
+        action: dict,
+        progress_callback: Optional[Callable]
+    ):
+        """Detecta y reporta eventos (corre en background)"""
+        
+        try:
+            events = await self.event_detector.detect_all_events(
+                driver,
+                execution_id,
+                profile_id,
+                computer_id=self.config.COMPUTER_ID,
+                action_index=action_index,
+                action_type=action.get("type")
+            )
+            
+            for event in events:
+                await self._send_detected_event_smart(event, progress_callback)
+        
+        except Exception as e:
+            logger.error(f"Event detection error: {e}")
+    
     async def _sync_wait_at_barrier(
         self,
         batch_id: str,
         action_index: int,
         execution_id: int
     ) -> bool:
-        """
-        ✅ SINCRONIZACIÓN: Espera en barrera distribuida
-        
-        Comunica con el orquestrador para coordinar con otros agentes
-        """
+        """Espera en barrera distribuida"""
         
         logger.debug(
-            f"Waiting at sync barrier: batch={batch_id}, "
-            f"action={action_index}, execution={execution_id}"
+            f"⏸️ Waiting at barrier: batch={batch_id}, action={action_index}"
         )
         
         # TODO: Implementar comunicación con orquestrador
-        # Por ahora, solo log
-        
-        # En producción, esto debería:
-        # 1. Enviar mensaje al orquestrador: "llegué a la barrera"
-        # 2. Esperar respuesta del orquestrador: "todos llegaron, continúa"
-        # 3. Timeout si no recibe respuesta en 60s
+        await asyncio.sleep(0.1)  # Placeholder
         
         return True
     
@@ -313,7 +289,6 @@ class WarmingExecutor:
         )
         
         if not should_report:
-            logger.debug(f"Event deduplicated: {event_type}")
             return
         
         should_report_once = self.execution_cache.should_report_once(
@@ -322,7 +297,6 @@ class WarmingExecutor:
         )
         
         if not should_report_once:
-            logger.debug(f"Event already reported once: {event_type}")
             return
         
         event = ExecutionEvent(
@@ -356,7 +330,6 @@ class WarmingExecutor:
         )
         
         if not should_report:
-            logger.debug(f"Event deduplicated: {event.event_type}")
             return
         
         should_report_once = self.execution_cache.should_report_once(
@@ -365,7 +338,6 @@ class WarmingExecutor:
         )
         
         if not should_report_once:
-            logger.debug(f"Event already reported once: {event.event_type}")
             return
         
         await self._send_detected_event(event, progress_callback)
@@ -393,7 +365,6 @@ class WarmingExecutor:
         """Detiene una ejecución"""
         
         if execution_id not in self.active_executions:
-            logger.warning(f"Execution {execution_id} not found")
             return False
         
         task = self.active_executions[execution_id]
@@ -402,7 +373,7 @@ class WarmingExecutor:
         self.event_deduplicator.mark_execution_completed(execution_id)
         self.execution_cache.clear_execution(execution_id)
         
-        logger.info(f"Execution {execution_id} cancelled")
+        logger.info(f"🛑 Execution {execution_id} cancelled")
         return True
     
     def get_active_count(self) -> int:

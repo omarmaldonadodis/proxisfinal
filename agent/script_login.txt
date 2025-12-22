@@ -31,12 +31,6 @@ Ecuabet numero 29 actualmente
       }
     },
     {
-      "type": "screenshot",
-      "params": {
-        "name": "modal_opened"
-      }
-    },
-    {
       "type": "advanced_login",
       "params": {
         "service": "ecuabet",
@@ -50,18 +44,7 @@ Ecuabet numero 29 actualmente
         "ignore_recaptcha": false
       }
     },
-    {
-      "type": "wait",
-      "params": {
-        "duration": 3
-      }
-    },
-    {
-      "type": "screenshot",
-      "params": {
-        "name": "after_login"
-      }
-    },
+
     {
       "type": "scroll",
       "params": {
@@ -82,47 +65,29 @@ Ecuabet numero 29 actualmente
 
 Sport
 {
-  name": "Login Sorti.ec",
+  "name": "Login Sorti.ec",
   "description": "Login con soporte Angular Material",
   "category": "authentication",
   "actions": [
     {
       "type": "navigate",
-      "params": {
-        "url": "https://www.sorti.ec/home",
-        "timeout": 50
-      },
-      "description": null
+      "params": { "url": "https://www.sorti.ec/home", "timeout": 50 }
     },
     {
       "type": "wait",
-      "params": {
-        "duration": 3
-      },
-      "description": null
+      "params": { "duration": 3 }
     },
     {
       "type": "click",
-      "params": {
-        "selector": "button.zg-btn-primary",
-        "text": null,
-        "human": true
-      },
-      "description": null
+      "params": { "selector": "button.zg-btn-primary", "human": true }
     },
     {
       "type": "wait",
-      "params": {
-        "duration": 4
-      },
-      "description": null
+      "params": { "duration": 4 }
     },
     {
       "type": "screenshot",
-      "params": {
-        "name": "modal_opened"
-      },
-      "description": null
+      "params": { "name": "modal_opened" }
     },
     {
       "type": "advanced_login",
@@ -130,32 +95,26 @@ Sport
         "service": "sorti",
         "username": "TU_USUARIO_AQUI",
         "password": "TU_PASSWORD_AQUI",
-        "username_selector": "input[formcontrolname='username'], input#usernameLogin",
-        "password_selector": "input[formcontrolname='password'], input#toggle-password-sign-in",
+        "username_selector": "input[formcontrolname=\"username\"], input#usernameLogin",
+        "password_selector": "input[formcontrolname=\"password\"], input#toggle-password-sign-in",
         "submit_selector": "button.zg-action-btn",
         "wait_after_submit": 6,
         "success_url_contains": "home",
         "ignore_recaptcha": false
-      },
-      "description": null
+      }
     },
     {
       "type": "wait",
-      "params": {
-        "duration": 3
-      },
-      "description": null
+      "params": { "duration": 3 }
     },
     {
       "type": "screenshot",
-      "params": {
-        "name": "after_login"
-      },
-      "description": null
+      "params": { "name": "after_login" }
     }
   ],
-  "duration_minutes": 5,
+  "duration_minutes": 5
 }
+
 
 Victory365
 {
@@ -355,6 +314,8 @@ Betcore
 }
 
 
+class="header_login_btn ns ui-link"
+
 
 sportbet.ec
 
@@ -381,4 +342,72 @@ sportbet.ec
   ],
   "duration_minutes": 5
 }
+
+
+
+sportbet.ec
+
+{
+  "name": "Login 1xBet",
+  "description": "Login automatizado 1xBet",
+  "category": "authentication",
+  "actions": [
+    {
+      "type": "navigate",
+      "params": {
+        "url": "https://sportbet.ec/",
+        "timeout": 50
+      },
+      "description": null
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 5
+      },
+      "description": null
+    },
+    {
+      "type": "click",
+      "params": {
+        "selector": ".header_login_btn",
+        "selector_type": "css",
+        "human": true
+      },
+      "description": null
+    },
+
+    {
+      "type": "advanced_login",
+      "params": {
+        "service": "sorti",
+        "username": "TU_USUARIO",
+        "password": "TU_PASSWORD",
+        "username_selector": "form#email",
+        "password_selector": "form#password",
+        "submit_selector": "#loginButton",
+        "wait_after_submit": 6,
+        "success_url_contains": "home",
+        "ignore_recaptcha": true
+      }
+    },
+
+    {
+      "type": "wait",
+      "params": {
+        "duration": 3
+      },
+      "description": null
+    },
+    {
+      "type": "screenshot",
+      "params": {
+        "name": "after_login"
+      },
+      "description": null
+    }
+  ],
+  "duration_minutes": 5
+}
+
 
