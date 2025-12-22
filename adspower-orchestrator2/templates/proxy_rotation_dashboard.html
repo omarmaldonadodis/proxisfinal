@@ -63,6 +63,7 @@
         .btn-primary { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
         .btn-secondary { background: linear-gradient(135deg, #f093fb, #f5576c); color: white; }
         .btn-success { background: linear-gradient(135deg, #4facfe, #00f2fe); color: white; }
+        .btn-warning { background: linear-gradient(135deg, #fa709a, #fee140); color: #333; }
 
         .btn:hover {
             transform: translateY(-2px);
@@ -283,7 +284,7 @@
     <div class="container">
         <div class="header">
             <h1>🔄 Proxy Rotation Dashboard</h1>
-            <p>Monitoreo Simplificado - <span id="lastUpdate"></span></p>
+            <p>AdsPower Centralizado - <span id="lastUpdate"></span></p>
             
             <div class="controls">
                 <label style="display: flex; align-items: center; gap: 10px;">
@@ -293,10 +294,13 @@
                 </label>
                 
                 <button class="btn btn-success" onclick="refreshData()">
-                    🔄 Actualizar
+                    🔄 Actualizar Stats
                 </button>
                 <button class="btn btn-secondary" onclick="rotateAll()">
                     🔧 Verificar Todos
+                </button>
+                <button class="btn btn-warning" onclick="syncAll()">
+                    🔄 Sync All to AdsPower
                 </button>
             </div>
         </div>
@@ -363,10 +367,9 @@
         }
 
         async function refreshData() {
-            log('🔄 Actualizando datos...', 'info');
+            log('🔄 Actualizando stats...', 'info');
             
             try {
-                // ✅ ENDPOINT SIMPLIFICADO
                 const response = await fetch('/api/v1/proxy-rotation/stats');
                 
                 if (!response.ok) {
@@ -399,7 +402,6 @@
 
         async function loadProxiesList() {
             try {
-                // Listar todos los proxies
                 const response = await fetch('/api/v1/proxies/?limit=100');
                 
                 if (!response.ok) {
@@ -541,6 +543,30 @@
             }
         }
 
+        async function syncAll() {
+            log('🔄 Sincronizando TODOS los proxies a AdsPower centralizado...', 'warning');
+            
+            try {
+                const response = await fetch('/api/v1/proxy-rotation/sync-all', {
+                    method: 'POST'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                log(`✅ Sincronización iniciada: ${data.message}`, 'success');
+                log(`ℹ️ Verifica el estado en 30-60 segundos`, 'info');
+                
+                setTimeout(refreshData, 5000);
+                
+            } catch (error) {
+                log(`❌ Error sincronizando: ${error.message}`, 'error');
+            }
+        }
+
         // Auto-refresh
         document.getElementById('autoRefresh').addEventListener('change', (e) => {
             if (e.target.checked) {
@@ -557,7 +583,7 @@
         // Inicializar
         refreshData();
         autoRefreshInterval = setInterval(refreshData, 30000);
-        log('🚀 Dashboard iniciado', 'success');
+        log('🚀 Dashboard iniciado - AdsPower Centralizado', 'success');
     </script>
 </body>
 </html>

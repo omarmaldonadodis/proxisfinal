@@ -1,4 +1,5 @@
-# app/api/v1/proxy_rotation.py - ✅ VERSIÓN COMPLETA CON ROUTER
+# app/api/v1/proxy_rotation.py - ✅ VERSIÓN CORREGIDA
+
 from fastapi import APIRouter, Depends, BackgroundTasks, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db
@@ -18,18 +19,12 @@ async def check_and_rotate_proxy(
 ):
     """
     🎯 Verifica y rota proxy si es necesario
-    
-    ✅ CORRECCIONES:
-    - Manejo robusto de errores de AdsPower
-    - Validación de conexión antes de rotar
-    - Response claro con detalles del error
     """
     
     try:
         service = ProxyRotationService(db)
         result = await service.check_and_rotate_proxy(proxy_id)
         
-        # ✅ Si hay error, retornar con status 500
         if result.get("error"):
             logger.error(f"Error rotando proxy {proxy_id}: {result['error']}")
             raise HTTPException(
@@ -60,17 +55,9 @@ async def check_and_rotate_all(
 ):
     """
     🔄 Verifica y rota TODOS los proxies
-    
-    ✅ CORRECCIÓN CRÍTICA:
-    - Ejecuta en background CON NUEVA SESIÓN DE DB
-    - No reutiliza sesión del request
     """
     
     async def _task():
-        """
-        ✅ CRÍTICO: Crear NUEVA sesión de DB
-        No podemos usar la sesión del request en background
-        """
         from app.database import AsyncSessionLocal
         
         try:
@@ -91,7 +78,6 @@ async def check_and_rotate_all(
             logger.error(f"Error en tarea de rotación: {e}")
             raise
     
-    # ✅ Ejecutar en background
     background_tasks.add_task(_task)
     
     return {
@@ -135,7 +121,7 @@ async def sync_all_to_adspower(background_tasks: BackgroundTasks):
     """
     🔄 FORZAR sincronización de TODOS los proxies a AdsPower
     
-    Útil cuando hay desincronización entre DB y AdsPower
+    ✅ CORREGIDO: Usa el método correcto del servicio
     """
     
     async def _sync_task():
@@ -157,7 +143,8 @@ async def sync_all_to_adspower(background_tasks: BackgroundTasks):
             
             for proxy in proxies:
                 try:
-                    success = await service._update_adspower_profiles_with_retry(proxy)
+                    # ✅ USAR EL MÉTODO CORRECTO
+                    success = await service._update_adspower_profiles_centralized(proxy)
                     
                     if success:
                         synced += 1

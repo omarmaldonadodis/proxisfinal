@@ -1,2 +1,17 @@
 2025-12-21 09:40:09 | ERROR    | websocket_client:connect:79 - WebSocket error: did not receive a valid HTTP response
 2025-12-21 09:40:19 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.1.8', 8000)
+2025-12-21 11:12:48 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.1.8', 8000)
+2025-12-21 11:17:50 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.1.8', 8000)
+2025-12-21 11:18:31 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.1.8', 8000)
+2025-12-21 11:21:04 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 61] Connect call failed ('192.168.1.8', 8000)
+2025-12-21 11:21:14 | ERROR    | websocket_client:connect:79 - WebSocket error: did not receive a valid HTTP response
+2025-12-21 20:58:33 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 51] Network is unreachable
+2025-12-21 21:40:02 | ERROR    | websocket_client:connect:83 - Connection error: 
+2025-12-21 21:40:13 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 51] Network is unreachable
+2025-12-21 21:40:33 | ERROR    | websocket_client:connect:83 - Connection error: 
+2025-12-21 21:40:53 | ERROR    | websocket_client:connect:83 - Connection error: 
+2025-12-21 21:41:03 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 64] Host is down
+2025-12-21 21:41:23 | ERROR    | websocket_client:connect:83 - Connection error: 
+2025-12-21 21:41:33 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 64] Host is down
+2025-12-21 21:41:53 | ERROR    | websocket_client:connect:83 - Connection error: 
+2025-12-21 21:42:03 | ERROR    | websocket_client:connect:83 - Connection error: [Errno 64] Host is down
