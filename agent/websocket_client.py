@@ -152,20 +152,33 @@ class WebSocketClient:
         except Exception as e:
             logger.error(f"Error handling message: {e}")
     
+    # agent/websocket_client.py (ACTUALIZACIÓN PARCIAL - _execute_warming)
+    # Solo incluyo el método modificado, el resto permanece igual
+
     async def _execute_warming(self, data: dict):
-        """Ejecuta warming (NON-BLOCKING)"""
+        """
+        Ejecuta warming (NON-BLOCKING)
+        
+        ✅ NUEVO: Soporta batch_id para sincronización
+        """
         
         execution_id = data.get("execution_id")
         profile_id = data.get("profile_id")
         actions = data.get("actions", [])
+        batch_id = data.get("batch_id")  # ✅ NUEVO
         
-        logger.info(f"🔥 Executing warming: execution_id={execution_id}, profile={profile_id}")
+        logger.info(
+            f"🔥 Executing warming: execution_id={execution_id}, "
+            f"profile={profile_id}, batch={batch_id or 'none'}"
+        )
         
         try:
+            # ✅ Pasar batch_id al executor
             await self.warming_executor.execute(
                 execution_id=execution_id,
                 profile_id=profile_id,
                 actions=actions,
+                batch_id=batch_id,  # ✅ NUEVO
                 progress_callback=self._send_progress
             )
         except Exception as e:
@@ -177,16 +190,7 @@ class WebSocketClient:
                 "error": str(e),
                 "error_type": "execution_error",
                 "timestamp": datetime.utcnow().isoformat()
-            })
-    
-    async def _stop_warming(self, data: dict):
-        """Detiene warming"""
-        
-        execution_id = data.get("execution_id")
-        logger.info(f"🛑 Stopping warming: {execution_id}")
-        
-        await self.warming_executor.stop(execution_id)
-    
+            }) 
     async def _send_progress(self, execution_id: int, progress: int, log_entry: dict):
         """Envía progreso al orquestrador"""
 
