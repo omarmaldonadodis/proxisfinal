@@ -347,7 +347,6 @@ class LoginDetector:
                 "dashboard",
                 "cuenta",
                 "perfil",
-                "home",
                 "lobby",
                 "sports",
                 "deportes"

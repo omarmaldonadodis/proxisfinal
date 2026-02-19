@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy Rotation Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding-bottom: 220px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
+        .btn-secondary { background: linear-gradient(135deg, #f093fb, #f5576c); color: white; }
+        .btn-success { background: linear-gradient(135deg, #4facfe, #00f2fe); color: white; }
+        .btn-warning { background: linear-gradient(135deg, #fa709a, #fee140); color: #333; }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card h3 {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-card .value {
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        .value.green { color: #4ade80; }
+        .value.yellow { color: #fbbf24; }
+        .value.red { color: #f87171; }
+        .value.gray { color: #94a3b8; }
+
+        .proxies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .proxy-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            border-left: 5px solid;
+            transition: all 0.3s;
+        }
+
+        .proxy-card.active { border-color: #4ade80; }
+        .proxy-card.failed { border-color: #f87171; }
+        .proxy-card.inactive { border-color: #94a3b8; }
+
+        .proxy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .proxy-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .proxy-location {
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge.active { background: #4ade80; color: #000; }
+        .badge.failed { background: #ef4444; color: #fff; }
+        .badge.inactive { background: #94a3b8; color: #000; }
+
+        .proxy-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .proxy-actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .proxy-actions button {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .proxy-actions button:hover {
+            transform: scale(1.05);
+        }
+
+        .action-check { background: #4ade80; color: #000; }
+
+        .log-console {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: rgba(0, 0, 0, 0.95);
+            border-top: 2px solid #667eea;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+
+        .log-console.collapsed {
+            transform: translateY(calc(100% - 40px));
+        }
+
+        .log-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background: #667eea;
+            cursor: pointer;
+        }
+
+        .log-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .log-entry {
+            margin-bottom: 8px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .log-entry .timestamp {
+            color: #94a3b8;
+            margin-right: 10px;
+        }
+
+        .log-entry.info { border-left: 3px solid #4ade80; }
+        .log-entry.warning { border-left: 3px solid #fbbf24; }
+        .log-entry.error { border-left: 3px solid #f87171; }
+        .log-entry.success { border-left: 3px solid #00f2fe; }
+
+        .clear-log {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .clear-log:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Proxy Rotation Dashboard</h1>
+            <p>AdsPower Centralizado - <span id="lastUpdate"></span></p>
+            
+            <div class="controls">
+                <label style="display: flex; align-items: center; gap: 10px;">
+                    Auto-refresh:
+                    <input type="checkbox" id="autoRefresh" checked>
+                    <span id="refreshStatus">30s</span>
+                </label>
+                
+                <button class="btn btn-success" onclick="refreshData()">
+                    Actualizar Estado
+                </button>
+                <button class="btn btn-secondary" onclick="rotateAll()">
+                    Verificar Todos
+                </button>
+                <button class="btn btn-warning" onclick="syncAll()">
+                    Sincronizar con BD
+                </button>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3>Total Proxies</h3>
+                <div class="value" id="totalProxies">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>✅ Activos</h3>
+                <div class="value green" id="activeProxies">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>🔴 Failed</h3>
+                <div class="value red" id="failedProxies">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>⚡ Latencia Prom.</h3>
+                <div class="value" id="avgLatency">-</div>
+            </div>
+        </div>
+
+        <div class="proxies-grid" id="proxiesGrid">
+            <div class="loading">Cargando proxies...</div>
+        </div>
+    </div>
+
+    <div class="log-console" id="logConsole">
+        <div class="log-header" onclick="toggleLog()">
+            <span>📋 Console Log</span>
+            <button class="clear-log" onclick="clearLog(event)">Limpiar</button>
+        </div>
+        <div class="log-body" id="logBody"></div>
+    </div>
+
+    <script>
+        let autoRefreshInterval = null;
+
+        function log(message, type = 'info') {
+            const logBody = document.getElementById('logBody');
+            const timestamp = new Date().toLocaleTimeString();
+            
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.innerHTML = `<span class="timestamp">[${timestamp}]</span><span>${message}</span>`;
+            
+            logBody.appendChild(entry);
+            logBody.scrollTop = logBody.scrollHeight;
+            
+            if (logBody.children.length > 100) {
+                logBody.removeChild(logBody.firstChild);
+            }
+        }
+
+        function toggleLog() {
+            document.getElementById('logConsole').classList.toggle('collapsed');
+        }
+
+        function clearLog(event) {
+            event.stopPropagation();
+            document.getElementById('logBody').innerHTML = '';
+            log('Log limpiado', 'info');
+        }
+
+        async function refreshData() {
+            log('🔄 Actualizando stats...', 'info');
+            
+            try {
+                const response = await fetch('/api/v1/proxy-rotation/stats');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Actualizar contadores
+                document.getElementById('totalProxies').textContent = data.total || 0;
+                document.getElementById('activeProxies').textContent = data.active || 0;
+                document.getElementById('failedProxies').textContent = data.failed || 0;
+                document.getElementById('avgLatency').textContent = 
+                    data.avg_latency_ms ? `${data.avg_latency_ms}ms` : 'N/A';
+                
+                // Actualizar timestamp
+                document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+                
+                // Cargar lista de proxies
+                await loadProxiesList();
+                
+                log(`✅ Stats actualizadas`, 'success');
+                
+            } catch (error) {
+                log(`❌ Error: ${error.message}`, 'error');
+                document.getElementById('proxiesGrid').innerHTML = 
+                    `<div class="loading">Error al cargar datos: ${error.message}</div>`;
+            }
+        }
+
+        async function loadProxiesList() {
+            try {
+                const response = await fetch('/api/v1/proxies/?limit=100');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                const grid = document.getElementById('proxiesGrid');
+                grid.innerHTML = '';
+                
+                if (data.items && data.items.length > 0) {
+                    data.items.forEach(proxy => {
+                        const card = createProxyCard(proxy);
+                        grid.appendChild(card);
+                    });
+                    
+                    log(`✅ ${data.items.length} proxies cargados`, 'success');
+                } else {
+                    grid.innerHTML = '<div class="loading">No hay proxies disponibles</div>';
+                    log('⚠️ No hay proxies en el sistema', 'warning');
+                }
+                
+            } catch (error) {
+                log(`❌ Error cargando lista: ${error.message}`, 'error');
+            }
+        }
+
+        function createProxyCard(proxy) {
+            const card = document.createElement('div');
+            card.className = `proxy-card ${proxy.status}`;
+            
+            const latencyDisplay = proxy.avg_response_time 
+                ? `${Math.round(proxy.avg_response_time)}ms` 
+                : 'N/A';
+            
+            const location = `${proxy.city || proxy.region || 'Unknown'}, ${proxy.country || 'EC'}`;
+            
+            const statusEmoji = {
+                'active': '✅',
+                'failed': '🔴',
+                'inactive': '⚠️',
+                'checking': '🔄'
+            };
+            
+            card.innerHTML = `
+                <div class="proxy-header">
+                    <div class="proxy-location">
+                        ${statusEmoji[proxy.status] || '❓'} ${location}
+                    </div>
+                    <span class="badge ${proxy.status}">${proxy.status.toUpperCase()}</span>
+                </div>
+                
+                <div class="proxy-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">ID</div>
+                        <div class="stat-value">#${proxy.id}</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Latencia</div>
+                        <div class="stat-value">${latencyDisplay}</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Tipo</div>
+                        <div class="stat-value">${proxy.proxy_type}</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Success Rate</div>
+                        <div class="stat-value">${Math.round(proxy.success_rate || 0)}%</div>
+                    </div>
+                </div>
+                
+                <div class="proxy-actions">
+                    <button class="action-check" onclick="checkProxy(${proxy.id})">
+                        🔍 Verificar y Rotar
+                    </button>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        async function checkProxy(proxyId) {
+            log(`🔍 Verificando proxy ${proxyId}...`, 'info');
+            
+            try {
+                const response = await fetch(`/api/v1/proxy-rotation/${proxyId}/check-and-rotate`, {
+                    method: 'POST'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    log(`⚠️ Proxy ${proxyId}: ${data.error}`, 'warning');
+                    return;
+                }
+                
+                if (data.rotated) {
+                    log(
+                        `✅ Proxy ${proxyId} rotado: ${data.old_location} (${data.old_latency_ms}ms) → ` +
+                        `${data.new_location} (${data.new_latency_ms}ms)`,
+                        'success'
+                    );
+                } else {
+                    log(`✅ Proxy ${proxyId}: ${data.message}`, 'info');
+                }
+                
+                setTimeout(refreshData, 1000);
+                
+            } catch (error) {
+                log(`❌ Error verificando proxy ${proxyId}: ${error.message}`, 'error');
+            }
+        }
+
+        async function rotateAll() {
+            log('🔧 Verificando todos los proxies...', 'warning');
+            
+            try {
+                const response = await fetch('/api/v1/proxy-rotation/check-and-rotate-all', {
+                    method: 'POST'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                log(`✅ ${data.message}`, 'success');
+                
+                setTimeout(refreshData, 3000);
+                
+            } catch (error) {
+                log(`❌ Error: ${error.message}`, 'error');
+            }
+        }
+
+        async function syncAll() {
+            log('🔄 Sincronizando TODOS los proxies a AdsPower centralizado...', 'warning');
+            
+            try {
+                const response = await fetch('/api/v1/proxy-rotation/sync-all', {
+                    method: 'POST'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                log(`✅ Sincronización iniciada: ${data.message}`, 'success');
+                log(`ℹ️ Verifica el estado en 30-60 segundos`, 'info');
+                
+                setTimeout(refreshData, 5000);
+                
+            } catch (error) {
+                log(`❌ Error sincronizando: ${error.message}`, 'error');
+            }
+        }
+
+        // Auto-refresh
+        document.getElementById('autoRefresh').addEventListener('change', (e) => {
+            if (e.target.checked) {
+                autoRefreshInterval = setInterval(refreshData, 30000);
+                document.getElementById('refreshStatus').textContent = '30s';
+                log('⏱️ Auto-refresh activado', 'info');
+            } else {
+                clearInterval(autoRefreshInterval);
+                document.getElementById('refreshStatus').textContent = 'OFF';
+                log('⏸️ Auto-refresh desactivado', 'warning');
+            }
+        });
+
+        // Inicializar
+        refreshData();
+        autoRefreshInterval = setInterval(refreshData, 30000);
+        log('🚀 Dashboard iniciado - AdsPower Centralizado', 'success');
+    </script>
+</body>
+</html>

@@ -39,7 +39,18 @@ class UniversalEventDetector:
         "contraseña incorrecta",
         "credenciales inválidas",
         "usuario o contraseña incorrectos",
-        "authentication failed"
+        "authentication failed",
+        "login failed",
+        "usuario (login) no existe",   
+        "usuario no existe",           
+        "correo no existe",           
+        "email no existe",            
+        "user not found",             
+        "cuenta no encontrada",     
+        "datos incorrectos",          
+        "acceso denegado",            
+        "email o contraseña incorrectos",
+        "usuario o clave incorrectos",
     ]
     
     ALREADY_LOGGED_IN_PATTERNS = [

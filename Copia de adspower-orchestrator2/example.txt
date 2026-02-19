@@ -1,0 +1,156 @@
+Primer se crea una computadora
+
+curl -X POST "http://localhost:8000/api/v1/computers/" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Mac",
+    "hostname": "omar-laptop",
+    "ip_address": "192.168.1.10",
+    "adspower_api_url": "http://192.168.1.10:50325",
+    "adspower_api_key": "0cbbd771ae5f6fad7ff4917bc66c95be",
+    "max_profiles": 20,
+    "cpu_cores": 8,
+    "ram_gb": 16,
+    "os_info": "Mac",
+    "tags": ["produccion", "loja"]
+}'
+
+
+El resultado se guarda el id 
+
+obtener el proxi
+
+bashcurl -X POST "http://localhost:8000/api/v1/proxies/" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "proxy_type": "mobile",
+    "host": "proxy.soax.com",
+    "port": 5000,
+    "country": "ec",
+    "city": "quito",
+    "session_lifetime": 3600,
+    "sticky_session": true,
+    "tags": ["ecuador", "quito", "mobile"]
+  }'
+
+  DEL RESULTADO SE GUARDA EL id
+
+Ahora para crear el perfil en adspower, será necesario incluirlos:
+curl -X POST "http://localhost:8000/api/v1/profiles/" \
+  -H "Content-Type: application/json" \
+  -d '{{
+    "computer_id": 1,
+    "proxy_id": 1,
+    "name": "OmarApi",
+    "age": 28,
+    "gender": "male",
+    "country": "ec",
+    "city": "Quito",
+    "timezone": "America/Guayaquil",
+    "language": "es-EC",
+    "device_type": "mobile",
+    "interests": ["technology", "business", "sports"],
+    "tags": ["api", "production", "quito"],
+    "notes": "Profile creado via API - Mobile Quito"
+
+}
+
+Warming script
+el del ejemplo
+
+
+{
+  "id": 1,
+  "name": "🔍 Google Search Test - Mobile",
+  "description": "Test simple de búsqueda en Google (mobile optimizado)",
+  "category": "search_test",
+  "actions": [
+    {
+      "type": "navigate",
+      "params": {
+        "url": "https://www.google.com"
+      }
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 3
+      }
+    },
+    {
+      "type": "search_google",
+      "params": {
+        "query": "latest technology news"
+      }
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 4
+      }
+    },
+    {
+      "type": "scroll",
+      "params": {
+        "direction": "down",
+        "amount": 300,
+        "smooth": true
+      }
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 2
+      }
+    },
+    {
+      "type": "scroll",
+      "params": {
+        "direction": "down",
+        "amount": 300,
+        "smooth": true
+      }
+    },
+    {
+      "type": "wait",
+      "params": {
+        "duration": 2
+      }
+    }
+  ],
+  "duration_minutes": 5,
+  "randomize_order": false,
+  "repeat_count": 1,
+  "status": "active",
+  "is_template": false,
+  "tags": [],
+  "success_rate": 0,
+  "times_used": 116,
+  "created_at": "2025-12-03T21:48:29.502519Z",
+  "updated_at": "2025-12-08T17:08:23.668018Z"
+}
+
+y finalmente se agrega
+
+
+POST
+/api/v1/warming/execute/batch
+Execute Batch Warming
+
+
+{
+  "script_id": 1,
+  "profile_ids": [1],
+  "max_parallel": 5
+}
+
+Post
+/api/v1/warming/schedule/
+
+{
+  "script_id": 1,                        
+  "profile_ids": [1, 2, 3],              
+  "frequency": "once",                   
+  "scheduled_at": "2025-12-21T23:40:00", 
+  "timezone": "America/Guayaquil"       
+}

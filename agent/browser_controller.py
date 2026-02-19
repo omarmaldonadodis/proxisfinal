@@ -203,8 +203,14 @@ class BrowserController:
             logger.warning(f"Browser not open for profile {profile_id}")
             return False
 
+        driver = None
         try:
             driver = self.active_browsers[profile_id]
+
+            # ✅ CRÍTICO: Eliminar de diccionario ANTES de cerrar
+            del self.active_browsers[profile_id]
+            if profile_id in self.browser_info:
+                del self.browser_info[profile_id]
 
             # Cerrar Selenium
             try:
@@ -229,16 +235,18 @@ class BrowserController:
             except Exception as e:
                 logger.warning(f"Error closing in AdsPower: {e}")
 
-            # Cleanup
-            del self.active_browsers[profile_id]
-            if profile_id in self.browser_info:
-                del self.browser_info[profile_id]
-
             logger.info(f"✓ Browser closed for profile {profile_id}")
             return True
 
         except Exception as e:
             logger.error(f"Error closing browser: {e}")
+            
+            # ✅ GARANTIZAR limpieza incluso si hay error
+            if profile_id in self.active_browsers:
+                del self.active_browsers[profile_id]
+            if profile_id in self.browser_info:
+                del self.browser_info[profile_id]
+            
             return False
 
     async def close_all_browsers(self):

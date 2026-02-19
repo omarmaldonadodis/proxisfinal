@@ -231,6 +231,22 @@ class ProfileService:
             f"AdsPower ID={adspower_id}, "
             f"Device={profile_config['device_name']}"
         )
+
+        import time
+        creation_end = time.time()
+        creation_duration = creation_end - creation_start  # Asumiendo que tienes creation_start
+
+        metrics_service = MetricsService(self.db)
+        await metrics_service.record_profile_creation(
+            profile_id=db_profile.id,
+            proxy_id=profile_in.proxy_id,
+            creation_duration=creation_duration,
+            proxy_latency=proxy_latency,  # Obtener del ping
+            device_info=profile_config,
+            cookies_count=len(profile_config["cookies"]),
+            adspower_response_time=adspower_response_time,  # Medir tiempo de AdsPower
+            success=True
+        )
         
         return db_profile
     
@@ -304,6 +320,7 @@ class ProfileService:
                 f"✗ Error uploading cookies to profile {adspower_id}: {e}"
             )
             return False
+    
 
     async def get_profile(self, profile_id: int) -> Optional[Profile]:
         result = await self.db.execute(

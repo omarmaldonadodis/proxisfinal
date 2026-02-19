@@ -1,0 +1,107 @@
+
+services:
+  # PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: adspower_postgres
+    environment:
+      POSTGRES_USER: adspower
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: adspower_db
+    ports:
+      - "5432:5432"  # Exponer para acceso externo si es necesario
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - adspower_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis
+  redis:
+    image: redis:7-alpine
+    container_name: adspower_redis
+    ports:
+      - "6379:6379"  # Exponer para Celery
+    volumes:
+      - redis_data:/data
+    networks:
+      - adspower_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # API FastAPI
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: adspower_api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - ../.env
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - ../logs:/app/logs  # Logs persistentes
+      - ../backups:/app/backups  # ✅ BACKUPS PERSISTENTES
+      - ../profiles:/app/profiles  # Profiles data
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    networks:
+      - adspower_network
+
+  celery_worker:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: adspower_celery_worker
+    restart: unless-stopped
+    env_file:
+      - ../.env
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - ../logs:/app/logs
+      - ../backups:/app/backups  # ✅ ACCESO A BACKUPS
+      - ../profiles:/app/profiles
+    command: celery -A app.tasks worker --loglevel=info
+    networks:
+      - adspower_network
+
+  celery_beat:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: adspower_celery_beat
+    restart: unless-stopped
+    env_file:
+      - ../.env
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - ../logs:/app/logs
+      - ../backups:/app/backups  # ✅ ACCESO A BACKUPS
+    command: celery -A app.tasks beat --loglevel=info
+    networks:
+      - adspower_network
+
+networks:
+  adspower_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
+  backups_data:

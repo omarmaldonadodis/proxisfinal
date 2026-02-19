@@ -1,0 +1,88 @@
+{
+  "id": 6,
+  "name": "Búsqueda Deportiva + Ecuabet (Mobile Optimizado)",
+  "description": "Script humanizado de búsqueda deportiva usando search_google (estable en mobile) y navegación hacia Ecuabet.",
+  "category": "deportes_apuestas",
+  "actions": [
+
+
+
+    { "type": "navigate", "params": { "url": "https://www.google.com" } },
+    { "type": "wait", "params": { "duration": 3 } },
+
+    {
+      "type": "search_google",
+      "params": {
+        "query": "resultados fútbol ecuatoriano hoy"
+      }
+    },
+    { "type": "wait", "params": { "duration": 4 } },
+
+    { "type": "scroll", "params": { "direction": "down", "amount": 400, "smooth": true } },
+    { "type": "wait", "params": { "duration": 3 } },
+
+    { "type": "scroll", "params": { "direction": "down", "amount": 350, "smooth": true } },
+    { "type": "wait", "params": { "duration": 3 } },
+
+
+    {
+      "type": "search_google",
+      "params": {
+        "query": "liga pro ecuador tabla de posiciones"
+      }
+    },
+    { "type": "wait", "params": { "duration": 4 } },
+
+    { "type": "scroll", "params": { "direction": "down", "amount": 500, "smooth": true } },
+    { "type": "wait", "params": { "duration": 4 } },
+
+    {
+      "type": "search_google",
+      "params": {
+        "query": "apuestas deportivas ecuador"
+      }
+    },
+    { "type": "wait", "params": { "duration": 4 } },
+
+    { "type": "scroll", "params": { "direction": "down", "amount": 450, "smooth": true } },
+    { "type": "wait", "params": { "duration": 4 } },
+
+    { "type": "scroll", "params": { "direction": "up", "amount": 200, "smooth": true } },
+    { "type": "wait", "params": { "duration": 2 } },
+
+    {
+      "type": "navigate",
+      "params": { "url": "https://www.ecuabet.com" }
+    },
+    { "type": "wait", "params": { "duration": 5 } },
+
+    { "type": "scroll", "params": { "direction": "down", "amount": 500, "smooth": true } },
+    { "type": "wait", "params": { "duration": 5 } },
+
+    { "type": "scroll", "params": { "direction": "down", "amount": 600, "smooth": true } },
+    { "type": "wait", "params": { "duration": 4 } },
+
+    { "type": "scroll", "params": { "direction": "down", "amount": 400, "smooth": true } },
+    { "type": "wait", "params": { "duration": 3 } },
+
+    { "type": "scroll", "params": { "direction": "up", "amount": 300, "smooth": true } },
+    { "type": "wait", "params": { "duration": 3 } },
+
+    { "type": "scroll", "params": { "direction": "down", "amount": 250, "smooth": true } },
+    { "type": "wait", "params": { "duration": 4 } }
+
+  ],
+
+  "duration_minutes": 8,
+  "randomize_order": false,
+  "repeat_count": 1,
+  "status": "active",
+  "is_template": false,
+  "tags": [
+    "deportes",
+    "ecuador",
+    "apuestas",
+    "google",
+    "ecuabet"
+  ]
+}

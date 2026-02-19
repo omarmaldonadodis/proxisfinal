@@ -1,0 +1,26 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments
+venv/
+agent/venv/
+
+# Logs
+logs/
+*.log
+agent/logs/
+
+# Screenshots debug
+agent/screenshots/
+
+# Env variables
+.env
+agent/.env
+
+# Cache
+.cache/

@@ -48,24 +48,25 @@ class EventDeduplicator:
     ) -> bool:
         """
         Determina si un evento debe reportarse o es duplicado
-        
-        Returns:
-            True si debe reportarse, False si es duplicado
         """
         
         # 1. SIEMPRE reportar eventos de ciclo de vida
         if event_type in self.always_report:
             return True
         
-        # 2. SIEMPRE reportar eventos CRÍTICOS (aunque sean duplicados)
+        # 2. SIEMPRE reportar eventos CRÍTICOS
         if severity == EventSeverity.CRITICAL:
-            # Pero con límite: máximo 1 por minuto del mismo tipo
             return self._should_report_critical(execution_id, event_type)
         
-        # 3. Construir clave de deduplicación
+        # ✅ 3. SIEMPRE reportar errores de login (SIN deduplicación)
+        if event_type == EventType.LOGIN_FAILED_CREDENTIALS:
+            logger.debug(f"LOGIN ERROR - reporting without deduplication")
+            return True
+        
+        # 4. Construir clave de deduplicación
         event_key = self._build_key(execution_id, event_type, current_url)
         
-        # 4. Verificar si ya fue reportado recientemente
+        # 5. Verificar cache
         if event_key in self._recent_events:
             last_reported = self._recent_events[event_key]
             time_since_last = datetime.utcnow() - last_reported
@@ -77,10 +78,10 @@ class EventDeduplicator:
                 )
                 return False
         
-        # 5. Registrar evento y permitir reporte
+        # 6. Registrar y permitir
         self._recent_events[event_key] = datetime.utcnow()
         
-        # 6. Auto-limpieza periódica
+        # 7. Auto-limpieza
         if len(self._recent_events) > self.max_stored_events:
             self._cleanup_old_events()
         

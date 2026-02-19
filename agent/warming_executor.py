@@ -111,7 +111,6 @@ class WarmingExecutor:
                 try:
                     # ✅ SINCRONIZACIÓN (si es batch)
                     if batch_id:
-                        # No bloqueamos más de 90s
                         try:
                             await asyncio.wait_for(
                                 self._sync_wait_at_barrier(batch_id, i, execution_id),
@@ -120,13 +119,13 @@ class WarmingExecutor:
                         except asyncio.TimeoutError:
                             logger.warning(f"⏱️ Sync timeout action {i}, continuing...")
                     
-                    # ✅ EJECUTAR ACCIÓN (timeout por acción)
+                    # ✅ EJECUTAR ACCIÓN
                     action_timeout = action.get("params", {}).get("timeout", 60)
                     
                     try:
                         success = await asyncio.wait_for(
                             self.action_executor.execute_action(driver, action),
-                            timeout=action_timeout + 10  # +10s de margen
+                            timeout=action_timeout + 10
                         )
                         
                         if success:
@@ -134,12 +133,27 @@ class WarmingExecutor:
                         else:
                             failed += 1
                             
-                            # ✅ DETECTAR EVENTOS SOLO SI FALLA
-                            asyncio.create_task(
-                                self._detect_and_report_events(
+                            # ✅ DETECTAR EVENTOS Y ESPERAR SI ES LOGIN
+                            action_type = action.get("type")
+                            if action_type in ["advanced_login", "login"]:
+                                logger.warning(f"🔴 Login failed - FORCING event detection")
+                                # Esperar 2 segundos para estabilización
+                                await asyncio.sleep(2)
+                                
+                                # ✅ ESPERAR la detección (NO background)
+                                await self._detect_and_report_events(
                                     driver, execution_id, profile_id, i, action, progress_callback
                                 )
-                            )
+                                
+                                # Esperar confirmación de envío
+                                await asyncio.sleep(1)
+                            else:
+                                # Para otros fallos, background está bien
+                                asyncio.create_task(
+                                    self._detect_and_report_events(
+                                        driver, execution_id, profile_id, i, action, progress_callback
+                                    )
+                                )
                     
                     except asyncio.TimeoutError:
                         logger.error(f"⏱️ Action {i} timeout ({action_timeout}s)")
@@ -160,6 +174,7 @@ class WarmingExecutor:
                             }
                         ))
                 
+
                 except Exception as e:
                     logger.error(f"❌ Action {i+1} failed: {e}")
                     failed += 1

@@ -51,7 +51,16 @@ class HumanizedLoginExecutor:
         "contraseña incorrecta", "credenciales inválidas", 
         "usuario o contraseña incorrectos", "invalid login",
         "authentication failed", "login failed",
-        "usuario (login) no existe" 
+        "usuario (login) no existe",  
+        "usuario no existe",          
+        "correo no existe",         
+        "email no existe",           
+        "user not found",           
+        "cuenta no encontrada",      
+        "datos incorrectos",         
+        "acceso denegado",            
+        "email o contraseña incorrectos", 
+        "usuario o clave incorrectos",    
     ]
     
     BLOCKED_INDICATORS = [
@@ -186,25 +195,24 @@ class HumanizedLoginExecutor:
         expected_url: Optional[str]
     ) -> LoginResult:
         """
-        ✅ VALIDACIÓN ESTRICTA DE RESULTADO DE LOGIN
+        ✅ VALIDACIÓN ESTRICTA - ORDEN CORRECTO
         
-        Orden de verificación:
-        1. Errores de credenciales → FAIL
+        1. Errores de credenciales → FAIL (PRIMERO)
         2. Cuenta bloqueada → FAIL
-        3. Modal sigue abierto → FAIL
-        4. URL cambió al dashboard → SUCCESS
-        5. Elementos de sesión presentes → SUCCESS
-        6. Si nada indica éxito → FAIL (por defecto)
+        3. URL cambió → SUCCESS
+        4. Elementos de sesión → SUCCESS
+        5. Modal abierto → FAIL
+        6. Por defecto → FAIL
         """
         
         try:
             current_url = driver.current_url
-            page_text = driver.page_source.lower()
+            page_text = driver.page_source.lower()  # ✅ Cambiar a page_source
             
             logger.info(f"🔍 Validating login result...")
             logger.debug(f"  Current URL: {current_url}")
             
-            # ✅ 1. VERIFICAR ERRORES DE CREDENCIALES (prioridad máxima)
+            # ✅ 1. VERIFICAR ERRORES PRIMERO (máxima prioridad)
             for error_pattern in self.AUTH_ERROR_INDICATORS:
                 if error_pattern in page_text:
                     logger.error(f"❌ Auth error detected: '{error_pattern}'")
@@ -225,46 +233,12 @@ class HumanizedLoginExecutor:
                         blocked=True
                     )
             
-            # ✅ 3. VERIFICAR SI MODAL SIGUE ABIERTO (indica fallo)
-            modal_still_open = driver.execute_script("""
-                const modal = document.querySelector('.modal.show, [role="dialog"]');
-                return modal !== null && window.getComputedStyle(modal).display !== 'none';
-            """)
-            
-            if modal_still_open:
-                logger.warning("⚠️ Login modal still open - likely failed")
-                # Buscar mensaje de error dentro del modal
-                try:
-                    modal_text = driver.execute_script("""
-                        const modal = document.querySelector('.modal.show, [role="dialog"]');
-                        return modal ? modal.textContent.toLowerCase() : '';
-                    """)
-                    
-                    for error_pattern in self.AUTH_ERROR_INDICATORS:
-                        if error_pattern in modal_text:
-                            logger.error(f"❌ Error in modal: '{error_pattern}'")
-                            return LoginResult(
-                                False,
-                                f"Login failed: '{error_pattern}' in modal",
-                                "auth_error"
-                            )
-                except:
-                    pass
-                
-                # Si el modal está abierto pero no vemos error específico
-                logger.error("❌ Modal still open without clear error - assuming failure")
-                return LoginResult(
-                    False,
-                    "Login modal still open - no redirect occurred",
-                    "no_redirect"
-                )
-            
-            # ✅ 4. VERIFICAR CAMBIO DE URL (indica éxito)
+            # ✅ 3. VERIFICAR CAMBIO DE URL (indica éxito)
             if expected_url and expected_url.lower() in current_url:
                 logger.info(f"✅ Login success: URL matches '{expected_url}'")
                 return LoginResult(True, "Login successful (URL redirect)")
             
-            # ✅ 5. VERIFICAR ELEMENTOS DE SESIÓN ACTIVA
+            # ✅ 4. VERIFICAR ELEMENTOS DE SESIÓN ACTIVA
             success_detected = False
             
             for success_pattern in self.SUCCESS_INDICATORS:
@@ -276,7 +250,7 @@ class HumanizedLoginExecutor:
             if success_detected:
                 return LoginResult(True, "Login successful (session indicators)")
             
-            # ✅ 6. VERIFICAR COOKIES DE SESIÓN
+            # ✅ 5. VERIFICAR COOKIES DE SESIÓN
             cookies = driver.get_cookies()
             session_cookies = [
                 c for c in cookies
@@ -287,15 +261,22 @@ class HumanizedLoginExecutor:
                 logger.info(f"✅ Login success: {len(session_cookies)} session cookies found")
                 return LoginResult(True, f"Login successful ({len(session_cookies)} session cookies)")
             
-            # ✅ 7. SI NO DETECTAMOS NADA → ASUMIR FALLO
-            logger.error(
-                "❌ Login validation inconclusive - no clear success indicators\n"
-                f"  URL: {current_url}\n"
-                f"  Expected: {expected_url}\n"
-                f"  Modal open: {modal_still_open}\n"
-                f"  Session cookies: {len(session_cookies)}"
-            )
+            # ✅ 6. VERIFICAR SI MODAL SIGUE ABIERTO
+            modal_still_open = driver.execute_script("""
+                const modal = document.querySelector('.modal.show, [role="dialog"]');
+                return modal !== null && window.getComputedStyle(modal).display !== 'none';
+            """)
             
+            if modal_still_open:
+                logger.error("❌ Modal still open - assuming failure")
+                return LoginResult(
+                    False,
+                    "Login modal still open - no redirect occurred",
+                    "no_redirect"
+                )
+            
+            # ✅ 7. POR DEFECTO → FALLO
+            logger.error("❌ No success indicators found")
             return LoginResult(
                 False,
                 "Login validation failed - no success indicators detected",
@@ -305,16 +286,15 @@ class HumanizedLoginExecutor:
         except Exception as e:
             logger.error(f"Validation error: {e}")
             return LoginResult(False, f"Validation error: {str(e)}", "validation_error")
-    
     async def _detect_angular_modal(self, driver: webdriver.Chrome) -> bool:
         """Detecta si hay un modal Angular activo"""
         try:
             angular_indicators = driver.execute_script("""
-                return document.querySelector('[ng-version]') !== null ||
-                       document.querySelector('[_nghost]') !== null ||
-                       document.querySelector('[_ngcontent]') !== null ||
-                       typeof window.ng !== 'undefined';
-            """)
+                    return document.querySelector('[ng-version]') !== null ||
+                        document.querySelector('[_nghost]') !== null ||
+                        document.querySelector('[_ngcontent]') !== null ||
+                        typeof window.ng !== 'undefined';
+                """)
             return angular_indicators
         except:
             return False

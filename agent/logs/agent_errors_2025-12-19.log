@@ -1,3 +1,0 @@
-2025-12-19 10:06:12 | ERROR    | registration_client:validate_token:122 - Token validation error: 
-2025-12-19 10:06:12 | ERROR    | registration_client:register:64 - Failed to connect to orchestrator: Cannot connect to host 192.168.1.9:8000 ssl:default [Host is down]
-2025-12-19 10:06:12 | ERROR    | __main__:start:140 - Agent error: Cannot connect to orchestrator at http://192.168.1.9:8000
