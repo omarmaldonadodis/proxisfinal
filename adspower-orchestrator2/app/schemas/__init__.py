@@ -1,3 +1,4 @@
+# app/schemas/__init__.py  ← REEMPLAZAR COMPLETO
 from app.schemas.computer import (
     ComputerCreate,
     ComputerUpdate,
@@ -18,39 +19,32 @@ from app.schemas.profile import (
     ProfileListResponse,
     ProfileBulkCreate
 )
-
-from app.schemas.warming_script import (
-    ActionType,
-    WarmingAction, 
-    WarmingScriptCreate,
-    WarmingScriptUpdate,
-    WarmingScriptResponse,
-    WarmingExecutionResponse,  
-    BatchWarmingRequest,
-    BatchWarmingResponse
+from app.schemas.agent import (
+    AgentTokenCreate,
+    AgentTokenResponse,
+    OpenBrowserRequest,
+    SessionResponse,
+    SessionListResponse,
+    SessionCloseRequest,
+    BrowserEventCreate,
+    BrowserEventResponse,
+    AgentRegisterRequest,
+    SessionMetricsUpdate
+)
+from app.schemas.assignment import (
+    ProfileAssignmentCreate,
+    ProfileAssignmentUpdate,
+    ProfileAssignmentResponse,
+    ProfileAssignmentListResponse
 )
 
 __all__ = [
-    "ComputerCreate",
-    "ComputerUpdate",
-    "ComputerResponse",
-    "ComputerListResponse",
-    "ProxyCreate",
-    "ProxyUpdate",
-    "ProxyResponse",
-    "ProxyListResponse",
-    "ProxyTestResponse",
-    "ProfileCreate",
-    "ProfileUpdate",
-    "ProfileResponse",
-    "ProfileListResponse",
-    "ProfileBulkCreate",
-    "ActionType",
-    "WarmingAction",  
-    "WarmingScriptCreate",
-    "WarmingScriptUpdate",
-    "WarmingScriptResponse",
-    "WarmingExecutionResponse", 
-    "BatchWarmingRequest",
-    "BatchWarmingResponse",
+    "ComputerCreate", "ComputerUpdate", "ComputerResponse", "ComputerListResponse",
+    "ProxyCreate", "ProxyUpdate", "ProxyResponse", "ProxyListResponse", "ProxyTestResponse",
+    "ProfileCreate", "ProfileUpdate", "ProfileResponse", "ProfileListResponse", "ProfileBulkCreate",
+    "AgentTokenCreate", "AgentTokenResponse", "OpenBrowserRequest",
+    "SessionResponse", "SessionListResponse", "SessionCloseRequest",
+    "BrowserEventCreate", "BrowserEventResponse", "AgentRegisterRequest", "SessionMetricsUpdate",
+    "ProfileAssignmentCreate", "ProfileAssignmentUpdate",
+    "ProfileAssignmentResponse", "ProfileAssignmentListResponse",
 ]

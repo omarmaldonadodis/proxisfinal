@@ -69,8 +69,10 @@ class Proxy(Base):
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
     
     # Relationships
+ # Relationships
     profiles = relationship("Profile", back_populates="proxy")
-
+    health_checks = relationship("ProxyHealthCheck", back_populates="proxy", cascade="all, delete-orphan")  # ← AGREGAR
+    score = relationship("ProxyScore", back_populates="proxy", uselist=False, cascade="all, delete-orphan")  # ← AGREGAR
 
     def __repr__(self):
         return f"<Proxy(type={self.proxy_type}, country={self.country}, status={self.status})>"

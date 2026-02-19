@@ -13,41 +13,34 @@ from app.integrations.adspower_client import AdsPowerClient
 from app.utils.profile_generator import ProfileGenerator
 from loguru import logger
 
+import time
+from app.services.metrics_service import MetricsService
+
 
 class ProfileService:
     def __init__(self, db: AsyncSession):
         self.db = db
 
     async def create_profile(self, profile_in: ProfileCreate) -> Profile:
-        """
-        Create profile with HYPER-REALISTIC fingerprinting + COOKIES
-        """
-        
-        # ========================================
-        # 1. VALIDACIONES INICIALES
-        # ========================================
-        
+        creation_start = time.time()  # ← FIX: definir aquí
+
         result = await self.db.execute(
             select(Computer).where(Computer.id == profile_in.computer_id)
         )
         computer = result.scalar_one_or_none()
         if not computer:
             raise ValueError(f"Computer {profile_in.computer_id} not found")
-        
+
         if not profile_in.proxy_id:
             raise ValueError("proxy_id is required")
-        
+
         result = await self.db.execute(
             select(Proxy).where(Proxy.id == profile_in.proxy_id)
         )
         proxy = result.scalar_one_or_none()
         if not proxy:
             raise ValueError(f"Proxy {profile_in.proxy_id} not found")
-        
-        # ========================================
-        # 2. GENERAR FINGERPRINT ULTRA-REALISTA
-        # ========================================
-        
+
         profile_config = ProfileGenerator.generate_profile(
             name=profile_in.name,
             age=profile_in.age,
@@ -58,19 +51,9 @@ class ProfileService:
             include_cookies=True,
             include_localstorage=True
         )
-        
-        logger.info(
-            f"Generated profile config: {profile_config['name']}, "
-            f"Device: {profile_config['device_name']}, "
-            f"Cookies: {len(profile_config['cookies'])}"
-        )
-        
-        # ========================================
-        # 3. CONFIGURAR FINGERPRINT PARA ADSPOWER
-        # ========================================
-        
+
         screen_res = profile_config["screen_resolution"].replace("x", "_")
-        
+
         fingerprint_config = {
             "automatic_timezone": "0",
             "timezone": profile_config["timezone"],
@@ -93,98 +76,50 @@ class ProfileService:
             "client_rects": "1",
             "speech_voices": "1",
         }
-        
-        # ========================================
-        # 4. PREPARAR DATOS PARA ADSPOWER API
-        # ========================================
-        
+
         adspower_data = {
             "name": profile_in.name,
-            "group_id": getattr(profile_in, 'group_id', "0"),
+            "group_id": "0",
             "fingerprint_config": fingerprint_config,
             "remark": profile_config["remark"],
+            "user_proxy_config": {
+                "proxy_soft": "other",
+                "proxy_type": "http",
+                "proxy_host": proxy.host,
+                "proxy_port": proxy.port,
+                "proxy_user": proxy.username or "",
+                "proxy_password": proxy.password or ""
+            }
         }
-        
-        if profile_in.tags and len(profile_in.tags) > 0:
-            adspower_data["remark"] += " | Tags: " + ", ".join(profile_in.tags)
-        
-        # ========================================
-        # 5. CONFIGURAR PROXY (SOAX)
-        # ========================================
-        
-        proxy_type_map = {
-            "http": "http",
-            "https": "https",
-            "socks5": "socks5",
-            "mobile": "http",
-            "residential": "http",
-            "datacenter": "http"
-        }
-        
-        adspower_data["user_proxy_config"] = {
-            "proxy_soft": "other",
-            "proxy_type": proxy_type_map.get(proxy.proxy_type, "http"),
-            "proxy_host": proxy.host,
-            "proxy_port": proxy.port,
-            "proxy_user": proxy.username or "",
-            "proxy_password": proxy.password or ""
-        }
-        
-        # ========================================
-        # 6. CREAR PROFILE EN ADSPOWER (SIN COOKIES)
-        # ========================================
-        
+
         adspower_client = AdsPowerClient(
-            api_url=computer.adspower_api_url,
-            api_key=computer.adspower_api_key
+            api_url=settings.ADSPOWER_DEFAULT_API_URL,   # ← siempre la cuenta central
+            api_key=settings.ADSPOWER_DEFAULT_API_KEY
         )
-        
+
+        adspower_start = time.time()  # ← FIX: medir tiempo de AdsPower
         adspower_response = await adspower_client.create_profile(adspower_data)
-        
-        # Validar respuesta
+        adspower_response_time = (time.time() - adspower_start) * 1000  # ms
+
         if not isinstance(adspower_response, dict):
-            raise RuntimeError(f"Unexpected AdsPower response type: {type(adspower_response)}")
-        
+            raise RuntimeError(f"Unexpected AdsPower response: {type(adspower_response)}")
+
         if adspower_response.get("code") != 0:
-            error_msg = adspower_response.get("msg", "Unknown error")
-            raise RuntimeError(f"Failed to create profile in AdsPower: {error_msg}")
-        
+            raise RuntimeError(f"AdsPower error: {adspower_response.get('msg')}")
+
         data = adspower_response.get("data")
         if not data or "id" not in data:
             raise RuntimeError(f"Invalid AdsPower response: {adspower_response}")
-        
+
         adspower_id = data["id"]
-        
-        logger.info(f"✓ Profile created in AdsPower: {adspower_id}")
-        
-        # ========================================
-        # 7. ✅ SUBIR COOKIES AL PROFILE (NUEVO)
-        # ========================================
-        
+
+        # Subir cookies
         if profile_config["cookies"]:
             try:
-                cookies_uploaded = await self._upload_cookies_to_profile(
-                    adspower_client=adspower_client,
-                    adspower_id=adspower_id,
-                    cookies=profile_config["cookies"]
-                )
-                
-                if cookies_uploaded:
-                    logger.info(
-                        f"✓ {len(profile_config['cookies'])} cookies uploaded to profile {adspower_id}"
-                    )
-                else:
-                    logger.warning(
-                        f"⚠️ Failed to upload cookies to profile {adspower_id}"
-                    )
+                await self._upload_cookies_to_profile(adspower_client, adspower_id, profile_config["cookies"])
             except Exception as e:
                 logger.error(f"Error uploading cookies: {e}")
-                # No fallar la creación del perfil por error en cookies
-        
-        # ========================================
-        # 8. GUARDAR EN BASE DE DATOS
-        # ========================================
-        
+
         db_profile = Profile(
             computer_id=profile_in.computer_id,
             proxy_id=profile_in.proxy_id,
@@ -214,40 +149,37 @@ class ProfileService:
                 "os": profile_config["os"],
                 "os_version": profile_config["os_version"],
                 "cookies_count": len(profile_config["cookies"]),
-                "localstorage_keys": len(profile_config["localstorage"]),
                 "remark": profile_config["remark"]
             },
             notes=profile_in.notes,
             status="ready",
             is_warmed=False
         )
-        
+
         self.db.add(db_profile)
         await self.db.commit()
         await self.db.refresh(db_profile)
-        
-        logger.info(
-            f"✓ Profile saved in DB: ID={db_profile.id}, "
-            f"AdsPower ID={adspower_id}, "
-            f"Device={profile_config['device_name']}"
-        )
 
-        import time
-        creation_end = time.time()
-        creation_duration = creation_end - creation_start  # Asumiendo que tienes creation_start
+        # Métricas
+        creation_duration = time.time() - creation_start
+        proxy_latency = proxy.avg_response_time or 0.0  # ← FIX: usar el avg guardado
 
-        metrics_service = MetricsService(self.db)
-        await metrics_service.record_profile_creation(
-            profile_id=db_profile.id,
-            proxy_id=profile_in.proxy_id,
-            creation_duration=creation_duration,
-            proxy_latency=proxy_latency,  # Obtener del ping
-            device_info=profile_config,
-            cookies_count=len(profile_config["cookies"]),
-            adspower_response_time=adspower_response_time,  # Medir tiempo de AdsPower
-            success=True
-        )
-        
+        try:
+            metrics_service = MetricsService(self.db)
+            await metrics_service.record_profile_creation(
+                profile_id=db_profile.id,
+                proxy_id=profile_in.proxy_id,
+                creation_duration=creation_duration,
+                proxy_latency=proxy_latency,
+                device_info=profile_config,
+                cookies_count=len(profile_config["cookies"]),
+                adspower_response_time=adspower_response_time,
+                success=True
+            )
+        except Exception as e:
+            logger.warning(f"Error recording metrics (non-critical): {e}")
+
+        logger.info(f"✅ Profile created: {db_profile.id} / AdsPower: {adspower_id}")
         return db_profile
     
     async def _upload_cookies_to_profile(
