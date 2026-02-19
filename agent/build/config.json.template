@@ -1,0 +1,11 @@
+// agent/build/config.json.template
+{
+  "server_url": "",
+  "server_token": "",
+  "adspower_url": "http://local.adspower.net:50325",
+  "computer_id": null,
+  "computer_token": null,
+  "agent_name": "",
+  "metrics_interval_seconds": 10,
+  "auto_start": true
+}

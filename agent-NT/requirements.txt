@@ -1,0 +1,27 @@
+# agent/requirements.txt
+# WebSocket
+websockets==12.0
+aiohttp==3.9.1
+
+# Configuración
+pydantic==2.5.0
+pydantic-settings==2.1.0
+python-dotenv==1.0.0
+
+# Selenium
+selenium==4.15.2
+webdriver-manager==4.0.1
+
+# HTTP client
+requests==2.31.0
+httpx==0.25.2
+
+# Logging
+loguru==0.7.2
+
+# Sistema
+psutil==5.9.6
+
+# Utilidades
+python-dateutil==2.8.2
+

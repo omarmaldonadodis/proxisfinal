@@ -1,192 +1,247 @@
 # agent/main.py
+"""
+Entry point del agente AdsPower.
+Orquesta todos los módulos y mantiene el ciclo de vida.
+"""
 import asyncio
 import sys
-import os
+import platform
 import signal
 from loguru import logger
-from datetime import datetime
+from pathlib import Path
 
-# Importar componentes del agente
-from config import AgentConfig
-from websocket_client import WebSocketClient
-from browser_controller import BrowserController
-from warming_executor import WarmingExecutor
-from auto_config import AutoConfig
+# Setup logging
+from agent.config import AgentConfig, get_config_path
+
+log_dir = get_config_path().parent / "logs"
+log_dir.mkdir(exist_ok=True)
+logger.add(
+    str(log_dir / "agent_{time:YYYY-MM-DD}.log"),
+    rotation="1 day",
+    retention="7 days",
+    level="INFO"
+)
+
 
 class AdsPowerAgent:
-    """Agente AdsPower para ejecución distribuida"""
-    
-    def __init__(self):
-        # Cargar configuración
-        self.config = AgentConfig()
 
-        hw = AutoConfig.get_hardware_info(self.config)
-        self.config.ADSPOWER_API_URL = hw["adspower_api_url"]
-        
-        # Setup logging
-        self._setup_logging()
-        
-        # Inicializar componentes
-        self.browser_controller = BrowserController(self.config)
-        self.warming_executor = WarmingExecutor(
-            self.config,
-            self.browser_controller
-        )
-        self.websocket_client = WebSocketClient(
-            self.config,
-            self.warming_executor
-        )
-        
-        # Estado
-        self.running = False
-        self.start_time = None
-        
-    def _setup_logging(self):
-        """Configura logging"""
-        # Crear directorio de logs
-        os.makedirs(self.config.LOG_PATH, exist_ok=True)
-        
-        # Remover handlers por defecto
-        logger.remove()
-        
-        # Console handler
-        logger.add(
-            sys.stdout,
-            format="<green>{time:HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan> - <level>{message}</level>",
-            level=self.config.LOG_LEVEL,
-            colorize=True
-        )
-        
-        # File handler
-        logger.add(
-            os.path.join(self.config.LOG_PATH, "agent_{time:YYYY-MM-DD}.log"),
-            rotation="1 day",
-            retention="30 days",
-            level="DEBUG",
-            format="{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {name}:{function}:{line} - {message}"
-        )
-        
-        # Error file handler
-        logger.add(
-            os.path.join(self.config.LOG_PATH, "agent_errors_{time:YYYY-MM-DD}.log"),
-            rotation="1 day",
-            retention="90 days",
-            level="ERROR",
-            format="{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {name}:{function}:{line} - {message}"
-        )
+    def __init__(self):
+        self.config = AgentConfig.load()
+        self.is_running = False
+        self.is_connected = False
+
+        # Módulos
+        from agent.adspower_monitor import AdsPowerMonitor
+        from agent.network_monitor import NetworkMonitor
+        from agent.server_client import ServerClient
+        from agent.browser_launcher import BrowserLauncher
+        from agent.tray_icon import TrayIcon
+
+        self.adspower = AdsPowerMonitor(self.config.adspower_url)
+        self.network = NetworkMonitor()
+        self.server = ServerClient(self.config)
+        self.launcher = BrowserLauncher(self.adspower, api_key=self.config.adspower_api_key)
+        self.tray = TrayIcon(self)
+
+        # Conectar callbacks del servidor
+        self.server.on_open_browser = self._on_open_browser_command
+        self.server.on_close_browser = self._on_close_browser_command
 
     async def start(self):
-        '''Inicia el agente'''
-        self.running = True
-        self.start_time = datetime.utcnow()
-        
-        logger.info("=" * 60)
-        logger.info(f"🤖 AdsPower Agent Starting")
-        logger.info(f"Computer Name: {self.config.COMPUTER_NAME}")
-        logger.info(f"Orchestrator: {self.config.ORCHESTRATOR_URL}")
-        logger.info("=" * 60)
-        
+        """Inicia el agente"""
+        logger.info("=" * 50)
+        logger.info(f"AdsPower Agent iniciando")
+        logger.info(f"Servidor: {self.config.server_url}")
+        logger.info(f"Agente: {self.config.agent_name}")
+        logger.info("=" * 50)
+
+        self.is_running = True
+
+        # 1. Registrar computadora en servidor
+        registered = await self.server.register()
+        if not registered:
+            logger.error("❌ No se pudo registrar en el servidor. Verifica la URL y el token.")
+            # Seguir corriendo de todas formas para no dejar al usuario sin tray icon
+        else:
+            self.is_connected = True
+            self.tray.update_status(True)
+
+        # 2. Iniciar tareas concurrentes
+        tasks = [
+            asyncio.create_task(self.server.connect_websocket()),
+            asyncio.create_task(self._metrics_loop()),
+            asyncio.create_task(self._heartbeat_loop()),
+        ]
+
+        # 3. Iniciar tray icon (en thread separado, no bloquea el event loop)
+        self.tray.start()
+
+        logger.info("✅ Agente iniciado correctamente")
+
+        # Esperar hasta que se llame stop()
         try:
-            # ✅ 1. REGISTRO AUTOMÁTICO
-            from registration_client import RegistrationClient
-            
-            registration_client = RegistrationClient(
-                self.config.ORCHESTRATOR_URL,
-                self.config
-            )
-            
-            # Intentar usar token guardado
-            saved_token = registration_client.load_token()
-            saved_registration = registration_client.load_registration()
-            
-            if saved_token and saved_registration:
-                logger.info("🔑 Found saved token, validating...")
-                validation = await registration_client.validate_token(saved_token)
-                
-                if validation.get("valid"):
-                    logger.info("✅ Token valid, using existing registration")
-                    self.config.set_computer_id(validation["computer_id"])
-                else:
-                    logger.warning("❌ Saved token invalid, re-registering...")
-                    saved_token = None
-            
-            if not saved_token:
-                logger.info("📝 Registering with orchestrator...")
-                result = await registration_client.register()
-                self.config.set_computer_id(result["computer_id"])
-            
-            # ✅ 2. VERIFICAR QUE TENEMOS COMPUTER_ID
-            if not self.config.COMPUTER_ID:
-                raise Exception("Failed to obtain Computer ID from orchestrator")
-            
-            logger.info(f"✅ Computer ID: {self.config.COMPUTER_ID}")
-            
-            # ✅ 3. CONECTAR AL WEBSOCKET
-            logger.info("Connecting to orchestrator via WebSocket...")
-            await self.websocket_client.connect()
-            
-            logger.info("✅ Agent started successfully!")
-            logger.info("Waiting for commands from orchestrator...")
-            
-            # Mantener agente corriendo
-            while self.running:
-                await asyncio.sleep(1)
-        
-        except KeyboardInterrupt:
-            logger.info("Received shutdown signal...")
-            await self.stop()
-        
-        except Exception as e:
-            logger.error(f"Agent error: {e}")
-            import traceback
-            traceback.print_exc()
-            await self.stop() 
-    
-    async def stop(self):
-        """Detiene el agente"""
-        if not self.running:
-            return
-        
-        logger.info("Stopping agent...")
-        self.running = False
-        
-        # Cerrar navegadores
-        await self.browser_controller.close_all_browsers()
-        
-        # Desconectar WebSocket
-        await self.websocket_client.disconnect()
-        
-        # Calcular uptime
-        if self.start_time:
-            uptime = datetime.utcnow() - self.start_time
-            logger.info(f"Agent uptime: {uptime}")
-        
-        logger.info("✅ Agent stopped")
-    
-    def handle_signal(self, signum, frame):
-        """Maneja señales del sistema"""
-        logger.info(f"Received signal {signum}")
-        asyncio.create_task(self.stop())
+            await asyncio.gather(*tasks)
+        except asyncio.CancelledError:
+            pass
+
+    def stop(self):
+        """Detiene el agente limpiamente"""
+        logger.info("Deteniendo agente...")
+        self.is_running = False
+        self.adspower.cleanup()
+
+    # ========================================
+    # LOOPS DE MONITOREO
+    # ========================================
+
+    async def _metrics_loop(self):
+        """Cada N segundos envía métricas al servidor"""
+        while self.is_running:
+            try:
+                metrics = self._collect_metrics()
+                await self.server.send_metrics(metrics)
+
+                # También actualizar métricas de sesiones activas
+                for session_id, session in list(self.launcher.active_sessions.items()):
+                    net_stats = self.network.get_stats()
+                    adspower_stats = self.adspower.get_process_stats()
+
+                    await self.server.update_metrics(
+                        session_id=session_id,
+                        data_sent_mb=net_stats["session_sent_mb"],
+                        data_received_mb=net_stats["session_received_mb"],
+                        pages_visited=session.pages_visited,
+                        current_url=session.current_url,
+                        browser_health=self.adspower.get_browser_health(session.profile_id),
+                        cpu_percent=adspower_stats["cpu_percent"],
+                        ram_mb=adspower_stats["ram_mb"]
+                    )
+
+            except Exception as e:
+                logger.debug(f"Error en metrics loop: {e}")
+
+            await asyncio.sleep(self.config.metrics_interval_seconds)
+
+    async def _heartbeat_loop(self):
+        """Ping al servidor cada 30 segundos para mantener conexión"""
+        while self.is_running:
+            await asyncio.sleep(30)
+            if self.server.ws and self.server.is_connected:
+                try:
+                    import json
+                    await self.server.ws.send(json.dumps({"type": "heartbeat"}))
+                except Exception:
+                    pass
+
+    def _collect_metrics(self) -> dict:
+        """Recolecta todas las métricas locales"""
+        adspower_stats = self.adspower.get_process_stats()
+        net_stats = self.network.get_stats()
+        sys_stats = self.network.get_system_stats()
+        active_browsers = self.adspower.get_active_browsers()
+
+        return {
+            "computer_id": self.config.computer_id,
+            "adspower_running": adspower_stats["is_running"],
+            "adspower_cpu_percent": adspower_stats["cpu_percent"],
+            "adspower_ram_mb": adspower_stats["ram_mb"],
+            "active_browsers_count": len(active_browsers),
+            "active_sessions": list(self.launcher.active_sessions.keys()),
+            "network": net_stats,
+            "system": sys_stats
+        }
+
+    # ========================================
+    # COMANDOS DEL SERVIDOR
+    # ========================================
+
+    async def _on_open_browser_command(
+        self,
+        session_id: int,
+        profile_id: str,
+        target_url: str
+    ):
+        """El servidor ordena abrir un navegador"""
+        logger.info(f"📥 Comando open_browser: sesión={session_id}, perfil={profile_id}")
+
+        # Resetear contador de red para esta sesión
+        self.network.reset_session()
+
+        # Abrir navegador
+        result = await self.launcher.launch(
+            session_id=session_id,
+            profile_id=profile_id,
+            target_url=target_url,
+            on_navigation=self._on_navigation,
+            on_close=self._on_browser_close,
+            on_error=self._on_browser_error
+        )
+
+        if result.get("success"):
+            # Confirmar al servidor
+            await self.server.mark_session_active(session_id)
+            logger.info(f"✅ Navegador activo confirmado: sesión={session_id}")
+        else:
+            logger.error(f"❌ Error abriendo navegador: {result.get('error')}")
+
+    async def _on_close_browser_command(self, session_id: int):
+        """El servidor ordena cerrar un navegador"""
+        logger.info(f"📥 Comando close_browser: sesión={session_id}")
+        await self.launcher.close_browser(session_id)
+
+    async def _on_navigation(self, session_id: int, url: str, title: str):
+        """El navegador navegó a una nueva URL"""
+        logger.debug(f"🌐 Navegación: sesión={session_id} → {url}")
+        await self.server.report_navigation(session_id, url, title)
+
+    async def _on_browser_close(self, session_id: int, final_metrics: dict):
+        """El navegador fue cerrado"""
+        logger.info(f"🔴 Sesión cerrada: {session_id}")
+        net_stats = self.network.get_stats()
+
+        await self.server.close_session(
+            session_id=session_id,
+            data_sent_mb=net_stats["session_sent_mb"],
+            data_received_mb=net_stats["session_received_mb"],
+            pages_visited=final_metrics.get("pages_visited", 0)
+        )
+
+    async def _on_browser_error(self, session_id: int, error: str):
+        """Error abriendo el navegador"""
+        logger.error(f"❌ Error en sesión {session_id}: {error}")
+        await self.server.close_session(
+            session_id=session_id,
+            data_sent_mb=0,
+            data_received_mb=0,
+            pages_visited=0,
+            crash_reason=error
+        )
 
 
-async def main():
-    """Función principal"""
+# ========================================
+# ENTRY POINT
+# ========================================
+
+def main():
+    config = AgentConfig.load()
+
+    if not config.is_configured():
+        logger.info("Primera ejecución - configuración inicial")
+        from agent.first_run import FirstRunSetup
+        setup = FirstRunSetup()
+        if not setup.run():
+            logger.error("Configuración cancelada")
+            sys.exit(1)
+        config = AgentConfig.load()
+
     agent = AdsPowerAgent()
-    
-    # Registrar manejadores de señales
-    signal.signal(signal.SIGINT, agent.handle_signal)
-    signal.signal(signal.SIGTERM, agent.handle_signal)
-    
-    # Iniciar agente
-    await agent.start()
 
+    if platform.system() != "Windows":
+        loop = asyncio.get_event_loop()
+        for sig in (signal.SIGTERM, signal.SIGINT):
+            loop.add_signal_handler(sig, agent.stop)
+
+    asyncio.run(agent.start())
 
 if __name__ == "__main__":
-    # Ejecutar agente
-    try:
-        asyncio.run(main())
-    except KeyboardInterrupt:
-        print("\nShutdown complete")
-    except Exception as e:
-        logger.error(f"Fatal error: {e}")
-        sys.exit(1)
+    main()
