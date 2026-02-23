@@ -30,6 +30,9 @@ class AdsPowerAgent:
         self.is_running = False
         self.is_connected = False
 
+        logger.info(f"DEBUG config.adspower_api_key = '{self.config.adspower_api_key}'")
+
+
         # Módulos
         from agent.adspower_monitor import AdsPowerMonitor
         from agent.network_monitor import NetworkMonitor
@@ -37,11 +40,22 @@ class AdsPowerAgent:
         from agent.browser_launcher import BrowserLauncher
         from agent.tray_icon import TrayIcon
 
-        self.adspower = AdsPowerMonitor(self.config.adspower_url)
+        # ✅ FIX: pasar api_key al monitor
+        self.adspower = AdsPowerMonitor(
+            self.config.adspower_url,
+            api_key=self.config.adspower_api_key
+        )
         self.network = NetworkMonitor()
         self.server = ServerClient(self.config)
-        self.launcher = BrowserLauncher(self.adspower, api_key=self.config.adspower_api_key)
+        # BrowserLauncher usa el mismo monitor que ya tiene el api_key
+        self.launcher = BrowserLauncher(self.adspower)
         self.tray = TrayIcon(self)
+
+        # Log para confirmar que la key cargó
+        if self.config.adspower_api_key:
+            logger.info(f"✅ AdsPower API Key cargada: {self.config.adspower_api_key[:8]}...")
+        else:
+            logger.warning("⚠️  AdsPower API Key NO configurada en config.json")
 
         # Conectar callbacks del servidor
         self.server.on_open_browser = self._on_open_browser_command
@@ -53,6 +67,7 @@ class AdsPowerAgent:
         logger.info(f"AdsPower Agent iniciando")
         logger.info(f"Servidor: {self.config.server_url}")
         logger.info(f"Agente: {self.config.agent_name}")
+        logger.info(f"AdsPower URL: {self.config.adspower_url}")
         logger.info("=" * 50)
 
         self.is_running = True
@@ -61,7 +76,6 @@ class AdsPowerAgent:
         registered = await self.server.register()
         if not registered:
             logger.error("❌ No se pudo registrar en el servidor. Verifica la URL y el token.")
-            # Seguir corriendo de todas formas para no dejar al usuario sin tray icon
         else:
             self.is_connected = True
             self.tray.update_status(True)
@@ -78,7 +92,6 @@ class AdsPowerAgent:
 
         logger.info("✅ Agente iniciado correctamente")
 
-        # Esperar hasta que se llame stop()
         try:
             await asyncio.gather(*tasks)
         except asyncio.CancelledError:
@@ -101,7 +114,6 @@ class AdsPowerAgent:
                 metrics = self._collect_metrics()
                 await self.server.send_metrics(metrics)
 
-                # También actualizar métricas de sesiones activas
                 for session_id, session in list(self.launcher.active_sessions.items()):
                     net_stats = self.network.get_stats()
                     adspower_stats = self.adspower.get_process_stats()
@@ -164,10 +176,8 @@ class AdsPowerAgent:
         """El servidor ordena abrir un navegador"""
         logger.info(f"📥 Comando open_browser: sesión={session_id}, perfil={profile_id}")
 
-        # Resetear contador de red para esta sesión
         self.network.reset_session()
 
-        # Abrir navegador
         result = await self.launcher.launch(
             session_id=session_id,
             profile_id=profile_id,
@@ -178,7 +188,6 @@ class AdsPowerAgent:
         )
 
         if result.get("success"):
-            # Confirmar al servidor
             await self.server.mark_session_active(session_id)
             logger.info(f"✅ Navegador activo confirmado: sesión={session_id}")
         else:

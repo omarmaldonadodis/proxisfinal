@@ -1,26 +1,34 @@
 # agent/adspower_monitor.py
 """
 Monitorea AdsPower via su API local (http://local.adspower.net:50325)
-y via psutil para CPU/RAM del proceso
+y via psutil para CPU/RAM del proceso.
+
+NOTA SOBRE AUTENTICACIÓN:
+AdsPower local API usa Authorization: Bearer <api_key> en el header.
+NO como query parameter.
 """
 import httpx
 import psutil
-import platform
 from typing import List, Dict, Optional
 from loguru import logger
 
 
 class AdsPowerMonitor:
 
-    def __init__(self, adspower_url: str = "http://local.adspower.net:50325", api_key: Optional[str] = None):
-        self.adspower_url = adspower_url
-        self.api_key = api_key
-        # ← CAMBIO: Authorization Bearer en vez de api-key
-        self._headers = {"Authorization": f"Bearer {api_key}"} if api_key else {}
-        self._client = httpx.Client(timeout=5.0, headers=self._headers)
+    def __init__(
+        self,
+        adspower_url: str = "http://local.adspower.net:50325",
+        api_key: Optional[str] = None
+    ):
+        self.adspower_url = adspower_url.rstrip("/")
+        self.api_key = api_key or ""
+        self._client = httpx.Client(
+            timeout=5.0,
+            headers={"Authorization": f"Bearer {self.api_key}"} if self.api_key else {}
+        )
 
     def is_adspower_running(self) -> bool:
-        """Verifica si AdsPower está corriendo"""
+        """Verifica si AdsPower está corriendo como proceso"""
         for proc in psutil.process_iter(["name"]):
             try:
                 if "adspower" in proc.info["name"].lower():
@@ -32,16 +40,16 @@ class AdsPowerMonitor:
     def ping_api(self) -> bool:
         """Verifica si la API local de AdsPower responde"""
         try:
-            response = self._client.get(f"{self.adspower_url}/api/v1/browser/active-list")
-            return response.status_code == 200
+            response = self._client.get(
+                f"{self.adspower_url}/api/v1/browser/active",
+                params={"user_id": "ping_test"}
+            )
+            return response.status_code in (200, 400)
         except Exception:
             return False
 
     def get_active_browsers(self) -> List[Dict]:
-        """
-        Lista navegadores activos via AdsPower API local.
-        Retorna lista de perfiles con su estado.
-        """
+        """Lista navegadores activos via AdsPower API local."""
         try:
             response = self._client.get(
                 f"{self.adspower_url}/api/v1/browser/active-list",
@@ -80,20 +88,31 @@ class AdsPowerMonitor:
         except Exception:
             return {"is_running": False, "error": "API no disponible"}
 
-    def open_browser(self, profile_id: str, url: Optional[str] = None, api_key: Optional[str] = None) -> Dict:
+    def open_browser(
+        self,
+        profile_id: str,
+        url: Optional[str] = None,
+        api_key: Optional[str] = None
+    ) -> Dict:
+        """Abre un perfil en AdsPower via Authorization: Bearer header."""
         try:
             params = {
                 "user_id": profile_id,
                 "open_tabs": 1,
                 "ip_tab": 0,
             }
-            if url:
-                params["launch_args"] = f'["--new-tab={url}"]'
 
-            # self._client ya tiene el header Authorization: Bearer
+            # AdsPower acepta open_urls para abrir una URL al inicio
+            if url:
+                params["open_urls"] = url
+
+            logger.debug(f"AdsPower open_browser: user_id={profile_id}, url={url}")
+
+            # Timeout extendido: AdsPower puede tardar 15-30s en lanzar el navegador
             response = self._client.get(
                 f"{self.adspower_url}/api/v1/browser/start",
-                params=params
+                params=params,
+                timeout=30.0
             )
             data = response.json()
 
@@ -107,9 +126,12 @@ class AdsPowerMonitor:
                     "webdriver": browser_data.get("webdriver")
                 }
             else:
-                return {"success": False, "error": data.get("msg", "Error desconocido")}
+                error_msg = data.get("msg", "Error desconocido")
+                logger.error(f"AdsPower open_browser error: code={data.get('code')}, msg={error_msg}")
+                return {"success": False, "error": error_msg}
 
         except Exception as e:
+            logger.error(f"Excepción en open_browser: {e}")
             return {"success": False, "error": str(e)}
 
     def close_browser(self, profile_id: str) -> bool:
@@ -147,15 +169,11 @@ class AdsPowerMonitor:
         }
 
     def get_browser_health(self, profile_id: str) -> str:
-        """
-        Determina salud del navegador:
-        healthy / slow / crashed / unknown
-        """
+        """healthy / slow / crashed"""
         import time
-
         start = time.time()
         status = self.get_browser_status(profile_id)
-        response_time = (time.time() - start) * 1000  # ms
+        response_time = (time.time() - start) * 1000
 
         if not status.get("is_running"):
             return "crashed"

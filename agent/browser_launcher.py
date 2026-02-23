@@ -127,6 +127,15 @@ class BrowserLauncher:
             service = Service(executable_path=webdriver_path)
             session.driver = wd.Chrome(service=service, options=options)
 
+            # ✅ Navegar a la URL objetivo
+            if session.target_url and session.target_url != "about:blank":
+                try:
+                    session.driver.get(session.target_url)
+                    logger.info(f"✅ Navegando a: {session.target_url}")
+                except Exception as nav_e:
+                    logger.warning(f"⚠️ Error navegando a URL: {nav_e}")
+
+            logger.info(f"✅ Selenium conectado: {debug_address}")
             logger.info(f"✅ Selenium conectado: {debug_address}")
 
         except Exception as e:
