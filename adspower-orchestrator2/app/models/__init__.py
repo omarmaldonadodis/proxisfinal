@@ -8,6 +8,8 @@ from app.models.proxy_health import ProxyHealthCheck, ProxyScore
 from app.models.profile_metrics import ProfileMetrics, ProxyUsageStats
 from app.models.profile_assignment import AgentToken, ProfileAssignment
 from app.models.agent_session import AgentSession, BrowserEvent, SessionStatus, BrowserEventType
+from app.models.alert import Alert, AlertSeverity, AlertStatus
+from app.models.proxy_rotation_log import ProxyRotationLog, RotationTrigger
 
 __all__ = [
     "Computer", "ComputerStatus",
@@ -19,4 +21,6 @@ __all__ = [
     "ProfileMetrics", "ProxyUsageStats",
     "AgentToken", "ProfileAssignment",
     "AgentSession", "BrowserEvent", "SessionStatus", "BrowserEventType",
+    "Alert", "AlertSeverity", "AlertStatus",
+    "ProxyRotationLog", "RotationTrigger",
 ]

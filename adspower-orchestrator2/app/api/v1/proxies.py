@@ -13,6 +13,11 @@ from app.schemas.proxy import (
 )
 from app.models.proxy import ProxyType, ProxyStatus
 
+# Agregar a los imports existentes:
+from app.models.proxy_rotation_log import ProxyRotationLog, RotationTrigger
+from sqlalchemy import select, desc
+from datetime import datetime, timedelta, timezone
+
 router = APIRouter(prefix="/proxies", tags=["Proxies"])
 
 @router.post("/", response_model=ProxyResponse, status_code=201)
@@ -121,3 +126,79 @@ async def get_proxies_stats(
     service = ProxyService(db)
     stats = await service.get_stats()
     return stats
+
+@router.post("/{proxy_id}/health-check")
+async def health_check_proxy(
+    proxy_id: int,
+    db: AsyncSession = Depends(get_db)
+):
+    """Alias de /test para compatibilidad con el frontend"""
+    service = ProxyService(db)
+    try:
+        result = await service.test_proxy(proxy_id)
+        return result
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+
+@router.post("/{proxy_id}/rotate")
+async def rotate_proxy(
+    proxy_id: int,
+    profile_id: Optional[int] = None,
+    computer_id: Optional[int] = None,
+    db: AsyncSession = Depends(get_db)
+):
+    """Rota el proxy usando tu ProxyRotationService existente y guarda el historial"""
+    from app.services.proxy_rotation_service import ProxyRotationService
+
+    service = ProxyRotationService(db)
+    try:
+        result = await service.check_and_rotate_proxy(proxy_id)
+
+        # Guardar en historial
+        log = ProxyRotationLog(
+            proxy_id=proxy_id,
+            profile_id=profile_id,
+            computer_id=computer_id,
+            old_proxy_display=result.get("old_proxy"),
+            new_proxy_display=result.get("new_proxy"),
+            trigger=RotationTrigger.MANUAL,
+            success=not result.get("error"),
+            error_message=result.get("error"),
+            latency_ms=result.get("new_latency_ms"),
+            ip_address=result.get("new_ip"),
+        )
+        db.add(log)
+        await db.commit()
+
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/rotation-history")
+async def get_rotation_history(
+    proxy_id: Optional[int] = None,
+    profile_id: Optional[int] = None,
+    computer_id: Optional[int] = None,
+    hours: int = Query(48, ge=1, le=720),
+    limit: int = Query(100, ge=1, le=500),
+    db: AsyncSession = Depends(get_db)
+):
+    """Historial de rotaciones con filtros"""
+    cutoff = datetime.now(timezone.utc) - timedelta(hours=hours)
+    query = (
+        select(ProxyRotationLog)
+        .where(ProxyRotationLog.created_at >= cutoff)
+        .order_by(desc(ProxyRotationLog.created_at))
+    )
+    if proxy_id:
+        query = query.where(ProxyRotationLog.proxy_id == proxy_id)
+    if profile_id:
+        query = query.where(ProxyRotationLog.profile_id == profile_id)
+    if computer_id:
+        query = query.where(ProxyRotationLog.computer_id == computer_id)
+
+    result = await db.execute(query.limit(limit))
+    logs = result.scalars().all()
+    return {"total": len(logs), "items": logs}
