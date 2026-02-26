@@ -1,12 +1,15 @@
-# app/services/proxy_service.py
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Tuple
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
 from app.repositories.proxy_repository import ProxyRepository
 from app.integrations.soax_client import SOAXClient
 from app.models.proxy import Proxy, ProxyType, ProxyStatus
+from app.models.profile import Profile                          # ← AGREGAR
+from app.models.proxy_health import ProxyScore                  # ← verificar que esté
 from app.schemas.proxy import ProxyCreate, ProxyUpdate
 from app.config import settings
 from loguru import logger
+
 
 class ProxyService:
     """Servicio para gestión de Proxies"""
@@ -63,28 +66,29 @@ class ProxyService:
         """Obtiene proxy por ID"""
         return await self.repo.get(proxy_id)
     
+
     async def list_proxies(
         self,
         skip: int = 0,
         limit: int = 100,
-        proxy_type: Optional[ProxyType] = None,
-        country: Optional[str] = None,
-        status: Optional[ProxyStatus] = None
-    ) -> tuple[List[Proxy], int]:
-        """Lista proxies con filtros"""
-        filters = {}
-        if proxy_type:
-            filters['proxy_type'] = proxy_type
-        if country:
-            filters['country'] = country
-        if status:
-            filters['status'] = status
-        
-        proxies = await self.repo.get_multi(skip=skip, limit=limit, filters=filters, order_by='-created_at')
-        total = await self.repo.count(filters=filters)
-        
-        return proxies, total
-    
+        status: Optional[str] = None,
+        proxy_type: Optional[str] = None,  # ← este faltaba
+    ) -> Tuple[List[Proxy], int]:
+        from sqlalchemy import func, and_
+        conditions = []
+        if status:     conditions.append(Proxy.status == status)
+        if proxy_type: conditions.append(Proxy.proxy_type == proxy_type)
+
+        query = select(Proxy)
+        count_query = select(func.count()).select_from(Proxy)
+
+        if conditions:
+            query = query.where(and_(*conditions))
+            count_query = count_query.where(and_(*conditions))
+
+        total = (await self.db.execute(count_query)).scalar()
+        items = list((await self.db.execute(query.offset(skip).limit(limit))).scalars().all())
+        return items, total
     async def _update_proxy_score(
         self,
         proxy_id: int,

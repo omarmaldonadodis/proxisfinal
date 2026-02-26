@@ -65,7 +65,7 @@ class BrowserLauncher:
         )
 
         # 1. Abrir via AdsPower API
-        result = self.monitor.open_browser(profile_id, target_url, api_key=self.api_key)
+        result = self.monitor.open_browser(profile_id, target_url)
 
         if not result.get("success"):
             error_msg = result.get("error", "Error desconocido")

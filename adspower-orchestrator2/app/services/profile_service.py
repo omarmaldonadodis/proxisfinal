@@ -5,7 +5,7 @@ from sqlalchemy import select, and_, func
 from datetime import datetime
 import json
 
-from app.models.profile import Profile, DeviceType
+from app.models.profile import Profile, DeviceType, ProfileStatus
 from app.models.computer import Computer
 from app.models.proxy import Proxy
 from app.schemas.profile import ProfileCreate, ProfileUpdate
@@ -15,6 +15,8 @@ from loguru import logger
 
 import time
 from app.services.metrics_service import MetricsService
+from app.config import settings
+
 
 
 class ProfileService:
@@ -24,12 +26,6 @@ class ProfileService:
     async def create_profile(self, profile_in: ProfileCreate) -> Profile:
         creation_start = time.time()  # ← FIX: definir aquí
 
-        result = await self.db.execute(
-            select(Computer).where(Computer.id == profile_in.computer_id)
-        )
-        computer = result.scalar_one_or_none()
-        if not computer:
-            raise ValueError(f"Computer {profile_in.computer_id} not found")
 
         if not profile_in.proxy_id:
             raise ValueError("proxy_id is required")
@@ -121,7 +117,6 @@ class ProfileService:
                 logger.error(f"Error uploading cookies: {e}")
 
         db_profile = Profile(
-            computer_id=profile_in.computer_id,
             proxy_id=profile_in.proxy_id,
             adspower_id=adspower_id,
             name=profile_in.name,
@@ -262,31 +257,30 @@ class ProfileService:
 
     async def list_profiles(
         self,
-        computer_id: Optional[int] = None,
-        status: Optional[str] = None,
         skip: int = 0,
-        limit: int = 100
+        limit: int = 100,
+        computer_id: Optional[int] = None,
+        status: Optional[ProfileStatus] = None,
+        owner: Optional[str] = None,
+        bookie: Optional[str] = None,
+        cookie_status: Optional[str] = None,
     ) -> Tuple[List[Profile], int]:
+        conditions = []
+        if computer_id:   conditions.append(Profile.computer_id == computer_id)
+        if status:        conditions.append(Profile.status == status)
+        if owner:         conditions.append(Profile.owner == owner)
+        if bookie:        conditions.append(Profile.bookie == bookie)
+        if cookie_status: conditions.append(Profile.cookie_status == cookie_status)
+
         query = select(Profile)
         count_query = select(func.count()).select_from(Profile)
-        
-        conditions = []
-        if computer_id:
-            conditions.append(Profile.computer_id == computer_id)
-        if status:
-            conditions.append(Profile.status == status)
-        
+
         if conditions:
             query = query.where(and_(*conditions))
             count_query = count_query.where(and_(*conditions))
-        
-        total_result = await self.db.execute(count_query)
-        total = total_result.scalar()
-        
-        query = query.offset(skip).limit(limit)
-        result = await self.db.execute(query)
-        items = list(result.scalars().all())
-        
+
+        total = (await self.db.execute(count_query)).scalar()
+        items = list((await self.db.execute(query.offset(skip).limit(limit))).scalars().all())
         return items, total
 
     async def update_profile(
@@ -323,8 +317,8 @@ class ProfileService:
         if computer:
             try:
                 adspower_client = AdsPowerClient(
-                    api_url=computer.adspower_api_url,
-                    api_key=computer.adspower_api_key
+                    api_url=settings.ADSPOWER_DEFAULT_API_URL,  # ← API central
+                    api_key=settings.ADSPOWER_DEFAULT_API_KEY
                 )
                 await adspower_client.delete_profile([profile.adspower_id])
             except Exception as e:
@@ -355,3 +349,4 @@ class ProfileService:
             'warmed': row.warmed or 0,
             'total_sessions': row.total_sessions or 0
         }
+    

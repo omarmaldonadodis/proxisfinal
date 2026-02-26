@@ -44,13 +44,8 @@ async def list_proxies(
 ):
     """Lista proxies con filtros"""
     service = ProxyService(db)
-    proxies, total = await service.list_proxies(
-        skip=skip,
-        limit=limit,
-        proxy_type=proxy_type,
-        country=country,
-        status=status
-    )
+    proxies, total = await service.list_proxies(status=status, proxy_type=proxy_type, skip=skip, limit=limit)
+
     return ProxyListResponse(total=total, items=proxies)
 
 @router.get("/{proxy_id}", response_model=ProxyResponse)

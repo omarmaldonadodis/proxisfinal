@@ -484,3 +484,126 @@ async def get_data_usage(
             for row in rows
         ]
     }
+
+@router.get("/activity-feed")
+async def get_activity_feed(
+    limit: int = Query(20, ge=1, le=100),
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    Feed unificado de: sesiones recientes + alertas recientes.
+    Usado por SystemEventsFeed del dashboard.
+    """
+    from app.models.alert import Alert, AlertStatus
+
+    # Sesiones recientes
+    sessions_result = await db.execute(
+        select(AgentSession)
+        .order_by(AgentSession.requested_at.desc())
+        .limit(limit // 2)
+    )
+    sessions = sessions_result.scalars().all()
+
+    # Alertas recientes
+    alerts_result = await db.execute(
+        select(Alert)
+        .order_by(Alert.created_at.desc())
+        .limit(limit // 2)
+    )
+    alerts = alerts_result.scalars().all()
+
+    events = []
+
+    for s in sessions:
+        event_type = {
+            "active":  "SUCCESS",
+            "closed":  "INFO",
+            "crashed": "ERROR",
+            "opening": "INFO",
+            "denied":  "WARNING",
+        }.get(s.status, "INFO")
+
+        events.append({
+            "id":        f"sess-{s.id}",
+            "type":      event_type,
+            "message":   _session_message(s),
+            "source":    s.agent_name,
+            "timestamp": s.requested_at.isoformat() if s.requested_at else "",
+            "meta": {
+                "session_id":  s.id,
+                "profile_id":  s.profile_id,
+                "computer_id": s.computer_id,
+                "target_url":  s.target_url,
+                "duration_s":  s.duration_seconds,
+                "data_mb":     s.total_data_mb,
+            }
+        })
+
+    for a in alerts:
+        events.append({
+            "id":        f"alert-{a.id}",
+            "type":      {"info":"INFO","warning":"WARNING","error":"ERROR","critical":"ERROR"}.get(a.severity.value, "INFO"),
+            "message":   a.title,
+            "source":    a.source or "System",
+            "timestamp": a.created_at.isoformat(),
+            "meta": {
+                "alert_id":  a.id,
+                "severity":  a.severity.value,
+                "status":    a.status.value,
+                "message":   a.message,
+            }
+        })
+
+    # Ordenar por timestamp desc
+    events.sort(key=lambda e: e["timestamp"], reverse=True)
+
+    return {"total": len(events), "items": events[:limit]}
+
+
+def _session_message(s: AgentSession) -> str:
+    msgs = {
+        "active":  f"Sesión iniciada — Perfil #{s.profile_id}",
+        "closed":  f"Sesión cerrada — {s.duration_seconds or 0}s, {round(s.total_data_mb or 0, 1)}MB",
+        "crashed": f"Sesión crasheó — Perfil #{s.profile_id}",
+        "opening": f"Abriendo navegador — Perfil #{s.profile_id}",
+        "denied":  f"Sesión denegada — {s.denial_reason}",
+    }
+    return msgs.get(s.status, f"Evento de sesión #{s.id}")
+
+@router.get("/sessions/by-profile/{profile_id}")
+async def get_sessions_by_profile(
+    profile_id: int,
+    limit: int = Query(20, ge=1, le=100),
+    db: AsyncSession = Depends(get_db)
+):
+    """Historial completo de un perfil específico"""
+    result = await db.execute(
+        select(AgentSession)
+        .where(AgentSession.profile_id == profile_id)
+        .order_by(AgentSession.requested_at.desc())
+        .limit(limit)
+    )
+    sessions = result.scalars().all()
+
+    return {
+        "profile_id": profile_id,
+        "total": len(sessions),
+        "items": [
+            {
+                "id":               s.id,
+                "agent_name":       s.agent_name,
+                "computer_id":      s.computer_id,
+                "target_url":       s.target_url,
+                "status":           s.status,
+                "requested_at":     s.requested_at,
+                "opened_at":        s.opened_at,
+                "closed_at":        s.closed_at,
+                "duration_seconds": s.duration_seconds,
+                "pages_visited":    s.pages_visited,
+                "total_data_mb":    s.total_data_mb,
+                "browser_health":   s.browser_health,
+                "last_url":         s.last_url,
+            }
+            for s in sessions
+        ]
+    }

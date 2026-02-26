@@ -65,4 +65,3 @@ class ProfileAssignment(Base):
     # Relationships
     profile = relationship("Profile")
     agent = relationship("AgentToken", back_populates="assignments")
-    sessions = relationship("AgentSession", back_populates="assignment", cascade="all, delete-orphan")

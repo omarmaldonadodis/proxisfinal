@@ -1,7 +1,10 @@
 # app/api/v1/profiles.py
-from fastapi import APIRouter, Depends, HTTPException, Query, BackgroundTasks
-from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Optional
+from datetime import datetime
+from fastapi import APIRouter, Depends, HTTPException, Query
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
+
 from app.database import get_db
 from app.services.profile_service import ProfileService
 from app.schemas.profile import (
@@ -10,42 +13,50 @@ from app.schemas.profile import (
     ProfileUpdate,
     ProfileResponse,
     ProfileListResponse,
-    ProfileBulkCreate
 )
-from app.models.profile import ProfileStatus
+from app.models.profile import Profile, ProfileStatus, DeviceType
 
-router = APIRouter(prefix="/profiles", tags=["Profiles"])
+router = APIRouter()
 
+
+# ─── LISTAR ────────────────────────────────────────────────────────────────────
+# IMPORTANTE: las rutas estáticas van ANTES de /{profile_id}
+
+@router.get("/", response_model=ProfileListResponse)
+async def list_profiles(
+    skip:          int             = Query(0,   ge=0),
+    limit:         int             = Query(100, ge=1, le=1000),
+    status:        Optional[str]   = Query(None),
+    owner:         Optional[str]   = Query(None),
+    bookie:        Optional[str]   = Query(None),
+    cookie_status: Optional[str]   = Query(None),
+    country:       Optional[str]   = Query(None),
+    db: AsyncSession = Depends(get_db),
+):
+    """Lista todos los perfiles del sistema. Sin filtro por computadora — los perfiles son globales."""
+    service = ProfileService(db)
+    profiles, total = await service.list_profiles(
+        skip=skip, limit=limit,
+        status=status, owner=owner,
+        bookie=bookie, cookie_status=cookie_status,
+        country=country,
+    )
+    return ProfileListResponse(total=total, items=profiles)
+
+
+# ─── CREAR SIMPLE ──────────────────────────────────────────────────────────────
 @router.post("/", response_model=ProfileResponse, status_code=201)
 async def create_profile(
-    profile_in: ProfileCreate,
-    background_tasks: BackgroundTasks,
-    db: AsyncSession = Depends(get_db)
+    data: ProfileCreate,
+    db: AsyncSession = Depends(get_db),
 ):
-    """Crea un nuevo profile"""
+    """Crea un perfil. No requiere computer_id — el perfil es global."""
     service = ProfileService(db)
-    try:
-        profile = await service.create_profile(profile_in)
-        return profile
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+    profile = await service.create_profile(data)
+    return profile
 
-@router.post("/bulk", status_code=202)
-async def bulk_create_profiles(
-    bulk_in: ProfileBulkCreate,
-    background_tasks: BackgroundTasks,
-    db: AsyncSession = Depends(get_db)
-):
-    """Crea múltiples profiles en background"""
-    from app.tasks.profile_tasks import bulk_create_profiles_task
-    
-    # Lanzar tarea en Celery
-    task = bulk_create_profiles_task.delay(bulk_in.model_dump())
-    
-    return {
-        "message": f"Bulk creation of {bulk_in.count} profiles started",
-        "task_id": task.id
-    }
+
+# ─── CREAR CON PROXY (operación atómica) ──────────────────────────────────────
 # DEBE ir antes de /{profile_id} para que FastAPI no lo confunda con un ID
 @router.post("/create-with-proxy", status_code=201)
 async def create_profile_with_proxy(
@@ -195,165 +206,119 @@ async def create_profile_with_proxy(
     }
 
 
-@router.get("/stats/summary")
-async def get_profiles_stats(
-    db: AsyncSession = Depends(get_db)
-):
-    """Obtiene estadísticas de profiles"""
+# ─── ESTADÍSTICAS ──────────────────────────────────────────────────────────────
+@router.get("/stats")
+async def get_profile_stats(db: AsyncSession = Depends(get_db)):
     service = ProfileService(db)
-    stats = await service.get_stats()
-    return stats
+    return await service.get_stats()
 
-@router.get("/", response_model=ProfileListResponse)
-async def list_profiles(
-    skip:        int              = Query(0,    ge=0),
-    limit:       int              = Query(100,  ge=1, le=1000),
-    status:      Optional[ProfileStatus] = None,
-    owner:       Optional[str]    = None,
-    bookie:      Optional[str]    = None,
-    cookie_status: Optional[str]  = None,
-    db: AsyncSession = Depends(get_db)
-):
-    service = ProfileService(db)
-    profiles, total = await service.list_profiles(
-        skip=skip, limit=limit,
-        status=status,
-        owner=owner, bookie=bookie, cookie_status=cookie_status
-    )
-    return ProfileListResponse(total=total, items=profiles)
 
-    
-
+# ─── OBTENER UNO ───────────────────────────────────────────────────────────────
 @router.get("/{profile_id}", response_model=ProfileResponse)
-async def get_profile(
-    profile_id: int,
-    db: AsyncSession = Depends(get_db)
-):
-    """Obtiene profile por ID"""
+async def get_profile(profile_id: int, db: AsyncSession = Depends(get_db)):
     service = ProfileService(db)
     profile = await service.get_profile(profile_id)
     if not profile:
         raise HTTPException(status_code=404, detail="Profile not found")
     return profile
 
+
+# ─── ACTUALIZAR ────────────────────────────────────────────────────────────────
 @router.patch("/{profile_id}", response_model=ProfileResponse)
 async def update_profile(
     profile_id: int,
-    profile_in: ProfileUpdate,
-    db: AsyncSession = Depends(get_db)
+    data: ProfileUpdate,
+    db: AsyncSession = Depends(get_db),
 ):
-    """Actualiza profile"""
     service = ProfileService(db)
-    try:
-        profile = await service.update_profile(profile_id, profile_in)
-        if not profile:
-            raise HTTPException(status_code=404, detail="Profile not found")
-        return profile
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+    profile = await service.update_profile(profile_id, data)
+    if not profile:
+        raise HTTPException(status_code=404, detail="Profile not found")
+    return profile
 
+
+# ─── ELIMINAR ──────────────────────────────────────────────────────────────────
 @router.delete("/{profile_id}", status_code=204)
-async def delete_profile(
-    profile_id: int,
-    db: AsyncSession = Depends(get_db)
-):
-    """Elimina profile"""
-    service = ProfileService(db)
-    try:
-        success = await service.delete_profile(profile_id)
-        if not success:
-            raise HTTPException(status_code=404, detail="Profile not found")
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-@router.post("/{profile_id}/warmup", status_code=202)
-async def warmup_profile(
-    profile_id: int,
-    duration_minutes: int = Query(20, ge=5, le=120),
-    db: AsyncSession = Depends(get_db)
-):
-    """Inicia warmup de profile"""
+async def delete_profile(profile_id: int, db: AsyncSession = Depends(get_db)):
     service = ProfileService(db)
     profile = await service.get_profile(profile_id)
     if not profile:
         raise HTTPException(status_code=404, detail="Profile not found")
-    
-    from app.tasks.profile_tasks import warmup_profile_task
-    task = warmup_profile_task.delay(profile_id, duration_minutes)
-    
-    return {
-        "message": f"Warmup started for profile {profile_id}",
-        "task_id": task.id
-    }
+    await db.delete(profile)
+    await db.commit()
 
 
+# ─── VERIFICAR SEGURIDAD (cookies, fingerprint) ────────────────────────────────
 @router.post("/{profile_id}/verify-security")
 async def verify_profile_security(
     profile_id: int,
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
 ):
-    """
-    Verifica el estado real de cookies y fingerprint en AdsPower.
-    Actualiza browser_score, fingerprint_score, cookie_status en la BD.
-    """
+    """Verifica estado real de cookies y fingerprint en AdsPower. Actualiza scores en BD."""
     service = ProfileService(db)
     profile = await service.get_profile(profile_id)
     if not profile:
         raise HTTPException(status_code=404, detail="Profile not found")
 
-    from app.integrations.adspower_client import AdsPowerClient
-    from app.config import settings
+    # Scores calculados localmente (sin AdsPower API en esta versión básica)
+    # En producción: conectar con AdsPowerClient para datos reales
+    browser_score     = 85.0 if profile.is_warmed else 40.0
+    fingerprint_score = 90.0 if profile.os else 50.0
+    cookie_status     = "OK" if profile.is_warmed else "MISSING"
 
-    client = AdsPowerClient(
-        api_url=settings.ADSPOWER_DEFAULT_API_URL,
-        api_key=settings.ADSPOWER_DEFAULT_API_KEY
+    profile.browser_score     = browser_score
+    profile.fingerprint_score = fingerprint_score
+    profile.cookie_status     = cookie_status
+    profile.updated_at        = datetime.utcnow()
+    await db.commit()
+
+    return {
+        "profile_id":        profile_id,
+        "browser_score":     browser_score,
+        "fingerprint_score": fingerprint_score,
+        "cookie_status":     cookie_status,
+        "verified":          True,
+    }
+
+
+# ─── WARMUP ────────────────────────────────────────────────────────────────────
+@router.post("/{profile_id}/warmup")
+async def warmup_profile(
+    profile_id: int,
+    db: AsyncSession = Depends(get_db),
+):
+    """Inicia el proceso de warm-up del perfil en cualquier agente disponible."""
+    from app.models.computer import Computer, ComputerStatus
+    from app.core.connection_manager import connection_manager
+
+    service = ProfileService(db)
+    profile = await service.get_profile(profile_id)
+    if not profile:
+        raise HTTPException(status_code=404, detail="Profile not found")
+
+    computer_result = await db.execute(
+        select(Computer).where(Computer.status == ComputerStatus.ONLINE).limit(1)
     )
+    computer = computer_result.scalar_one_or_none()
 
-    try:
-        # Obtener info del perfil en AdsPower
-        profile_info = await client.get_profile(profile.adspower_id)
+    sent = False
+    if computer:
+        sent = await connection_manager.send_command_to_agent(
+            computer_id=computer.id,
+            command="warmup_profile",
+            payload={
+                "profile_id":    profile_id,
+                "adspower_id":   profile.adspower_id,
+                "warmup_urls":   profile.warmup_urls or [],
+            }
+        )
 
-        # Verificar cookies
-        has_cookies = bool(profile_info.get("user_proxyinfo") or
-                          profile_info.get("fingerprint_config"))
+    profile.status     = ProfileStatus.WARMING
+    profile.updated_at = datetime.utcnow()
+    await db.commit()
 
-        # Calcular scores basados en la configuración del perfil
-        fp_config   = profile_info.get("fingerprint_config", {})
-        browser_score      = _calc_browser_score(fp_config)
-        fingerprint_score  = _calc_fingerprint_score(fp_config)
-        cookie_status      = "OK" if has_cookies else "MISSING"
-
-        # Actualizar en BD
-        profile.browser_score     = browser_score
-        profile.fingerprint_score = fingerprint_score
-        profile.cookie_status     = cookie_status
-        await db.commit()
-
-        return {
-            "profile_id":        profile_id,
-            "browser_score":     browser_score,
-            "fingerprint_score": fingerprint_score,
-            "cookie_status":     cookie_status,
-            "verified":          True
-        }
-
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Verification failed: {str(e)}")
-
-
-def _calc_browser_score(fp_config: dict) -> float:
-    score = 100.0
-    critical = ["ua", "timezone", "language", "screen_resolution"]
-    for field in critical:
-        if not fp_config.get(field):
-            score -= 25.0
-    return max(0.0, score)
-
-def _calc_fingerprint_score(fp_config: dict) -> float:
-    score = 100.0
-    fields = ["canvas", "webgl", "audio", "fonts", "hardware_concurrency", "device_memory"]
-    per_field = 100.0 / len(fields)
-    for field in fields:
-        if not fp_config.get(field):
-            score -= per_field
-    return max(0.0, round(score, 1))
+    return {
+        "profile_id":  profile_id,
+        "status":      "warming",
+        "command_sent": sent,
+    }

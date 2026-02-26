@@ -1,12 +1,5 @@
 # agent/adspower_monitor.py
-"""
-Monitorea AdsPower via su API local (http://local.adspower.net:50325)
-y via psutil para CPU/RAM del proceso.
-
-NOTA SOBRE AUTENTICACIÓN:
-AdsPower local API usa Authorization: Bearer <api_key> en el header.
-NO como query parameter.
-"""
+import asyncio
 import httpx
 import psutil
 from typing import List, Dict, Optional
@@ -22,13 +15,125 @@ class AdsPowerMonitor:
     ):
         self.adspower_url = adspower_url.rstrip("/")
         self.api_key = api_key or ""
-        self._client = httpx.Client(
-            timeout=5.0,
-            headers={"Authorization": f"Bearer {self.api_key}"} if self.api_key else {}
-        )
+        self._headers = {"Authorization": f"Bearer {self.api_key}"} if self.api_key else {}
+        self._client = httpx.Client(timeout=5.0, headers=self._headers)
+
+    # ──────────────────────────────────────────────
+    # OPCIÓN A: Verifica una lista conocida de perfiles (rápido)
+    # ──────────────────────────────────────────────
+
+    def get_active_browsers_from_known(self, profile_ids: List[str]) -> List[Dict]:
+        """
+        Verifica en paralelo (threads) el estado de una lista conocida de profile_ids.
+        Usa los perfiles que el BrowserLauncher ya conoce.
+        Ideal para polling frecuente — O(n) requests donde n = sesiones activas del agente.
+        """
+        if not profile_ids:
+            return []
+
+        active = []
+        # httpx no tiene async aquí, usamos un pool simple con ThreadPoolExecutor
+        from concurrent.futures import ThreadPoolExecutor, as_completed
+
+        def check_one(pid: str) -> Optional[Dict]:
+            try:
+                r = self._client.get(
+                    f"{self.adspower_url}/api/v1/browser/active",
+                    params={"user_id": pid}
+                )
+                data = r.json()
+                if data.get("code") == 0 and data.get("data", {}).get("status") == "Active":
+                    return {
+                        "user_id": pid,
+                        "status": "Active",
+                        "ws": data["data"].get("ws", {}),
+                        "debug_port": data["data"].get("debug_port"),
+                    }
+            except Exception as e:
+                logger.debug(f"Error verificando perfil {pid}: {e}")
+            return None
+
+        with ThreadPoolExecutor(max_workers=min(len(profile_ids), 10)) as pool:
+            futures = {pool.submit(check_one, pid): pid for pid in profile_ids}
+            for future in as_completed(futures):
+                result = future.result()
+                if result:
+                    active.append(result)
+
+        return active
+
+    # ──────────────────────────────────────────────
+    # OPCIÓN B: Scan completo de todos los perfiles (costoso pero completo)
+    # Detecta browsers abiertos desde fuera del agente
+    # ──────────────────────────────────────────────
+
+    def get_active_browsers_full_scan(self, max_profiles: int = 200) -> List[Dict]:
+        """
+        Pagina /api/v1/user/list y verifica cada perfil contra /api/v1/browser/active.
+        Llama esto solo cuando necesitas descubrir browsers que no abriste tú.
+        Respeta el rate limit de AdsPower: 2-10 req/s según cantidad de perfiles.
+        """
+        profile_ids = self._get_all_profile_ids(max_profiles)
+        logger.debug(f"Full scan: {len(profile_ids)} perfiles a verificar")
+
+        if not profile_ids:
+            return []
+
+        return self.get_active_browsers_from_known(profile_ids)
+
+    def _get_all_profile_ids(self, max_profiles: int = 200) -> List[str]:
+        """Pagina /api/v1/user/list y retorna todos los user_ids"""
+        ids = []
+        page = 1
+        page_size = 100
+
+        while len(ids) < max_profiles:
+            try:
+                r = self._client.get(
+                    f"{self.adspower_url}/api/v1/user/list",
+                    params={"page": page, "page_size": page_size}
+                )
+                data = r.json()
+
+                if data.get("code") != 0:
+                    break
+
+                profiles = data.get("data", {}).get("list", [])
+                if not profiles:
+                    break  # No hay más páginas
+
+                ids.extend(p["user_id"] for p in profiles if "user_id" in p)
+
+                # Si nos devolvieron menos que page_size, es la última página
+                if len(profiles) < page_size:
+                    break
+
+                page += 1
+
+            except Exception as e:
+                logger.debug(f"Error paginando perfiles página {page}: {e}")
+                break
+
+        return ids[:max_profiles]
+
+    # ──────────────────────────────────────────────
+    # Método principal — usa A por default
+    # ──────────────────────────────────────────────
+
+    def get_active_browsers(self, known_profile_ids: Optional[List[str]] = None) -> List[Dict]:
+        """
+        Por default usa la lista conocida (rápido).
+        Si known_profile_ids es None y no hay nada que verificar, retorna [].
+        """
+        if known_profile_ids is not None:
+            return self.get_active_browsers_from_known(known_profile_ids)
+        return []
+
+    # ──────────────────────────────────────────────
+    # Resto de métodos sin cambios
+    # ──────────────────────────────────────────────
 
     def is_adspower_running(self) -> bool:
-        """Verifica si AdsPower está corriendo como proceso"""
         for proc in psutil.process_iter(["name"]):
             try:
                 if "adspower" in proc.info["name"].lower():
@@ -38,7 +143,6 @@ class AdsPowerMonitor:
         return False
 
     def ping_api(self) -> bool:
-        """Verifica si la API local de AdsPower responde"""
         try:
             response = self._client.get(
                 f"{self.adspower_url}/api/v1/browser/active",
@@ -48,67 +152,32 @@ class AdsPowerMonitor:
         except Exception:
             return False
 
-    def get_active_browsers(self) -> List[Dict]:
-        """Lista navegadores activos via AdsPower API local."""
-        try:
-            response = self._client.get(
-                f"{self.adspower_url}/api/v1/browser/active-list",
-                params={"page": 1, "page_size": 100}
-            )
-            data = response.json()
-
-            if data.get("code") == 0:
-                return data.get("data", {}).get("list", [])
-            return []
-
-        except Exception as e:
-            logger.debug(f"AdsPower API no disponible: {e}")
-            return []
-
     def get_browser_status(self, profile_id: str) -> Dict:
-        """Estado de un perfil específico"""
         try:
             response = self._client.get(
                 f"{self.adspower_url}/api/v1/browser/active",
                 params={"user_id": profile_id}
             )
             data = response.json()
-
             if data.get("code") == 0:
                 browser_data = data.get("data", {})
                 return {
-                    "is_running": True,
+                    "is_running": browser_data.get("status") == "Active",
                     "status": browser_data.get("status", "unknown"),
                     "ws_puppeteer": browser_data.get("ws", {}).get("puppeteer"),
                     "ws_selenium": browser_data.get("ws", {}).get("selenium"),
                     "debug_port": browser_data.get("debug_port")
                 }
             return {"is_running": False}
-
         except Exception:
             return {"is_running": False, "error": "API no disponible"}
 
-    def open_browser(
-        self,
-        profile_id: str,
-        url: Optional[str] = None,
-        api_key: Optional[str] = None
-    ) -> Dict:
-        """Abre un perfil en AdsPower via Authorization: Bearer header."""
+    def open_browser(self, profile_id: str, url: Optional[str] = None) -> Dict:
         try:
-            params = {
-                "user_id": profile_id,
-                "open_tabs": 1,
-                "ip_tab": 0,
-            }
-
-            # AdsPower acepta open_urls para abrir una URL al inicio
+            params = {"user_id": profile_id, "open_tabs": 1, "ip_tab": 0}
             if url:
                 params["open_urls"] = url
 
-            logger.debug(f"AdsPower open_browser: user_id={profile_id}, url={url}")
-
-            # Timeout extendido: AdsPower puede tardar 15-30s en lanzar el navegador
             response = self._client.get(
                 f"{self.adspower_url}/api/v1/browser/start",
                 params=params,
@@ -125,17 +194,11 @@ class AdsPowerMonitor:
                     "debug_port": browser_data.get("debug_port"),
                     "webdriver": browser_data.get("webdriver")
                 }
-            else:
-                error_msg = data.get("msg", "Error desconocido")
-                logger.error(f"AdsPower open_browser error: code={data.get('code')}, msg={error_msg}")
-                return {"success": False, "error": error_msg}
-
+            return {"success": False, "error": data.get("msg", "Error desconocido")}
         except Exception as e:
-            logger.error(f"Excepción en open_browser: {e}")
             return {"success": False, "error": str(e)}
 
     def close_browser(self, profile_id: str) -> bool:
-        """Cierra un perfil"""
         try:
             response = self._client.get(
                 f"{self.adspower_url}/api/v1/browser/stop",
@@ -147,7 +210,6 @@ class AdsPowerMonitor:
             return False
 
     def get_process_stats(self) -> Dict:
-        """CPU y RAM que consume AdsPower en total"""
         total_cpu = 0.0
         total_ram_mb = 0.0
         process_count = 0
@@ -169,7 +231,6 @@ class AdsPowerMonitor:
         }
 
     def get_browser_health(self, profile_id: str) -> str:
-        """healthy / slow / crashed"""
         import time
         start = time.time()
         status = self.get_browser_status(profile_id)

@@ -554,7 +554,7 @@ class AgentService:
         # Sesiones pendientes de auth
         pending_count = (await self.db.execute(
             select(func.count(AgentSession.id)).where(
-                AgentSession.status == SessionStatus.PENDING_AUTH
+                AgentSession.status == SessionStatus.OPENING
             )
         )).scalar()
 

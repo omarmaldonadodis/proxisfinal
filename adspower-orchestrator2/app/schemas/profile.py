@@ -1,73 +1,147 @@
 # app/schemas/profile.py
-from pydantic import BaseModel, Field
-from typing import Optional, List, Dict, Any
+from typing import Optional, List
 from datetime import datetime
+from pydantic import BaseModel, ConfigDict
 from app.models.profile import ProfileStatus, DeviceType
 
-class ProfileBase(BaseModel):
-    name: str = Field(..., min_length=1, max_length=255)
-    age: Optional[int] = Field(None, ge=18, le=100)
-    gender: Optional[str] = Field(None, pattern="^(male|female|other)$")
-    country: Optional[str] = Field(None, min_length=2, max_length=2)
-    city: Optional[str] = None
-    timezone: Optional[str] = None
-    language: Optional[str] = None
-    device_type: DeviceType = DeviceType.DESKTOP
-    device_name: Optional[str] = None
-    interests: List[str] = Field(default_factory=list)
-    tags: List[str] = Field(default_factory=list)
-    meta_data: Dict[str, Any] = Field(default_factory=dict)
-    notes: Optional[str] = None
 
-class ProfileCreate(ProfileBase):
-    computer_id: int = Field(..., ge=1)
-    proxy_id: Optional[int] = None
-    proxy_type: Optional[str] = Field(None, pattern="^(mobile|residential)$")
-    proxy_country: Optional[str] = None
-    proxy_city: Optional[str] = None
-    auto_warmup: bool = False
-    warmup_duration_minutes: int = Field(default=20, ge=5, le=120)
+# ─── CREATE ───────────────────────────────────────────────────────────────────
+# Profile ya NO necesita computer_id — es global
+
+class ProfileCreate(BaseModel):
+    name:      str
+    proxy_id:  Optional[int] = None   # Si ya existe un proxy, asignarlo directamente
+
+    # Identidad
+    owner:     Optional[str] = None
+    bookie:    Optional[str] = None
+    sport:     Optional[str] = None
+    country:   Optional[str] = None
+    city:      Optional[str] = None
+    language:  Optional[str] = "es-ES"
+
+    # Dispositivo
+    device_type:       DeviceType = DeviceType.DESKTOP
+    os:                Optional[str] = "Windows"
+    screen_resolution: Optional[str] = "1920x1080"
+
+    # Proxy / Red
+    rotation_minutes: int       = 30
+    warmup_urls:      List[str] = []
+
+    # Opciones
+    auto_fingerprint: bool = True
+    tags:             List[str] = []
+    notes:            Optional[str] = None
+
+
+# ─── CREATE CON PROXY (crea proxy y perfil en una sola operación) ────────────
+
+class ProfileWithProxyCreate(BaseModel):
+    # Info general
+    name:    str
+    owner:   Optional[str] = None
+    bookie:  Optional[str] = None
+    sport:   Optional[str] = None
+
+    # Proxy / Red
+    proxy_type:       str       = "RESIDENTIAL"   # RESIDENTIAL | MOBILE_4G | DATACENTER
+    country:          str       = "ES"
+    city:             Optional[str] = None
+    rotation_minutes: int       = 30
+    warmup_urls:      List[str] = []
+
+    # Dispositivo / Huella digital
+    device_type:      str  = "DESKTOP"            # DESKTOP | TABLET | MOBILE
+    os:               str  = "Windows"
+    screen_res:       str  = "1920x1080"
+    language:         str  = "es-ES"
+    auto_fingerprint: bool = True
+    open_on_create:   bool = False                # Abrir navegador al crear
+
+
+# ─── UPDATE ───────────────────────────────────────────────────────────────────
 
 class ProfileUpdate(BaseModel):
-    name: Optional[str] = None
-    computer_id: Optional[int] = None
-    proxy_id: Optional[int] = None
-    status: Optional[ProfileStatus] = None
-    tags: Optional[List[str]] = None
-    meta_data: Optional[Dict[str, Any]] = None
-    notes: Optional[str] = None
+    name:              Optional[str]   = None
+    status:            Optional[ProfileStatus] = None
+    proxy_id:          Optional[int]   = None
+    owner:             Optional[str]   = None
+    bookie:            Optional[str]   = None
+    sport:             Optional[str]   = None
+    browser_score:     Optional[float] = None
+    fingerprint_score: Optional[float] = None
+    cookie_status:     Optional[str]   = None
+    health_score:      Optional[float] = None
+    trust_score:       Optional[float] = None
+    last_action:       Optional[str]   = None
+    memory_mb:         Optional[float] = None
+    is_warmed:         Optional[bool]  = None
+    warmup_urls:       Optional[List[str]] = None
+    tags:              Optional[List[str]] = None
+    notes:             Optional[str]   = None
+    meta_data:         Optional[dict]  = None
 
-class ProfileResponse(ProfileBase):
-    id: int
-    adspower_id: str
-    computer_id: int
-    proxy_id: Optional[int]
-    status: ProfileStatus
-    is_warmed: bool
-    warmup_completed_at: Optional[datetime]
-    last_opened_at: Optional[datetime]
-    total_sessions: int
-    created_at: datetime
-    updated_at: Optional[datetime]
-    
-    # Nested relationships (opcional)
-    computer_name: Optional[str] = None
-    proxy_info: Optional[str] = None
-    
-    class Config:
-        from_attributes = True
+
+# ─── RESPONSE ─────────────────────────────────────────────────────────────────
+
+class ProfileResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id:               int
+    adspower_id:      str
+    name:             str
+    proxy_id:         Optional[int] = None
+    status:           ProfileStatus
+
+    # Identidad
+    owner:            Optional[str] = None
+    bookie:           Optional[str] = None
+    sport:            Optional[str] = None
+    country:          Optional[str] = None
+    city:             Optional[str] = None
+    language:         Optional[str] = None
+
+    # Dispositivo
+    device_type:      DeviceType
+    os:               Optional[str] = None
+    screen_resolution: Optional[str] = None
+
+    # Métricas de calidad
+    health_score:      float = 100.0
+    trust_score:       float = 100.0
+    browser_score:     float = 0.0
+    fingerprint_score: float = 0.0
+    cookie_status:     str   = "MISSING"
+    last_action:       Optional[str] = None
+    memory_mb:         float = 0.0
+
+    # Proxy / Red
+    rotation_minutes:  int       = 30
+    warmup_urls:       List[str] = []
+
+    is_warmed:         bool = False
+    total_sessions:    int  = 0
+    tags:              List[str] = []
+    created_at:        datetime
+    updated_at:        Optional[datetime] = None
+
+
+# ─── LIST ─────────────────────────────────────────────────────────────────────
 
 class ProfileListResponse(BaseModel):
     total: int
     items: List[ProfileResponse]
 
 class ProfileBulkCreate(BaseModel):
-    count: int = Field(..., ge=1, le=100)
-    computer_id: int
-    proxy_type: str = Field(..., pattern="^(mobile|residential)$")
-    country: str = Field(default="ec", min_length=2, max_length=2)
-    city: Optional[str] = None
-    device_type: DeviceType = DeviceType.MOBILE
-    auto_warmup: bool = False
-    warmup_duration_minutes: int = Field(default=15, ge=5, le=60)
-    tags: List[str] = Field(default_factory=list)
+    count:       int
+    proxy_id:    int
+    device_type: DeviceType = DeviceType.DESKTOP
+    owner:       Optional[str] = None
+    bookie:      Optional[str] = None
+    sport:       Optional[str] = None
+    country:     Optional[str] = None
+    city:        Optional[str] = None
+    language:    Optional[str] = "es-ES"
+    tags:        List[str] = []
+    notes:       Optional[str] = None

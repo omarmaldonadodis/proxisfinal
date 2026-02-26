@@ -121,10 +121,16 @@ class ConnectionManager:
 
         if msg_type == "metrics":
             # Guardar métricas en vivo
+
+            metrics_data = data.get("data", {})  # ← extraer primero en variable
+
             self.live_metrics[computer_id] = {
                 **data.get("data", {}),
                 "last_update": datetime.utcnow().isoformat()
             }
+
+            asyncio.create_task(self._save_metrics_to_db(computer_id, metrics_data))  # ← ahora sí existe
+
             # Reenviar a admins
             await self.broadcast_to_admins({
                 "type": "agent_metrics",
@@ -162,17 +168,23 @@ class ConnectionManager:
         await websocket.accept()
         self.admin_connections.append(websocket)
         logger.info(f"✅ Admin conectado. Total admins: {len(self.admin_connections)}")
-
-        # Enviar estado actual al nuevo admin
-        await websocket.send_json({
-            "type": "initial_state",
-            "online_agents": list(self.agent_connections.keys()),
-            "live_metrics": self.live_metrics
-        })
+        
+        # ← Envolver el send inicial en try/except
+        try:
+            await websocket.send_json({
+                "type": "connected",
+                "message": "Admin WebSocket conectado",
+                "timestamp": datetime.utcnow().isoformat()
+            })
+        except Exception:
+            # Conexión cerrada inmediatamente (React StrictMode), remover y salir
+            self.admin_connections.remove(websocket)
+            return
 
     def disconnect_admin(self, websocket: WebSocket):
         if websocket in self.admin_connections:
             self.admin_connections.remove(websocket)
+        logger.info(f"❌ Admin desconectado. Total admins: {len(self.admin_connections)}")
 
     async def broadcast_to_admins(self, message: dict):
         """Envía mensaje a todos los admins conectados"""
@@ -190,6 +202,32 @@ class ConnectionManager:
         if computer_id:
             return self.live_metrics.get(computer_id, {})
         return self.live_metrics
+    
+    async def _save_metrics_to_db(self, computer_id: int, metrics: dict):
+        try:
+            from app.database import AsyncSessionLocal
+            from app.models.health_check import HealthCheck
+
+            sys_stats = metrics.get("system", {})
+
+            async with AsyncSessionLocal() as db:
+                check = HealthCheck(
+                    computer_id=computer_id,
+                    is_healthy=True,
+                    cpu_usage=sys_stats.get("cpu_percent"),
+                    memory_usage=sys_stats.get("memory_percent"),
+                    disk_usage=sys_stats.get("disk_percent"),
+                    active_profiles=metrics.get("active_browsers_count", 0),
+                    adspower_status="online" if metrics.get("adspower_running") else "offline",
+                    response_time_ms=None,
+                    checks_details=metrics,
+                    errors=[]
+                )
+                db.add(check)
+                await db.commit()
+
+        except Exception as e:
+            logger.error(f"Error guardando métricas de computer {computer_id}: {e}")
 
 
 connection_manager = ConnectionManager()

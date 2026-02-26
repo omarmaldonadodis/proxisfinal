@@ -53,8 +53,9 @@ class Computer(Base):
     last_seen_at = Column(DateTime(timezone=True))
     
     # Relationships
-    profiles = relationship("Profile", back_populates="computer", cascade="all, delete-orphan")
     health_checks = relationship("HealthCheck", back_populates="computer", cascade="all, delete-orphan")
+    sessions      = relationship("AgentSession", back_populates="computer")  # ← AGREGAR
+
     
     def __repr__(self):
         return f"<Computer(name={self.name}, status={self.status})>"

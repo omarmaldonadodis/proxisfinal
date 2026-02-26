@@ -146,11 +146,17 @@ class AdsPowerAgent:
                     pass
 
     def _collect_metrics(self) -> dict:
-        """Recolecta todas las métricas locales"""
         adspower_stats = self.adspower.get_process_stats()
         net_stats = self.network.get_stats()
         sys_stats = self.network.get_system_stats()
-        active_browsers = self.adspower.get_active_browsers()
+
+        # Extraer profile_ids de las sesiones activas del launcher
+        known_profile_ids = [
+            s.profile_id for s in self.launcher.active_sessions.values()
+        ]
+
+        # Opción A: verificación rápida solo de perfiles que el agente abrió
+        active_browsers = self.adspower.get_active_browsers(known_profile_ids)
 
         return {
             "computer_id": self.config.computer_id,
@@ -162,7 +168,6 @@ class AdsPowerAgent:
             "network": net_stats,
             "system": sys_stats
         }
-
     # ========================================
     # COMANDOS DEL SERVIDOR
     # ========================================
