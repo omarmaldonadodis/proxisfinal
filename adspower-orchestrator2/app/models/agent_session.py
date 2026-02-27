@@ -48,7 +48,11 @@ class AgentSession(Base):
     last_url     = Column(Text, nullable=True)     # Última URL visitada
 
     # ── Estado y tiempos ──────────────────────────────────────────────────────
-    status       = Column(SQLEnum(SessionStatus), default=SessionStatus.OPENING, index=True)
+    status = Column(
+        String(50),
+        default=SessionStatus.OPENING.value,  # ← .value, no el enum
+        index=True
+    )
     requested_at = Column(DateTime(timezone=True), server_default=func.now(), index=True)
     opened_at    = Column(DateTime(timezone=True), nullable=True)
     closed_at    = Column(DateTime(timezone=True), nullable=True)
@@ -57,7 +61,7 @@ class AgentSession(Base):
     duration_seconds = Column(Integer, nullable=True)     # Duración total
     pages_visited    = Column(Integer, default=0)         # Páginas visitadas
     total_data_mb    = Column(Float,   default=0.0)       # Datos consumidos
-    browser_health   = Column(Float,   default=100.0)     # Salud del browser al cerrar
+    browser_health = Column(String(50), nullable=True)
     memory_mb        = Column(Float,   default=0.0)       # RAM usada
 
     # ── Razón de error/denegación ─────────────────────────────────────────────
@@ -66,6 +70,17 @@ class AgentSession(Base):
 
     # ── Eventos durante la sesión ─────────────────────────────────────────────
     events           = Column(JSON, default=list)   # Lista de eventos registrados
+
+
+    assignment_id      = Column(Integer, nullable=True)
+    data_sent_mb       = Column(Float, nullable=True)
+    data_received_mb   = Column(Float, nullable=True)
+    last_url_at        = Column(DateTime(timezone=True), nullable=True)
+    avg_response_time_ms = Column(Float, nullable=True)
+    browser_pid        = Column(Integer, nullable=True)
+    local_cpu_percent  = Column(Float, nullable=True)
+    local_ram_mb       = Column(Float, nullable=True)
+    authorized_by      = Column(String(255), nullable=True)
 
     # ── Relaciones ────────────────────────────────────────────────────────────
     # sessions = relationship("AgentSession", back_populates="computer")
@@ -100,7 +115,11 @@ class BrowserEvent(Base):
 
     id         = Column(Integer, primary_key=True, index=True)
     session_id = Column(Integer, ForeignKey("agent_sessions.id"), nullable=False, index=True)
-    event_type = Column(SQLEnum(BrowserEventType), nullable=False, index=True)
+    event_type = Column(
+        String(50),
+        nullable=False,
+        index=True
+    )
     url        = Column(Text,        nullable=True)
     details    = Column(JSON,        nullable=True)
     timestamp  = Column(DateTime(timezone=True), server_default=func.now(), index=True)

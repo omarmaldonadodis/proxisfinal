@@ -25,8 +25,8 @@ class Alert(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String(255), nullable=False)
     message = Column(Text, nullable=True)
-    severity = Column(SQLEnum(AlertSeverity), default=AlertSeverity.INFO, nullable=False)
-    status = Column(SQLEnum(AlertStatus), default=AlertStatus.ACTIVE, nullable=False, index=True)
+    severity = Column(String(50), default=AlertSeverity.INFO.value, nullable=False)
+    status = Column(String(50), default=AlertStatus.ACTIVE.value, nullable=False, index=True)
     source = Column(String(100), nullable=True)       # "proxy", "computer", "profile"
     source_id = Column(Integer, nullable=True)
     acknowledged_by = Column(String(255), nullable=True)
@@ -35,3 +35,4 @@ class Alert(Base):
     resolved_at = Column(DateTime(timezone=True), nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), index=True)
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+

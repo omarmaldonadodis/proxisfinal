@@ -542,7 +542,9 @@ async def get_activity_feed(
     for a in alerts:
         events.append({
             "id":        f"alert-{a.id}",
-            "type":      {"info":"INFO","warning":"WARNING","error":"ERROR","critical":"ERROR"}.get(a.severity.value, "INFO"),
+            "type": {"info":"INFO","warning":"WARNING","error":"ERROR","critical":"ERROR"}.get(
+                a.severity.value if hasattr(a.severity, 'value') else a.severity, "INFO"
+            ),
             "message":   a.title,
             "source":    a.source or "System",
             "timestamp": a.created_at.isoformat(),
@@ -568,6 +570,7 @@ def _session_message(s: AgentSession) -> str:
         "opening": f"Abriendo navegador — Perfil #{s.profile_id}",
         "denied":  f"Sesión denegada — {s.denial_reason}",
     }
+    # s.status ya es string, no hace falta .value
     return msgs.get(s.status, f"Evento de sesión #{s.id}")
 
 @router.get("/sessions/by-profile/{profile_id}")
