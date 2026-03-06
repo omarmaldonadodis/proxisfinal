@@ -7,7 +7,7 @@
 #
 from typing import Optional
 from datetime import datetime
-from fastapi import APIRouter, Depends, HTTPException, WebSocket, WebSocketDisconnect, Query
+from fastapi import APIRouter, Depends, HTTPException, WebSocket, WebSocketDisconnect, Query, Header
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from loguru import logger
@@ -17,8 +17,15 @@ from app.models.profile import Profile, ProfileStatus
 from app.models.agent_session import AgentSession, SessionStatus
 from app.models.computer import Computer, ComputerStatus
 from app.core.connection_manager import connection_manager
+from app.config import settings
 
-router = APIRouter()
+
+
+
+from pydantic import BaseModel
+from app.core.security import verify_token  # o como tengas la validación
+
+router = APIRouter(prefix="/agent", tags=["Agent"])
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -28,8 +35,7 @@ router = APIRouter()
 @router.websocket("/ws/{computer_id}")
 async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSession = Depends(get_db)):
     """WebSocket persistente para cada agente. Recibe comandos y envía eventos."""
-    await connection_manager.connect_agent(computer_id, websocket)
-
+    await connection_manager.connect_agent(websocket, computer_id)
     # Marcar computadora como ONLINE
     result = await db.execute(select(Computer).where(Computer.id == computer_id))
     computer = result.scalar_one_or_none()
@@ -54,14 +60,22 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
                 await websocket.send_json({"type": "pong"})
 
             elif msg_type == "metrics":
-                # El agente reporta CPU/RAM en tiempo real
+                metrics_data = data.get("data", {})
                 await connection_manager.broadcast_to_admins({
                     "type":        "agent_metrics",
                     "computer_id": computer_id,
-                    "data":        data.get("data", {}),
+                    "data":        metrics_data,
                     "timestamp":   datetime.utcnow().isoformat(),
                 })
+                # ← AGREGAR: persistir en DB
+                await connection_manager._save_metrics_to_db(computer_id, metrics_data)
+                
+                # ← AGREGAR: actualizar last_seen
+                if computer:
+                    computer.last_seen_at = datetime.utcnow()
+                    await db.commit()
 
+            
             elif msg_type == "session_opened":
                 # Confirma que el navegador se abrió
                 session_id = data.get("session_id")
@@ -82,17 +96,24 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
                         })
 
             elif msg_type == "session_closed":
-                # Navegador cerrado
                 session_id = data.get("session_id")
                 if session_id:
                     sess = await db.get(AgentSession, session_id)
                     if sess:
-                        sess.status           = SessionStatus.CLOSED
-                        sess.closed_at        = datetime.utcnow()
-                        sess.duration_seconds = data.get("duration_seconds")
-                        sess.pages_visited    = data.get("pages_visited", 0)
-                        sess.total_data_mb    = data.get("total_data_mb", 0.0)
-                        sess.last_url         = data.get("last_url")
+                        sess.status        = SessionStatus.CLOSED
+                        sess.closed_at     = datetime.utcnow()
+                        sess.pages_visited = data.get("pages_visited", 0)
+                        sess.total_data_mb = data.get("total_data_mb", 0.0)
+
+                        # Calcular duración
+                        if sess.opened_at:
+                            delta = datetime.utcnow() - sess.opened_at.replace(tzinfo=None)
+                            sess.duration_seconds = int(delta.total_seconds())
+
+                        if data.get("crash_reason"):
+                            sess.status       = SessionStatus.CRASHED
+                            sess.error_detail = data.get("crash_reason")
+
                         await db.commit()
 
                         await connection_manager.broadcast_to_admins({
@@ -100,6 +121,7 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
                             "session_id":       session_id,
                             "computer_id":      computer_id,
                             "duration_seconds": sess.duration_seconds,
+                            "pages_visited":    sess.pages_visited,
                             "timestamp":        datetime.utcnow().isoformat(),
                         })
 
@@ -120,23 +142,48 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
                         "timestamp":   datetime.utcnow().isoformat(),
                     })
 
+            elif msg_type == "session_metrics":
+                session_id = data.get("session_id")
+                if session_id:
+                    sess = await db.get(AgentSession, session_id)
+                    if sess:
+                        metrics = data.get("data", {})
+                        sess.pages_visited  = metrics.get("pages_visited", sess.pages_visited or 0)
+                        sess.total_data_mb  = metrics.get("total_data_mb", sess.total_data_mb or 0.0)
+                        sess.browser_health = metrics.get("browser_health", 100.0)
+                        sess.memory_mb      = metrics.get("memory_mb", 0.0)
+                        if metrics.get("current_url"):
+                            sess.last_url = metrics["current_url"]
+                        await db.commit()
             elif msg_type == "page_visit":
-                # Registrar visita a URL (incluso sin perfil)
+
                 session_id = data.get("session_id")
                 url        = data.get("url")
-                if session_id:
+                title      = data.get("title", "")
+                if session_id and url:
                     sess = await db.get(AgentSession, session_id)
                     if sess:
                         sess.last_url      = url
                         sess.pages_visited = (sess.pages_visited or 0) + 1
-                        events = sess.events or []
-                        events.append({
-                            "type":      "page_visit",
-                            "url":       url,
-                            "timestamp": datetime.utcnow().isoformat(),
-                        })
-                        sess.events = events
+
+                        # ✅ Guardar en BrowserEvent (lo que lee el endpoint)
+                        from app.models.agent_session import BrowserEvent
+                        db.add(BrowserEvent(
+                            session_id = session_id,
+                            event_type = "page_visit",
+                            url        = url,
+                            details    = {"title": title},
+                        ))
                         await db.commit()
+
+                        # ✅ Broadcast en tiempo real al admin panel
+                        await connection_manager.broadcast_to_admins({
+                            "type":       "page_visit",
+                            "session_id": session_id,
+                            "url":        url,
+                            "title":      title,
+                            "timestamp":  datetime.utcnow().isoformat(),
+                        })
 
             elif msg_type == "error":
                 session_id = data.get("session_id")
@@ -155,6 +202,10 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
                             "error":       data.get("error"),
                             "timestamp":   datetime.utcnow().isoformat(),
                         })
+            elif msg_type == "log":
+                level   = data.get("level", "INFO")
+                message = data.get("message", "")
+                await connection_manager.add_agent_log(computer_id, level, message)
 
     except WebSocketDisconnect:
         pass
@@ -366,43 +417,61 @@ async def open_browser_url(
 # REGISTRAR AGENTE (al arrancar el ejecutable por primera vez)
 # ══════════════════════════════════════════════════════════════════════════════
 
+
+class RegisterAgentRequest(BaseModel):
+    name:             str
+    hostname:         str
+    ip_address:       Optional[str] = ""
+    adspower_api_url: Optional[str] = ""
+    adspower_api_key: Optional[str] = ""
+    os_info:          Optional[str] = ""
+    cpu_cores:        Optional[int] = None
+    ram_gb:           Optional[int] = None
+
 @router.post("/register")
 async def register_agent(
-    name:        str = Query(...),
-    hostname:    str = Query(...),
-    ip_address:  str = Query(""),
+    request: RegisterAgentRequest,
+    token: str = Header(None, alias="X-Agent-Token"),
     db: AsyncSession = Depends(get_db),
 ):
-    """Registra una nueva computadora en el sistema."""
-    # Verificar si ya existe
+    # Validar token
+    if not token or token != settings.AGENT_SECRET_TOKEN:
+        raise HTTPException(status_code=401, detail="Token inválido")
+
+    # Verificar si ya existe por hostname
     result = await db.execute(
-        select(Computer).where(Computer.hostname == hostname)
+        select(Computer).where(Computer.hostname == request.hostname)
     )
     existing = result.scalar_one_or_none()
+    
     if existing:
-        existing.status       = ComputerStatus.ONLINE
-        existing.last_seen_at = datetime.utcnow()
+        existing.status           = ComputerStatus.ONLINE
+        existing.last_seen_at     = datetime.utcnow()
+        existing.adspower_api_url = request.adspower_api_url or existing.adspower_api_url
+        existing.ip_address       = request.ip_address or existing.ip_address
         await db.commit()
         return {"computer_id": existing.id, "name": existing.name, "registered": False}
 
     computer = Computer(
-        name=         name,
-        hostname=     hostname,
-        ip_address=   ip_address,
-        status=       ComputerStatus.ONLINE,
-        last_seen_at= datetime.utcnow(),
-        max_profiles= 10,
-        is_active=    True,
+        name=             request.name,
+        hostname=         request.hostname,
+        ip_address=       request.ip_address,
+        adspower_api_url= request.adspower_api_url or "",
+        adspower_api_key= request.adspower_api_key or "",
+        os_info=          request.os_info,
+        cpu_cores=        request.cpu_cores,
+        ram_gb=           request.ram_gb,
+        status=           ComputerStatus.ONLINE,
+        last_seen_at=     datetime.utcnow(),
+        is_active=        True,
     )
     db.add(computer)
     await db.commit()
     await db.refresh(computer)
 
-    await connection_manager.broadcast_to_admins({
-        "type":        "agent_registered",
-        "computer_id": computer.id,
-        "name":        computer.name,
-        "timestamp":   datetime.utcnow().isoformat(),
-    })
-
     return {"computer_id": computer.id, "name": computer.name, "registered": True}
+
+@router.get("/computers/{computer_id}/logs")
+async def get_computer_logs(computer_id: int):
+    return {"logs": connection_manager.get_agent_logs(computer_id)}
+

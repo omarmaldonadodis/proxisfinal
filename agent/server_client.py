@@ -24,9 +24,11 @@ class ServerClient:
         self.ws: Optional[websockets.WebSocketClientProtocol] = None
         self.is_connected = False
 
-        # Callback para cuando el servidor envía un comando
-        self.on_open_browser: Optional[Callable] = None
-        self.on_close_browser: Optional[Callable] = None
+        self.on_open_browser:   Optional[Callable] = None
+        self.on_close_browser:  Optional[Callable] = None
+        self.on_create_profile: Optional[Callable] = None
+        self.on_update_proxy:   Optional[Callable] = None  # ← ADD
+
 
     # ========================================
     # REGISTRO
@@ -92,6 +94,7 @@ class ServerClient:
 
                 async with websockets.connect(
                     ws_url,
+                    additional_headers={"X-Agent-Token": self.config.server_token},
                     ping_interval=30,
                     ping_timeout=10
                 ) as ws:
@@ -135,9 +138,16 @@ class ServerClient:
                 await self.on_close_browser(
                     session_id=data["session_id"]
                 )
+        elif command == "create_adspower_profile":
+            if self.on_create_profile:
+                asyncio.create_task(self.on_create_profile(data))
 
         elif data.get("type") == "pong":
             logger.debug("Pong recibido del servidor")
+        
+        elif command == "update_proxy":
+            if self.on_update_proxy:
+                asyncio.create_task(self.on_update_proxy(data))
 
     # ========================================
     # ENVÍO DE DATOS
@@ -155,51 +165,49 @@ class ServerClient:
                 logger.debug(f"Error enviando métricas: {e}")
 
     async def mark_session_active(self, session_id: int) -> bool:
-        """Confirma al servidor que el navegador se abrió"""
-        return await self._post(
-            f"/api/v1/agent/session/{session_id}/active",
-            {}
-        )
+        """Confirma al servidor que el navegador se abrió — via WebSocket"""
+        if self.ws and self.is_connected:
+            try:
+                await self.ws.send(json.dumps({
+                    "type":       "session_opened",
+                    "session_id": session_id,
+                }))
+                return True
+            except Exception as e:
+                logger.debug(f"Error marcando sesión activa: {e}")
+        return False
 
-    async def report_navigation(
-        self,
-        session_id: int,
-        url: str,
-        title: str
-    ) -> bool:
-        return await self._post(
-            f"/api/v1/agent/session/{session_id}/event",
-            {
-                "event_type": "navigation",
-                "url": url,
-                "page_title": title
-            }
-        )
 
     async def update_metrics(
         self,
         session_id: int,
-        data_sent_mb: float,
-        data_received_mb: float,
-        pages_visited: int,
+        data_sent_mb: float = 0,
+        data_received_mb: float = 0,
+        pages_visited: int = 0,
         current_url: Optional[str] = None,
         browser_health: str = "healthy",
         cpu_percent: Optional[float] = None,
         ram_mb: Optional[float] = None
     ) -> bool:
-        return await self._post(
-            f"/api/v1/agent/session/{session_id}/metrics",
-            {
-                "session_id": session_id,
-                "data_sent_mb": data_sent_mb,
-                "data_received_mb": data_received_mb,
-                "pages_visited": pages_visited,
-                "current_url": current_url,
-                "browser_health": browser_health,
-                "cpu_percent": cpu_percent,
-                "ram_mb": ram_mb
-            }
-        )
+        """Métricas de sesión — via WebSocket"""
+        if self.ws and self.is_connected:
+            try:
+                await self.ws.send(json.dumps({
+                    "type":       "session_metrics",
+                    "session_id": session_id,
+                    "data": {
+                        "pages_visited":    pages_visited,
+                        "total_data_mb":    data_sent_mb + data_received_mb,
+                        "current_url":      current_url,
+                        "browser_health":   browser_health,
+                        "cpu_percent":      cpu_percent,
+                        "memory_mb":        ram_mb,
+                    }
+                }))
+                return True
+            except Exception as e:
+                logger.debug(f"Error enviando métricas: {e}")
+        return False
 
     async def close_session(
         self,
@@ -209,15 +217,52 @@ class ServerClient:
         pages_visited: int,
         crash_reason: Optional[str] = None
     ) -> bool:
-        return await self._post(
-            f"/api/v1/agent/session/{session_id}/close",
-            {
-                "data_sent_mb": data_sent_mb,
-                "data_received_mb": data_received_mb,
-                "pages_visited": pages_visited,
-                "crash_reason": crash_reason
-            }
-        )
+        """Cierra sesión — via WebSocket"""
+        if self.ws and self.is_connected:
+            try:
+                await self.ws.send(json.dumps({
+                    "type":             "session_closed",
+                    "session_id":       session_id,
+                    "pages_visited":    pages_visited,
+                    "total_data_mb":    data_sent_mb + data_received_mb,
+                    "duration_seconds": None,  # el server lo calcula
+                    "crash_reason":     crash_reason,
+                }))
+                return True
+            except Exception as e:
+                logger.debug(f"Error cerrando sesión: {e}")
+        return False
+
+    async def report_navigation(self, session_id: int, url: str, title: str) -> bool:
+        """Reporta navegación — via WebSocket"""
+        if self.ws and self.is_connected:
+            try:
+                await self.ws.send(json.dumps({
+                    "type":       "page_visit",
+                    "session_id": session_id,
+                    "url":        url,
+                    "title":      title,
+                }))
+                return True
+            except Exception as e:
+                logger.debug(f"Error reportando navegación: {e}")
+        return False
+    
+
+
+    async def update_metrics(self, session_id: int, **kwargs) -> bool:
+        """Métricas de sesión — via WebSocket (ya funciona con type=metrics)"""
+        if self.ws and self.is_connected:
+            try:
+                await self.ws.send(json.dumps({
+                    "type":       "metrics",
+                    "session_id": session_id,
+                    "data":       kwargs,
+                }))
+                return True
+            except Exception as e:
+                logger.debug(f"Error enviando métricas: {e}")
+        return False
 
     # ========================================
     # HELPER HTTP
@@ -235,3 +280,14 @@ class ServerClient:
         except Exception as e:
             logger.debug(f"Error HTTP {endpoint}: {e}")
             return False
+
+    async def send_log(self, level: str, message: str):
+        if self.ws and self.is_connected:
+            try:
+                await self.ws.send(json.dumps({
+                    "type":    "log",
+                    "level":   level,
+                    "message": message,
+                }))
+            except Exception:
+                pass

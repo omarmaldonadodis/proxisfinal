@@ -1,7 +1,9 @@
 # app/api/v1/profiles.py
 from fastapi import APIRouter, Depends, HTTPException, Query, BackgroundTasks
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select 
 from typing import Optional
+from datetime import datetime 
 from app.database import get_db
 from app.services.profile_service import ProfileService
 from app.schemas.profile import (
@@ -12,7 +14,9 @@ from app.schemas.profile import (
     ProfileListResponse,
     ProfileBulkCreate
 )
-from app.models.profile import ProfileStatus
+from app.models.profile import Profile, ProfileStatus, DeviceType
+
+
 
 router = APIRouter(prefix="/profiles", tags=["Profiles"])
 
@@ -76,35 +80,38 @@ async def create_profile_with_proxy(
     }
     db_proxy_type = proxy_type_map.get(data.proxy_type, "residential")
 
-    # ── Paso 1: Buscar proxy disponible ───────────────────────────────────────
-    proxy_result = await db.execute(
-        select(Proxy)
-        .where(
-            Proxy.status     == ProxyStatus.ACTIVE,
-            Proxy.proxy_type == db_proxy_type,
-            Proxy.country    == data.country,
-        )
-        .limit(1)
-    )
-    proxy = proxy_result.scalar_one_or_none()
 
-    # ── Paso 2: Si no hay, crear uno nuevo ────────────────────────────────────
-    if not proxy:
-        from app.config import settings
-        proxy = Proxy(
-            host=             "proxy.soax.com",
-            port=             5000,
-            username=         f"user-{data.country.lower()}-{db_proxy_type}",
-            password=         getattr(settings, "SOAX_PASSWORD", "changeme"),
-            proxy_type=       db_proxy_type,
-            country=          data.country,
-            city=             data.city,
-            status=           ProxyStatus.ACTIVE,
-            rotation_minutes= data.rotation_minutes,
-            created_at=       datetime.utcnow(),
-        )
-        db.add(proxy)
-        await db.flush()
+    from app.integrations.soax_client import SOAXClient
+    from app.config import settings
+    import uuid
+
+    soax = SOAXClient(
+        username=settings.SOAX_USERNAME,  # "package-325401"
+        password=settings.SOAX_PASSWORD,
+        host=    "proxy.soax.com",
+        port=    5000,
+    )
+
+    proxy_config = soax.get_proxy_config(
+        proxy_type=       db_proxy_type,
+        country=          data.country.lower(),
+        city=             (data.city or "").lower() or None,
+        session_id=       uuid.uuid4().hex[:16],
+        session_lifetime= (data.rotation_minutes or 30) * 60,
+    )
+
+    proxy = Proxy(
+        host=       proxy_config["host"],
+        port=       proxy_config["port"],
+        username=   proxy_config["username"],   # ← username completo de SOAX
+        password=   proxy_config["password"],
+        proxy_type= db_proxy_type,
+        country=    data.country,
+        city=       data.city,
+        status=     ProxyStatus.ACTIVE,
+    )
+    db.add(proxy)
+    await db.flush()
 
     # ── Paso 3: Crear el perfil ────────────────────────────────────────────────
     device_map = {
@@ -145,11 +152,69 @@ async def create_profile_with_proxy(
     await db.commit()
     await db.refresh(profile)
 
-    # ── Paso 4: Buscar cualquier agente online y enviar comando ───────────────
+    # ── Paso 4: Generar fingerprint completo en el servidor ───────────────────
+    from app.utils.profile_generator import ProfileGenerator
+
+    profile_config = ProfileGenerator.generate_profile(
+        name=                 data.name,
+        country=              data.country,
+        city=                 data.city,
+        device_type=          data.device_type,
+        include_cookies=      True,
+        include_localstorage= True
+    )
+
+    screen_res = profile_config["screen_resolution"].replace("x", "_")
+
+    fingerprint_config = {
+        "automatic_timezone":   "0",
+        "timezone":             profile_config["timezone"],
+        "webrtc":               "proxy",
+        "location":             "ask",
+        "language":             [profile_config["language"]],
+        "page_language":        [profile_config["language"]],
+        "ua":                   profile_config["user_agent"],
+        "screen_resolution":    screen_res,
+        "fonts":                ["all"],
+        "canvas":               "1",
+        "webgl_image":          "1",
+        "webgl":                "1",
+        "audio":                "1",
+        "do_not_track":         "default",
+        "hardware_concurrency": str(profile_config["hardware_concurrency"]),
+        "device_memory":        str(profile_config["device_memory"]),
+        "flash":                "block",
+        "media_devices":        "1",
+        "client_rects":         "1",
+        "speech_voices":        "1",
+    }
+
+    user_proxy_config = {
+        "proxy_soft":     "other",
+        "proxy_type":     "http",
+        "proxy_host":     proxy.host,
+        "proxy_port":     str(proxy.port),
+        "proxy_user":     proxy.username,
+        "proxy_password": proxy.password or getattr(settings, "SOAX_PASSWORD", ""),
+    }
+
+    # ── Actualizar perfil en BD con datos reales del generator ────────────────
+    profile.language=          profile_config["language"]
+    profile.timezone=          profile_config["timezone"]
+    profile.device_name=       profile_config["device_name"]
+    profile.user_agent=        profile_config["user_agent"]
+    profile.screen_resolution= profile_config["screen_resolution"]
+    profile.viewport=          profile_config["viewport"]
+    profile.pixel_ratio=       profile_config["pixel_ratio"]
+    profile.hardware_concurrency= profile_config["hardware_concurrency"]
+    profile.device_memory=     profile_config["device_memory"]
+    profile.platform=          profile_config["platform"]
+    profile.interests=         profile_config["interests"]
+    await db.commit()
+
+    # ── Paso 5: Buscar agente online y enviar comando con TODO el fingerprint ─
     computer_result = await db.execute(
-        select(Computer)
-        .where(Computer.status == ComputerStatus.ONLINE)
-        .limit(1)
+        select(Computer).where(Computer.status == ComputerStatus.ONLINE).limit(1)
     )
     computer = computer_result.scalar_one_or_none()
 
@@ -159,21 +224,14 @@ async def create_profile_with_proxy(
             computer_id=computer.id,
             command="create_adspower_profile",
             payload={
-                "profile_id":       profile.id,
-                "name":             data.name,
-                "proxy_type":       data.proxy_type,
-                "country":          data.country,
-                "city":             data.city,
-                "os":               data.os,
-                "screen_res":       data.screen_res,
-                "language":         data.language,
-                "auto_fingerprint": data.auto_fingerprint,
-                "warmup_urls":      data.warmup_urls,
-                "open_on_create":   data.open_on_create,
-                "rotation_minutes": data.rotation_minutes,
+                "profile_id":         profile.id,
+                "name":               data.name,
+                "remark":             profile_config["remark"],
+                "fingerprint_config": fingerprint_config,      # ← completo
+                "user_proxy_config":  user_proxy_config,       # ← completo
+                "cookies":            profile_config.get("cookies", []),
             }
         )
-
     # ── Paso 5: Notificar al panel ────────────────────────────────────────────
     await connection_manager.broadcast_to_admins({
         "type":       "profile_created",

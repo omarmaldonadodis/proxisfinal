@@ -23,6 +23,9 @@ logger.add(
 )
 
 
+
+
+
 class AdsPowerAgent:
 
     def __init__(self):
@@ -39,6 +42,9 @@ class AdsPowerAgent:
         from agent.server_client import ServerClient
         from agent.browser_launcher import BrowserLauncher
         from agent.tray_icon import TrayIcon
+
+        from agent.profile_creator import ProfileCreator
+
 
         # ✅ FIX: pasar api_key al monitor
         self.adspower = AdsPowerMonitor(
@@ -61,6 +67,14 @@ class AdsPowerAgent:
         self.server.on_open_browser = self._on_open_browser_command
         self.server.on_close_browser = self._on_close_browser_command
 
+        self.profile_creator = ProfileCreator(
+            self.config.adspower_url,
+            self.config.adspower_api_key
+        )
+        self.server.on_create_profile = self._on_create_profile_command
+        self.server.on_update_proxy = self._on_update_proxy_command
+
+
     async def start(self):
         """Inicia el agente"""
         logger.info("=" * 50)
@@ -74,11 +88,17 @@ class AdsPowerAgent:
 
         # 1. Registrar computadora en servidor
         registered = await self.server.register()
-        if not registered:
-            logger.error("❌ No se pudo registrar en el servidor. Verifica la URL y el token.")
-        else:
+
+        tasks = [asyncio.create_task(self._metrics_loop())]
+
+        if registered:
             self.is_connected = True
             self.tray.update_status(True)
+            tasks.append(asyncio.create_task(self.server.connect_websocket()))
+        else:
+            logger.error("❌ No se pudo registrar. WebSocket no iniciado.")
+
+        tasks.append(asyncio.create_task(self._heartbeat_loop()))
 
         # 2. Iniciar tareas concurrentes
         tasks = [
@@ -230,6 +250,85 @@ class AdsPowerAgent:
             pages_visited=0,
             crash_reason=error
         )
+
+    async def _on_update_proxy_command(self, data: dict):
+        """Backend pide rotar proxy en AdsPower local."""
+        import httpx
+        import json
+
+        profile_ids  = data.get("profile_ids", [])
+        proxy_config = {
+            "proxy_soft":     "other",
+            "proxy_type":     "http",
+            "proxy_host":     data["proxy_host"],
+            "proxy_port":     str(data["proxy_port"]),
+            "proxy_user":     data["proxy_user"],
+            "proxy_password": data["proxy_password"],
+        }
+
+        logger.info(f"🔄 update_proxy: {len(profile_ids)} perfiles → {data['proxy_host']}:{data['proxy_port']}")
+
+        success_count = 0
+        failed_count  = 0
+
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            for ads_id in profile_ids:
+                try:
+                    r = await client.post(
+                        f"{self.config.adspower_url}/api/v1/user/update",
+                        json={"user_id": ads_id, "user_proxy_config": proxy_config},
+                        headers={"Authorization": f"Bearer {self.config.adspower_api_key}"},
+                    )
+                    if r.status_code == 200 and r.json().get("code") == 0:
+                        success_count += 1
+                        logger.info(f"  ✅ Perfil {ads_id} proxy actualizado")
+                    else:
+                        failed_count += 1
+                        logger.warning(f"  ⚠️ Perfil {ads_id} falló: {r.text}")
+                except Exception as e:
+                    failed_count += 1
+                    logger.error(f"  ❌ Perfil {ads_id}: {e}")
+
+        # Reportar resultado al backend
+        if self.server.ws and self.server.is_connected:
+            await self.server.ws.send(json.dumps({
+                "type":          "proxy_update_result",
+                "proxy_id":      data.get("proxy_id"),
+                "success_count": success_count,
+                "failed_count":  failed_count,
+            }))
+
+        logger.info(f"✅ update_proxy completado: {success_count} ok, {failed_count} fallidos")
+        
+    # Agregar método:
+    async def _on_create_profile_command(self, data: dict):
+        """Crea el perfil en AdsPower y notifica al servidor"""
+        profile_id = data.get("profile_id")
+        logger.info(f"📥 Creando perfil AdsPower para profile_id={profile_id}")
+
+        adspower_id = await self.profile_creator.create_profile(data)
+
+        # Notificar al servidor con el resultado
+        if self.server.ws and self.server.is_connected:
+            import json
+            await self.server.ws.send(json.dumps({
+                "type":        "profile_created",
+                "profile_id":  profile_id,
+                "adspower_id": adspower_id,  # None si falló
+                "success":     adspower_id is not None,
+            }))
+
+
+    def _setup_remote_logging(self):
+        async def remote_sink(message):
+            record = message.record
+            await self.server_client.send_log(
+                level=record["level"].name,
+                message=record["message"],
+            )
+        
+        logger.add(remote_sink, level="DEBUG")
+
 
 
 # ========================================

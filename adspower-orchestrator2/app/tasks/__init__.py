@@ -1,4 +1,3 @@
-# app/tasks/__init__.py
 from celery import Celery
 from app.config import settings
 from loguru import logger
@@ -11,6 +10,7 @@ celery_app = Celery(
         'app.tasks.backup_tasks',
         'app.tasks.health_tasks',
         'app.tasks.proxy_rotation_tasks',
+        'app.tasks.proxy_health_tasks',
     ]
 )
 
@@ -24,17 +24,21 @@ celery_app.conf.update(
 
 @celery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
-    """Configurar tareas periódicas"""
     sender.conf.beat_schedule = {
-        # Rotación automática de proxies
+        # Rotación + health check de proxies cada 15 min
         'auto-rotate-slow-proxies': {
             'task': 'tasks.auto_rotate_slow_proxies',
-            'schedule': 900.0,  # Cada 15 minutos
+            'schedule': 900.0,
+        },
+        # Health check de computers cada 5 min
+        'health-check-computers': {
+            'task': 'tasks.health_check_all_computers',
+            'schedule': 300.0,
         },
         # Backup diario
         'backup-database-daily': {
             'task': 'tasks.backup_database',
-            'schedule': 86400.0,  # Cada 24 horas
+            'schedule': 86400.0,
         },
     }
     logger.info("✓ Celery Beat schedule configured")

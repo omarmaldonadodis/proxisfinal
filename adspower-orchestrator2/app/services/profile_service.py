@@ -349,4 +349,19 @@ class ProfileService:
             'warmed': row.warmed or 0,
             'total_sessions': row.total_sessions or 0
         }
-    
+    # En profile_service.py, agregar:
+    async def set_adspower_id(self, profile_id: int, adspower_id: str) -> bool:
+        profile = await self.get_profile(profile_id)
+        if not profile:
+            return False
+
+        # Si ya fue procesado por otro agente, ignorar
+        if not profile.adspower_id.startswith("pending-"):
+            logger.warning(f"Profile {profile_id} ya tiene adspower_id real, ignorando duplicado")
+            return False
+
+        profile.adspower_id = adspower_id
+        profile.status      = ProfileStatus.READY
+        profile.updated_at  = datetime.utcnow()
+        await self.db.commit()
+        return True

@@ -65,8 +65,11 @@ class BrowserLauncher:
         )
 
         # 1. Abrir via AdsPower API
-        result = self.monitor.open_browser(profile_id, target_url)
-
+        loop = asyncio.get_event_loop()
+        result = await loop.run_in_executor(
+            None,
+            lambda: self.monitor.open_browser(profile_id, target_url)
+        )
         if not result.get("success"):
             error_msg = result.get("error", "Error desconocido")
             logger.error(f"❌ Error abriendo navegador: {error_msg}")
@@ -87,7 +90,14 @@ class BrowserLauncher:
         webdriver_path = result.get("webdriver")
 
         if selenium_ws and webdriver_path:
-            await self._connect_selenium(session, selenium_ws, webdriver_path)
+            try:
+                await asyncio.wait_for(
+                    self._connect_selenium(session, selenium_ws, webdriver_path),
+                    timeout=30.0
+                )
+            except asyncio.TimeoutError:
+                logger.warning("⚠️ Timeout conectando Selenium, continuando sin él")
+                session.driver = None        
         else:
             logger.warning(
                 "⚠️ Sin endpoint Selenium, usando polling básico de AdsPower API"
@@ -101,41 +111,29 @@ class BrowserLauncher:
         logger.info(f"✅ Navegador abierto correctamente: sesión={session_id}")
         return {"success": True, "session_id": session_id}
 
-    async def _connect_selenium(
-        self,
-        session: BrowserSession,
-        selenium_ws: str,
-        webdriver_path: str
-    ):
-        """Conecta Selenium al navegador ya abierto"""
+    async def _connect_selenium(self, session, selenium_ws, webdriver_path):
         try:
             from selenium import webdriver as wd
             from selenium.webdriver.chrome.options import Options
             from selenium.webdriver.chrome.service import Service
 
-            # Extraer host:port del ws endpoint
-            # ws://127.0.0.1:9222/devtools/browser/xxx → 127.0.0.1:9222
             debug_address = (
-                selenium_ws
-                .replace("ws://", "")
-                .split("/devtools/")[0]
+                selenium_ws.replace("ws://", "").split("/devtools/")[0]
             )
 
-            options = Options()
-            options.add_experimental_option("debuggerAddress", debug_address)
+            loop = asyncio.get_event_loop()
 
-            service = Service(executable_path=webdriver_path)
-            session.driver = wd.Chrome(service=service, options=options)
+            def _init_driver():
+                options = Options()
+                options.add_experimental_option("debuggerAddress", debug_address)
+                service = Service(executable_path=webdriver_path)
+                driver = wd.Chrome(service=service, options=options)
+                if session.target_url and session.target_url != "about:blank":
+                    driver.get(session.target_url)
+                return driver
 
-            # ✅ Navegar a la URL objetivo
-            if session.target_url and session.target_url != "about:blank":
-                try:
-                    session.driver.get(session.target_url)
-                    logger.info(f"✅ Navegando a: {session.target_url}")
-                except Exception as nav_e:
-                    logger.warning(f"⚠️ Error navegando a URL: {nav_e}")
-
-            logger.info(f"✅ Selenium conectado: {debug_address}")
+            # Ejecutar en thread pool — evita bloquear el event loop
+            session.driver = await loop.run_in_executor(None, _init_driver)
             logger.info(f"✅ Selenium conectado: {debug_address}")
 
         except Exception as e:

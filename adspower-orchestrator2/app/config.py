@@ -51,6 +51,9 @@ class Settings(BaseSettings):
     BACKUP_ENABLED: bool = True
     BACKUP_INTERVAL: int = 86400
     BACKUP_PATH: str = "/backups"
+
+    AGENT_SECRET_TOKEN: str = "Lfis9BJ3sm0tINNAfV_PixQTGpPcJj2jLD8N9QtFVWk" 
+
     
     class Config:
         env_file = ".env"

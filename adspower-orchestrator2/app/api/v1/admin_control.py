@@ -323,48 +323,49 @@ async def get_active_sessions(db: AsyncSession = Depends(get_db)):
     }
 
 
-@router.get("/sessions/history")
-async def get_session_history(
-    skip: int = Query(0, ge=0),
-    limit: int = Query(50, ge=1, le=200),
-    agent_name: Optional[str] = None,
-    computer_id: Optional[int] = None,
-    date_from: Optional[datetime] = None,
-    date_to: Optional[datetime] = None,
+@router.get("/sessions/{session_id}/events")
+async def get_session_events(
+    session_id: int,
     db: AsyncSession = Depends(get_db)
 ):
-    """Historial completo de sesiones con filtros"""
-    service = AgentService(db)
-    sessions, total = await service.get_session_history(
-        skip=skip,
-        limit=limit,
-        agent_name=agent_name,
-        computer_id=computer_id,
-        date_from=date_from,
-        date_to=date_to
+    """Ver todos los eventos de una sesión específica"""
+    result = await db.execute(
+        select(AgentSession).where(AgentSession.id == session_id)
     )
+    session = result.scalar_one_or_none()
+    if not session:
+        raise HTTPException(status_code=404, detail="Sesión no encontrada")
+
+    from app.models.agent_session import BrowserEvent
+    events_r = await db.execute(
+        select(BrowserEvent)
+        .where(BrowserEvent.session_id == session_id)
+        .order_by(BrowserEvent.timestamp)
+    )
+    events = events_r.scalars().all()
+
+    def safe_title(e):
+        if hasattr(e, "details") and e.details:
+            return e.details.get("title")
+        if hasattr(e, "page_title"):
+            return e.page_title
+        return None
 
     return {
-        "total": total,
-        "items": [
+        "session_id":   session_id,
+        "agent_name":   session.agent_name,
+        "total_events": len(events),
+        "events": [
             {
-                "id": s.id,
-                "agent_name": s.agent_name,
-                "profile_id": s.profile_id,
-                "target_url": s.target_url,
-                "status": s.status,
-                "requested_at": s.requested_at,
-                "opened_at": s.opened_at,
-                "closed_at": s.closed_at,
-                "duration_seconds": s.duration_seconds,
-                "pages_visited": s.pages_visited,
-                "total_data_mb": s.total_data_mb,
-                "browser_health": s.browser_health
+                "id":        e.id,
+                "type":      e.event_type,
+                "url":       e.url,
+                "title":     safe_title(e),
+                "timestamp": e.timestamp.isoformat() if hasattr(e.timestamp, 'isoformat') else str(e.timestamp),
             }
-            for s in sessions
+            for e in events
         ]
     }
-
 
 @router.get("/sessions/{session_id}/events")
 async def get_session_events(
@@ -401,7 +402,7 @@ async def get_session_events(
                 "id": e.id,
                 "type": e.event_type,
                 "url": e.url,
-                "title": e.page_title,
+                "title": (e.details or {}).get("title") if hasattr(e, "details") else None,
                 "timestamp": e.timestamp,
                 "extra": e.extra_data
             }
@@ -514,7 +515,15 @@ async def get_activity_feed(
 
     events = []
 
+    # Importar Profile arriba del loop
+    from app.models.profile import Profile
+
     for s in sessions:
+        # Buscar nombre del perfil
+        profile_r = await db.get(Profile, s.profile_id)
+        profile_name = profile_r.name if profile_r else f"Perfil #{s.profile_id}"
+        profile_owner = profile_r.owner if profile_r else None
+
         event_type = {
             "active":  "SUCCESS",
             "closed":  "INFO",
@@ -526,8 +535,8 @@ async def get_activity_feed(
         events.append({
             "id":        f"sess-{s.id}",
             "type":      event_type,
-            "message":   _session_message(s),
-            "source":    s.agent_name,
+            "message":   _session_message(s, profile_name),
+            "source":    profile_owner or s.agent_name,   # ← muestra dueño en vez de "admin-panel"
             "timestamp": s.requested_at.isoformat() if s.requested_at else "",
             "meta": {
                 "session_id":  s.id,
@@ -555,6 +564,7 @@ async def get_activity_feed(
                 "message":   a.message,
             }
         })
+        
 
     # Ordenar por timestamp desc
     events.sort(key=lambda e: e["timestamp"], reverse=True)
@@ -562,16 +572,16 @@ async def get_activity_feed(
     return {"total": len(events), "items": events[:limit]}
 
 
-def _session_message(s: AgentSession) -> str:
+def _session_message(s: AgentSession, profile_name: str = None) -> str:
+    name = profile_name or f"Perfil #{s.profile_id}"
     msgs = {
-        "active":  f"Sesión iniciada — Perfil #{s.profile_id}",
-        "closed":  f"Sesión cerrada — {s.duration_seconds or 0}s, {round(s.total_data_mb or 0, 1)}MB",
-        "crashed": f"Sesión crasheó — Perfil #{s.profile_id}",
-        "opening": f"Abriendo navegador — Perfil #{s.profile_id}",
-        "denied":  f"Sesión denegada — {s.denial_reason}",
+        "active":  f"Sesión iniciada — {name}",
+        "closed":  f"Sesión cerrada — {name} · {s.duration_seconds or 0}s, {round(s.total_data_mb or 0, 1)}MB",
+        "crashed": f"Sesión crasheó — {name}",
+        "opening": f"Abriendo navegador — {name}",
+        "denied":  f"Sesión denegada — {name}",
     }
-    # s.status ya es string, no hace falta .value
-    return msgs.get(s.status, f"Evento de sesión #{s.id}")
+    return msgs.get(s.status, f"Evento #{s.id}")
 
 @router.get("/sessions/by-profile/{profile_id}")
 async def get_sessions_by_profile(

@@ -240,56 +240,54 @@ class ProxyRotationService:
         return await self._apply_new_session(proxy, new_session, "rotation")
     
     async def check_and_rotate_all_proxies(self) -> Dict:
-        """
-        ✅ CORREGIDO: Verifica y rota TODOS los proxies (ACTIVE + FAILED)
-        """
-        
-        # ✅ INCLUIR PROXIES FAILED
+        from sqlalchemy import select
+
+        # ✅ Cargar solo IDs — sin objetos ORM que puedan expirar
         result = await self.db.execute(
-            select(Proxy).where(
+            select(Proxy.id).where(
                 or_(
                     Proxy.status == ProxyStatus.ACTIVE,
                     Proxy.status == ProxyStatus.FAILED
                 )
             )
         )
-        proxies = list(result.scalars().all())
-        
-        logger.info(
-            f"🔄 Verificando {len(proxies)} proxies "
-            f"(ACTIVE + FAILED para recuperación)..."
-        )
-        
+        proxy_ids = list(result.scalars().all())  # lista de ints puros
+
+        logger.info(f"🔄 Verificando {len(proxy_ids)} proxies (ACTIVE + FAILED)...")
+
         stats = {
-            "total": len(proxies),
-            "optimal": 0,
-            "rotated": 0,
+            "total":     len(proxy_ids),
+            "optimal":   0,
+            "rotated":   0,
             "recovered": 0,
-            "failed": 0
+            "failed":    0
         }
-        
-        for proxy in proxies:
-            result = await self.check_and_rotate_proxy(proxy.id)
-            
-            if result.get("recovered"):
-                stats["recovered"] += 1
-            elif result.get("rotated"):
-                stats["rotated"] += 1
-            elif result.get("error"):
+
+        for proxy_id in proxy_ids:
+            try:
+                result = await self.check_and_rotate_proxy(proxy_id)
+
+                if result.get("recovered"):
+                    stats["recovered"] += 1
+                elif result.get("rotated"):
+                    stats["rotated"] += 1
+                elif result.get("error"):
+                    stats["failed"] += 1
+                else:
+                    stats["optimal"] += 1
+
+            except Exception as e:
+                logger.error(f"Error procesando proxy {proxy_id}: {e}")
                 stats["failed"] += 1
-            else:
-                stats["optimal"] += 1
-            
+
             await asyncio.sleep(2)
-        
+
         logger.info(
             f"✅ Verificación completa: "
-            f"{stats['optimal']} óptimos, "
-            f"{stats['rotated']} rotados, "
-            f"{stats['recovered']} recuperados, "
-            f"{stats['failed']} fallidos"
+            f"{stats['optimal']} óptimos, {stats['rotated']} rotados, "
+            f"{stats['recovered']} recuperados, {stats['failed']} fallidos"
         )
-        
+
         return stats
     
     # ========================================
@@ -297,95 +295,82 @@ class ProxyRotationService:
     # ========================================
     
     async def _update_adspower_profiles_centralized(self, proxy: Proxy) -> bool:
-        """Actualiza profiles en AdsPower centralizado"""
-        
         result = await self.db.execute(
             select(Profile).where(Profile.proxy_id == proxy.id)
         )
         profiles = list(result.scalars().all())
-        
-        if not profiles:
-            logger.info(f"ℹ️ Proxy {proxy.id} has no profiles")
+
+        # ✅ Filtrar perfiles que aún no existen en AdsPower
+        valid_profiles = [
+            p for p in profiles
+            if p.adspower_id and not p.adspower_id.startswith("pending-")
+        ]
+
+        skipped = len(profiles) - len(valid_profiles)
+        if skipped:
+            logger.warning(f"⚠️ {skipped} perfiles pendientes omitidos (aún no en AdsPower)")
+
+        if not valid_profiles:
+            logger.info(f"ℹ️ Proxy {proxy.id} sin perfiles válidos en AdsPower")
             return True
-        
-        logger.info(f"🔄 Updating {len(profiles)} profiles in centralized AdsPower...")
-        
-        adspower_url = settings.ADSPOWER_DEFAULT_API_URL
-        adspower_key = settings.ADSPOWER_DEFAULT_API_KEY
-        
-        if not adspower_url or not adspower_key:
-            logger.error("❌ AdsPower credentials not configured in settings")
-            return False
-        
+
+        logger.info(f"🔄 Actualizando {len(valid_profiles)} perfiles en AdsPower...")
+
         proxy_config = {
             "user_proxy_config": {
-                "proxy_soft": "other",
-                "proxy_type": "http",
-                "proxy_host": proxy.host,
-                "proxy_port": str(proxy.port),
-                "proxy_user": proxy.username or "",
+                "proxy_soft":     "other",
+                "proxy_type":     "http",
+                "proxy_host":     proxy.host,
+                "proxy_port":     str(proxy.port),
+                "proxy_user":     proxy.username or "",
                 "proxy_password": proxy.password or ""
             }
         }
-        
+
         is_reachable = await self._check_adspower_reachable_centralized(
-            adspower_url, 
-            adspower_key
+            settings.ADSPOWER_DEFAULT_API_URL,
+            settings.ADSPOWER_DEFAULT_API_KEY
         )
-        
         if not is_reachable:
-            logger.error(f"❌ AdsPower not reachable at {adspower_url}")
+            logger.error("❌ AdsPower no disponible")
             return False
-        
+
         success_count = 0
-        failed_count = 0
-        
-        try:
-            async with httpx.AsyncClient(timeout=30.0) as client:
-                for profile in profiles:
-                    try:
-                        url = f"{adspower_url}/api/v1/user/update"
-                        
-                        payload = {
-                            "user_id": profile.adspower_id,
-                            **proxy_config
+        failed_count  = 0
+
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            for profile in valid_profiles:
+                try:
+                    response = await client.post(
+                        f"{settings.ADSPOWER_DEFAULT_API_URL}/api/v1/user/update",
+                        json={"user_id": profile.adspower_id, **proxy_config},
+                        headers={
+                            "Authorization": f"Bearer {settings.ADSPOWER_DEFAULT_API_KEY}",
+                            "Content-Type":  "application/json"
                         }
-                        
-                        response = await client.post(
-                            url,
-                            json=payload,
-                            headers={
-                                "Authorization": f"Bearer {adspower_key}",
-                                "Content-Type": "application/json"
-                            }
-                        )
-                        
-                        if response.status_code == 200:
-                            data = response.json()
-                            
-                            if data.get("code") == 0:
-                                success_count += 1
-                            else:
-                                logger.error(f"❌ AdsPower error: {data.get('msg')}")
-                                failed_count += 1
-                        else:
-                            failed_count += 1
-                    
-                    except Exception as e:
-                        logger.error(f"❌ Error updating profile {profile.id}: {e}")
+                    )
+                    data = response.json()
+
+                    if data.get("code") == 0:
+                        success_count += 1
+                    else:
+                        logger.error(f"❌ AdsPower error en {profile.adspower_id}: {data.get('msg')}")
                         failed_count += 1
-        
-        except Exception as e:
-            logger.error(f"❌ Client error: {e}")
-            return False
-        
+
+                except Exception as e:
+                    logger.error(f"❌ Error actualizando perfil {profile.id}: {e}")
+                    failed_count += 1
+
+                # ✅ Rate limiting — AdsPower acepta ~1 req/s
+                await asyncio.sleep(1.1)
+
         if failed_count > 0:
-            logger.error(f"⚠️ Partial update: {success_count} OK, {failed_count} failed")
-            return False
-        
-        logger.info(f"✅ All profiles updated: {success_count}/{len(profiles)}")
-        return True
-    
+            logger.error(f"⚠️ Parcial: {success_count} OK, {failed_count} fallidos")
+            return failed_count == 0
+
+        logger.info(f"✅ Todos actualizados: {success_count}/{len(valid_profiles)}")
+        return True  
+
     async def _check_adspower_reachable_centralized(
         self, 
         adspower_url: str,
