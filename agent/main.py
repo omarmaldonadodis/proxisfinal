@@ -73,6 +73,7 @@ class AdsPowerAgent:
         )
         self.server.on_create_profile = self._on_create_profile_command
         self.server.on_update_proxy = self._on_update_proxy_command
+        self.server.on_check_proxy    = self._on_check_proxy_command
 
 
     async def start(self):
@@ -288,6 +289,8 @@ class AdsPowerAgent:
                 except Exception as e:
                     failed_count += 1
                     logger.error(f"  ❌ Perfil {ads_id}: {e}")
+                
+                await asyncio.sleep(0.5)  # ← ADD: respetar rate limit de AdsPower
 
         # Reportar resultado al backend
         if self.server.ws and self.server.is_connected:
@@ -328,6 +331,43 @@ class AdsPowerAgent:
             )
         
         logger.add(remote_sink, level="DEBUG")
+
+    async def _on_check_proxy_command(self, data: dict):
+        """Hace ping al proxy DESDE esta máquina y reporta latencia al backend."""
+        import httpx, time, json
+
+        request_id = data.get("request_id")
+        proxy_id   = data.get("proxy_id")
+        host       = data.get("proxy_host")
+        port       = data.get("proxy_port")
+        user       = data.get("proxy_user")
+        password   = data.get("proxy_password")
+
+        proxy_url = f"http://{user}:{password}@{host}:{port}"
+        latency_ms = None
+        error = None
+
+        try:
+            start = time.time()
+            async with httpx.AsyncClient(
+                proxy=proxy_url,
+                timeout=10.0
+            ) as client:
+                r = await client.get("https://api.ipify.org?format=json")
+                if r.status_code == 200:
+                    latency_ms = int((time.time() - start) * 1000)
+        except Exception as e:
+            error = str(e)
+            logger.warning(f"Proxy {proxy_id} unreachable: {e}")
+
+        if self.server.ws and self.server.is_connected:
+            await self.server.ws.send(json.dumps({
+                "type":       "proxy_check_result",
+                "request_id": request_id,
+                "proxy_id":   proxy_id,
+                "latency_ms": latency_ms,   # None = offline
+                "error":      error,
+            }))
 
 
 

@@ -21,90 +21,20 @@ celery_app = get_celery_app()
 
 @celery_app.task(name='tasks.auto_rotate_slow_proxies', bind=True)
 def auto_rotate_slow_proxies_task(self: Task):
-    """
-    ⏰ Rotación automática cada 15 minutos
-    
-    ✅ CORREGIDO: Verifica ACTIVE + FAILED (recuperación automática)
-    """
-    
-    logger.info("🔄 Starting automatic proxy rotation + recovery")
-    
-    from sqlalchemy import create_engine, or_
-    from sqlalchemy.orm import sessionmaker
+    """Dispara la rotación vía HTTP interno para aprovechar el event loop de FastAPI."""
+    import httpx
     from app.config import settings
-    from app.models.proxy import Proxy, ProxyStatus
-    
-    sync_engine = create_engine(
-        settings.DATABASE_SYNC_URL,
-        pool_pre_ping=True
-    )
-    
-    SyncSession = sessionmaker(bind=sync_engine)
-    
-    try:
-        with SyncSession() as db:
-            # ✅ INCLUIR PROXIES FAILED PARA RECUPERACIÓN
-            proxies = db.query(Proxy).filter(
-                or_(
-                    Proxy.status == ProxyStatus.ACTIVE,
-                    Proxy.status == ProxyStatus.FAILED
-                )
-            ).all()
-            
-            logger.info(
-                f"Found {len(proxies)} proxies to check "
-                f"(ACTIVE + FAILED for recovery)"
-            )
-            
-            stats = {
-                "total": len(proxies),
-                "optimal": 0,
-                "rotated": 0,
-                "recovered": 0,
-                "failed": 0
-            }
-            
-            for proxy in proxies:
-                try:
-                    result = _check_and_rotate_proxy_sync(db, proxy)
-                    
-                    if result.get("recovered"):
-                        stats["recovered"] += 1
-                        logger.info(f"✅ Proxy {proxy.id} RECOVERED")
-                    elif result.get("rotated"):
-                        stats["rotated"] += 1
-                    elif result.get("error"):
-                        stats["failed"] += 1
-                    else:
-                        stats["optimal"] += 1
-                    
-                    db.commit()
-                
-                except Exception as e:
-                    logger.error(f"Error processing proxy {proxy.id}: {e}")
-                    db.rollback()
-                    stats["failed"] += 1
-            
-            logger.info(
-                f"✅ Rotation complete: "
-                f"{stats['optimal']} optimal, "
-                f"{stats['rotated']} rotated, "
-                f"{stats['recovered']} recovered, "
-                f"{stats['failed']} failed"
-            )
-            
-            return stats
-    
-    except Exception as e:
-        logger.error(f"❌ Rotation task failed: {e}")
-        return {
-            "error": str(e),
-            "total": 0,
-            "rotated": 0,
-            "recovered": 0,
-            "failed": 0
-        }
 
+    try:
+        with httpx.Client(timeout=10.0) as client:
+            r = client.post(
+                f"http://localhost:{settings.PORT}/api/v1/proxy-rotation/check-and-rotate-all"
+            )
+            logger.info(f"Rotación disparada: {r.status_code}")
+            return r.json()
+    except Exception as e:
+        logger.error(f"Error disparando rotación: {e}")
+        return {"error": str(e)}
 
 def _check_and_rotate_proxy_sync(db, proxy: "Proxy") -> dict:
     """

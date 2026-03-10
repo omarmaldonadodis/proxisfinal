@@ -559,8 +559,8 @@ async def get_activity_feed(
             "timestamp": a.created_at.isoformat(),
             "meta": {
                 "alert_id":  a.id,
-                "severity":  a.severity.value,
-                "status":    a.status.value,
+                "severity":  a.severity if isinstance(a.severity, str) else a.severity.value,
+                "status": a.status if isinstance(a.status, str) else a.status.value,
                 "message":   a.message,
             }
         })

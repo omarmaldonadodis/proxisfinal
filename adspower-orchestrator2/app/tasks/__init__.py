@@ -10,7 +10,6 @@ celery_app = Celery(
         'app.tasks.backup_tasks',
         'app.tasks.health_tasks',
         'app.tasks.proxy_rotation_tasks',
-        'app.tasks.proxy_health_tasks',
     ]
 )
 

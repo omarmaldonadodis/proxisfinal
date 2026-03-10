@@ -24,6 +24,8 @@ class ConnectionManager:
         self.live_metrics: Dict[int, dict] = {}
         self.agent_logs: Dict[int, list] = {}
         self.connection_times: Dict[int, datetime] = {}
+        self._pending_proxy_checks: dict[str, asyncio.Future] = {}
+
         MAX_LOGS = 100
 
     # ========================================
@@ -248,6 +250,53 @@ class ConnectionManager:
     def get_online_agents(self) -> set[int]:
         """Retorna computer_ids de agentes conectados"""
         return set(self.agent_connections.keys())
+
+    # Método nuevo:
+    async def request_proxy_check(
+        self,
+        computer_id: int,
+        proxy_id: int,
+        proxy_host: str,
+        proxy_port: int,
+        proxy_user: str,
+        proxy_password: str,
+        timeout: float = 15.0
+    ) -> dict | None:
+        """
+        Envía check_proxy al agente y espera la respuesta.
+        Retorna {"latency_ms": int|None, "error": str|None} o None si timeout.
+        """
+        import uuid
+        request_id = str(uuid.uuid4())
+        loop = asyncio.get_event_loop()
+        future = loop.create_future()
+        self._pending_proxy_checks[request_id] = future
+
+        sent = await self.send_command_to_agent(computer_id, "check_proxy", {
+            "request_id":    request_id,
+            "proxy_id":      proxy_id,
+            "proxy_host":    proxy_host,
+            "proxy_port":    proxy_port,
+            "proxy_user":    proxy_user,
+            "proxy_password": proxy_password,
+        })
+
+        if not sent:
+            del self._pending_proxy_checks[request_id]
+            return None
+
+        try:
+            result = await asyncio.wait_for(future, timeout=timeout)
+            return result
+        except asyncio.TimeoutError:
+            self._pending_proxy_checks.pop(request_id, None)
+            return None
+
+    def resolve_proxy_check(self, request_id: str, result: dict):
+        """Llamado cuando llega proxy_check_result desde el agente."""
+        future = self._pending_proxy_checks.pop(request_id, None)
+        if future and not future.done():
+            future.set_result(result)
 
 
 connection_manager = ConnectionManager()

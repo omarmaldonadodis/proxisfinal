@@ -344,61 +344,76 @@ async def warmup_profile(
         "task_id": task.id
     }
 
-
 @router.post("/{profile_id}/verify-security")
 async def verify_profile_security(
     profile_id: int,
     db: AsyncSession = Depends(get_db)
 ):
-    """
-    Verifica el estado real de cookies y fingerprint en AdsPower.
-    Actualiza browser_score, fingerprint_score, cookie_status en la BD.
-    """
+    from app.core.connection_manager import connection_manager
+    import asyncio, uuid
+
     service = ProfileService(db)
     profile = await service.get_profile(profile_id)
     if not profile:
         raise HTTPException(status_code=404, detail="Profile not found")
 
-    from app.integrations.adspower_client import AdsPowerClient
-    from app.config import settings
+    if profile.adspower_id.startswith("pending"):
+        raise HTTPException(status_code=400, detail="Perfil aún no creado en AdsPower")
 
-    client = AdsPowerClient(
-        api_url=settings.ADSPOWER_DEFAULT_API_URL,
-        api_key=settings.ADSPOWER_DEFAULT_API_KEY
+    # ── Obtener agente online ──────────────────────────────────
+    online_agents = connection_manager.get_online_agents()
+    if not online_agents:
+        raise HTTPException(status_code=503, detail="No hay agentes online")
+
+    computer_id = next(iter(online_agents))
+
+    # ── Crear Future para esperar respuesta del agente ─────────
+    request_id = str(uuid.uuid4())
+    loop = asyncio.get_event_loop()
+    future = loop.create_future()
+    connection_manager._pending_proxy_checks[request_id] = future  # reusar el mismo dict
+
+    sent = await connection_manager.send_command_to_agent(
+        computer_id=computer_id,
+        command="verify_profile",
+        payload={
+            "request_id":  request_id,
+            "adspower_id": profile.adspower_id,
+        }
     )
 
+    if not sent:
+        del connection_manager._pending_proxy_checks[request_id]
+        raise HTTPException(status_code=503, detail="No se pudo enviar comando al agente")
+
+    # ── Esperar respuesta (timeout 15s) ────────────────────────
     try:
-        # Obtener info del perfil en AdsPower
-        profile_info = await client.get_profile(profile.adspower_id)
+        result = await asyncio.wait_for(future, timeout=15.0)
+    except asyncio.TimeoutError:
+        connection_manager._pending_proxy_checks.pop(request_id, None)
+        raise HTTPException(status_code=504, detail="Agente no respondió a tiempo")
 
-        # Verificar cookies
-        has_cookies = bool(profile_info.get("user_proxyinfo") or
-                          profile_info.get("fingerprint_config"))
+    # ── Calcular scores desde la respuesta ────────────────────
+    fp_config         = result.get("fingerprint_config", {})
+    has_cookies       = result.get("has_cookies", False)
+    browser_score     = _calc_browser_score(fp_config)
+    fingerprint_score = _calc_fingerprint_score(fp_config)
+    cookie_status     = "OK" if has_cookies else "MISSING"
 
-        # Calcular scores basados en la configuración del perfil
-        fp_config   = profile_info.get("fingerprint_config", {})
-        browser_score      = _calc_browser_score(fp_config)
-        fingerprint_score  = _calc_fingerprint_score(fp_config)
-        cookie_status      = "OK" if has_cookies else "MISSING"
+    # ── Guardar en BD ─────────────────────────────────────────
+    profile.browser_score     = browser_score
+    profile.fingerprint_score = fingerprint_score
+    profile.cookie_status     = cookie_status
+    await db.commit()
 
-        # Actualizar en BD
-        profile.browser_score     = browser_score
-        profile.fingerprint_score = fingerprint_score
-        profile.cookie_status     = cookie_status
-        await db.commit()
-
-        return {
-            "profile_id":        profile_id,
-            "browser_score":     browser_score,
-            "fingerprint_score": fingerprint_score,
-            "cookie_status":     cookie_status,
-            "verified":          True
-        }
-
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Verification failed: {str(e)}")
-
-
+    return {
+        "profile_id":        profile_id,
+        "browser_score":     browser_score,
+        "fingerprint_score": fingerprint_score,
+        "cookie_status":     cookie_status,
+        "verified":          True,
+    }
+    
 def _calc_browser_score(fp_config: dict) -> float:
     score = 100.0
     critical = ["ua", "timezone", "language", "screen_resolution"]

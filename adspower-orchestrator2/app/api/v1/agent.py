@@ -207,6 +207,14 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
                 message = data.get("message", "")
                 await connection_manager.add_agent_log(computer_id, level, message)
 
+            elif msg_type == "proxy_check_result":
+                request_id = data.get("request_id")
+                if request_id:
+                    connection_manager.resolve_proxy_check(request_id, {
+                        "latency_ms": data.get("latency_ms"),
+                        "error":      data.get("error"),
+                    })
+
     except WebSocketDisconnect:
         pass
     finally:

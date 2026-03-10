@@ -27,7 +27,9 @@ class ServerClient:
         self.on_open_browser:   Optional[Callable] = None
         self.on_close_browser:  Optional[Callable] = None
         self.on_create_profile: Optional[Callable] = None
-        self.on_update_proxy:   Optional[Callable] = None  # ← ADD
+        self.on_update_proxy:   Optional[Callable] = None 
+        self.on_check_proxy: Optional[Callable] = None
+
 
 
     # ========================================
@@ -148,6 +150,11 @@ class ServerClient:
         elif command == "update_proxy":
             if self.on_update_proxy:
                 asyncio.create_task(self.on_update_proxy(data))
+        
+        elif command == "check_proxy":
+            if self.on_check_proxy:
+                asyncio.create_task(self.on_check_proxy(data))
+        
 
     # ========================================
     # ENVÍO DE DATOS
