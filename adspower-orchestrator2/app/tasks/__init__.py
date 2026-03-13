@@ -10,6 +10,7 @@ celery_app = Celery(
         'app.tasks.backup_tasks',
         'app.tasks.health_tasks',
         'app.tasks.proxy_rotation_tasks',
+        'app.tasks.profile_verification',
     ]
 )
 
@@ -38,6 +39,11 @@ def setup_periodic_tasks(sender, **kwargs):
         'backup-database-daily': {
             'task': 'tasks.backup_database',
             'schedule': 86400.0,
+        },
+        # Verificación de perfiles cada 3 horas
+        'verify-all-profiles': {
+            'task': 'tasks.verify_all_profiles',
+            'schedule': 18000.0,
         },
     }
     logger.info("✓ Celery Beat schedule configured")

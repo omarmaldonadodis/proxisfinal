@@ -74,10 +74,9 @@ class AdsPowerAgent:
         self.server.on_create_profile = self._on_create_profile_command
         self.server.on_update_proxy = self._on_update_proxy_command
         self.server.on_check_proxy    = self._on_check_proxy_command
-
-
+        self.server.on_verify_profile = self._on_verify_profile_command
+    
     async def start(self):
-        """Inicia el agente"""
         logger.info("=" * 50)
         logger.info(f"AdsPower Agent iniciando")
         logger.info(f"Servidor: {self.config.server_url}")
@@ -87,28 +86,20 @@ class AdsPowerAgent:
 
         self.is_running = True
 
-        # 1. Registrar computadora en servidor
         registered = await self.server.register()
+        if not registered:
+            logger.error("❌ No se pudo registrar. Abortando.")
+            return
 
-        tasks = [asyncio.create_task(self._metrics_loop())]
+        self.is_connected = True
+        self.tray.update_status(True)
 
-        if registered:
-            self.is_connected = True
-            self.tray.update_status(True)
-            tasks.append(asyncio.create_task(self.server.connect_websocket()))
-        else:
-            logger.error("❌ No se pudo registrar. WebSocket no iniciado.")
-
-        tasks.append(asyncio.create_task(self._heartbeat_loop()))
-
-        # 2. Iniciar tareas concurrentes
         tasks = [
             asyncio.create_task(self.server.connect_websocket()),
             asyncio.create_task(self._metrics_loop()),
             asyncio.create_task(self._heartbeat_loop()),
         ]
 
-        # 3. Iniciar tray icon (en thread separado, no bloquea el event loop)
         self.tray.start()
 
         logger.info("✅ Agente iniciado correctamente")
@@ -331,6 +322,7 @@ class AdsPowerAgent:
             )
         
         logger.add(remote_sink, level="DEBUG")
+    
 
     async def _on_check_proxy_command(self, data: dict):
         """Hace ping al proxy DESDE esta máquina y reporta latencia al backend."""
@@ -369,8 +361,139 @@ class AdsPowerAgent:
                 "error":      error,
             }))
 
+    def _calculate_profile_score(self, profile_info: dict, db_profile_data: dict) -> dict:
+        scores = {}
 
+        # ── 1. PROXY (25pts) ──────────────────────────
+        proxy = profile_info.get("user_proxy_config", {})
+        proxy_score = 0
+        if proxy.get("proxy_host"):                                    proxy_score += 10
+        if proxy.get("proxy_user") and proxy.get("proxy_password"):    proxy_score += 10
+        if "sessionid" in proxy.get("proxy_user", ""):                 proxy_score += 5
+        scores["proxy"] = proxy_score
 
+        # ── 2. COOKIES (35pts) ───────────────────────  ← ESTE FALTABA
+        cookie_count = db_profile_data.get("cookie_count", 0)
+        cookie_score = 0
+        if   cookie_count >= 50: cookie_score = 35
+        elif cookie_count >= 20: cookie_score = 28
+        elif cookie_count >= 10: cookie_score = 20
+        elif cookie_count >= 3:  cookie_score = 12
+        elif cookie_count >= 1:  cookie_score = 6
+        scores["cookies"] = cookie_score
+
+        # ── 3. MADUREZ (25pts) ───────────────────────
+        session_score = 0
+        if db_profile_data.get("total_sessions", 0) >= 5:            session_score += 10
+        elif db_profile_data.get("total_sessions", 0) >= 1:          session_score += 6
+        if db_profile_data.get("total_duration_seconds", 0) >= 3600: session_score += 8
+        if profile_info.get("last_open_time", "0") != "0":           session_score += 2
+        scores["maturity"] = session_score
+
+        # ── 4. ANTI-DETECCIÓN (20pts) ─────────────────
+        anti_score = 0
+        if profile_info.get("ipchecker"):                              anti_score += 8
+        if proxy.get("proxy_type") in ("http", "socks5"):              anti_score += 8
+        if profile_info.get("remark"):                                 anti_score += 4
+        scores["anti_detection"] = anti_score
+
+        total = min(sum(scores.values()), 100)
+
+        return {
+            "browser_score":     total,
+            "fingerprint_score": scores["proxy"] + scores["anti_detection"],
+            "breakdown":         scores,
+            "cookie_status":     db_profile_data.get("cookie_status", "MISSING"),
+            "grade": (
+                "EXCELENTE" if total >= 80 else
+                "BUENO"     if total >= 60 else
+                "REGULAR"   if total >= 40 else
+                "DÉBIL"
+            )
+        }
+    async def _on_verify_profile_command(self, data: dict):
+        """Backend pide verificar fingerprint/cookies de un perfil via AdsPower local."""
+        import httpx, json
+
+        request_id  = data.get("request_id")
+        adspower_id = data.get("adspower_id")
+
+        logger.info(f"📥 verify_profile: adspower_id={adspower_id}")
+
+        try:
+            async with httpx.AsyncClient(timeout=10.0) as client:
+                # 1. Obtener info del perfil
+                r = await client.get(
+                    f"{self.config.adspower_url}/api/v1/user/list",
+                    params={"user_id": adspower_id, "page": 1, "page_size": 1},
+                    headers={"Authorization": f"Bearer {self.config.adspower_api_key}"},
+                )
+                resp = r.json()
+                profiles_list = resp.get("data", {}).get("list", [])
+                profile_info = profiles_list[0] if profiles_list else {}
+                logger.info(f"[VERIFY RAW] profile_info: {profile_info}")
+
+                # 2. Obtener cookies via API V2 — funciona con browser CERRADO
+                has_cookies = False
+                cookie_count = 0
+                cookie_status = "MISSING"  # ← agregar aquí
+
+                try:
+                    r2 = await client.get(
+                        f"{self.config.adspower_url}/api/v2/browser-profile/cookies",
+                        params={"profile_id": adspower_id},
+                        headers={"Authorization": f"Bearer {self.config.adspower_api_key}"},
+                    )
+                    if r2.status_code == 200 and r2.text.strip():
+                        resp2 = r2.json()
+                        if resp2.get("code") == 0:
+                            import json as json_mod
+                            cookies_raw = resp2.get("data", {}).get("cookies", "[]")
+                            # cookies viene como string JSON — hay que parsearlo
+                            cookies_list = json_mod.loads(cookies_raw) if isinstance(cookies_raw, str) else cookies_raw
+                            cookie_count = len(cookies_list)
+                            has_cookies = cookie_count > 0
+                            cookie_status = "OK" if has_cookies else "MISSING"
+                            logger.info(f"[VERIFY] cookies encontradas: {cookie_count}")
+                except Exception as e:
+                    logger.warning(f"⚠️ No se pudo obtener cookies V2: {e}")
+                    has_cookies = False
+            # 3. Datos de DB que el backend envió en el payload
+            db_data = {
+                "total_sessions":         data.get("total_sessions", 0),
+                "is_warmed":              data.get("is_warmed", False),
+                "total_duration_seconds": data.get("total_duration_seconds", 0),
+                "cookie_count":           cookie_count,
+                "cookie_status":          "OK" if has_cookies else data.get("cookie_status", "MISSING"),
+            }
+
+            # 4. Calcular score profesional
+            score_result = self._calculate_profile_score(profile_info, db_data)
+
+            result = {
+                "type":              "verify_profile_result",
+                "request_id":        request_id,
+                "browser_score":     score_result["browser_score"],
+                "fingerprint_score": score_result["fingerprint_score"],
+                "cookie_status":     score_result["cookie_status"],
+                "breakdown":         score_result["breakdown"],
+                "grade":             score_result["grade"],
+            }
+
+        except Exception as e:
+            logger.error(f"❌ verify_profile error: {e}")
+            result = {
+                "type":              "verify_profile_result",
+                "request_id":        request_id,
+                "browser_score":     0,
+                "fingerprint_score": 0,
+                "cookie_status":     "MISSING",
+                "error":             str(e),
+            }
+
+        if self.server.ws and self.server.is_connected:
+            await self.server.ws.send(json.dumps(result))
+            logger.info(f"✅ verify_profile_result enviado: request_id={request_id}")
 # ========================================
 # ENTRY POINT
 # ========================================

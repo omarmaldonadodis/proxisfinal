@@ -16,6 +16,7 @@ from app.schemas.profile import (
 )
 from app.models.profile import Profile, ProfileStatus, DeviceType
 
+from loguru import logger
 
 
 router = APIRouter(prefix="/profiles", tags=["Profiles"])
@@ -377,11 +378,16 @@ async def verify_profile_security(
         computer_id=computer_id,
         command="verify_profile",
         payload={
-            "request_id":  request_id,
-            "adspower_id": profile.adspower_id,
+            "request_id":             request_id,
+            "adspower_id":            profile.adspower_id,
+            # ← AGREGAR estos para que el agente calcule madurez correctamente:
+            "total_sessions":         profile.total_sessions or 0,
+            "is_warmed":              profile.is_warmed or False,
+            "total_duration_seconds": profile.total_duration_seconds or 0,
+            "cookie_status":          profile.cookie_status or "MISSING",
         }
     )
-
+    
     if not sent:
         del connection_manager._pending_proxy_checks[request_id]
         raise HTTPException(status_code=503, detail="No se pudo enviar comando al agente")
@@ -394,17 +400,20 @@ async def verify_profile_security(
         raise HTTPException(status_code=504, detail="Agente no respondió a tiempo")
 
     # ── Calcular scores desde la respuesta ────────────────────
-    fp_config         = result.get("fingerprint_config", {})
     has_cookies       = result.get("has_cookies", False)
-    browser_score     = _calc_browser_score(fp_config)
-    fingerprint_score = _calc_fingerprint_score(fp_config)
-    cookie_status     = "OK" if has_cookies else "MISSING"
+    cookie_status     = result.get("cookie_status", "MISSING")
+    browser_score     = result.get("browser_score", 0)
+    fingerprint_score = result.get("fingerprint_score", 0)
 
-    # ── Guardar en BD ─────────────────────────────────────────
+    # Ya no calcular con _calc_browser_score — usar lo que manda el agente
     profile.browser_score     = browser_score
     profile.fingerprint_score = fingerprint_score
     profile.cookie_status     = cookie_status
     await db.commit()
+
+    # En verify_profile_security, después de recibir result del agente:
+    logger.info(f"[VERIFY] fingerprint_config keys: {list(result.get('fingerprint_config', {}).keys())}")
+    logger.info(f"[VERIFY] has_cookies: {result.get('has_cookies')}")
 
     return {
         "profile_id":        profile_id,
@@ -413,7 +422,98 @@ async def verify_profile_security(
         "cookie_status":     cookie_status,
         "verified":          True,
     }
-    
+
+@router.post("/verify-all")
+async def verify_all_profiles_now(background_tasks: BackgroundTasks):
+    """Dispara verificación de todos los perfiles en background (mismo proceso FastAPI)."""
+    background_tasks.add_task(_run_verify_all)
+    return {"status": "enqueued"}
+
+
+async def _run_verify_all():
+    """Corre en el mismo proceso que FastAPI → tiene acceso al connection_manager real."""
+    import asyncio
+    from app.core.connection_manager import connection_manager
+    from sqlalchemy import select
+    from app.database import AsyncSessionLocal
+    from app.models.profile import Profile, ProfileStatus
+    import uuid
+
+    async with AsyncSessionLocal() as db:
+        result = await db.execute(
+            select(Profile).where(
+                Profile.status == ProfileStatus.READY,
+                Profile.adspower_id.isnot(None),
+                ~Profile.adspower_id.like("pending-%"),
+            )
+        )
+        profiles = result.scalars().all()
+
+    if not profiles:
+        logger.info("ℹ️ No hay perfiles ready para verificar")
+        return
+
+    agents = connection_manager.get_online_agents()
+    if not agents:
+        logger.warning("⚠️ No hay agentes online")
+        return
+
+    agent_id = next(iter(agents))
+    verified = 0
+
+    for profile in profiles:
+        request_id = str(uuid.uuid4())
+        try:
+            loop = asyncio.get_event_loop()
+            future = loop.create_future()
+            connection_manager._pending_proxy_checks[request_id] = future
+
+            sent = await connection_manager.send_command_to_agent(
+                computer_id=agent_id,
+                command="verify_profile",
+                payload={
+                    "request_id":             request_id,
+                    "adspower_id":            profile.adspower_id,
+                    "total_sessions":         profile.total_sessions or 0,
+                    "is_warmed":              getattr(profile, "is_warmed", False) or False,
+                    "total_duration_seconds": getattr(profile, "total_duration_seconds", 0) or 0,
+                    "cookie_status":          profile.cookie_status or "MISSING",
+                }
+            )
+
+            if not sent:
+                connection_manager._pending_proxy_checks.pop(request_id, None)
+                logger.warning(f"⚠️ No se pudo enviar a agente para {profile.adspower_id}")
+                continue
+
+            result = await asyncio.wait_for(future, timeout=15.0)
+
+            async with AsyncSessionLocal() as db:
+                p = await db.get(Profile, profile.id)
+                if p:
+                    p.browser_score     = result.get("browser_score", 0)
+                    p.fingerprint_score = result.get("fingerprint_score", 0)
+                    p.cookie_status     = result.get("cookie_status", "MISSING")
+                    await db.commit()
+
+            logger.info(
+                f"✅ {profile.adspower_id} → "
+                f"score={result.get('browser_score', 0)} "
+                f"cookies={result.get('cookie_status', 'MISSING')}"
+            )
+            verified += 1
+
+        except asyncio.TimeoutError:
+            connection_manager._pending_proxy_checks.pop(request_id, None)
+            logger.warning(f"⏱ Timeout: {profile.adspower_id}")
+        except Exception as e:
+            connection_manager._pending_proxy_checks.pop(request_id, None)
+            logger.error(f"❌ Error perfil {profile.id}: {e}")
+
+        await asyncio.sleep(1.5)
+
+    logger.info(f"✅ Verificación completada: {verified}/{len(profiles)}")
+
 def _calc_browser_score(fp_config: dict) -> float:
     score = 100.0
     critical = ["ua", "timezone", "language", "screen_resolution"]

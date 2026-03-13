@@ -8,6 +8,7 @@
 from typing import Optional
 from datetime import datetime
 from fastapi import APIRouter, Depends, HTTPException, WebSocket, WebSocketDisconnect, Query, Header
+from loguru import logger
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from loguru import logger
@@ -19,11 +20,13 @@ from app.models.computer import Computer, ComputerStatus
 from app.core.connection_manager import connection_manager
 from app.config import settings
 
+from app.database import AsyncSessionLocal
 
 
 
 from pydantic import BaseModel
 from app.core.security import verify_token  # o como tengas la validación
+import asyncio
 
 router = APIRouter(prefix="/agent", tags=["Agent"])
 
@@ -43,6 +46,9 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
         computer.status       = ComputerStatus.ONLINE
         computer.last_seen_at = datetime.utcnow()
         await db.commit()
+
+        asyncio.create_task(_process_pending_profiles(computer_id))  # ← sin db
+
 
         await connection_manager.broadcast_to_admins({
             "type":        "agent_online",
@@ -105,7 +111,6 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
                         sess.pages_visited = data.get("pages_visited", 0)
                         sess.total_data_mb = data.get("total_data_mb", 0.0)
 
-                        # Calcular duración
                         if sess.opened_at:
                             delta = datetime.utcnow() - sess.opened_at.replace(tzinfo=None)
                             sess.duration_seconds = int(delta.total_seconds())
@@ -116,14 +121,17 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
 
                         await db.commit()
 
-                        await connection_manager.broadcast_to_admins({
-                            "type":             "session_closed",
-                            "session_id":       session_id,
-                            "computer_id":      computer_id,
-                            "duration_seconds": sess.duration_seconds,
-                            "pages_visited":    sess.pages_visited,
-                            "timestamp":        datetime.utcnow().isoformat(),
-                        })
+                        # ← AGREGAR: si el perfil tuvo sesión real, marcar cookies como OK
+                        if sess.profile_id and sess.pages_visited and sess.pages_visited > 0:
+                            from app.models.profile import Profile
+                            profile = await db.get(Profile, sess.profile_id)
+                            if profile:
+                                profile.cookie_status  = "OK"
+                                profile.total_sessions = (profile.total_sessions or 0) + 1
+                                profile.total_duration_seconds = (
+                                    (profile.total_duration_seconds or 0) + (sess.duration_seconds or 0)
+                                )
+                                await db.commit()
 
             elif msg_type == "profile_created":
                 # El agente creó el perfil en AdsPower y reporta el adspower_id real
@@ -214,6 +222,20 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
                         "latency_ms": data.get("latency_ms"),
                         "error":      data.get("error"),
                     })
+            elif msg_type == "verify_profile_result":
+                request_id = data.get("request_id")
+                if request_id:
+                    connection_manager.resolve_proxy_check(request_id, {
+                        # ANTES solo tenía fingerprint_config y has_cookies
+                        # AHORA pasa TODO lo que calcula el agente:
+                        "browser_score":     data.get("browser_score", 0),
+                        "fingerprint_score": data.get("fingerprint_score", 0),
+                        "cookie_status":     data.get("cookie_status", "MISSING"),
+                        "breakdown":         data.get("breakdown", {}),
+                        "grade":             data.get("grade", "DÉBIL"),
+                        "has_cookies":       data.get("has_cookies", False),
+                        "error":             data.get("error"),
+                    })
 
     except WebSocketDisconnect:
         pass
@@ -234,6 +256,76 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
         })
 
 
+# La función crea su propia sesión:
+async def _process_pending_profiles(computer_id: int):
+    from app.database import AsyncSessionLocal
+    from app.models.profile import Profile, ProfileStatus
+    from app.models.proxy import Proxy
+    from sqlalchemy.orm import selectinload
+    import asyncio
+
+    await asyncio.sleep(2)
+
+    async with AsyncSessionLocal() as db:
+        result = await db.execute(
+            select(Profile)
+            .options(selectinload(Profile.proxy))
+            .where(Profile.status == ProfileStatus.CREATING)
+            .where(Profile.adspower_id.like("pending-%"))
+        )
+        pending = result.scalars().all()
+
+        if not pending:
+            logger.info(f"✅ No hay perfiles pendientes para agente #{computer_id}")
+            return
+
+        logger.info(f"📋 {len(pending)} perfiles pendientes — enviando a agente #{computer_id}")
+
+        for profile in pending:
+
+           
+            # # # # #REVISAR LENGUAJE 
+            fingerprint_config = {
+                "ua":                  profile.user_agent or "",
+                "os":                  profile.os or "Windows",
+                "language":            ["es-ES", "es"] or profile.language,
+                "resolution":          profile.screen_resolution or "1920x1080",
+                "device_name":         profile.device_name or "",
+                "platform":            profile.platform or "Win32",
+                "hardware_concurrency": profile.hardware_concurrency or 4,
+                "device_memory":       profile.device_memory or 8,
+            }
+
+            # Construir proxy config desde la relación
+            proxy = profile.proxy
+            user_proxy_config = {}
+            if proxy:
+                user_proxy_config = {
+                    "proxy_soft":     "other",
+                    "proxy_type":     "http",
+                    "proxy_host":     proxy.host,
+                    "proxy_port":     str(proxy.port),
+                    "proxy_user":     proxy.username or "",
+                    "proxy_password": proxy.password or "",
+                }
+
+            sent = await connection_manager.send_command_to_agent(
+                computer_id=computer_id,
+                command="create_adspower_profile",
+                payload={
+                    "profile_id":         profile.id,
+                    "name":               profile.name,
+                    "fingerprint_config": fingerprint_config,
+                    "user_proxy_config":  user_proxy_config,
+                    "remark":             profile.owner or "",
+                }
+            )
+            if sent:
+                logger.info(f"  ✅ Perfil {profile.id} ({profile.name}) encolado")
+            else:
+                logger.warning(f"  ⚠️ No se pudo enviar perfil {profile.id}")
+
+            await asyncio.sleep(2)
 # ══════════════════════════════════════════════════════════════════════════════
 # CHECK-IN del agente al conectarse
 # ══════════════════════════════════════════════════════════════════════════════

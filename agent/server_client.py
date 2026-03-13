@@ -29,6 +29,8 @@ class ServerClient:
         self.on_create_profile: Optional[Callable] = None
         self.on_update_proxy:   Optional[Callable] = None 
         self.on_check_proxy: Optional[Callable] = None
+        self.on_verify_profile: Optional[Callable] = None
+
 
 
 
@@ -154,6 +156,10 @@ class ServerClient:
         elif command == "check_proxy":
             if self.on_check_proxy:
                 asyncio.create_task(self.on_check_proxy(data))
+        
+        elif command == "verify_profile":
+            if hasattr(self, 'on_verify_profile') and self.on_verify_profile:
+                asyncio.create_task(self.on_verify_profile(data))
         
 
     # ========================================
