@@ -264,17 +264,17 @@ class ServerClient:
 
 
     async def update_metrics(self, session_id: int, **kwargs) -> bool:
-        """Métricas de sesión — via WebSocket (ya funciona con type=metrics)"""
+        """Métricas de sesión via WebSocket — type correcto para el backend"""
         if self.ws and self.is_connected:
             try:
                 await self.ws.send(json.dumps({
-                    "type":       "metrics",
+                    "type":       "session_metrics",   # ← CORREGIDO: era "metrics"
                     "session_id": session_id,
                     "data":       kwargs,
                 }))
                 return True
             except Exception as e:
-                logger.debug(f"Error enviando métricas: {e}")
+                logger.debug(f"Error enviando métricas de sesión: {e}")
         return False
 
     # ========================================

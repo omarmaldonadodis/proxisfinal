@@ -1,59 +1,45 @@
-# app/tasks/health_tasks.py
-from app.tasks import celery_app
-from app.database import AsyncSessionLocal
-from app.services.computer_service import ComputerService
-from app.services.proxy_service import ProxyService
+# app/tasks/health_tasks.py — versión corregida usando HTTP interno
+# (mismo patrón que proxy_rotation_tasks.py que ya usa httpx)
+
+from celery import Task
+import httpx
 from loguru import logger
+
+
+def get_celery_app():
+    from app.tasks import celery_app
+    return celery_app
+
+celery_app = get_celery_app()
+
 
 @celery_app.task(name='tasks.health_check_all_computers')
 def health_check_all_computers_task():
-    """Health check de todos los computers"""
-    import asyncio
-    
-    async def _health_check():
-        async with AsyncSessionLocal() as db:
-            service = ComputerService(db)
-            
-            # Obtener todos los computers
-            computers, _ = await service.list_computers(limit=1000)
-            
-            results = {
-                'total': len(computers),
-                'healthy': 0,
-                'unhealthy': 0,
-                'results': []
-            }
-            
-            for computer in computers:
-                try:
-                    health = await service.health_check(computer.id)
-                    results['results'].append(health)
-                    
-                    if health['is_healthy']:
-                        results['healthy'] += 1
-                    else:
-                        results['unhealthy'] += 1
-                        
-                except Exception as e:
-                    logger.error(f"Health check failed for computer {computer.id}: {e}")
-                    results['unhealthy'] += 1
-            
-            logger.info(f"Health check completed: {results['healthy']}/{results['total']} healthy")
-            return results
-    
-    return asyncio.run(_health_check())
+    """Delega al endpoint FastAPI que tiene el event loop correcto."""
+    from app.config import settings
+    api_port = getattr(settings, 'API_PORT', 8000)
+    try:
+        with httpx.Client(timeout=30.0) as client:
+            r = client.get(f"http://localhost:{api_port}/api/v1/health/computers")
+            logger.info(f"Health check computers: {r.status_code}")
+            return r.json()
+    except Exception as e:
+        logger.error(f"Error health check computers: {e}")
+        return {"error": str(e)}
+
 
 @celery_app.task(name='tasks.health_check_proxies')
 def health_check_proxies_task():
-    """Health check de proxies"""
-    import asyncio
-    
-    async def _health_check():
-        async with AsyncSessionLocal() as db:
-            service = ProxyService(db)
-            result = await service.health_check_batch(limit=50)
-            
-            logger.info(f"Proxy health check: {result['success']}/{result['total']} successful")
-            return result
-    
-    return asyncio.run(_health_check())
+    """Delega al endpoint FastAPI."""
+    from app.config import settings
+    api_port = getattr(settings, 'API_PORT', 8000)
+    try:
+        with httpx.Client(timeout=60.0) as client:
+            r = client.post(
+                f"http://localhost:{api_port}/api/v1/proxies/health-check/batch",
+                params={"limit": 50}
+            )
+            return r.json()
+    except Exception as e:
+        logger.error(f"Error health check proxies: {e}")
+        return {"error": str(e)}

@@ -53,6 +53,8 @@ class AgentSession(Base):
         default=SessionStatus.OPENING.value,  # ← .value, no el enum
         index=True
     )
+
+    
     requested_at = Column(DateTime(timezone=True), server_default=func.now(), index=True)
     opened_at    = Column(DateTime(timezone=True), nullable=True)
     closed_at    = Column(DateTime(timezone=True), nullable=True)

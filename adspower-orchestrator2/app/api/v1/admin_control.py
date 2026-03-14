@@ -336,50 +336,6 @@ async def get_session_events(
     if not session:
         raise HTTPException(status_code=404, detail="Sesión no encontrada")
 
-    from app.models.agent_session import BrowserEvent
-    events_r = await db.execute(
-        select(BrowserEvent)
-        .where(BrowserEvent.session_id == session_id)
-        .order_by(BrowserEvent.timestamp)
-    )
-    events = events_r.scalars().all()
-
-    def safe_title(e):
-        if hasattr(e, "details") and e.details:
-            return e.details.get("title")
-        if hasattr(e, "page_title"):
-            return e.page_title
-        return None
-
-    return {
-        "session_id":   session_id,
-        "agent_name":   session.agent_name,
-        "total_events": len(events),
-        "events": [
-            {
-                "id":        e.id,
-                "type":      e.event_type,
-                "url":       e.url,
-                "title":     safe_title(e),
-                "timestamp": e.timestamp.isoformat() if hasattr(e.timestamp, 'isoformat') else str(e.timestamp),
-            }
-            for e in events
-        ]
-    }
-
-@router.get("/sessions/{session_id}/events")
-async def get_session_events(
-    session_id: int,
-    db: AsyncSession = Depends(get_db)
-):
-    """Ver todos los eventos de una sesión específica"""
-    result = await db.execute(
-        select(AgentSession).where(AgentSession.id == session_id)
-    )
-    session = result.scalar_one_or_none()
-    if not session:
-        raise HTTPException(status_code=404, detail="Sesión no encontrada")
-
     events_result = await db.execute(
         select(AgentSession).where(AgentSession.id == session_id)
     )
@@ -404,7 +360,7 @@ async def get_session_events(
                 "url": e.url,
                 "title": (e.details or {}).get("title") if hasattr(e, "details") else None,
                 "timestamp": e.timestamp,
-                "extra": e.extra_data
+                "extra": e.details or {}
             }
             for e in events
         ]

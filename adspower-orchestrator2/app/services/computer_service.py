@@ -84,45 +84,33 @@ class ComputerService:
         return computer
     
     async def delete_computer(self, computer_id: int) -> bool:
+        from sqlalchemy import select, func
+        from app.models.agent_session import AgentSession
+
         computer = await self.repo.get(computer_id)
         if not computer:
             raise ValueError(f"Computer {computer_id} not found")
-        
-        # REASIGNAR PERFILES si los tiene
-        if computer.current_profiles > 0:
-            logger.info(f"Reassigning {computer.current_profiles} profiles from computer {computer_id}")
-            
-            # Obtener computadora disponible
-            available = await self.repo.get_available(min_capacity=1)
-            
-            if not available:
-                raise ValueError(
-                    f"Cannot delete computer: has {computer.current_profiles} profiles "
-                    "and no available computers for reassignment"
-                )
-            
-            target_computer = available[0]
-            
-            # Reasignar profiles
-            from app.repositories.profile_repository import ProfileRepository
-            profile_repo = ProfileRepository(self.db)
-            
-            profiles = await profile_repo.get_by_computer(computer_id)
-            
-            for profile in profiles:
-                await profile_repo.update(profile.id, {"computer_id": target_computer.id})
-                logger.info(f"Profile {profile.id} reassigned to computer {target_computer.id}")
-            
-            # Actualizar contadores
-            await self.repo.increment_profiles(target_computer.id, len(profiles))
-            
-            logger.info(f"✅ {len(profiles)} profiles reassigned to {target_computer.name}")
-        
-        # Eliminar computadora
+
+        # Verificar sesiones activas — no eliminar si hay trabajo en curso
+        active_result = await self.db.execute(
+            select(func.count(AgentSession.id)).where(
+                AgentSession.computer_id == computer_id,
+                AgentSession.status.in_([
+                    SessionStatus.ACTIVE.value,
+                    SessionStatus.OPENING.value
+                ])
+            )
+        )
+        active_count = active_result.scalar() or 0
+        if active_count > 0:
+            raise ValueError(
+                f"No se puede eliminar la computadora: tiene {active_count} sesiones activas"
+            )
+
+        # Los perfiles son globales — no requieren reasignación
         success = await self.repo.delete(computer_id)
         await self.db.commit()
-        
-        logger.info(f"Computer deleted: {computer.name}")
+        logger.info(f"Computer eliminado: {computer.name}")
         return success
         
     async def get_available_computers(self, min_capacity: int = 1) -> List[Computer]:

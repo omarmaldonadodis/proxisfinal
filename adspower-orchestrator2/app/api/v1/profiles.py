@@ -431,14 +431,15 @@ async def verify_all_profiles_now(background_tasks: BackgroundTasks):
 
 
 async def _run_verify_all():
-    """Corre en el mismo proceso que FastAPI → tiene acceso al connection_manager real."""
+    """Versión corregida: una sola sesión para lecturas batch, 
+    sesión individual solo para commits."""
     import asyncio
     from app.core.connection_manager import connection_manager
-    from sqlalchemy import select
     from app.database import AsyncSessionLocal
     from app.models.profile import Profile, ProfileStatus
     import uuid
 
+    # UNA sola sesión para leer todos los perfiles
     async with AsyncSessionLocal() as db:
         result = await db.execute(
             select(Profile).where(
@@ -448,8 +449,21 @@ async def _run_verify_all():
             )
         )
         profiles = result.scalars().all()
+        # Extraer solo los datos que necesitamos — liberar sesión
+        profile_data = [
+            {
+                "id": p.id,
+                "adspower_id": p.adspower_id,
+                "total_sessions": p.total_sessions or 0,
+                "is_warmed": getattr(p, "is_warmed", False) or False,
+                "total_duration_seconds": getattr(p, "total_duration_seconds", 0) or 0,
+                "cookie_status": p.cookie_status or "MISSING",
+            }
+            for p in profiles
+        ]
+    # Sesión cerrada — el pool está libre
 
-    if not profiles:
+    if not profile_data:
         logger.info("ℹ️ No hay perfiles ready para verificar")
         return
 
@@ -461,7 +475,7 @@ async def _run_verify_all():
     agent_id = next(iter(agents))
     verified = 0
 
-    for profile in profiles:
+    for pdata in profile_data:
         request_id = str(uuid.uuid4())
         try:
             loop = asyncio.get_event_loop()
@@ -473,46 +487,41 @@ async def _run_verify_all():
                 command="verify_profile",
                 payload={
                     "request_id":             request_id,
-                    "adspower_id":            profile.adspower_id,
-                    "total_sessions":         profile.total_sessions or 0,
-                    "is_warmed":              getattr(profile, "is_warmed", False) or False,
-                    "total_duration_seconds": getattr(profile, "total_duration_seconds", 0) or 0,
-                    "cookie_status":          profile.cookie_status or "MISSING",
+                    "adspower_id":            pdata["adspower_id"],
+                    "total_sessions":         pdata["total_sessions"],
+                    "is_warmed":              pdata["is_warmed"],
+                    "total_duration_seconds": pdata["total_duration_seconds"],
+                    "cookie_status":          pdata["cookie_status"],
                 }
             )
 
             if not sent:
                 connection_manager._pending_proxy_checks.pop(request_id, None)
-                logger.warning(f"⚠️ No se pudo enviar a agente para {profile.adspower_id}")
                 continue
 
             result = await asyncio.wait_for(future, timeout=15.0)
 
+            # Sesión corta solo para el UPDATE — no mantener abierta durante el wait
             async with AsyncSessionLocal() as db:
-                p = await db.get(Profile, profile.id)
+                p = await db.get(Profile, pdata["id"])
                 if p:
                     p.browser_score     = result.get("browser_score", 0)
                     p.fingerprint_score = result.get("fingerprint_score", 0)
                     p.cookie_status     = result.get("cookie_status", "MISSING")
                     await db.commit()
 
-            logger.info(
-                f"✅ {profile.adspower_id} → "
-                f"score={result.get('browser_score', 0)} "
-                f"cookies={result.get('cookie_status', 'MISSING')}"
-            )
             verified += 1
 
         except asyncio.TimeoutError:
             connection_manager._pending_proxy_checks.pop(request_id, None)
-            logger.warning(f"⏱ Timeout: {profile.adspower_id}")
+            logger.warning(f"⏱ Timeout: {pdata['adspower_id']}")
         except Exception as e:
             connection_manager._pending_proxy_checks.pop(request_id, None)
-            logger.error(f"❌ Error perfil {profile.id}: {e}")
+            logger.error(f"❌ Error perfil {pdata['id']}: {e}")
 
         await asyncio.sleep(1.5)
 
-    logger.info(f"✅ Verificación completada: {verified}/{len(profiles)}")
+    logger.info(f"✅ Verificación completada: {verified}/{len(profile_data)}")
 
 def _calc_browser_score(fp_config: dict) -> float:
     score = 100.0

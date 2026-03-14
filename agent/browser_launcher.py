@@ -196,17 +196,16 @@ class BrowserLauncher:
                 await asyncio.sleep(check_interval)
 
     async def _handle_browser_closed(self, session: BrowserSession):
-        """Limpieza cuando el navegador se cierra"""
+        if not session.is_running:
+            return   # ← ya fue procesado por otra coroutine, ignorar
         session.is_running = False
-
-        if session.session_id in self.active_sessions:
-            del self.active_sessions[session.session_id]
+        self.active_sessions.pop(session.session_id, None)   # ← pop es seguro, no lanza KeyError
 
         if session.on_close:
             await session.on_close(
                 session.session_id,
                 {
-                    "pages_visited": session.pages_visited,
+                    "pages_visited":    session.pages_visited,
                     "duration_seconds": int(time.time() - (session.opened_at or time.time()))
                 }
             )

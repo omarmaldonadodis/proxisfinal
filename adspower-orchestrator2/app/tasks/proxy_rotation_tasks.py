@@ -27,8 +27,9 @@ def auto_rotate_slow_proxies_task(self: Task):
 
     try:
         with httpx.Client(timeout=10.0) as client:
+            api_port = getattr(settings, 'API_PORT', 8000)
             r = client.post(
-                f"http://localhost:{settings.PORT}/api/v1/proxy-rotation/check-and-rotate-all"
+                f"http://localhost:{api_port}/api/v1/proxy-rotation/check-and-rotate-all"
             )
             logger.info(f"Rotación disparada: {r.status_code}")
             return r.json()

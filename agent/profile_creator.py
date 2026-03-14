@@ -21,12 +21,6 @@ class ProfileCreator:
         cookies            = payload.get("cookies", [])
         remark             = payload.get("remark", "")
 
-        if "language" in fingerprint_config:
-            lang = fingerprint_config["language"]
-            if isinstance(lang, str):
-                country = lang.upper()
-                fingerprint_config["language"] = [f"{lang}-{country}", lang]
-
 
         logger.info(f"[CREATE] fingerprint_config enviado: {fingerprint_config}")  # ← AGREGAR
 

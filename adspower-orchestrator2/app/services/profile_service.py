@@ -157,8 +157,25 @@ class ProfileService:
 
         # Métricas
         creation_duration = time.time() - creation_start
-        proxy_latency = proxy.avg_response_time or 0.0  # ← FIX: usar el avg guardado
-
+        if proxy.avg_response_time and proxy.avg_response_time > 0:
+            proxy_latency = proxy.avg_response_time
+        else:
+            # Para proxies nuevos, medir latencia ahora
+            import time, httpx as _httpx
+            proxy_url = f"http://{proxy.username}:{proxy.password}@{proxy.host}:{proxy.port}"
+            try:
+                start = time.time()
+                async with _httpx.AsyncClient(
+                    proxies={"http://": proxy_url, "https://": proxy_url},
+                    timeout=8.0
+                ) as _client:
+                    await _client.get("https://api.ipify.org?format=json")
+                proxy_latency = (time.time() - start) * 1000
+                # Persistir para futuras consultas
+                proxy.avg_response_time = proxy_latency
+                await self.db.commit()
+            except Exception:
+                proxy_latency = 0.0
         try:
             metrics_service = MetricsService(self.db)
             await metrics_service.record_profile_creation(

@@ -222,6 +222,16 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
                         "latency_ms": data.get("latency_ms"),
                         "error":      data.get("error"),
                     })
+            elif msg_type == "heartbeat":
+                await websocket.send_json({
+                    "type":      "pong",
+                    "timestamp": datetime.utcnow().isoformat() + "Z",
+                })
+                # Actualizar last_seen del computer
+                if computer:
+                    computer.last_seen_at = datetime.utcnow()
+                    await db.commit()
+
             elif msg_type == "verify_profile_result":
                 request_id = data.get("request_id")
                 if request_id:

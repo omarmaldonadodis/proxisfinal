@@ -19,25 +19,16 @@ class ProfileRepository(BaseRepository[Profile]):
             select(Profile).where(Profile.adspower_id == adspower_id)
         )
         return result.scalar_one_or_none()
-    
-    async def get_with_relations(self, id: int) -> Optional[Profile]:
-        """Obtiene profile con relaciones cargadas"""
+    async def get_with_proxy(self, id: int) -> Optional[Profile]:
+        """Reemplaza get_with_relations — Profile solo tiene relación con Proxy"""
         result = await self.db.execute(
             select(Profile)
-            .options(
-                selectinload(Profile.computer),
-                selectinload(Profile.proxy)
-            )
+            .options(selectinload(Profile.proxy))
             .where(Profile.id == id)
         )
         return result.scalar_one_or_none()
     
-    async def get_by_computer(self, computer_id: int) -> List[Profile]:
-        """Obtiene profiles de un computer específico"""
-        result = await self.db.execute(
-            select(Profile).where(Profile.computer_id == computer_id)
-        )
-        return list(result.scalars().all())
+    
     
     async def get_available_for_automation(self, limit: int = 10) -> List[Profile]:
         """Obtiene profiles disponibles para automatización"""
@@ -52,6 +43,7 @@ class ProfileRepository(BaseRepository[Profile]):
         )
         return list(result.scalars().all())
     
+
     async def update_status(self, id: int, status: ProfileStatus) -> bool:
         """Actualiza estado del profile"""
         return await self.update(id, {'status': status})

@@ -92,6 +92,7 @@ class AdsPowerAgent:
             return
 
         self.is_connected = True
+        self._setup_remote_logging()
         self.tray.update_status(True)
 
         tasks = [
@@ -100,7 +101,7 @@ class AdsPowerAgent:
             asyncio.create_task(self._heartbeat_loop()),
         ]
 
-        self.tray.start()
+        #self.tray.start()
 
         logger.info("✅ Agente iniciado correctamente")
 
@@ -184,17 +185,7 @@ class AdsPowerAgent:
     # COMANDOS DEL SERVIDOR
     # ========================================
 
-    async def _on_open_browser_command(
-        self,
-        session_id: int,
-        profile_id: str,
-        target_url: str
-    ):
-        """El servidor ordena abrir un navegador"""
-        logger.info(f"📥 Comando open_browser: sesión={session_id}, perfil={profile_id}")
-
-        self.network.reset_session()
-
+    async def _on_open_browser_command(self, session_id, profile_id, target_url):
         result = await self.launcher.launch(
             session_id=session_id,
             profile_id=profile_id,
@@ -205,6 +196,7 @@ class AdsPowerAgent:
         )
 
         if result.get("success"):
+            self.network.reset_session()   # ← resetear SOLO si el browser abrió
             await self.server.mark_session_active(session_id)
             logger.info(f"✅ Navegador activo confirmado: sesión={session_id}")
         else:
@@ -314,14 +306,17 @@ class AdsPowerAgent:
 
 
     def _setup_remote_logging(self):
+        server_ref = self.server
+
         async def remote_sink(message):
             record = message.record
-            await self.server_client.send_log(
-                level=record["level"].name,
-                message=record["message"],
-            )
-        
-        logger.add(remote_sink, level="DEBUG")
+            if server_ref.is_connected:
+                await server_ref.send_log(
+                    level=record["level"].name,
+                    message=record["message"],
+                )
+
+        logger.add(remote_sink, level="WARNING") 
     
 
     async def _on_check_proxy_command(self, data: dict):
@@ -411,53 +406,71 @@ class AdsPowerAgent:
                 "DÉBIL"
             )
         }
+    # agent/main.py — _on_verify_profile_command COMPLETO
+
     async def _on_verify_profile_command(self, data: dict):
-        """Backend pide verificar fingerprint/cookies de un perfil via AdsPower local."""
         import httpx, json
 
         request_id  = data.get("request_id")
         adspower_id = data.get("adspower_id")
-
         logger.info(f"📥 verify_profile: adspower_id={adspower_id}")
 
         try:
+            headers = {"Authorization": f"Bearer {self.config.adspower_api_key}"}
+
             async with httpx.AsyncClient(timeout=10.0) as client:
-                # 1. Obtener info del perfil
+                # 1. Obtener info del perfil via API v1 real
                 r = await client.get(
                     f"{self.config.adspower_url}/api/v1/user/list",
                     params={"user_id": adspower_id, "page": 1, "page_size": 1},
-                    headers={"Authorization": f"Bearer {self.config.adspower_api_key}"},
+                    headers=headers,
                 )
                 resp = r.json()
                 profiles_list = resp.get("data", {}).get("list", [])
-                profile_info = profiles_list[0] if profiles_list else {}
-                logger.info(f"[VERIFY RAW] profile_info: {profile_info}")
+                profile_info  = profiles_list[0] if profiles_list else {}
+                logger.info(f"[VERIFY] profile_info keys: {list(profile_info.keys())}")
 
-                # 2. Obtener cookies via API V2 — funciona con browser CERRADO
-                has_cookies = False
+                # 2. Inferir cookies desde last_open_time y cookie field del perfil
+                #    AdsPower almacena cookies en el campo "cookie" del profile
+                #    pero solo cuando el browser está abierto las expone via /browser/cookies
+                has_cookies  = False
                 cookie_count = 0
-                cookie_status = "MISSING"  # ← agregar aquí
 
-                try:
-                    r2 = await client.get(
-                        f"{self.config.adspower_url}/api/v2/browser-profile/cookies",
-                        params={"profile_id": adspower_id},
-                        headers={"Authorization": f"Bearer {self.config.adspower_api_key}"},
+                last_open_time = profile_info.get("last_open_time", "0")
+                cookie_field   = profile_info.get("cookie", "")
+
+                if cookie_field and cookie_field not in ("", "[]", None):
+                    try:
+                        import json as json_mod
+                        parsed = json_mod.loads(cookie_field) if isinstance(cookie_field, str) else cookie_field
+                        cookie_count = len(parsed) if isinstance(parsed, list) else 0
+                        has_cookies  = cookie_count > 0
+                    except Exception:
+                        # Cookie field existe pero no es JSON válido — asumir que hay cookies
+                        has_cookies  = True
+                        cookie_count = 1
+
+                # Si el browser está abierto ahora, leer cookies reales
+                if not has_cookies and last_open_time and last_open_time != "0":
+                    browser_check = await client.get(
+                        f"{self.config.adspower_url}/api/v1/browser/active",
+                        params={"user_id": adspower_id},
+                        headers=headers,
                     )
-                    if r2.status_code == 200 and r2.text.strip():
-                        resp2 = r2.json()
-                        if resp2.get("code") == 0:
-                            import json as json_mod
-                            cookies_raw = resp2.get("data", {}).get("cookies", "[]")
-                            # cookies viene como string JSON — hay que parsearlo
-                            cookies_list = json_mod.loads(cookies_raw) if isinstance(cookies_raw, str) else cookies_raw
-                            cookie_count = len(cookies_list)
-                            has_cookies = cookie_count > 0
-                            cookie_status = "OK" if has_cookies else "MISSING"
-                            logger.info(f"[VERIFY] cookies encontradas: {cookie_count}")
-                except Exception as e:
-                    logger.warning(f"⚠️ No se pudo obtener cookies V2: {e}")
-                    has_cookies = False
+                    if browser_check.status_code == 200:
+                        bdata = browser_check.json()
+                        if bdata.get("code") == 0 and bdata.get("data", {}).get("status") == "Active":
+                            # Browser abierto — leer cookies reales
+                            ck_r = await client.get(
+                                f"{self.config.adspower_url}/api/v1/browser/cookies",
+                                params={"user_id": adspower_id},
+                                headers=headers,
+                            )
+                            if ck_r.status_code == 200 and ck_r.json().get("code") == 0:
+                                cookies_data = ck_r.json().get("data", {}).get("cookies", [])
+                                cookie_count = len(cookies_data)
+                                has_cookies  = cookie_count > 0
+
             # 3. Datos de DB que el backend envió en el payload
             db_data = {
                 "total_sessions":         data.get("total_sessions", 0),
@@ -467,10 +480,10 @@ class AdsPowerAgent:
                 "cookie_status":          "OK" if has_cookies else data.get("cookie_status", "MISSING"),
             }
 
-            # 4. Calcular score profesional
+            # 4. Calcular score
             score_result = self._calculate_profile_score(profile_info, db_data)
 
-            result = {
+            result_payload = {
                 "type":              "verify_profile_result",
                 "request_id":        request_id,
                 "browser_score":     score_result["browser_score"],
@@ -478,23 +491,26 @@ class AdsPowerAgent:
                 "cookie_status":     score_result["cookie_status"],
                 "breakdown":         score_result["breakdown"],
                 "grade":             score_result["grade"],
+                "has_cookies":       has_cookies,
+                "cookie_count":      cookie_count,
             }
 
         except Exception as e:
             logger.error(f"❌ verify_profile error: {e}")
-            result = {
+            result_payload = {
                 "type":              "verify_profile_result",
                 "request_id":        request_id,
                 "browser_score":     0,
                 "fingerprint_score": 0,
                 "cookie_status":     "MISSING",
+                "has_cookies":       False,
                 "error":             str(e),
             }
 
         if self.server.ws and self.server.is_connected:
-            await self.server.ws.send(json.dumps(result))
+            await self.server.ws.send(json.dumps(result_payload))
             logger.info(f"✅ verify_profile_result enviado: request_id={request_id}")
-# ========================================
+            # ========================================
 # ENTRY POINT
 # ========================================
 

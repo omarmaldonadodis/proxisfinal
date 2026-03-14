@@ -49,7 +49,7 @@ async def list_computers_with_metrics(db: AsyncSession = Depends(get_db)):
             select(func.count(AgentSession.id))
             .where(
                 AgentSession.computer_id == computer.id,
-                AgentSession.status == SessionStatus.ACTIVE
+                AgentSession.status == SessionStatus.ACTIVE.value
             )
         )
         active_sessions = sessions_result.scalar() or 0

@@ -123,11 +123,8 @@ class AgentService:
             session_result = await self.db.execute(
                 select(AgentSession).where(
                     AgentSession.assignment_id == assignment.id,
-                    AgentSession.status.in_([
-                        SessionStatus.ACTIVE,
-                        SessionStatus.OPENING,
-                        SessionStatus.PENDING_AUTH
-                    ])
+                    AgentSession.status.in_([SessionStatus.ACTIVE.value, SessionStatus.OPENING.value])
+
                 )
             )
             active_session = session_result.scalar_one_or_none()
@@ -189,11 +186,8 @@ class AgentService:
         existing_result = await self.db.execute(
             select(AgentSession).where(
                 AgentSession.assignment_id == assignment_id,
-                AgentSession.status.in_([
-                    SessionStatus.ACTIVE,
-                    SessionStatus.OPENING,
-                    SessionStatus.PENDING_AUTH
-                ])
+                AgentSession.status.in_([SessionStatus.ACTIVE.value, SessionStatus.OPENING.value])
+
             )
         )
         if existing_result.scalar_one_or_none():
@@ -500,11 +494,8 @@ class AgentService:
     async def get_active_sessions(self) -> List[AgentSession]:
         result = await self.db.execute(
             select(AgentSession).where(
-                AgentSession.status.in_([
-                    SessionStatus.ACTIVE,
-                    SessionStatus.OPENING,
-                    SessionStatus.PENDING_AUTH
-                ])
+                AgentSession.status.in_([SessionStatus.ACTIVE.value, SessionStatus.OPENING.value])
+
             ).order_by(AgentSession.requested_at.desc())
         )
         return list(result.scalars().all())
@@ -547,7 +538,7 @@ class AgentService:
         # Sesiones activas ahora
         active_count = (await self.db.execute(
             select(func.count(AgentSession.id)).where(
-                AgentSession.status == SessionStatus.ACTIVE
+                AgentSession.status == SessionStatus.ACTIVE.value
             )
         )).scalar()
 
