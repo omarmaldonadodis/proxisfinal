@@ -1,5 +1,3 @@
-
-
 # app/models/computer_token.py
 from sqlalchemy import Text, Column, String, Integer, Boolean, DateTime, ForeignKey
 from sqlalchemy.orm import relationship

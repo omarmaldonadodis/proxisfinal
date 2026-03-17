@@ -24,6 +24,4 @@ agent/.env
 
 # Cache
 .cache/
-# Repos internos (MUY IMPORTANTE)
-agente/
-adsPowerOrquestador/
+
