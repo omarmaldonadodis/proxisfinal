@@ -386,11 +386,12 @@ async def verify_profile_security(
         payload={
             "request_id":             request_id,
             "adspower_id":            profile.adspower_id,
-            # ← AGREGAR estos para que el agente calcule madurez correctamente:
             "total_sessions":         profile.total_sessions or 0,
             "is_warmed":              profile.is_warmed or False,
             "total_duration_seconds": profile.total_duration_seconds or 0,
             "cookie_status":          profile.cookie_status or "MISSING",
+            "timezone":               profile.timezone or "",
+            "hardware_concurrency":   profile.hardware_concurrency,
         }
     )
     
@@ -400,7 +401,7 @@ async def verify_profile_security(
 
     # ── Esperar respuesta (timeout 15s) ────────────────────────
     try:
-        result = await asyncio.wait_for(future, timeout=15.0)
+        result = await asyncio.wait_for(future, timeout=40.0)
     except asyncio.TimeoutError:
         connection_manager._pending_proxy_checks.pop(request_id, None)
         raise HTTPException(status_code=504, detail="Agente no respondió a tiempo")
@@ -513,7 +514,7 @@ async def _run_verify_all():
                 connection_manager._pending_proxy_checks.pop(request_id, None)
                 continue
 
-            result = await asyncio.wait_for(future, timeout=15.0)
+            result = await asyncio.wait_for(future, timeout=40.0)
 
             # Sesión corta solo para el UPDATE — no mantener abierta durante el wait
             async with AsyncSessionLocal() as db:

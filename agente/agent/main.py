@@ -563,110 +563,48 @@ class AdsPowerAgent:
             )
         }
     # agent/main.py — _on_verify_profile_command COMPLETO
-
     async def _on_verify_profile_command(self, data: dict):
-        import httpx, json
+        import json
+        from agent.profile_verifier import ProfileVerifier
 
         request_id  = data.get("request_id")
         adspower_id = data.get("adspower_id")
-        logger.info(f"📥 verify_profile: adspower_id={adspower_id}")
+        logger.info(f"📥 verify_profile real: adspower_id={adspower_id}")
 
-        try:
-            headers = {"Authorization": f"Bearer {self.config.adspower_api_key}"}
+        verifier = ProfileVerifier(
+            self.config.adspower_url,
+            self.config.adspower_api_key
+        )
 
-            async with httpx.AsyncClient(timeout=10.0) as client:
-                # 1. Obtener info del perfil via API v1 real
-                r = await client.get(
-                    f"{self.config.adspower_url}/api/v1/user/list",
-                    params={"user_id": adspower_id, "page": 1, "page_size": 1},
-                    headers=headers,
-                )
-                resp = r.json()
-                profiles_list = resp.get("data", {}).get("list", [])
-                profile_info  = profiles_list[0] if profiles_list else {}
-                logger.info(f"[VERIFY] profile_info keys: {list(profile_info.keys())}")
+        db_data = {
+            "total_sessions":         data.get("total_sessions", 0),
+            "is_warmed":              data.get("is_warmed", False),
+            "total_duration_seconds": data.get("total_duration_seconds", 0),
+            "cookie_status":          data.get("cookie_status", "MISSING"),
+            "timezone":               data.get("timezone", ""),
+            "hardware_concurrency":   data.get("hardware_concurrency"),
+        }
 
-                # 2. Inferir cookies desde last_open_time y cookie field del perfil
-                #    AdsPower almacena cookies en el campo "cookie" del profile
-                #    pero solo cuando el browser está abierto las expone via /browser/cookies
-                has_cookies  = False
-                cookie_count = 0
+        result = await verifier.verify(adspower_id, db_data)
 
-                last_open_time = profile_info.get("last_open_time", "0")
-                cookie_field   = profile_info.get("cookie", "")
-
-                if cookie_field and cookie_field not in ("", "[]", None):
-                    try:
-                        import json as json_mod
-                        parsed = json_mod.loads(cookie_field) if isinstance(cookie_field, str) else cookie_field
-                        cookie_count = len(parsed) if isinstance(parsed, list) else 0
-                        has_cookies  = cookie_count > 0
-                    except Exception:
-                        # Cookie field existe pero no es JSON válido — asumir que hay cookies
-                        has_cookies  = True
-                        cookie_count = 1
-
-                # Si el browser está abierto ahora, leer cookies reales
-                if not has_cookies and last_open_time and last_open_time != "0":
-                    browser_check = await client.get(
-                        f"{self.config.adspower_url}/api/v1/browser/active",
-                        params={"user_id": adspower_id},
-                        headers=headers,
-                    )
-                    if browser_check.status_code == 200:
-                        bdata = browser_check.json()
-                        if bdata.get("code") == 0 and bdata.get("data", {}).get("status") == "Active":
-                            # Browser abierto — leer cookies reales
-                            ck_r = await client.get(
-                                f"{self.config.adspower_url}/api/v1/browser/cookies",
-                                params={"user_id": adspower_id},
-                                headers=headers,
-                            )
-                            if ck_r.status_code == 200 and ck_r.json().get("code") == 0:
-                                cookies_data = ck_r.json().get("data", {}).get("cookies", [])
-                                cookie_count = len(cookies_data)
-                                has_cookies  = cookie_count > 0
-
-            # 3. Datos de DB que el backend envió en el payload
-            db_data = {
-                "total_sessions":         data.get("total_sessions", 0),
-                "is_warmed":              data.get("is_warmed", False),
-                "total_duration_seconds": data.get("total_duration_seconds", 0),
-                "cookie_count":           cookie_count,
-                "cookie_status":          "OK" if has_cookies else data.get("cookie_status", "MISSING"),
-            }
-
-            # 4. Calcular score
-            score_result = self._calculate_profile_score(profile_info, db_data)
-
-            result_payload = {
-                "type":              "verify_profile_result",
-                "request_id":        request_id,
-                "browser_score":     score_result["browser_score"],
-                "fingerprint_score": score_result["fingerprint_score"],
-                "cookie_status":     score_result["cookie_status"],
-                "breakdown":         score_result["breakdown"],
-                "grade":             score_result["grade"],
-                "has_cookies":       has_cookies,
-                "cookie_count":      cookie_count,
-            }
-
-        except Exception as e:
-            logger.error(f"❌ verify_profile error: {e}")
-            result_payload = {
-                "type":              "verify_profile_result",
-                "request_id":        request_id,
-                "browser_score":     0,
-                "fingerprint_score": 0,
-                "cookie_status":     "MISSING",
-                "has_cookies":       False,
-                "error":             str(e),
-            }
+        payload = {
+            "type":              "verify_profile_result",
+            "request_id":        request_id,
+            "browser_score":     result.get("browser_score", 0),
+            "fingerprint_score": result.get("fingerprint_score", 0),
+            "cookie_status":     result.get("cookie_status", "MISSING"),
+            "has_cookies":       result.get("has_cookies", False),
+            "breakdown":         result.get("breakdown", {}),
+            "issues":            result.get("issues", []),
+            "warnings":          result.get("warnings", []),
+            "raw_fingerprint":   result.get("raw_fingerprint", {}),
+            "grade":             result.get("grade", "DÉBIL"),
+            "error":             result.get("error"),
+        }
 
         if self.server.ws and self.server.is_connected:
-            await self.server.ws.send(json.dumps(result_payload))
-            logger.info(f"✅ verify_profile_result enviado: request_id={request_id}")
-            # ========================================
+            await self.server.ws.send(json.dumps(payload))
+            logger.info(f"✅ verify_profile_result enviado: score={result.get('browser_score')}")            # ========================================
 # ENTRY POINT
 # ========================================
 
