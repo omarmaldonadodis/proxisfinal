@@ -35,7 +35,7 @@ class Settings(BaseSettings):
     SOAX_PASSWORD: str
     SOAX_HOST: str = "proxy.soax.com"
     SOAX_PORT: int = 5000
-    SOAX_API_KEY: str = "VXF9Hzx7MkFa0emd"
+    SOAX_API_KEY: str = "KL7Zjf51HZY1XNSv"
     
     # 3X-UI
     USE_3XUI: bool = False

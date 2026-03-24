@@ -27,7 +27,7 @@ class ProfileCreator:
 
         adspower_data = {
             "name":               name,
-            "group_id":           "0",
+            "group_id":           "8987213",
             "remark":             remark,
             "fingerprint_config": fingerprint_config,
             "user_proxy_config":  user_proxy_config,

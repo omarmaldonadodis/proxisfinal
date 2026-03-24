@@ -18,6 +18,16 @@ from app.services.metrics_service import MetricsService
 from app.config import settings
 
 
+def _clamp_hardware_concurrency(value: int) -> int:
+    """AdsPower solo acepta valores específicos"""
+    valid = [2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 32, 64]
+    return min(valid, key=lambda x: abs(x - value))
+
+
+def _clamp_device_memory(value: int) -> int:
+    """AdsPower solo acepta valores específicos para device_memory"""
+    valid = [2, 4, 6, 8, 16, 32, 64, 128]
+    return min(valid, key=lambda x: abs(x - value))
 
 class ProfileService:
     def __init__(self, db: AsyncSession):
@@ -25,7 +35,6 @@ class ProfileService:
 
     async def create_profile(self, profile_in: ProfileCreate) -> Profile:
         creation_start = time.time()  # ← FIX: definir aquí
-
 
         if not profile_in.proxy_id:
             raise ValueError("proxy_id is required")
@@ -65,8 +74,8 @@ class ProfileService:
             "webgl": "1",
             "audio": "1",
             "do_not_track": "default",
-            "hardware_concurrency": str(profile_config["hardware_concurrency"]),
-            "device_memory": str(profile_config["device_memory"]),
+            "hardware_concurrency": str(_clamp_hardware_concurrency(profile_config["hardware_concurrency"])),
+            "device_memory": str(_clamp_device_memory(profile_config["device_memory"])),
             "flash": "block",
             "media_devices": "1",
             "client_rects": "1",
@@ -98,14 +107,17 @@ class ProfileService:
         adspower_response_time = (time.time() - adspower_start) * 1000  # ms
 
         if not isinstance(adspower_response, dict):
-            raise RuntimeError(f"Unexpected AdsPower response: {type(adspower_response)}")
+            raise RuntimeError(
+                f"Unexpected AdsPower response: {type(adspower_response)}")
 
         if adspower_response.get("code") != 0:
-            raise RuntimeError(f"AdsPower error: {adspower_response.get('msg')}")
+            raise RuntimeError(
+                f"AdsPower error: {adspower_response.get('msg')}")
 
         data = adspower_response.get("data")
         if not data or "id" not in data:
-            raise RuntimeError(f"Invalid AdsPower response: {adspower_response}")
+            raise RuntimeError(
+                f"Invalid AdsPower response: {adspower_response}")
 
         adspower_id = data["id"]
 
@@ -161,7 +173,8 @@ class ProfileService:
             proxy_latency = proxy.avg_response_time
         else:
             # Para proxies nuevos, medir latencia ahora
-            import time, httpx as _httpx
+            import time
+            import httpx as _httpx
             proxy_url = f"http://{proxy.username}:{proxy.password}@{proxy.host}:{proxy.port}"
             try:
                 start = time.time()
@@ -191,9 +204,10 @@ class ProfileService:
         except Exception as e:
             logger.warning(f"Error recording metrics (non-critical): {e}")
 
-        logger.info(f"✅ Profile created: {db_profile.id} / AdsPower: {adspower_id}")
+        logger.info(
+            f"✅ Profile created: {db_profile.id} / AdsPower: {adspower_id}")
         return db_profile
-    
+
     async def _upload_cookies_to_profile(
         self,
         adspower_client: AdsPowerClient,
@@ -202,14 +216,14 @@ class ProfileService:
     ) -> bool:
         """
         ✅ CORREGIDO FINAL: Sube cookies como lista de objetos
-        
+
         AdsPower maneja la conversión a JSON internamente.
         Solo enviamos lista limpia de objetos.
         """
-        
+
         # ✅ Convertir cookies al formato correcto de AdsPower
         formatted_cookies = []
-        
+
         for cookie in cookies:
             # ✅ Crear objeto con tipos correctos
             formatted_cookie = {
@@ -220,26 +234,29 @@ class ProfileService:
                 "httpOnly": bool(cookie.get("httpOnly", False)),
                 "secure": bool(cookie.get("secure", True)),
             }
-            
+
             # ✅ Agregar expirationDate solo si existe (debe ser int/float)
             if "expirationDate" in cookie and cookie["expirationDate"]:
                 try:
-                    formatted_cookie["expirationDate"] = int(cookie["expirationDate"])
+                    formatted_cookie["expirationDate"] = int(
+                        cookie["expirationDate"])
                 except (ValueError, TypeError):
-                    logger.warning(f"Invalid expirationDate for cookie {cookie['name']}, skipping")
-            
+                    logger.warning(
+                        f"Invalid expirationDate for cookie {cookie['name']}, skipping")
+
             # ✅ Agregar sameSite solo si existe
             if "sameSite" in cookie and cookie["sameSite"]:
                 formatted_cookie["sameSite"] = str(cookie["sameSite"])
-            
+
             formatted_cookies.append(formatted_cookie)
-        
-        logger.info(f"Uploading {len(formatted_cookies)} cookies to profile {adspower_id}")
-        
+
+        logger.info(
+            f"Uploading {len(formatted_cookies)} cookies to profile {adspower_id}")
+
         # ✅ Log primera cookie para debugging
         if formatted_cookies:
             logger.debug(f"Sample cookie: {formatted_cookies[0]}")
-        
+
         try:
             # ✅ Enviar como LISTA (no como string)
             # El AdsPowerClient manejará la conversión a JSON
@@ -247,7 +264,7 @@ class ProfileService:
                 profile_id=adspower_id,
                 profile_data={"cookie": formatted_cookies}
             )
-            
+
             if result:
                 logger.info(
                     f"✓ {len(formatted_cookies)} cookies uploaded successfully to profile {adspower_id}"
@@ -258,13 +275,12 @@ class ProfileService:
                     f"⚠️ Cookie upload returned false for profile {adspower_id}"
                 )
                 return False
-        
+
         except Exception as e:
             logger.error(
                 f"✗ Error uploading cookies to profile {adspower_id}: {e}"
             )
             return False
-    
 
     async def get_profile(self, profile_id: int) -> Optional[Profile]:
         result = await self.db.execute(
@@ -283,11 +299,16 @@ class ProfileService:
         cookie_status: Optional[str] = None,
     ) -> Tuple[List[Profile], int]:
         conditions = []
-        if computer_id:   conditions.append(Profile.computer_id == computer_id)
-        if status:        conditions.append(Profile.status == status)
-        if owner:         conditions.append(Profile.owner == owner)
-        if bookie:        conditions.append(Profile.bookie == bookie)
-        if cookie_status: conditions.append(Profile.cookie_status == cookie_status)
+        if computer_id:
+            conditions.append(Profile.computer_id == computer_id)
+        if status:
+            conditions.append(Profile.status == status)
+        if owner:
+            conditions.append(Profile.owner == owner)
+        if bookie:
+            conditions.append(Profile.bookie == bookie)
+        if cookie_status:
+            conditions.append(Profile.cookie_status == cookie_status)
 
         query = select(Profile)
         count_query = select(func.count()).select_from(Profile)
@@ -308,53 +329,55 @@ class ProfileService:
         profile = await self.get_profile(profile_id)
         if not profile:
             raise ValueError(f"Profile {profile_id} not found")
-        
+
         update_data = profile_update.model_dump(exclude_unset=True)
-        
+
         for field, value in update_data.items():
             setattr(profile, field, value)
-        
+
         profile.updated_at = datetime.utcnow()
-        
+
         await self.db.commit()
         await self.db.refresh(profile)
-        
+
         return profile
 
     async def delete_profile(self, profile_id: int) -> bool:
-        profile = await self.get_profile(profile_id)
+        """Elimina profile y su proxy asociado"""
+        profile = await self.repo.get(profile_id)
         if not profile:
+            raise ValueError(f"Profile {profile_id} not found")
+
+        proxy_id = profile.proxy_id  # ← guardar antes de borrar
+
+        # Borrar perfil primero (por FK)
+        success = await self.repo.delete(profile_id)
+        if not success:
             return False
-        
-        result = await self.db.execute(
-            select(Computer).where(Computer.id == profile.computer_id)
-        )
-        computer = result.scalar_one_or_none()
-        
-        if computer:
-            try:
-                adspower_client = AdsPowerClient(
-                    api_url=settings.ADSPOWER_DEFAULT_API_URL,  # ← API central
-                    api_key=settings.ADSPOWER_DEFAULT_API_KEY
-                )
-                await adspower_client.delete_profile([profile.adspower_id])
-            except Exception as e:
-                logger.error(f"Failed to delete from AdsPower: {e}")
-        
-        await self.db.delete(profile)
+
+        # Borrar proxy asociado si existe
+        if proxy_id:
+            from app.models.proxy import Proxy
+            proxy = await self.db.get(Proxy, proxy_id)
+            if proxy:
+                await self.db.delete(proxy)
+
         await self.db.commit()
-        
+        logger.info(f"Perfil {profile_id} y proxy {proxy_id} eliminados")
         return True
-    
+
     async def get_stats(self) -> Dict:
         from app.models.profile import ProfileStatus
-        
+
         result = await self.db.execute(
             select(
                 func.count(Profile.id).label('total'),
-                func.count(Profile.id).filter(Profile.status == ProfileStatus.READY).label('ready'),
-                func.count(Profile.id).filter(Profile.status == ProfileStatus.ACTIVE).label('active'),
-                func.count(Profile.id).filter(Profile.is_warmed == True).label('warmed'),
+                func.count(Profile.id).filter(Profile.status ==
+                                              ProfileStatus.READY).label('ready'),
+                func.count(Profile.id).filter(Profile.status ==
+                                              ProfileStatus.ACTIVE).label('active'),
+                func.count(Profile.id).filter(
+                    Profile.is_warmed == True).label('warmed'),
                 func.sum(Profile.total_sessions).label('total_sessions')
             )
         )
@@ -367,6 +390,7 @@ class ProfileService:
             'total_sessions': row.total_sessions or 0
         }
     # En profile_service.py, agregar:
+
     async def set_adspower_id(self, profile_id: int, adspower_id: str) -> bool:
         profile = await self.get_profile(profile_id)
         if not profile:
@@ -374,11 +398,12 @@ class ProfileService:
 
         # Si ya fue procesado por otro agente, ignorar
         if not profile.adspower_id.startswith("pending-"):
-            logger.warning(f"Profile {profile_id} ya tiene adspower_id real, ignorando duplicado")
+            logger.warning(
+                f"Profile {profile_id} ya tiene adspower_id real, ignorando duplicado")
             return False
 
         profile.adspower_id = adspower_id
-        profile.status      = ProfileStatus.READY
-        profile.updated_at  = datetime.utcnow()
+        profile.status = ProfileStatus.READY
+        profile.updated_at = datetime.utcnow()
         await self.db.commit()
         return True

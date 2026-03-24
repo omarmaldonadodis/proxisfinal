@@ -173,6 +173,12 @@ class AdsPowerMonitor:
             return {"is_running": False, "error": "API no disponible"}
 
     def open_browser(self, profile_id: str, url: Optional[str] = None) -> Dict:
+        # Verificar que AdsPower esté corriendo antes de intentar
+        if not self.ping_api():
+            error_msg = "AdsPower no está disponible — verifica que la aplicación esté abierta"
+            logger.error(f"❌ {error_msg}")
+            return {"success": False, "error": error_msg}
+
         try:
             params = {"user_id": profile_id, "open_tabs": 1, "ip_tab": 0}
             if url:
@@ -194,10 +200,38 @@ class AdsPowerMonitor:
                     "debug_port": browser_data.get("debug_port"),
                     "webdriver": browser_data.get("webdriver")
                 }
-            return {"success": False, "error": data.get("msg", "Error desconocido")}
-        except Exception as e:
-            return {"success": False, "error": str(e)}
 
+            error_msg = data.get("msg", "Error desconocido")
+            logger.error(f"❌ AdsPower rechazó abrir el navegador: {error_msg}")
+
+            # Clasificar el error
+            error_type = "UNKNOWN"
+            if "proxy" in error_msg.lower() or "Check Proxy" in error_msg:
+                error_type = "PROXY_INVALID"
+                error_msg = f"Proxy inválido o caído — {error_msg}"
+            elif "not exist" in error_msg.lower():
+                error_type = "PROFILE_NOT_FOUND"
+                error_msg = f"Perfil no existe en AdsPower — {error_msg}"
+
+            return {"success": False, "error": error_msg, "error_type": error_type}
+
+        except httpx.ConnectError:
+            return {
+                "success": False,
+                "error": "AdsPower no disponible",
+                "error_type": "ADSPOWER_OFFLINE",
+                "detail": "La aplicación AdsPower no está abierta o no responde"
+            }
+        except httpx.TimeoutException:
+            return {
+                "success": False,
+                "error": "Timeout al abrir navegador",
+                "error_type": "TIMEOUT",
+                "detail": "AdsPower tardó más de 30s en responder"
+            }
+        except Exception as e:
+            return {"success": False, "error": str(e), "error_type": "UNKNOWN"}
+        
     def close_browser(self, profile_id: str) -> bool:
         try:
             response = self._client.get(

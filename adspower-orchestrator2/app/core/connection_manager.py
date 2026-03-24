@@ -39,7 +39,7 @@ class ConnectionManager:
         if computer_id not in self.connection_times:
             self.connection_times[computer_id] = datetime.now(timezone.utc)
 
-        logger.info(f"✅ Agente conectado: computer_id={computer_id}")
+        logger.info(f"Agente conectado: computer_id={computer_id}")
         asyncio.create_task(self._update_computer_status(computer_id, "online"))
 
         await self.broadcast_to_admins({
@@ -262,6 +262,20 @@ class ConnectionManager:
         proxy_password: str,
         timeout: float = 15.0
     ) -> dict | None:
+        
+        # ← AGREGAR VALIDACIÓN
+        if not proxy_host or not proxy_port:
+            logger.error(f"❌ check_proxy: datos inválidos — host={proxy_host}, port={proxy_port}")
+            return None
+        
+        proxy_user     = proxy_user or ""
+        proxy_password = proxy_password or ""
+        
+        logger.info(
+            f"🔍 Enviando check_proxy al agente {computer_id}: "
+            f"{proxy_host}:{proxy_port} user={proxy_user[:20]}..."
+        )
+    
         """
         Envía check_proxy al agente y espera la respuesta.
         Retorna {"latency_ms": int|None, "error": str|None} o None si timeout.

@@ -88,7 +88,10 @@ class AdsPowerAgent:
 
         registered = await self.server.register()
         if not registered:
-            logger.error("❌ No se pudo registrar. Abortando.")
+            logger.warning(
+                "No se pudo registrar. Esperando para reintentar...")
+            await self._wait_for_server()  # ← NUEVO: esperar en vez de abortar
+            # logger.error("❌ No se pudo registrar. Abortando.")
             return
 
         self.is_connected = True
@@ -99,6 +102,7 @@ class AdsPowerAgent:
             asyncio.create_task(self.server.connect_websocket()),
             asyncio.create_task(self._metrics_loop()),
             asyncio.create_task(self._heartbeat_loop()),
+            asyncio.create_task(self._adspower_health_loop()),
         ]
 
         #self.tray.start()
@@ -110,11 +114,70 @@ class AdsPowerAgent:
         except asyncio.CancelledError:
             pass
 
+    async def _wait_for_server(self):
+        """Espera indefinidamente hasta que el servidor esté disponible"""
+        import httpx
+        retry_interval = 10
+        while self.is_running:
+            logger.info(f"⏳ Servidor no disponible, reintentando en {retry_interval}s...")
+            await asyncio.sleep(retry_interval)
+            try:
+                async with httpx.AsyncClient(timeout=5.0) as client:
+                    r = await client.get(f"{self.config.server_url}/health")
+                    if r.status_code == 200:
+                        registered = await self.server.register()
+                        if registered:
+                            logger.info("✅ Servidor recuperado, continuando...")
+                            return
+            except Exception:
+                pass
+            retry_interval = min(retry_interval * 1.5, 60)  # backoff hasta 60s
+        
     def stop(self):
-        """Detiene el agente limpiamente"""
-        logger.info("Deteniendo agente...")
+        """Detiene el agente limpiamente cerrando todos los navegadores"""
+        logger.info("Deteniendo agente — cerrando navegadores activos...")
         self.is_running = False
+
+        # Cerrar todos los navegadores activos sincrónicamente
+        active = list(self.launcher.active_sessions.items())
+        if active:
+            logger.info(f"Cerrando {len(active)} navegador(es)...")
+            loop = asyncio.get_event_loop()
+            if loop.is_running():
+                # Crear tarea de limpieza
+                asyncio.create_task(self._shutdown_all_browsers())
+            else:
+                loop.run_until_complete(self._shutdown_all_browsers())
+
         self.adspower.cleanup()
+
+
+    async def _shutdown_all_browsers(self):
+        """Cierra todos los navegadores y notifica al servidor"""
+        tasks = []
+        for session_id, session in list(self.launcher.active_sessions.items()):
+            tasks.append(self._close_session_on_shutdown(session_id, session))
+        if tasks:
+            await asyncio.gather(*tasks, return_exceptions=True)
+        logger.info("✅ Todos los navegadores cerrados")
+
+
+    async def _close_session_on_shutdown(self, session_id: int, session):
+        try:
+            # Cerrar navegador en AdsPower
+            self.monitor.close_browser(session.profile_id)
+
+            # Notificar al servidor si hay conexión
+            await self.server.close_session(
+                session_id=session_id,
+                data_sent_mb=0,
+                data_received_mb=0,
+                pages_visited=session.pages_visited,
+                crash_reason="Agent shutdown"
+            )
+            logger.info(f"✅ Sesión {session_id} cerrada correctamente")
+        except Exception as e:
+            logger.error(f"Error cerrando sesión {session_id}: {e}")
 
     # ========================================
     # LOOPS DE MONITOREO
@@ -143,7 +206,7 @@ class AdsPowerAgent:
                     )
 
             except Exception as e:
-                logger.debug(f"Error en metrics loop: {e}")
+                logger.warning(f"⚠️ Error en metrics loop: {e}")
 
             await asyncio.sleep(self.config.metrics_interval_seconds)
 
@@ -157,6 +220,49 @@ class AdsPowerAgent:
                     await self.server.ws.send(json.dumps({"type": "heartbeat"}))
                 except Exception:
                     pass
+                
+    async def _adspower_health_loop(self):
+        """Verifica cada 15s si AdsPower está corriendo y reporta al backend"""
+        was_running = True  # asumimos que arranca corriendo
+        while self.is_running:
+            await asyncio.sleep(15)
+            try:
+                is_running = await asyncio.get_event_loop().run_in_executor(
+                    None, self.adspower.ping_api
+                )
+
+                if was_running and not is_running:
+                    # AdsPower acaba de caerse
+                    logger.warning("⚠️ AdsPower dejó de responder")
+                    if self.server.ws and self.server.is_connected:
+                        import json
+                        await self.server.ws.send(json.dumps({
+                            "type":    "log",
+                            "level":   "ERROR",
+                            "message": "⚠️ AdsPower no está disponible — aplicación cerrada o bloqueada",
+                        }))
+                    # Cerrar sesiones activas
+                    for session_id in list(self.launcher.active_sessions.keys()):
+                        await self._on_browser_error(
+                            session_id,
+                            "AdsPower dejó de responder"
+                        )
+
+                elif not was_running and is_running:
+                    # AdsPower volvió
+                    logger.info("✅ AdsPower volvió a estar disponible")
+                    if self.server.ws and self.server.is_connected:
+                        import json
+                        await self.server.ws.send(json.dumps({
+                            "type":    "log",
+                            "level":   "INFO",
+                            "message": "✅ AdsPower disponible nuevamente",
+                        }))
+
+                was_running = is_running
+
+            except Exception as e:
+                logger.debug(f"Error en adspower_health_loop: {e}")
 
     def _collect_metrics(self) -> dict:
         adspower_stats = self.adspower.get_process_stats()
@@ -225,15 +331,45 @@ class AdsPowerAgent:
         )
 
     async def _on_browser_error(self, session_id: int, error: str):
-        """Error abriendo el navegador"""
-        logger.error(f"❌ Error en sesión {session_id}: {error}")
-        await self.server.close_session(
-            session_id=session_id,
-            data_sent_mb=0,
-            data_received_mb=0,
-            pages_visited=0,
-            crash_reason=error
-        )
+        """Error abriendo el navegador — cierra sesión en backend y limpia local"""
+        # Clasificar el error para mejor visibilidad
+        if "ADSPOWER_OFFLINE" in error or "AdsPower no disponible" in error:
+            logger.error(f"❌ Sesión {session_id} — AdsPower no está abierto")
+        elif "PROXY_INVALID" in error or "Proxy inválido" in error:
+            logger.error(
+                f"❌ Sesión {session_id} — Proxy caído o inválido, necesita rotación")
+        elif "TIMEOUT" in error or "Timeout" in error:
+            logger.error(
+                f"❌ Sesión {session_id} — Timeout: navegador tardó demasiado")
+        elif "not exist" in error.lower():
+            logger.error(
+                f"❌ Sesión {session_id} — Perfil no existe en AdsPower")
+        else:
+            logger.error(f"❌ Error en sesión {session_id}: {error}")
+
+        # Limpiar sesión local si quedó registrada
+        if session_id in self.launcher.active_sessions:
+            session = self.launcher.active_sessions.pop(session_id)
+            session.is_running = False
+            logger.info(f"🧹 Sesión zombie limpiada: {session_id}")
+
+        # Verificar conexión antes de reportar
+        if not self.server.is_connected or not self.server.ws:
+            logger.warning(
+                f"⚠️ Sin conexión al backend — error de sesión {session_id} no reportado")
+            return
+
+        try:
+            await self.server.close_session(
+                session_id=session_id,
+                data_sent_mb=0,
+                data_received_mb=0,
+                pages_visited=0,
+                crash_reason=error
+            )
+            logger.info(f"✅ Error de sesión {session_id} reportado al backend")
+        except Exception as e:
+            logger.error(f"❌ No se pudo reportar error al backend: {e}")
 
     async def _on_update_proxy_command(self, data: dict):
         """Backend pide rotar proxy en AdsPower local."""
@@ -277,14 +413,28 @@ class AdsPowerAgent:
 
         # Reportar resultado al backend
         if self.server.ws and self.server.is_connected:
-            await self.server.ws.send(json.dumps({
-                "type":          "proxy_update_result",
-                "proxy_id":      data.get("proxy_id"),
-                "success_count": success_count,
-                "failed_count":  failed_count,
-            }))
+            try:
+                await self.server.ws.send(json.dumps({
+                    "type":          "proxy_update_result",
+                    "proxy_id":      data.get("proxy_id"),
+                    "success_count": success_count,
+                    "failed_count":  failed_count,
+                }))
+                logger.info(f"✅ Resultado proxy_update enviado al backend")
+            except Exception as e:
+                logger.error(
+                    f"❌ No se pudo reportar resultado de proxy al backend: {e}")
+        else:
+            logger.warning(
+                f"⚠️ Sin conexión — resultado proxy_update no enviado")
 
         logger.info(f"✅ update_proxy completado: {success_count} ok, {failed_count} fallidos")
+        
+        # ← AGREGAR ESTO: dar tiempo a AdsPower para recargar el proxy
+        if success_count > 0:
+            logger.info(
+                "⏳ Esperando 4s para que AdsPower recargue el proxy...")
+            await asyncio.sleep(4)
         
     # Agregar método:
     async def _on_create_profile_command(self, data: dict):
@@ -304,20 +454,26 @@ class AdsPowerAgent:
                 "success":     adspower_id is not None,
             }))
 
-
     def _setup_remote_logging(self):
         server_ref = self.server
 
         async def remote_sink(message):
             record = message.record
-            if server_ref.is_connected:
+            if not server_ref.is_connected or not server_ref.ws:
+                return
+            try:
                 await server_ref.send_log(
                     level=record["level"].name,
-                    message=record["message"],
+                    message=(
+                        f"[{record['name']}:{record['function']}:{record['line']}] "
+                        f"{record['message']}"
+                    ),
                 )
+            except Exception:
+                pass  # No loguear errores del logger — evita loop infinito
 
-        logger.add(remote_sink, level="WARNING") 
-    
+        logger.add(remote_sink, level="WARNING")
+
 
     async def _on_check_proxy_command(self, data: dict):
         """Hace ping al proxy DESDE esta máquina y reporta latencia al backend."""
@@ -514,26 +670,38 @@ class AdsPowerAgent:
 # ENTRY POINT
 # ========================================
 
+
 def main():
     config = AgentConfig.load()
 
     if not config.is_configured():
-        logger.info("Primera ejecución - configuración inicial")
         from agent.first_run import FirstRunSetup
         setup = FirstRunSetup()
         if not setup.run():
-            logger.error("Configuración cancelada")
             sys.exit(1)
         config = AgentConfig.load()
 
     agent = AdsPowerAgent()
 
-    if platform.system() != "Windows":
-        loop = asyncio.get_event_loop()
-        for sig in (signal.SIGTERM, signal.SIGINT):
-            loop.add_signal_handler(sig, agent.stop)
+    async def _run():
+        loop = asyncio.get_running_loop()
 
-    asyncio.run(agent.start())
+        # Manejador de señales que espera cierre limpio
+        def _signal_handler():
+            logger.info("🛑 Señal de cierre recibida")
+            asyncio.create_task(_graceful_shutdown())
+
+        async def _graceful_shutdown():
+            await agent._shutdown_all_browsers()
+            agent.stop()
+
+        if platform.system() != "Windows":
+            for sig in (signal.SIGTERM, signal.SIGINT):
+                loop.add_signal_handler(sig, _signal_handler)
+
+        await agent.start()
+
+    asyncio.run(_run())
 
 if __name__ == "__main__":
     main()

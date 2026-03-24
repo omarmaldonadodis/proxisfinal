@@ -197,3 +197,66 @@ async def get_rotation_history(
     result = await db.execute(query.limit(limit))
     logs = result.scalars().all()
     return {"total": len(logs), "items": logs}
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SOAX — Países y ciudades disponibles
+# ══════════════════════════════════════════════════════════════════════════════
+
+
+@router.get("/soax/countries")
+async def get_soax_countries():
+    """
+    Retorna los países disponibles en SOAX con sus códigos ISO.
+    Lista estática curada — SOAX soporta proxies residenciales en estos países.
+    """
+    countries = [
+        {"code": "ec", "name": "Ecuador"},
+        {"code": "es", "name": "España"},
+        {"code": "co", "name": "Colombia"},
+        {"code": "pe", "name": "Perú"},
+        {"code": "mx", "name": "México"},
+        {"code": "ar", "name": "Argentina"},
+        {"code": "cl", "name": "Chile"},
+        {"code": "us", "name": "Estados Unidos"},
+        {"code": "gb", "name": "Reino Unido"},
+        {"code": "de", "name": "Alemania"},
+        {"code": "fr", "name": "Francia"},
+        {"code": "it", "name": "Italia"},
+        {"code": "br", "name": "Brasil"},
+        {"code": "jp", "name": "Japón"},
+        {"code": "kr", "name": "Corea del Sur"},
+    ]
+    return {"countries": countries, "total": len(countries)}
+
+
+@router.get("/soax/cities")
+async def get_soax_cities(
+    country: str = Query(
+        "ec", description="Código ISO del país (ej: ec, es, co)"),
+    conn_type: str = Query(
+        "mobile", description="Tipo de conexión: mobile o wifi"),
+    force_refresh: bool = Query(
+        False, description="Forzar actualización del caché"),
+):
+    """
+    Retorna ciudades disponibles en SOAX para un país dado.
+    Consulta la API de SOAX en tiempo real con caché de 5 minutos.
+    """
+    from app.utils.soax_cities_manager import SOAXCitiesManager
+
+    try:
+        cities = await SOAXCitiesManager.get_available_cities(
+            country=country,
+            conn_type=conn_type,
+            force_refresh=force_refresh
+        )
+        return {
+            "country": country,
+            "conn_type": conn_type,
+            "cities": cities,
+            "total": len(cities),
+            "cached": not force_refresh,
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Error consultando SOAX: {str(e)}")

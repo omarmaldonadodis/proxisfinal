@@ -64,12 +64,30 @@ class BrowserLauncher:
             f"url={target_url}, sesión={session_id}"
         )
 
-        # 1. Abrir via AdsPower API
+        # 1. Abrir via AdsPower API (con timeout de 30s)
         loop = asyncio.get_event_loop()
-        result = await loop.run_in_executor(
-            None,
-            lambda: self.monitor.open_browser(profile_id, target_url)
-        )
+        try:
+            result = await asyncio.wait_for(
+                loop.run_in_executor(
+                    None,
+                    lambda: self.monitor.open_browser(profile_id, target_url)
+                ),
+                timeout=30.0
+            )
+        except asyncio.TimeoutError:
+            error_msg = "Timeout: AdsPower no respondió en 30 segundos"
+            logger.error(
+                f"❌ {error_msg} — perfil={profile_id}, sesión={session_id}")
+            if on_error:
+                await on_error(session_id, error_msg)
+            return {"success": False, "error": error_msg}
+        except Exception as e:
+            error_msg = f"Error inesperado al contactar AdsPower: {e}"
+            logger.error(f"❌ {error_msg}")
+            if on_error:
+                await on_error(session_id, error_msg)
+            return {"success": False, "error": error_msg}
+
         if not result.get("success"):
             error_msg = result.get("error", "Error desconocido")
             logger.error(f"❌ Error abriendo navegador: {error_msg}")
@@ -78,7 +96,8 @@ class BrowserLauncher:
             return {"success": False, "error": error_msg}
 
         # 2. Crear sesión
-        session = BrowserSession(session_id, profile_id, target_url, self.monitor)
+        session = BrowserSession(
+            session_id, profile_id, target_url, self.monitor)
         session.on_navigation = on_navigation
         session.on_close = on_close
         session.on_error = on_error
@@ -92,12 +111,14 @@ class BrowserLauncher:
         if selenium_ws and webdriver_path:
             try:
                 await asyncio.wait_for(
-                    self._connect_selenium(session, selenium_ws, webdriver_path),
+                    self._connect_selenium(
+                        session, selenium_ws, webdriver_path),
                     timeout=30.0
                 )
             except asyncio.TimeoutError:
-                logger.warning("⚠️ Timeout conectando Selenium, continuando sin él")
-                session.driver = None        
+                logger.warning(
+                    "⚠️ Timeout conectando Selenium, continuando sin él")
+                session.driver = None
         else:
             logger.warning(
                 "⚠️ Sin endpoint Selenium, usando polling básico de AdsPower API"
@@ -125,7 +146,8 @@ class BrowserLauncher:
 
             def _init_driver():
                 options = Options()
-                options.add_experimental_option("debuggerAddress", debug_address)
+                options.add_experimental_option(
+                    "debuggerAddress", debug_address)
                 service = Service(executable_path=webdriver_path)
                 driver = wd.Chrome(service=service, options=options)
                 if session.target_url and session.target_url != "about:blank":
@@ -137,7 +159,8 @@ class BrowserLauncher:
             logger.info(f"✅ Selenium conectado: {debug_address}")
 
         except Exception as e:
-            logger.warning(f"⚠️ No se pudo conectar Selenium: {e}. Usando polling.")
+            logger.warning(
+                f"⚠️ No se pudo conectar Selenium: {e}. Usando polling.")
             session.driver = None
 
     async def _monitor_session(self, session: BrowserSession):
@@ -178,7 +201,8 @@ class BrowserLauncher:
 
                 else:
                     # Monitoreo via AdsPower API polling
-                    status = self.monitor.get_browser_status(session.profile_id)
+                    status = self.monitor.get_browser_status(
+                        session.profile_id)
 
                     if not status.get("is_running"):
                         logger.info(
@@ -192,14 +216,19 @@ class BrowserLauncher:
             except asyncio.CancelledError:
                 break
             except Exception as e:
-                logger.error(f"Error en monitor loop sesión {session.session_id}: {e}")
-                await asyncio.sleep(check_interval)
+                logger.error(
+                    f"❌ Error en monitor loop sesión {session.session_id}: {e}")
+                if on_error := session.on_error:
+                    await on_error(session.session_id, f"Error de monitoreo: {e}")
+                await self._handle_browser_closed(session)
+                break
 
     async def _handle_browser_closed(self, session: BrowserSession):
         if not session.is_running:
             return   # ← ya fue procesado por otra coroutine, ignorar
         session.is_running = False
-        self.active_sessions.pop(session.session_id, None)   # ← pop es seguro, no lanza KeyError
+        # ← pop es seguro, no lanza KeyError
+        self.active_sessions.pop(session.session_id, None)
 
         if session.on_close:
             await session.on_close(

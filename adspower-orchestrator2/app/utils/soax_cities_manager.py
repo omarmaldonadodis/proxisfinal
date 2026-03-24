@@ -84,6 +84,10 @@ class SOAXCitiesManager:
             async with httpx.AsyncClient(timeout=10.0) as client:
                 response = await client.get(url, params=params)
                 
+                # ← AGREGAR ESTAS DOS LÍNEAS
+                logger.info(f"SOAX status: {response.status_code}")
+                logger.info(f"SOAX response raw: {response.text[:300]}")
+                
                 if response.status_code != 200:
                     logger.error(
                         f"❌ SOAX API error: {response.status_code} - {response.text}"

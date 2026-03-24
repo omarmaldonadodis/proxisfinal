@@ -7,7 +7,7 @@ Panel de control del administrador:
 - Autorizar/denegar sesiones
 - WebSocket para actualizaciones en tiempo real
 """
-from fastapi import APIRouter, Depends, HTTPException, Query, WebSocket, WebSocketDisconnect
+from fastapi import APIRouter, Depends, HTTPException, Query, WebSocket, WebSocketDisconnect, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from typing import Optional
@@ -575,4 +575,61 @@ async def get_sessions_by_profile(
             }
             for s in sessions
         ]
+    }
+    
+
+
+@router.post("/sessions/cleanup-stale")
+async def cleanup_stale_sessions(db: AsyncSession = Depends(get_db)):
+    """Cierra todas las sesiones activas/opening que no tienen actividad reciente"""
+    from app.models.agent_session import AgentSession, SessionStatus
+    from sqlalchemy import select, update
+    from datetime import datetime, timedelta
+
+    # Cerrar sesiones en estado active u opening con más de 10 minutos sin actividad
+    cutoff = datetime.utcnow() - timedelta(minutes=10)
+
+    result = await db.execute(
+        select(AgentSession).where(
+            AgentSession.status.in_(
+                [SessionStatus.ACTIVE, SessionStatus.OPENING])
+        )
+    )
+    stale = result.scalars().all()
+
+    closed = 0
+    for sess in stale:
+        sess.status = SessionStatus.CLOSED
+        sess.closed_at = datetime.utcnow()
+        closed += 1
+
+    await db.commit()
+
+    return {"closed": closed, "message": f"{closed} sesiones zombie cerradas"}
+
+@router.get("/my-computer")
+async def get_my_computer(request: Request, db: AsyncSession = Depends(get_db)):
+    """Retorna el computer asociado a la IP del cliente"""
+    from app.models.computer import Computer
+    from sqlalchemy import select
+
+    client_ip = request.client.host
+    result = await db.execute(
+        select(Computer).where(Computer.ip_address == client_ip)
+    )
+    computer = result.scalar_one_or_none()
+
+    if computer:
+        return {"computer_id": computer.id, "name": computer.name, "ip": client_ip}
+
+    # Si no encuentra por IP exacta, retorna el primero online como fallback
+    result = await db.execute(
+        select(Computer).where(Computer.status == 'ONLINE').limit(1)
+    )
+    computer = result.scalar_one_or_none()
+    return {
+        "computer_id": computer.id if computer else None,
+        "name": computer.name if computer else None,
+        "ip": client_ip,
+        "fallback": True
     }

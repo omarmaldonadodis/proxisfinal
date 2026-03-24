@@ -9,7 +9,7 @@ import asyncio
 import json
 import platform
 import httpx
-import websockets
+from websockets.asyncio.client import connect as ws_connect
 import psutil
 from typing import Optional, Callable, Dict
 from loguru import logger
@@ -96,9 +96,10 @@ class ServerClient:
             try:
                 logger.info(f"🔌 Conectando WebSocket a {ws_url}...")
 
-                async with websockets.connect(
+                async with ws_connect(
                     ws_url,
-                    additional_headers={"X-Agent-Token": self.config.server_token},
+                    additional_headers={
+                        "X-Agent-Token": self.config.server_token},
                     ping_interval=30,
                     ping_timeout=10
                 ) as ws:

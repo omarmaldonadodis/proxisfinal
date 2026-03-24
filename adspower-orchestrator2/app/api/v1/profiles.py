@@ -100,6 +100,12 @@ async def create_profile_with_proxy(
         session_id=       uuid.uuid4().hex[:16],
         session_lifetime= (data.rotation_minutes or 30) * 60,
     )
+    # Agregar logger
+    logger.info(
+        f"🔑 Proxy config generado: host={proxy_config['host']} "
+        f"port={proxy_config['port']} "
+        f"user={proxy_config['username'][:60]}..."
+    )
 
     proxy = Proxy(
         host=       proxy_config["host"],
@@ -473,6 +479,14 @@ async def _run_verify_all():
         return
 
     agent_id = next(iter(agents))
+    total = len(profile_data)
+    await connection_manager.broadcast_to_admins({
+        "type":    "system_event",
+        "event":   "verify_profiles_start",
+        "message": f"Verificando {total} perfiles...",
+        "source":  "verify_profiles",
+        "stats":   {"total": total, "verified": 0},
+    })
     verified = 0
 
     for pdata in profile_data:
@@ -522,6 +536,13 @@ async def _run_verify_all():
         await asyncio.sleep(1.5)
 
     logger.info(f"✅ Verificación completada: {verified}/{len(profile_data)}")
+    await connection_manager.broadcast_to_admins({
+        "type":    "system_event",
+        "event":   "verify_profiles_complete",
+        "message": f"Verificación completada — {verified}/{len(profile_data)} perfiles",
+        "source":  "verify_profiles",
+        "stats":   {"verified": verified, "total": len(profile_data)},
+    })
 
 def _calc_browser_score(fp_config: dict) -> float:
     score = 100.0

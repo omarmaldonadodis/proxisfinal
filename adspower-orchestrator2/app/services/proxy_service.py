@@ -67,6 +67,22 @@ class ProxyService:
         return await self.repo.get(proxy_id)
     
 
+    async def update_proxy(self, proxy_id: int, proxy_in: ProxyUpdate) -> Optional[Proxy]:
+        """Actualiza campos del proxy"""
+        proxy = await self.repo.get(proxy_id)
+        if not proxy:
+                return None
+
+        update_data = proxy_in.model_dump(exclude_unset=True)
+        for field, value in update_data.items():
+            if hasattr(proxy, field) and value is not None:
+                setattr(proxy, field, value)
+
+        await self.db.commit()
+        await self.db.refresh(proxy)
+        logger.info(f"Proxy {proxy_id} actualizado")
+        return proxy
+    
     async def list_proxies(
         self,
         skip: int = 0,
