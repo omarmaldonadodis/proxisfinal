@@ -22,6 +22,8 @@ from app.config import settings
 
 from app.database import AsyncSessionLocal
 
+import httpx
+
 
 
 from pydantic import BaseModel
@@ -91,12 +93,23 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
                         sess.status    = SessionStatus.ACTIVE
                         sess.opened_at = datetime.utcnow()
                         await db.commit()
+                        
+                        # Enriquecer con nombre del perfil
+                        profile_name = None
+                        agent_name_val = sess.agent_name or "agent"
+                        if sess.profile_id:
+                            from app.models.profile import Profile
+                            prof = await db.get(Profile, sess.profile_id)
+                            if prof:
+                                profile_name = prof.name
 
                         await connection_manager.broadcast_to_admins({
                             "type":        "session_active",
                             "session_id":  session_id,
                             "computer_id": computer_id,
                             "profile_id":  sess.profile_id,
+                            "profile":     profile_name,          # ← nombre del perfil
+                            "agent_name":  agent_name_val,        # ← nombre del agente
                             "target_url":  sess.target_url,
                             "timestamp":   datetime.utcnow().isoformat(),
                         })
@@ -104,6 +117,7 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
             elif msg_type == "session_closed":
                 session_id = data.get("session_id")
                 if session_id:
+                    from app.models.profile import Profile
                     sess = await db.get(AgentSession, session_id)
                     if sess:
                         sess.status        = SessionStatus.CLOSED
@@ -121,11 +135,17 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
 
                         await db.commit()
                         
+                        profile_name = None
+                        if sess.profile_id:
+                            prof = await db.get(Profile, sess.profile_id)
+                            profile_name = prof.name if prof else f"Perfil #{sess.profile_id}"
+
                         await connection_manager.broadcast_to_admins({
                             "type":             "session_closed",
                             "session_id":       session_id,
                             "computer_id":      computer_id,
                             "profile_id":       sess.profile_id,
+                            "profile_name":     profile_name,
                             "duration_seconds": sess.duration_seconds,
                             "total_data_mb":    sess.total_data_mb,
                             "agent_name":       "agent",
@@ -134,7 +154,6 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
                         
                         # ← AGREGAR: si el perfil tuvo sesión real, marcar cookies como OK
                         if sess.profile_id and sess.pages_visited and sess.pages_visited > 0:
-                            from app.models.profile import Profile
                             profile = await db.get(Profile, sess.profile_id)
                             if profile:
                                 profile.cookie_status  = "OK"
@@ -148,6 +167,8 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
                 # El agente creó el perfil en AdsPower y reporta el adspower_id real
                 profile_id   = data.get("profile_id")
                 adspower_id  = data.get("adspower_id")
+                name = data.get("name")
+                logger.info(f"[profile_created] {data}")
                 if profile_id and adspower_id:
                     from app.services.profile_service import ProfileService
                     svc = ProfileService(db)
@@ -155,12 +176,50 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
 
                     await connection_manager.broadcast_to_admins({
                         "type":        "profile_ready",
+                        "name": name,
                         "profile_id":  profile_id,
                         "adspower_id": adspower_id,
                         "computer_id": computer_id,
                         "timestamp":   datetime.utcnow().isoformat(),
                     })
 
+            elif msg_type == "profile_create_error":
+                profile_id = data.get("profile_id")
+                name = data.get("name")
+                error_msg = data.get("error", "Error desconocido al crear perfil")
+
+                if profile_id:
+                    # Marcar perfil como ERROR en BD (no quedarse en CREATING)
+                    from app.models.profile import Profile, ProfileStatus
+                    profile = await db.get(Profile, profile_id)
+                    if profile:
+                        profile.status = ProfileStatus.ERROR
+                        profile.last_action = "CREATE_FAILED"
+                        await db.commit()
+
+                    # Crear alerta visible en el timeline
+                    from app.models.alert import Alert, AlertSeverity, AlertStatus
+                    alert = Alert(
+                        title=f"Error al crear perfil {name}",
+                        message=error_msg,
+                        severity=AlertSeverity.ERROR.value,
+                        status=AlertStatus.ACTIVE.value,
+                        source="profile_creator",
+                        source_id=profile_id,
+                    )
+                    db.add(alert)
+                    await db.commit()
+
+                    # Broadcast al panel admin
+                    await connection_manager.broadcast_to_admins({
+                        "type":       "profile_create_error",
+                        "profile_id": profile_id,
+                        "name":       name,
+                        "error":      error_msg,
+                        "timestamp":  datetime.utcnow().isoformat(),
+                    })
+                    logger.error(f"❌ Perfil {profile_id} falló: {error_msg}")
+        
             elif msg_type == "session_metrics":
                 session_id = data.get("session_id")
                 if session_id:
@@ -215,23 +274,64 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
                         sess.closed_at = datetime.utcnow()
                         await db.commit()
 
+                        profile_name = None
+                        if sess.profile_id:
+                            prof = await db.get(Profile, sess.profile_id)
+                            profile_name = prof.name if prof else f"Perfil #{sess.profile_id}"
+
+                        # Clasificar el error (limpio, sin traza Python)
+                        is_proxy_error = any(kw in error_msg for kw in [
+                            "Proxy inválido", "Check Proxy", "PROXY_INVALID",
+                            "proxy", "Check", "Proxy caído",
+                        ])
+
+                        # Mensaje amigable (sin [_main_:xxx:yyy])
+                        if is_proxy_error:
+                            friendly_msg = f"Proxy caído o inválido — ejecuta rotación de proxies"
+                        elif "AdsPower no disponible" in error_msg or "ADSPOWER_OFFLINE" in error_msg:
+                            friendly_msg = "AdsPower no disponible — verifica que la app esté abierta"
+                        elif "Timeout" in error_msg or "TIMEOUT" in error_msg:
+                            friendly_msg = "Timeout al abrir navegador — AdsPower tardó demasiado"
+                        elif "not exist" in error_msg.lower():
+                            friendly_msg = "Perfil no encontrado en AdsPower — puede haber sido eliminado"
+                        else:
+                            friendly_msg = error_msg
+
+                        # Crear alerta en BD ANTES del broadcast
+                        crash_alert_id = None
+                        if is_proxy_error and sess.profile_id:
+                            from app.models.alert import Alert, AlertSeverity, AlertStatus
+                            crash_alert = Alert(
+                                title=f"Proxy inválido o caído — {profile_name or f'Perfil #{sess.profile_id}'}",
+                                message=f"Sesión #{session_id} crasheó: {friendly_msg}. Auto-rotación iniciando...",
+                                severity=AlertSeverity.ERROR.value,
+                                status=AlertStatus.ACTIVE.value,
+                                source="proxy_crash",
+                                source_id=sess.profile_id,
+                            )
+                            db.add(crash_alert)
+                            await db.commit()
+                            await db.refresh(crash_alert)
+                            crash_alert_id = crash_alert.id
+
                         await connection_manager.broadcast_to_admins({
-                            "type":        "session_crashed",
-                            "session_id":  session_id,
-                            "computer_id": computer_id,
-                            "error":       error_msg,
-                            "timestamp":   datetime.utcnow().isoformat(),
+                            "type":           "session_crashed",
+                            "session_id":     session_id,
+                            "computer_id":    computer_id,
+                            "profile_id":     sess.profile_id,
+                            "profile_name":   profile_name,
+                            "error":          friendly_msg,      # ← limpio
+                            "crash_reason":   friendly_msg,
+                            "is_proxy_error": is_proxy_error,
+                            "crash_alert_id": crash_alert_id,
+                            "timestamp":      datetime.utcnow().isoformat(),
                         })
 
-                        # ← AUTO-ROTACIÓN si el error es de proxy
-                        is_proxy_error = any(kw in error_msg for kw in [
-                            "Proxy inválido", "Check Proxy", "PROXY_INVALID", "proxy"
-                        ])
                         if is_proxy_error and sess.profile_id:
                             asyncio.create_task(
-                                _auto_rotate_proxy_for_profile(
-                                    sess.profile_id, computer_id)
+                                self._rotate_proxy_runtime(sess.profile_id)
                             )
+        
             elif msg_type == "log":
                 level   = data.get("level", "INFO")
                 message = data.get("message", "")
@@ -292,10 +392,39 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
 
         await connection_manager.broadcast_to_admins({
             "type":        "agent_offline",
+            "name":        computer.name,
             "computer_id": computer_id,
             "timestamp":   datetime.utcnow().isoformat(),
         })
 
+
+async def _rotate_proxy_runtime(self, profile_id: int):
+    from app.database import AsyncSessionLocal
+    from app.models.profile import Profile
+    from app.config import settings
+
+    async with AsyncSessionLocal() as db:
+        profile = await db.get(Profile, profile_id)
+
+        if not profile or not profile.proxy_id:
+            logger.warning(f"⚠️ No proxy_id para profile {profile_id}")
+            return
+
+        proxy_id = profile.proxy_id
+
+    try:
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            r = await client.post(
+                f"{settings.SERVER_URL}/proxy-rotation/{proxy_id}/check-and-rotate"
+            )
+
+            if r.status_code == 200:
+                logger.info(f"🔄 Proxy rotado correctamente: {proxy_id}")
+            else:
+                logger.error(f"❌ Error rotando proxy {proxy_id}: {r.text}")
+
+    except Exception as e:
+        logger.error(f"❌ Error llamando rotación proxy: {e}")
 
 # La función crea su propia sesión:
 async def _process_pending_profiles(computer_id: int):
@@ -347,10 +476,10 @@ async def _process_pending_profiles(computer_id: int):
                 user_proxy_config = {
                     "proxy_soft":     "other",
                     "proxy_type":     "http",
-                    "proxy_host":     proxy.host,
-                    "proxy_port":     str(proxy.port),
+                    "proxy_host":     settings.SOAX_HOST,      # ← del .env
+                    "proxy_port":     str(settings.SOAX_PORT),  # ← del .env
                     "proxy_user":     proxy.username or "",
-                    "proxy_password": proxy.password or "",
+                    "proxy_password": settings.SOAX_PASSWORD,  # ← del .env
                 }
 
             sent = await connection_manager.send_command_to_agent(
@@ -468,6 +597,7 @@ async def open_browser_direct(
             "session_id":  session.id,
             "profile_id":  profile_adspower_id,
             "target_url":  target_url,
+            "proxy_id":    profile.proxy_id,
         }
     )
 
@@ -619,79 +749,3 @@ async def register_agent(
 async def get_computer_logs(computer_id: int):
     return {"logs": connection_manager.get_agent_logs(computer_id)}
 
-
-async def _auto_rotate_proxy_for_profile(profile_id: int, computer_id: int):
-    """Auto-rota el proxy de un perfil cuando falla al abrir navegador"""
-    from app.database import AsyncSessionLocal
-    from app.models.proxy import Proxy, ProxyStatus
-    from app.config import settings
-    import secrets
-    import re
-
-    await asyncio.sleep(1)
-
-    async with AsyncSessionLocal() as db:
-        profile = await db.get(Profile, profile_id)
-        if not profile or not profile.proxy_id:
-            return
-
-        proxy = await db.get(Proxy, profile.proxy_id)
-        if not proxy:
-            return
-
-        logger.info(
-            f"🔄 Auto-rotando proxy {proxy.id} por falla en perfil {profile_id}")
-
-        try:
-            from app.utils.soax_cities_manager import get_soax_username_with_dynamic_city
-            soax_result = await get_soax_username_with_dynamic_city(
-                base_username=settings.SOAX_USERNAME,
-                country=(proxy.country or "ec").lower(),
-                preferred_city=None,
-                exclude_cities=[proxy.city.lower()] if proxy.city else [],
-                session_lifetime=3600
-            )
-            new_user = soax_result.get("username")
-            if not new_user:
-                return
-
-            city = soax_result.get("selected_city") or proxy.city or "unknown"
-            match = re.search(r'sessionid-(.+?)(?:-sessionlength|$)', new_user)
-            session_id = match.group(1) if match else secrets.token_urlsafe(8)
-
-            # Actualizar proxy en BD
-            proxy.username = new_user
-            proxy.session_id = session_id
-            proxy.status = ProxyStatus.ACTIVE
-            await db.commit()
-
-            # Enviar update al agente
-            adspower_ids = [profile.adspower_id] if (
-                profile.adspower_id and not profile.adspower_id.startswith(
-                    "pending")
-            ) else []
-
-            sent = await connection_manager.send_command_to_agent(
-                computer_id=computer_id,
-                command="update_proxy",
-                payload={
-                    "proxy_id":       proxy.id,
-                    "profile_ids":    adspower_ids,
-                    "proxy_host":     proxy.host,
-                    "proxy_port":     proxy.port,
-                    "proxy_user":     new_user,
-                    "proxy_password": proxy.password or "",
-                }
-            )
-
-            if sent:
-                logger.info(
-                    f"✅ Auto-rotación completada: proxy {proxy.id} → {city}")
-                await connection_manager.broadcast_to_admins({
-                    "type":    "system_event",
-                    "event":   "proxy_auto_rotated",
-                    "message": f"Proxy auto-rotado — perfil '{profile.name}' → {city}",
-                    "source":  "auto_rotation",
-                })
-        except Exception as e:
-            logger.error(f"❌ Error en auto-rotación proxy {proxy.id}: {e}")

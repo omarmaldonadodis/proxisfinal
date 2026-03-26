@@ -233,8 +233,8 @@ async def get_soax_countries():
 async def get_soax_cities(
     country: str = Query(
         "ec", description="Código ISO del país (ej: ec, es, co)"),
-    conn_type: str = Query(
-        "mobile", description="Tipo de conexión: mobile o wifi"),
+    # conn_type: str = Query(
+    #     "mobile", description="Tipo de conexión: mobile o wifi"),
     force_refresh: bool = Query(
         False, description="Forzar actualización del caché"),
 ):
@@ -247,12 +247,12 @@ async def get_soax_cities(
     try:
         cities = await SOAXCitiesManager.get_available_cities(
             country=country,
-            conn_type=conn_type,
-            force_refresh=force_refresh
+            # conn_type=conn_type,
+            force_refresh=False
         )
         return {
             "country": country,
-            "conn_type": conn_type,
+            # "conn_type": conn_type,
             "cities": cities,
             "total": len(cities),
             "cached": not force_refresh,

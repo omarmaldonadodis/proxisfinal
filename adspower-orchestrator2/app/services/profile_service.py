@@ -343,27 +343,30 @@ class ProfileService:
         return profile
 
     async def delete_profile(self, profile_id: int) -> bool:
-        """Elimina profile y su proxy asociado"""
-        profile = await self.repo.get(profile_id)
+        """
+        Elimina el perfil y su proxy asociado de la base de datos.
+        Las sesiones huérfanas deben limpiarse antes de llamar este método (ver endpoint).
+        """
+        from app.models.proxy import Proxy
+
+        # Usar self.db directamente (NO self.repo — no existe)
+        profile = await self.db.get(Profile, profile_id)
         if not profile:
-            raise ValueError(f"Profile {profile_id} not found")
-
-        proxy_id = profile.proxy_id  # ← guardar antes de borrar
-
-        # Borrar perfil primero (por FK)
-        success = await self.repo.delete(profile_id)
-        if not success:
             return False
 
-        # Borrar proxy asociado si existe
+        proxy_id = profile.proxy_id  # guardar antes de eliminar
+
+        # Eliminar el perfil
+        await self.db.delete(profile)
+        await self.db.flush()  # forzar FK antes de borrar proxy
+
+        # Eliminar el proxy asociado si existe
         if proxy_id:
-            from app.models.proxy import Proxy
             proxy = await self.db.get(Proxy, proxy_id)
             if proxy:
                 await self.db.delete(proxy)
 
         await self.db.commit()
-        logger.info(f"Perfil {profile_id} y proxy {proxy_id} eliminados")
         return True
 
     async def get_stats(self) -> Dict:

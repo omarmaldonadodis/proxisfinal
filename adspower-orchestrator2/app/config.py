@@ -32,7 +32,7 @@ class Settings(BaseSettings):
     
     # SOAX
     SOAX_USERNAME: str
-    SOAX_PASSWORD: str
+    SOAX_PASSWORD: str = "cUohoUq59MXWY6aT"
     SOAX_HOST: str = "proxy.soax.com"
     SOAX_PORT: int = 5000
     SOAX_API_KEY: str = "KL7Zjf51HZY1XNSv"

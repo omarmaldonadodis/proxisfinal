@@ -28,6 +28,11 @@ class SOAXCitiesManager:
         return getattr(settings, 'SOAX_API_KEY', None)
     
     @classmethod
+    def get_password(cls) -> Optional[str]:
+        """Obtiene password desde settings"""
+        return getattr(settings, 'SOAX_PASSWORD', None)
+    
+    @classmethod
     async def initialize(cls):
         """Inicializa el manager (opcional ahora)"""
         api_key = cls.get_api_key()
@@ -73,33 +78,43 @@ class SOAXCitiesManager:
             url = "https://api.soax.com/api/get-country-cities"
             
             params = {
-                "api_key": api_key,  # ✅ Usar el valor obtenido
-                "package_key": settings.SOAX_PASSWORD,
+                "api_key":     cls.get_api_key(),
+                "package_key": cls.get_password(), 
                 "country_iso": country.lower(),
-                "conn_type": conn_type
+                # "conn_type":   conn_type
             }
             
             logger.info(f"🌐 Consultando ciudades disponibles en SOAX...")
             
             async with httpx.AsyncClient(timeout=10.0) as client:
                 response = await client.get(url, params=params)
-                
-                # ← AGREGAR ESTAS DOS LÍNEAS
+
                 logger.info(f"SOAX status: {response.status_code}")
-                logger.info(f"SOAX response raw: {response.text[:300]}")
-                
+                raw_text = response.text
+                logger.info(f"SOAX response raw: {raw_text[:300]}")
+
                 if response.status_code != 200:
-                    logger.error(
-                        f"❌ SOAX API error: {response.status_code} - {response.text}"
-                    )
+                    logger.error(f"❌ SOAX API error: {response.status_code}")
                     return cls._get_fallback_cities()
-                
-                data = response.json()
+
+                # SOAX a veces devuelve texto plano en vez de JSON
+                content_type = response.headers.get("content-type", "")
+                if "json" not in content_type and not raw_text.strip().startswith("["):
+                    logger.warning(f"⚠️ SOAX respondió texto plano: {raw_text[:100]}")
+                    # logger.warning(params)
+
+                    return cls._get_fallback_cities()
+
+                try:
+                    data = response.json()
+                except Exception as e:
+                    logger.error(f"❌ No se pudo parsear respuesta SOAX: {e}")
+                    return cls._get_fallback_cities()
 
                 if isinstance(data, list):
-                    cities = [c.lower().strip() for c in data if c]
+                    cities = [c for c in data if c]
                 else:
-                    logger.error(f"Formato inesperado de respuesta SOAX: {data}")
+                    logger.error(f"Formato inesperado: {type(data)}")
                     return cls._get_fallback_cities()
                 
                 if not cities:
@@ -181,24 +196,26 @@ class SOAXCitiesManager:
             "ibarra"
         ]
     
+
     @classmethod
     def normalize_city_for_soax(cls, city: str) -> str:
         """
-        Normaliza ciudad para username de SOAX
+        Normaliza ciudad a:
+        - minúsculas
+        - sin guiones
+        - con espacios normales
         
         Args:
-            city: "santo domingo de los colorados" o "santo-domingo-de-los-colorados"
+            city: "Santo-Domingo-De-Los-Colorados"
         
         Returns:
-            "santo+domingo+de+los+colorados" (formato SOAX)
+            "santo domingo de los colorados"
         """
-        # Eliminar guiones y convertir espacios a +
         normalized = city.lower().strip()
         normalized = normalized.replace("-", " ")  # Guiones → espacios
-        normalized = normalized.replace(" ", "+")   # Espacios → +
-        
+
         return normalized
-    
+        
     @classmethod
     async def get_optimal_city(
         cls,

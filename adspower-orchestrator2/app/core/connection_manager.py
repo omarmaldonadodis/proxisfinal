@@ -42,13 +42,6 @@ class ConnectionManager:
         logger.info(f"Agente conectado: computer_id={computer_id}")
         asyncio.create_task(self._update_computer_status(computer_id, "online"))
 
-        await self.broadcast_to_admins({
-            "type":            "agent_online",
-            "computer_id":     computer_id,
-            # FIX: timestamp con Z explícita → browser lo parsea como UTC
-            "connected_since": self.connection_times[computer_id].strftime('%Y-%m-%dT%H:%M:%S.%f')[:-3] + 'Z',
-            "timestamp":       _utcnow_iso(),
-        })
 
     def disconnect_agent(self, computer_id: int):
         if computer_id in self.agent_connections:
@@ -61,11 +54,6 @@ class ConnectionManager:
         self.connection_times.pop(computer_id, None)
 
         asyncio.create_task(self._update_computer_status(computer_id, "offline"))
-        asyncio.create_task(self.broadcast_to_admins({
-            "type":        "agent_offline",
-            "computer_id": computer_id,
-            "timestamp":   _utcnow_iso(),
-        }))
 
     def get_connected_since(self, computer_id: int) -> Optional[datetime]:
         return self.connection_times.get(computer_id)

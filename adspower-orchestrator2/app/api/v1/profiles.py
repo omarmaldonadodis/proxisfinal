@@ -1,4 +1,9 @@
 # app/api/v1/profiles.py
+from sqlalchemy import text
+from app.models.agent_session import AgentSession, SessionStatus
+from sqlalchemy import delete as sql_delete
+from sqlalchemy.exc import IntegrityError
+from datetime import datetime  # asegúrate de que está importado arriba
 from fastapi import APIRouter, Depends, HTTPException, Query, BackgroundTasks
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select 
@@ -172,6 +177,13 @@ async def create_profile_with_proxy(
     )
 
     screen_res = profile_config["screen_resolution"].replace("x", "_")
+    def _clamp_hw(value: int) -> int:
+        valid = [2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 32, 64]
+        return min(valid, key=lambda x: abs(x - value))
+
+    def _clamp_mem(value: int) -> int:
+        valid = [2, 4, 6, 8, 16, 32, 64, 128]
+        return min(valid, key=lambda x: abs(x - value))
 
     fingerprint_config = {
         "automatic_timezone":   "0",
@@ -188,8 +200,8 @@ async def create_profile_with_proxy(
         "webgl":                "1",
         "audio":                "1",
         "do_not_track":         "default",
-        "hardware_concurrency": str(profile_config["hardware_concurrency"]),
-        "device_memory":        str(profile_config["device_memory"]),
+        "hardware_concurrency": str(_clamp_hw(profile_config["hardware_concurrency"])),
+        "device_memory":        str(_clamp_mem(profile_config["device_memory"])),
         "flash":                "block",
         "media_devices":        "1",
         "client_rects":         "1",
@@ -317,20 +329,95 @@ async def update_profile(
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
+
 @router.delete("/{profile_id}", status_code=204)
 async def delete_profile(
     profile_id: int,
     db: AsyncSession = Depends(get_db)
 ):
-    """Elimina profile"""
+    from app.core.connection_manager import connection_manager
+    from app.models.proxy import Proxy  # ← asegurar import
+
     service = ProfileService(db)
+    profile = await service.get_profile(profile_id)
+    if not profile:
+        raise HTTPException(status_code=404, detail="Profile not found")
+
+    adspower_id = profile.adspower_id
+    profile_name = profile.name
+
+    # ── 0. Bloquear si hay sesión activa ──────────────────────────────────
+    active_check = await db.execute(
+        select(AgentSession).where(
+            AgentSession.profile_id == profile_id,
+            AgentSession.status.in_(
+                [SessionStatus.ACTIVE, SessionStatus.OPENING]),
+        )
+    )
+    if active_check.scalar_one_or_none():
+        raise HTTPException(
+            status_code=409,
+            detail=f"'{profile_name}' tiene una sesión activa. Cierra el navegador primero."
+        )
+
+    # ── 1. Notificar agente AdsPower (fire & forget) ──────────────────────
+    online_agents = connection_manager.get_online_agents()
+    agent_notified = False
+    if online_agents and adspower_id and not adspower_id.startswith("pending-"):
+        agent_id = next(iter(online_agents))
+        agent_notified = await connection_manager.send_command_to_agent(
+            computer_id=agent_id,
+            command="delete_adspower_profile",
+            payload={"adspower_id": adspower_id, "profile_id": profile_id},
+        )
+
+    # ── 2. Limpiar en cascada (orden FK) ──────────────────────────────────
+
+    # 2a. Obtener IDs de sesiones de este perfil
+    session_ids_result = await db.execute(
+        select(AgentSession.id).where(AgentSession.profile_id == profile_id)
+    )
+    session_ids = session_ids_result.scalars().all()
+
+    if session_ids:
+        # 2b. Eliminar browser_events que apuntan a esas sesiones (FK hija)
+        await db.execute(
+            text("DELETE FROM browser_events WHERE session_id = ANY(:ids)"),
+            {"ids": session_ids}
+        )
+        await db.flush()
+
+    # 2c. Ahora sí eliminar las sesiones
+    await db.execute(
+        sql_delete(AgentSession).where(AgentSession.profile_id == profile_id)
+    )
+    await db.flush()
+
+    # ── 3. Eliminar perfil + proxy de BD ──────────────────────────────────
     try:
         success = await service.delete_profile(profile_id)
         if not success:
             raise HTTPException(status_code=404, detail="Profile not found")
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+    except IntegrityError:
+        await db.rollback()
+        raise HTTPException(
+            status_code=409,
+            detail="No se pudo eliminar: el perfil tiene registros asociados."
+        )
 
+    # ── 4. Broadcast WS al panel ──────────────────────────────────────────
+    await connection_manager.broadcast_to_admins({
+        "type":        "profile_deleted",
+        "profile_id":  profile_id,
+        "name":        profile_name,
+        "adspower_id": adspower_id,
+        "timestamp":   datetime.utcnow().isoformat(),
+    })
+
+    logger.info(
+        f"🗑️ Perfil '{profile_name}' eliminado. AdsPower notificado: {agent_notified}")
+    # 204 — sin return body
+    
 @router.post("/{profile_id}/warmup", status_code=202)
 async def warmup_profile(
     profile_id: int,
@@ -386,6 +473,7 @@ async def verify_profile_security(
         payload={
             "request_id":             request_id,
             "adspower_id":            profile.adspower_id,
+            # ← AGREGAR estos para que el agente calcule madurez correctamente:
             "total_sessions":         profile.total_sessions or 0,
             "is_warmed":              profile.is_warmed or False,
             "total_duration_seconds": profile.total_duration_seconds or 0,
@@ -515,7 +603,6 @@ async def _run_verify_all():
                 continue
 
             result = await asyncio.wait_for(future, timeout=40.0)
-
             # Sesión corta solo para el UPDATE — no mantener abierta durante el wait
             async with AsyncSessionLocal() as db:
                 p = await db.get(Profile, pdata["id"])

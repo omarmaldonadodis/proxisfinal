@@ -657,7 +657,7 @@ DESKTOP_DEVICES_DB = {
         "viewport": "1512x982",
         "pixel_ratio": "2",
         "platform": "MacIntel",
-        "hardware_concurrency": 11,
+        "hardware_concurrency": 12,
         "device_memory": 16,
         "device_type": "desktop"
     },
