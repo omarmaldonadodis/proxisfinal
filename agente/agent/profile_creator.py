@@ -48,8 +48,21 @@ class ProfileCreator:
                 data = response.json()
 
                 if data.get("code") != 0:
-                    logger.error(f"❌ AdsPower error: {data.get('msg')}")
-                    return None
+                    msg = data.get("msg", "")
+                    # Traducir errores conocidos de AdsPower
+                    if "exceeds the limit" in msg:
+                        import re
+                        limit = re.search(r"limit of (\d+)", msg)
+                        limit_str = limit.group(1) if limit else "máximo"
+                        friendly = f"Límite de perfiles AdsPower alcanzado ({limit_str} máx). Elimina perfiles antiguos antes de crear nuevos."
+                    elif "not exist" in msg.lower():
+                        friendly = "El perfil no existe en AdsPower."
+                    elif "proxy" in msg.lower():
+                        friendly = f"Proxy inválido o caído — {msg}"
+                    else:
+                        friendly = msg
+                    logger.error(f"❌ AdsPower error: {friendly}")
+                    raise ValueError(friendly)   # ← lanzar excepción en lugar de return None
 
                 adspower_id = data["data"]["id"]
                 logger.info(f"✅ Perfil creado en AdsPower: {adspower_id}")
@@ -60,9 +73,12 @@ class ProfileCreator:
 
                 return adspower_id
 
+            # Ahora en vez de return None, levanta ValueError
+        except ValueError:
+            raise   # ← re-lanzar para que _on_create_profile_command lo atrape
         except Exception as e:
             logger.error(f"❌ Error creando perfil en AdsPower: {e}")
-            return None
+        raise
 
     async def _upload_cookies(
         self,

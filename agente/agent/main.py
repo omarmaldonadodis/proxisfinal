@@ -75,6 +75,8 @@ class AdsPowerAgent:
         self.server.on_update_proxy = self._on_update_proxy_command
         self.server.on_check_proxy    = self._on_check_proxy_command
         self.server.on_verify_profile = self._on_verify_profile_command
+        self.server.on_delete_profile = self._on_delete_profile_command
+
     
     async def start(self):
         logger.info("=" * 50)
@@ -233,7 +235,7 @@ class AdsPowerAgent:
 
                 if was_running and not is_running:
                     # AdsPower acaba de caerse
-                    logger.warning("⚠️ AdsPower dejó de responder")
+                    # logger.warning("⚠️ AdsPower dejó de responder")
                     if self.server.ws and self.server.is_connected:
                         import json
                         await self.server.ws.send(json.dumps({
@@ -438,22 +440,106 @@ class AdsPowerAgent:
         
     # Agregar método:
     async def _on_create_profile_command(self, data: dict):
-        """Crea el perfil en AdsPower y notifica al servidor"""
         profile_id = data.get("profile_id")
+        name = data.get("name")
+        
         logger.info(f"📥 Creando perfil AdsPower para profile_id={profile_id}")
 
-        adspower_id = await self.profile_creator.create_profile(data)
+        try:
+            adspower_id = await self.profile_creator.create_profile(data)
+        except ValueError as e:
+            # Error conocido (límite, proxy, etc.) — NO crear en BD
+            friendly_msg = str(e)
+            logger.error(f"❌ Perfil {name} no creado: {friendly_msg}")
+            if self.server.ws and self.server.is_connected:
+                import json
+                await self.server.ws.send(json.dumps({
+                    "type":       "profile_create_error",
+                    "profile_id": profile_id,
+                    "name":       name,
+                    "error":      friendly_msg,
+                }))
+            return
+        except Exception as e:
+            friendly_msg = f"Error inesperado creando perfil: {e}"
+            logger.error(f"❌ {friendly_msg}")
+            if self.server.ws and self.server.is_connected:
+                import json
+                await self.server.ws.send(json.dumps({
+                    "type":       "profile_create_error",
+                    "profile_id": profile_id,
+                    "name":       name,
+                    "error":      friendly_msg,
+                }))
+            return
 
-        # Notificar al servidor con el resultado
+        # Solo llega aquí si AdsPower creó el perfil exitosamente
         if self.server.ws and self.server.is_connected:
             import json
             await self.server.ws.send(json.dumps({
                 "type":        "profile_created",
+                "name":        name,
                 "profile_id":  profile_id,
-                "adspower_id": adspower_id,  # None si falló
-                "success":     adspower_id is not None,
+                "adspower_id": adspower_id,
+                "success":     True,
             }))
 
+    async def _on_delete_profile_command(self, data: dict):
+        """Elimina un perfil de AdsPower local."""
+        import httpx
+        import json
+
+        adspower_id = data.get("adspower_id")
+        profile_id = data.get("profile_id")
+
+        if not adspower_id or adspower_id.startswith("pending-"):
+            logger.info(
+                f"🗑️ Perfil {profile_id} sin adspower_id válido, skip AdsPower")
+            return
+
+        logger.info(f"🗑️ Eliminando perfil AdsPower: {adspower_id}")
+
+        try:
+            headers = {}
+            if self.config.adspower_api_key:
+                headers["Authorization"] = f"Bearer {self.config.adspower_api_key}"
+
+            async with httpx.AsyncClient(timeout=15.0) as client:
+                r = await client.post(
+                    f"{self.config.adspower_url}/api/v1/user/delete",
+                    json={"user_ids": [adspower_id]},
+                    headers=headers,
+                )
+                data_resp = r.json()
+                if data_resp.get("code") == 0:
+                    logger.info(f"✅ Perfil {adspower_id} eliminado de AdsPower")
+                else:
+                    msg = data_resp.get("msg", "")
+                    # Casos donde el perfil ya no está disponible — no es error crítico
+                    already_gone = (
+                        "not exist" in msg.lower() or
+                        "being used by other" in msg.lower() or  # ← perfil en Trash
+                        "does not exist" in msg.lower()
+                    )
+                    if already_gone:
+                        logger.info(
+                            f"ℹ️ Perfil {adspower_id} ya no estaba disponible en AdsPower "
+                            f"(en Trash o eliminado previamente): {msg}"
+                        )
+                    else:
+                        logger.warning(
+                            f"⚠️ AdsPower no eliminó {adspower_id}: {msg}")
+
+            await self.server.ws.send(json.dumps({
+                "type":       "profile_delete_result",
+                "profile_id": profile_id,
+                "adspower_id": adspower_id,
+                "status":     "deleted",   # o "skipped" si already_gone
+            }))
+
+        except Exception as e:
+            logger.error(
+                f"❌ Error eliminando perfil {adspower_id} de AdsPower: {e}")
     def _setup_remote_logging(self):
         server_ref = self.server
 
@@ -563,13 +649,15 @@ class AdsPowerAgent:
             )
         }
     # agent/main.py — _on_verify_profile_command COMPLETO
+    
+
     async def _on_verify_profile_command(self, data: dict):
         import json
         from agent.profile_verifier import ProfileVerifier
 
         request_id  = data.get("request_id")
         adspower_id = data.get("adspower_id")
-        logger.info(f"📥 verify_profile real: adspower_id={adspower_id}")
+        logger.info(f"📥 verify_profile: adspower_id={adspower_id}")
 
         verifier = ProfileVerifier(
             self.config.adspower_url,
@@ -587,6 +675,19 @@ class AdsPowerAgent:
 
         result = await verifier.verify(adspower_id, db_data)
 
+        # ← AGREGAR: loguear si hubo error
+        if result.get("error"):
+            logger.error(
+                f"❌ verify_profile falló para {adspower_id}: {result['error']}"
+            )
+        else:
+            logger.info(
+                f"✅ verify_profile OK: score={result.get('browser_score')} "
+                f"grade={result.get('grade')} "
+                f"cookies={result.get('cookie_count')} "
+                f"issues={result.get('issues', [])}"
+            )
+
         payload = {
             "type":              "verify_profile_result",
             "request_id":        request_id,
@@ -603,8 +704,9 @@ class AdsPowerAgent:
         }
 
         if self.server.ws and self.server.is_connected:
-            await self.server.ws.send(json.dumps(payload))
-            logger.info(f"✅ verify_profile_result enviado: score={result.get('browser_score')}")            # ========================================
+            await self.server.ws.send(json.dumps(payload))    
+
+            # ========================================
 # ENTRY POINT
 # ========================================
 

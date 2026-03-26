@@ -9,7 +9,8 @@ import asyncio
 import json
 import platform
 import httpx
-from websockets.asyncio.client import connect as ws_connect
+import websockets
+import websockets.exceptions
 import psutil
 from typing import Optional, Callable, Dict
 from loguru import logger
@@ -30,6 +31,7 @@ class ServerClient:
         self.on_update_proxy:   Optional[Callable] = None 
         self.on_check_proxy: Optional[Callable] = None
         self.on_verify_profile: Optional[Callable] = None
+        self.on_delete_profile: Optional[Callable] = None
 
 
 
@@ -96,10 +98,9 @@ class ServerClient:
             try:
                 logger.info(f"🔌 Conectando WebSocket a {ws_url}...")
 
-                async with ws_connect(
+                async with websockets.connect(
                     ws_url,
-                    additional_headers={
-                        "X-Agent-Token": self.config.server_token},
+                    extra_headers={"X-Agent-Token": self.config.server_token},
                     ping_interval=30,
                     ping_timeout=10
                 ) as ws:
@@ -161,6 +162,10 @@ class ServerClient:
         elif command == "verify_profile":
             if hasattr(self, 'on_verify_profile') and self.on_verify_profile:
                 asyncio.create_task(self.on_verify_profile(data))
+                
+        elif command == "delete_adspower_profile":
+            if hasattr(self, 'on_delete_profile') and self.on_delete_profile:
+                asyncio.create_task(self.on_delete_profile(data))
         
 
     # ========================================

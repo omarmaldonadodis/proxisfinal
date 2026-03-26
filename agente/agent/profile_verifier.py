@@ -1,9 +1,12 @@
 # agent/profile_verifier.py
+
+
 import asyncio
-import time
+import json
 import httpx
-from typing import Optional, Dict
+import websockets
 from loguru import logger
+from typing import Optional
 
 FINGERPRINT_JS = """
 (function() {
@@ -127,173 +130,158 @@ FINGERPRINT_JS = """
 
 
 class ProfileVerifier:
-    """Verifica el fingerprint real de un perfil abriendo el browser brevemente."""
 
     def __init__(self, adspower_url: str, api_key: str = ""):
         self.adspower_url = adspower_url.rstrip("/")
-        self.api_key      = api_key
-        self._headers     = {"Authorization": f"Bearer {api_key}"} if api_key else {}
-
-    # ──────────────────────────────────────────────────────────────────────────
-    # ENTRY POINT
-    # ──────────────────────────────────────────────────────────────────────────
+        self.api_key = api_key
+        self._headers = {"Authorization": f"Bearer {api_key}"} if api_key else {}
 
     async def verify(self, adspower_id: str, db_data: dict) -> dict:
-        """
-        1. Abre el perfil en AdsPower (navega a google.com)
-        2. Conecta Selenium y ejecuta JS de fingerprint
-        3. Cierra el browser
-        4. Devuelve resultado con scores e issues
-        """
-        logger.info(f"🔬 Verificando perfil real: {adspower_id}")
-
+        # Esperar un poco si el perfil fue recientemente actualizado
+        # (proxy puede estar en proceso de aplicarse)
+        await asyncio.sleep(2)
+        
         browser_info = await self._open_browser(adspower_id)
         if not browser_info.get("success"):
-            return {
-                "error":             browser_info.get("error", "No se pudo abrir el browser"),
-                "browser_score":     0,
-                "fingerprint_score": 0,
-                "cookie_status":     db_data.get("cookie_status", "MISSING"),
-                "has_cookies":       False,
-                "cookie_count":      0,
-                "grade":             "DÉBIL",
-                "issues":            [browser_info.get("error", "No se pudo abrir el browser")],
-                "warnings":          [],
-            }
-
-        webdriver_path = browser_info.get("webdriver")
-        debug_address  = browser_info.get("debug_address")
+            logger.error(
+                f"❌ No se pudo abrir browser para {adspower_id}: "
+                f"{browser_info.get('error')}"
+            )
+            return self._error_result(browser_info.get("error"), db_data)
 
         try:
-            fp_data = await self._extract_fingerprint(debug_address, webdriver_path)
-
-            if not fp_data:
-                return {
-                    "error":             "No se pudo extraer fingerprint",
-                    "browser_score":     0,
-                    "fingerprint_score": 0,
-                    "cookie_status":     db_data.get("cookie_status", "MISSING"),
-                    "has_cookies":       False,
-                    "cookie_count":      0,
-                    "grade":             "DÉBIL",
-                    "issues":            ["Selenium no pudo ejecutar JS"],
-                    "warnings":          [],
-                }
-
-            result = self._analyze(fp_data, db_data)
-            logger.info(
-                f"✅ Verificación completada: score={result['browser_score']} "
-                f"grade={result['grade']} issues={len(result['issues'])}"
+            fp_data = await self._extract_fingerprint_cdp(
+                browser_info["debug_address"]
             )
-            return result
-
+            if not fp_data:
+                return self._error_result(
+                    "No se pudo extraer fingerprint via CDP", db_data
+                )
+            return self._analyze(fp_data, db_data)
         finally:
-            # SIEMPRE cerrar el browser
             await self._close_browser(adspower_id)
 
-    # ──────────────────────────────────────────────────────────────────────────
-    # ABRIR BROWSER
-    # ──────────────────────────────────────────────────────────────────────────
+    async def _open_browser(self, adspower_id: str, retries: int = 3) -> dict:
+        for attempt in range(retries):
+            try:
+                async with httpx.AsyncClient(timeout=30.0) as client:
+                    r = await client.get(
+                        f"{self.adspower_url}/api/v1/browser/start",
+                        params={
+                            "user_id": adspower_id,
+                            "open_urls": "https://www.google.com",
+                            "ip_tab": 0,
+                            "new_first_tab": 1,
+                        },
+                        headers=self._headers,
+                    )
+                    data = r.json()
 
-    async def _open_browser(self, adspower_id: str) -> dict:
-        try:
-            async with httpx.AsyncClient(timeout=30.0) as client:
-                r = await client.get(
-                    f"{self.adspower_url}/api/v1/browser/start",
-                    params={
-                        "user_id":       adspower_id,
-                        # Google permite JS completo y tiene cookies reales del perfil
-                        "open_urls":     "https://www.google.com",
-                        "ip_tab":        0,
-                        "new_first_tab": 1,
-                    },
-                    headers=self._headers,
-                )
-                data = r.json()
+                    if data.get("code") != 0:
+                        error_msg = data.get("msg", "Error AdsPower")
+                        logger.warning(
+                            f"⚠️ Intento {attempt + 1}/{retries} fallido: {error_msg}"
+                        )
+                        if attempt < retries - 1:
+                            await asyncio.sleep(5)
+                        continue
 
-                if data.get("code") != 0:
-                    err = data.get("msg", "Error AdsPower")
-                    logger.error(f"❌ AdsPower no pudo abrir perfil {adspower_id}: {err}")
-                    return {"success": False, "error": err}
+                    bdata = data["data"]
+                    selenium_ws = bdata.get("ws", {}).get("selenium", "")
+                    debug_address = (
+                        selenium_ws.replace("ws://", "").split("/devtools/")[0]
+                        if selenium_ws else None
+                    )
 
-                bdata        = data["data"]
-                selenium_ws  = bdata.get("ws", {}).get("selenium", "")
-                debug_address = (
-                    selenium_ws.replace("ws://", "").split("/devtools/")[0]
-                    if selenium_ws else None
-                )
+                    logger.info(f"✅ Browser abierto — debug_address={debug_address}")
+                    return {"success": True, "debug_address": debug_address}
 
-                logger.info(
-                    f"✅ Browser abierto — debug_address={debug_address} "
-                    f"webdriver={bdata.get('webdriver')}"
-                )
+            except Exception as e:
+                logger.warning(f"⚠️ Intento {attempt + 1}/{retries} excepción: {e}")
+                if attempt < retries - 1:
+                    await asyncio.sleep(5)
 
-                return {
-                    "success":       True,
-                    "debug_address": debug_address,
-                    "webdriver":     bdata.get("webdriver"),
-                }
+        return {"success": False, "error": f"No se pudo abrir el browser tras {retries} intentos"}
 
-        except Exception as e:
-            logger.error(f"❌ Error abriendo browser {adspower_id}: {e}")
-            return {"success": False, "error": str(e)}
-
-    # ──────────────────────────────────────────────────────────────────────────
-    # EXTRAER FINGERPRINT VÍA SELENIUM
-    # ──────────────────────────────────────────────────────────────────────────
-
-    async def _extract_fingerprint(
-        self, debug_address: str, webdriver_path: str
-    ) -> Optional[dict]:
-        if not debug_address or not webdriver_path:
-            logger.warning("Sin debug_address o webdriver_path — saltando Selenium")
+    async def _extract_fingerprint_cdp(self, debug_address: str) -> Optional[dict]:
+        if not debug_address:
             return None
 
-        loop = asyncio.get_event_loop()
         try:
-            import json as _json
+            async with httpx.AsyncClient(timeout=10.0) as client:
+                r = await client.get(f"http://{debug_address}/json")
+                targets = r.json()
 
-            def _run():
-                from selenium import webdriver as wd
-                from selenium.webdriver.chrome.options import Options
-                from selenium.webdriver.chrome.service import Service
+            page_target = None
+            for t in targets:
+                if t.get("type") == "page":
+                    ws_url = t.get("webSocketDebuggerUrl")
+                    if ws_url:
+                        page_target = ws_url
+                        if "google.com" in t.get("url", ""):
+                            break
 
-                options = Options()
-                options.add_experimental_option("debuggerAddress", debug_address)
-                service = Service(executable_path=webdriver_path)
-                driver  = wd.Chrome(service=service, options=options)
+            if not page_target:
+                logger.warning("No se encontró target de página en CDP")
+                return None
 
-                # Esperar carga de la página (max 10s)
-                try:
-                    from selenium.webdriver.support.ui import WebDriverWait
-                    WebDriverWait(driver, 10).until(
-                        lambda d: d.execute_script("return document.readyState") == "complete"
-                    )
-                except Exception:
-                    pass
+            logger.info(f"🔌 Conectando CDP a: {page_target}")
 
-                # Margen extra para que los scripts de la página terminen
-                time.sleep(2)
+            async with websockets.connect(
+                page_target,
+                ping_interval=None,
+                open_timeout=10
+            ) as ws:
+                # Navegar explícitamente para evitar about:blank
+                await ws.send(json.dumps({
+                    "id": 0,
+                    "method": "Page.navigate",
+                    "params": {"url": "https://www.google.com"}
+                }))
+                await asyncio.sleep(4)
 
-                raw = driver.execute_script(FINGERPRINT_JS)
-                return _json.loads(raw) if raw else None
+                msg_id = 1
+                payload = {
+                    "id": msg_id,
+                    "method": "Runtime.evaluate",
+                    "params": {
+                        "expression": FINGERPRINT_JS,
+                        "returnByValue": True,
+                        "awaitPromise": False,
+                    }
+                }
+                await ws.send(json.dumps(payload))
 
-            # Timeout de 30s para todo el proceso Selenium
-            return await asyncio.wait_for(
-                loop.run_in_executor(None, _run),
-                timeout=30.0
-            )
+                # Reemplazar asyncio.timeout() con wait_for()
+                async def _wait_for_result():
+                    while True:
+                        raw = await ws.recv()
+                        msg = json.loads(raw)
+                        if msg.get("id") == msg_id:
+                            return (
+                                msg.get("result", {})
+                                .get("result", {})
+                                .get("value")
+                            )
+
+                result_str = await asyncio.wait_for(_wait_for_result(), timeout=15.0)
+
+            if result_str:
+                fp = json.loads(result_str)
+                logger.info(
+                    f"✅ Fingerprint extraído — "
+                    f"webdriver={fp.get('webdriver')} "
+                    f"cookies={fp.get('cookieCount')} "
+                    f"tz={fp.get('timezone')}"
+                )
+                return fp
 
         except asyncio.TimeoutError:
-            logger.error("⏱ Timeout extrayendo fingerprint (30s)")
-            return None
+            logger.error("⏱ Timeout extrayendo fingerprint via CDP")
         except Exception as e:
-            logger.error(f"Error extrayendo fingerprint: {e}")
-            return None
+            logger.error(f"Error CDP: {e}")
 
-    # ──────────────────────────────────────────────────────────────────────────
-    # CERRAR BROWSER
-    # ──────────────────────────────────────────────────────────────────────────
+        return None
 
     async def _close_browser(self, adspower_id: str):
         try:
@@ -303,13 +291,24 @@ class ProfileVerifier:
                     params={"user_id": adspower_id},
                     headers=self._headers,
                 )
-                logger.info(f"✅ Browser cerrado: {adspower_id}")
         except Exception as e:
-            logger.warning(f"Error cerrando browser {adspower_id}: {e}")
+            logger.warning(f"Error cerrando browser: {e}")
 
-    # ──────────────────────────────────────────────────────────────────────────
-    # ANÁLISIS DE RESULTADOS
-    # ──────────────────────────────────────────────────────────────────────────
+    def _error_result(self, error: str, db_data: dict) -> dict:
+        return {
+            "error": error,
+            "browser_score": 0,
+            "fingerprint_score": 0,
+            "cookie_status": db_data.get("cookie_status", "MISSING"),
+            "has_cookies": False,
+            "cookie_count": 0,
+            "grade": "DÉBIL",
+            "issues": [error or "Error desconocido"],
+            "warnings": [],
+            "breakdown": {},
+            "raw_fingerprint": {},
+        }
+
 
     def _analyze(self, fp: dict, db: dict) -> dict:
         issues   = []
