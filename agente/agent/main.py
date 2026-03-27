@@ -111,6 +111,12 @@ class AdsPowerAgent:
 
         logger.info("✅ Agente iniciado correctamente")
 
+        import threading
+        from agent.local_api import start_local_api
+
+        start_local_api(self)
+
+
         try:
             await asyncio.gather(*tasks)
         except asyncio.CancelledError:
@@ -579,7 +585,7 @@ class AdsPowerAgent:
         try:
             start = time.time()
             async with httpx.AsyncClient(
-                proxy=proxy_url,
+                proxies=proxy_url,    
                 timeout=10.0
             ) as client:
                 r = await client.get("https://api.ipify.org?format=json")
