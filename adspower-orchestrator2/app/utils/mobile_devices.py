@@ -867,8 +867,7 @@ def get_random_device(device_type: Optional[str] = None, brand: Optional[str] = 
     
     # Filtrar por tipo
     if device_type:
-        devices = [d for d in devices if d.get("device_type") == device_type]
-    
+        devices = [d for d in devices if d.get("device_type") == device_type.lower()]
     # Filtrar por marca
     if brand:
         devices = [d for d in devices if d["brand"].lower() == brand.lower()]

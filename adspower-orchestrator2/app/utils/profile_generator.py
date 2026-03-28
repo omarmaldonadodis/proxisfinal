@@ -145,6 +145,8 @@ class ProfileGenerator:
         country: str = "EC",  # ✅ DEFAULT ECUADOR
         city: Optional[str] = None,
         device_type: str = "mobile",  # mobile, tablet, desktop
+        # Sugerencia de sistema operativo (e.g. "Android", "iOS", "Windows")
+        os_hint: Optional[str] = None,
         device_id: Optional[str] = None,  # ID específico de dispositivo
         include_cookies: bool = True,
         include_localstorage: bool = True

@@ -171,8 +171,8 @@ async def create_profile_with_proxy(
         name=                 data.name,
         country=              data.country,
         city=                 data.city,
-        device_type=          data.device_type,
-        include_cookies=      True,
+        device_type=data.device_type.lower(),
+        os_hint=data.os,        include_cookies=True,
         include_localstorage= True
     )
 

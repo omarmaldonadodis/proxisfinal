@@ -27,6 +27,8 @@ from app.core.connection_manager import connection_manager
 from app.models.profile_assignment import ProfileAssignment, AgentToken
 from app.models.agent_session import AgentSession
 
+
+
 router = APIRouter(prefix="/admin", tags=["👑 Admin Control"])
 
 
@@ -609,27 +611,54 @@ async def cleanup_stale_sessions(db: AsyncSession = Depends(get_db)):
 
 @router.get("/my-computer")
 async def get_my_computer(request: Request, db: AsyncSession = Depends(get_db)):
-    """Retorna el computer asociado a la IP del cliente"""
     from app.models.computer import Computer
     from sqlalchemy import select
 
-    client_ip = request.client.host
+    # ✅ NUEVO: prioridad al agente local
+    computer_id = request.headers.get("X-Computer-ID")
+
+    if computer_id:
+        result = await db.execute(
+            select(Computer).where(Computer.id == int(computer_id))
+        )
+        computer = result.scalar_one_or_none()
+
+        if computer:
+            return {
+                "computer_id": computer.id,
+                "name": computer.name,
+                "source": "agent"
+            }
+
+    # 🔁 fallback a IP (opcional mantenerlo)
+    client_ip = (
+        request.headers.get("X-Local-IP")
+        or request.client.host
+    )
+
     result = await db.execute(
         select(Computer).where(Computer.ip_address == client_ip)
     )
     computer = result.scalar_one_or_none()
 
     if computer:
-        return {"computer_id": computer.id, "name": computer.name, "ip": client_ip}
+        return {
+            "computer_id": computer.id,
+            "name": computer.name,
+            "ip": client_ip,
+            "source": "ip"
+        }
 
-    # Si no encuentra por IP exacta, retorna el primero online como fallback
+    # 🔁 fallback final
     result = await db.execute(
         select(Computer).where(Computer.status == 'ONLINE').limit(1)
     )
     computer = result.scalar_one_or_none()
+
     return {
         "computer_id": computer.id if computer else None,
         "name": computer.name if computer else None,
         "ip": client_ip,
-        "fallback": True
+        "fallback": True,
+        "source": "fallback"
     }
