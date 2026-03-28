@@ -32,6 +32,7 @@ class ServerClient:
         self.on_check_proxy: Optional[Callable] = None
         self.on_verify_profile: Optional[Callable] = None
         self.on_delete_profile: Optional[Callable] = None
+        self._active_session_ids: set = set()
 
 
 
@@ -108,7 +109,19 @@ class ServerClient:
                     self.is_connected = True
                     logger.info("✅ WebSocket conectado al servidor")
 
-                    # Loop de recepción de mensajes
+                    # ← NUEVO: al conectar/reconectar, notificar sesiones realmente activas
+                    # Si el agente arrancó fresco (crash/restart), active_sessions estará vacío
+                    # y el backend cerrará todas las sesiones huérfanas de esta computadora
+                    try:
+                        active_ids = list(self._active_session_ids) if hasattr(self, '_active_session_ids') else []
+                        await ws.send(json.dumps({
+                            "type":               "agent_connected",
+                            "computer_id":        self.config.computer_id,
+                            "active_session_ids": active_ids,   # vacío en crash/restart = limpiar todo
+                        }))
+                    except Exception:
+                        pass
+
                     async for message in ws:
                         try:
                             data = json.loads(message)
@@ -184,7 +197,7 @@ class ServerClient:
                 logger.debug(f"Error enviando métricas: {e}")
 
     async def mark_session_active(self, session_id: int) -> bool:
-        """Confirma al servidor que el navegador se abrió — via WebSocket"""
+        self._active_session_ids.add(session_id)   # ← AGREGAR
         if self.ws and self.is_connected:
             try:
                 await self.ws.send(json.dumps({
@@ -194,6 +207,24 @@ class ServerClient:
                 return True
             except Exception as e:
                 logger.debug(f"Error marcando sesión activa: {e}")
+        return False
+
+    async def close_session(self, session_id, data_sent_mb, data_received_mb,
+                            pages_visited, crash_reason=None):
+        self._active_session_ids.discard(session_id)   # ← AGREGAR
+        if self.ws and self.is_connected:
+            try:
+                await self.ws.send(json.dumps({
+                    "type":             "session_closed",
+                    "session_id":       session_id,
+                    "pages_visited":    pages_visited,
+                    "total_data_mb":    data_sent_mb + data_received_mb,
+                    "duration_seconds": None,
+                    "crash_reason":     crash_reason,
+                }))
+                return True
+            except Exception as e:
+                logger.debug(f"Error cerrando sesión: {e}")
         return False
 
 
@@ -228,29 +259,6 @@ class ServerClient:
                 logger.debug(f"Error enviando métricas: {e}")
         return False
 
-    async def close_session(
-        self,
-        session_id: int,
-        data_sent_mb: float,
-        data_received_mb: float,
-        pages_visited: int,
-        crash_reason: Optional[str] = None
-    ) -> bool:
-        """Cierra sesión — via WebSocket"""
-        if self.ws and self.is_connected:
-            try:
-                await self.ws.send(json.dumps({
-                    "type":             "session_closed",
-                    "session_id":       session_id,
-                    "pages_visited":    pages_visited,
-                    "total_data_mb":    data_sent_mb + data_received_mb,
-                    "duration_seconds": None,  # el server lo calcula
-                    "crash_reason":     crash_reason,
-                }))
-                return True
-            except Exception as e:
-                logger.debug(f"Error cerrando sesión: {e}")
-        return False
 
     async def report_navigation(self, session_id: int, url: str, title: str) -> bool:
         """Reporta navegación — via WebSocket"""

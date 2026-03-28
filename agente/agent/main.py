@@ -193,6 +193,8 @@ class AdsPowerAgent:
 
     async def _metrics_loop(self):
         """Cada N segundos envía métricas al servidor"""
+        _cleanup_counter = 0
+
         while self.is_running:
             try:
                 metrics = self._collect_metrics()
@@ -212,6 +214,11 @@ class AdsPowerAgent:
                         cpu_percent=adspower_stats["cpu_percent"],
                         ram_mb=adspower_stats["ram_mb"]
                     )
+
+                _cleanup_counter += 1
+                if _cleanup_counter >= 3:
+                    _cleanup_counter = 0
+                    await self._cleanup_dead_sessions()
 
             except Exception as e:
                 logger.warning(f"⚠️ Error en metrics loop: {e}")
@@ -417,7 +424,7 @@ class AdsPowerAgent:
                     failed_count += 1
                     logger.error(f"  ❌ Perfil {ads_id}: {e}")
                 
-                await asyncio.sleep(0.5)  # ← ADD: respetar rate limit de AdsPower
+                await asyncio.sleep(1)  # ← ADD: respetar rate limit de AdsPower
 
         # Reportar resultado al backend
         if self.server.ws and self.server.is_connected:
@@ -585,7 +592,7 @@ class AdsPowerAgent:
         try:
             start = time.time()
             async with httpx.AsyncClient(
-                proxies=proxy_url,    
+                proxy=proxy_url,
                 timeout=10.0
             ) as client:
                 r = await client.get("https://api.ipify.org?format=json")
@@ -663,6 +670,7 @@ class AdsPowerAgent:
 
         request_id  = data.get("request_id")
         adspower_id = data.get("adspower_id")
+        name        = data.get("name")
         logger.info(f"📥 verify_profile: adspower_id={adspower_id}")
 
         verifier = ProfileVerifier(
@@ -684,11 +692,11 @@ class AdsPowerAgent:
         # ← AGREGAR: loguear si hubo error
         if result.get("error"):
             logger.error(
-                f"❌ verify_profile falló para {adspower_id}: {result['error']}"
+                f"Verificar perfil falló para {name}: {result['error']}"
             )
         else:
             logger.info(
-                f"✅ verify_profile OK: score={result.get('browser_score')} "
+                f"Verificar perfil exitoso para {name}: score={result.get('browser_score')} "
                 f"grade={result.get('grade')} "
                 f"cookies={result.get('cookie_count')} "
                 f"issues={result.get('issues', [])}"
@@ -711,6 +719,43 @@ class AdsPowerAgent:
 
         if self.server.ws and self.server.is_connected:
             await self.server.ws.send(json.dumps(payload))    
+
+    # Agregar en la clase AdsPowerAgent:
+
+    async def _cleanup_dead_sessions(self):
+        """
+        Verifica qué sesiones activas tienen el navegador realmente cerrado.
+        Limpia las sesiones fantasma sin esperar al monitor de CDP.
+        """
+        for session_id, session in list(self.launcher.active_sessions.items()):
+            try:
+                debug_address = getattr(session, '_debug_address', None)
+                if not debug_address:
+                    continue
+
+                # Ping rápido al Chrome — si no responde, la sesión está muerta
+                async with httpx.AsyncClient(timeout=2.0) as client:
+                    r = await client.get(f"http://{debug_address}/json/version")
+                    if r.status_code == 200:
+                        continue  # navegador vivo, ok
+
+            except Exception:
+                pass  # No respondió = navegador cerrado
+
+            # Navegador cerrado pero sesión activa → limpiar
+            logger.warning(
+                f"⚠️ Sesión fantasma detectada: {session_id} — cerrando..."
+            )
+            session.is_running = False
+            self.launcher.active_sessions.pop(session_id, None)
+
+            await self.server.close_session(
+                session_id=session_id,
+                data_sent_mb=0,
+                data_received_mb=0,
+                pages_visited=session.pages_visited,
+                crash_reason="Browser cerrado externamente",
+        )
 
             # ========================================
 # ENTRY POINT

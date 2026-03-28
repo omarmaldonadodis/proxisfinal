@@ -42,26 +42,44 @@ def _is_internal_url(url: str) -> bool:
 # CDP NAVIGATE HELPER
 # ──────────────────────────────────────────────────────────────────────────────
 
-async def _cdp_navigate(ws_url: str, target_url: str, timeout: float = 5.0) -> bool:
+# DESPUÉS — compatible con Python 3.8+
+# REEMPLAZAR la función completa
+async def _cdp_navigate(ws_url: str, target_url: str, timeout: float = 8.0) -> bool:
     """
-    Envía Page.navigate al target indicado por su webSocketDebuggerUrl.
-    Retorna True si la navegación fue enviada exitosamente.
+    Navega via CDP esperando correctamente la respuesta con id=1.
+    Compatible con Python 3.8+ (usa asyncio.wait_for en vez de asyncio.timeout).
     """
     try:
-        async with asyncio.timeout(timeout):
-            async with websockets.connect(ws_url) as ws:
-                cmd = json.dumps({
+        async def _do():
+            async with websockets.connect(ws_url, ping_interval=None, open_timeout=6) as ws:
+                # 1. Habilitar el dominio Page (necesario en algunos builds de Chrome/Mac)
+                await ws.send(json.dumps({"id": 0, "method": "Page.enable"}))
+
+                # 2. Enviar navigate
+                await ws.send(json.dumps({
                     "id": 1,
                     "method": "Page.navigate",
                     "params": {"url": target_url}
-                })
-                await ws.send(cmd)
-                await ws.recv()  # espera ack
+                }))
+
+                # 3. Esperar la respuesta con id=1 (ignorar eventos intermedios)
+                for _ in range(10):   # máximo 10 mensajes antes de rendirse
+                    raw = await asyncio.wait_for(ws.recv(), timeout=3.0)
+                    msg = json.loads(raw)
+                    if msg.get("id") == 1:
+                        # Verificar que no hubo error en la navegación
+                        err = msg.get("result", {}).get("errorText")
+                        if err:
+                            logger.warning(f"CDP navigate error: {err}")
+                        return True
+                return False
+
+        await asyncio.wait_for(_do(), timeout=timeout)
         return True
+
     except Exception as e:
         logger.debug(f"_cdp_navigate error: {e}")
         return False
-
 
 class BrowserSession:
     """Representa una sesión de navegador activa"""
@@ -211,7 +229,12 @@ class BrowserLauncher:
         consecutive_errors = 0
 
         # Espera a que Chrome arranque y fuerza navegación si está en about:blank
-        await asyncio.sleep(1.5)
+# DESPUÉS
+        import platform as _platform
+
+        # Mac necesita más tiempo para que Chrome registre sus targets en CDP
+        _startup_wait = 4.0 if _platform.system() == "Darwin" else 1.5
+        await asyncio.sleep(_startup_wait)
         await self._ensure_navigated(session, debug_address, TARGETS_TIMEOUT)
 
         while session.is_running:
@@ -272,35 +295,51 @@ class BrowserLauncher:
         debug_address: str,
         timeout: float
     ):
-        """
-        Si todas las pestañas siguen en about:blank (o URL interna),
-        envía Page.navigate a la primera pestaña usando CDP WebSocket.
-        Evita que el navegador quede atascado en about:blank cuando
-        AdsPower no completa la navegación inicial.
-        """
-        targets = await self._get_all_page_targets(debug_address, timeout)
-        if not targets:
-            return
+        import platform as _platform
 
-        for target in targets:
-            url = target.get("url", "")
-            ws_url = target.get("webSocketDebuggerUrl", "")
+        max_attempts = 4 if _platform.system() == "Darwin" else 2
+        retry_delay  = 1.5
 
-            if _is_internal_url(url) and ws_url:
-                logger.info(
-                    f"🔀 Sesión {session.session_id}: pestaña en '{url}', "
-                    f"navegando a {session.target_url}"
+        for attempt in range(max_attempts):
+            targets = await self._get_all_page_targets(debug_address, timeout)
+
+            if not targets:
+                # Chrome aún no registró sus targets — esperar y reintentar
+                logger.debug(
+                    f"Sesión {session.session_id}: sin targets CDP "
+                    f"(intento {attempt + 1}/{max_attempts}), esperando {retry_delay}s..."
                 )
-                ok = await _cdp_navigate(ws_url, session.target_url)
-                if ok:
+                await asyncio.sleep(retry_delay)
+                continue
+
+            for target in targets:
+                url    = target.get("url", "")
+                ws_url = target.get("webSocketDebuggerUrl", "")
+
+                if _is_internal_url(url) and ws_url:
                     logger.info(
-                        f"✅ Navegación forzada enviada: sesión={session.session_id}"
+                        f"🔀 Sesión {session.session_id}: pestaña en '{url}', "
+                        f"navegando a {session.target_url} (intento {attempt + 1})"
                     )
-                else:
-                    logger.warning(
-                        f"⚠️ No se pudo navegar via CDP: sesión={session.session_id}"
-                    )
-                return  # solo aplica a la primera pestaña
+                    ok = await _cdp_navigate(ws_url, session.target_url)
+                    if ok:
+                        logger.info(
+                            f"✅ Navegación forzada enviada: sesión={session.session_id}"
+                        )
+                        return  # éxito
+                    else:
+                        logger.warning(
+                            f"⚠️ CDP navigate falló, reintentando... sesión={session.session_id}"
+                        )
+                        await asyncio.sleep(retry_delay)
+                        break  # ir al siguiente intento del for externo
+            else:
+                # Todos los targets ya tienen URL real — no hace falta navegar
+                return
+
+        logger.warning(
+            f"⚠️ _ensure_navigated agotó intentos para sesión {session.session_id}"
+        )
 
     async def _is_browser_alive(self, debug_address: str, timeout: float) -> bool:
         """
