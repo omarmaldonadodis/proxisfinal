@@ -273,7 +273,7 @@ async def restart_adspower(computer_id: int, db: AsyncSession = Depends(get_db))
     if computer.status != ComputerStatus.ONLINE:
         raise HTTPException(status_code=409, detail="Computer is offline")
 
-    sent = await connection_manager.send_to_agent(computer_id, {"type": "restart_adspower", "payload": {}})
+    sent = await connection_manager.send_command_to_agent(computer_id, {"type": "restart_adspower", "payload": {}})
     return {"success": sent, "computer_id": computer_id}
 
 

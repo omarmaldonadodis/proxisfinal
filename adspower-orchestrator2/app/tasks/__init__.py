@@ -25,10 +25,10 @@ celery_app.conf.update(
 @celery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
     sender.conf.beat_schedule = {
-        # Rotación + health check de proxies cada 15 min
+        # Rotación + health check de proxies cada 6 horas
         'auto-rotate-slow-proxies': {
             'task': 'tasks.auto_rotate_slow_proxies',
-            'schedule': 900.0,
+            'schedule': 21600.0,
         },
         # Health check de computers cada 5 min
         'health-check-computers': {
@@ -40,10 +40,10 @@ def setup_periodic_tasks(sender, **kwargs):
             'task': 'tasks.backup_database',
             'schedule': 86400.0,
         },
-        # Verificación de perfiles cada 3 horas
+        # Verificación de perfiles cada 6 horas
         'verify-all-profiles': {
             'task': 'tasks.verify_all_profiles',
-            'schedule': 18000.0,
+            'schedule': 21600.0,
         },
     }
     logger.info("✓ Celery Beat schedule configured")

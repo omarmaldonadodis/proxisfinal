@@ -33,8 +33,6 @@ def build():
         str(AGENT_DIR / "main.py")
     ]
 
-    if system == "Darwin":
-        cmd.extend(["--target-arch", "universal2"])  # Intel + Apple Silicon
 
     subprocess.run(cmd, check=True, cwd=str(ROOT))
     print(f"✅ Ejecutable generado en: {DIST_DIR}")

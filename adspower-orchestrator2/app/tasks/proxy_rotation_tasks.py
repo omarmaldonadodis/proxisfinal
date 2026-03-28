@@ -9,6 +9,7 @@ CORRECCIONES:
 
 from celery import Task
 from loguru import logger
+import httpx
 
 
 def get_celery_app():
@@ -21,15 +22,11 @@ celery_app = get_celery_app()
 
 @celery_app.task(name='tasks.auto_rotate_slow_proxies', bind=True)
 def auto_rotate_slow_proxies_task(self: Task):
-    """Dispara la rotación vía HTTP interno para aprovechar el event loop de FastAPI."""
-    import httpx
     from app.config import settings
-
     try:
         with httpx.Client(timeout=10.0) as client:
-            api_port = getattr(settings, 'API_PORT', 8000)
             r = client.post(
-                f"http://localhost:{api_port}/api/v1/proxy-rotation/check-and-rotate-all"
+                f"{settings.API_INTERNAL_URL}/api/v1/proxy-rotation/check-and-rotate-all"
             )
             logger.info(f"Rotación disparada: {r.status_code}")
             return r.json()

@@ -48,6 +48,98 @@ async def list_proxies(
 
     return ProxyListResponse(total=total, items=proxies)
 
+
+
+@router.get("/rotation-history")
+async def get_rotation_history(
+    proxy_id: Optional[int] = None,
+    profile_id: Optional[int] = None,
+    computer_id: Optional[int] = None,
+    hours: int = Query(48, ge=1, le=720),
+    limit: int = Query(100, ge=1, le=500),
+    db: AsyncSession = Depends(get_db)
+):
+    """Historial de rotaciones con filtros"""
+    cutoff = datetime.now(timezone.utc) - timedelta(hours=hours)
+    query = (
+        select(ProxyRotationLog)
+        .where(ProxyRotationLog.created_at >= cutoff)
+        .order_by(desc(ProxyRotationLog.created_at))
+    )
+    if proxy_id:
+        query = query.where(ProxyRotationLog.proxy_id == proxy_id)
+    if profile_id:
+        query = query.where(ProxyRotationLog.profile_id == profile_id)
+    if computer_id:
+        query = query.where(ProxyRotationLog.computer_id == computer_id)
+
+    result = await db.execute(query.limit(limit))
+    logs = result.scalars().all()
+    return {"total": len(logs), "items": logs}
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SOAX — Países y ciudades disponibles
+# ══════════════════════════════════════════════════════════════════════════════
+
+
+@router.get("/soax/countries")
+async def get_soax_countries():
+    """
+    Retorna los países disponibles en SOAX con sus códigos ISO.
+    Lista estática curada — SOAX soporta proxies residenciales en estos países.
+    """
+    countries = [
+        {"code": "ec", "name": "Ecuador"},
+        {"code": "es", "name": "España"},
+        {"code": "co", "name": "Colombia"},
+        {"code": "pe", "name": "Perú"},
+        {"code": "mx", "name": "México"},
+        {"code": "ar", "name": "Argentina"},
+        {"code": "cl", "name": "Chile"},
+        {"code": "us", "name": "Estados Unidos"},
+        {"code": "gb", "name": "Reino Unido"},
+        {"code": "de", "name": "Alemania"},
+        {"code": "fr", "name": "Francia"},
+        {"code": "it", "name": "Italia"},
+        {"code": "br", "name": "Brasil"},
+        {"code": "jp", "name": "Japón"},
+        {"code": "kr", "name": "Corea del Sur"},
+    ]
+    return {"countries": countries, "total": len(countries)}
+
+
+@router.get("/soax/cities")
+async def get_soax_cities(
+    country: str = Query(
+        "ec", description="Código ISO del país (ej: ec, es, co)"),
+    # conn_type: str = Query(
+    #     "mobile", description="Tipo de conexión: mobile o wifi"),
+    force_refresh: bool = Query(
+        False, description="Forzar actualización del caché"),
+):
+    """
+    Retorna ciudades disponibles en SOAX para un país dado.
+    Consulta la API de SOAX en tiempo real con caché de 5 minutos.
+    """
+    from app.utils.soax_cities_manager import SOAXCitiesManager
+
+    try:
+        cities = await SOAXCitiesManager.get_available_cities(
+            country=country,
+            # conn_type=conn_type,
+            force_refresh=False
+        )
+        return {
+            "country": country,
+            # "conn_type": conn_type,
+            "cities": cities,
+            "total": len(cities),
+            "cached": not force_refresh,
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Error consultando SOAX: {str(e)}")
+
 @router.get("/{proxy_id}", response_model=ProxyResponse)
 async def get_proxy(
     proxy_id: int,
@@ -170,93 +262,3 @@ async def rotate_proxy(
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-
-@router.get("/rotation-history")
-async def get_rotation_history(
-    proxy_id: Optional[int] = None,
-    profile_id: Optional[int] = None,
-    computer_id: Optional[int] = None,
-    hours: int = Query(48, ge=1, le=720),
-    limit: int = Query(100, ge=1, le=500),
-    db: AsyncSession = Depends(get_db)
-):
-    """Historial de rotaciones con filtros"""
-    cutoff = datetime.now(timezone.utc) - timedelta(hours=hours)
-    query = (
-        select(ProxyRotationLog)
-        .where(ProxyRotationLog.created_at >= cutoff)
-        .order_by(desc(ProxyRotationLog.created_at))
-    )
-    if proxy_id:
-        query = query.where(ProxyRotationLog.proxy_id == proxy_id)
-    if profile_id:
-        query = query.where(ProxyRotationLog.profile_id == profile_id)
-    if computer_id:
-        query = query.where(ProxyRotationLog.computer_id == computer_id)
-
-    result = await db.execute(query.limit(limit))
-    logs = result.scalars().all()
-    return {"total": len(logs), "items": logs}
-
-# ══════════════════════════════════════════════════════════════════════════════
-# SOAX — Países y ciudades disponibles
-# ══════════════════════════════════════════════════════════════════════════════
-
-
-@router.get("/soax/countries")
-async def get_soax_countries():
-    """
-    Retorna los países disponibles en SOAX con sus códigos ISO.
-    Lista estática curada — SOAX soporta proxies residenciales en estos países.
-    """
-    countries = [
-        {"code": "ec", "name": "Ecuador"},
-        {"code": "es", "name": "España"},
-        {"code": "co", "name": "Colombia"},
-        {"code": "pe", "name": "Perú"},
-        {"code": "mx", "name": "México"},
-        {"code": "ar", "name": "Argentina"},
-        {"code": "cl", "name": "Chile"},
-        {"code": "us", "name": "Estados Unidos"},
-        {"code": "gb", "name": "Reino Unido"},
-        {"code": "de", "name": "Alemania"},
-        {"code": "fr", "name": "Francia"},
-        {"code": "it", "name": "Italia"},
-        {"code": "br", "name": "Brasil"},
-        {"code": "jp", "name": "Japón"},
-        {"code": "kr", "name": "Corea del Sur"},
-    ]
-    return {"countries": countries, "total": len(countries)}
-
-
-@router.get("/soax/cities")
-async def get_soax_cities(
-    country: str = Query(
-        "ec", description="Código ISO del país (ej: ec, es, co)"),
-    # conn_type: str = Query(
-    #     "mobile", description="Tipo de conexión: mobile o wifi"),
-    force_refresh: bool = Query(
-        False, description="Forzar actualización del caché"),
-):
-    """
-    Retorna ciudades disponibles en SOAX para un país dado.
-    Consulta la API de SOAX en tiempo real con caché de 5 minutos.
-    """
-    from app.utils.soax_cities_manager import SOAXCitiesManager
-
-    try:
-        cities = await SOAXCitiesManager.get_available_cities(
-            country=country,
-            # conn_type=conn_type,
-            force_refresh=False
-        )
-        return {
-            "country": country,
-            # "conn_type": conn_type,
-            "cities": cities,
-            "total": len(cities),
-            "cached": not force_refresh,
-        }
-    except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Error consultando SOAX: {str(e)}")

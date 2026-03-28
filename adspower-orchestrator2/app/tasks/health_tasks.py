@@ -12,15 +12,12 @@ def get_celery_app():
 
 celery_app = get_celery_app()
 
-
 @celery_app.task(name='tasks.health_check_all_computers')
 def health_check_all_computers_task():
-    """Delega al endpoint FastAPI que tiene el event loop correcto."""
     from app.config import settings
-    api_port = getattr(settings, 'API_PORT', 8000)
     try:
         with httpx.Client(timeout=30.0) as client:
-            r = client.get(f"http://localhost:{api_port}/api/v1/health/computers")
+            r = client.get(f"{settings.API_INTERNAL_URL}/api/v1/health/computers")
             logger.info(f"Health check computers: {r.status_code}")
             return r.json()
     except Exception as e:
@@ -30,13 +27,11 @@ def health_check_all_computers_task():
 
 @celery_app.task(name='tasks.health_check_proxies')
 def health_check_proxies_task():
-    """Delega al endpoint FastAPI."""
     from app.config import settings
-    api_port = getattr(settings, 'API_PORT', 8000)
     try:
         with httpx.Client(timeout=60.0) as client:
             r = client.post(
-                f"http://localhost:{api_port}/api/v1/proxies/health-check/batch",
+                f"{settings.API_INTERNAL_URL}/api/v1/proxies/health-check/batch",
                 params={"limit": 50}
             )
             return r.json()

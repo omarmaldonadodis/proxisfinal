@@ -1,0 +1,3 @@
+([('AdsPowerAgent',
+   '/Users/omarmaldonado/Desktop/joseph-proxis/apuestas-backend/agente/dist/AdsPowerAgent',
+   'EXECUTABLE')],)

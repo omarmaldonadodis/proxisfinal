@@ -7,6 +7,7 @@ from app.models.computer import Computer, ComputerStatus
 from app.schemas.computer import ComputerCreate, ComputerUpdate
 from loguru import logger
 from datetime import datetime
+from app.models.agent_session import SessionStatus
 
 class ComputerService:
     """Servicio para gestión de Computers"""

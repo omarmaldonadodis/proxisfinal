@@ -328,9 +328,7 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
                         })
 
                         if is_proxy_error and sess.profile_id:
-                            asyncio.create_task(
-                                self._rotate_proxy_runtime(sess.profile_id)
-                            )
+                            asyncio.create_task(_rotate_proxy_runtime(sess.profile_id))
         
             elif msg_type == "log":
                 level   = data.get("level", "INFO")
@@ -398,7 +396,7 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
         })
 
 
-async def _rotate_proxy_runtime(self, profile_id: int):
+async def _rotate_proxy_runtime(profile_id: int):
     from app.database import AsyncSessionLocal
     from app.models.profile import Profile
     from app.config import settings

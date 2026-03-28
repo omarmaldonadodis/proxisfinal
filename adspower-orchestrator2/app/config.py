@@ -54,6 +54,8 @@ class Settings(BaseSettings):
 
     AGENT_SECRET_TOKEN: str = "Lfis9BJ3sm0tINNAfV_PixQTGpPcJj2jLD8N9QtFVWk" 
 
+    API_INTERNAL_URL: str = "http://api:8000"
+
     
     class Config:
         env_file = ".env"
