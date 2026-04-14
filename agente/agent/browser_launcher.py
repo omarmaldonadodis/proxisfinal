@@ -233,7 +233,7 @@ class BrowserLauncher:
         import platform as _platform
 
         # Mac necesita más tiempo para que Chrome registre sus targets en CDP
-        _startup_wait = 4.0 if _platform.system() == "Darwin" else 1.5
+        _startup_wait = 4.0 if _platform.system() == "Darwin" else 3.5  # Windows necesita más
         await asyncio.sleep(_startup_wait)
         await self._ensure_navigated(session, debug_address, TARGETS_TIMEOUT)
 
@@ -297,7 +297,7 @@ class BrowserLauncher:
     ):
         import platform as _platform
 
-        max_attempts = 4 if _platform.system() == "Darwin" else 2
+        max_attempts = 4 if _platform.system() == "Darwin" else 4 
         retry_delay  = 1.5
 
         for attempt in range(max_attempts):

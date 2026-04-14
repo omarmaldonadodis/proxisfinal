@@ -23,7 +23,7 @@ class FirstRunSetup:
         # ----------------------------------------
         # URL del servidor
         # ----------------------------------------
-        default_url = self.config.server_url or "http://localhost:8000"
+        default_url = self.config.server_url or "https://orq.wisebetcore.com/"
         server_url = input(f"URL del servidor [{default_url}]: ").strip()
         if not server_url:
             server_url = default_url

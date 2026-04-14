@@ -33,6 +33,8 @@ class ServerClient:
         self.on_verify_profile: Optional[Callable] = None
         self.on_delete_profile: Optional[Callable] = None
         self._active_session_ids: set = set()
+        self.on_check_adspower_now: Optional[Callable] = None
+        self.on_connected: Optional[Callable] = None
 
 
 
@@ -121,7 +123,11 @@ class ServerClient:
                         }))
                     except Exception:
                         pass
-
+                    
+                    # check inmediato de AdsPower al conectar
+                    if self.on_check_adspower_now:
+                        asyncio.create_task(self.on_check_adspower_now())
+        
                     async for message in ws:
                         try:
                             data = json.loads(message)
@@ -179,7 +185,13 @@ class ServerClient:
         elif command == "delete_adspower_profile":
             if hasattr(self, 'on_delete_profile') and self.on_delete_profile:
                 asyncio.create_task(self.on_delete_profile(data))
-        
+         
+        elif command == "check_adspower_now":
+            if self.on_check_adspower_now and not getattr(self, '_checking_adspower', False):
+                self._checking_adspower = True
+                task = asyncio.create_task(self.on_check_adspower_now())
+                task.add_done_callback(lambda _: setattr(
+                    self, '_checking_adspower', False))
 
     # ========================================
     # ENVÍO DE DATOS

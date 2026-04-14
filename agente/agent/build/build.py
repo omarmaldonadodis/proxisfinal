@@ -18,10 +18,17 @@ def build():
     system = platform.system()
     print(f"🔨 Building para {system}...")
 
-    cmd = [
-        "pyinstaller",
+    cmd = ["python3", "-m", "PyInstaller"]
+    if system == "Windows":
+        cmd.append("--uac-admin")
+
+    cmd += [
         "--onefile",
-        "--windowed",          # sin consola
+        "--hidden-import", "websockets.legacy.client",
+        "--hidden-import", "websockets.legacy.server", 
+        "--hidden-import", "httpx._transports.default",
+        "--hidden-import", "loguru",
+        "--hidden-import", "psutil",
         "--name", "AdsPowerAgent",
         "--icon", str(AGENT_DIR / "build" / "icon.ico"),
         "--add-data", f"{AGENT_DIR / 'build' / 'config.json.template'}{':' if system != 'Windows' else ';'}.",
@@ -32,7 +39,6 @@ def build():
         "--collect-all", "pystray",
         str(AGENT_DIR / "main.py")
     ]
-
 
     subprocess.run(cmd, check=True, cwd=str(ROOT))
     print(f"✅ Ejecutable generado en: {DIST_DIR}")

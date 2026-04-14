@@ -3,7 +3,7 @@ websockets==11.0.3
 psutil==5.9.8
 loguru==0.7.2
 pystray==0.19.5
-Pillow==10.3.0
+Pillow==10.0.1
 selenium==4.21.0
 pyinstaller==6.6.0
 rumps==0.4.0; sys_platform == "darwin"
