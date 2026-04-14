@@ -7,12 +7,22 @@ Panel de control del administrador:
 - Autorizar/denegar sesiones
 - WebSocket para actualizaciones en tiempo real
 """
+from enum import Enum
 from fastapi import APIRouter, Depends, HTTPException, Query, WebSocket, WebSocketDisconnect, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from typing import Optional
 from datetime import datetime
 from loguru import logger
+
+
+class SessionStatusFilter(str, Enum):
+    """Filtro de estado para el activity-feed. Debe coincidir con AgentSession.status."""
+    ACTIVE = "active"
+    CLOSED = "closed"
+    CRASHED = "crashed"
+    DENIED = "denied"
+    OPENING = "opening"
 
 from app.database import get_db
 from app.services.agent_service import AgentService
@@ -447,20 +457,34 @@ async def get_data_usage(
 @router.get("/activity-feed")
 async def get_activity_feed(
     limit: int = Query(20, ge=1, le=100),
+    date_from: Optional[datetime] = Query(None, description="Filtra sesiones con requested_at >= date_from (ISO 8601)"),
+    date_to: Optional[datetime] = Query(None, description="Filtra sesiones con requested_at <= date_to (ISO 8601)"),
+    session_status: Optional[SessionStatusFilter] = Query(None, description="Filtra por estado de sesión"),
     db: AsyncSession = Depends(get_db)
 ):
     """
     Feed unificado de: sesiones recientes + alertas recientes.
     Usado por SystemEventsFeed del dashboard.
+
+    Filtros opcionales (todos AND):
+    - date_from / date_to: rango temporal sobre AgentSession.requested_at
+    - session_status: filtra por AgentSession.status
     """
     from app.models.alert import Alert, AlertStatus
 
-    # Sesiones recientes
-    sessions_result = await db.execute(
+    # Sesiones filtradas — aplicar filtros antes del limit para paginación correcta
+    session_query = (
         select(AgentSession)
         .order_by(AgentSession.requested_at.desc())
-        .limit(limit // 2)
     )
+    if date_from is not None:
+        session_query = session_query.where(AgentSession.requested_at >= date_from)
+    if date_to is not None:
+        session_query = session_query.where(AgentSession.requested_at <= date_to)
+    if session_status is not None:
+        session_query = session_query.where(AgentSession.status == session_status.value)
+
+    sessions_result = await db.execute(session_query.limit(limit // 2))
     sessions = sessions_result.scalars().all()
 
     # Alertas recientes
@@ -482,29 +506,55 @@ async def get_activity_feed(
         profile_name = profile_r.name if profile_r else f"Perfil #{s.profile_id}"
         profile_owner = profile_r.owner if profile_r else None
 
-        event_type = {
-            "active":  "SUCCESS",
-            "closed":  "INFO",
-            "crashed": "ERROR",
-            "opening": "INFO",
-            "denied":  "WARNING",
-        }.get(s.status, "INFO")
+        # Meta común a los eventos de esta sesión
+        base_meta = {
+            "session_id":    s.id,
+            "profile_id":    s.profile_id,
+            "computer_id":   s.computer_id,
+            "target_url":    s.target_url,
+            "opened_at":     s.opened_at.isoformat() if s.opened_at else None,
+            "closed_at":     s.closed_at.isoformat() if s.closed_at else None,
+            "duration_s":    s.duration_seconds,
+            "pages_visited": s.pages_visited or 0,
+            "data_mb":       s.total_data_mb,
+            "last_url":      s.last_url,
+            "status":        s.status,
+        }
 
+        # Evento de APERTURA — siempre se emite
+        open_ts = (s.opened_at or s.requested_at)
         events.append({
-            "id":        f"sess-{s.id}",
-            "type":      event_type,
-            "message":   _session_message(s, profile_name),
-            "source":    profile_owner or s.agent_name,   # ← muestra dueño en vez de "admin-panel"
-            "timestamp": s.requested_at.isoformat() if s.requested_at else "",
-            "meta": {
-                "session_id":  s.id,
-                "profile_id":  s.profile_id,
-                "computer_id": s.computer_id,
-                "target_url":  s.target_url,
-                "duration_s":  s.duration_seconds,
-                "data_mb":     s.total_data_mb,
-            }
+            "id":        f"sess-{s.id}-open",
+            "type":      "SUCCESS",
+            "message":   f"Sesión iniciada — {profile_name}",
+            "source":    profile_owner or s.agent_name,
+            "timestamp": open_ts.isoformat() if open_ts else "",
+            "meta":      {**base_meta, "phase": "open"},
         })
+
+        # Evento de CIERRE — solo si la sesión terminó (closed/crashed/denied)
+        if s.status in ("closed", "crashed", "denied") and s.closed_at:
+            close_type = {
+                "closed":  "INFO",
+                "crashed": "ERROR",
+                "denied":  "WARNING",
+            }.get(s.status, "INFO")
+
+            if s.status == "closed":
+                close_msg = f"Sesión cerrada — {profile_name} · {s.duration_seconds or 0}s, {round(s.total_data_mb or 0, 1)}MB"
+            elif s.status == "crashed":
+                close_msg = f"Sesión crasheó — {profile_name}"
+            else:
+                close_msg = f"Sesión denegada — {profile_name}"
+
+            events.append({
+                "id":        f"sess-{s.id}-close",
+                "type":      close_type,
+                "message":   close_msg,
+                "source":    profile_owner or s.agent_name,
+                "timestamp": s.closed_at.isoformat(),
+                "meta":      {**base_meta, "phase": "close"},
+            })
 
     for a in alerts:
         events.append({
@@ -541,18 +591,39 @@ def _session_message(s: AgentSession, profile_name: str = None) -> str:
     }
     return msgs.get(s.status, f"Evento #{s.id}")
 
+
 @router.get("/sessions/by-profile/{profile_id}")
 async def get_sessions_by_profile(
     profile_id: int,
     limit: int = Query(20, ge=1, le=100),
+    date_from: Optional[str] = Query(None, description="ISO datetime start"),
+    date_to:   Optional[str] = Query(None, description="ISO datetime end"),
     db: AsyncSession = Depends(get_db)
 ):
-    """Historial completo de un perfil específico"""
-    result = await db.execute(
+    # \"\"\"Historial completo de un perfil específico, con filtro de fechas opcional\"\"\"
+    from datetime import datetime as _dt
+
+    query = (
         select(AgentSession)
         .where(AgentSession.profile_id == profile_id)
-        .order_by(AgentSession.requested_at.desc())
-        .limit(limit)
+    )
+
+    if date_from:
+        try:
+            dt = _dt.fromisoformat(date_from.replace("Z", "+00:00"))
+            query = query.where(AgentSession.requested_at >= dt)
+        except ValueError:
+            pass
+
+    if date_to:
+        try:
+            dt = _dt.fromisoformat(date_to.replace("Z", "+00:00"))
+            query = query.where(AgentSession.requested_at <= dt)
+        except ValueError:
+            pass
+
+    result = await db.execute(
+        query.order_by(AgentSession.requested_at.desc()).limit(limit)
     )
     sessions = result.scalars().all()
 

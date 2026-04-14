@@ -119,46 +119,33 @@ class ComputerService:
         return await self.repo.get_available(min_capacity=min_capacity)
     
     async def health_check(self, computer_id: int) -> Dict:
-        """Verifica salud de un computer"""
+        """
+        Verifica salud usando connection_manager (memoria, sin I/O, sin writes).
+        El status de Computer es gestionado por el heartbeat WS — este método NO lo toca.
+        """
+        from app.core.connection_manager import connection_manager
+
         computer = await self.repo.get(computer_id)
         if not computer:
             raise ValueError(f"Computer {computer_id} not found")
-        
-        # Verificar conexión AdsPower
-        client = AdsPowerClient(computer.adspower_api_url, computer.adspower_api_key)
-        
-        health = {
+
+        agent_connected = computer_id in connection_manager.agent_connections
+        adspower_running = connection_manager.is_adspower_ready(computer_id)
+
+        return {
             'computer_id': computer_id,
             'name': computer.name,
-            'is_healthy': False,
-            'adspower_connected': False,
+            'is_healthy': agent_connected and adspower_running,
+            'adspower_connected': adspower_running,
             'state': computer.status,
             'current_profiles': computer.current_profiles,
             'max_profiles': computer.max_profiles,
-            'capacity_percentage': (computer.current_profiles / computer.max_profiles * 100) if computer.max_profiles > 0 else 0
+            'capacity_percentage': (
+                (computer.current_profiles / computer.max_profiles * 100)
+                if computer.max_profiles > 0 else 0
+            ),
         }
-        
-        try:
-            health['adspower_connected'] = await client.test_connection()
-            
-            if health['adspower_connected']:
-                # Actualizar status
-                await self.repo.update(computer_id, {
-                    'status': ComputerStatus.ONLINE,
-                    'last_seen_at': datetime.utcnow()
-                })
-                health['is_healthy'] = True
-            else:
-                await self.repo.update(computer_id, {'status': ComputerStatus.OFFLINE})
-        
-        except Exception as e:
-            logger.error(f"Health check failed for computer {computer_id}: {e}")
-            await self.repo.update(computer_id, {'status': ComputerStatus.ERROR})
-            health['error'] = str(e)
-        
-        await self.db.commit()
-        return health
-    
+
     async def get_stats(self) -> Dict:
         """Obtiene estadísticas generales"""
         return await self.repo.get_stats()

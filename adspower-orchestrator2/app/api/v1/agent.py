@@ -45,12 +45,30 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
     result = await db.execute(select(Computer).where(Computer.id == computer_id))
     computer = result.scalar_one_or_none()
     if computer:
-        computer.status       = ComputerStatus.ONLINE
+        computer.status = ComputerStatus.ONLINE
         computer.last_seen_at = datetime.utcnow()
         await db.commit()
+        asyncio.create_task(_process_pending_profiles(computer_id))
 
-        asyncio.create_task(_process_pending_profiles(computer_id))  # ← sin db
-
+        # ── Enviar eliminaciones de AdsPower pendientes ──────────────────
+        pending_deletes = connection_manager.get_pending_adspower_deletes()
+        if pending_deletes:
+            logger.info(
+                f"📋 {len(pending_deletes)} eliminaciones AdsPower pendientes "
+                f"→ agente #{computer_id}"
+            )
+            for item in pending_deletes:
+                sent = await connection_manager.send_command_to_agent(
+                    computer_id=computer_id,
+                    command="delete_adspower_profile",
+                    payload={
+                        "adspower_id": item["adspower_id"],
+                        "profile_id":  item["profile_id"],
+                    },
+                )
+                if sent:
+                    logger.info(
+                        f"  ✅ Comando delete enviado: {item['adspower_id']}")
 
         await connection_manager.broadcast_to_admins({
             "type":        "agent_online",
@@ -220,6 +238,26 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
                     })
                     logger.error(f"❌ Perfil {profile_id} falló: {error_msg}")
         
+            elif msg_type == "profile_delete_result":
+                adspower_id = data.get("adspower_id")
+                status = data.get("status")  # "deleted" o "already_gone"
+
+                if adspower_id:
+                    # Limpiar de la cola en ambos casos — ya no hace falta reintentarlo
+                    connection_manager.clear_adspower_delete(adspower_id)
+                    logger.info(
+                        f"✅ Delete de AdsPower resuelto ({status}): {adspower_id} — "
+                        f"eliminado de la cola pendiente"
+                    )
+
+                await connection_manager.broadcast_to_admins({
+                    "type":        "profile_delete_result",
+                    "adspower_id": adspower_id,
+                    "status":      status,
+                    "computer_id": computer_id,
+                    "timestamp":   datetime.utcnow().isoformat(),
+                })
+    
             elif msg_type == "session_metrics":
                 session_id = data.get("session_id")
                 if session_id:
@@ -334,11 +372,71 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
                 level   = data.get("level", "INFO")
                 message = data.get("message", "")
                 await connection_manager.add_agent_log(computer_id, level, message)
+                
+            elif msg_type == "proxy_rotation_queued":
+                # El agente encoló una rotación porque AdsPower estaba cerrado
+                proxy_id = data.get("proxy_id")
+                queued = data.get("queued", 0)
+                reason = data.get("reason", "AdsPower no disponible")
 
+                connection_manager.set_pending_rotation(computer_id, True)
+
+                await connection_manager.broadcast_to_admins({
+                    "type":        "system_event",
+                    "event":       "proxy_rotation_queued",
+                    "message":     f"⏸️ Rotación encolada — {reason} ({queued} pendiente/s)",
+                    "source":      f"Computer #{computer_id}",
+                    "computer_id": computer_id,
+                    "timestamp":   datetime.utcnow().isoformat(),
+                })
+                logger.info(
+                    f"📋 Rotación encolada en Computer #{computer_id}: {queued} pendientes")
+
+            elif msg_type == "proxy_update_result":
+                # Resultado de un update_proxy (éxito o fallo)
+                proxy_id = data.get("proxy_id")
+                success_count = data.get("success_count", 0)
+                failed_count = data.get("failed_count", 0)
+
+                await connection_manager.broadcast_to_admins({
+                    "type":          "proxy_update_result",
+                    "computer_id":   computer_id,
+                    "proxy_id":      proxy_id,
+                    "success_count": success_count,
+                    "failed_count":  failed_count,
+                    "timestamp":     datetime.utcnow().isoformat(),
+                })
+    
             elif msg_type == "adspower_status":
+                status = data.get("status")
+                is_available = status in ("available", "online", True)
+
+                # Guardar estado ANTERIOR antes de actualizar
+                was_available = connection_manager.is_adspower_ready(computer_id)
+                connection_manager.set_adspower_status(computer_id, is_available)
+
+                # ── Solo disparar cola si es una TRANSICIÓN offline → online ─────────
+                # Cubre dos casos:
+                # 1. Agente conecta y AdsPower ya está abierto (was_available=False por defecto)
+                # 2. AdsPower estaba cerrado y el usuario lo abrió
+                if is_available and not was_available:
+                    asyncio.create_task(_process_pending_profiles(computer_id))
+                    logger.info(
+                        f"🟢 AdsPower de Computer #{computer_id} disponible — "
+                        f"el agente procesará la cola de perfiles pendientes"
+                    )
+                # ─────────────────────────────────────────────────────────────────────
+
+                if is_available and connection_manager.has_pending_rotation(computer_id):
+                    connection_manager.clear_pending_rotation(computer_id)
+                    logger.info(
+                        f"🟢 AdsPower de Computer #{computer_id} disponible — "
+                        f"el agente procesará la cola de rotaciones pendientes"
+                    )
+
                 await connection_manager.broadcast_to_admins({
                     "type":        "adspower_status",
-                    "status":      data.get("status"),
+                    "status":      status,
                     "computer_id": computer_id,
                     "message":     data.get("message"),
                     "timestamp":   datetime.utcnow().isoformat(),
@@ -360,6 +458,57 @@ async def agent_websocket(websocket: WebSocket, computer_id: int, db: AsyncSessi
                 if computer:
                     computer.last_seen_at = datetime.utcnow()
                     await db.commit()
+            elif msg_type == "agent_connected":
+                """
+                El agente envía su lista de sesiones realmente activas al reconectarse.
+                Cerramos en la BD todas las sesiones de esta computadora que NO estén
+                en esa lista (quedaron abiertas del crash/restart anterior).
+                """
+                from app.models.agent_session import AgentSession, SessionStatus
+
+                reported_active_ids: list[int] = data.get("active_session_ids", [])
+
+                # Buscar sesiones que el backend cree que siguen abiertas
+                result = await db.execute(
+                    select(AgentSession).where(
+                        AgentSession.computer_id == computer_id,
+                        AgentSession.status.in_([
+                            SessionStatus.ACTIVE.value,
+                            SessionStatus.OPENING.value,
+                        ])
+                    )
+                )
+                open_sessions = result.scalars().all()
+
+                zombie_count = 0
+                for sess in open_sessions:
+                    if sess.id not in reported_active_ids:
+                        sess.status = SessionStatus.CLOSED.value
+                        sess.closed_at = datetime.utcnow()
+                        sess.error_detail = "Cerrada por reconexión del agente (sesión zombie)"
+                        zombie_count += 1
+
+                if zombie_count > 0:
+                    await db.commit()
+                    logger.info(
+                        f"🧹 Agente #{computer_id} reconectó — "
+                        f"{zombie_count} sesión(es) zombie cerradas, "
+                        f"{len(reported_active_ids)} sesión(es) activas conservadas"
+                    )
+                    await connection_manager.broadcast_to_admins({
+                        "type":        "system_event",
+                        "event":       "zombie_sessions_cleaned",
+                        "computer_id": computer_id,
+                        "message":     (
+                            f"🧹 {zombie_count} sesión(es) zombie cerradas en "
+                            f"{computer.name if computer else f'Computer #{computer_id}'}"
+                        ),
+                        "timestamp":   datetime.utcnow().isoformat(),
+                    })
+                else:
+                    logger.info(
+                        f"✅ Agente #{computer_id} reconectó — sin sesiones zombie"
+                    )
 
             elif msg_type == "verify_profile_result":
                 request_id = data.get("request_id")
@@ -413,7 +562,7 @@ async def _rotate_proxy_runtime(profile_id: int):
     try:
         async with httpx.AsyncClient(timeout=30.0) as client:
             r = await client.post(
-                f"{settings.SERVER_URL}/proxy-rotation/{proxy_id}/check-and-rotate"
+                f"{settings.API_INTERNAL_URL}/api/v1/proxy-rotation/{proxy_id}/check-and-rotate"
             )
 
             if r.status_code == 200:
@@ -425,6 +574,8 @@ async def _rotate_proxy_runtime(profile_id: int):
         logger.error(f"❌ Error llamando rotación proxy: {e}")
 
 # La función crea su propia sesión:
+
+
 async def _process_pending_profiles(computer_id: int):
     from app.database import AsyncSessionLocal
     from app.models.profile import Profile, ProfileStatus
@@ -432,71 +583,101 @@ async def _process_pending_profiles(computer_id: int):
     from sqlalchemy.orm import selectinload
     import asyncio
 
-    await asyncio.sleep(2)
+    # ── Guard: solo una ejecución por computadora a la vez ───────────────────
+    if computer_id in connection_manager._processing_profiles:
+        logger.info(
+            f"⏭️ _process_pending_profiles ya corriendo para #{computer_id}, skip")
+        return
+    connection_manager._processing_profiles.add(computer_id)
+    # ─────────────────────────────────────────────────────────────────────────
 
-    async with AsyncSessionLocal() as db:
-        result = await db.execute(
-            select(Profile)
-            .options(selectinload(Profile.proxy))
-            .where(Profile.status == ProfileStatus.CREATING)
-            .where(Profile.adspower_id.like("pending-%"))
-        )
-        pending = result.scalars().all()
+    try:
+        """Espera 2s y verifica AdsPower antes de enviar perfiles pendientes."""
+        await asyncio.sleep(2)
 
-        if not pending:
-            logger.info(f"✅ No hay perfiles pendientes para agente #{computer_id}")
-            return
+        # Verificar si el agente reportó AdsPower como disponible
+        adspower_ok = connection_manager.is_adspower_ready(computer_id)
+        if not adspower_ok:
+            logger.warning(
+                f"⏸️ Computer #{computer_id} conectado pero AdsPower NO está disponible. "
+                f"Perfiles pendientes quedarán en cola hasta que AdsPower se abra."
+            )
+            await connection_manager.broadcast_to_admins({
+                "type":        "adspower_not_ready_on_connect",
+                "computer_id": computer_id,
+                "message":     f"Computer #{computer_id} conectado — esperando que AdsPower se abra para procesar cola",
+                "timestamp":   datetime.utcnow().isoformat(),
+            })
+            return  # No procesar cola todavía
 
-        logger.info(f"📋 {len(pending)} perfiles pendientes — enviando a agente #{computer_id}")
+        async with AsyncSessionLocal() as db:
+            result = await db.execute(
+                select(Profile)
+                .options(selectinload(Profile.proxy))
+                .where(Profile.status == ProfileStatus.CREATING)
+                .where(Profile.adspower_id.like("pending-%"))
+            )
+            pending = result.scalars().all()
 
-        for profile in pending:
+            if not pending:
+                logger.info(
+                    f"✅ No hay perfiles pendientes para agente #{computer_id}")
+                return
 
-           
-            # # # # #REVISAR LENGUAJE 
+            logger.info(
+                f"📋 {len(pending)} perfiles pendientes — enviando a agente #{computer_id}")
+
             def _clamp_val(value, valid_list):
                 return min(valid_list, key=lambda x: abs(x - (value or valid_list[0])))
 
-            fingerprint_config = {
-                "ua":                  profile.user_agent or "",
-                "os":                  profile.os or "Windows",
-                "language":            ["es-ES", "es"] or profile.language,
-                "resolution":          profile.screen_resolution or "1920x1080",
-                "device_name":         profile.device_name or "",
-                "platform":            profile.platform or "Win32",
-                "hardware_concurrency": _clamp_val(profile.hardware_concurrency, [2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 32, 64]),
-                "device_memory":       _clamp_val(profile.device_memory, [2, 4, 6, 8, 16, 32, 64, 128]),
-            }
-
-            # Construir proxy config desde la relación
-            proxy = profile.proxy
-            user_proxy_config = {}
-            if proxy:
-                user_proxy_config = {
-                    "proxy_soft":     "other",
-                    "proxy_type":     "http",
-                    "proxy_host":     settings.SOAX_HOST,      # ← del .env
-                    "proxy_port":     str(settings.SOAX_PORT),  # ← del .env
-                    "proxy_user":     proxy.username or "",
-                    "proxy_password": settings.SOAX_PASSWORD,  # ← del .env
+            for profile in pending:
+                fingerprint_config = {
+                    "ua":                   profile.user_agent or "",
+                    "os":                   profile.os or "Windows",
+                    "language":             ["es-ES", "es"] or profile.language,
+                    "resolution":           profile.screen_resolution or "1920x1080",
+                    "device_name":          profile.device_name or "",
+                    "platform":             profile.platform or "Win32",
+                    "hardware_concurrency": _clamp_val(profile.hardware_concurrency, [2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 32, 64]),
+                    "device_memory":        _clamp_val(profile.device_memory, [2, 4, 6, 8, 16, 32, 64, 128]),
                 }
 
-            sent = await connection_manager.send_command_to_agent(
-                computer_id=computer_id,
-                command="create_adspower_profile",
-                payload={
-                    "profile_id":         profile.id,
-                    "name":               profile.name,
-                    "fingerprint_config": fingerprint_config,
-                    "user_proxy_config":  user_proxy_config,
-                    "remark":             profile.owner or "",
-                }
-            )
-            if sent:
-                logger.info(f"  ✅ Perfil {profile.id} ({profile.name}) encolado")
-            else:
-                logger.warning(f"  ⚠️ No se pudo enviar perfil {profile.id}")
+                proxy = profile.proxy
+                user_proxy_config = {}
+                if proxy:
+                    user_proxy_config = {
+                        "proxy_soft":     "other",
+                        "proxy_type":     "http",
+                        "proxy_host":     settings.SOAX_HOST,
+                        "proxy_port":     str(settings.SOAX_PORT),
+                        "proxy_user":     proxy.username or "",
+                        "proxy_password": settings.SOAX_PASSWORD,
+                    }
 
-            await asyncio.sleep(2)
+                sent = await connection_manager.send_command_to_agent(
+                    computer_id=computer_id,
+                    command="create_adspower_profile",
+                    payload={
+                        "profile_id":         profile.id,
+                        "name":               profile.name,
+                        "fingerprint_config": fingerprint_config,
+                        "user_proxy_config":  user_proxy_config,
+                        "remark":             profile.owner or "",
+                    }
+                )
+                if sent:
+                    logger.info(
+                        f"  ✅ Perfil {profile.id} ({profile.name}) encolado")
+                else:
+                    logger.warning(
+                        f"  ⚠️ No se pudo enviar perfil {profile.id}")
+
+                await asyncio.sleep(2)
+
+    finally:
+        # Siempre liberar el guard, incluso si hubo excepción
+        connection_manager._processing_profiles.discard(computer_id)
+        
 # ══════════════════════════════════════════════════════════════════════════════
 # CHECK-IN del agente al conectarse
 # ══════════════════════════════════════════════════════════════════════════════
@@ -517,6 +698,24 @@ async def agent_checkin(
     computer.last_seen_at = datetime.utcnow()
     await db.commit()
 
+    # ── Enviar eliminaciones pendientes al agente que acaba de hacer checkin ──
+    pending_deletes = connection_manager.get_pending_adspower_deletes()
+    if pending_deletes:
+        logger.info(
+            f"📋 Enviando {len(pending_deletes)} eliminaciones pendientes "
+            f"al agente #{computer_id}"
+        )
+        for item in pending_deletes:
+            await connection_manager.send_command_to_agent(
+                computer_id=computer_id,
+                command="delete_adspower_profile",
+                payload={
+                    "adspower_id": item["adspower_id"],
+                    "profile_id":  item["profile_id"],
+                },
+            )
+            await asyncio.sleep(0.5)
+
     await connection_manager.broadcast_to_admins({
         "type":        "agent_checkin",
         "computer_id": computer_id,
@@ -531,6 +730,23 @@ async def agent_checkin(
         "timestamp":   datetime.utcnow().isoformat(),
     }
 
+
+@router.post("/broadcast-check-adspower")
+async def broadcast_check_adspower():
+    """
+    Pide a todos los agentes online que reporten
+    el estado de AdsPower de forma inmediata.
+    """
+    online = connection_manager.get_online_agents()
+    results = {}
+    for cid in online:
+        sent = await connection_manager.send_command_to_agent(
+            computer_id=cid,
+            command="check_adspower_now",
+            payload={"computer_id": cid},
+        )
+        results[str(cid)] = sent
+    return {"agents_notified": results, "total": len(online)}
 
 # ══════════════════════════════════════════════════════════════════════════════
 # ABRIR NAVEGADOR CON PERFIL (desde el panel admin)
@@ -559,7 +775,7 @@ async def open_browser_direct(
     if not profile:
         raise HTTPException(status_code=404, detail=f"Perfil '{profile_adspower_id}' no encontrado")
 
-    # Verificar que no haya sesión activa en NINGUNA computadora
+    # Verificar si hay sesión activa
     existing = await db.execute(
         select(AgentSession).where(
             AgentSession.profile_id == profile.id,
@@ -567,11 +783,16 @@ async def open_browser_direct(
         )
     )
     active_session = existing.scalar_one_or_none()
-    if active_session:
+    
+    # Si ya hay una sesión activa, pero en OTRA computadora, denegar (AdsPower no permite concurrencia entre máquinas)
+    if active_session and active_session.computer_id != computer_id:
         raise HTTPException(
             status_code=409,
-            detail=f"El perfil ya está activo en la computadora #{active_session.computer_id}",
+            detail=f"El perfil ya está activo en la computadora #{active_session.computer_id}. Ciérralo allí primero.",
         )
+    
+    # Si ya hay una sesión activa en la MISMA computadora, el agente lo manejará como una nueva pestaña
+    is_new_tab = active_session is not None
 
     # Crear registro de sesión
     session = AgentSession(
@@ -596,6 +817,7 @@ async def open_browser_direct(
             "profile_id":  profile_adspower_id,
             "target_url":  target_url,
             "proxy_id":    profile.proxy_id,
+            "is_new_tab":  is_new_tab,
         }
     )
 

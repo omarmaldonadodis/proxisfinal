@@ -57,28 +57,82 @@ async def check_and_rotate_all():
 
 
 async def _queued_check_all():
-    """Espera hasta que haya un agente online y luego ejecuta la rotación"""
+    """
+    Espera hasta que haya un agente online con AdsPower disponible.
+    Si el agente está online pero AdsPower cerrado → notifica y espera.
+    """
     from app.core.connection_manager import connection_manager
-    max_wait_seconds = 300  # máximo 5 minutos esperando
+    max_wait_seconds = 600  # 10 minutos
     waited = 0
+    notified_no_agent = False
+    notified_no_adspower = False
 
     while waited < max_wait_seconds:
         online_agents = connection_manager.get_online_agents()
-        if online_agents:
-            logger.info(f"✅ Agente disponible — iniciando rotación de proxies")
-            await _background_check_all()
-            return
+
+        if not online_agents:
+            if not notified_no_agent:
+                logger.warning("⏳ Esperando agente online para rotación...")
+                await connection_manager.broadcast_to_admins({
+                    "type":    "system_event",
+                    "event":   "proxy_rotation_waiting",
+                    "message": "⏸️ Rotación en espera — no hay agentes conectados",
+                    "source":  "proxy_rotation",
+                })
+                notified_no_agent = True
+            await asyncio.sleep(15)
+            waited += 15
+            continue
+
+        notified_no_agent = False
+
+        # Verificar que al menos un agente tenga AdsPower disponible
+        ready_agents = [
+            cid for cid in online_agents
+            if connection_manager.is_adspower_ready(cid)
+        ]
+
+        if not ready_agents:
+            if not notified_no_adspower:
+                agent_names = list(online_agents)
+                logger.warning(
+                    f"⏳ Agente(s) {agent_names} conectados pero AdsPower no disponible"
+                )
+                await connection_manager.broadcast_to_admins({
+                    "type":    "system_event",
+                    "event":   "proxy_rotation_waiting_adspower",
+                    "message": (
+                        f"⏸️ Rotación encolada — agente conectado pero AdsPower no está abierto. "
+                        f"Abre AdsPower para continuar."
+                    ),
+                    "source":  "proxy_rotation",
+                })
+                # Marcar en connection_manager que hay rotación pendiente
+                for cid in online_agents:
+                    connection_manager.set_pending_rotation(cid, True)
+                notified_no_adspower = True
+            await asyncio.sleep(10)
+            waited += 10
+            continue
+
+        # ✅ Hay agente online con AdsPower disponible
+        notified_no_adspower = False
+        for cid in ready_agents:
+            connection_manager.clear_pending_rotation(cid)
+
         logger.info(
-            f"⏳ Esperando agente online... ({waited}s / {max_wait_seconds}s)")
-        await asyncio.sleep(10)
-        waited += 10
+            f"✅ Agente {list(ready_agents)[0]} disponible con AdsPower — "
+            f"iniciando rotación de proxies"
+        )
+        await _background_check_all()
+        return
 
     logger.warning(
-        "⚠️ Timeout esperando agente — rotación cancelada después de 5 minutos")
+        "⚠️ Timeout esperando agente + AdsPower — rotación cancelada")
     await connection_manager.broadcast_to_admins({
         "type":    "system_event",
         "event":   "proxy_rotation_timeout",
-        "message": "Rotación cancelada — no hubo agente disponible en 5 minutos",
+        "message": "❌ Rotación cancelada — timeout sin agente+AdsPower disponible (10 min)",
         "source":  "proxy_rotation",
     })
 
@@ -221,8 +275,7 @@ async def _background_check_all():
                 # match = re.search(r'sessionid-(.+?)(?:-sessionlength|$)', raw)
                 match = re.search(r'sessionid-([a-zA-Z0-9]+)(?:-sessionlength|$)', raw)
                 import secrets as _secrets
-                session_id = match.group(
-                    1) if match else _secrets.token_urlsafe(8)
+                session_id = match.group(1) if match else _secrets.token_hex(8)  # ← era token_urlsafe(8)
 
                 from app.models.profile import Profile
                 profiles_r = await db.execute(
@@ -400,10 +453,10 @@ async def get_proxy_rotation_history(
 
 @router.get("/stats")
 async def get_stats(db: AsyncSession = Depends(get_db)):
-    """📊 Estadísticas reales de proxies (success_rate, latencia, checks)"""
-
     from sqlalchemy import select, func
     from app.models.proxy import Proxy, ProxyStatus
+    from app.models.proxy_rotation_log import ProxyRotationLog
+    from datetime import datetime, timedelta
 
     try:
         result = await db.execute(
@@ -414,34 +467,38 @@ async def get_stats(db: AsyncSession = Depends(get_db)):
                 func.count(Proxy.id).filter(Proxy.status ==
                                             ProxyStatus.FAILED).label("failed"),
                 func.avg(Proxy.avg_response_time).label("avg_latency"),
-                func.avg(Proxy.success_rate).label("avg_success_rate"),
-                func.coalesce(func.sum(Proxy.total_checks),
-                              0).label("total_checks"),
             )
         )
         row = result.one()
 
-        total = row.total or 0
-        active = row.active or 0
-        failed = row.failed or 0
-        total_checks = int(row.total_checks or 0)
+        # ── Success rate: solo checks de los últimos 7 días ──────────────
+        # Evita que checks históricos fallidos arrastren el % hacia abajo
+        since = datetime.utcnow() - timedelta(days=7)
+        recent = await db.execute(
+            select(
+                func.count(ProxyRotationLog.id).label("total"),
+                func.count(ProxyRotationLog.id).filter(
+                    ProxyRotationLog.success == True
+                ).label("success"),
+            ).where(ProxyRotationLog.created_at >= since)
+        )
+        rrow = recent.one()
 
-        # Si ya hay registros de health-check en BD, usarlos.
-        # Si no (sistema nuevo), inferir éxito como active / total.
-        if total_checks > 0:
-            avg_success_rate = round(float(row.avg_success_rate or 0), 2)
-        elif total > 0:
-            avg_success_rate = round(active / total * 100, 2)
+        if rrow.total and rrow.total > 0:
+            avg_success_rate = round(rrow.success / rrow.total * 100, 2)
+        elif row.active and row.total and row.total > 0:
+            # Fallback: ratio activos/total si no hay logs recientes
+            avg_success_rate = round(row.active / row.total * 100, 2)
         else:
-            avg_success_rate = 0.0
+            avg_success_rate = 100.0
 
         return {
-            "total":            total,
-            "active":           active,
-            "failed":           failed,
+            "total":            row.total or 0,
+            "active":           row.active or 0,
+            "failed":           row.failed or 0,
             "avg_latency_ms":   round(float(row.avg_latency or 0), 2),
-            "avg_success_rate": avg_success_rate,   # ← NUEVO: 0-100
-            "total_checks":     total_checks,        # ← NUEVO
+            "avg_success_rate": avg_success_rate,
+            "total_checks":     rrow.total or 0,
         }
 
     except Exception as e:
@@ -534,23 +591,23 @@ async def rotate_proxy_for_profile(
     from app.models.profile import Profile
     from app.models.proxy import Proxy
     from app.core.connection_manager import connection_manager
-    from app.api.v1.agent import _auto_rotate_proxy_for_profile
 
-    # Validar que el perfil existe y tiene proxy
     profile = await db.get(Profile, profile_id)
     if not profile:
         raise HTTPException(
-            status_code=404, detail=f"Perfil {profile_id} no encontrado")
+            status_code=404, detail=f"Perfil {profile_id} no encontrado"
+        )
     if not profile.proxy_id:
         raise HTTPException(
-            status_code=400, detail="El perfil no tiene proxy asignado")
+            status_code=400, detail="El perfil no tiene proxy asignado"
+        )
 
     proxy = await db.get(Proxy, profile.proxy_id)
     if not proxy:
         raise HTTPException(
-            status_code=404, detail="Proxy del perfil no encontrado")
+            status_code=404, detail="Proxy del perfil no encontrado"
+        )
 
-    # Verificar que hay un agente disponible
     online_agents = connection_manager.get_online_agents()
     if not online_agents:
         raise HTTPException(
@@ -560,11 +617,11 @@ async def rotate_proxy_for_profile(
 
     computer_id = next(iter(online_agents))
 
-    # Ejecutar la rotación (misma función que usa el auto-rotate)
+    # _auto_rotate_proxy_for_profile está definida en este mismo módulo
     result = await _auto_rotate_proxy_for_profile(
         profile_id=profile_id,
         computer_id=computer_id,
-        crash_alert_id=None,     # creará una nueva alerta
+        crash_alert_id=None,
     )
 
     if result.get("success"):

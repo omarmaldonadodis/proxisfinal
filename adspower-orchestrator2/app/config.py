@@ -52,10 +52,22 @@ class Settings(BaseSettings):
     BACKUP_INTERVAL: int = 86400
     BACKUP_PATH: str = "/backups"
 
-    AGENT_SECRET_TOKEN: str = "Lfis9BJ3sm0tINNAfV_PixQTGpPcJj2jLD8N9QtFVWk" 
+    AGENT_SECRET_TOKEN: str 
 
     API_INTERNAL_URL: str = "http://api:8000"
 
+    # Al final de la clase Settings, antes de class Config:
+    @property
+    def allowed_origins_list(self) -> list[str]:
+        return [o.strip() for o in self.ALLOWED_ORIGINS.split(",")]
+    
+    @property
+    def allowed_ips_list(self) -> list[str]:
+        return [ip.strip() for ip in self.ALLOWED_IPS.split(",")]
+
+    ALLOWED_ORIGINS: str = "http://localhost:3000,http://localhost:8000"
+    
+    ALLOWED_IPS: str = "127.0.0.1"
     
     class Config:
         env_file = ".env"

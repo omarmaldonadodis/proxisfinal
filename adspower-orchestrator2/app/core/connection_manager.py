@@ -25,6 +25,10 @@ class ConnectionManager:
         self.agent_logs: Dict[int, list] = {}
         self.connection_times: Dict[int, datetime] = {}
         self._pending_proxy_checks: dict[str, asyncio.Future] = {}
+        self._adspower_status: Dict[int, bool] = {}   # ← NUEVO
+        self._pending_rotations: Dict[int, bool] = {} # computer_id → tiene rotación pendiente
+        self._pending_adspower_deletes: list[dict] = []  # cola backend (agente offline)
+        self._processing_profiles: set[int] = set()
 
         MAX_LOGS = 100
 
@@ -42,7 +46,48 @@ class ConnectionManager:
         logger.info(f"Agente conectado: computer_id={computer_id}")
         asyncio.create_task(self._update_computer_status(computer_id, "online"))
 
+    def set_adspower_status(self, computer_id: int, available: bool):
+        """El agente reporta si AdsPower está disponible."""
+        self._adspower_status[computer_id] = available
 
+    def is_adspower_ready(self, computer_id: int) -> bool:
+        """
+        Retorna True si el agente reportó AdsPower como disponible.
+        Por defecto False (no asumir disponibilidad).
+        """
+        return self._adspower_status.get(computer_id, False)
+    
+    def queue_adspower_delete(self, adspower_id: str, profile_id: int):
+        """Cola una eliminación de AdsPower para cuando haya un agente online."""
+        if not any(d["adspower_id"] == adspower_id for d in self._pending_adspower_deletes):
+            self._pending_adspower_deletes.append({
+                "adspower_id": adspower_id,
+                "profile_id": profile_id,
+            })
+            logger.info(f"📋 AdsPower delete encolado: {adspower_id} "
+                        f"(total pendientes: {len(self._pending_adspower_deletes)})")
+
+
+    def get_pending_adspower_deletes(self) -> list[dict]:
+        return list(self._pending_adspower_deletes)
+
+
+    def clear_adspower_delete(self, adspower_id: str):
+        self._pending_adspower_deletes = [
+            d for d in self._pending_adspower_deletes
+            if d["adspower_id"] != adspower_id
+        ]
+    
+    def set_pending_rotation(self, computer_id: int, has_pending: bool):
+        """Marca que una computadora tiene rotación pendiente de ejecutar."""
+        self._pending_rotations[computer_id] = has_pending
+
+    def has_pending_rotation(self, computer_id: int) -> bool:
+        return self._pending_rotations.get(computer_id, False)
+
+    def clear_pending_rotation(self, computer_id: int):
+        self._pending_rotations.pop(computer_id, None)
+        
     def disconnect_agent(self, computer_id: int):
         if computer_id in self.agent_connections:
             del self.agent_connections[computer_id]
@@ -54,6 +99,9 @@ class ConnectionManager:
         self.connection_times.pop(computer_id, None)
 
         asyncio.create_task(self._update_computer_status(computer_id, "offline"))
+        
+        self._adspower_status.pop(computer_id, None)
+
 
     def get_connected_since(self, computer_id: int) -> Optional[datetime]:
         return self.connection_times.get(computer_id)

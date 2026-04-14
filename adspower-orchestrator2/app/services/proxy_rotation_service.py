@@ -446,7 +446,7 @@ class ProxyRotationService:
             logger.warning(f"Ciudad {proxy.city} no disponible")
             return None
         
-        session_id = secrets.token_urlsafe(16)
+        session_id = secrets.token_hex(8)  # ← era token_urlsafe(16)
         
         result = await get_soax_username_with_dynamic_city(
             base_username=settings.SOAX_USERNAME,
@@ -497,7 +497,7 @@ class ProxyRotationService:
             return None
         
         for city in nearby:
-            session_id = secrets.token_urlsafe(16)
+            session_id = secrets.token_hex(8)  # ← era token_urlsafe(16)
             
             result = await get_soax_username_with_dynamic_city(
                 base_username=settings.SOAX_USERNAME,
@@ -552,7 +552,7 @@ class ProxyRotationService:
                 continue
             
             city = available[0]
-            session_id = secrets.token_urlsafe(16)
+            session_id = secrets.token_hex(8)  # ← era token_urlsafe(16)
             
             result = await get_soax_username_with_dynamic_city(
                 base_username=settings.SOAX_USERNAME,
@@ -585,7 +585,7 @@ class ProxyRotationService:
     
     async def _rotate_to_fallback(self) -> Optional[Dict]:
         """Fallback: Guayaquil"""
-        session_id = secrets.token_urlsafe(16)
+        session_id = secrets.token_hex(8)  # ← era token_urlsafe(16)
         
         result = await get_soax_username_with_dynamic_city(
             base_username=settings.SOAX_USERNAME,

@@ -103,7 +103,7 @@ def _check_and_rotate_proxy_sync(db, proxy: "Proxy") -> dict:
     logger.warning(f"⚠️ Proxy {proxy.id} slow ({old_latency}ms) → Rotating...")
     
     # Generar nueva sesión
-    session_id = secrets.token_urlsafe(16)
+    session_id = secrets.token_hex(8)  # ← era token_urlsafe(16)
     
     new_username = (
         f"{settings.SOAX_USERNAME}-"
@@ -169,7 +169,7 @@ def _attempt_recovery_sync(db, proxy: "Proxy") -> dict:
     
     # Generar nueva sesión en misma ciudad
     if proxy.city:
-        session_id = secrets.token_urlsafe(16)
+        session_id = secrets.token_hex(8)  # ← era token_urlsafe(16)
         
         new_username = (
             f"{settings.SOAX_USERNAME}-"
@@ -209,7 +209,7 @@ def _attempt_recovery_sync(db, proxy: "Proxy") -> dict:
         proxy.session_id = old_session_id
     
     # Si no se pudo recuperar, usar Guayaquil como fallback
-    session_id = secrets.token_urlsafe(16)
+    session_id = secrets.token_hex(8)  # ← era token_urlsafe(16)
     
     fallback_username = (
         f"{settings.SOAX_USERNAME}-"

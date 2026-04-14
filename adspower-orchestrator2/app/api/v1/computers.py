@@ -249,8 +249,7 @@ async def run_diagnostics(computer_id: int, db: AsyncSession = Depends(get_db)):
         "status":          computer.status,
         "overall_healthy": health.get("is_healthy", False),
         "checks": {
-            "adspower":  health.get("adspower_status") == "online",
-            "cpu_ok":    (latest.cpu_usage    or 0) < 85 if latest else None,
+            "adspower":  health.get("adspower_connected", False),            "cpu_ok":    (latest.cpu_usage    or 0) < 85 if latest else None,
             "memory_ok": (latest.memory_usage or 0) < 90 if latest else None,
             "disk_ok":   (latest.disk_usage   or 0) < 95 if latest else None,
         },

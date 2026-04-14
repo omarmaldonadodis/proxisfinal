@@ -9,8 +9,9 @@ from app.models.profile import ProfileStatus, DeviceType
 # Profile ya NO necesita computer_id — es global
 
 class ProfileCreate(BaseModel):
-    name:      str
-    proxy_id:  Optional[int] = None   # Si ya existe un proxy, asignarlo directamente
+    name:         str
+    adspower_id:  Optional[str] = None  # Si ya existe, vincularlo
+    proxy_id:     Optional[int] = None   # Si ya existe un proxy, asignarlo directamente
 
     # Identidad
     owner:     Optional[str] = None

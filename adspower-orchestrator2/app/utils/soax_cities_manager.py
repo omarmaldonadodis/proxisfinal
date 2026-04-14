@@ -333,8 +333,8 @@ async def get_soax_username_with_dynamic_city(
     
     if not session_id:
         import secrets
-        session_id = secrets.token_urlsafe(16)
-    
+        session_id = secrets.token_hex(8)  # ← era token_urlsafe(16)
+
     # ========================================
     # 1. INTENTAR CIUDAD ESPECÍFICA
     # ========================================

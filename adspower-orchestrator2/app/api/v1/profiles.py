@@ -86,6 +86,22 @@ async def create_profile_with_proxy(
     }
     db_proxy_type = proxy_type_map.get(data.proxy_type, "residential")
 
+    # Normalizar país: nombre completo → código ISO 2 letras
+    _COUNTRY_TO_ISO = {
+        "ecuador": "EC", "spain": "ES", "españa": "ES", "mexico": "MX",
+        "méxico": "MX", "colombia": "CO", "argentina": "AR", "peru": "PE",
+        "perú": "PE", "chile": "CL", "brasil": "BR", "brazil": "BR",
+        "united states": "US", "estados unidos": "US", "venezuela": "VE",
+        "panama": "PA", "panamá": "PA", "uruguay": "UY", "paraguay": "PY",
+        "bolivia": "BO", "costa rica": "CR", "guatemala": "GT",
+        "dominican republic": "DO", "república dominicana": "DO",
+        "honduras": "HN", "el salvador": "SV", "nicaragua": "NI", "cuba": "CU",
+        "puerto rico": "PR", "united kingdom": "GB", "germany": "DE",
+        "france": "FR", "italy": "IT", "portugal": "PT", "canada": "CA",
+    }
+    country_raw = (data.country or "").strip()
+    country_iso = _COUNTRY_TO_ISO.get(country_raw.lower(), country_raw[:2].upper() if len(country_raw) > 2 else country_raw.upper())
+
 
     from app.integrations.soax_client import SOAXClient
     from app.config import settings
@@ -118,7 +134,7 @@ async def create_profile_with_proxy(
         username=   proxy_config["username"],   # ← username completo de SOAX
         password=   proxy_config["password"],
         proxy_type= db_proxy_type,
-        country=    data.country,
+        country=    country_iso,
         city=       data.city,
         status=     ProxyStatus.ACTIVE,
     )
@@ -139,7 +155,7 @@ async def create_profile_with_proxy(
         owner=             data.owner,
         bookie=            data.bookie,
         sport=             data.sport,
-        country=           data.country,
+        country=           country_iso,
         city=              data.city,
         language=          data.language,
         device_type=       device_map.get(data.device_type, DeviceType.DESKTOP),
@@ -330,10 +346,29 @@ async def update_profile(
         raise HTTPException(status_code=400, detail=str(e))
 
 
+@router.delete("/by-adspower/{adspower_id}", status_code=204)
+async def delete_profile_by_adspower(
+    adspower_id: str,
+    db: AsyncSession = Depends(get_db),
+):
+    """
+    Elimina un perfil buscándolo por su adspower_id.
+    Redirige internamente al delete principal por profile_id.
+    Usado por el ERP Django cuando se elimina una Persona.
+    """
+    result = await db.execute(
+        select(Profile).where(Profile.adspower_id == adspower_id)
+    )
+    profile = result.scalar_one_or_none()
+    if not profile:
+        return  # Ya no existe — idempotente, 204 OK
+    return await delete_profile(profile.id, db)
+
+
 @router.delete("/{profile_id}", status_code=204)
 async def delete_profile(
     profile_id: int,
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
 ):
     from app.core.connection_manager import connection_manager
     from app.models.proxy import Proxy  # ← asegurar import
@@ -363,13 +398,42 @@ async def delete_profile(
     # ── 1. Notificar agente AdsPower (fire & forget) ──────────────────────
     online_agents = connection_manager.get_online_agents()
     agent_notified = False
-    if online_agents and adspower_id and not adspower_id.startswith("pending-"):
-        agent_id = next(iter(online_agents))
-        agent_notified = await connection_manager.send_command_to_agent(
-            computer_id=agent_id,
-            command="delete_adspower_profile",
-            payload={"adspower_id": adspower_id, "profile_id": profile_id},
-        )
+
+    if adspower_id and not adspower_id.startswith("pending-"):
+        if online_agents:
+            # Hay agente online → intentar enviar directamente
+            agent_id = next(iter(online_agents))
+            agent_notified = await connection_manager.send_command_to_agent(
+                computer_id=agent_id,
+                command="delete_adspower_profile",
+                payload={
+                    "adspower_id": adspower_id,
+                    "profile_id":  profile_id,
+                },
+            )
+            if not agent_notified:
+                # Envío falló → encolar
+                connection_manager.queue_adspower_delete(adspower_id, profile_id)
+                logger.warning(
+                    f"⚠️ Agente no recibió el comando, encolado: {adspower_id}")
+        else:
+            # Sin agentes online → encolar para cuando se conecte uno
+            connection_manager.queue_adspower_delete(adspower_id, profile_id)
+            logger.warning(
+                f"⚠️ Sin agentes online — eliminación AdsPower encolada: {adspower_id}"
+            )
+
+            # Notificar al panel que la eliminación está pendiente
+            await connection_manager.broadcast_to_admins({
+                "type":        "profile_delete_queued",
+                "adspower_id": adspower_id,
+                "profile_id":  profile_id,
+                "message":     (
+                    f"🗑️ Perfil '{profile_name}' eliminado de la BD. "
+                    f"Se eliminará de AdsPower cuando un agente se conecte."
+                ),
+                "timestamp":   datetime.utcnow().isoformat(),
+            })
 
     # ── 2. Limpiar en cascada (orden FK) ──────────────────────────────────
 
@@ -549,6 +613,7 @@ async def _run_verify_all():
             {
                 "id": p.id,
                 "adspower_id": p.adspower_id,
+                "name": p.name,
                 "total_sessions": p.total_sessions or 0,
                 "is_warmed": getattr(p, "is_warmed", False) or False,
                 "total_duration_seconds": getattr(p, "total_duration_seconds", 0) or 0,
@@ -591,6 +656,7 @@ async def _run_verify_all():
                 payload={
                     "request_id":             request_id,
                     "adspower_id":            pdata["adspower_id"],
+                    "name":                   pdata["name"],
                     "total_sessions":         pdata["total_sessions"],
                     "is_warmed":              pdata["is_warmed"],
                     "total_duration_seconds": pdata["total_duration_seconds"],

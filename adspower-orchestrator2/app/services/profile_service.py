@@ -1,12 +1,9 @@
-# app/services/profile_service.py - VERSIÓN CORREGIDA CON COOKIES
-from typing import List, Optional, Dict, Any, Tuple
+from typing import List, Optional, Dict, Tuple
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, and_, func
 from datetime import datetime
-import json
 
-from app.models.profile import Profile, DeviceType, ProfileStatus
-from app.models.computer import Computer
+from app.models.profile import Profile, ProfileStatus
 from app.models.proxy import Proxy
 from app.schemas.profile import ProfileCreate, ProfileUpdate
 from app.integrations.adspower_client import AdsPowerClient
@@ -39,6 +36,18 @@ class ProfileService:
         if not profile_in.proxy_id:
             raise ValueError("proxy_id is required")
 
+        # ── NUEVO: Si se provee adspower_id, intentar recuperar o vincular ──────
+        if profile_in.adspower_id:
+            # 1. Buscar en BD si ya existe este adspower_id
+            result = await self.db.execute(
+                select(Profile).where(Profile.adspower_id == profile_in.adspower_id)
+            )
+            existing_db = result.scalar_one_or_none()
+            if existing_db:
+                logger.info(f"♻️ Reutilizando perfil existente en BD: {existing_db.adspower_id}")
+                return existing_db
+        # ────────────────────────────────────────────────────────────────────────
+
         result = await self.db.execute(
             select(Proxy).where(Proxy.id == profile_in.proxy_id)
         )
@@ -46,94 +55,96 @@ class ProfileService:
         if not proxy:
             raise ValueError(f"Proxy {profile_in.proxy_id} not found")
 
-        profile_config = ProfileGenerator.generate_profile(
-            name=profile_in.name,
-            age=profile_in.age,
-            gender=profile_in.gender,
-            country=profile_in.country or proxy.country or "EC",
-            city=profile_in.city or proxy.city,
-            device_type=profile_in.device_type.value,
-            include_cookies=True,
-            include_localstorage=True
-        )
+        # Si ya tenemos adspower_id provisto pero NO está en BD, necesitamos "re-hidratar" el registro
+        # pero saltándonos la llamada a AdsPower.create_profile
+        adspower_id = profile_in.adspower_id
+        
+        if not adspower_id:
+            # Crear en AdsPower normalmente
+            profile_config = ProfileGenerator.generate_profile(
+                name=profile_in.name,
+                age=profile_in.age,
+                gender=profile_in.gender,
+                country=profile_in.country or proxy.country or "EC",
+                city=profile_in.city or proxy.city,
+                device_type=profile_in.device_type.value,
+                include_cookies=True,
+                include_localstorage=True
+            )
 
-        screen_res = profile_config["screen_resolution"].replace("x", "_")
+            screen_res = profile_config["screen_resolution"].replace("x", "_")
 
-        fingerprint_config = {
-            "automatic_timezone": "0",
-            "timezone": profile_config["timezone"],
-            "webrtc": "proxy",
-            "location": "ask",
-            "language": [profile_config["language"]],
-            "page_language": [profile_config["language"]],
-            "ua": profile_config["user_agent"],
-            "screen_resolution": screen_res,
-            "fonts": ["all"],
-            "canvas": "1",
-            "webgl_image": "1",
-            "webgl": "1",
-            "audio": "1",
-            "do_not_track": "default",
-            "hardware_concurrency": str(_clamp_hardware_concurrency(profile_config["hardware_concurrency"])),
-            "device_memory": str(_clamp_device_memory(profile_config["device_memory"])),
-            "flash": "block",
-            "media_devices": "1",
-            "client_rects": "1",
-            "speech_voices": "1",
-        }
-
-        adspower_data = {
-            "name": profile_in.name,
-            "group_id": "0",
-            "fingerprint_config": fingerprint_config,
-            "remark": profile_config["remark"],
-            "user_proxy_config": {
-                "proxy_soft": "other",
-                "proxy_type": "http",
-                "proxy_host": proxy.host,
-                "proxy_port": proxy.port,
-                "proxy_user": proxy.username or "",
-                "proxy_password": proxy.password or ""
+            fingerprint_config = {
+                "automatic_timezone": "0",
+                "timezone": profile_config["timezone"],
+                "webrtc": "proxy",
+                "location": "ask",
+                "language": [profile_config["language"]],
+                "page_language": [profile_config["language"]],
+                "ua": profile_config["user_agent"],
+                "screen_resolution": screen_res,
+                "fonts": ["all"],
+                "canvas": "1",
+                "webgl_image": "1",
+                "webgl": "1",
+                "audio": "1",
+                "do_not_track": "default",
+                "hardware_concurrency": str(_clamp_hardware_concurrency(profile_config["hardware_concurrency"])),
+                "device_memory": str(_clamp_device_memory(profile_config["device_memory"])),
+                "flash": "block",
+                "media_devices": "1",
+                "client_rects": "1",
+                "speech_voices": "1",
             }
-        }
 
-        adspower_client = AdsPowerClient(
-            api_url=settings.ADSPOWER_DEFAULT_API_URL,   # ← siempre la cuenta central
-            api_key=settings.ADSPOWER_DEFAULT_API_KEY
-        )
+            adspower_data = {
+                "name": profile_in.name,
+                "group_id": "0",
+                "fingerprint_config": fingerprint_config,
+                "remark": profile_config["remark"],
+                "user_proxy_config": {
+                    "proxy_soft": "other",
+                    "proxy_type": "http",
+                    "proxy_host": proxy.host,
+                    "proxy_port": proxy.port,
+                    "proxy_user": proxy.username or "",
+                    "proxy_password": proxy.password or ""
+                }
+            }
 
-        adspower_start = time.time()  # ← FIX: medir tiempo de AdsPower
-        adspower_response = await adspower_client.create_profile(adspower_data)
-        adspower_response_time = (time.time() - adspower_start) * 1000  # ms
+            adspower_client = AdsPowerClient(
+                api_url=settings.ADSPOWER_DEFAULT_API_URL,
+                api_key=settings.ADSPOWER_DEFAULT_API_KEY
+            )
 
-        if not isinstance(adspower_response, dict):
-            raise RuntimeError(
-                f"Unexpected AdsPower response: {type(adspower_response)}")
+            adspower_start = time.time()
+            adspower_response = await adspower_client.create_profile(adspower_data)
+            adspower_response_time = (time.time() - adspower_start) * 1000
 
-        if adspower_response.get("code") != 0:
-            raise RuntimeError(
-                f"AdsPower error: {adspower_response.get('msg')}")
+            if adspower_response.get("code") != 0:
+                raise RuntimeError(f"AdsPower error: {adspower_response.get('msg')}")
 
-        data = adspower_response.get("data")
-        if not data or "id" not in data:
-            raise RuntimeError(
-                f"Invalid AdsPower response: {adspower_response}")
-
-        adspower_id = data["id"]
-
-        # Subir cookies
-        if profile_config["cookies"]:
-            try:
-                await self._upload_cookies_to_profile(adspower_client, adspower_id, profile_config["cookies"])
-            except Exception as e:
-                logger.error(f"Error uploading cookies: {e}")
+            data = adspower_response.get("data")
+            adspower_id = data["id"]
+            
+            # Subir cookies si es creación nueva
+            if profile_config["cookies"]:
+                try:
+                    await self._upload_cookies_to_profile(adspower_client, adspower_id, profile_config["cookies"])
+                except Exception as e:
+                    logger.error(f"Error uploading cookies: {e}")
+        else:
+            # Si el adspower_id ya existe, lo vinculamos con una configuración básica o placeholder
+            # En este caso, asumimos que el perfil ya existe en AdsPower
+            profile_config = ProfileGenerator.generate_profile(name=profile_in.name)
+            adspower_response_time = 0.0
 
         db_profile = Profile(
             proxy_id=profile_in.proxy_id,
             adspower_id=adspower_id,
             name=profile_in.name,
-            age=profile_in.age,
-            gender=profile_in.gender,
+            owner=profile_in.owner,
+            bookie=profile_in.bookie,
             country=profile_config["country"],
             city=profile_config["city"],
             timezone=profile_config["timezone"],
@@ -173,7 +184,6 @@ class ProfileService:
             proxy_latency = proxy.avg_response_time
         else:
             # Para proxies nuevos, medir latencia ahora
-            import time
             import httpx as _httpx
             proxy_url = f"http://{proxy.username}:{proxy.password}@{proxy.host}:{proxy.port}"
             try:
